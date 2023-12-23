@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./PackOfCards.module.css";
-import MyCard from "../MyCard";
+import MyCard from "../../singel/MyCard";
 
 const PackOfCards: React.FC = () => {
     return <section>
