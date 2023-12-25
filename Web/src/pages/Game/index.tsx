@@ -1,26 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./Game.module.css";
 import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
 import PackOfCards from "../../components/cards/pack/PackOfCards";
 import SelectedCards from "../../components/cards/pack/SelectedCards";
-import { DndContext } from "@dnd-kit/core";
-import { TargetMovieCard } from "../../models/types/movie";
-import { initTargetMovieCard } from "../../models/initialization/movie";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { useCardsContext } from "../../context/CardsContext";
+import { Card } from "../../models/types/card";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
+    const { setSelectedCards } = useCardsContext();
 
-    const [terget, setTerget] = useState<TargetMovieCard>(initTargetMovieCard);
-
-    function handleDragEnd(event: any) {
+    function handleDragEnd(event: DragEndEvent) {
         const { over, active } = event;
+        const id = over?.id.toString();
         const movie = active?.data?.current?.movie;
-        setTerget({ id: over?.id, movie });
+
+        if (movie && id) {
+            const card: Card = { id, movie, rate: movie.imdbVotes };
+
+            setSelectedCards((prev) => {
+                const updatedCards = [...prev];
+                updatedCards[parseInt(id)] = card;
+                return updatedCards;
+            });
+        }
     }
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
-            <SelectedCards terget={terget} />
+            <SelectedCards />
             <PackOfCards />
         </DndContext>
     );

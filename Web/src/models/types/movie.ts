@@ -1,11 +1,11 @@
 export type Movie = {
     title: string;
+    id: string;
     poster_path: string;
     imdbID?: string;
     adult?: boolean;
     backdrop_path?: string;
     genre_ids?: number[];
-    id?: number;
     release_date?: string;
     imdbRating?: string;
     imdbVotes?: string;
@@ -59,8 +59,3 @@ export type MovieOMDB = {
     imdbRating?: string;
     imdbVotes?: string;
 };
-
-export type TargetMovieCard = {
-    id?: string;
-    movie?: Movie;
-}

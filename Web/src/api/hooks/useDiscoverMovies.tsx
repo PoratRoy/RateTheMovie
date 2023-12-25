@@ -34,16 +34,16 @@ const useDiscoverMovies = () => {
                 for (const index of indexs) {
                     const tmdbMovie = resultsTMDB[index];
 
-                    const { title, release_date } = tmdbMovie;
-                    if (!title || !release_date) {
+                    const { title, release_date, id } = tmdbMovie;
+                    if (!title || !release_date || !id) {
                         setError("Something went wrong");
-                        return;
+                        continue;
                     }
 
                     const [isValidDate, year] = extractYearFromDateString(release_date);
                     if (!isValidDate) {
                         setError(year);
-                        return;
+                        continue;
                     }
 
                     const response = await axios.get(OmdbBaseURL, {
@@ -59,11 +59,11 @@ const useDiscoverMovies = () => {
                     if (resultsOMDB.Poster && resultsOMDB.Poster !== "N/A") {
                         const movie: Movie = {
                             title: title,
+                            id: id.toString(),
                             backdrop_path: tmdbMovie.backdrop_path,
                             release_date: tmdbMovie.release_date,
                             genre_ids: tmdbMovie.genre_ids,
                             adult: tmdbMovie.adult,
-                            id: tmdbMovie.id,
                             video: "",
                             imdbRating: resultsOMDB.imdbRating,
                             imdbVotes: resultsOMDB.imdbVotes,

@@ -11,7 +11,7 @@ const PackOfCards: React.FC = () => {
     return (
         <Pack>
             {movies.map((movie: Movie, i: number) => (
-                <Draggable key={i} draggableId={movie.id?.toString() || i.toString()} movie={movie}>
+                <Draggable key={i} draggableId={movie.id} movie={movie}>
                     <MyCard movie={movie} loading={movieLoading} />
                 </Draggable>
             ))}
