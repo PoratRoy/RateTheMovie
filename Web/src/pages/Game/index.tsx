@@ -6,6 +6,7 @@ import SelectedCards from "../../components/cards/pack/SelectedCards";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { useCardsContext } from "../../context/CardsContext";
 import { Card } from "../../models/types/card";
+import { initCard } from "../../models/initialization/card";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
@@ -21,6 +22,13 @@ const Game: React.FC = () => {
 
             setSelectedCards((prev) => {
                 const updatedCards = [...prev];
+                const existingIndex = updatedCards.findIndex(
+                    (c) => c?.movie?.title === card?.movie?.title,
+                );
+
+                if (existingIndex !== -1) {//exists
+                    updatedCards[existingIndex] = initCard;
+                }
                 updatedCards[parseInt(id)] = card;
                 return updatedCards;
             });
@@ -36,3 +44,11 @@ const Game: React.FC = () => {
 };
 
 export default Game;
+
+//const isAlreadyInPack = selectedCards.some((card: Card) => card.movie?.id === movie.id);
+
+// setSelectedCards((prev) => {
+//     const updatedCards = [...prev];
+//     updatedCards[parseInt(id)] = card;
+//     return updatedCards;
+// });
