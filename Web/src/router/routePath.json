@@ -1,0 +1,6 @@
+{
+    "main": "/",
+    "filter": "/filter",
+    "game": "/game",
+    "all": "*"
+}

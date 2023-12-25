@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import style from "./Game.module.css";
+import style from "./GamePage.module.css";
 import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
 import PackOfCards from "../../components/cards/pack/PackOfCards";
 import SelectedCards from "../../components/cards/pack/SelectedCards";
@@ -14,7 +14,7 @@ import Score from "../../components/actions/Score";
 import { Movie } from "../../models/types/movie";
 import PackOfRightCards from "../../components/cards/pack/PackOfRightCards";
 
-const Game: React.FC = () => {
+const GamePage: React.FC = () => {
     useDiscoverMovies();
     const { setSelectedCards } = useCardsContext();
     const { setRightOrder } = useGamePlayContext();
@@ -82,4 +82,4 @@ const Game: React.FC = () => {
     );
 };
 
-export default Game;
+export default GamePage;

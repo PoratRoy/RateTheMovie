@@ -1,13 +1,16 @@
 import Providers from "../../context/Providers";
-import Game from "../Game";
+import { BrowserRouter } from "react-router-dom";
+import Router from "../../router/Router";
 import "./App.css";
 
-function App() {
+const App = () => {
     return (
-        <Providers>
-            <Game />
-        </Providers>
+        <BrowserRouter>
+            <Providers>
+                <Router />
+            </Providers>
+        </BrowserRouter>
     );
-}
+};
 
 export default App;
