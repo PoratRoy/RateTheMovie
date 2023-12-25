@@ -7,13 +7,14 @@ import { extractYearFromDateString } from "../../utils/date";
 import { useErrorContext } from "../../context/ErrorContext";
 import { useSingleton } from "../../hooks/useSingleton";
 import { useMovieContext } from "../../context/MovieContext";
+import { PACK_CARDS_NUM } from "../../models/constants";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
     const { movies, setMovies, setMovieLoading } = useMovieContext();
 
     const discoverMovies = async () => {
-        if(movies.length > 0) return;
+        if (movies.length > 0) return;
 
         const page = getRandomNumber(1, 500);
 
@@ -26,7 +27,7 @@ const useDiscoverMovies = () => {
                 params: { api_key: import.meta.env.VITE_TMDB_API_KEY || "", page },
             });
             const resultsTMDB: MovieTMDB[] = response.data.results;
-            if (resultsTMDB && resultsTMDB.length >= 5) {
+            if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 let movies: Movie[] = [];
                 const indexs: number[] = generateRandomArray(resultsTMDB.length);
 
@@ -34,11 +35,17 @@ const useDiscoverMovies = () => {
                     const tmdbMovie = resultsTMDB[index];
 
                     const { title, release_date } = tmdbMovie;
+                    if (!title || !release_date) {
+                        setError("Something went wrong");
+                        return;
+                    }
+
                     const [isValidDate, year] = extractYearFromDateString(release_date);
                     if (!isValidDate) {
                         setError(year);
                         return;
                     }
+
                     const response = await axios.get(OmdbBaseURL, {
                         params: {
                             apikey: import.meta.env.VITE_OMDB_API_KEY || "",
@@ -51,10 +58,10 @@ const useDiscoverMovies = () => {
 
                     if (resultsOMDB.Poster && resultsOMDB.Poster !== "N/A") {
                         const movie: Movie = {
+                            title: title,
                             backdrop_path: tmdbMovie.backdrop_path,
                             release_date: tmdbMovie.release_date,
                             genre_ids: tmdbMovie.genre_ids,
-                            title: tmdbMovie.title,
                             adult: tmdbMovie.adult,
                             id: tmdbMovie.id,
                             video: "",
@@ -69,9 +76,9 @@ const useDiscoverMovies = () => {
                         movies.push(movie);
                     }
 
-                    if(movies.length === 5) break;
+                    if (movies.length === PACK_CARDS_NUM) break;
                 }
-                console.log("5 movies: ", movies);
+                console.log(`${PACK_CARDS_NUM} movies: `, movies);
                 setMovies(movies);
             } else {
                 setError("Something went wrong");
