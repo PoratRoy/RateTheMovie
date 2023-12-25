@@ -40,3 +40,7 @@ export type DraggableProps = ChildernsProps & {
 export type SelectedCardProps = {
     movie?: Movie;
 };
+
+export type RightCardProps = {
+    movie: Movie;
+};

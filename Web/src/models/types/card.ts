@@ -2,6 +2,6 @@ import { Movie } from "./movie";
 
 export type Card = {
     id?: string;
-    movie?: Movie;
+    movie: Movie;
     rate?: number;
 };

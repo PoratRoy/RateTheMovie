@@ -12,6 +12,7 @@ import { useMovieContext } from "../../context/MovieContext";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import Score from "../../components/actions/Score";
 import { Movie } from "../../models/types/movie";
+import PackOfRightCards from "../../components/cards/pack/PackOfRightCards";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
@@ -30,7 +31,7 @@ const Game: React.FC = () => {
 
         const cards: Card[] = sortedMovies.map((movie: Movie, i: number) => {
             return { id: i.toString(), movie, rate: movie.imdbVotes } as Card;
-        })
+        });
         setRightOrder(cards);
     }, [movies]);
 
@@ -39,7 +40,7 @@ const Game: React.FC = () => {
         const id = over?.id.toString();
         const movie = active?.data?.current?.movie;
 
-        if (movie && id) {
+        if (movie) {
             const card: Card = { id, movie, rate: movie.imdbVotes };
 
             setSelectedCards((prev) => {
@@ -48,11 +49,23 @@ const Game: React.FC = () => {
                     (c) => c?.movie?.title === card?.movie?.title,
                 );
 
-                if (existingIndex !== -1) {
-                    //exists
-                    updatedCards[existingIndex] = initCard;
+                if (id) {
+                    const existingCard = updatedCards[parseInt(id)];
+                    if (existingCard) {
+                        //swap
+                        updatedCards[existingIndex] = existingCard;
+                    } else if (existingIndex !== -1) {
+                        //alredy exists
+                        updatedCards[existingIndex] = initCard;
+                    }
+                    updatedCards[parseInt(id)] = card;
+                } else {
+                    //remove
+                    const selectedCard = updatedCards.find((c) => c?.movie?.id === movie.id);
+                    if (selectedCard) {
+                        updatedCards[updatedCards.indexOf(selectedCard)] = initCard;
+                    }
                 }
-                updatedCards[parseInt(id)] = card;
                 return updatedCards;
             });
         }
@@ -60,6 +73,7 @@ const Game: React.FC = () => {
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
+            <PackOfRightCards />
             <SelectedCards />
             <PackOfCards />
             <FinishBtn />
