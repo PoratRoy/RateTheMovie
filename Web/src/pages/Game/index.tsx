@@ -9,10 +9,14 @@ import { Card } from "../../models/types/card";
 import { initCard } from "../../models/initialization/card";
 import FinishBtn from "../../components/actions/FinishBtn";
 import { useMovieContext } from "../../context/MovieContext";
+import { useGamePlayContext } from "../../context/GamePlayContext";
+import Score from "../../components/actions/Score";
+import { Movie } from "../../models/types/movie";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
-    const { setSelectedCards, setCorrectOrder } = useCardsContext();
+    const { setSelectedCards } = useCardsContext();
+    const { setRightOrder } = useGamePlayContext();
     const { movies } = useMovieContext();
 
     useEffect(() => {
@@ -24,7 +28,10 @@ const Game: React.FC = () => {
             return votesA - votesB;
         });
 
-        setCorrectOrder(sortedMovies)
+        const cards: Card[] = sortedMovies.map((movie: Movie, i: number) => {
+            return { id: i.toString(), movie, rate: movie.imdbVotes } as Card;
+        })
+        setRightOrder(cards);
     }, [movies]);
 
     function handleDragEnd(event: DragEndEvent) {
@@ -56,6 +63,7 @@ const Game: React.FC = () => {
             <SelectedCards />
             <PackOfCards />
             <FinishBtn />
+            <Score />
         </DndContext>
     );
 };
