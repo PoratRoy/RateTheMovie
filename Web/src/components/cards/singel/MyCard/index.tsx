@@ -9,7 +9,7 @@ const MyCard: React.FC<MyCardProps> = ({ movie, loading }) => {
 
     return (
         <Card onHover={title}>
-            {!loading && title && poster_path && <Img alt={title} src={poster_path} />}
+            {!loading && <Img alt={title} src={poster_path} />}
         </Card>
     );
 };

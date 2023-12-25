@@ -1,4 +1,4 @@
-import { Movie } from "./movie";
+import { Movie, TargetMovieCard } from "./movie";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -25,4 +25,22 @@ export type ImgProps = {
 export type MyCardProps = {
     movie: Movie;
     loading: boolean;
+};
+
+export type DroppableProps = ChildernsProps & {
+    droppableId: string;
+};
+
+export type DraggableProps = ChildernsProps & {
+    draggableId: string;
+    index?: number;
+    movie?: Movie;
+};
+
+export type SelectedCardsProps = {
+    terget: TargetMovieCard;
+};
+
+export type SelectedCardProps = {
+    movie?: Movie;
 };
