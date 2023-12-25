@@ -2,13 +2,13 @@ export type Movie = {
     title: string;
     id: string;
     poster_path: string;
+    imdbRating: string;
+    imdbVotes?: string;
     imdbID?: string;
     adult?: boolean;
     backdrop_path?: string;
     genre_ids?: number[];
     release_date?: string;
-    imdbRating?: string;
-    imdbVotes?: string;
     video?: string;
     actors?: string;
     director?: string;

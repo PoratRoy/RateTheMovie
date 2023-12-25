@@ -56,7 +56,12 @@ const useDiscoverMovies = () => {
                     });
                     const resultsOMDB: MovieOMDB = response.data;
 
-                    if (resultsOMDB.Poster && resultsOMDB.Poster !== "N/A") {
+                    if (
+                        resultsOMDB.Poster &&
+                        resultsOMDB.Poster !== "N/A" &&
+                        resultsOMDB.imdbRating &&
+                        resultsOMDB.imdbRating !== "N/A" // TODO: what shold I do?
+                    ) {
                         const movie: Movie = {
                             title: title,
                             id: id.toString(),

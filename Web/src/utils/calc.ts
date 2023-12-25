@@ -14,3 +14,11 @@ export const generateRandomArray = (length: number = DISCOVERD_MOVIES_NUM): numb
 
     return array;
 };
+
+export const sortNumbers = (numbers: number[]): number[] => {
+    const sortedArray = [...numbers];
+    sortedArray.sort((a, b) => {
+        return a - b;
+    });
+    return sortedArray;
+};

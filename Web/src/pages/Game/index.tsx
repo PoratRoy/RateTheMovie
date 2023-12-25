@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Game.module.css";
 import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
 import PackOfCards from "../../components/cards/pack/PackOfCards";
@@ -8,10 +8,24 @@ import { useCardsContext } from "../../context/CardsContext";
 import { Card } from "../../models/types/card";
 import { initCard } from "../../models/initialization/card";
 import FinishBtn from "../../components/actions/FinishBtn";
+import { useMovieContext } from "../../context/MovieContext";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
-    const { setSelectedCards } = useCardsContext();
+    const { setSelectedCards, setCorrectOrder } = useCardsContext();
+    const { movies } = useMovieContext();
+
+    useEffect(() => {
+        const sortedMovies = [...movies];
+
+        sortedMovies.sort((a, b) => {
+            const votesA = parseFloat(a.imdbRating || "0");
+            const votesB = parseFloat(b.imdbRating || "0");
+            return votesA - votesB;
+        });
+
+        setCorrectOrder(sortedMovies)
+    }, [movies]);
 
     function handleDragEnd(event: DragEndEvent) {
         const { over, active } = event;
@@ -47,11 +61,3 @@ const Game: React.FC = () => {
 };
 
 export default Game;
-
-//const isAlreadyInPack = selectedCards.some((card: Card) => card.movie?.id === movie.id);
-
-// setSelectedCards((prev) => {
-//     const updatedCards = [...prev];
-//     updatedCards[parseInt(id)] = card;
-//     return updatedCards;
-// });
