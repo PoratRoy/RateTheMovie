@@ -7,6 +7,7 @@ import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { useCardsContext } from "../../context/CardsContext";
 import { Card } from "../../models/types/card";
 import { initCard } from "../../models/initialization/card";
+import FinishBtn from "../../components/actions/FinishBtn";
 
 const Game: React.FC = () => {
     useDiscoverMovies();
@@ -26,7 +27,8 @@ const Game: React.FC = () => {
                     (c) => c?.movie?.title === card?.movie?.title,
                 );
 
-                if (existingIndex !== -1) {//exists
+                if (existingIndex !== -1) {
+                    //exists
                     updatedCards[existingIndex] = initCard;
                 }
                 updatedCards[parseInt(id)] = card;
@@ -39,6 +41,7 @@ const Game: React.FC = () => {
         <DndContext onDragEnd={handleDragEnd}>
             <SelectedCards />
             <PackOfCards />
+            <FinishBtn />
         </DndContext>
     );
 };
