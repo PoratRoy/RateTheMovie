@@ -23,10 +23,12 @@
     --text-color: #FFFFFF;
     --text-color-hover: #FFFFFF90;
     --text-color-active: #FFFFFF80;
+    --text-color-opacity: #FFFFFF50;
 
     --error-color: #FF5A5F;
 
-
+    --primary-border-radius: 20px;
+    --secondary-border-radius: 10px;
 }
 
 body {

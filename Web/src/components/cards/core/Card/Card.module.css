@@ -1,0 +1,31 @@
+.cardContanier {
+    position: relative;
+    width: fit-content;
+    height: 200px;
+    width: 135px;
+    margin: 20px;
+    border: 7px solid var(--tertiary-color);
+    overflow: hidden;
+    border-radius: var(--primary-border-radius);
+    background-color: var(--secondary-color);
+}
+
+.cardTitle {
+    display: none;
+}
+
+.cardContanier:hover .cardTitle {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+    padding: 40% 10px 10px 10px;
+    box-sizing: border-box;
+}
