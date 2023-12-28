@@ -1,3 +1,4 @@
+import { DateEndYear, DateStartYear } from "../models/constants";
 import { DateRangeOptionFilter } from "../models/types/filter";
 import { datePattern } from "./format";
 
@@ -10,8 +11,8 @@ export const extractYearFromDateString = (date: string | undefined): [boolean, s
 };
 
 export const getYearsArray = (date?: DateRangeOptionFilter): string[] => {
-    const startYear = date?.start || 1800;
-    const endYear = date?.end || new Date().getFullYear();
+    const startYear = date?.start || DateStartYear;
+    const endYear = date?.end || DateEndYear;
     const yearsArray = [];
 
     for (let year = endYear; year >= startYear; year--) {

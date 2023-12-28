@@ -63,24 +63,32 @@ export type InputPlaceholderProps = {
     placeholder?: string;
 };
 
-export type SelectInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps & {
-        // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
-        // setValue: UseFormSetValue<TInput>;
-        setValue: any;
-        options: SelectOption[];
-        defaultValue?: string[];
-    };
+export type SelectInputProps = InputPlaceholderProps & {
+    // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
+    // setValue: UseFormSetValue<TInput>;
+    setValue: any;
+    options: SelectOption[];
+    defaultValue?: string[];
+};
 
-export type SelectMultiInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps & {
-        // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
-        // setValue: UseFormSetValue<TInput>;
-        setValue: any;
-        options: SelectOption[];
-        defaultValue?: string[];
-    };
+export type SelectMultiInputProps = InputPlaceholderProps & {
+    // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
+    // setValue: UseFormSetValue<TInput>;
+    setValue: any;
+    options: SelectOption[];
+    defaultValue?: string[];
+};
 
 export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> & {
     setValue: any;
 };
+
+export type GenreInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps & {
+        setValue: any;
+    };
+
+export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps & {
+        setValue: any;
+    };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { DateRangeInputProps } from "../../../../models/types/props";
-import { FormSetValue } from "../../../../models/constants";
-import SelectInput from "../select/SelectInput";
+import { DateEndYear, DateStartYear, FormSetValue } from "../../../../models/constants";
+import SelectInput from "../../core/select/SelectInput";
 import { getYearsArray } from "../../../../utils/date";
 import { initOptions } from "../../../../utils/select";
 import { SelectOption } from "../../../../models/types/select";
@@ -15,8 +15,8 @@ const DateRangeInput = <TInput extends FieldValues>({
 }: DateRangeInputProps<TInput>) => {
     const [fromOptions, setFromOptions] = useState<SelectOption[]>([]);
     const [toOptions, setToOptions] = useState<SelectOption[]>([]);
-    const [from, setFrom] = useState<SelectOption | undefined>();
-    const [to, setTo] = useState<SelectOption | undefined>();
+    const [from, setFrom] = useState<string | undefined>();
+    const [to, setTo] = useState<string | undefined>();
 
     const setOptions = (filter: DateRangeOptionFilter) => {
         const years = getYearsArray(filter);
@@ -24,22 +24,19 @@ const DateRangeInput = <TInput extends FieldValues>({
     };
 
     useEffect(() => {
-        if (fromOptions.length === 0 || to?.value) {
-            setFromOptions(setOptions({ end: parseInt(to?.value || "") - 1 }));
-        }
-        if (toOptions.length === 0 || from?.value) {
-            setToOptions(setOptions({ start: parseInt(from?.value || "") + 1 }));
-        }
-    }, [to, from]);
+        let date = [DateStartYear.toString(), DateEndYear.toString()];
 
-    useEffect(() => {
-        if (from) {
-            console.log("from", from);
+        if (fromOptions.length === 0 || to) {
+            setFromOptions(setOptions({ end: parseInt(to || "") - 1 }));
         }
-        if (to) {
-            console.log("to", to);
+        if (toOptions.length === 0 || from) {
+            setToOptions(setOptions({ start: parseInt(from || "") + 1 }));
         }
-        setValue(id, JSON.stringify("roy"), FormSetValue);
+
+        if (from) date[0] = from;
+        if (to) date[1] = to;
+
+        setValue(id, JSON.stringify(date), FormSetValue);
     }, [from, to]);
 
     return (

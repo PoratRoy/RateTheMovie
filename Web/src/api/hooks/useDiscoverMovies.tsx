@@ -2,7 +2,7 @@ import path from "../path.json";
 import axios from "axios";
 import { OmdbBaseURL, TmdbBaseURL } from "../constants";
 import { generateRandomArray, getRandomNumber } from "../../utils/calc";
-import { Movie, MovieOMDB, MovieTMDB } from "../../models/types/movie";
+import { Movie, MovieFilters, MovieOMDB, MovieTMDB } from "../../models/types/movie";
 import { extractYearFromDateString } from "../../utils/date";
 import { useErrorContext } from "../../context/ErrorContext";
 import { useSingleton } from "../../hooks/useSingleton";
@@ -11,16 +11,9 @@ import { PACK_CARDS_NUM } from "../../models/constants";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
-    const { movies, setMovies, setMovieLoading } = useMovieContext();
+    const { movies, setMovies, setMovieLoading, filters } = useMovieContext();
 
-    const setQueryParams = (
-        page: number,
-        filters?: {
-            year?: [string, string];
-            genre?: string[];
-            country?: string;
-        },
-    ) => {
+    const setQueryParams = (page: number, filters?: MovieFilters) => {
         let release_date_gte = "";
         let release_date_lte = "";
         let genres = "";
@@ -28,12 +21,12 @@ const useDiscoverMovies = () => {
         if (filters) {
             if (filters.year) {
                 release_date_gte = `${filters.year[0]}-01-01`;
-                release_date_lte = `${filters.year[1]}-12-31`;
+                release_date_lte = `${filters.year[1]}-12-29`;
             }
             if (filters.genre) {
                 genres = filters.genre.join(",");
             }
-            if(filters.country) {
+            if (filters.country) {
                 with_origin_country = filters.country;
             }
         }
@@ -44,14 +37,11 @@ const useDiscoverMovies = () => {
             "release_date.gte": release_date_gte,
             "release_date.lte": release_date_lte,
             with_genres: genres,
+            with_origin_country
         };
     };
 
-    const discoverMovies = async (filters?: {
-        year?: [string, string];
-        genre?: string[];
-        country?: string;
-    }) => {
+    const discoverMovies = async () => {
         if (movies.length > 0) return;
 
         const page = getRandomNumber(1, 500);

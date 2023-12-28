@@ -2,32 +2,20 @@ import Select, { SingleValue } from "react-select";
 import style from "./SelectInput.module.css";
 import selectStyles from "../../../../../style/select";
 import { SelectInputProps } from "../../../../../models/types/props";
-import { FieldValues } from "react-hook-form";
-import { FormSetValue } from "../../../../../models/constants";
 import { SelectOption } from "../../../../../models/types/select";
+import React from "react";
 
-const SelectInput = <TInput extends FieldValues>({
-    id,
-    placeholder,
-    setValue,
-    options,
-    defaultValue,
-}: SelectInputProps<TInput>) => {
+const SelectInput: React.FC<SelectInputProps> = ({ placeholder, setValue, options }) => {
     const onSelectOption = (newValue: unknown) => {
         const option = newValue as SingleValue<SelectOption>;
         if (option) {
-            if (id) {
-                setValue(id, JSON.stringify(option), FormSetValue);
-            } else {
-                setValue(option);
-            }
+            setValue(option.value);
         }
     };
 
     return (
         <section className={style.selectTag}>
             <Select
-                name={id}
                 defaultValue={options[0]}
                 options={options}
                 styles={selectStyles}

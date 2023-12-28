@@ -6,3 +6,7 @@ export const FormSetValue = {
     shouldTouch: true,
     shouldValidate: true,
 };
+
+export const DateStartYear = 1800
+export const DateEndYear = new Date().getFullYear()
+export const DateDefaultJSON = '["1800","2023"]'

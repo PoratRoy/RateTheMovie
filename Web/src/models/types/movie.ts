@@ -59,3 +59,9 @@ export type MovieOMDB = {
     imdbRating?: string;
     imdbVotes?: string;
 };
+
+export type MovieFilters = {
+    year?: [string, string];
+    genre?: string[];
+    country?: string;
+};

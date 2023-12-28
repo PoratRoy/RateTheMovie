@@ -11,9 +11,15 @@ import { getYearsArray } from "../../utils/date";
 import { initOptions } from "../../utils/select";
 import DateRangeInput from "../../components/actions/input/DateRangeInput";
 import { SelectOption } from "../../models/types/select";
+import { useMovieContext } from "../../context/MovieContext";
+import { MovieFilters } from "../../models/types/movie";
+import GenreInput from "../../components/actions/input/GenreInput";
+import CountryInput from "../../components/actions/input/CountryInput";
+import { DateDefaultJSON } from "../../models/constants";
 
 const FilterPage: React.FC = () => {
     const navigate = useNavigate();
+    const { setFilters } = useMovieContext();
     const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
     const { setValue } = methods;
     const [yearOptions, setYearOptions] = useState<SelectOption[]>([]);
@@ -27,14 +33,30 @@ const FilterPage: React.FC = () => {
     }, []);
 
     const onSubmit: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
-        // const { year, genre, country } = data;
-        console.log("year", data);
-        // navigate(path.game);
+        const { year, genre, country } = data;
+
+        const movieFilters: MovieFilters = {
+            year: JSON.parse(year || DateDefaultJSON),
+            genre: JSON.parse(genre || "[]"),
+            country: JSON.parse(country || ""),
+        };
+        setFilters(movieFilters);
+        navigate(path.game);
     };
 
     return (
         <FilterFormLayout methods={methods} onSubmit={onSubmit} isLoading={false}>
             <DateRangeInput id={filterInputs.year.id} setValue={setValue} />
+            <GenreInput
+                id={filterInputs.genre.id}
+                placeholder={filterInputs.genre.placeholder}
+                setValue={setValue}
+            />
+            <CountryInput
+                id={filterInputs.country.id}
+                placeholder={filterInputs.country.placeholder}
+                setValue={setValue}
+            />
         </FilterFormLayout>
     );
 };

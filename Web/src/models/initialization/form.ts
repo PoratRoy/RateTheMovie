@@ -3,14 +3,14 @@ import { FilterInputs } from "../types/form";
 export const filterInputs: FilterInputs = {
     year: {
         id: "year",
-        placeholder: "Select release years",
+        placeholder: "Select Release Years",
     },
     genre: {
         id: "genre",
-        placeholder: "Select genres",
+        placeholder: "Select Genres",
     },
     country: {
         id: "country",
-        placeholder: "Select countries",
+        placeholder: "Select Country",
     },
 };
