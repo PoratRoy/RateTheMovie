@@ -1,6 +1,6 @@
 import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { Movie } from "./movie";
-import { SelectOption } from "./common";
+import { SelectOption } from "./select";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
