@@ -9,13 +9,14 @@ export type ChildernsProps = {
 export type ProvidersProps = ChildernsProps;
 
 export type PackProps = ChildernsProps & {
-    width?: string;
+    maxWidth?: string;
 };
 
 export type CardProps = ChildernsProps & {
-    width?: string;
-    height?: string;
+    width?: number;
+    height?: number;
     onHover?: string;
+    isShadow?: boolean;
 };
 
 export type ImgProps = {
@@ -27,6 +28,10 @@ export type ImgProps = {
 export type MyCardProps = {
     movie: Movie;
     loading: boolean;
+};
+
+export type ShadowCardProps = {
+    movie: Movie;
 };
 
 export type DroppableProps = ChildernsProps & {
@@ -41,6 +46,7 @@ export type DraggableProps = ChildernsProps & {
 
 export type SelectedCardProps = {
     movie?: Movie;
+    index: string;
 };
 
 export type RightCardProps = {

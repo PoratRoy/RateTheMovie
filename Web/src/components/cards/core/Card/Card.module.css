@@ -1,8 +1,6 @@
 .cardContanier {
     position: relative;
     width: fit-content;
-    height: 200px;
-    width: 135px;
     margin: 20px;
     border: 7px solid var(--tertiary-color);
     overflow: hidden;
