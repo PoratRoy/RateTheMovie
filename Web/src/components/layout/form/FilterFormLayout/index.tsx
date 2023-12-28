@@ -12,14 +12,14 @@ const FilterFormLayout = <TInput extends FieldValues>({
 
     return (
         <FormProvider {...methods}>
-            <form className={style.cardForm} onSubmit={handleSubmit(onSubmit)} noValidate>
-                <section className={style.cardFormChildrens}>{children}</section>
+            <form className={style.filterForm} onSubmit={handleSubmit(onSubmit)} noValidate>
+                <section className={style.filterFormChildrens}>{children}</section>
 
                 <section className={style.btnLayoutContainer}>
                     {isLoading ? (
                         <div className={style.btnLayoutLoading}>Loading...</div>
                     ) : (
-                        <input type="button" className={style.btnLayout} value="Play!" />
+                        <input type="submit" className={style.btnLayout} value="Play!" />
                     )}
                 </section>
             </form>

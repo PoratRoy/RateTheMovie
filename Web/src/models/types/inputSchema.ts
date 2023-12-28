@@ -1,5 +1,5 @@
 export type SelectInputSchema = {
-    date: string | undefined;
-    type: string | undefined;
-    tags: string | undefined;
+    year: string | undefined;
+    ganre: string | undefined;
+    contry: string | undefined;
 };

@@ -14,7 +14,7 @@ export type InputTypeText<TInput> = RootInputType<TInput> & {
 export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & {};
 
 export type FilterInputs = {
-    date: InputTypeSelect<SelectInputSchema>;
-    type: InputTypeSelect<SelectInputSchema>;
-    tags: InputTypeSelect<SelectInputSchema>;
+    year: InputTypeSelect<SelectInputSchema>;
+    ganre: InputTypeSelect<SelectInputSchema>;
+    contry: InputTypeSelect<SelectInputSchema>;
 };

@@ -56,7 +56,7 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 export type FilterFormLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
 export type InputProps<TInput extends FieldValues> = {
-    id: Path<TInput>;
+    id?: Path<TInput>;
 };
 
 export type InputPlaceholderProps = {
@@ -71,3 +71,16 @@ export type SelectInputProps<TInput extends FieldValues> = InputProps<TInput> &
         options: SelectOption[];
         defaultValue?: string[];
     };
+
+export type SelectMultiInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps & {
+        // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
+        // setValue: UseFormSetValue<TInput>;
+        setValue: any;
+        options: SelectOption[];
+        defaultValue?: string[];
+    };
+
+export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> & {
+    setValue: any;
+};

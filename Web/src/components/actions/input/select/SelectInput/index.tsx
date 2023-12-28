@@ -1,10 +1,10 @@
 import Select, { SingleValue } from "react-select";
-import style from "./SelectInput.module.scss";
-import { SelectOption } from "../../../models/types/common";
-import selectStyles from "../../../style/select";
-import { SelectInputProps } from "../../../models/types/props";
+import style from "./SelectInput.module.css";
+import selectStyles from "../../../../../style/select";
+import { SelectInputProps } from "../../../../../models/types/props";
 import { FieldValues } from "react-hook-form";
-import { FormSetValue } from "../../../models/constants";
+import { FormSetValue } from "../../../../../models/constants";
+import { SelectOption } from "../../../../../models/types/select";
 
 const SelectInput = <TInput extends FieldValues>({
     id,
@@ -16,7 +16,11 @@ const SelectInput = <TInput extends FieldValues>({
     const onSelectOption = (newValue: unknown) => {
         const option = newValue as SingleValue<SelectOption>;
         if (option) {
-            setValue(id, JSON.stringify(option.value), FormSetValue);
+            if (id) {
+                setValue(id, JSON.stringify(option), FormSetValue);
+            } else {
+                setValue(option);
+            }
         }
     };
 

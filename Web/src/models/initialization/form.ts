@@ -1,16 +1,16 @@
 import { FilterInputs } from "../types/form";
 
 export const filterInputs: FilterInputs = {
-    date: {
-        id: "date",
-        placeholder: "Date",
+    year: {
+        id: "year",
+        placeholder: "Select release years",
     },
-    type: {
-        id: "type",
-        placeholder: "Type",
+    ganre: {
+        id: "ganre",
+        placeholder: "Select ganres",
     },
-    tags: {
-        id: "tags",
-        placeholder: "Add tags...",
+    contry: {
+        id: "contry",
+        placeholder: "Select contries",
     },
 };
