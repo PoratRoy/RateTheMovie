@@ -13,7 +13,45 @@ const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
     const { movies, setMovies, setMovieLoading } = useMovieContext();
 
-    const discoverMovies = async () => {
+    const setQueryParams = (
+        page: number,
+        filters?: {
+            year?: [string, string];
+            genre?: string[];
+            country?: string;
+        },
+    ) => {
+        let release_date_gte = "";
+        let release_date_lte = "";
+        let genres = "";
+        let with_origin_country = "";
+        if (filters) {
+            if (filters.year) {
+                release_date_gte = `${filters.year[0]}-01-01`;
+                release_date_lte = `${filters.year[1]}-12-31`;
+            }
+            if (filters.genre) {
+                genres = filters.genre.join(",");
+            }
+            if(filters.country) {
+                with_origin_country = filters.country;
+            }
+        }
+
+        return {
+            api_key: import.meta.env.VITE_TMDB_API_KEY || "",
+            page,
+            "release_date.gte": release_date_gte,
+            "release_date.lte": release_date_lte,
+            with_genres: genres,
+        };
+    };
+
+    const discoverMovies = async (filters?: {
+        year?: [string, string];
+        genre?: string[];
+        country?: string;
+    }) => {
         if (movies.length > 0) return;
 
         const page = getRandomNumber(1, 500);
@@ -23,9 +61,8 @@ const useDiscoverMovies = () => {
         setMovieLoading(true);
         setError(undefined);
         try {
-            const response = await axios.get(URL, {
-                params: { api_key: import.meta.env.VITE_TMDB_API_KEY || "", page },
-            });
+            const response = await axios.get(URL, { params: setQueryParams(page, filters) });
+
             const resultsTMDB: MovieTMDB[] = response.data.results;
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 let movies: Movie[] = [];

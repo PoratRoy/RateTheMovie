@@ -1,4 +1,4 @@
-export const Ganres = [
+export const genres = [
     "Action",
     "Adventure",
     "Animated",

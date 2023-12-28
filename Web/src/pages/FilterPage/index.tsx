@@ -28,7 +28,7 @@ const FilterPage: React.FC = () => {
     }, []);
 
     const onSubmit: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
-        // const { year, ganre, contry } = data;
+        // const { year, genre, country } = data;
         console.log("year", data);
         //navigate(path.game);
     };

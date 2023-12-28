@@ -5,12 +5,12 @@ export const filterInputs: FilterInputs = {
         id: "year",
         placeholder: "Select release years",
     },
-    ganre: {
-        id: "ganre",
-        placeholder: "Select ganres",
+    genre: {
+        id: "genre",
+        placeholder: "Select genres",
     },
-    contry: {
-        id: "contry",
-        placeholder: "Select contries",
+    country: {
+        id: "country",
+        placeholder: "Select countries",
     },
 };

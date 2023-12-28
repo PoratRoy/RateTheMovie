@@ -1,4 +1,4 @@
-import { ContryOption, SelectOption } from "../models/types/select";
+import { CountryOption, SelectOption } from "../models/types/select";
 
 export const initOptions = (values: string[]): SelectOption[] => {
     const res = values.map((value: string): SelectOption => {
@@ -14,15 +14,15 @@ export const createOption = (value: string): SelectOption => {
     };
 };
 
-export const createContryOption = (contries: ContryOption[]): SelectOption[] => {
-    const options: SelectOption[] = contries.map((contry: ContryOption) => {
+export const createCountryOption = (countries: CountryOption[]): SelectOption[] => {
+    const options: SelectOption[] = countries.map((country: CountryOption) => {
         return {
             label: (
                 <div>
-                    {contry.emoji} - {contry.name}
+                    {country.emoji} - {country.name}
                 </div>
             ),
-            value: contry.name,
+            value: country.name,
         };
     });
     return options;

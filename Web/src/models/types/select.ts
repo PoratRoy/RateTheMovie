@@ -4,7 +4,7 @@ export type SelectOption = {
     action?: () => any;
 };
 
-export type ContryOption = {
+export type CountryOption = {
     name: string;
     emoji: string;
     image: string;
