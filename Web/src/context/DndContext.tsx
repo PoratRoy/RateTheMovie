@@ -1,43 +1,49 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { Card } from "../models/types/card";
-import { useCardsContext } from "./CardsContext";
 import { initCard } from "../models/initialization/card";
+import { useGamePlayContext } from "./GamePlayContext";
+import { Movie } from "../models/types/movie";
+import { Player } from "../models/types/player";
 
 export const DndContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const { setSelectedCards } = useCardsContext();
+    const { setPlayers } = useGamePlayContext();
 
     function handleDragEnd(event: DragEndEvent) {
         const { over, active } = event;
         const id = over?.id.toString();
-        const movie = active?.data?.current?.movie;
+        const movie: Movie = active?.data?.current?.movie;
+        const player: Player = active?.data?.current?.player;
 
-        if (movie) {
-            const card: Card = { id, movie, rate: movie.imdbVotes };
+        if (movie && player) {
+            const card: Card = { id, movie, rate: parseInt(movie.imdbVotes || "0") };
 
-            setSelectedCards((prev) => {
-                const updatedCards = [...prev];
-                const existingIndex = updatedCards.findIndex(
-                    (c) => c?.movie?.title === card?.movie?.title,
-                );
+            setPlayers((prev) => {
+                const players = [...prev];
+                const playerId = player.id;
+                const selectedCards = players[playerId].selectedCards;
 
                 if (id) {
-                    const existingCard = updatedCards[parseInt(id)];
+                    const cardId = parseInt(id);
+                    const existingCard = selectedCards[cardId];
+                    const existingIndex = selectedCards.findIndex(
+                        (c) => c?.movie?.title === card?.movie?.title,
+                    );
                     if (existingCard) {
                         //swap
-                        updatedCards[existingIndex] = existingCard;
+                        selectedCards[existingIndex] = existingCard;
                     } else if (existingIndex !== -1) {
                         //alredy exists
-                        updatedCards[existingIndex] = initCard;
+                        selectedCards[existingIndex] = initCard;
                     }
-                    updatedCards[parseInt(id)] = card;
+                    selectedCards[cardId] = card;
                 } else {
                     //remove
-                    const selectedCard = updatedCards.find((c) => c?.movie?.id === movie.id);
+                    const selectedCard = selectedCards.find((c) => c?.movie?.id === movie.id);
                     if (selectedCard) {
-                        updatedCards[updatedCards.indexOf(selectedCard)] = initCard;
+                        selectedCards[selectedCards.indexOf(selectedCard)] = undefined;
                     }
                 }
-                return updatedCards;
+                return players;
             });
         }
     }

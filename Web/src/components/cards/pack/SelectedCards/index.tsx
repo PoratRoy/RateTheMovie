@@ -1,18 +1,16 @@
 import React from "react";
-import style from "./SelectedCards.module.css";
 import SelectedCard from "../../singel/SelectedCard";
 import Pack from "../../core/Pack";
 import { PACK_CARDS_NUM } from "../../../../models/constants";
-import { useCardsContext } from "../../../../context/CardsContext";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const SelectedCards: React.FC = () => {
-    const { selectedCards } = useCardsContext();
+    const { players } = useGamePlayContext();
 
     return (
         <Pack>
             {[...Array(PACK_CARDS_NUM)].map((_, index) => {
-                const movie = selectedCards[index] ? selectedCards[index].movie : undefined;
-                return <SelectedCard movie={movie} index={index.toString()} />;
+                return <SelectedCard key={index} index={index} players={players} />;
             })}
         </Pack>
     );

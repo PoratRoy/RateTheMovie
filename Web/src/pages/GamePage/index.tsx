@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
-import style from "./GamePage.module.css";
 import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
-import PackOfCards from "../../components/cards/pack/PackOfCards";
 import SelectedCards from "../../components/cards/pack/SelectedCards";
 import { Card } from "../../models/types/card";
 import FinishBtn from "../../components/actions/FinishBtn";
 import { useMovieContext } from "../../context/MovieContext";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import Score from "../../components/actions/Score";
 import { Movie } from "../../models/types/movie";
 import PackOfRightCards from "../../components/cards/pack/PackOfRightCards";
+import { Player } from "../../models/types/player";
+import PlayerLayout from "../../components/layout/PlayerLayout";
 
 const GamePage: React.FC = () => {
     useDiscoverMovies();
-    const { setRightOrder } = useGamePlayContext();
+    const { setCorrectOrder, players } = useGamePlayContext();
     const { movies } = useMovieContext();
-
     useEffect(() => {
         const sortedMovies = [...movies];
 
@@ -28,16 +26,17 @@ const GamePage: React.FC = () => {
         const cards: Card[] = sortedMovies.map((movie: Movie, i: number) => {
             return { id: i.toString(), movie, rate: movie.imdbVotes } as Card;
         });
-        setRightOrder(cards);
+        setCorrectOrder(cards);
     }, [movies]);
 
     return (
         <section>
             <PackOfRightCards />
             <SelectedCards />
-            <PackOfCards />
             <FinishBtn />
-            <Score />
+            {players.map((player: Player, i: number) => (
+                <PlayerLayout key={i} player={player} />
+            ))}
         </section>
     );
 };

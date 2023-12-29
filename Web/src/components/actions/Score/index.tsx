@@ -1,8 +1,7 @@
 import React from "react";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { ScoreProps } from "../../../models/types/props";
 
-const Score: React.FC = () => {
-    const { score } = useGamePlayContext();
+const Score: React.FC<ScoreProps> = ({ score }) => {
     return <div style={{ color: "white" }}>{score}</div>;
 };
 

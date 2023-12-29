@@ -6,10 +6,10 @@ import { Card } from "../../../../models/types/card";
 
 
 const PackOfRightCards: React.FC = () => {
-    const { rightOrder } = useGamePlayContext();
+    const { correctOrder } = useGamePlayContext();
     return (
         <Pack>
-            {rightOrder.map((card: Card, i: number) => (
+            {correctOrder.map((card: Card, i: number) => (
                 <RightCard key={i} movie={card.movie} />
             ))}
         </Pack>

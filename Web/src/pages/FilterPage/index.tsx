@@ -22,11 +22,10 @@ const FilterPage: React.FC = () => {
 
     const onSubmit: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
         const { year, genre, country } = data;
-
         const movieFilters: MovieFilters = {
-            year: JSON.parse(year || DateDefaultJSON),
-            genre: JSON.parse(genre || "[]"),
-            country: JSON.parse(country || ""),
+            year: year ? JSON.parse(year) : DateDefaultJSON,
+            genre: genre ? JSON.parse(genre) : [],
+            country: country ? JSON.parse(country) : "",
         };
         setFilters(movieFilters);
         navigate(path.game);

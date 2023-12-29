@@ -1,25 +1,41 @@
 import React, { useEffect, useState } from "react";
 import style from "./FinishBtn.module.css";
-import { useCardsContext } from "../../../context/CardsContext";
 import { PACK_CARDS_NUM } from "../../../models/constants";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { Player } from "../../../models/types/player";
 
 const FinishBtn: React.FC = () => {
-    const { selectedCards } = useCardsContext();
-    const { rightOrder, setScore } = useGamePlayContext();
+    const { correctOrder, setPlayers, players } = useGamePlayContext();
     const [isFinished, setIsFinished] = useState<boolean>(false);
 
     useEffect(() => {
-        const isAllFilled = selectedCards.every((card) => card?.movie !== undefined);
-        setIsFinished(selectedCards.length === PACK_CARDS_NUM && isAllFilled ? true : false);
-    }, [selectedCards]);
+        let finish = true;
+        players.every((player: Player) => {
+            const selectedCards = player.selectedCards;
+            const isAllFilled = selectedCards.every((card) => card?.movie !== undefined);
+            if (selectedCards.length !== PACK_CARDS_NUM || !isAllFilled) {
+                finish = false;
+                return;
+            }
+        });
+        setIsFinished(finish);
+    }, [players]);
 
     const handleFinish = () => {
-        for (let i = 0; i < rightOrder.length; i++) {
-            if (rightOrder[i].movie === selectedCards[i].movie) {
-                setScore((prev) => prev + parseFloat(rightOrder[i]?.movie?.imdbRating || "0"));
-            }
-        }
+        setPlayers((prev) => {
+            return prev.map((player: Player) => {
+                let playerScore = 0;
+                for (let i = 0; i < correctOrder.length; i++) {
+                    if (correctOrder[i].movie === player.selectedCards[i]?.movie) {
+                        playerScore += parseFloat(correctOrder[i]?.movie?.imdbRating || "0");
+                    }
+                }
+                return {
+                    ...player,
+                    score: player.score + playerScore,
+                };
+            });
+        });
     };
 
     return (

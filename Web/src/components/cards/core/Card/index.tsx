@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Card.module.css";
 import { CardProps } from "../../../../models/types/props";
+import PlaceholderIcon from "../../core/PlaceholderIcon";
 
 const Card: React.FC<CardProps> = ({ children, onHover, isShadow, width = 135, height = 200 }) => {
     return (
@@ -10,6 +11,7 @@ const Card: React.FC<CardProps> = ({ children, onHover, isShadow, width = 135, h
         >
             {onHover && <div className={style.cardTitle}>{onHover}</div>}
             {children}
+            <PlaceholderIcon />
         </section>
     );
 };

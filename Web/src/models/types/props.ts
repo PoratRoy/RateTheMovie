@@ -1,6 +1,7 @@
 import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
+import { Player } from "./player";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -19,6 +20,12 @@ export type CardProps = ChildernsProps & {
     isShadow?: boolean;
 };
 
+export type CardSliceProps = {
+    side: "left" | "right" | "all";
+    player: Player;
+    index: number
+};
+
 export type ImgProps = {
     src: string;
     alt: string;
@@ -28,6 +35,7 @@ export type ImgProps = {
 export type MyCardProps = {
     movie: Movie;
     loading: boolean;
+    player: Player;
 };
 
 export type ShadowCardProps = {
@@ -42,11 +50,12 @@ export type DraggableProps = ChildernsProps & {
     draggableId: string;
     index?: number;
     movie?: Movie;
+    player?: Player;
 };
 
 export type SelectedCardProps = {
-    movie?: Movie;
-    index: string;
+    index: number;
+    players: Player[];
 };
 
 export type RightCardProps = {
@@ -98,3 +107,15 @@ export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps & {
         setValue: any;
     };
+
+export type PlayerLayoutProps = {
+    player: Player
+}
+
+export type ScoreProps = {
+    score: number
+}
+
+export type PackOfCardsProps = {
+    player: Player
+}
