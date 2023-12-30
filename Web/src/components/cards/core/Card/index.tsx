@@ -6,6 +6,7 @@ import PlaceholderIcon from "../../core/PlaceholderIcon";
 const Card: React.FC<CardProps> = ({ children, onHover, isShadow, width = 135, height = 200 }) => {
     return (
         <section
+            onClick={() => console.log("click")}
             style={{ width, height }}
             className={`${style.cardContanier} ${isShadow && style.cardShadow}`}
         >

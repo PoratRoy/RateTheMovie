@@ -2,6 +2,7 @@ import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
+import { Card } from "./card";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -118,4 +119,8 @@ export type ScoreProps = {
 
 export type PackOfCardsProps = {
     player: Player
+}
+
+export type CardViewProps = {
+    movie: Movie
 }
