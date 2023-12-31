@@ -6,11 +6,13 @@ import { FormSetValue } from "../../../../models/constants";
 import { initGenreOptions } from "../../../../utils/select";
 import { Genres } from "../../../../models/ganres";
 import { SelectOption } from "../../../../models/types/select";
+import SelectLayout from "../../../layout/SelectLayout";
 
 const GenreInput = <TInput extends FieldValues>({
     id,
     setValue,
     placeholder,
+    label,
 }: GenreInputProps<TInput>) => {
     const [genresOptions, setGenresOptions] = useState<SelectOption[]>([]);
     const [genres, setGenres] = useState<string[]>([]);
@@ -29,13 +31,13 @@ const GenreInput = <TInput extends FieldValues>({
     }, [genres]);
 
     return (
-        <div>
+        <SelectLayout label={label}>
             <SelectMultiInput
                 placeholder={placeholder}
                 setValue={setGenres}
                 options={genresOptions}
             />
-        </div>
+        </SelectLayout>
     );
 };
 

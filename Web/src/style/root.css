@@ -1,13 +1,20 @@
 :root {
-    --primary-color: #132C43;
-    --primary-color-hover: #16334e;
-    --primary-color-focus: #1e4467;
-    --primary-color-active: #1e4467;
-    --primary-color-disabled: #132C4330;
-    --primary-color-opacity: #132C4350;
+    --background-color: #132C43;
+    --background-color-hover: #16334e;
+    --background-color-focus: #1e4467;
+    --background-color-active: #1e4467;
+    --background-color-disabled: #132C4330;
+    --background-color-opacity: #132C4350;
+
+    --primary-color: #5548F4;
+    --primary-color-hover: #6356f0;
+    --primary-color-focus: #7469ec;
+    --primary-color-active: #7469ec;
+    --primary-color-disabled: #5548F430;
+    --primary-color-opacity: #5548F450;
 
     --secondary-color: #101C28;
-    --secondary-color-hover: #1a2d40;
+    --secondary-color-hover: #13212f;
     --secondary-color-focus: #213850;
     --secondary-color-active: #213850;
     --secondary-color-disabled: #101C2830;
@@ -20,15 +27,25 @@
     --tertiary-color-disabled: #34425130;
     --tertiary-color-opacity: #34425150;
 
+
+
     --text-color: #FFFFFF;
     --text-color-hover: #FFFFFF90;
     --text-color-active: #FFFFFF80;
     --text-color-opacity: #FFFFFF50;
 
+    --input-background-color: #FFFFFF;
+    --input-background-color-hover: #E6E6E6;
+    --input-text-color: #181818;
+    --input_light_text_color: #222222;
+
     --error-color: #FF5A5F;
 
     --primary-border-radius: 20px;
     --secondary-border-radius: 10px;
+
+    --primary-border: 5px solid var(--tertiary-color);
+    --secondary-border: 3px solid var(--tertiary-color);
 }
 
 body {
@@ -39,5 +56,6 @@ body {
     line-height: 1.5;
     font-weight: 400;
     overflow-x: hidden;
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
+    position: relative;
 }

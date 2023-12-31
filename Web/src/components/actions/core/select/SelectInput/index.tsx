@@ -1,28 +1,29 @@
 import Select, { SingleValue } from "react-select";
-import style from "./SelectInput.module.css";
 import selectStyles from "../../../../../style/select";
 import { SelectInputProps } from "../../../../../models/types/props";
 import { SelectOption } from "../../../../../models/types/select";
-import React from "react";
+import React, { useState } from "react";
 
-const SelectInput: React.FC<SelectInputProps> = ({ placeholder, setValue, options }) => {
+const SelectInput: React.FC<SelectInputProps> = ({ placeholder, setValue, options, defaultValue }) => {
+    const [val, setVal] = useState<SelectOption>(defaultValue || options[0]);
+    
     const onSelectOption = (newValue: unknown) => {
         const option = newValue as SingleValue<SelectOption>;
         if (option) {
+            setVal(option);
             setValue(option.value);
         }
     };
 
     return (
-        <section className={style.selectTag}>
-            <Select
-                defaultValue={options[0]}
-                options={options}
-                styles={selectStyles}
-                placeholder={placeholder}
-                onChange={onSelectOption}
-            />
-        </section>
+        <Select
+            defaultValue={defaultValue}
+            options={options}
+            styles={selectStyles}
+            placeholder={placeholder}
+            onChange={onSelectOption}
+            value={val}
+        />
     );
 };
 

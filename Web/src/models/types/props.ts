@@ -2,7 +2,6 @@ import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
-import { Card } from "./card";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -24,7 +23,7 @@ export type CardProps = ChildernsProps & {
 export type CardSliceProps = {
     side: "left" | "right" | "all";
     player: Player;
-    index: number
+    index: number;
 };
 
 export type ImgProps = {
@@ -69,7 +68,7 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     isLoading: boolean;
 };
 
-export type FilterFormLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
+export type MainLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
 export type InputProps<TInput extends FieldValues> = {
     id?: Path<TInput>;
@@ -79,12 +78,16 @@ export type InputPlaceholderProps = {
     placeholder?: string;
 };
 
+export type InputLabelProps = {
+    label: string;
+};
+
 export type SelectInputProps = InputPlaceholderProps & {
     // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
     // setValue: UseFormSetValue<TInput>;
     setValue: any;
     options: SelectOption[];
-    defaultValue?: string[];
+    defaultValue?: SelectOption;
 };
 
 export type SelectMultiInputProps = InputPlaceholderProps & {
@@ -92,35 +95,63 @@ export type SelectMultiInputProps = InputPlaceholderProps & {
     // setValue: UseFormSetValue<TInput>;
     setValue: any;
     options: SelectOption[];
-    defaultValue?: string[];
+    defaultValue?: SelectOption;
 };
 
-export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> & {
-    setValue: any;
-};
+export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputLabelProps & {
+        setValue: any;
+    };
 
 export type GenreInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps & {
+    InputPlaceholderProps &
+    InputLabelProps & {
         setValue: any;
     };
 
 export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps & {
+    InputPlaceholderProps &
+    InputLabelProps & {
         setValue: any;
     };
 
+export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & {
+    setValue: any;
+};
+
 export type PlayerLayoutProps = {
-    player: Player
-}
+    player: Player;
+};
 
 export type ScoreProps = {
-    score: number
-}
+    score: number;
+};
 
 export type PackOfCardsProps = {
-    player: Player
-}
+    player: Player;
+};
 
 export type CardViewProps = {
-    movie: Movie
-}
+    movie: Movie;
+};
+
+export type PlayBtnProps = {
+    title: string;
+    width?: number | string;
+    height?: number | string;
+    loading: boolean;
+};
+
+export type SelectLayoutProps = ChildernsProps & {
+    label: string;
+};
+
+export type PlayerBtnProps = {
+    title: string;
+    onFocused: boolean;
+    onClicked: () => void;
+};
+
+export type LogoProps = {
+    width?: number | string;
+};

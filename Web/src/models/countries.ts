@@ -1,5 +1,11 @@
 export const Countries = [
     {
+        name: "All",
+        emoji: "🌎",
+        image: "",
+        iso_3166_1: "",
+    },
+    {
         name: "Armenia",
         emoji: "🇦🇲",
         image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AM.svg",

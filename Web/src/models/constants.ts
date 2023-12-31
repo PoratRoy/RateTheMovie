@@ -7,6 +7,10 @@ export const FormSetValue = {
     shouldValidate: true,
 };
 
-export const DateStartYear = 1800
-export const DateEndYear = new Date().getFullYear()
-export const DateDefaultJSON = '["1800","2023"]'
+export const DateStartYear = 1800;
+export const DateEndYear = new Date().getFullYear();
+export const DateDefaultJSON = '["1800","2023"]';
+
+export const Colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "brown"];
+
+export const Players = ["1 Player", "2 Players", "Multiplayer"];

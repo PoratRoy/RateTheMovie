@@ -11,10 +11,15 @@ export type InputTypeText<TInput> = RootInputType<TInput> & {
     placeholder: string;
 };
 
-export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & {};
+export type LabelTypeText = {
+    label: string;
+}
+
+export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & LabelTypeText;
 
 export type FilterInputs = {
     year: InputTypeSelect<SelectInputSchema>;
     genre: InputTypeSelect<SelectInputSchema>;
     country: InputTypeSelect<SelectInputSchema>;
+    players: InputTypeSelect<SelectInputSchema>;
 };
