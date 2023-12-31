@@ -1,0 +1,17 @@
+.selectContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: var(--text-color);
+    gap: 5px;
+}
+
+.selectLabel{
+    font-weight: 600;
+    position: relative;
+    left: 13px;
+}
+
+.selectSelect{
+    width: 400px;
+}

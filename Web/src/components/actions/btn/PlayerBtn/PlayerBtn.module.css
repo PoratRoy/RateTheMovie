@@ -1,0 +1,31 @@
+.playerBtn {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--secondary-border);
+    border-radius: var(--secondary-border-radius);
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.playerBtn:hover {
+    background-color: var(--secondary-color-hover);
+    transform: scale(1.01);
+}
+
+.playerBtn:focus {
+    background-color: var(--secondary-color-focus);
+}
+
+.playerBtn:active {
+    background-color: var(--secondary-color-active);
+    transform: scale(1.02);
+}
+
+.playerBtnGlow{
+    box-shadow: 0px 0px 20px 3px var(--primary-color);
+    border: 3px solid var(--primary-color);
+}
