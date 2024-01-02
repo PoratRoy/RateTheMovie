@@ -9,10 +9,7 @@ export type ChildernsProps = {
 
 export type ProvidersProps = ChildernsProps;
 
-export type PackProps = ChildernsProps & {
-    maxWidth?: string;
-};
-
+//--Card--//
 export type CardProps = ChildernsProps & {
     width?: number;
     height?: number;
@@ -26,12 +23,6 @@ export type CardSliceProps = {
     index: number;
 };
 
-export type ImgProps = {
-    src: string;
-    alt: string;
-    height?: string;
-};
-
 export type MyCardProps = {
     movie: Movie;
     loading: boolean;
@@ -42,6 +33,29 @@ export type ShadowCardProps = {
     movie: Movie;
 };
 
+export type SelectedCardProps = {
+    index: number;
+    players: Player[];
+};
+
+export type CorrectCardProps = {
+    movie: Movie;
+};
+
+export type CardViewProps = {
+    movie: Movie;
+};
+
+//--Pack--//
+export type PackProps = ChildernsProps & {
+    maxWidth?: string;
+};
+
+export type PackOfCardsProps = {
+    player: Player;
+};
+
+//--DND--//
 export type DroppableProps = ChildernsProps & {
     droppableId: string;
 };
@@ -53,25 +67,26 @@ export type DraggableProps = ChildernsProps & {
     player?: Player;
 };
 
-export type SelectedCardProps = {
-    index: number;
-    players: Player[];
-};
-
-export type RightCardProps = {
-    movie: Movie;
-};
-
+//--Layout--//
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     onSubmit: SubmitHandler<TInput>;
     methods: UseFormReturn<TInput, any, undefined>;
     isLoading: boolean;
 };
 
-export type MainLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
+export type LandingLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
+export type PlayerLayoutProps = {
+    player: Player;
+};
+
+export type SelectLayoutProps = ChildernsProps & {
+    label: string;
+};
+
+//--Input--//
 export type InputProps<TInput extends FieldValues> = {
-    id?: Path<TInput>;
+    id: Path<TInput>;
 };
 
 export type InputPlaceholderProps = {
@@ -82,57 +97,45 @@ export type InputLabelProps = {
     label: string;
 };
 
-export type SelectInputProps = InputPlaceholderProps & {
+export type FormSetValueProps = {
     // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
     // setValue: UseFormSetValue<TInput>;
     setValue: any;
+};
+
+export type SelectInputProps = InputPlaceholderProps & {
+    setValue: React.Dispatch<React.SetStateAction<string | undefined>>;
     options: SelectOption[];
     defaultValue?: SelectOption;
 };
 
 export type SelectMultiInputProps = InputPlaceholderProps & {
-    // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
-    // setValue: UseFormSetValue<TInput>;
-    setValue: any;
+    setValue: React.Dispatch<React.SetStateAction<string[]>>;
     options: SelectOption[];
     defaultValue?: SelectOption;
 };
 
 export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputLabelProps & {
-        setValue: any;
-    };
+    InputLabelProps &
+    FormSetValueProps;
 
 export type GenreInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps &
-    InputLabelProps & {
-        setValue: any;
-    };
+    InputLabelProps &
+    FormSetValueProps;
 
 export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps &
-    InputLabelProps & {
-        setValue: any;
-    };
+    InputLabelProps &
+    FormSetValueProps;
 
-export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & {
-    setValue: any;
-};
+export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
-export type PlayerLayoutProps = {
-    player: Player;
-};
-
-export type ScoreProps = {
-    score: number;
-};
-
-export type PackOfCardsProps = {
-    player: Player;
-};
-
-export type CardViewProps = {
-    movie: Movie;
+//--Btn--//
+export type PlayerBtnProps = {
+    title: string;
+    onFocused: boolean;
+    onClicked: () => void;
 };
 
 export type PlayBtnProps = {
@@ -142,17 +145,17 @@ export type PlayBtnProps = {
     loading: boolean;
 };
 
-export type SelectLayoutProps = ChildernsProps & {
-    label: string;
+//--Common--//
+export type ImgProps = {
+    src: string;
+    alt: string;
+    height?: string;
 };
 
-export type PlayerBtnProps = {
-    title: string;
-    onFocused: boolean;
-    onClicked: () => void;
+export type ScoreProps = {
+    score: number;
 };
 
 export type LogoProps = {
     width?: number | string;
 };
-

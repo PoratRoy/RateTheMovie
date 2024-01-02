@@ -1,7 +1,6 @@
 .cardContanier {
     position: relative;
     width: fit-content;
-    margin: 20px;
     border: 7px solid var(--tertiary-color);
     overflow: hidden;
     border-radius: var(--primary-border-radius);
@@ -26,4 +25,18 @@
     text-align: center;
     padding: 40% 10px 10px 10px;
     box-sizing: border-box;
+}
+
+.cardImgs{
+    display: flex;
+    align-items: center;
+}
+
+.cardPlaceholder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+
 }

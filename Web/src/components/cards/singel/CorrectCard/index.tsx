@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "../../core/Card";
 import Img from "../../core/Img";
-import { RightCardProps } from "../../../../models/types/props";
+import { CorrectCardProps } from "../../../../models/types/props";
 
-const RightCard: React.FC<RightCardProps> = ({ movie }) => {
+const CorrectCard: React.FC<CorrectCardProps> = ({ movie }) => {
     const { title, poster_path } = movie;
 
     return (
@@ -13,4 +13,4 @@ const RightCard: React.FC<RightCardProps> = ({ movie }) => {
     );
 };
 
-export default RightCard;
+export default CorrectCard;

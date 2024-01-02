@@ -12,17 +12,20 @@ const SwitchPlayers = <TInput extends FieldValues>({
 }: SwitchPlayersProps<TInput>) => {
     const [selected, setSelected] = useState<number>(0);
 
+    const setPlayersValue = (playerId: number) => {
+        const players = switchPlayers(playerId);
+        setValue(id, JSON.stringify(players), FormSetValue);
+    };
+
     useEffect(() => {
         if (selected === 0) {
-            const players = switchPlayers(0);
-            setValue(id, JSON.stringify(players), FormSetValue);
+            setPlayersValue(0);
         }
     }, []);
 
     const handleOnClick = (playerId: number) => {
         setSelected(playerId);
-        const players = switchPlayers(playerId);
-        setValue(id, JSON.stringify(players), FormSetValue);
+        setPlayersValue(playerId);
     };
 
     return (

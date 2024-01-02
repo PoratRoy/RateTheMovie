@@ -19,9 +19,9 @@ const CardSlice: React.FC<CardSliceProps> = ({ side, player, index }) => {
                 );
             }
         }
-        return <div>empty</div>;
+        return <div></div>;
     };
-    return <div className={`${style.cardSliceContanier} ${side}`}>{setDraggableCard(card)}</div>;
+    return <div className={style.cardSliceContanier}>{setDraggableCard(card)}</div>;
 };
 
 export default CardSlice;

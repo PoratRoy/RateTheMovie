@@ -11,8 +11,10 @@ const Card: React.FC<CardProps> = ({ children, onHover, isShadow, width = 135, h
             className={`${style.cardContanier} ${isShadow && style.cardShadow}`}
         >
             {onHover && <div className={style.cardTitle}>{onHover}</div>}
-            {children}
-            <PlaceholderIcon />
+            <div className={style.cardImgs}>{children}</div>
+            <div className={style.cardPlaceholder}>
+                <PlaceholderIcon />
+            </div>
         </section>
     );
 };

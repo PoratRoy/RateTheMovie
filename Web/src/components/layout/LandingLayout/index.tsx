@@ -1,15 +1,15 @@
-import style from "./MainLayout.module.css";
+import style from "./LandingLayout.module.css";
 import { FieldValues, FormProvider } from "react-hook-form";
-import { MainLayoutProps } from "../../../models/types/props";
+import { LandingLayoutProps } from "../../../models/types/props";
 import PlayBtn from "../../actions/PlayBtn";
 import Logo from "../../common/Logo";
 
-const MainLayout = <TInput extends FieldValues>({
+const LandingLayout = <TInput extends FieldValues>({
     children,
     onSubmit,
     methods,
     isLoading,
-}: MainLayoutProps<TInput>) => {
+}: LandingLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
 
     return (
@@ -28,4 +28,4 @@ const MainLayout = <TInput extends FieldValues>({
     );
 };
 
-export default MainLayout;
+export default LandingLayout;

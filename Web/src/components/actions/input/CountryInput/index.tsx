@@ -15,7 +15,7 @@ const CountryInput = <TInput extends FieldValues>({
     label,
 }: CountryInputProps<TInput>) => {
     const [countryOptions, setCountryOptions] = useState<SelectOption[]>([]);
-    const [country, setCountry] = useState<string>("");
+    const [country, setCountry] = useState<string | undefined>();
 
     useEffect(() => {
         if (countryOptions.length === 0) {

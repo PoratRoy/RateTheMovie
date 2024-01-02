@@ -4,7 +4,7 @@ import Pack from "../../core/Pack";
 import { PACK_CARDS_NUM } from "../../../../models/constants";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
-const SelectedCards: React.FC = () => {
+const PackOfSelectedCards: React.FC = () => {
     const { players } = useGamePlayContext();
 
     return (
@@ -16,4 +16,4 @@ const SelectedCards: React.FC = () => {
     );
 };
 
-export default SelectedCards;
+export default PackOfSelectedCards;

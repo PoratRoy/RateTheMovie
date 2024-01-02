@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import path from "../../router/routePath.json";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import style from "./Main.module.css";
+import style from "./LandingPage.module.css";
 import { useMovieContext } from "../../context/MovieContext";
 import useInitialForm from "../../hooks/useInitialForm";
 import { SelectInputSchema } from "../../models/types/inputSchema";
@@ -14,12 +14,12 @@ import { filterInputs } from "../../models/initialization/form";
 import DateRangeInput from "../../components/actions/input/DateRangeInput";
 import GenreInput from "../../components/actions/input/GenreInput";
 import CountryInput from "../../components/actions/input/CountryInput";
-import GameFormLayout from "../../components/layout/MainLayout";
+import LandingLayout from "../../components/layout/LandingLayout";
 import SwitchPlayers from "../../components/actions/switch/SwitchPlayers";
 import backgroundMoviesImg from "../../assets/moviePoster4.png";
 import WaveSVG from "../../style/WaveSVG";
 
-const Main: React.FC = () => {
+const LandingPage: React.FC = () => {
     const navigate = useNavigate();
     const { setPlayers } = useGamePlayContext();
     const { setFilters } = useMovieContext();
@@ -45,7 +45,7 @@ const Main: React.FC = () => {
             </section>
             <WaveSVG/>
             <section className={style.mainContainer}>
-                <GameFormLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
+                <LandingLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
                     <SwitchPlayers id={filterInputs.players.id} setValue={setValue} />
                     <GenreInput
                         id={filterInputs.genre.id}
@@ -64,10 +64,10 @@ const Main: React.FC = () => {
                         label={filterInputs.year.label}
                         setValue={setValue}
                     />
-                </GameFormLayout>
+                </LandingLayout>
             </section>
         </section>
     );
 };
 
-export default Main;
+export default LandingPage;

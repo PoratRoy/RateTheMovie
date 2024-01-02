@@ -2,44 +2,17 @@ import path from "../path.json";
 import axios from "axios";
 import { OmdbBaseURL, TmdbBaseURL } from "../constants";
 import { generateRandomArray, getRandomNumber } from "../../utils/calc";
-import { Movie, MovieFilters, MovieOMDB, MovieTMDB } from "../../models/types/movie";
+import { Movie, MovieOMDB, MovieTMDB } from "../../models/types/movie";
 import { extractYearFromDateString } from "../../utils/date";
 import { useErrorContext } from "../../context/ErrorContext";
 import { useSingleton } from "../../hooks/useSingleton";
 import { useMovieContext } from "../../context/MovieContext";
 import { PACK_CARDS_NUM } from "../../models/constants";
+import { setNewMovie, setQueryParams } from "../utils";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
     const { movies, setMovies, setMovieLoading, filters } = useMovieContext();
-
-    const setQueryParams = (page: number, filters?: MovieFilters) => {
-        let release_date_gte = "";
-        let release_date_lte = "";
-        let genres = "";
-        let with_origin_country = "";
-        if (filters) {
-            if (filters.year) {
-                release_date_gte = `${filters.year[0]}-01-01`;
-                release_date_lte = `${filters.year[1]}-12-29`;
-            }
-            if (filters.genre) {
-                genres = filters.genre.join(",");
-            }
-            if (filters.country) {
-                with_origin_country = filters.country;
-            }
-        }
-
-        return {
-            api_key: import.meta.env.VITE_TMDB_API_KEY || "",
-            page,
-            "release_date.gte": release_date_gte,
-            "release_date.lte": release_date_lte,
-            with_genres: genres,
-            with_origin_country
-        };
-    };
 
     const discoverMovies = async () => {
         if (movies.length > 0) return;
@@ -83,28 +56,8 @@ const useDiscoverMovies = () => {
                     });
                     const resultsOMDB: MovieOMDB = response.data;
 
-                    if (
-                        resultsOMDB.Poster &&
-                        resultsOMDB.Poster !== "N/A" &&
-                        resultsOMDB.imdbRating &&
-                        resultsOMDB.imdbRating !== "N/A" // TODO: what shold I do?
-                    ) {
-                        const movie: Movie = {
-                            title: title,
-                            id: id.toString(),
-                            backdrop_path: tmdbMovie.backdrop_path,
-                            release_date: tmdbMovie.release_date,
-                            genre_ids: tmdbMovie.genre_ids,
-                            adult: tmdbMovie.adult,
-                            video: "",
-                            imdbRating: resultsOMDB.imdbRating,
-                            imdbVotes: resultsOMDB.imdbVotes,
-                            poster_path: resultsOMDB.Poster,
-                            director: resultsOMDB.Director,
-                            website: resultsOMDB.Website,
-                            imdbID: resultsOMDB.imdbID,
-                            actors: resultsOMDB.Actors,
-                        };
+                    const movie = setNewMovie(tmdbMovie, resultsOMDB)
+                    if(movie){
                         movies.push(movie);
                     }
 
