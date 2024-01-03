@@ -8,13 +8,9 @@ type ShadowOptionCardProps = {
 };
 
 const ShadowOptionCard: React.FC<ShadowOptionCardProps> = ({ movie }) => {
-    if(!movie) return null;
+    if (!movie) return null;
     const { title, poster_path } = movie;
-    return (
-        <Card width={60} height={85}>
-            <Img alt={title} src={poster_path} />
-        </Card>
-    );
+    return <Card width={60} height={85} front={<Img alt={title} src={poster_path} />}></Card>;
 };
 
 export default ShadowOptionCard;

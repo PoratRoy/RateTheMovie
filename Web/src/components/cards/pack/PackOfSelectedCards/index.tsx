@@ -5,13 +5,21 @@ import { PACK_CARDS_NUM } from "../../../../models/constants";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const PackOfSelectedCards: React.FC = () => {
-    const { players } = useGamePlayContext();
+    const { players, correctOrder } = useGamePlayContext();
 
     return (
         <Pack>
-            {[...Array(PACK_CARDS_NUM)].map((_, index) => {
-                return <SelectedCard key={index} index={index} players={players} />;
-            })}
+            {correctOrder.length !== 0 &&
+                [...Array(PACK_CARDS_NUM)].map((_, index) => {
+                    return (
+                        <SelectedCard
+                            key={index}
+                            index={index}
+                            players={players}
+                            correctMovie={correctOrder[index].movie}
+                        />
+                    );
+                })}
         </Pack>
     );
 };

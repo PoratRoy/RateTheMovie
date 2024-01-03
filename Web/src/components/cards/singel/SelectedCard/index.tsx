@@ -3,12 +3,13 @@ import Card from "../../core/Card";
 import { SelectedCardProps } from "../../../../models/types/props";
 import Droppable from "../../../dnd/Droppable";
 import CardSlice from "../../core/CardSlice";
-import ShadowOptionCard from "../ShadowOptionCard";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import Img from "../../core/Img";
 
-const SelectedCard: React.FC<SelectedCardProps> = ({ index, players }) => {
+const SelectedCard: React.FC<SelectedCardProps> = ({ index, players, correctMovie }) => {
     const { finish } = useGamePlayContext();
     const [focus, setFocus] = useState<boolean>(false);
+    const { title, poster_path } = correctMovie;
 
     useEffect(() => {
         if (finish) {
@@ -19,24 +20,29 @@ const SelectedCard: React.FC<SelectedCardProps> = ({ index, players }) => {
         switch (players.length) {
             case 2:
                 return (
-                    <Card isFocus={focus}>
+                    <React.Fragment>
                         <CardSlice player={players[0]} side="right" index={index} />
                         <CardSlice player={players[1]} side="left" index={index} />
-                    </Card>
+                    </React.Fragment>
                 );
 
             case 1:
                 return (
-                    <Card isFocus={focus}>
+                    <React.Fragment>
                         <CardSlice player={players[0]} side="all" index={index} />
-                    </Card>
+                    </React.Fragment>
                 );
         }
     };
 
     return (
         <Droppable droppableId={index.toString()} setFocus={setFocus}>
-            {setPlayers()}
+            <Card
+                flip={finish}
+                isFocus={focus}
+                back={<Img alt={title} src={poster_path} />}
+                front={setPlayers()}
+            />
         </Droppable>
     );
 };

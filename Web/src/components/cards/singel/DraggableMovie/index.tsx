@@ -33,10 +33,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({ movie, player, isHover,
                 className={style.draggableMovie}
             >
                 {isHover && isHovered && <div className={style.cardTitle}>{title}</div>}
-                <div className={style.cardLoading}></div>
-                <div className={style.cardImgs}>
-                    <Img alt={title} src={poster_path} />
-                </div>
+                <Img alt={title} src={poster_path} />
             </section>
         </Draggable>
     );

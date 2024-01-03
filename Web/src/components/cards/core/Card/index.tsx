@@ -7,7 +7,8 @@ import { CARD_HEIGHT, CARD_WIDTH } from "../../../../style/root";
 import useCardAnimation from "../../../../hooks/useCardAnimation";
 
 const Card: React.FC<CardProps> = ({
-    children,
+    front,
+    back,
     isFocus,
     flip,
     width = CARD_WIDTH,
@@ -30,7 +31,8 @@ const Card: React.FC<CardProps> = ({
                 transition={{ duration: 0.3, animationDiraction: "normal" }}
                 onAnimationComplete={onAnimationComplete}
             >
-                {children}
+                <div className={style.cardFront}>{front}</div>
+                <div className={style.cardBack}>{back}</div>
             </motion.div>
         </section>
     );

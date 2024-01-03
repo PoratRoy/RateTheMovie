@@ -3,7 +3,6 @@ import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
 import PackOfSelectedCards from "../../components/cards/pack/PackOfSelectedCards";
 import FinishBtn from "../../components/actions/FinishBtn";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import PackOfCorrectCards from "../../components/cards/pack/PackOfCorrectCards";
 import { Player } from "../../models/types/player";
 import PlayerLayout from "../../components/layout/PlayerLayout";
 import useCorrectOrder from "../../hooks/useCorrectOrder";

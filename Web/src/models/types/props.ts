@@ -10,11 +10,13 @@ export type ChildernsProps = {
 export type ProvidersProps = ChildernsProps;
 
 //--Card--//
-export type CardProps = ChildernsProps & {
+export type CardProps = {
     width?: number;
     height?: number;
     isFocus?: boolean;
     flip?: boolean;
+    front?: React.ReactNode;
+    back?: React.ReactNode;
 };
 
 export type CardSliceProps = {
@@ -43,10 +45,7 @@ export type ShadowCardProps = {
 export type SelectedCardProps = {
     index: number;
     players: Player[];
-};
-
-export type CorrectCardProps = {
-    movie: Movie;
+    correctMovie: Movie;
 };
 
 export type CardViewProps = {
