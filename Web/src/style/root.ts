@@ -40,3 +40,6 @@ export const ERROR_COLOR = "#FF5A5F";
 
 export const PRIMARY_BORDER_RADIUS = "20px";
 export const SECONDARY_BORDER_RADIUS = "10px";
+
+export const CARD_WIDTH = 120;
+export const CARD_HEIGHT = 170;

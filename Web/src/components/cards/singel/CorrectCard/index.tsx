@@ -7,7 +7,7 @@ const CorrectCard: React.FC<CorrectCardProps> = ({ movie }) => {
     const { title, poster_path } = movie;
 
     return (
-        <Card width={100} height={165}>
+        <Card>
             <Img alt={title} src={poster_path} />
         </Card>
     );

@@ -15,7 +15,7 @@ const useDiscoverMovies = () => {
     const { movies, setMovies, setMovieLoading, filters } = useMovieContext();
 
     const discoverMovies = async () => {
-        if (movies.length > 0) return;
+        if (movies.some((movie) => movie.title !== "" || movie.id !== "")) return;
 
         const page = getRandomNumber(1, 500);
 
@@ -56,8 +56,8 @@ const useDiscoverMovies = () => {
                     });
                     const resultsOMDB: MovieOMDB = response.data;
 
-                    const movie = setNewMovie(tmdbMovie, resultsOMDB)
-                    if(movie){
+                    const movie = setNewMovie(tmdbMovie, resultsOMDB);
+                    if (movie) {
                         movies.push(movie);
                     }
 

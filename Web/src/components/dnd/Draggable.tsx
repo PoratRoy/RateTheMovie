@@ -2,6 +2,7 @@ import React from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { DraggableProps } from "../../models/types/props";
 import { CSS } from "@dnd-kit/utilities";
+//TODO: prevent drag and drop when finish
 //TODO: typescript moving multiple data objects as 1 object?
 const Draggable: React.FC<DraggableProps> = ({ children, draggableId, movie, player }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -10,6 +11,11 @@ const Draggable: React.FC<DraggableProps> = ({ children, draggableId, movie, pla
     });
     const style = {
         transform: CSS.Translate.toString(transform),
+        touchAction: "none",
+        zIndex: 1000,
+        // border: `7px solid ${TERTIARY_COLOR}`,
+        // borderRadius: PRIMARY_BORDER_RADIUS,
+        // overflow: "hidden",
     };
     //TODO: put the card css also here so it would show the shadow when dragging
     return (

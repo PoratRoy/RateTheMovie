@@ -46,6 +46,9 @@
 
     --primary-border: 5px solid var(--tertiary-color);
     --secondary-border: 3px solid var(--tertiary-color);
+
+    --cardWidth: 120;
+    --cardHeight: 170;
 }
 
 body {

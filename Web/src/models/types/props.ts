@@ -13,8 +13,8 @@ export type ProvidersProps = ChildernsProps;
 export type CardProps = ChildernsProps & {
     width?: number;
     height?: number;
-    onHover?: string;
-    isShadow?: boolean;
+    isFocus?: boolean;
+    flip?: boolean;
 };
 
 export type CardSliceProps = {
@@ -25,12 +25,19 @@ export type CardSliceProps = {
 
 export type MyCardProps = {
     movie: Movie;
-    loading: boolean;
+    loading?: boolean;
     player: Player;
 };
 
-export type ShadowCardProps = {
+export type DraggableMovieProps = {
     movie: Movie;
+    player: Player;
+    isHover: boolean;
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type ShadowCardProps = {
+    movie?: Movie;
 };
 
 export type SelectedCardProps = {
@@ -58,6 +65,7 @@ export type PackOfCardsProps = {
 //--DND--//
 export type DroppableProps = ChildernsProps & {
     droppableId: string;
+    setFocus: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export type DraggableProps = ChildernsProps & {
@@ -150,6 +158,7 @@ export type ImgProps = {
     src: string;
     alt: string;
     height?: string;
+    isShadow?: boolean;
 };
 
 export type ScoreProps = {

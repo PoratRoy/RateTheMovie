@@ -1,4 +1,12 @@
 .cardImg{
     width: 100%;
     object-fit: cover;
+    z-index: 100;
+}
+
+.cardImgShadow{
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

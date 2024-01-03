@@ -16,7 +16,6 @@ const GamePage: React.FC = () => {
 
     return (
         <section>
-            <PackOfCorrectCards />
             <PackOfSelectedCards />
             <FinishBtn />
             <section className={style.gamePlayersLayout}>

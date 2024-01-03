@@ -1,3 +1,4 @@
+import { PACK_CARDS_NUM } from "../constants";
 import { Movie } from "../types/movie";
 
 export const initMovie: Movie = {
@@ -15,4 +16,12 @@ export const initMovie: Movie = {
     actors: undefined,
     director: undefined,
     website: undefined,
+};
+
+export const initMovieList = (): Movie[] => {
+    let movieList: Movie[] = [];
+    for (let i = 0; i < PACK_CARDS_NUM; i++) {
+        movieList.push(initMovie);
+    }
+    return movieList;
 };

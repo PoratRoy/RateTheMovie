@@ -5,7 +5,7 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { Player } from "../../../models/types/player";
 
 const FinishBtn: React.FC = () => {
-    const { correctOrder, setPlayers, players } = useGamePlayContext();
+    const { correctOrder, setPlayers, players, setFinish } = useGamePlayContext();
     const [isFinished, setIsFinished] = useState<boolean>(false);
 
     useEffect(() => {
@@ -36,6 +36,7 @@ const FinishBtn: React.FC = () => {
                 };
             });
         });
+        setFinish(true);
     };
 
     return (
