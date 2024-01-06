@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import Card from "../../core/Card";
 import { MyCardProps } from "../../../../models/types/props";
-import DraggableMovie from "../DraggableMovie2";
+import DraggableMovie from "../DraggableMovie";
 import Img from "../../core/Img";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
 
 const MyCard: React.FC<MyCardProps> = ({ movie, loading, player }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const cardId = `${movie.id}-${player.id}`;
     return (
         <Card
+            isAnimate
             flip={loading != undefined && !loading}
             front={<LoadingCard />}
             back={
                 <React.Fragment>
                     <DraggableMovie
-                        isClickbel
+                        isClickable
                         isHover
-                        id={`${movie.id}-${player.id}`}
+                        id={cardId}
                         movie={movie}
                         player={player}
                         setOpen={setOpen}
+                        side="all"
                     />
                     {/* <Img isShadow alt={movie.title} src={movie.poster_path} /> */}
                     {open && <CardView movie={movie} />}

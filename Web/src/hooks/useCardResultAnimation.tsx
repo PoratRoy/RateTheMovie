@@ -5,7 +5,7 @@ import { delayPromise } from "../utils/date";
 import { PRIMARY_COLOR } from "../style/root";
 import { ABOVE_ID, BELOW_ID, CARD_ID, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
 
-const useCardsResultAnimation = (activate: boolean | undefined, correctPlayers: string[]) => {
+const useCardResultAnimation = (activate: boolean | undefined, correctPlayers: string[]) => {
     const [scope, animation] = useAnimate();
     const { setScore } = useSetScore();
 
@@ -61,4 +61,4 @@ const useCardsResultAnimation = (activate: boolean | undefined, correctPlayers: 
     return { scope };
 };
 
-export default useCardsResultAnimation;
+export default useCardResultAnimation;

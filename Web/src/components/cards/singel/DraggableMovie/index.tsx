@@ -5,7 +5,15 @@ import { DraggableMovieProps } from "../../../../models/types/props";
 import style from "./DraggableMovie.module.css";
 import useCardEvent from "../../../../hooks/useCardEvents";
 
-const DraggableMovie: React.FC<DraggableMovieProps> = ({ movie, player, isHover, setOpen }) => {
+const DraggableMovie: React.FC<DraggableMovieProps> = ({
+    id,
+    movie,
+    player,
+    isHover,
+    isClickable,
+    side,
+    setOpen,
+}) => {
     const {
         isHovered,
         isDoubleClick,
@@ -14,28 +22,29 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({ movie, player, isHover,
         handleMouseDown,
         handleMouseUp,
     } = useCardEvent();
-    const { id, title, poster_path } = movie;
-    const draggableId = `${id}-${player.id}`;
+    const { title, poster_path } = movie;
 
     useEffect(() => {
-        if (isDoubleClick) {
+        if (isClickable && isDoubleClick) {
             setOpen && setOpen(true);
         }
     }, [isDoubleClick, setOpen]);
 
     return (
-        <Draggable draggableId={draggableId} movie={movie} player={player}>
-            <section
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                className={style.draggableMovie}
-            >
-                {isHover && isHovered && <div className={style.cardTitle}>{title}</div>}
-                <Img alt={title} src={poster_path} />
-            </section>
-        </Draggable>
+        <div className={style.cardSide}>
+            <Draggable draggableId={id} movie={movie} player={player}>
+                <section
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    className={style.draggableMovie}
+                >
+                    {isHover && isHovered && <div className={style.cardTitle}>{title}</div>}
+                    <Img alt={title} src={poster_path} />
+                </section>
+            </Draggable>
+        </div>
     );
 };
 

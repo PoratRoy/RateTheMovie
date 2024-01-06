@@ -17,21 +17,16 @@ export type CardProps = {
     width?: number;
     height?: number;
     isFocus?: boolean;
+    isAnimate?: boolean;
     flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
 };
 
-export type ElectedCardProps2 = {
-    width?: number;
-    height?: number;
-    isFocus?: boolean;
-    activate?: boolean;
-    front?: React.ReactNode;
-    back?: React.ReactNode;
-    above?: React.ReactNode;
-    below?: React.ReactNode;
-    correctPlayers: string[];
+export type CardInnerContainerProps = {
+    isAnimate?: boolean;
+    flip?: boolean;
+    children: React.ReactNode[];
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
@@ -58,18 +53,12 @@ export type ShadowPlayerCardProps = {
 };
 
 export type DraggableMovieProps = {
-    movie: Movie;
-    player: Player;
-    isHover: boolean;
-    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export type DraggableMovieProps2 = {
     id: string;
     movie: Movie;
     player: Player;
     isHover?: boolean;
-    isClickbel?: boolean;
+    isClickable?: boolean;
+    side: "left" | "right" | "all";
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
