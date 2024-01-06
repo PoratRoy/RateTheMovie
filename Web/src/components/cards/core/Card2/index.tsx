@@ -1,43 +1,32 @@
 import React from "react";
 import style from "./Card.module.css";
 import { CardProps } from "../../../../models/types/props";
-import PlaceholderIcon from "../../core/PlaceholderIcon";
-import { motion } from "framer-motion";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../../../style/root";
-import useCardAnimation from "../../../../hooks/useCardAnimation";
+import { CARD_ID } from "../../../../models/constants";
+import PlaceholderIcon from "../../core/PlaceholderIcon";
 
-const Card: React.FC<CardProps> = ({
-    id,
+const Card2: React.FC<CardProps> = ({
     front,
     back,
     isFocus,
-    flip,
     width = CARD_WIDTH,
     height = CARD_HEIGHT,
 }) => {
-    const { isFlipped, onAnimationComplete } = useCardAnimation(flip);
 
     return (
         <section
-            id={id}
             style={{ width, height }}
             className={`${style.cardContainer} ${isFocus ? style.cardContainerFocus : ""}`}
         >
             <div className={style.cardPlaceholder}>
                 <PlaceholderIcon />
             </div>
-            <motion.div
-                className={style.cardInnerContainer}
-                initial={false}
-                animate={{ rotateY: isFlipped ? 180 : 360 }}
-                transition={{ duration: 0.3, animationDiraction: "normal" }}
-                onAnimationComplete={onAnimationComplete}
-            >
+            <div id={CARD_ID} className={style.cardInnerContainer}>
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
-            </motion.div>
+            </div>
         </section>
     );
 };
 
-export default Card;
+export default Card2;

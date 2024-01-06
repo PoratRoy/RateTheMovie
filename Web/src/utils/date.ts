@@ -21,3 +21,6 @@ export const getYearsArray = (date?: DateRangeOptionFilter): string[] => {
 
     return yearsArray;
 };
+
+export const delayPromise = (duration: number) =>
+    new Promise((resolve) => setTimeout(resolve, duration));

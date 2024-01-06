@@ -5,7 +5,7 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { Player } from "../../../models/types/player";
 
 const FinishBtn: React.FC = () => {
-    const { correctOrder, setPlayers, players, setFinish } = useGamePlayContext();
+    const { players, setFinish } = useGamePlayContext();
     const [isFinished, setIsFinished] = useState<boolean>(false);
 
     useEffect(() => {
@@ -22,20 +22,6 @@ const FinishBtn: React.FC = () => {
     }, [players]);
 
     const handleFinish = () => {
-        setPlayers((prev) => {
-            return prev.map((player: Player) => {
-                let playerScore = 0;
-                for (let i = 0; i < correctOrder.length; i++) {
-                    if (correctOrder[i].movie === player.selectedCards[i]?.movie) {
-                        playerScore += parseFloat(correctOrder[i]?.movie?.imdbRating || "0");
-                    }
-                }
-                return {
-                    ...player,
-                    score: player.score + playerScore,
-                };
-            });
-        });
         setFinish(true);
     };
 

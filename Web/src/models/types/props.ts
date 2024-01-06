@@ -2,6 +2,8 @@ import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
+import React from "react";
+import { AnimationScope } from "framer-motion";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -11,6 +13,7 @@ export type ProvidersProps = ChildernsProps;
 
 //--Card--//
 export type CardProps = {
+    id?: string;
     width?: number;
     height?: number;
     isFocus?: boolean;
@@ -18,6 +21,24 @@ export type CardProps = {
     front?: React.ReactNode;
     back?: React.ReactNode;
 };
+
+export type ElectedCardProps2 = {
+    width?: number;
+    height?: number;
+    isFocus?: boolean;
+    activate?: boolean;
+    front?: React.ReactNode;
+    back?: React.ReactNode;
+    above?: React.ReactNode;
+    below?: React.ReactNode;
+    correctPlayers: string[];
+};
+
+export type ElectedCardWrapperProps = ChildernsProps & {
+    above?: React.ReactNode;
+    below?: React.ReactNode;
+    scope: AnimationScope<any>
+}
 
 export type CardSliceProps = {
     side: "left" | "right" | "all";
@@ -31,6 +52,11 @@ export type MyCardProps = {
     player: Player;
 };
 
+export type ShadowPlayerCardProps = {
+    movie?: Movie;
+    id: string;
+};
+
 export type DraggableMovieProps = {
     movie: Movie;
     player: Player;
@@ -38,11 +64,20 @@ export type DraggableMovieProps = {
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type DraggableMovieProps2 = {
+    id: string;
+    movie: Movie;
+    player: Player;
+    isHover?: boolean;
+    isClickbel?: boolean;
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export type ShadowCardProps = {
     movie?: Movie;
 };
 
-export type SelectedCardProps = {
+export type ElectedCardProps = {
     index: number;
     players: Player[];
     correctMovie: Movie;
@@ -60,6 +95,8 @@ export type PackProps = ChildernsProps & {
 export type PackOfCardsProps = {
     player: Player;
 };
+
+export type PackWrapperProps = ChildernsProps
 
 //--DND--//
 export type DroppableProps = ChildernsProps & {
