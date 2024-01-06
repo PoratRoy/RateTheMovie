@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import style from "./FinishBtn.module.css";
-import { PACK_CARDS_NUM } from "../../../models/constants";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
-import { Player } from "../../../models/types/player";
+import { PACK_CARDS_NUM } from "../../../../models/constants";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import { Player } from "../../../../models/types/player";
+import PrimaryBtn from "../../core/button/PrimaryBtn";
 
 const FinishBtn: React.FC = () => {
     const { players, setFinish } = useGamePlayContext();
@@ -26,9 +26,12 @@ const FinishBtn: React.FC = () => {
     };
 
     return (
-        <button disabled={!isFinished} onClick={handleFinish} className={style.finishBtn}>
-            Done
-        </button>
+        <PrimaryBtn
+            title="Finish"
+            onClicked={handleFinish}
+            disabled={!isFinished}
+            size="Small"
+        />
     );
 };
 

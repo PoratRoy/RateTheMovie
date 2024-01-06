@@ -32,8 +32,8 @@ export type CardInnerContainerProps = {
 export type ElectedCardWrapperProps = ChildernsProps & {
     above?: React.ReactNode;
     below?: React.ReactNode;
-    scope: AnimationScope<any>
-}
+    scope: AnimationScope<any>;
+};
 
 export type CardSliceProps = {
     side: "left" | "right" | "all";
@@ -85,12 +85,14 @@ export type PackOfCardsProps = {
     player: Player;
 };
 
-export type PackWrapperProps = ChildernsProps
+export type PackWrapperProps = ChildernsProps;
+
+export type ElectedPackLayoutProps = ChildernsProps;
 
 //--DND--//
 export type DroppableProps = ChildernsProps & {
     droppableId: string;
-    setFocus: React.Dispatch<React.SetStateAction<boolean>>
+    setFocus: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type DraggableProps = ChildernsProps & {
@@ -116,6 +118,8 @@ export type PlayerLayoutProps = {
 export type SelectLayoutProps = ChildernsProps & {
     label: string;
 };
+
+export type GameLayoutProps = ChildernsProps;
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
@@ -165,6 +169,23 @@ export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
 //--Btn--//
+export type PrimaryBtnProps = {
+    type?: "button" | "submit" | undefined;
+    title: string;
+    onClicked?: () => void;
+    disabled?: boolean;
+    size: "Small" | "Medium" | "Large";
+    loading?: boolean;
+};
+
+export type SecondaryBtnProps = {
+    title: string;
+    onClicked?: () => void;
+    disabled?: boolean;
+    loading?: boolean;
+    onFocused?: boolean;
+};
+
 export type PlayerBtnProps = {
     title: string;
     onFocused: boolean;
@@ -173,8 +194,6 @@ export type PlayerBtnProps = {
 
 export type PlayBtnProps = {
     title: string;
-    width?: number | string;
-    height?: number | string;
     loading: boolean;
 };
 

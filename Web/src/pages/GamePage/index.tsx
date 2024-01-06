@@ -1,12 +1,12 @@
 import React from "react";
 import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
-import PackOfSelectedCards from "../../components/cards/pack/PackOfSelectedCards";
-import FinishBtn from "../../components/actions/FinishBtn";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { Player } from "../../models/types/player";
 import PlayerLayout from "../../components/layout/PlayerLayout";
 import useCorrectOrder from "../../hooks/useCorrectOrder";
-import style from "./GamePage.module.css"
+import PackWrapper from "../../components/cards/pack/PackWrapper";
+import GameLayout from "../../components/layout/GameLayout";
+import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
 
 const GamePage: React.FC = () => {
     useDiscoverMovies();
@@ -14,15 +14,14 @@ const GamePage: React.FC = () => {
     const { players } = useGamePlayContext();
 
     return (
-        <section>
-            <PackOfSelectedCards />
-            <FinishBtn />
-            <section className={style.gamePlayersLayout}>
+        <GameLayout>
+            <ElectedPackLayout />
+            <PackWrapper>
                 {players.map((player: Player, i: number) => (
                     <PlayerLayout key={i} player={player} />
                 ))}
-            </section>
-        </section>
+            </PackWrapper>
+        </GameLayout>
     );
 };
 

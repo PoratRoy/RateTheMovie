@@ -1,0 +1,61 @@
+.loadingBtnPrimary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnPrimarySmall,
+.btnPrimaryMedium,
+.btnPrimaryLarge {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    border-radius: var(--primary-border-radius);
+    cursor: pointer;
+    border: var(--primary-border);
+    text-align: center;
+}
+
+.btnPrimarySmall:hover,
+.btnPrimaryMedium:hover,
+.btnPrimaryLarge:hover {
+    background-color: var(--primary-color-hover);
+    transform: scale(1.01);
+}
+
+.btnPrimarySmall:focus,
+.btnPrimaryMedium:focus,
+.btnPrimaryLarge:focus {
+    background-color: var(--primary-color-focus);
+}
+
+.btnPrimarySmall:active,
+.btnPrimaryMedium:active,
+.btnPrimaryLarge:active {
+    background-color: var(--primary-color-active);
+    transform: scale(1.02);
+}
+
+.btnPrimarySmall{
+    width: 150px;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    border: var(--secondary-border);
+}
+
+.btnPrimaryMedium{
+    width: 200px;
+    height: 60px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 8px;
+}
+
+.btnPrimaryLarge{
+    width: 300px;
+    height: 90px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 10px;
+}

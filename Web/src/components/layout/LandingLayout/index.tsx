@@ -1,7 +1,7 @@
 import style from "./LandingLayout.module.css";
 import { FieldValues, FormProvider } from "react-hook-form";
 import { LandingLayoutProps } from "../../../models/types/props";
-import PlayBtn from "../../actions/PlayBtn";
+import PlayBtn from "../../actions/btn/PlayBtn";
 import Logo from "../../common/Logo";
 
 const LandingLayout = <TInput extends FieldValues>({

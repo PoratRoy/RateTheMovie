@@ -1,16 +1,9 @@
 import React from "react";
 import { PlayerBtnProps } from "../../../../models/types/props";
-import style from "./PlayerBtn.module.css";
+import SecondaryBtn from "../../core/button/SecondaryBtn";
 
 const PlayerBtn: React.FC<PlayerBtnProps> = ({ title, onClicked, onFocused }) => {
-    return (
-        <div
-            onClick={onClicked}
-            className={`${style.playerBtn} ${onFocused && style.playerBtnGlow}`}
-        >
-            {title}
-        </div>
-    );
+    return <SecondaryBtn onClicked={onClicked} onFocused={onFocused} title={title} />;
 };
 
 export default PlayerBtn;
