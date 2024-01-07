@@ -1,6 +1,7 @@
 [build]
+  base = "Web"
   command = "npm run build"
-  publish = "web/dist"
+  publish = "Web/dist"
 
 [[redirects]]
   from = "/*"
