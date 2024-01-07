@@ -1,8 +1,7 @@
 import React from "react";
-import style from "./CardView.module.css";
 import { CardViewProps } from "../../../models/types/props";
 
-const CardView: React.FC<CardViewProps> = ({movie}) => {
+const CardView: React.FC<CardViewProps> = () => {
     return <section>CardView</section>;
 };
 
