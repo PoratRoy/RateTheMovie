@@ -6,11 +6,10 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
     title,
     onClicked,
     disabled,
-    width,
-    height,
     loading,
     onFocused,
 }) => {
+    console.log(disabled)
     return (
         <React.Fragment>
             {loading ? (
@@ -18,7 +17,6 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
             ) : (
                 <div
                     onClick={onClicked}
-                    style={{ width, height }}
                     className={`${style.btnSecondary} ${onFocused && style.btnSecondaryGlow}`}
                 >
                     {title}

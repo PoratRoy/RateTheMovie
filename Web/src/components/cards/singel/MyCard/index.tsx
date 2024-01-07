@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Card from "../../core/Card";
 import { MyCardProps } from "../../../../models/types/props";
 import DraggableMovie from "../DraggableMovie";
-import Img from "../../core/Img";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
 
