@@ -1,7 +1,9 @@
 .cardImg{
-    width: 100%;
+    width: var(--card-width);
+    height: var( --card-height);
     object-fit: cover;
     z-index: 100;
+    border-radius: var(--secondary-border-radius);
 }
 
 .cardImgShadow{

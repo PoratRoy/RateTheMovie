@@ -7,14 +7,14 @@ const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({ children, above
         <div ref={scope} style={{ position: "relative" }}>
             <div
                 id={ABOVE_ID}
-                style={{ position: "relative", top: 100, opacity: 0, display: "none", scale: 1 }}
+                style={{ position: "absolute", top: "-100px", opacity: 0, display: "none", scale: 1 }}
             >
                 {above}
             </div>
             {children}
             <div
                 id={BELOW_ID}
-                style={{ position: "relative", bottom: 100, opacity: 0, display: "none" }}
+                style={{ color: "white", position: "absolute", bottom: "-40px", opacity: 0, display: "none" }}
             >
                 {below}
             </div>

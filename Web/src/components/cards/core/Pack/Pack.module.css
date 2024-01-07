@@ -1,8 +1,9 @@
 .packContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: space-between;
+    max-width: 100%;
     height: 100%;
-    gap: 15px;
+    gap: 30px;
+    margin-bottom: 10px;
 }

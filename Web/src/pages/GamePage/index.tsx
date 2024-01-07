@@ -4,9 +4,9 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import { Player } from "../../models/types/player";
 import PlayerLayout from "../../components/layout/PlayerLayout";
 import useCorrectOrder from "../../hooks/useCorrectOrder";
-import PackWrapper from "../../components/cards/pack/PackWrapper";
 import GameLayout from "../../components/layout/GameLayout";
 import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
+import PlayersPackLayout from "../../components/layout/PlayersPackLayout";
 
 const GamePage: React.FC = () => {
     useDiscoverMovies();
@@ -16,11 +16,11 @@ const GamePage: React.FC = () => {
     return (
         <GameLayout>
             <ElectedPackLayout />
-            <PackWrapper>
+            <PlayersPackLayout>
                 {players.map((player: Player, i: number) => (
                     <PlayerLayout key={i} player={player} />
                 ))}
-            </PackWrapper>
+            </PlayersPackLayout>
         </GameLayout>
     );
 };

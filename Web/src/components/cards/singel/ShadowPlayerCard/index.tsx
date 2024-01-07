@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../../core/Card";
 import Img from "../../core/Img";
 import { ShadowPlayerCardProps } from "../../../../models/types/props";
+import Card from "../../core/Card";
 
 const ShadowPlayerCard: React.FC<ShadowPlayerCardProps> = ({ movie, id }) => {
     if (!movie) return null;

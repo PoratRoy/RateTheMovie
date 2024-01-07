@@ -1,14 +1,14 @@
 .cardContainer {
     position: relative;
-    border: 7px solid var(--tertiary-color);
-    /* overflow: hidden; */
-    border-radius: var(--primary-border-radius);
-    background-color: var(--secondary-color);
-    box-shadow: none;
     perspective: 1000px;
+    /* overflow: hidden; */
 }
 
 .cardInnerContainer{
+    border: 7px solid var(--tertiary-color);
+    border-radius: var(--primary-border-radius);
+    background-color: var(--secondary-color);
+    box-shadow: none;
     transition: transform 0.8s;
     transform-style: preserve-3d;
     width: 100%;

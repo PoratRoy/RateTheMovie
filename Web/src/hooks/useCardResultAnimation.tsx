@@ -12,7 +12,7 @@ const useCardResultAnimation = (activate: boolean | undefined, correctPlayers: s
     const handleAnimation = async () => {
         await animation(
             `#${ABOVE_ID}`,
-            { top: 0, opacity: 1, display: "block" },
+            { top: -100, opacity: 1, display: "block" },
             { duration: 0.3 },
         );
         await delayPromise(2000);

@@ -4,6 +4,7 @@ import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
 import { AnimationScope } from "framer-motion";
+import { CardSide } from "./union";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -27,6 +28,7 @@ export type CardInnerContainerProps = {
     isAnimate?: boolean;
     flip?: boolean;
     children: React.ReactNode[];
+    isFocus: boolean | undefined
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
@@ -36,7 +38,7 @@ export type ElectedCardWrapperProps = ChildernsProps & {
 };
 
 export type CardSliceProps = {
-    side: "left" | "right" | "all";
+    side: CardSide;
     player: Player;
     index: number;
 };
@@ -58,7 +60,7 @@ export type DraggableMovieProps = {
     player: Player;
     isHover?: boolean;
     isClickable?: boolean;
-    side: "left" | "right" | "all";
+    side: CardSide;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -120,6 +122,8 @@ export type SelectLayoutProps = ChildernsProps & {
 };
 
 export type GameLayoutProps = ChildernsProps;
+
+export type PlayersPackLayoutProps = ChildernsProps;
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {

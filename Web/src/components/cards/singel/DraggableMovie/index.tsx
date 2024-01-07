@@ -30,8 +30,15 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
         }
     }, [isDoubleClick, setOpen]);
 
+    const className =
+        side === "all"
+            ? style.cardSideAll
+            : side === "left"
+              ? style.cardSideLeft
+              : style.cardSideRight;
+
     return (
-        <div className={style.cardSide}>
+        <div className={className}>
             <Draggable draggableId={id} movie={movie} player={player}>
                 <section
                     onMouseEnter={handleMouseEnter}

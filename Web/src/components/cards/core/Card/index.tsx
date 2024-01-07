@@ -7,7 +7,12 @@ import PlaceholderIcon from "../PlaceholderIcon";
 import { motion } from "framer-motion";
 import useCardFlipAnimation from "../../../../hooks/useCardFlipAnimation";
 
-const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ children, flip, isAnimate }) => {
+const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
+    children,
+    flip,
+    isAnimate,
+    isFocus,
+}) => {
     const { isFlipped, onAnimationComplete } = useCardFlipAnimation(flip);
     if (isAnimate) {
         return (
@@ -23,7 +28,10 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ children, flip,
         );
     } else {
         return (
-            <div id={CARD_ID} className={style.cardInnerContainer}>
+            <div
+                id={CARD_ID}
+                className={`${style.cardInnerContainer} ${isFocus ? style.cardContainerFocus : ""}`}
+            >
                 {children}
             </div>
         );
@@ -41,15 +49,11 @@ const Card: React.FC<CardProps> = ({
     height = CARD_HEIGHT,
 }) => {
     return (
-        <section
-            id={id}
-            style={{ width, height }}
-            className={`${style.cardContainer} ${isFocus ? style.cardContainerFocus : ""}`}
-        >
+        <section id={id} style={{ width, height }} className={style.cardContainer}>
             <div className={style.cardPlaceholder}>
                 <PlaceholderIcon />
             </div>
-            <CardInnerContainer flip={flip} isAnimate={isAnimate}>
+            <CardInnerContainer flip={flip} isAnimate={isAnimate} isFocus={isFocus}>
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
             </CardInnerContainer>
