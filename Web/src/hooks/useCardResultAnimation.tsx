@@ -1,13 +1,11 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import useSetScore from "./useSetScore";
 import { delayPromise } from "../utils/date";
 import { PRIMARY_COLOR } from "../style/root";
 import { ABOVE_ID, BELOW_ID, CARD_ID, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
 
 const useCardResultAnimation = (activate: boolean | undefined, correctPlayers: string[]) => {
     const [scope, animation] = useAnimate();
-    const { setScore } = useSetScore();
 
     const handleAnimation = async () => {
         await animation(
@@ -49,7 +47,6 @@ const useCardResultAnimation = (activate: boolean | undefined, correctPlayers: s
             await delayPromise(2000);
             await animation(`#${BELOW_ID}`, { y: 400, x: -300 }, { duration: 0.4 });
         }
-        setScore();
     };
 
     useEffect(() => {

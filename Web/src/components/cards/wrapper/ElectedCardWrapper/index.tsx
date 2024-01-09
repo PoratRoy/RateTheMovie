@@ -7,7 +7,7 @@ const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({ children, above
         <div ref={scope} style={{ position: "relative" }}>
             <div
                 id={ABOVE_ID}
-                style={{ position: "absolute", top: "-100px", opacity: 0, display: "none", scale: 1 }}
+                style={{ position: "absolute", width: "100%", top: "-100px", opacity: 0, display: "none", scale: 1 }}
             >
                 {above}
             </div>
