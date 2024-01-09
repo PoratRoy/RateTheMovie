@@ -1,7 +1,7 @@
 import PackWrapper from "../components/cards/wrapper/PackWrapper";
 import DraggableMovie from "../components/cards/singel/DraggableMovie";
 import ShadowPlayerCard from "../components/cards/singel/ShadowPlayerCard";
-import { PLAYER1_ID, PLAYER2_ID } from "../models/constants";
+import { PACK_CARDS_NUM, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { CardSide } from "../models/types/union";
@@ -87,4 +87,12 @@ export const getCardFront = (players: Player[], index: number) => {
             break;
     }
     return front;
+};
+
+export const setPlaceholderText = (index: number): string | undefined => {
+    if (index === 0) {
+        return "Worst Rating";
+    } else if (index + 1 === PACK_CARDS_NUM) {
+        return "Best Rating";
+    }
 };

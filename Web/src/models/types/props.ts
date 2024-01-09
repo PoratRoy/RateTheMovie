@@ -5,6 +5,7 @@ import { Player } from "./player";
 import React from "react";
 import { AnimationScope } from "framer-motion";
 import { BtnSize, CardSide } from "./union";
+import { placeholderCardType } from "./card";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -15,6 +16,7 @@ export type ProvidersProps = ChildernsProps;
 //--Card--//
 export type CardProps = {
     id?: string;
+    type: placeholderCardType
     width?: number;
     height?: number;
     isFocus?: boolean;
@@ -77,6 +79,10 @@ export type ElectedCardProps = {
 export type CardViewProps = {
     movie: Movie;
 };
+
+export type PlaceholderProps = {
+    type: placeholderCardType
+}
 
 //--Pack--//
 export type PackProps = ChildernsProps & {

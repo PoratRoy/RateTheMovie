@@ -4,6 +4,7 @@ import { PlayerCardProps } from "../../../../models/types/props";
 import DraggableMovie from "../DraggableMovie";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
+import { placeholderCardType } from "../../../../models/types/card";
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -24,10 +25,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
                         setOpen={setOpen}
                         side="all"
                     />
-                    {/* <Img isShadow alt={movie.title} src={movie.poster_path} /> */}
                     {open && <CardView movie={movie} />}
                 </React.Fragment>
             }
+            type={{ t: "Player", movie } as placeholderCardType}
         />
     );
 };

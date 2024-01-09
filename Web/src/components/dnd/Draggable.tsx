@@ -9,10 +9,11 @@ const Draggable: React.FC<DraggableProps> = ({ children, draggableId, movie, pla
         id: draggableId,
         data: { movie, player },
     });
-    const style = {
+    const style: React.CSSProperties = {
         transform: CSS.Translate.toString(transform),
         touchAction: "none",
         zIndex: 1000,
+        cursor: "pointer",
         // border: `7px solid ${TERTIARY_COLOR}`,
         // borderRadius: PRIMARY_BORDER_RADIUS,
         // overflow: "hidden",
