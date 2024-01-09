@@ -7,13 +7,13 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     onClicked,
     disabled,
     loading,
-    size = "Large",
+    size = "large",
     type = "button",
 }) => {
     const className =
-        size === "Large"
+        size === "large"
             ? style.btnPrimaryLarge
-            : size === "Medium"
+            : size === "medium"
               ? style.btnPrimaryMedium
               : style.btnPrimarySmall;
     return (

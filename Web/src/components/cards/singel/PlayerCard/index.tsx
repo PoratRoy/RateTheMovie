@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Card from "../../core/Card";
-import { MyCardProps } from "../../../../models/types/props";
+import { PlayerCardProps } from "../../../../models/types/props";
 import DraggableMovie from "../DraggableMovie";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
 
-const MyCard: React.FC<MyCardProps> = ({ movie, loading, player }) => {
+const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
     const [open, setOpen] = useState<boolean>(false);
     const cardId = `${movie.id}-${player.id}`;
     return (
@@ -32,4 +32,4 @@ const MyCard: React.FC<MyCardProps> = ({ movie, loading, player }) => {
     );
 };
 
-export default MyCard;
+export default PlayerCard;

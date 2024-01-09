@@ -3,7 +3,7 @@ import { PlayBtnProps } from "../../../../models/types/props";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
 
 const PlayBtn: React.FC<PlayBtnProps> = ({ title, loading }) => {
-    return <PrimaryBtn title={title} loading={loading} type="submit" size="Large" />;
+    return <PrimaryBtn title={title} loading={loading} type="submit" size="large" />;
 };
 
 export default PlayBtn;

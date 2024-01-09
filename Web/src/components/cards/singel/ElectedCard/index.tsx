@@ -5,7 +5,7 @@ import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import Img from "../../core/Img";
 import Card from "../../core/Card";
 import { getAbove, getCardFront, getCorrectPlayers } from "../../../../utils/card";
-import ElectedCardWrapper from "../../core/ElectedCardWrapper";
+import ElectedCardWrapper from "../../wrapper/ElectedCardWrapper";
 import useCardResultAnimation from "../../../../hooks/useCardResultAnimation";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ players, index, correctMovie }) => {

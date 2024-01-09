@@ -30,7 +30,7 @@ const FinishBtn: React.FC = () => {
             title="Finish"
             onClicked={handleFinish}
             disabled={!isFinished}
-            size="Small"
+            size="small"
         />
     );
 };

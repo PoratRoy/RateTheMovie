@@ -1,4 +1,4 @@
-import PackWrapper from "../components/cards/pack/PackWrapper";
+import PackWrapper from "../components/cards/wrapper/PackWrapper";
 import DraggableMovie from "../components/cards/singel/DraggableMovie";
 import ShadowPlayerCard from "../components/cards/singel/ShadowPlayerCard";
 import { PLAYER1_ID, PLAYER2_ID } from "../models/constants";

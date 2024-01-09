@@ -2,7 +2,7 @@ import React from "react";
 import { GameLayoutProps } from "../../../models/types/props";
 import Logo from "../../common/Logo";
 import style from "./GameLayout.module.css";
-
+//TODO: link to help page
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     return (
         <section className={style.gmaeContainer}>

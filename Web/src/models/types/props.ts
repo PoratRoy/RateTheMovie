@@ -4,7 +4,7 @@ import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
 import { AnimationScope } from "framer-motion";
-import { CardSide } from "./union";
+import { BtnSize, CardSide } from "./union";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -43,7 +43,7 @@ export type CardSliceProps = {
     index: number;
 };
 
-export type MyCardProps = {
+export type PlayerCardProps = {
     movie: Movie;
     loading?: boolean;
     player: Player;
@@ -178,7 +178,7 @@ export type PrimaryBtnProps = {
     title: string;
     onClicked?: () => void;
     disabled?: boolean;
-    size: "Small" | "Medium" | "Large";
+    size: BtnSize;
     loading?: boolean;
 };
 

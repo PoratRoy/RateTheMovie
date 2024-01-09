@@ -9,7 +9,6 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
     loading,
     onFocused,
 }) => {
-    console.log(disabled)
     return (
         <React.Fragment>
             {loading ? (
