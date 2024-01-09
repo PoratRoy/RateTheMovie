@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./Card.module.css";
-import { CARD_HEIGHT, CARD_WIDTH } from "../../../../style/root";
 import { CardProps } from "../../../../models/types/props";
 import CardInnerContainer from "./CardInnerContainer";
 import Placeholder from "../Placeholder";
@@ -10,16 +9,15 @@ const Card: React.FC<CardProps> = ({
     type,
     front,
     back,
-    isFocus,
-    isAnimate,
     flip,
-    width = CARD_WIDTH,
-    height = CARD_HEIGHT,
+    isFocus,
+    size = "large",
 }) => {
+    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall;
     return (
-        <section id={id} style={{ width, height }} className={style.cardContainer}>
-            <CardInnerContainer flip={flip} isAnimate={isAnimate} isFocus={isFocus}>
-                <Placeholder type={type}/>
+        <section id={id} className={sizeClass}>
+            <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>
+                <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
             </CardInnerContainer>

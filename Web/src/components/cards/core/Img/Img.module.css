@@ -1,8 +1,17 @@
-.cardImg{
-    width: var(--card-width);
-    height: var( --card-height);
+.cardImgLarge, 
+.cardImgSmall{
     object-fit: cover;
     border-radius: var(--secondary-border-radius);
+}
+
+.cardImgLarge{
+    width: var(--card-width);
+    height: var( --card-height);
+}
+
+.cardImgSmall{
+    width: calc(var(--card-width) / 2);
+    height: calc(var(--card-height) / 2);
 }
 
 .cardImgShadow{

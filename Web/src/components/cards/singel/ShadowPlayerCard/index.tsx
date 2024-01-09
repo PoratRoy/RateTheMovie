@@ -9,12 +9,11 @@ const ShadowPlayerCard: React.FC<ShadowPlayerCardProps> = ({ movie, id }) => {
     const { title, poster_path } = movie;
     return (
         <Card
-            type={{ t: "Elected", index: 0 } as placeholderCardType}
             id={id}
-            width={60}
-            height={85}
-            front={<Img alt={title} src={poster_path} />}
-        ></Card>
+            size="small"
+            type={{ t: "Shadow" } as placeholderCardType}
+            front={<Img alt={title} src={poster_path} size="small" />}
+        />
     );
 };
 

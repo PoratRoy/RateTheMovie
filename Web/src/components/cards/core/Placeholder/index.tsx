@@ -11,11 +11,11 @@ const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
             movie: { title, poster_path },
         } = type;
         return (
-            <div style={{transform: "rotateY(180deg)"}}>
+            <div style={{ transform: "rotateY(180deg)" }}>
                 <Img isShadow alt={title} src={poster_path} />
             </div>
         );
-    } else {
+    } else if (type.t === "Elected") {
         const { index } = type;
         const text = setPlaceholderText(index || 0);
         return (
@@ -26,6 +26,8 @@ const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
                 <div className={style.cardPlaceholderText}>{text}</div>
             </div>
         );
+    } else {
+        return <div className={style.cardPlaceholder} />;
     }
 };
 

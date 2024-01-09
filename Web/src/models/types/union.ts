@@ -5,3 +5,5 @@ export type PlayerColor = "red" | "blue" | "green" | "yellow" | "purple" | "pink
 export type CardSide = "left" | "right" | "all";
 
 export type BtnSize = "small" | "medium" | "large";
+
+export type CardSize = "small" | "large";

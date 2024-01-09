@@ -5,12 +5,14 @@ import { CARD_ID } from "../../../../models/constants";
 import style from "./Card.module.css";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
+    type,
     children,
     flip,
-    isAnimate,
     isFocus,
 }) => {
     const { isFlipped, onAnimationComplete } = useCardFlipAnimation(flip);
+    const id = type === "Elected" ? CARD_ID : "";
+    const isAnimate = type === "Player";
     if (isAnimate) {
         return (
             <motion.div
@@ -26,7 +28,7 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     } else {
         return (
             <div
-                id={CARD_ID}
+                id={id}
                 className={`${style.cardInnerContainer} ${isFocus ? style.cardContainerFocus : ""}`}
             >
                 {children}

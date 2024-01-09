@@ -4,7 +4,7 @@ import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
 import { AnimationScope } from "framer-motion";
-import { BtnSize, CardSide } from "./union";
+import { BtnSize, CardSide, CardSize } from "./union";
 import { placeholderCardType } from "./card";
 
 export type ChildernsProps = {
@@ -16,18 +16,16 @@ export type ProvidersProps = ChildernsProps;
 //--Card--//
 export type CardProps = {
     id?: string;
+    size?: CardSize;
     type: placeholderCardType
-    width?: number;
-    height?: number;
     isFocus?: boolean;
-    isAnimate?: boolean;
     flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
 };
 
 export type CardInnerContainerProps = {
-    isAnimate?: boolean;
+    type: string;
     flip?: boolean;
     children: React.ReactNode[];
     isFocus: boolean | undefined
@@ -211,7 +209,7 @@ export type PlayBtnProps = {
 export type ImgProps = {
     src: string;
     alt: string;
-    height?: string;
+    size?: CardSize;
     isShadow?: boolean;
 };
 

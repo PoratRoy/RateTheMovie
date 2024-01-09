@@ -11,7 +11,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
     const cardId = `${movie.id}-${player.id}`;
     return (
         <Card
-            isAnimate
+            type={{ t: "Player", movie } as placeholderCardType}
             flip={loading != undefined && !loading}
             front={<LoadingCard />}
             back={
@@ -28,7 +28,6 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
                     {open && <CardView movie={movie} />}
                 </React.Fragment>
             }
-            type={{ t: "Player", movie } as placeholderCardType}
         />
     );
 };

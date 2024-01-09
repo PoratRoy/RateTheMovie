@@ -21,7 +21,7 @@ const ElectedCard: React.FC<ElectedCardProps> = ({ players, index, correctMovie 
                 <Card
                     type={{ t: "Elected", index } as placeholderCardType}
                     front={getCardFront(players, index)}
-                    back={<Img alt={title} src={poster_path} />}
+                    back={<Img alt={title} src={poster_path}/>}
                     isFocus={focus}
                 />
             </Droppable>

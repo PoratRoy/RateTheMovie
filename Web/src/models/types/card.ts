@@ -6,4 +6,9 @@ export type Card = {
     rate?: number;
 };
 
-export type placeholderCardType = { t: "Elected"; index: number } | { t: "Player"; movie: Movie };
+export type CardType = "Elected" | "Player" | "Shadow";
+
+export type placeholderCardType =
+    | { t: "Elected"; index: number }
+    | { t: "Player"; movie: Movie }
+    | { t: "Shadow" };
