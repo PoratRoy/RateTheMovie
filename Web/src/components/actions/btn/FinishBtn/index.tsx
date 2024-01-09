@@ -1,37 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { PACK_CARDS_NUM } from "../../../../models/constants";
+import React from "react";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import { Player } from "../../../../models/types/player";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
+import useFinishGame from "../../../../hooks/useFinishGame";
 
 const FinishBtn: React.FC = () => {
     const { players, setFinish } = useGamePlayContext();
-    const [isFinished, setIsFinished] = useState<boolean>(false);
-
-    useEffect(() => {
-        let finish = true;
-        players.every((player: Player) => {
-            const selectedCards = player.selectedCards;
-            const isAllFilled = selectedCards.every((card) => card?.movie !== undefined);
-            if (selectedCards.length !== PACK_CARDS_NUM || !isAllFilled) {
-                finish = false;
-                return;
-            }
-        });
-        setIsFinished(finish);
-    }, [players]);
+    const { isFinished } = useFinishGame(players);
 
     const handleFinish = () => {
         setFinish(true);
     };
 
     return (
-        <PrimaryBtn
-            title="Finish"
-            onClicked={handleFinish}
-            disabled={!isFinished}
-            size="small"
-        />
+        <PrimaryBtn title="Finish" onClicked={handleFinish} disabled={!isFinished} size="small" />
     );
 };
 

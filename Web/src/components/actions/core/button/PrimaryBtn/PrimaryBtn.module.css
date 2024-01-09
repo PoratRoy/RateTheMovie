@@ -9,7 +9,6 @@
 .btnPrimaryLarge {
     color: var(--text-color);
     background-color: var(--primary-color);
-    border-radius: var(--primary-border-radius);
     cursor: pointer;
     border: var(--primary-border);
     text-align: center;
@@ -35,13 +34,22 @@
     transform: scale(1.02);
 }
 
+.btnPrimarySmall:disabled,
+.btnPrimaryMedium:disabled,
+.btnPrimaryLarge:disabled {
+    color: var(--text-color-opacity);
+    background-color: var(--primary-color-disabled);
+    cursor: default;
+}
+
 .btnPrimarySmall{
-    width: 150px;
-    height: 50px;
+    width: 120px;
+    height: 40px;
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 3px;
     border: var(--secondary-border);
+    border-radius: var(--secondary-border-radius);
 }
 
 .btnPrimaryMedium{
@@ -50,6 +58,7 @@
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 8px;
+    border-radius: var(--primary-border-radius);
 }
 
 .btnPrimaryLarge{
@@ -58,4 +67,5 @@
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 10px;
+    border-radius: var(--primary-border-radius);
 }
