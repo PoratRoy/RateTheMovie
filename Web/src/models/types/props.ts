@@ -76,6 +76,7 @@ export type ElectedCardProps = {
 
 export type CardViewProps = {
     movie: Movie;
+    close: () => void;
 };
 
 export type PlaceholderProps = {
@@ -211,6 +212,11 @@ export type ImgProps = {
     alt: string;
     size?: CardSize;
     isShadow?: boolean;
+};
+
+export type ViewImgProps = {
+    src: string;
+    alt: string;
 };
 
 export type ScoreProps = {

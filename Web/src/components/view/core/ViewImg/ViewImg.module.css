@@ -1,0 +1,4 @@
+.cardImgLarge, 
+.cardImgSmall{
+    object-fit: cover;
+}

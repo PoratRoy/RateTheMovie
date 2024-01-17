@@ -25,7 +25,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
                         setOpen={setOpen}
                         side="all"
                     />
-                    {open && <CardView movie={movie} />}
+                    {open && <CardView movie={movie} close={() => setOpen(false)} />}
                 </React.Fragment>
             }
         />
