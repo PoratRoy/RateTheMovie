@@ -1,8 +1,9 @@
 /* Mobile 320px - 767px -- 812px */
 .logoSmall {
-    width: 100px;
+    width: 70px;
     min-width: 50px;
     max-width: 150px;
+    opacity: 0.5;
 }
 
 .logoLarge {
@@ -15,6 +16,7 @@
 @media screen and (min-width: 768px) {
     .logoSmall {
         width: 150px;
+        opacity: 1;
     }
 
     .logoLarge {

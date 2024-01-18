@@ -1,24 +1,33 @@
 /* Mobile 320px - 767px -- 812px */
-.gmaeFotter {
+.gmaeFotter{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: fit-content;
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     padding: 1em;
     color: var(--text-color-hover);
     font-size: 0.9rem;
+    width: 100%;
+    height: fit-content;
+}
+
+.gameFotterBack {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--text-color-hover);
+    text-decoration: none;
 }
 
 .gmaeFotterLink {
     color: var(--text-color-hover);
-    margin-left: 5px;
+    margin-left: 2px;
     cursor: pointer;
 }
 
@@ -33,7 +42,6 @@
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
     .gmaeFotter {
-        width: 100%;
         height: 4em;
         padding: 1em 2em;
         font-size: 1rem;

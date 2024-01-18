@@ -8,11 +8,6 @@ import { SelectInputSchema } from "../../models/types/inputSchema";
 import { initSelectDefaultValues } from "../../models/initialization/input";
 import { SubmitHandler } from "react-hook-form";
 import { MovieFilters } from "../../models/types/movie";
-import {
-    DateDefaultJSON,
-    LANDIND_MULTIPLAYER_BTN_ID,
-    LANDIND_PLAY_BTN_ID,
-} from "../../models/constants";
 import LandingLayout from "../../components/layout/LandingLayout";
 import PlayBtn from "../../components/actions/btn/PlayBtn";
 import PlayerBtn from "../../components/actions/btn/PlayerBtn";
@@ -21,6 +16,14 @@ import GenreInput from "../../components/actions/input/GenreInput";
 import CountryInput from "../../components/actions/input/CountryInput";
 import DateRangeInput from "../../components/actions/input/DateRangeInput";
 import { filterInputs } from "../../models/initialization/form";
+import { PlayerColor } from "../../models/types/union";
+import { initPlayer } from "../../models/initialization/player";
+import {
+    Colors,
+    DateDefaultJSON,
+    LANDIND_MULTIPLAYER_BTN_ID,
+    LANDIND_PLAY_BTN_ID,
+} from "../../models/constants";
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
@@ -33,18 +36,18 @@ const LandingPage: React.FC = () => {
     const { setValue } = methods;
 
     const onSubmitPlay: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
-        const { year, genre, country, players } = data;
+        const { year, genre, country } = data;
         const movieFilters: MovieFilters = {
             year: year ? JSON.parse(year) : DateDefaultJSON,
             genre: genre ? JSON.parse(genre) : [],
             country: country ? JSON.parse(country) : "",
         };
         setFilters(movieFilters);
-        setPlayers(players ? JSON.parse(players) : []);
         navigate(path.game);
     };
 
     const onHandlePlay = () => {
+        setPlayers([initPlayer(0, Colors[0] as PlayerColor)]);
         setIsFilter(true);
     };
 

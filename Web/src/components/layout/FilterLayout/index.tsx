@@ -25,7 +25,7 @@ const FilterLayout = <TInput extends FieldValues>({
                 </section>
 
                 <section className={style.filterFormbtn}>
-                    <PlayBtn title="Start" loading={isLoading} />
+                    <PlayBtn type="submit" title="Start" loading={isLoading} />
                 </section>
             </form>
         </FormProvider>

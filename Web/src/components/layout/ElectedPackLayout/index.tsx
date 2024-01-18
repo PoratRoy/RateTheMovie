@@ -2,7 +2,6 @@ import React from "react";
 import PackOfSelectedCards from "../../cards/pack/PackOfSelectedCards";
 import FinishBtn from "../../actions/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
-import RefreshBtn from "../../actions/btn/RefreshBtn";
 
 const ElectedPackLayout: React.FC = () => {
     return (
@@ -12,7 +11,6 @@ const ElectedPackLayout: React.FC = () => {
             </div>
             <div className={style.electedPackBtns}>
                 <FinishBtn />
-                <RefreshBtn />
             </div>
         </section>
     );

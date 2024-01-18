@@ -9,7 +9,13 @@
     padding: 2em;
 }
 
-.gmaeChildrenContainer{
+.gmaeHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.gmaeChildrenContainer {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

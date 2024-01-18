@@ -1,4 +1,19 @@
 .score{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.scoreNum{
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-top: -8px;
+}
+
+/* .score{
     color: var(--text-color);
     width: fit-content;
     min-width: 25px;
@@ -12,4 +27,4 @@
     justify-content: center;
     font-size: 1.3rem;
     font-weight: 600;
-}
+} */

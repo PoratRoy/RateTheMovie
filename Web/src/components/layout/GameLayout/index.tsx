@@ -3,13 +3,20 @@ import { GameLayoutProps } from "../../../models/types/props";
 import Logo from "../../common/Logo";
 import style from "./GameLayout.module.css";
 import Footer from "../../common/Footer";
-//TODO: link to help page
+import Score from "../../actions/Score";
+import ShuffleBtn from "../../actions/btn/ShuffleBtn";
+import path from "../../../router/routePath.json";
+
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     return (
         <section className={style.gmaeContainer}>
-            <Logo size="small" />
+            <section className={style.gmaeHeaderContainer}>
+                <Score score={12} />
+                <Logo size="small" />
+                <ShuffleBtn />
+            </section>
             <section className={style.gmaeChildrenContainer}>{children}</section>
-            <Footer />
+            <Footer link={path.land} />
         </section>
     );
 };

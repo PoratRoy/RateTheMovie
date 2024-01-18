@@ -240,4 +240,6 @@ export type DescriptionProps = IdProps & {
     description: string;
 };
 
-
+export type FooterProps = {
+    link?: string;
+};

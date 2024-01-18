@@ -16,9 +16,4 @@ export const filterInputs: FilterInputs = {
         placeholder: "Select Country",
         label: "Select Country",
     },
-    players: {
-        id: "players",
-        placeholder: "Select Players",
-        label: "Select Players",
-    },
 };
