@@ -47,8 +47,13 @@
     --primary-border: 2px solid var(--tertiary-color);
     --secondary-border: 1px solid var(--tertiary-color);
 
-    --card-width: 120px;
-    --card-height: 170px;
+    --card-width: 100px;
+    --card-height: 150px;
+    /* --card-width: 120px;
+    --card-height: 170px; */
+
+    --small-card-width: 50px;
+    --small-card-height: 80px;
 }
 
 body {

@@ -56,7 +56,8 @@ export type ShadowPlayerCardProps = IdProps & {
     movie?: Movie;
 };
 
-export type DraggableMovieProps = IdProps & {
+export type DraggableMovieProps = {
+    id: string;
     movie: Movie;
     player: Player;
     isHover?: boolean;
@@ -86,7 +87,7 @@ export type PlaceholderProps = {
 
 //--Pack--//
 export type PackProps = ChildernsProps & {
-    maxWidth?: string;
+    isWrap?: boolean;
 };
 
 export type PackOfCardsProps = {

@@ -15,7 +15,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
                 <Logo size="small" />
                 <ShuffleBtn />
             </section>
-            <section className={style.gmaeChildrenContainer}>{children}</section>
+            <section className={style.gameChildrenContainer}>{children}</section>
             <Footer link={path.land} />
         </section>
     );
