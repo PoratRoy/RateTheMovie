@@ -3,6 +3,7 @@ import style from "./PrimaryBtn.module.css";
 import { PrimaryBtnProps } from "../../../../../models/types/props";
 
 const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
+    id,
     title,
     onClicked,
     disabled,
@@ -22,6 +23,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
                 <div className={style.loadingBtnPrimary}>loading...</div>
             ) : (
                 <input
+                    id={id}
                     value={title}
                     className={className}
                     onClick={onClicked}

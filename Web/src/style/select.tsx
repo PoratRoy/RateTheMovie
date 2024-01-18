@@ -12,9 +12,9 @@ const selectStyles: StylesConfig<SelectOption, true> = {
     control: (styles) => ({
         ...styles,
         backgroundColor: INPUT_BACKGROUND_COLOR,
+        minWidth: 110,
         width: "100%",
-        minHeight: 12,
-        height: "100%",
+        height: 50,
         borderRadius: SECONDARY_BORDER_RADIUS,
         fontSize: "1rem",
         boxShadow: "none",

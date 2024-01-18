@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import path from "../../router/routePath.json";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import style from "./LandingPage.module.css";
 import { useMovieContext } from "../../context/MovieContext";
 import useInitialForm from "../../hooks/useInitialForm";
 import { SelectInputSchema } from "../../models/types/inputSchema";
 import { initSelectDefaultValues } from "../../models/initialization/input";
 import { SubmitHandler } from "react-hook-form";
 import { MovieFilters } from "../../models/types/movie";
-import { DateDefaultJSON } from "../../models/constants";
-import { filterInputs } from "../../models/initialization/form";
-import DateRangeInput from "../../components/actions/input/DateRangeInput";
+import {
+    DateDefaultJSON,
+    LANDIND_MULTIPLAYER_BTN_ID,
+    LANDIND_PLAY_BTN_ID,
+} from "../../models/constants";
+import LandingLayout from "../../components/layout/LandingLayout";
+import PlayBtn from "../../components/actions/btn/PlayBtn";
+import PlayerBtn from "../../components/actions/btn/PlayerBtn";
+import FilterLayout from "../../components/layout/FilterLayout";
 import GenreInput from "../../components/actions/input/GenreInput";
 import CountryInput from "../../components/actions/input/CountryInput";
-import LandingLayout from "../../components/layout/LandingLayout";
-import SwitchPlayers from "../../components/actions/switch/SwitchPlayers";
-import backgroundMoviesImg from "../../assets/moviePoster4.png";
-import WaveSVG from "../../style/WaveSVG";
+import DateRangeInput from "../../components/actions/input/DateRangeInput";
+import { filterInputs } from "../../models/initialization/form";
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
     const { setPlayers } = useGamePlayContext();
     const { setFilters } = useMovieContext();
+
+    const [isFilter, setIsFilter] = useState<boolean>(false);
+
     const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
     const { setValue } = methods;
 
@@ -38,35 +44,39 @@ const LandingPage: React.FC = () => {
         navigate(path.game);
     };
 
+    const onHandlePlay = () => {
+        setIsFilter(true);
+    };
+
     return (
-        <section className={style.mainBackground}>
-            <section className={style.mainBackgroundImg}>
-                <img src={backgroundMoviesImg} alt="Background image of movies" />
-            </section>
-            <WaveSVG/>
-            <section className={style.mainContainer}>
-                <LandingLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
-                    <SwitchPlayers id={filterInputs.players.id} setValue={setValue} />
-                    <GenreInput
-                        id={filterInputs.genre.id}
-                        placeholder={filterInputs.genre.placeholder}
-                        label={filterInputs.genre.label}
-                        setValue={setValue}
-                    />
-                    <CountryInput
-                        id={filterInputs.country.id}
-                        placeholder={filterInputs.country.placeholder}
-                        label={filterInputs.country.label}
-                        setValue={setValue}
-                    />
-                    <DateRangeInput
-                        id={filterInputs.year.id}
-                        label={filterInputs.year.label}
-                        setValue={setValue}
-                    />
-                </LandingLayout>
-            </section>
-        </section>
+        <LandingLayout isFilterLayout={isFilter}>
+            <FilterLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
+                <GenreInput
+                    id={filterInputs.genre.id}
+                    placeholder={filterInputs.genre.placeholder}
+                    label={filterInputs.genre.label}
+                    setValue={setValue}
+                />
+                <CountryInput
+                    id={filterInputs.country.id}
+                    placeholder={filterInputs.country.placeholder}
+                    label={filterInputs.country.label}
+                    setValue={setValue}
+                />
+                <DateRangeInput
+                    id={filterInputs.year.id}
+                    label={filterInputs.year.label}
+                    setValue={setValue}
+                />
+            </FilterLayout>
+            <PlayBtn id={LANDIND_PLAY_BTN_ID} title="Play" onClicked={onHandlePlay} />
+            <PlayerBtn
+                id={LANDIND_MULTIPLAYER_BTN_ID}
+                title="Multiplayer"
+                onClicked={() => {}}
+                onFocused={false}
+            />
+        </LandingLayout>
     );
 };
 

@@ -3,6 +3,7 @@ import { SecondaryBtnProps } from "../../../../../models/types/props";
 import style from "./SecondaryBtn.module.css";
 
 const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
+    id,
     title,
     onClicked,
     disabled,
@@ -15,6 +16,7 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
                 <div className={style.loadingBtnSecondary}>loading...</div>
             ) : (
                 <div
+                    id={id}
                     onClick={onClicked}
                     className={`${style.btnSecondary} ${onFocused && style.btnSecondaryGlow}`}
                 >

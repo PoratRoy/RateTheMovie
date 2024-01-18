@@ -4,7 +4,7 @@ import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
 import { AnimationScope } from "framer-motion";
-import { BtnSize, CardSide, CardSize } from "./union";
+import { BtnSize, CardSide, CardSize, LogoSize } from "./union";
 import { placeholderCardType } from "./card";
 
 export type ChildernsProps = {
@@ -13,11 +13,14 @@ export type ChildernsProps = {
 
 export type ProvidersProps = ChildernsProps;
 
-//--Card--//
-export type CardProps = {
+export type IdProps = {
     id?: string;
+};
+
+//--Card--//
+export type CardProps = IdProps & {
     size?: CardSize;
-    type: placeholderCardType
+    type: placeholderCardType;
     isFocus?: boolean;
     flip?: boolean;
     front?: React.ReactNode;
@@ -28,7 +31,7 @@ export type CardInnerContainerProps = {
     type: string;
     flip?: boolean;
     children: React.ReactNode[];
-    isFocus: boolean | undefined
+    isFocus: boolean | undefined;
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
@@ -49,13 +52,11 @@ export type PlayerCardProps = {
     player: Player;
 };
 
-export type ShadowPlayerCardProps = {
+export type ShadowPlayerCardProps = IdProps & {
     movie?: Movie;
-    id: string;
 };
 
-export type DraggableMovieProps = {
-    id: string;
+export type DraggableMovieProps = IdProps & {
     movie: Movie;
     player: Player;
     isHover?: boolean;
@@ -80,8 +81,8 @@ export type CardViewProps = {
 };
 
 export type PlaceholderProps = {
-    type: placeholderCardType
-}
+    type: placeholderCardType;
+};
 
 //--Pack--//
 export type PackProps = ChildernsProps & {
@@ -116,7 +117,11 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     isLoading: boolean;
 };
 
-export type LandingLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
+export type LandingLayoutProps = ChildernsProps & {
+    isFilterLayout: boolean;
+};
+
+export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
 export type PlayerLayoutProps = {
     player: Player;
@@ -129,6 +134,8 @@ export type SelectLayoutProps = ChildernsProps & {
 export type GameLayoutProps = ChildernsProps;
 
 export type PlayersPackLayoutProps = ChildernsProps;
+
+export type WaveLayoutProps = ChildernsProps;
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
@@ -178,7 +185,7 @@ export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
 //--Btn--//
-export type PrimaryBtnProps = {
+export type PrimaryBtnProps = IdProps & {
     type?: "button" | "submit" | undefined;
     title: string;
     onClicked?: () => void;
@@ -187,7 +194,7 @@ export type PrimaryBtnProps = {
     loading?: boolean;
 };
 
-export type SecondaryBtnProps = {
+export type SecondaryBtnProps = IdProps & {
     title: string;
     onClicked?: () => void;
     disabled?: boolean;
@@ -195,15 +202,17 @@ export type SecondaryBtnProps = {
     onFocused?: boolean;
 };
 
-export type PlayerBtnProps = {
+export type PlayerBtnProps = IdProps & {
     title: string;
     onFocused: boolean;
     onClicked: () => void;
 };
 
-export type PlayBtnProps = {
+export type PlayBtnProps = IdProps & {
     title: string;
-    loading: boolean;
+    loading?: boolean;
+    type?: "button" | "submit";
+    onClicked?: () => void;
 };
 
 //--Common--//
@@ -223,6 +232,12 @@ export type ScoreProps = {
     score: number;
 };
 
-export type LogoProps = {
-    width?: number | string;
+export type LogoProps = IdProps & {
+    size?: LogoSize;
 };
+
+export type DescriptionProps = IdProps & {
+    description: string;
+};
+
+

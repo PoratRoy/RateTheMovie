@@ -20,3 +20,11 @@ export const CARD_ID = "card";
 export const BELOW_ID = "below";
 export const PLAYER1_ID = "player1";
 export const PLAYER2_ID = "player2";
+
+export const LANDIND_PLAY_BTN_ID = "landing-play-btn";
+export const LANDIND_MULTIPLAYER_BTN_ID = "landing-multiplayer-btn";
+export const LOGO_ID = "logo";
+export const DESCRIPTION_ID = "description";
+export const MOVIES_POSTER_ID = "movies-poster";
+export const WAVE_ID = "wave";
+export const FILTER_LAYOUT_ID = "filter-layout";

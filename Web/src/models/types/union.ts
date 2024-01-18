@@ -7,3 +7,5 @@ export type CardSide = "left" | "right" | "all";
 export type BtnSize = "small" | "medium" | "large";
 
 export type CardSize = "small" | "large";
+
+export type LogoSize = "small" | "large";

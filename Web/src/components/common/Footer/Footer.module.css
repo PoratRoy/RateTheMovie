@@ -1,0 +1,41 @@
+/* Mobile 320px - 767px -- 812px */
+.gmaeFotter {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 1em;
+    color: var(--text-color-hover);
+    font-size: 0.9rem;
+}
+
+.gmaeFotterLink {
+    color: var(--text-color-hover);
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.gmaeFotterLink:hover {
+    color: var(--text-color-active);
+}
+
+.gmaeFotterLink:active {
+    color: var(--text-color-active);
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .gmaeFotter {
+        width: 100%;
+        height: 4em;
+        padding: 1em 2em;
+        font-size: 1rem;
+    }
+}

@@ -1,4 +1,5 @@
-.selectContainer{
+/* Mobile 320px - 767px -- 812px */
+.selectContainer {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -6,12 +7,29 @@
     gap: 5px;
 }
 
-.selectLabel{
+.selectLabel {
     font-weight: 600;
     position: relative;
     left: 13px;
 }
 
-.selectSelect{
-    width: 400px;
+.selectSelect {
+    min-width: 80vw;
+    width: 85vw;
+    max-width: 400px;
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .selectContainer {
+        gap: 5px;
+    }
+
+    .selectLabel {
+        left: 13px;
+    }
+
+    .selectSelect {
+        width: 400px;
+    }
 }
