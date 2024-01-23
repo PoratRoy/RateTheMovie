@@ -22,3 +22,5 @@ export const sortNumbers = (numbers: number[]): number[] => {
     });
     return sortedArray;
 };
+
+export const roundToOneDecimal = (value: number) => Math.round(value * 10) / 10;

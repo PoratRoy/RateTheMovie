@@ -1,4 +1,4 @@
-.gmaeContainer {
+.gameContainer {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -9,15 +9,6 @@
     position: relative;
     align-items: center;
     justify-content: center;
-}
-
-.gmaeHeaderContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    width: 100%;
-    max-width: var(--mobile-width);
-    margin-top: 1em;
 }
 
 .gameChildrenContainer {

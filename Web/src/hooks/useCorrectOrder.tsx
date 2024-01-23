@@ -19,7 +19,7 @@ const useCorrectOrder = () => {
             });
 
             const cards: Card[] = sortedMovies.map((movie: Movie, i: number) => {
-                return { id: i.toString(), movie, rate: movie.imdbVotes } as Card;
+                return { id: i.toString(), movie, rate: parseFloat(movie.imdbRating) } as Card;
             });
             setCorrectOrder(cards);
         }

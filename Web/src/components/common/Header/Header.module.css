@@ -1,0 +1,8 @@
+.gameHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    max-width: var(--mobile-width);
+    margin-top: 1em;
+}
