@@ -4,15 +4,20 @@
     box-sizing: border-box;
     width: 100%;
     height: 110%;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    padding: 2em;
+    align-items: center;
+    justify-content: center;
 }
 
 .gmaeHeaderContainer {
     display: flex;
     justify-content: space-between;
     align-items: start;
+    width: 100%;
+    max-width: var(--mobile-width);
+    margin-top: 1em;
 }
 
 .gameChildrenContainer {

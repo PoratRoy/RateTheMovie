@@ -11,7 +11,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     return (
         <section className={style.gmaeContainer}>
             <section className={style.gmaeHeaderContainer}>
-                <Score score={12} />
+                <Score score={124.3} />
                 <Logo size="small" />
                 <ShuffleBtn />
             </section>

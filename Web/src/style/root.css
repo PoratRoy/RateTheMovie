@@ -54,6 +54,8 @@
 
     --small-card-width: 50px;
     --small-card-height: 80px;
+
+    --mobile-width: 80vw;
 }
 
 body {

@@ -63,6 +63,7 @@ export type DraggableMovieProps = {
     isHover?: boolean;
     isClickable?: boolean;
     side: CardSide;
+    size?: CardSize;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

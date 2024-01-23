@@ -61,6 +61,7 @@ const setSlice = (player: Player, movie: Movie | undefined, side: CardSide) => {
             movie={movie}
             player={player}
             side={side}
+            size="small"
         />
     ) : (
         <div></div>

@@ -5,8 +5,8 @@
 }
 
 .cardImgLarge{
-    width: var(--small-card-width);
-    height: var( --small-card-height);
+    width: var(--card-width);
+    height: var( --card-height);
 }
 
 .cardImgSmall{
