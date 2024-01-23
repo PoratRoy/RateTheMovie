@@ -5,13 +5,13 @@
 }
 
 .cardImgLarge{
-    width: var(--card-width);
-    height: var( --card-height);
+    width: var(--small-card-width);
+    height: var( --small-card-height);
 }
 
 .cardImgSmall{
-    width: calc(var(--card-width) / 2);
-    height: calc(var(--card-height) / 2);
+    width: var(--small-card-width);
+    height: var(--small-card-height);
 }
 
 .cardImgShadow{

@@ -8,14 +8,14 @@ import { useErrorContext } from "../../context/ErrorContext";
 import { useSingleton } from "../../hooks/useSingleton";
 import { useMovieContext } from "../../context/MovieContext";
 import { PACK_CARDS_NUM } from "../../models/constants";
-import { setNewMovie, setQueryParams } from "../utils";
+import { checkMoviesAlreadySet, setNewMovie, setQueryParams } from "../utils";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
     const { movies, setMovies, setMovieLoading, filters } = useMovieContext();
 
     const discoverMovies = async () => {
-        if (movies.some((movie) => movie.title !== "" || movie.id !== "")) return;
+        if (checkMoviesAlreadySet(movies)) return;
 
         const page = getRandomNumber(1, 500);
 
@@ -25,8 +25,8 @@ const useDiscoverMovies = () => {
         setError(undefined);
         try {
             const response = await axios.get(URL, { params: setQueryParams(page, filters) });
-
             const resultsTMDB: MovieTMDB[] = response.data.results;
+            
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 let movies: Movie[] = [];
                 const indexs: number[] = generateRandomArray(resultsTMDB.length);

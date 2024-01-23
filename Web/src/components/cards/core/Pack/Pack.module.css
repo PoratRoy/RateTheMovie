@@ -1,26 +1,28 @@
 .packContainer,
 .packContainerWrap {
     display: flex;
-    max-width: 90vw;
+    flex-wrap: wrap;
+    max-width: 80vw;
     height: 100%;
     margin-bottom: 10px;
-}
-
-.packContainer {
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: space-between;
 }
 
-.packContainerWrap {
+/* .packContainer {
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+/* .packContainerWrap {
     position: relative;
-    /* flex-wrap: wrap; */
-    /* gap: 10em; */
     height: 50vh;
     width: 100%;
-}
+} */
 
-.packContainerWrap section:nth-child(2) {
+/* .packContainerWrap section:nth-child(2) {
     position: absolute;
     right: 0;
 }
@@ -42,7 +44,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-}
+} */
 
 
 /* 

@@ -9,6 +9,7 @@ export const MovieContext = createContext<{
     setMovieLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
     filters: MovieFilters | undefined;
     setFilters: React.Dispatch<React.SetStateAction<MovieFilters | undefined>>;
+    clearMovieContext: () => void;
 }>({
     movies: [],
     setMovies: () => {},
@@ -16,6 +17,7 @@ export const MovieContext = createContext<{
     setMovieLoading: () => {},
     filters: undefined,
     setFilters: () => {},
+    clearMovieContext: () => {},
 });
 
 export const useMovieContext = () => useContext(MovieContext);
@@ -25,9 +27,22 @@ export const MovieContextProvider = ({ children }: { children: React.ReactNode }
     const [movieLoading, setMovieLoading] = useState<boolean | undefined>();
     const [filters, setFilters] = useState<MovieFilters | undefined>();
 
+    const clearMovieContext = () => {
+        setMovies([]);
+        setFilters(undefined);
+    };
+
     return (
         <MovieContext.Provider
-            value={{ movies, setMovies, movieLoading, setMovieLoading, filters, setFilters }}
+            value={{
+                movies,
+                setMovies,
+                movieLoading,
+                setMovieLoading,
+                filters,
+                setFilters,
+                clearMovieContext,
+            }}
         >
             {children}
         </MovieContext.Provider>

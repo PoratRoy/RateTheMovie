@@ -1,0 +1,16 @@
+.fotterBackLink {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--text-color-hover);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.fotterBackLink:hover {
+    color: var(--text-color-active);
+}
+
+.fotterBackLink:active {
+    color: var(--text-color-active);
+}

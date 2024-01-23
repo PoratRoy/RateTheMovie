@@ -54,3 +54,6 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
     }
     return;
 };
+
+export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
+    movies.some((movie) => movie.title !== "" || movie.id !== "");

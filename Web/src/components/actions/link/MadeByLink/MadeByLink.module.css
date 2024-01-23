@@ -1,0 +1,18 @@
+.FotterMadeBy {
+    color: var(--text-color-hover);
+    font-size: 0.9rem;
+}
+
+.FotterMadeByLink {
+    color: var(--text-color-hover);
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.FotterMadeByLink:hover {
+    color: var(--text-color-active);
+}
+
+.FotterMadeByLink:active {
+    color: var(--text-color-active);
+}

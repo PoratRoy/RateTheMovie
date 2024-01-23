@@ -21,8 +21,8 @@ import { initPlayer } from "../../models/initialization/player";
 import {
     Colors,
     DateDefaultJSON,
-    LANDIND_MULTIPLAYER_BTN_ID,
-    LANDIND_PLAY_BTN_ID,
+    MULTIPLAYER_BTN_ID,
+    PLAY_BTN_ID,
 } from "../../models/constants";
 
 const LandingPage: React.FC = () => {
@@ -30,7 +30,7 @@ const LandingPage: React.FC = () => {
     const { setPlayers } = useGamePlayContext();
     const { setFilters } = useMovieContext();
 
-    const [isFilter, setIsFilter] = useState<boolean>(false);
+    const [isFilterLayout, setIsFilterLayout] = useState<boolean>(false);
 
     const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
     const { setValue } = methods;
@@ -48,11 +48,11 @@ const LandingPage: React.FC = () => {
 
     const onHandlePlay = () => {
         setPlayers([initPlayer(0, Colors[0] as PlayerColor)]);
-        setIsFilter(true);
+        setIsFilterLayout(true);
     };
 
     return (
-        <LandingLayout isFilterLayout={isFilter}>
+        <LandingLayout isFilterLayout={isFilterLayout}>
             <FilterLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
                 <GenreInput
                     id={filterInputs.genre.id}
@@ -72,9 +72,9 @@ const LandingPage: React.FC = () => {
                     setValue={setValue}
                 />
             </FilterLayout>
-            <PlayBtn id={LANDIND_PLAY_BTN_ID} title="Play" onClicked={onHandlePlay} />
+            <PlayBtn id={PLAY_BTN_ID} title="Play" onClicked={onHandlePlay} />
             <PlayerBtn
-                id={LANDIND_MULTIPLAYER_BTN_ID}
+                id={MULTIPLAYER_BTN_ID}
                 title="Multiplayer"
                 onClicked={() => {}}
                 onFocused={false}

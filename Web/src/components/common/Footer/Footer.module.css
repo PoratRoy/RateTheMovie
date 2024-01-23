@@ -1,5 +1,5 @@
 /* Mobile 320px - 767px -- 812px */
-.gmaeFotter{
+.gameFotter{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -11,37 +11,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 1em;
-    color: var(--text-color-hover);
-    font-size: 0.9rem;
     width: 100%;
     height: fit-content;
 }
 
-.gameFotterBack {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    color: var(--text-color-hover);
-    text-decoration: none;
-}
-
-.gmaeFotterLink {
-    color: var(--text-color-hover);
-    margin-left: 2px;
-    cursor: pointer;
-}
-
-.gmaeFotterLink:hover {
-    color: var(--text-color-active);
-}
-
-.gmaeFotterLink:active {
-    color: var(--text-color-active);
-}
-
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
-    .gmaeFotter {
+    .gameFotter {
         height: 4em;
         padding: 1em 2em;
         font-size: 1rem;

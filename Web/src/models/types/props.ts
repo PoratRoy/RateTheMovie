@@ -85,6 +85,10 @@ export type PlaceholderProps = {
     type: placeholderCardType;
 };
 
+export type RateProps = IdProps & {
+    rate: number;
+};
+
 //--Pack--//
 export type PackProps = ChildernsProps & {
     isWrap?: boolean;
@@ -243,4 +247,8 @@ export type DescriptionProps = IdProps & {
 
 export type FooterProps = {
     link?: string;
+};
+
+export type BackLinkProps = {
+    link: string;
 };
