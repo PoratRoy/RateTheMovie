@@ -1,16 +1,19 @@
 import React from "react";
 import { BELOW_ID } from "../../../../models/constants";
 import { ElectedCardWrapperProps } from "../../../../models/types/props";
+import style from "./ElectedCardWrapper.module.css";
+import Rate from "../../core/Rate";
 
-const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({ children, below, scope }) => {
+const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({ children, rate, scope }) => {
     return (
-        <div ref={scope} style={{ position: "relative" }}>
+        <div ref={scope} className={style.electedWrapper}>
             {children}
             <div
                 id={BELOW_ID}
-                style={{ color: "white", position: "absolute", bottom: "-40px", opacity: 0, display: "none" }}
+                className={style.electedWrapperRate}
+                style={{ display: "none", opacity: 0 }}
             >
-                {below}
+                <Rate rate={rate} />
             </div>
         </div>
     );

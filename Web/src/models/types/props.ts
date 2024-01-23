@@ -35,8 +35,7 @@ export type CardInnerContainerProps = {
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
-    above?: React.ReactNode;
-    below?: React.ReactNode;
+    rate: number | string;
     scope: AnimationScope<any>;
 };
 
@@ -87,7 +86,7 @@ export type PlaceholderProps = {
 };
 
 export type RateProps = IdProps & {
-    rate: number;
+    rate: number | string;
 };
 
 export type PositionProps = {

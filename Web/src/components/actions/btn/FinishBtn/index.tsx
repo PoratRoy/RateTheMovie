@@ -1,29 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
-import useFinishGame from "../../../../hooks/useFinishGame";
+import useFinishPlacingCards from "../../../../hooks/useFinishPlacingCards";
 import useSetScore from "../../../../hooks/useSetScore";
 import style from "./FinishBtn.module.css";
 
 const FinishBtn: React.FC = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const { players, setFinish } = useGamePlayContext();
-    const { isFinished } = useFinishGame(players);
+    const { isFinishPlacing } = useFinishPlacingCards(players);
     const { setScore } = useSetScore();
 
     const handleFinish = () => {
         setFinish(true);
+        setLoading(true);
         setTimeout(() => {
             setScore();
+            setLoading(false);
         }, 4000);
     };
 
     return (
         <React.Fragment>
-            {isFinished ? (
+            {isFinishPlacing ? (
                 <PrimaryBtn
                     title="Finish"
                     onClicked={handleFinish}
-                    disabled={!isFinished}
+                    disabled={!isFinishPlacing}
+                    loading={loading}
                     size="small"
                 />
             ) : (

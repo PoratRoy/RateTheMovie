@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Player } from "../models/types/player";
 import { PACK_CARDS_NUM } from "../models/constants";
 
-const useFinishGame = (players: Player[]) => {
-    const [isFinished, setIsFinished] = useState<boolean>(false);
+const useFinishPlacingCards = (players: Player[]) => {
+    const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);
 
     useEffect(() => {
         let finish = true;
@@ -21,10 +21,10 @@ const useFinishGame = (players: Player[]) => {
                 return;
             }
         });
-        setIsFinished(finish);
+        setIsFinishPlacing(finish);
     }, [players]);
 
-    return { isFinished };
+    return { isFinishPlacing };
 };
 
-export default useFinishGame;
+export default useFinishPlacingCards;
