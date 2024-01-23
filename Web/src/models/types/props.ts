@@ -3,9 +3,8 @@ import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
-import { AnimationScope } from "framer-motion";
 import { BtnSize, CardSide, CardSize, LogoSize } from "./union";
-import { placeholderCardType } from "./card";
+import { Card, placeholderCardType } from "./card";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -36,7 +35,8 @@ export type CardInnerContainerProps = {
 
 export type ElectedCardWrapperProps = ChildernsProps & {
     rate: number | string;
-    scope: AnimationScope<any>;
+    index: string;
+    setFocus: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type CardSliceProps = {
@@ -72,8 +72,8 @@ export type ShadowCardProps = {
 
 export type ElectedCardProps = {
     index: number;
-    players: Player[];
-    correctMovie: Movie;
+    player: Player;
+    card: Card | undefined;
 };
 
 export type CardViewProps = {

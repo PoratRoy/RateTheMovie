@@ -12,12 +12,9 @@ const FinishBtn: React.FC = () => {
     const { setScore } = useSetScore();
 
     const handleFinish = () => {
-        setFinish(true);
         setLoading(true);
-        setTimeout(() => {
-            setScore();
-            setLoading(false);
-        }, 4000);
+        setFinish(true);
+        setScore();
     };
 
     return (

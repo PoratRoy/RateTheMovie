@@ -5,7 +5,7 @@ import { placeholderCardType } from "../models/types/card";
 
 const useCardOrderPosition = (type: placeholderCardType) => {
     const { selectedOrder } = useGamePlayContext();
-    const [pos, setPos] = useState<number | undefined>();
+    const [pos, setPos] = useState<number>(0);
 
     useEffect(() => {
         if (type.t === "Player") {

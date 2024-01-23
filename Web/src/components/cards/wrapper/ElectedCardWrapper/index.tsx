@@ -3,11 +3,19 @@ import { BELOW_ID } from "../../../../models/constants";
 import { ElectedCardWrapperProps } from "../../../../models/types/props";
 import style from "./ElectedCardWrapper.module.css";
 import Rate from "../../core/Rate";
+import Droppable from "../../../dnd/Droppable";
 
-const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({ children, rate, scope }) => {
+const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
+    children,
+    rate,
+    index,
+    setFocus,
+}) => {
     return (
-        <div ref={scope} className={style.electedWrapper}>
-            {children}
+        <div className={style.electedWrapper}>
+            <Droppable droppableId={index} setFocus={setFocus}>
+                {children}
+            </Droppable>
             <div
                 id={BELOW_ID}
                 className={style.electedWrapperRate}
