@@ -8,6 +8,7 @@ import { placeholderCardType } from "../../../../models/types/card";
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
     const [open, setOpen] = useState<boolean>(false);
+    
     const cardId = `${movie.id}-${player.id}`;
     return (
         <Card

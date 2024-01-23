@@ -5,5 +5,9 @@ export type Player = {
     id: number;
     color: PlayerColor;
     score: number;
-    selectedCards: (Card | undefined)[]
+    selectedCards: (Card | undefined)[];
+};
+
+export type SelectedOrder = {
+    card: Card | undefined;
 };

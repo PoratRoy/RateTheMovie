@@ -5,8 +5,9 @@ import { useMovieContext } from "../../../../context/MovieContext";
 import { Movie } from "../../../../models/types/movie";
 import { PackOfCardsProps } from "../../../../models/types/props";
 
-const PackOfCards: React.FC<PackOfCardsProps> = ({player}) => {
+const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
     const { movies, movieLoading } = useMovieContext();
+
     return (
         <Pack isWrap>
             {movies.map((movie: Movie, i: number) => (

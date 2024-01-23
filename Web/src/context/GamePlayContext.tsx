@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { Card } from "../models/types/card";
-import { Player } from "../models/types/player";
+import { Player, SelectedOrder } from "../models/types/player";
 
 export const GamePlayContext = createContext<{
     correctOrder: Card[];
@@ -10,6 +10,8 @@ export const GamePlayContext = createContext<{
     finish: boolean;
     setFinish: React.Dispatch<React.SetStateAction<boolean>>;
     clearGameContext: () => void;
+    selectedOrder: SelectedOrder[];
+    setCardsOrder: (index: number, card: Card | undefined) => void;
 }>({
     correctOrder: [],
     setCorrectOrder: () => {},
@@ -18,6 +20,8 @@ export const GamePlayContext = createContext<{
     finish: false,
     setFinish: () => {},
     clearGameContext: () => {},
+    selectedOrder: [],
+    setCardsOrder: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -26,6 +30,15 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [correctOrder, setCorrectOrder] = useState<Card[]>([]);
     const [players, setPlayers] = useState<Player[]>([]);
     const [finish, setFinish] = useState<boolean>(false);
+    const [selectedOrder, setSelectedOrder] = useState<SelectedOrder[]>([]);
+
+    const setCardsOrder = (index: number, card: Card | undefined) => {
+        setSelectedOrder((prev) => {
+            const newOrder = [...prev];
+            newOrder[index] = { card } as SelectedOrder;
+            return newOrder;
+        });
+    };
 
     const clearGameContext = () => {
         setCorrectOrder([]);
@@ -43,6 +56,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 finish,
                 setFinish,
                 clearGameContext,
+                selectedOrder,
+                setCardsOrder,
             }}
         >
             {children}
