@@ -9,14 +9,24 @@ import { useSingleton } from "../../hooks/useSingleton";
 import { useMovieContext } from "../../context/MovieContext";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import { checkMoviesAlreadySet, setNewMovie, setQueryParams } from "../utils";
-import { MOCK_MOVIES } from "../../models/mock";
+import Session from "../../utils/sessionStorage";
+import { SessionKey } from "../../models/enums/session";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
     const { movies, setMovies, setMovieLoading, filters } = useMovieContext();
 
     const discoverMovies = async () => {
+        // console.log(`${PACK_CARDS_NUM} movies: `, MOCK_MOVIES);
+        // setMovies(MOCK_MOVIES);
+        // return;
         if (checkMoviesAlreadySet(movies)) return;
+        const sessionMovies = Session.get(SessionKey.MOVIES);
+        if (sessionMovies && sessionMovies.length > 0) {
+            setMovies(sessionMovies);
+            setMovieLoading(false);
+            return;
+        }
 
         const page = getRandomNumber(1, 500);
 
@@ -24,12 +34,6 @@ const useDiscoverMovies = () => {
 
         setMovieLoading(true);
         setError(undefined);
-
-        console.log(`${PACK_CARDS_NUM} movies: `, MOCK_MOVIES);
-        setMovies(MOCK_MOVIES);
-        setMovieLoading(false);
-        return;
-        
         try {
             const response = await axios.get(URL, { params: setQueryParams(page, filters) });
             const resultsTMDB: MovieTMDB[] = response.data.results;
@@ -65,12 +69,13 @@ const useDiscoverMovies = () => {
 
                     const movie = setNewMovie(tmdbMovie, resultsOMDB);
                     if (movie) {
-                        // movies.push(movie);
+                        movies.push(movie);
                     }
 
                     if (movies.length === PACK_CARDS_NUM) break;
                 }
                 console.log(`${PACK_CARDS_NUM} movies: `, movies);
+                Session.set(SessionKey.MOVIES, movies);
                 setMovies(movies);
             } else {
                 setError("Something went wrong");

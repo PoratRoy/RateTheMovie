@@ -3,6 +3,8 @@ import { useGamePlayContext } from "../context/GamePlayContext";
 import { useMovieContext } from "../context/MovieContext";
 import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
+import Session from "../utils/sessionStorage";
+import { SessionKey } from "../models/enums/session";
 
 const useCorrectOrder = () => {
     const { setCorrectOrder } = useGamePlayContext();
@@ -21,6 +23,7 @@ const useCorrectOrder = () => {
             const cards: Card[] = sortedMovies.map((movie: Movie, i: number) => {
                 return { id: i.toString(), movie, rate: parseFloat(movie.imdbRating) } as Card;
             });
+            Session.set(SessionKey.CORRECT_ORDER, cards)
             setCorrectOrder(cards);
         }
     }, [movies]);

@@ -6,6 +6,7 @@ export const initPlayer = (id: number, color: PlayerColor): Player => {
         id,
         color,
         score: 0,
-        selectedCards: []
+        selectedCards: [],
+        rightChoices: [],
     } as Player;
 };

@@ -24,6 +24,8 @@ import {
     MULTIPLAYER_BTN_ID,
     PLAY_BTN_ID,
 } from "../../models/constants";
+import Session from "../../utils/sessionStorage";
+import { SessionKey } from "../../models/enums/session";
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
@@ -35,7 +37,7 @@ const LandingPage: React.FC = () => {
     const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
     const { setValue } = methods;
 
-    const onSubmitPlay: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
+    const onSubmitFilter: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
         const { year, genre, country } = data;
         const movieFilters: MovieFilters = {
             year: year ? JSON.parse(year) : DateDefaultJSON,
@@ -47,13 +49,15 @@ const LandingPage: React.FC = () => {
     };
 
     const onHandlePlay = () => {
-        setPlayers([initPlayer(0, Colors[0] as PlayerColor)]);
+        const players = [initPlayer(0, Colors[0] as PlayerColor)]
+        Session.set(SessionKey.PLAYERS, players);
+        setPlayers(players);
         setIsFilterLayout(true);
     };
 
     return (
         <LandingLayout isFilterLayout={isFilterLayout}>
-            <FilterLayout methods={methods} onSubmit={onSubmitPlay} isLoading={false}>
+            <FilterLayout methods={methods} onSubmit={onSubmitFilter} isLoading={false}>
                 <GenreInput
                     id={filterInputs.genre.id}
                     placeholder={filterInputs.genre.placeholder}

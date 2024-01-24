@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { Card } from "../models/types/card";
 import { Player, SelectedOrder } from "../models/types/player";
+import { SessionKey } from "../models/enums/session";
+import Session from "../utils/sessionStorage";
 
 export const GamePlayContext = createContext<{
     correctOrder: Card[];
@@ -32,6 +34,20 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [finish, setFinish] = useState<boolean>(false);
     const [selectedOrder, setSelectedOrder] = useState<SelectedOrder[]>([]);
 
+    const setStateFromSession = () => {
+        if (!players || players.length === 0) {
+            const sessionPlayers = Session.get(SessionKey.PLAYERS);
+            const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
+            if (sessionPlayers && sessionPlayers.length > 0) {
+                setPlayers(sessionPlayers);
+            }
+            if (sessionCorrectOrder && sessionCorrectOrder.length > 0) {
+                setCorrectOrder(sessionCorrectOrder);
+            }
+        }
+    };
+    setStateFromSession();
+
     const setCardsOrder = (index: number, card: Card | undefined) => {
         setSelectedOrder((prev) => {
             const newOrder = [...prev];
@@ -41,6 +57,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
 
     const clearGameContext = () => {
+        Session.remove(SessionKey.PLAYERS);
+        Session.remove(SessionKey.CORRECT_ORDER);
         setCorrectOrder([]);
         setPlayers([]);
         setFinish(false);

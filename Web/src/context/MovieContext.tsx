@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { Movie, MovieFilters } from "../models/types/movie";
 import { initMovieList } from "../models/initialization/movie";
+import Session from "../utils/sessionStorage";
+import { SessionKey } from "../models/enums/session";
 
 export const MovieContext = createContext<{
     movies: Movie[];
@@ -28,7 +30,8 @@ export const MovieContextProvider = ({ children }: { children: React.ReactNode }
     const [filters, setFilters] = useState<MovieFilters | undefined>();
 
     const clearMovieContext = () => {
-        setMovies([]);
+        Session.remove(SessionKey.MOVIES);
+        setMovies(initMovieList());
         setFilters(undefined);
     };
 
