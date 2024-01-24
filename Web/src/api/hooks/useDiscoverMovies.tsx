@@ -9,6 +9,7 @@ import { useSingleton } from "../../hooks/useSingleton";
 import { useMovieContext } from "../../context/MovieContext";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import { checkMoviesAlreadySet, setNewMovie, setQueryParams } from "../utils";
+import { MOCK_MOVIES } from "../../models/mock";
 
 const useDiscoverMovies = () => {
     const { setError } = useErrorContext();
@@ -23,10 +24,16 @@ const useDiscoverMovies = () => {
 
         setMovieLoading(true);
         setError(undefined);
+
+        console.log(`${PACK_CARDS_NUM} movies: `, MOCK_MOVIES);
+        setMovies(MOCK_MOVIES);
+        setMovieLoading(false);
+        return;
+        
         try {
             const response = await axios.get(URL, { params: setQueryParams(page, filters) });
             const resultsTMDB: MovieTMDB[] = response.data.results;
-            
+
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 let movies: Movie[] = [];
                 const indexs: number[] = generateRandomArray(resultsTMDB.length);
@@ -58,7 +65,7 @@ const useDiscoverMovies = () => {
 
                     const movie = setNewMovie(tmdbMovie, resultsOMDB);
                     if (movie) {
-                        movies.push(movie);
+                        // movies.push(movie);
                     }
 
                     if (movies.length === PACK_CARDS_NUM) break;

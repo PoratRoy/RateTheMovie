@@ -1,4 +1,5 @@
 import { Card } from "./card";
+import { Movie } from "./movie";
 import { PlayerColor } from "./union";
 
 export type Player = {
@@ -6,6 +7,7 @@ export type Player = {
     color: PlayerColor;
     score: number;
     selectedCards: (Card | undefined)[];
+    rightChoices: Movie[];
 };
 
 export type SelectedOrder = {
