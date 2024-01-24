@@ -7,8 +7,10 @@ const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
 
     const handleAnimation = async () => {
-        await delayPromise(2000);
+        await delayPromise(1000);
         await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
+        await delayPromise(1000);
+        await animation(`#${BELOW_ID}`, { opacity: 0 }, { duration: 0.3 });
     };
 
     useEffect(() => {

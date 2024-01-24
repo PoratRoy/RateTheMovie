@@ -8,7 +8,7 @@ import Position from "../Position";
 
 const Card: React.FC<CardProps> = ({ id, type, front, back, flip, isFocus, size = "large" }) => {
     const pos = useCardOrderPosition(type);
-
+    const movieId = type.t === "Player" ? type.movie.id : undefined;
     const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODO: refactor
     return (
         <section id={id} className={sizeClass}>
@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ id, type, front, back, flip, isFocus, size 
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
-                {pos && <Position position={pos} />}
+                {pos && <Position id={movieId} position={pos} />}
             </CardInnerContainer>
         </section>
     );

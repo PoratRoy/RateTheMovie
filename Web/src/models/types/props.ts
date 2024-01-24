@@ -89,7 +89,7 @@ export type RateProps = IdProps & {
     rate: number | string;
 };
 
-export type PositionProps = {
+export type PositionProps = IdProps & {
     position: number;
 };
 
