@@ -37,10 +37,12 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setStateFromSession = () => {
         if (!players || players.length === 0) {
             const sessionPlayers = Session.get(SessionKey.PLAYERS);
-            const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
             if (sessionPlayers && sessionPlayers.length > 0) {
                 setPlayers(sessionPlayers);
             }
+        }
+        if(!correctOrder || correctOrder.length === 0){
+            const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
             if (sessionCorrectOrder && sessionCorrectOrder.length > 0) {
                 setCorrectOrder(sessionCorrectOrder);
             }

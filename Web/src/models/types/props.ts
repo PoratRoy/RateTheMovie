@@ -76,11 +76,6 @@ export type ElectedCardProps = {
     card: Card | undefined;
 };
 
-export type CardViewProps = {
-    movie: Movie;
-    close: () => void;
-};
-
 export type PlaceholderProps = {
     type: placeholderCardType;
 };
@@ -224,6 +219,22 @@ export type PlayBtnProps = IdProps & {
     onClicked?: () => void;
 };
 
+//--View--//
+export type ViewImgProps = {
+    src: string;
+    alt: string;
+};
+
+export type CardViewProps = {
+    movie: Movie;
+    close: () => void;
+};
+
+export type CloseBtnProps = {
+    close: () => void;
+}
+
+
 //--Common--//
 export type ImgProps = {
     src: string;
@@ -232,10 +243,7 @@ export type ImgProps = {
     isShadow?: boolean;
 };
 
-export type ViewImgProps = {
-    src: string;
-    alt: string;
-};
+
 
 export type ScoreProps = {
     score: number;

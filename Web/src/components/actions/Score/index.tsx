@@ -2,10 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ScoreProps } from "../../../models/types/props";
 import style from "./Score.module.css";
-import useCountingScore from "../../../hooks/useCountingScore";
+import useCountingScoreAnimation from "../../../hooks/animation/useCountingScoreAnimation";
 
 const Score: React.FC<ScoreProps> = ({ score }) => {
-    const { scoreRes } = useCountingScore(score);
+    const { scoreRes } = useCountingScoreAnimation(score);
 
     return (
         <section className={style.score}>

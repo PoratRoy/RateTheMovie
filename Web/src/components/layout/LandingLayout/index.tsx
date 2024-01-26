@@ -5,7 +5,7 @@ import Logo from "../../common/Logo";
 import Description from "../../common/Description";
 import Footer from "../../common/Footer";
 import { LandingLayoutProps } from "../../../models/types/props";
-import useLandingAnimation from "../../../hooks/useLandingAnimation";
+import useLandingAnimation from "../../../hooks/animation/useLandingAnimation";
 import { DESCRIPTION_ID, LOGO_ID, MOVIES_POSTER_ID } from "../../../models/constants";
 import WaveLayout from "../WaveLayout";
 

@@ -1,8 +1,8 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { delayPromise } from "../utils/date";
-import { PRIMARY_COLOR } from "../style/root";
-import { ABOVE_ID, BELOW_ID, CARD_ID, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
+import { delayPromise } from "../../utils/date";
+import { PRIMARY_COLOR } from "../../style/root";
+import { ABOVE_ID, BELOW_ID, CARD_ID, PLAYER1_ID, PLAYER2_ID } from "../../models/constants";
 
 const useCardResultAnimation = (activate: boolean | undefined, correctPlayers: string[]) => {
     const [scope, animation] = useAnimate();

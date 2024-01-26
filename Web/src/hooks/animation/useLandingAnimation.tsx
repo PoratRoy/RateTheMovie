@@ -7,7 +7,7 @@ import {
     PLAY_BTN_ID,
     MOVIES_POSTER_ID,
     WAVE_ID,
-} from "../models/constants";
+} from "../../models/constants";
 
 const useLandingAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();

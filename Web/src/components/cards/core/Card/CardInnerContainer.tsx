@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import useCardFlipAnimation from "../../../../hooks/useCardFlipAnimation";
+import useCardFlipAnimation from "../../../../hooks/animation/useCardFlipAnimation";
 import { CardInnerContainerProps } from "../../../../models/types/props";
 import { CARD_ID } from "../../../../models/constants";
 import style from "./Card.module.css";

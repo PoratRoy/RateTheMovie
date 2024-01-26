@@ -14,6 +14,7 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
         <React.Fragment>
             {loading ? (
                 <div className={style.loadingBtnSecondary}>loading...</div>
+                // TODO: loading animation
             ) : (
                 <div
                     id={id}

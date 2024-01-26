@@ -16,11 +16,12 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
             ? style.btnPrimaryLarge
             : size === "medium"
               ? style.btnPrimaryMedium
-              : style.btnPrimarySmall;
+              : style.btnPrimarySmall;//TODO: refactor this
     return (
         <React.Fragment>
             {loading ? (
                 <div className={style.loadingBtnPrimary}>loading...</div>
+                // TODO: loading animation
             ) : (
                 <input
                     id={id}

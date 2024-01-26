@@ -57,3 +57,15 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
 
 export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
     movies.some((movie) => movie.title !== "" || movie.id !== "");
+
+// export const getMoviesOptions = (movies: MovieTMDB[]): MovieTMDB[][] => {
+//     const shuffledArray = movies.slice().sort(() => Math.random() - 0.5);
+
+//     const moviesOptions = [];
+//     for (let i = 0; i < MOVIES_OPTIONS; i++) {
+//         const movies = shuffledArray.slice(i * PACK_CARDS_NUM, (i + 1) * PACK_CARDS_NUM);
+//         moviesOptions.push(movies);
+//     }
+
+//     return moviesOptions;
+// };

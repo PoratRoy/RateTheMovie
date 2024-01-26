@@ -18,6 +18,7 @@ const useDiscoverMovies = () => {
 
     const discoverMovies = async () => {
         // console.log(`${PACK_CARDS_NUM} movies: `, MOCK_MOVIES);
+        // setMovieLoading(false);
         // setMovies(MOCK_MOVIES);
         // return;
         if (checkMoviesAlreadySet(movies)) return;
@@ -40,46 +41,41 @@ const useDiscoverMovies = () => {
 
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 let movies: Movie[] = [];
+                //got 20 movies
                 const indexs: number[] = generateRandomArray(resultsTMDB.length);
-
+                //got 20 indexs
                 for (const index of indexs) {
                     const tmdbMovie = resultsTMDB[index];
 
                     const { title, release_date, id } = tmdbMovie;
-                    if (!title || !release_date || !id) {
-                        setError("Something went wrong");
-                        continue;
-                    }
-
                     const [isValidDate, year] = extractYearFromDateString(release_date);
-                    if (!isValidDate) {
-                        setError(year);
-                        continue;
+                    if (title && release_date && id && isValidDate) {
+
+                        const response = await axios.get(OmdbBaseURL, {
+                            params: {
+                                apikey: import.meta.env.VITE_OMDB_API_KEY || "",
+                                t: title,
+                                y: year,
+                                plot: "full",
+                            },
+                        });
+                        const resultsOMDB: MovieOMDB = response.data;
+    
+                        const movie = setNewMovie(tmdbMovie, resultsOMDB);
+                        if (movie) {
+                            movies.push(movie);
+                        }
+                        if (movies.length === PACK_CARDS_NUM) break;
                     }
-
-                    const response = await axios.get(OmdbBaseURL, {
-                        params: {
-                            apikey: import.meta.env.VITE_OMDB_API_KEY || "",
-                            t: title,
-                            y: year,
-                            plot: "full",
-                        },
-                    });
-                    const resultsOMDB: MovieOMDB = response.data;
-
-                    const movie = setNewMovie(tmdbMovie, resultsOMDB);
-                    if (movie) {
-                        movies.push(movie);
-                    }
-
-                    if (movies.length === PACK_CARDS_NUM) break;
                 }
-                console.log(`${PACK_CARDS_NUM} movies: `, movies);
-                Session.set(SessionKey.MOVIES, movies);
-                setMovies(movies);
-            } else {
-                setError("Something went wrong");
-            }
+                if(movies.length === PACK_CARDS_NUM){
+                    console.log(`${PACK_CARDS_NUM} movies: `, movies);
+                    Session.set(SessionKey.MOVIES, movies);
+                    setMovies(movies);
+                    return;
+                }
+            } 
+            setError("Something went wrong");
         } catch (error) {
             setError((error as Error).message || "Something went wrong");
         } finally {

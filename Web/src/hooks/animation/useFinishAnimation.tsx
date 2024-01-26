@@ -1,9 +1,9 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { delayPromise } from "../utils/date";
-import { BELOW_ID } from "../models/constants";
-import { useGamePlayContext } from "../context/GamePlayContext";
-import { Movie } from "../models/types/movie";
+import { delayPromise } from "../../utils/date";
+import { BELOW_ID } from "../../models/constants";
+import { useGamePlayContext } from "../../context/GamePlayContext";
+import { Movie } from "../../models/types/movie";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();

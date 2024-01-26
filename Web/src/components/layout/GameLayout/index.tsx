@@ -4,7 +4,7 @@ import style from "./GameLayout.module.css";
 import Footer from "../../common/Footer";
 import path from "../../../router/routePath.json";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import useFinishAnimation from "../../../hooks/useFinishAnimation";
+import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
 import Header from "../../common/Header";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {

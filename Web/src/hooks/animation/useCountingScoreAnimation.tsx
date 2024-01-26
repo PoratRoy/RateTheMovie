@@ -1,8 +1,8 @@
 import { useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
-import { roundToOneDecimal } from "../utils/calc";
+import { roundToOneDecimal } from "../../utils/calc";
 
-const useCountingScore = (score: number) => {
+const useCountingScoreAnimation = (score: number) => {
     const count = useMotionValue(score);
     const scoreRes = useTransform(count, roundToOneDecimal);
 
@@ -17,4 +17,4 @@ const useCountingScore = (score: number) => {
     return { scoreRes };
 };
 
-export default useCountingScore;
+export default useCountingScoreAnimation;
