@@ -11,26 +11,26 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
 
     const cardId = `${movie.id}-${player.id}`;
     const back = (
+        <DraggableMovie
+            isClickable
+            isHover
+            id={cardId}
+            movie={movie}
+            player={player}
+            setOpen={setOpen}
+            side="all"
+        />
+    );
+    return (
         <React.Fragment>
-            <DraggableMovie
-                isClickable
-                isHover
-                id={cardId}
-                movie={movie}
-                player={player}
-                setOpen={setOpen}
-                side="all"
+            <Card
+                type={{ t: "Player", movie } as placeholderCardType}
+                flip={loading != undefined && !loading}
+                front={<LoadingCard />}
+                back={back}
             />
             {open && <CardView movie={movie} close={() => setOpen(false)} />}
         </React.Fragment>
-    );
-    return (
-        <Card
-            type={{ t: "Player", movie } as placeholderCardType}
-            flip={loading != undefined && !loading}
-            front={<LoadingCard />}
-            back={back}
-        />
     );
 };
 

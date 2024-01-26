@@ -141,6 +141,10 @@ export type PlayersPackLayoutProps = ChildernsProps;
 
 export type WaveLayoutProps = ChildernsProps;
 
+export type CardViewLayoutProps = ChildernsProps & {
+    close: () => void;
+};
+
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
     id: Path<TInput>;
@@ -232,8 +236,11 @@ export type CardViewProps = {
 
 export type CloseBtnProps = {
     close: () => void;
-}
+};
 
+export type GenreProps = {
+    genre: string;
+};
 
 //--Common--//
 export type ImgProps = {
@@ -242,8 +249,6 @@ export type ImgProps = {
     size?: CardSize;
     isShadow?: boolean;
 };
-
-
 
 export type ScoreProps = {
     score: number;
