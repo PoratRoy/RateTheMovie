@@ -1,6 +1,6 @@
 .cardPlaceholder{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    gap: 10px;
 }
 
 .cardMovieIcon {
@@ -22,11 +23,12 @@
 
 .cardPlaceholderText{
     position: absolute;
-    bottom: -25px;
+    bottom: -20px;
     color: var(--text-color-opacity);
-    width: 100%;
+    width: 80%;
     font-size: 0.4rem;
     font-weight: 500;
     letter-spacing: 1px;
     text-align: center;
+    overflow-wrap: break-word;
 }

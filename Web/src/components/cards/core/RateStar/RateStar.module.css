@@ -1,0 +1,13 @@
+.rateStars{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.rateStar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    color: var(--text-color-opacity);
+}
