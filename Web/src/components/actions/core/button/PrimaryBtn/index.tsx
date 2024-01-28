@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./PrimaryBtn.module.css";
 import { PrimaryBtnProps } from "../../../../../models/types/props";
+import useLoadingBtnAnimation from "../../../../../hooks/animation/useLoadingBtnAnimation";
 
 const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     id,
@@ -11,28 +12,26 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     size = "large",
     type = "button",
 }) => {
+    const { scope } = useLoadingBtnAnimation(loading);
+
     const className =
         size === "large"
             ? style.btnPrimaryLarge
             : size === "medium"
               ? style.btnPrimaryMedium
-              : style.btnPrimarySmall;//TODO: refactor this
+              : style.btnPrimarySmall; //TODO: refactor this
     return (
-        <React.Fragment>
-            {loading ? (
-                <div className={style.loadingBtnPrimary}>loading...</div>
-                // TODO: loading animation
-            ) : (
-                <input
-                    id={id}
-                    value={title}
-                    className={className}
-                    onClick={onClicked}
-                    disabled={disabled}
-                    type={type}
-                />
-            )}
-        </React.Fragment>
+        <div ref={scope}>
+            <input
+                id={id}
+                value={title}
+                style={{ scale: 1 }}
+                className={className}
+                onClick={onClicked}
+                disabled={disabled}
+                type={type}
+            />
+        </div>
     );
 };
 
