@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { useMovieContext } from "../context/MovieContext";
 import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 import Session from "../utils/sessionStorage";
@@ -9,9 +7,8 @@ import { movieRating } from "../utils/format";
 
 const useCorrectOrder = () => {
     const { setCorrectOrder } = useGamePlayContext();
-    const { movies } = useMovieContext();
 
-    useEffect(() => {
+    const correctOrder = (movies: Movie[]) => {
         if (movies && movies.length !== 0) {
             const sortedMovies = [...movies];
 
@@ -27,7 +24,9 @@ const useCorrectOrder = () => {
             Session.set(SessionKey.CORRECT_ORDER, cards);
             setCorrectOrder(cards);
         }
-    }, [movies]);
+    };
+
+    return { correctOrder };
 };
 
 export default useCorrectOrder;

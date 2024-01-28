@@ -1,4 +1,4 @@
-import { FieldValues, Path, SubmitHandler, UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
@@ -120,7 +120,6 @@ export type DraggableProps = ChildernsProps & {
 
 //--Layout--//
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
-    onSubmit: SubmitHandler<TInput>;
     methods: UseFormReturn<TInput, any, undefined>;
     isLoading: boolean;
 };

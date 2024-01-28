@@ -8,7 +8,7 @@ import { springAnimation } from "../../../../style/animation";
 import { isFinishPlacingElectedpCards } from "../../../../utils/finish";
 
 const PackOfSelectedCards: React.FC = () => {
-    const { players, correctOrder, finish, finishAnimation, setCorrectPack } = useGamePlayContext();
+    const { players, finish, finishAnimation, setCorrectPack } = useGamePlayContext();
 
     useEffect(() => {
         if (!finish) {
@@ -21,18 +21,11 @@ const PackOfSelectedCards: React.FC = () => {
 
     return (
         <Pack>
-            {correctOrder.length !== 0 &&
-                finishAnimation.showCorrectPack.map(
-                    (card: CardModal | undefined, index: number) => (
-                        <motion.span
-                            key={card?.movie.id || index}
-                            layout
-                            transition={springAnimation}
-                        >
-                            <ElectedCard index={index} player={players[0]} card={card} />
-                        </motion.span>
-                    ),
-                )}
+            {finishAnimation.showCorrectPack.map((card: CardModal | undefined, index: number) => (
+                <motion.span key={card?.movie.id || index} layout transition={springAnimation}>
+                    <ElectedCard index={index} player={players[0]} card={card} />
+                </motion.span>
+            ))}
         </Pack>
     );
 };

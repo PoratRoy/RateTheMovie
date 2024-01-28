@@ -7,7 +7,7 @@ const useFinishPlacingCards = (players: Player[]) => {
 
     useEffect(() => {
         const selectedCards = isFinishPlacingElectedpCards(players);
-        setIsFinishPlacing(selectedCards ? true : false);
+        setIsFinishPlacing(selectedCards[0] === undefined ? false : true);
     }, [players]);
 
     return { isFinishPlacing };

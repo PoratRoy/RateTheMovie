@@ -70,6 +70,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const clearGameContext = () => {
         Session.remove(SessionKey.PLAYERS);
         Session.remove(SessionKey.CORRECT_ORDER);
+        Session.remove(SessionKey.FILTERS);
         setCorrectOrder([]);
         setPlayers([]);
         setFinish(false);

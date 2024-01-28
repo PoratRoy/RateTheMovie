@@ -18,5 +18,5 @@ export const isFinishPlacingElectedpCards = (players: Player[]) => {
             }
         }
     });
-    return sc[0] ? sc[0] : undefined;
+    return sc[0] ? sc[0] : [...Array(PACK_CARDS_NUM)];
 };

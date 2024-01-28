@@ -3,6 +3,7 @@ import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
 import useFinishPlacingCards from "../../../../hooks/useFinishPlacingCards";
 import style from "./FinishBtn.module.css";
+import { DONE_BTN_ID } from "../../../../models/constants";
 
 const FinishBtn: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -18,6 +19,7 @@ const FinishBtn: React.FC = () => {
         <React.Fragment>
             {isFinishPlacing ? (
                 <PrimaryBtn
+                    id={DONE_BTN_ID}
                     title="Finish"
                     onClicked={handleFinish}
                     disabled={!isFinishPlacing}
