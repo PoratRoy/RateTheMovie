@@ -4,6 +4,7 @@ import { initCard } from "../models/initialization/card";
 import { useGamePlayContext } from "./GamePlayContext";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
+import { movieRating } from "../utils/format";
 
 export const DndContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { setPlayers, setCardsOrder } = useGamePlayContext();
@@ -15,7 +16,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
         const player: Player = active?.data?.current?.player;
 
         if (movie && player) {
-            const card: Card = { id, movie, rate: parseInt(movie.imdbVotes || "0") };
+            const card: Card = { id, movie, rate: movieRating(movie.imdbRating) };
 
             setPlayers((prev) => {
                 const players = [...prev];

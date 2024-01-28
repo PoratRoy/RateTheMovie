@@ -16,6 +16,9 @@
     border: var(--primary-border);
     border-radius: var(--secondary-border-radius);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btnPrimarySmall:hover,
@@ -65,7 +68,7 @@
     width: 200px;
     height: 60px;
     font-size: 1.5rem;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
 }
 
 /* Tablet 768px - 1279px -- 800px*/

@@ -1,5 +1,6 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
 import { Player } from "../models/types/player";
+import { movieRating } from "../utils/format";
 
 const useSetScore = () => {
     const { correctOrder, setPlayers } = useGamePlayContext();
@@ -11,7 +12,7 @@ const useSetScore = () => {
                 let rightChoices = [];
                 for (let i = 0; i < correctOrder.length; i++) {
                     if (correctOrder[i].movie === player.selectedCards[i]?.movie) {
-                        playerScore += parseFloat(correctOrder[i]?.movie?.imdbRating || "0");
+                        playerScore += movieRating(correctOrder[i]?.movie?.imdbRating);
                         rightChoices.push(correctOrder[i].movie);
                     }
                 }

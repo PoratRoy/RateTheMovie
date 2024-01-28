@@ -3,6 +3,8 @@ import { Card } from "../models/types/card";
 import { Player, SelectedOrder } from "../models/types/player";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
+import { FinishAnimation } from "../models/types/game";
+import { initFinishAnimation } from "../models/initialization/game";
 
 export const GamePlayContext = createContext<{
     correctOrder: Card[];
@@ -14,6 +16,9 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => void;
     selectedOrder: SelectedOrder[];
     setCardsOrder: (index: number, card: Card | undefined) => void;
+    finishAnimation: FinishAnimation;
+    setCorrectPack: (showCorrectPack: (Card | undefined)[]) => void;
+    setPlayAgainBtn: (playAgainBtn: boolean) => void;
 }>({
     correctOrder: [],
     setCorrectOrder: () => {},
@@ -24,6 +29,9 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => {},
     selectedOrder: [],
     setCardsOrder: () => {},
+    finishAnimation: initFinishAnimation,
+    setCorrectPack: () => {},
+    setPlayAgainBtn: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -33,6 +41,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [players, setPlayers] = useState<Player[]>([]);
     const [finish, setFinish] = useState<boolean>(false);
     const [selectedOrder, setSelectedOrder] = useState<SelectedOrder[]>([]);
+    const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
 
     const setStateFromSession = () => {
         if (!players || players.length === 0) {
@@ -41,7 +50,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPlayers(sessionPlayers);
             }
         }
-        if(!correctOrder || correctOrder.length === 0){
+        if (!correctOrder || correctOrder.length === 0) {
             const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
             if (sessionCorrectOrder && sessionCorrectOrder.length > 0) {
                 setCorrectOrder(sessionCorrectOrder);
@@ -66,6 +75,12 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setFinish(false);
     };
 
+    const setCorrectPack = (showCorrectPack: (Card | undefined)[]) =>
+        setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
+
+    const setPlayAgainBtn = (playAgainBtn: boolean) =>
+        setFinishAnimation((prev) => ({ ...prev, playAgainBtn }));
+
     return (
         <GamePlayContext.Provider
             value={{
@@ -78,6 +93,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 clearGameContext,
                 selectedOrder,
                 setCardsOrder,
+                finishAnimation,
+                setCorrectPack,
+                setPlayAgainBtn,
             }}
         >
             {children}

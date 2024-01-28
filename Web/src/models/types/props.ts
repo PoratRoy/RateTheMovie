@@ -88,6 +88,10 @@ export type PositionProps = IdProps & {
     position: number;
 };
 
+export type RateStarProps = {
+    amount: number;
+};
+
 //--Pack--//
 export type PackProps = ChildernsProps & {
     isWrap?: boolean;

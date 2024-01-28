@@ -3,7 +3,7 @@ import { Card } from "../models/types/card";
 import { Player } from "../models/types/player";
 
 export const isFinishPlacingElectedpCards = (players: Player[]) => {
-    players.forEach((player: Player) => {
+    const sc: ((Card | undefined)[] | undefined)[] = players.map((player: Player) => {
         const selectedCards = player.selectedCards;
 
         if (selectedCards && selectedCards.length === PACK_CARDS_NUM) {
@@ -18,5 +18,5 @@ export const isFinishPlacingElectedpCards = (players: Player[]) => {
             }
         }
     });
-    return undefined;
+    return sc[0] ? sc[0] : undefined;
 };
