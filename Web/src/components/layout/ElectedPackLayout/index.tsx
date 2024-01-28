@@ -3,27 +3,24 @@ import PackOfSelectedCards from "../../cards/pack/PackOfSelectedCards";
 import FinishBtn from "../../actions/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
 import PlayAgainBtn from "../../actions/btn/PlayAgainBtn";
-import FilterAgainBtn from "../../actions/btn/FilterAgainBtn";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 
 const ElectedPackLayout: React.FC = () => {
-    const { finishAnimation } = useGamePlayContext()
+    const { finishAnimation } = useGamePlayContext();
     return (
         <section className={style.electedPackContainer}>
+            <div className={style.electedPack}>
+                <PackOfSelectedCards />
+            </div>
             {finishAnimation.playAgainBtn ? (
                 <div className={style.playAgain}>
                     <PlayAgainBtn />
-                    <FilterAgainBtn />
+                    {/* <FilterAgainBtn /> */}
                 </div>
             ) : (
-                <React.Fragment>
-                    <div className={style.electedPack}>
-                        <PackOfSelectedCards />
-                    </div>
-                    <div className={style.electedPackBtns}>
-                        <FinishBtn />
-                    </div>
-                </React.Fragment>
+                <div className={style.electedPackBtns}>
+                    <FinishBtn />
+                </div>
             )}
         </section>
     );

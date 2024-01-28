@@ -10,14 +10,17 @@ const useCardOrderPosition = (type: placeholderCardType) => {
     useEffect(() => {
         if (type.t === "Player") {
             const movie = type.movie;
-            selectedOrder.forEach((card: SelectedOrder | undefined, i: number) => {
-                if(pos === i + 1 && card?.card === undefined ){
-                    setPos(0)
-                }
-                else if (card && card.card?.movie === movie) {
-                    setPos(i + 1);
-                }
-            });
+            if (selectedOrder.length === 0) {
+                setPos(0);
+            } else {
+                selectedOrder.forEach((card: SelectedOrder | undefined, i: number) => {
+                    if (pos === i + 1 && card?.card === undefined) {
+                        setPos(0);
+                    } else if (card && card.card?.movie === movie) {
+                        setPos(i + 1);
+                    }
+                });
+            }
         }
     }, [selectedOrder]);
 

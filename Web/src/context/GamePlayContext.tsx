@@ -14,6 +14,7 @@ export const GamePlayContext = createContext<{
     finish: boolean;
     setFinish: React.Dispatch<React.SetStateAction<boolean>>;
     clearGameContext: () => void;
+    refreshGameContext: () => void;
     selectedOrder: SelectedOrder[];
     setCardsOrder: (index: number, card: Card | undefined) => void;
     finishAnimation: FinishAnimation;
@@ -27,6 +28,7 @@ export const GamePlayContext = createContext<{
     finish: false,
     setFinish: () => {},
     clearGameContext: () => {},
+    refreshGameContext: () => {},
     selectedOrder: [],
     setCardsOrder: () => {},
     finishAnimation: initFinishAnimation,
@@ -67,21 +69,38 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         });
     };
 
-    const clearGameContext = () => {
-        Session.remove(SessionKey.PLAYERS);
-        Session.remove(SessionKey.CORRECT_ORDER);
-        Session.remove(SessionKey.FILTERS);
-        setCorrectOrder([]);
-        setPlayers([]);
-        setFinish(false);
-    };
-
     const setCorrectPack = (showCorrectPack: (Card | undefined)[]) =>
         setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
 
     const setPlayAgainBtn = (playAgainBtn: boolean) =>
         setFinishAnimation((prev) => ({ ...prev, playAgainBtn }));
 
+    const refreshGameContext = () => {
+        Session.remove(SessionKey.CORRECT_ORDER);
+        setFinishAnimation(initFinishAnimation);
+        setSelectedOrder([]);
+        setCorrectOrder([]);
+        setFinish(false);
+        setPlayers((prev) => {
+            const player = [...prev];
+            player.forEach((player: Player) => {
+                player.rightChoices = [];
+                player.selectedCards = [];
+            });
+            return player;
+        });
+    };
+
+    const clearGameContext = () => {
+        Session.remove(SessionKey.PLAYERS);
+        Session.remove(SessionKey.FILTERS);
+        Session.remove(SessionKey.CORRECT_ORDER);
+        setFinishAnimation(initFinishAnimation);
+        setSelectedOrder([]);
+        setCorrectOrder([]);
+        setFinish(false);
+        setPlayers([]);
+    };
     return (
         <GamePlayContext.Provider
             value={{
@@ -92,6 +111,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 finish,
                 setFinish,
                 clearGameContext,
+                refreshGameContext,
                 selectedOrder,
                 setCardsOrder,
                 finishAnimation,

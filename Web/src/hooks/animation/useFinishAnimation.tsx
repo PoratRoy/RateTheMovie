@@ -11,7 +11,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
     const { players, correctOrder, setCorrectPack, setPlayAgainBtn } = useGamePlayContext();
     const { setScore } = useSetScore();
 
-    const rightChoices = players[0].rightChoices;
+    const rightChoices = players[0]?.rightChoices;
 
     const handleAnimation = async () => {
         await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
