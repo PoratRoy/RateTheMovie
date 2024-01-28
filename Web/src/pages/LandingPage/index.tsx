@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import path from "../../router/routePath.json";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import { useMovieContext } from "../../context/MovieContext";
 import useInitialForm from "../../hooks/useInitialForm";
 import { SelectInputSchema } from "../../models/types/inputSchema";
 import { initSelectDefaultValues } from "../../models/initialization/input";
-import { SubmitHandler } from "react-hook-form";
-import { MovieFilters } from "../../models/types/movie";
 import LandingLayout from "../../components/layout/LandingLayout";
 import PlayBtn from "../../components/actions/btn/PlayBtn";
 import PlayerBtn from "../../components/actions/btn/PlayerBtn";
@@ -18,38 +13,20 @@ import DateRangeInput from "../../components/actions/input/DateRangeInput";
 import { filterInputs } from "../../models/initialization/form";
 import { PlayerColor } from "../../models/types/union";
 import { initPlayer } from "../../models/initialization/player";
-import {
-    Colors,
-    DateDefaultJSON,
-    MULTIPLAYER_BTN_ID,
-    PLAY_BTN_ID,
-} from "../../models/constants";
+import { Colors, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../models/constants";
 import Session from "../../utils/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 
 const LandingPage: React.FC = () => {
-    const navigate = useNavigate();
     const { setPlayers } = useGamePlayContext();
-    const { setFilters } = useMovieContext();
 
     const [isFilterLayout, setIsFilterLayout] = useState<boolean>(false);
 
     const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
     const { setValue } = methods;
 
-    const onSubmitFilter: SubmitHandler<SelectInputSchema> = (data: SelectInputSchema) => {
-        const { year, genre, country } = data;
-        const movieFilters: MovieFilters = {
-            year: year ? JSON.parse(year) : DateDefaultJSON,
-            genre: genre ? JSON.parse(genre) : [],
-            country: country ? JSON.parse(country) : "",
-        };
-        setFilters(movieFilters);
-        navigate(path.game);
-    };
-
     const onHandlePlay = () => {
-        const players = [initPlayer(0, Colors[0] as PlayerColor)]
+        const players = [initPlayer(0, Colors[0] as PlayerColor)];
         Session.set(SessionKey.PLAYERS, players);
         setPlayers(players);
         setIsFilterLayout(true);
@@ -57,7 +34,7 @@ const LandingPage: React.FC = () => {
 
     return (
         <LandingLayout isFilterLayout={isFilterLayout}>
-            <FilterLayout methods={methods} onSubmit={onSubmitFilter} isLoading={false}>
+            <FilterLayout<SelectInputSchema> methods={methods} isLoading={false}>
                 <GenreInput
                     id={filterInputs.genre.id}
                     placeholder={filterInputs.genre.placeholder}
