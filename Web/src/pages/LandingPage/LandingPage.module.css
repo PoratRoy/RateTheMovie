@@ -1,6 +1,5 @@
 .mainBackgroundImg {
     width: 100%;
-    height: 35vh;
     z-index: 0;
 }
 .mainBackgroundImg img {
@@ -18,4 +17,25 @@
     position: fixed;
     left: 0;
     bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainLogoContainer{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem 0 2rem 0;
+}
+
+.mainBtnContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }

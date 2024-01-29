@@ -17,6 +17,7 @@ export const initMovie: Movie = {
     actors: undefined,
     director: undefined,
     website: undefined,
+    description: undefined,
 };
 
 export const initMovieList = (): Movie[] => {

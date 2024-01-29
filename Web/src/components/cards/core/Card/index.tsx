@@ -1,61 +1,22 @@
 import React from "react";
 import style from "./Card.module.css";
-import { CardInnerContainerProps, CardProps } from "../../../../models/types/props";
-import { CARD_HEIGHT, CARD_WIDTH } from "../../../../style/root";
-import { CARD_ID } from "../../../../models/constants";
-import PlaceholderIcon from "../PlaceholderIcon";
-import { motion } from "framer-motion";
-import useCardFlipAnimation from "../../../../hooks/useCardFlipAnimation";
+import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
+import { CardProps } from "../../../../models/types/props";
+import CardInnerContainer from "./CardInnerContainer";
+import Placeholder from "../Placeholder";
+import Position from "../Position";
 
-const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
-    children,
-    flip,
-    isAnimate,
-    isFocus,
-}) => {
-    const { isFlipped, onAnimationComplete } = useCardFlipAnimation(flip);
-    if (isAnimate) {
-        return (
-            <motion.div
-                className={style.cardInnerContainer}
-                initial={false}
-                animate={{ rotateY: isFlipped ? 180 : 360 }}
-                transition={{ duration: 0.3, animationDiraction: "normal" }}
-                onAnimationComplete={onAnimationComplete}
-            >
-                {children}
-            </motion.div>
-        );
-    } else {
-        return (
-            <div
-                id={CARD_ID}
-                className={`${style.cardInnerContainer} ${isFocus ? style.cardContainerFocus : ""}`}
-            >
-                {children}
-            </div>
-        );
-    }
-};
-
-const Card: React.FC<CardProps> = ({
-    id,
-    front,
-    back,
-    isFocus,
-    isAnimate,
-    flip,
-    width = CARD_WIDTH,
-    height = CARD_HEIGHT,
-}) => {
+const Card: React.FC<CardProps> = ({ id, type, front, back, flip, isFocus, size = "large" }) => {
+    const pos = useCardOrderPosition(type);
+    const movieId = type.t === "Player" ? type.movie.imdbID : undefined;
+    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODO: refactor
     return (
-        <section id={id} style={{ width, height }} className={style.cardContainer}>
-            <div className={style.cardPlaceholder}>
-                <PlaceholderIcon />
-            </div>
-            <CardInnerContainer flip={flip} isAnimate={isAnimate} isFocus={isFocus}>
+        <section id={id} className={sizeClass}>
+            <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>
+                <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
+                {pos && <Position id={movieId} position={pos} />}
             </CardInnerContainer>
         </section>
     );

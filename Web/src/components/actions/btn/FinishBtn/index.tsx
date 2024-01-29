@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { PACK_CARDS_NUM } from "../../../../models/constants";
+import React, { useState } from "react";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import { Player } from "../../../../models/types/player";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
+import useFinishPlacingCards from "../../../../hooks/useFinishPlacingCards";
+import style from "./FinishBtn.module.css";
+import { DONE_BTN_ID } from "../../../../models/constants";
+import useSetScore from "../../../../hooks/useSetScore";
 
 const FinishBtn: React.FC = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const { players, setFinish } = useGamePlayContext();
-    const [isFinished, setIsFinished] = useState<boolean>(false);
-
-    useEffect(() => {
-        let finish = true;
-        players.every((player: Player) => {
-            const selectedCards = player.selectedCards;
-            const isAllFilled = selectedCards.every((card) => card?.movie !== undefined);
-            if (selectedCards.length !== PACK_CARDS_NUM || !isAllFilled) {
-                finish = false;
-                return;
-            }
-        });
-        setIsFinished(finish);
-    }, [players]);
+    const { isFinishPlacing } = useFinishPlacingCards(players);
+    const { setScore } = useSetScore();
 
     const handleFinish = () => {
+        setLoading(true);
+        setScore();
         setFinish(true);
     };
 
     return (
-        <PrimaryBtn
-            title="Finish"
-            onClicked={handleFinish}
-            disabled={!isFinished}
-            size="Small"
-        />
+        <React.Fragment>
+            {isFinishPlacing ? (
+                <PrimaryBtn
+                    id={DONE_BTN_ID}
+                    title="Finish"
+                    onClicked={handleFinish}
+                    disabled={!isFinishPlacing}
+                    loading={loading}
+                    size="small"
+                />
+            ) : (
+                <p className={style.finishBtnP}>Choose your rating order</p>
+            )}
+        </React.Fragment>
     );
 };
 

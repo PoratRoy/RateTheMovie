@@ -1,51 +1,20 @@
-.gmaeContainer {
+.gameContainer {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     height: 110%;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    padding: 2em;
+    align-items: center;
+    justify-content: center;
 }
 
-.gmaeChildrenContainer{
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 2em 0;
+.gameChildrenContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2em;
     width: 100%;
     height: 100%;
-}
-
-.gmaeFotter{
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4em;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    padding: 1em 2em;
-    color: var(--text-color-hover);
-}
-
-.gmaeFotterLink{
-    color: var(--text-color-hover);
-    margin-left: 5px;
-    cursor: pointer;
-}
-.gmaeFotterLink:hover{
-    color: var(--text-color-active);
-}
-.gmaeFotterLink:active{
-    color: var(--text-color-active);
 }

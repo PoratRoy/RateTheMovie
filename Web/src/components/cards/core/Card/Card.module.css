@@ -1,44 +1,57 @@
-.cardContainer {
+/* Mobile 320px - 767px -- 812px */
+.cardContainerSmall,
+.cardContainerLarge {
     position: relative;
     perspective: 1000px;
-    /* overflow: hidden; */
 }
 
-.cardInnerContainer{
-    border: 7px solid var(--tertiary-color);
-    border-radius: var(--primary-border-radius);
+.cardContainerSmall {
+    width: var(--small-card-width);
+    height: var(--small-card-height);
+}
+
+.cardContainerLarge {
+    width: var(--card-width);
+    height: var(--card-height);
+}
+
+.cardInnerContainer {
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--secondary-border-radius);
     background-color: var(--secondary-color);
-    box-shadow: none;
+    box-shadow: #00000045 0px 3px 8px;
     transition: transform 0.8s;
     transform-style: preserve-3d;
     width: 100%;
     height: 100%;
 }
 
-.cardContainerFocus{
-    border: 7px solid var(--primary-color);
-    box-shadow: 0px 0px 20px 3px var(--primary-color);
-}
-
-.cardPlaceholder{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-}
-
-.cardFront, .cardBack{
+.cardFront,
+.cardBack {
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
-.cardBack{
+.cardBack {
     transform: rotateY(180deg);
 }
 
-.cardFront{
+.cardFront {
     width: 100%;
     height: 100%;
 }
+
+.cardContainerFocus {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px 20px 3px var(--primary-color);
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .cardContainerFocus {
+        border: 7px solid var(--primary-color);
+        box-shadow: 0px 0px 20px 3px var(--primary-color);
+    }
+}
+

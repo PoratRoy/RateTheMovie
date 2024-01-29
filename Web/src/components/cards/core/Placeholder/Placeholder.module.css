@@ -1,0 +1,34 @@
+.cardPlaceholder{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.cardMovieIcon {
+    color: var(--text-color-opacity);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.cardPlaceholderText{
+    position: absolute;
+    bottom: -20px;
+    color: var(--text-color-opacity);
+    width: 80%;
+    font-size: 0.4rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    overflow-wrap: break-word;
+}

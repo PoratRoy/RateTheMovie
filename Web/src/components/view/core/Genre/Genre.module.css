@@ -1,0 +1,5 @@
+.viewGenre {
+    padding: 2px 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 50px;
+}

@@ -21,5 +21,4 @@ export type FilterInputs = {
     year: InputTypeSelect<SelectInputSchema>;
     genre: InputTypeSelect<SelectInputSchema>;
     country: InputTypeSelect<SelectInputSchema>;
-    players: InputTypeSelect<SelectInputSchema>;
 };

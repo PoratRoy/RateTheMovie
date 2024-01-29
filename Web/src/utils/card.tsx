@@ -1,10 +1,31 @@
-import PackWrapper from "../components/cards/pack/PackWrapper";
+import PackWrapper from "../components/cards/wrapper/PackWrapper";
 import DraggableMovie from "../components/cards/singel/DraggableMovie";
 import ShadowPlayerCard from "../components/cards/singel/ShadowPlayerCard";
-import { PLAYER1_ID, PLAYER2_ID } from "../models/constants";
+import { PACK_CARDS_NUM, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { CardSide } from "../models/types/union";
+import { Card } from "../models/types/card";
+import React from "react";
+
+export const setElectedFrontCard = (player: Player, card: Card | undefined, index: number) => {
+    const movie = card?.movie ? card?.movie : player.selectedCards[index]?.movie;
+    return (
+        <PackWrapper>
+            {movie && movie.title ? (
+                <DraggableMovie
+                    id={`${movie.imdbID}-${player.id}`}
+                    movie={movie}
+                    player={player}
+                    side="all"
+                    size="small"
+                />
+            ) : (
+                <React.Fragment />
+            )}
+        </PackWrapper>
+    );
+};
 
 export const getCorrectPlayers = (players: Player[], index: number, id: string) => {
     let selectedPlayers: string[] = [];
@@ -61,6 +82,7 @@ const setSlice = (player: Player, movie: Movie | undefined, side: CardSide) => {
             movie={movie}
             player={player}
             side={side}
+            size="small"
         />
     ) : (
         <div></div>
@@ -87,4 +109,12 @@ export const getCardFront = (players: Player[], index: number) => {
             break;
     }
     return front;
+};
+
+export const setPlaceholderText = (index: number): string | undefined => {
+    if (index === 0) {
+        return "Worst Rating";
+    } else if (index + 1 === PACK_CARDS_NUM) {
+        return "Best Rating";
+    }
 };

@@ -1,9 +1,17 @@
-.cardImg{
+.cardImgLarge, 
+.cardImgSmall{
+    object-fit: cover;
+    border-radius: var(--secondary-border-radius);
+}
+
+.cardImgLarge{
     width: var(--card-width);
     height: var( --card-height);
-    object-fit: cover;
-    z-index: 100;
-    border-radius: var(--secondary-border-radius);
+}
+
+.cardImgSmall{
+    width: var(--small-card-width);
+    height: var(--small-card-height);
 }
 
 .cardImgShadow{

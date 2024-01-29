@@ -1,0 +1,17 @@
+/* Mobile 320px - 767px -- 812px */
+.landingDescription {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-color-opacity);
+    margin: 0.5em;
+    display: block;
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .landingDescription {
+        font-size: 1.5rem;
+    }
+}
