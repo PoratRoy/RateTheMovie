@@ -11,6 +11,7 @@ const ShuffleBtn: React.FC = () => {
     const handleShuffle = () => {
         const filters = Session.get(SessionKey.FILTERS);
         discoverMovies(filters);
+        //TODO: remove the player selected cards + postions
     };
 
     return (

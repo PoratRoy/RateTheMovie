@@ -18,7 +18,7 @@ const PackOfSelectedCards: React.FC = () => {
             }
         }
     }, [players]);
-
+    //TODO: swiching places after fill all the cards triger the animation and not the dnd
     return (
         <Pack>
             {finishAnimation.showCorrectPack.map((card: CardModal | undefined, index: number) => (

@@ -17,7 +17,9 @@ export const GamePlayContext = createContext<{
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
     setCorrectPack: (showCorrectPack: (Card | undefined)[]) => void;
-    setPlayAgainBtn: (playAgainBtn: boolean) => void;
+    setPlayAgainBtn: () => void;
+    setIncreaseScore: () => void;
+    setRemovePosition: () => void;
 }>({
     correctOrder: [],
     setCorrectOrder: () => {},
@@ -30,6 +32,8 @@ export const GamePlayContext = createContext<{
     finishAnimation: initFinishAnimation,
     setCorrectPack: () => {},
     setPlayAgainBtn: () => {},
+    setIncreaseScore: () => {},
+    setRemovePosition: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -59,8 +63,16 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setCorrectPack = (showCorrectPack: (Card | undefined)[]) =>
         setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
 
-    const setPlayAgainBtn = (playAgainBtn: boolean) =>
-        setFinishAnimation((prev) => ({ ...prev, playAgainBtn }));
+    const setPlayAgainBtn = () => {
+        if(!finishAnimation.playAgainBtn){
+            setFinishAnimation((prev) => ({ ...prev, playAgainBtn: true }));
+        }
+    };
+
+    const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));
+
+    const setRemovePosition = () =>
+        setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
 
     const refreshGameContext = () => {
         Session.remove(SessionKey.CORRECT_ORDER);
@@ -100,6 +112,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 finishAnimation,
                 setCorrectPack,
                 setPlayAgainBtn,
+                setIncreaseScore,
+                setRemovePosition,
             }}
         >
             {children}

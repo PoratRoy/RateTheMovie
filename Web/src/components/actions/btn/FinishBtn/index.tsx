@@ -4,14 +4,17 @@ import PrimaryBtn from "../../core/button/PrimaryBtn";
 import useFinishPlacingCards from "../../../../hooks/useFinishPlacingCards";
 import style from "./FinishBtn.module.css";
 import { DONE_BTN_ID } from "../../../../models/constants";
+import useSetScore from "../../../../hooks/useSetScore";
 
 const FinishBtn: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { players, setFinish } = useGamePlayContext();
     const { isFinishPlacing } = useFinishPlacingCards(players);
+    const { setScore } = useSetScore();
 
     const handleFinish = () => {
         setLoading(true);
+        setScore();
         setFinish(true);
     };
 

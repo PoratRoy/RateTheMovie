@@ -41,7 +41,7 @@ const useDiscoverMovies = (shuffle: boolean = false) => {
                 let movies: Movie[] = [];
 
                 const indexs: number[] = generateRandomArray(resultsTMDB.length);
-
+                //TODO: check no rating duplicate in the pack
                 for (const index of indexs) {
                     const tmdbMovie = resultsTMDB[index];
 
