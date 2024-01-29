@@ -9,6 +9,7 @@ const PlayAgainBtn: React.FC = () => {
     const { discoverMovies } = useDiscoverMovies(true);
     const { handleRefresh } = useClear();
 
+    //TODO: fetch movies twice
     const handleShuffle = () => {
         handleRefresh();
         const filters = Session.get(SessionKey.FILTERS);

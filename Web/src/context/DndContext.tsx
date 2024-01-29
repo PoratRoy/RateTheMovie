@@ -7,7 +7,7 @@ import { Player } from "../models/types/player";
 import { movieRating } from "../utils/format";
 
 export const DndContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const { setPlayers, setCardsOrder } = useGamePlayContext();
+    const { setPlayers } = useGamePlayContext();
 
     function handleDragEnd(event: DragEndEvent) {
         const { over, active } = event;
@@ -31,21 +31,17 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                     );
                     if (existingCard) {
                         //swap
-                        setCardsOrder(existingIndex, existingCard);
                         selectedCards[existingIndex] = existingCard;
                     } else if (existingIndex !== -1) {
                         //alredy exists
-                        setCardsOrder(existingIndex, undefined);
                         selectedCards[existingIndex] = initCard;
                     }
-                    setCardsOrder(cardId, card);
                     selectedCards[cardId] = card;
                 } else {
                     //remove
                     const selectedCard = selectedCards.find((c) => c?.movie?.id === movie.id);
                     if (selectedCard) {
                         const index = selectedCards.indexOf(selectedCard);
-                        setCardsOrder(index, undefined);
                         selectedCards[index] = undefined;
                     }
                 }

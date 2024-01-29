@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { SelectedOrder } from "../models/types/player";
 import { placeholderCardType } from "../models/types/card";
 
 const useCardOrderPosition = (type: placeholderCardType) => {
-    const { selectedOrder } = useGamePlayContext();
+    const { players } = useGamePlayContext();
     const [pos, setPos] = useState<number>(0);
 
     useEffect(() => {
         if (type.t === "Player") {
+            const selectedOrder = players[0]?.selectedCards;
             const movie = type.movie;
-            if (selectedOrder.length === 0) {
-                setPos(0);
-            } else {
-                selectedOrder.forEach((card: SelectedOrder | undefined, i: number) => {
-                    if (pos === i + 1 && card?.card === undefined) {
-                        setPos(0);
-                    } else if (card && card.card?.movie === movie) {
-                        setPos(i + 1);
+            let match = false;
+            if (selectedOrder && selectedOrder.length !== 0) {
+                selectedOrder.forEach((card, i) => {
+                    if (!match && card?.movie?.imdbID) {
+                        if (card?.movie === movie) {
+                            setPos(i + 1);
+                            match = true;
+                        }
                     }
                 });
             }
+            if (!match) setPos(0);
         }
-    }, [selectedOrder]);
+    }, [players]);
 
     return pos;
 };

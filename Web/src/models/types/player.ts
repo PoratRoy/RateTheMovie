@@ -9,7 +9,3 @@ export type Player = {
     selectedCards: (Card | undefined)[];
     rightChoices: Movie[];
 };
-
-export type SelectedOrder = {
-    card: Card | undefined;
-};
