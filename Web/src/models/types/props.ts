@@ -16,6 +16,10 @@ export type IdProps = {
     id?: string;
 };
 
+export type PropsObj<T = Record<string, any>> = {
+    [key: string]: T;
+};
+
 //--Card--//
 export type CardProps = IdProps & {
     size?: CardSize;
@@ -113,9 +117,7 @@ export type DroppableProps = ChildernsProps & {
 
 export type DraggableProps = ChildernsProps & {
     draggableId: string;
-    index?: number;
-    movie?: Movie;
-    player?: Player;
+    props: PropsObj;
 };
 
 //--Layout--//
@@ -208,8 +210,6 @@ export type PrimaryBtnProps = IdProps & {
 export type SecondaryBtnProps = IdProps & {
     title: string;
     onClicked?: () => void;
-    disabled?: boolean;
-    loading?: boolean;
     onFocused?: boolean;
 };
 

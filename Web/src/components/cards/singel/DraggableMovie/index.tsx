@@ -31,7 +31,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
         }
     }, [isDoubleClick, setOpen]);
 
-    const className =//TODO: refactor this
+    const className = //TODO: refactor this
         side === "all"
             ? style.cardSideAll
             : side === "left"
@@ -40,7 +40,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
 
     return (
         <div className={className}>
-            <Draggable draggableId={id} movie={movie} player={player}>
+            <Draggable draggableId={id} props={{ movie, player }}>
                 <section
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -49,7 +49,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
                     className={style.draggableMovie}
                 >
                     {isHover && isHovered && <div className={style.cardTitle}>{title}</div>}
-                    <Img alt={title} src={poster_path} size={size}/>
+                    <Img alt={title} src={poster_path} size={size} />
                 </section>
             </Draggable>
         </div>

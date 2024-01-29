@@ -1,18 +1,10 @@
 import React from "react";
 import { GiCardExchange } from "react-icons/gi";
 import style from "./ShuffleBtn.module.css";
-import useDiscoverMovies from "../../../../api/hooks/useDiscoverMovies";
-import Session from "../../../../utils/sessionStorage";
-import { SessionKey } from "../../../../models/enums/session";
+import useHandleShuffle from "../../../../hooks/useHandleShuffle";
 
 const ShuffleBtn: React.FC = () => {
-    const { discoverMovies } = useDiscoverMovies(true);
-
-    const handleShuffle = () => {
-        const filters = Session.get(SessionKey.FILTERS);
-        discoverMovies(filters);
-        //TODO: remove the player selected cards + postions
-    };
+    const { handleShuffle } = useHandleShuffle();
 
     return (
         <div onClick={handleShuffle} className={style.shuffleBtn}>
