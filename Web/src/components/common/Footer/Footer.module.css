@@ -1,0 +1,25 @@
+/* Mobile 320px - 767px -- 812px */
+.gameFotter{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    width: 100%;
+    height: fit-content;
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .gameFotter {
+        height: 4em;
+        padding: 1em 2em;
+        font-size: 1rem;
+    }
+}

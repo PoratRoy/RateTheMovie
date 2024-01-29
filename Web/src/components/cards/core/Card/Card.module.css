@@ -1,3 +1,4 @@
+/* Mobile 320px - 767px -- 812px */
 .cardContainerSmall,
 .cardContainerLarge {
     position: relative;
@@ -5,8 +6,8 @@
 }
 
 .cardContainerSmall {
-    width: calc(var(--card-width) / 2);
-    height: calc(var(--card-height) / 2);
+    width: var(--small-card-width);
+    height: var(--small-card-height);
 }
 
 .cardContainerLarge {
@@ -15,10 +16,10 @@
 }
 
 .cardInnerContainer {
-    border: 7px solid var(--tertiary-color);
-    border-radius: var(--primary-border-radius);
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--secondary-border-radius);
     background-color: var(--secondary-color);
-    box-shadow: none;
+    box-shadow: #00000045 0px 3px 8px;
     transition: transform 0.8s;
     transform-style: preserve-3d;
     width: 100%;
@@ -42,6 +43,15 @@
 }
 
 .cardContainerFocus {
-    border: 7px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     box-shadow: 0px 0px 20px 3px var(--primary-color);
 }
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+    .cardContainerFocus {
+        border: 7px solid var(--primary-color);
+        box-shadow: 0px 0px 20px 3px var(--primary-color);
+    }
+}
+

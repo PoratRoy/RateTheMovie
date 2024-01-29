@@ -29,7 +29,7 @@ export const setQueryParams = (page: number, filters?: MovieFilters) => {
 };
 
 export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie | undefined => {
-    const { title, id, backdrop_path, release_date, genre_ids, adult } = tmdbMovie;
+    const { title, id, backdrop_path, release_date, genre_ids, adult, overview } = tmdbMovie;
     const { imdbRating, imdbVotes, Poster, Director, Website, imdbID, Actors } = resultsOMDB;
 
     if (title && id && Poster && Poster !== "N/A" && imdbRating && imdbRating !== "N/A") {
@@ -49,8 +49,24 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
             director: Director,
             website: Website,
             actors: Actors,
+            description: overview,
         };
         return movie;
     }
     return;
 };
+
+export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
+    movies.some((movie) => movie.title !== "" || movie.id !== "");
+
+// export const getMoviesOptions = (movies: MovieTMDB[]): MovieTMDB[][] => {
+//     const shuffledArray = movies.slice().sort(() => Math.random() - 0.5);
+
+//     const moviesOptions = [];
+//     for (let i = 0; i < MOVIES_OPTIONS; i++) {
+//         const movies = shuffledArray.slice(i * PACK_CARDS_NUM, (i + 1) * PACK_CARDS_NUM);
+//         moviesOptions.push(movies);
+//     }
+
+//     return moviesOptions;
+// };

@@ -10,8 +10,8 @@
 }
 
 .cardImgSmall{
-    width: calc(var(--card-width) / 2);
-    height: calc(var(--card-height) / 2);
+    width: var(--small-card-width);
+    height: var(--small-card-height);
 }
 
 .cardImgShadow{

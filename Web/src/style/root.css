@@ -44,18 +44,25 @@
     --primary-border-radius: 20px;
     --secondary-border-radius: 10px;
 
-    --primary-border: 5px solid var(--tertiary-color);
-    --secondary-border: 3px solid var(--tertiary-color);
+    --primary-border: 2px solid var(--tertiary-color);
+    --secondary-border: 1px solid var(--tertiary-color);
 
-    --card-width: 120px;
-    --card-height: 170px;
+    --card-width: 100px;
+    --card-height: 150px;
+    /* --card-width: 120px;
+    --card-height: 170px; */
+
+    --small-card-width: 50px;
+    --small-card-height: 80px;
+
+    --mobile-width: 80vw;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 1.5;
     font-weight: 400;
     overflow-x: hidden;

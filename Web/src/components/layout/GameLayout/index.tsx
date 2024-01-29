@@ -1,23 +1,23 @@
 import React from "react";
 import { GameLayoutProps } from "../../../models/types/props";
-import Logo from "../../common/Logo";
 import style from "./GameLayout.module.css";
-//TODO: link to help page
+import Footer from "../../common/Footer";
+import path from "../../../router/routePath.json";
+import { useGamePlayContext } from "../../../context/GamePlayContext";
+import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
+import Header from "../../common/Header";
+
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
+    const { finish } = useGamePlayContext();
+    const { scope } = useFinishAnimation(finish);
+
     return (
-        <section className={style.gmaeContainer}>
-            <Logo width={150} />
-            <section className={style.gmaeChildrenContainer}>{children}</section>
-            <footer className={style.gmaeFotter}>
-                Made By{" "}
-                <a
-                    className={style.gmaeFotterLink}
-                    href="https://github.com/PoratRoy"
-                    target="_blank"
-                >
-                    Roy Porat
-                </a>
-            </footer>
+        <section className={style.gameContainer}>
+            <Header />
+            <section ref={scope} className={style.gameChildrenContainer}>
+                {children}
+            </section>
+            <Footer link={path.land} />
         </section>
     );
 };

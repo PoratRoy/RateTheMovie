@@ -1,52 +1,44 @@
-.cardViewModal {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: absolute;
-    top: -200px;
-    left: -200px;
+.cardViewImgContainer {
     width: fit-content;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-    background-color: var(--input-background-color);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: var(--secondary-border-radius);
-    z-index: 100;
-    padding: 0.5em;
-    border: var(--primary-border);
-}
-
-.cardViewModalExist {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+    border: var(--secondary-border);
+    overflow: hidden;
+    background-color: black;
 }
 
 .cardViewDataContainer {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     gap: 0.5em;
-    padding: 0.5em;
-    width: 15vw;
+    width: 80%;
     min-width: 200px;
-
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    overflow-wrap:break-word;
 }
 
-.cardViewImgContainer {
-    width: fit-content;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: var(--secondary-border-radius);
-    overflow: hidden;
+.cardViewInfo{
+    height: 100px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
 }
 
-.cardViewTitle{
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-bottom: 1em;
+.cardViewTitle {
+    margin: 0.5em 0 0.7em 0;
+}
+
+.cardViewGenres{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
 }

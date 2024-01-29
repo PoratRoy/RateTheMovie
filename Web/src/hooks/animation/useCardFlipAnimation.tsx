@@ -9,9 +9,11 @@ const useCardFlipAnimation = (flip: boolean | undefined) => {
     };
 
     useEffect(() => {
-        if (flip && !isAnimation) {
-            setIsAnimation(true);
-            setIsFlipped(true);
+        if(!isAnimation){
+            setIsFlipped(flip ? true : false);
+            if (flip) {
+                setIsAnimation(true);
+            }
         }
     }, [flip]);
 

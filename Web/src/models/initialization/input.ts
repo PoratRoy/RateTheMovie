@@ -5,5 +5,4 @@ export const initSelectDefaultValues: SelectInputSchema = {
     year: DateDefaultJSON,
     country: "",
     genre: "[]",
-    players: "[]",
 };

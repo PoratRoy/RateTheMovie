@@ -1,16 +1,14 @@
 import React from "react";
-import useDiscoverMovies from "../../api/hooks/useDiscoverMovies";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { Player } from "../../models/types/player";
 import PlayerLayout from "../../components/layout/PlayerLayout";
-import useCorrectOrder from "../../hooks/useCorrectOrder";
 import GameLayout from "../../components/layout/GameLayout";
 import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
 import PlayersPackLayout from "../../components/layout/PlayersPackLayout";
+import useCheckMoviesAlreadySet from "../../api/hooks/useCheckMoviesAlreadySet";
 
 const GamePage: React.FC = () => {
-    useDiscoverMovies();
-    useCorrectOrder();
+    useCheckMoviesAlreadySet();
     const { players } = useGamePlayContext();
 
     return (

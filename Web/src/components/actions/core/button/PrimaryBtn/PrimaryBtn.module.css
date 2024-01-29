@@ -1,3 +1,5 @@
+/* Mobile 320px - 767px -- 812px */
+
 .loadingBtnPrimary {
     display: flex;
     align-items: center;
@@ -9,9 +11,14 @@
 .btnPrimaryLarge {
     color: var(--text-color);
     background-color: var(--primary-color);
+    font-weight: 600;
     cursor: pointer;
     border: var(--primary-border);
+    border-radius: var(--secondary-border-radius);
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btnPrimarySmall:hover,
@@ -42,30 +49,49 @@
     cursor: default;
 }
 
-.btnPrimarySmall{
+.btnPrimarySmall {
     width: 120px;
     height: 40px;
     font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     border: var(--secondary-border);
-    border-radius: var(--secondary-border-radius);
 }
 
-.btnPrimaryMedium{
+.btnPrimaryMedium {
+    width: 150px;
+    height: 50px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.btnPrimaryLarge {
     width: 200px;
     height: 60px;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 8px;
-    border-radius: var(--primary-border-radius);
+    font-size: 1.5rem;
+    letter-spacing: 3px;
 }
 
-.btnPrimaryLarge{
-    width: 300px;
-    height: 90px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 10px;
-    border-radius: var(--primary-border-radius);
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+
+    .btnPrimarySmall {
+        width: 120px;
+        height: 40px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .btnPrimaryMedium {
+        width: 200px;
+        height: 60px;
+        font-size: 1rem;
+        letter-spacing: 5px;
+    }
+
+    .btnPrimaryLarge {
+        width: 300px;
+        height: 90px;
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+    }
 }
