@@ -29,7 +29,7 @@ export const setQueryParams = (page: number, filters?: MovieFilters) => {
 };
 
 export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie | undefined => {
-    const { title, id, backdrop_path, release_date, genre_ids, adult } = tmdbMovie;
+    const { title, id, backdrop_path, release_date, genre_ids, adult, overview } = tmdbMovie;
     const { imdbRating, imdbVotes, Poster, Director, Website, imdbID, Actors } = resultsOMDB;
 
     if (title && id && Poster && Poster !== "N/A" && imdbRating && imdbRating !== "N/A") {
@@ -49,6 +49,7 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
             director: Director,
             website: Website,
             actors: Actors,
+            description: overview,
         };
         return movie;
     }

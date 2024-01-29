@@ -7,7 +7,7 @@ import CardViewLayout from "../../layout/CardViewLayout";
 import Genre from "../core/Genre";
 
 const CardView: React.FC<CardViewProps> = ({ movie, close }) => {
-    const { title, poster_path, actors, director, genre_ids, release_date } = movie;
+    const { title, poster_path, actors, director, genre_ids, release_date, description } = movie;
     return (
         <CardViewLayout close={close}>
             <section className={style.cardViewImgContainer}>
@@ -22,9 +22,12 @@ const CardView: React.FC<CardViewProps> = ({ movie, close }) => {
                         </React.Fragment>
                     ))}
                 </div>
-                <div>actors: {actors ? actors : "N/A"}</div>
-                <div>director: {director ? director : "N/A"}</div>
-                <div>release date: {release_date ? release_date : "N/A"}</div>
+                <section className={style.cardViewInfo}>
+                    <div>actors: {actors ? actors : "N/A"}</div>
+                    <div>director: {director ? director : "N/A"}</div>
+                    <div>release date: {release_date ? release_date : "N/A"}</div>
+                    <div>{description ? description : "N/A"}</div>
+                </section>
             </section>
         </CardViewLayout>
     );

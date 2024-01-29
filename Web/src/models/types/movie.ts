@@ -13,6 +13,7 @@ export type Movie = {
     actors?: string;
     director?: string;
     website?: string;
+    description?: string;
 };
 
 export type MovieTMDB = {

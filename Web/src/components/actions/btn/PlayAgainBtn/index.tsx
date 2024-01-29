@@ -15,7 +15,7 @@ const PlayAgainBtn: React.FC = () => {
         discoverMovies(filters);
     };
 
-    return <PrimaryBtn title="Play Again" onClicked={handleShuffle} size="medium" />;
+    return <PrimaryBtn title="New Round" onClicked={handleShuffle} size="medium" />;
 };
 
 export default PlayAgainBtn;

@@ -23,4 +23,6 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+    overflow: scroll;
+    width: 100%;
 }
