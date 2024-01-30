@@ -16,14 +16,6 @@
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
-.draggableMovie{
-    /* border: 7px solid var(--tertiary-color); */
-    /* overflow: hidden; */
-    /* border-radius: var(--primary-border-radius); */
-    /* height: var(--card-height); */
-    /* width: var(--card-width); */
-}
-
 .cardTitle {
     cursor: pointer;
     position: absolute;
@@ -35,7 +27,8 @@
     text-align: center;
     padding: 40% 10px 10px 10px;
     box-sizing: border-box;
+    border-radius: var(--secondary-border-radius);
+
     width: var(--card-width);
     height: var(--card-height);
-    border-radius: var(--secondary-border-radius);
 }

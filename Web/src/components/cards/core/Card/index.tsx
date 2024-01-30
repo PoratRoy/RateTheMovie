@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ id, type, front, back, flip, isFocus, size 
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
-                {pos && <Position id={movieId} position={pos} />}
+                {pos ? <Position id={movieId} position={pos} /> : null}
             </CardInnerContainer>
         </section>
     );
