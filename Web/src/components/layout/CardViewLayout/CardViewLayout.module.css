@@ -4,11 +4,12 @@
     box-sizing: border-box;
     position: fixed;
     left: 50%;
-    bottom: 5%;
-    transform: translate(-50%, -5%);
+    bottom: 2vh;
+    transform: translateX(-50%);
     width: 90%;
-    height: fit-content;
-    max-height: 80%;
+    min-height: fit-content;
+    height: 85%;
+    max-height: 100%;
     background-color: var(--secondary-color);
     border-radius: var(--secondary-border-radius);
     z-index: 1000;

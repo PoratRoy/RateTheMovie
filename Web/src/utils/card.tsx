@@ -113,8 +113,8 @@ export const getCardFront = (players: Player[], index: number) => {
 
 export const setPlaceholderText = (index: number): string | undefined => {
     if (index === 0) {
-        return "Worst Rating";
+        return "Worst";
     } else if (index + 1 === PACK_CARDS_NUM) {
-        return "Best Rating";
+        return "Best";
     }
 };

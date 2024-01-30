@@ -1,5 +1,5 @@
 import style from "./LandingLayout.module.css";
-import backgroundMoviesImg from "../../../assets/allMoviesPoster1.jpeg";
+import backgroundMoviesImg from "../../../assets/allMoviesPoster2.jpeg";
 //https://www.reduceimages.com/
 import Logo from "../../common/Logo";
 import Description from "../../common/Description";
@@ -14,6 +14,9 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children, isFilterLayout 
 
     return (
         <section ref={scope} className={style.landingBackground}>
+            <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>
+                <img src={backgroundMoviesImg} alt="Background poster of movies" />
+            </section>
             <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>
                 <img src={backgroundMoviesImg} alt="Background poster of movies" />
             </section>

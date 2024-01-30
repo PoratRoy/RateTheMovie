@@ -7,7 +7,7 @@ const WaveSVG: React.FC = () => {
             viewBox="0 0 1440 320"
             transform="scale(-1, 1)"
             style={{
-                filter: `drop-shadow(0 -10px 20px ${PRIMARY_COLOR})`,
+                filter: `drop-shadow(0 -10px 15px ${PRIMARY_COLOR})`,
                 position: "fixed",
                 bottom: "64vh",
                 left: 0,

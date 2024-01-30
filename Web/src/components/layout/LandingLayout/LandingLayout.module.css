@@ -3,6 +3,9 @@
     z-index: 0;
     display: block;
     opacity: 1;
+    animation: slider 50s infinite linear;
+    display: inline-block;
+    margin: -1px 0;
 }
 
 .landingBackgroundImg img {
@@ -10,6 +13,15 @@
     height: 100%;
     object-fit: cover;
     object-position: top;
+}
+
+@keyframes slider {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
 }
 
 .landingLogoContainer {

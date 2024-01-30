@@ -30,7 +30,7 @@ const FinishBtn: React.FC = () => {
                     size="small"
                 />
             ) : (
-                <p className={style.finishBtnP}>Choose your rating order</p>
+                <p className={style.finishBtnP}>Drag and Drop your rating order</p>
             )}
         </React.Fragment>
     );

@@ -39,6 +39,7 @@ const FilterLayout = <TInput extends FieldValues>({
                 onSubmit={handleSubmit(onSubmitFilter)}
                 noValidate
             >
+                <div className={style.filterFormTitle}>Add some filters</div>
                 <section className={style.filterFormContainer}>
                     <section className={style.filterFormChildrens}>{children}</section>
                 </section>
