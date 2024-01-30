@@ -1,4 +1,5 @@
 .finishBtnP{
     color: var(--text-color);
     font-size: 1.1rem;
+    height: var(--btn-height-small);
 }

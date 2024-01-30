@@ -47,6 +47,13 @@
     --primary-border: 2px solid var(--tertiary-color);
     --secondary-border: 1px solid var(--tertiary-color);
 
+    --btn-width-small: 120px;
+    --btn-width-medium: 150px;
+    --btn-width-large: 200px;
+    --btn-height-small: 40px;
+    --btn-height-medium: 50px;
+    --btn-height-large: 60px;
+
     --card-width: 140px;
     --card-height: 200px;
     /* --card-width: 120px;

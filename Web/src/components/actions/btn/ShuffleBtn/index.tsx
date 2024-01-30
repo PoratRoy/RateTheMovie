@@ -8,7 +8,10 @@ const ShuffleBtn: React.FC = () => {
 
     return (
         <div onClick={handleShuffle} className={style.shuffleBtn}>
-            <GiCardExchange />
+            <div className={style.shuffleIcon}>
+                <GiCardExchange />
+            </div>
+            <div className={style.shuffleText}>Shuffle</div>
         </div>
     );
 };

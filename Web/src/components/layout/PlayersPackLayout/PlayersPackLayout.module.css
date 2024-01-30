@@ -1,5 +1,4 @@
 .playerPackContainer{
-    position: fixed;
-    bottom: 50px;
+    position: relative;
     width: 100%;
 }

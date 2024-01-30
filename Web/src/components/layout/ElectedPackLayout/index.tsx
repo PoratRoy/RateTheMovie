@@ -15,7 +15,6 @@ const ElectedPackLayout: React.FC = () => {
             {finishAnimation.playAgainBtn ? (
                 <div className={style.playAgain}>
                     <PlayAgainBtn />
-                    {/* <FilterAgainBtn /> */}
                 </div>
             ) : (
                 <div className={style.electedPackBtns}>
