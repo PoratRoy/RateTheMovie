@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { CountryInputProps } from "../../../../models/types/props";
 import { FormSetValue } from "../../../../models/constants";
-import { initCountryOptions } from "../../../../utils/select";
+import { initCountryOption, initCountryOptions } from "../../../../utils/select";
 import { SelectOption } from "../../../../models/types/select";
 import SelectInput from "../../core/select/SelectInput";
 import { Countries } from "../../../../models/countries";
@@ -15,7 +15,7 @@ const CountryInput = <TInput extends FieldValues>({
     label,
 }: CountryInputProps<TInput>) => {
     const [countryOptions, setCountryOptions] = useState<SelectOption[]>([]);
-    const [country, setCountry] = useState<string | undefined>();
+    const [country, setCountry] = useState<string | undefined>(Countries[1].iso_3166_1);
 
     useEffect(() => {
         if (countryOptions.length === 0) {
@@ -32,7 +32,12 @@ const CountryInput = <TInput extends FieldValues>({
 
     return (
         <SelectLayout label={label}>
-            <SelectInput placeholder={placeholder} setValue={setCountry} options={countryOptions} />
+            <SelectInput
+                placeholder={placeholder}
+                setValue={setCountry}
+                options={countryOptions}
+                defaultValue={initCountryOption(Countries[1])}
+            />
         </SelectLayout>
     );
 };

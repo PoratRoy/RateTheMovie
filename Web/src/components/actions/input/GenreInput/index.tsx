@@ -7,7 +7,7 @@ import { initGenreOptions } from "../../../../utils/select";
 import { Genres } from "../../../../models/ganres";
 import { SelectOption } from "../../../../models/types/select";
 import SelectLayout from "../../../layout/SelectLayout";
-//TODO: the height wont take the full height of the select
+
 const GenreInput = <TInput extends FieldValues>({
     id,
     setValue,

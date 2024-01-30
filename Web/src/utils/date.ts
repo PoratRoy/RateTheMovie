@@ -24,3 +24,6 @@ export const getYearsArray = (date?: DateRangeOptionFilter): string[] => {
 
 export const delayPromise = (duration: number) =>
     new Promise((resolve) => setTimeout(resolve, duration));
+
+export const subtractYears = (year: number = DateEndYear, subtract: number = 4): number =>
+    year - subtract;

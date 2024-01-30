@@ -6,34 +6,16 @@ export const Countries = [
         iso_3166_1: "",
     },
     {
-        name: "Armenia",
-        emoji: "🇦🇲",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AM.svg",
-        iso_3166_1: "AM",
-    },
-    {
-        name: "Argentina",
-        emoji: "🇦🇷",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AR.svg",
-        iso_3166_1: "AR",
-    },
-    {
-        name: "Austria",
-        emoji: "🇦🇹",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AT.svg",
-        iso_3166_1: "AT",
+        name: "United States",
+        emoji: "🇺🇸",
+        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/US.svg",
+        iso_3166_1: "US",
     },
     {
         name: "Australia",
         emoji: "🇦🇺",
         image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AU.svg",
         iso_3166_1: "AU",
-    },
-    {
-        name: "Belgium",
-        emoji: "🇧🇪",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BE.svg",
-        iso_3166_1: "BE",
     },
     {
         name: "Brazil",
@@ -48,23 +30,11 @@ export const Countries = [
         iso_3166_1: "CA",
     },
     {
-        name: "Switzerland",
-        emoji: "🇨🇭",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CH.svg",
-        iso_3166_1: "CH",
-    },
-    {
-        name: "Chile",
-        emoji: "🇨🇱",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CL.svg",
-        iso_3166_1: "CL",
-    },
-    {
         name: "China",
         emoji: "🇨🇳",
         image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CN.svg",
         iso_3166_1: "CN",
-    },
+    },//
     {
         name: "Colombia",
         emoji: "🇨🇴",
@@ -382,12 +352,6 @@ export const Countries = [
         emoji: "🇺🇦",
         image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/UA.svg",
         iso_3166_1: "UA",
-    },
-    {
-        name: "United States",
-        emoji: "🇺🇸",
-        image: "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/US.svg",
-        iso_3166_1: "US",
     },
     {
         name: "Venezuela",

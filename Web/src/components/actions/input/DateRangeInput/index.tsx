@@ -3,8 +3,8 @@ import { FieldValues } from "react-hook-form";
 import { DateRangeInputProps } from "../../../../models/types/props";
 import { DateEndYear, DateStartYear, FormSetValue } from "../../../../models/constants";
 import SelectInput from "../../core/select/SelectInput";
-import { getYearsArray } from "../../../../utils/date";
-import { initOptions } from "../../../../utils/select";
+import { getYearsArray, subtractYears } from "../../../../utils/date";
+import { initDateOption, initOptions } from "../../../../utils/select";
 import { SelectOption } from "../../../../models/types/select";
 import style from "./DateRangeInput.module.css";
 import { DateRangeOptionFilter } from "../../../../models/types/filter";
@@ -17,8 +17,8 @@ const DateRangeInput = <TInput extends FieldValues>({
 }: DateRangeInputProps<TInput>) => {
     const [fromOptions, setFromOptions] = useState<SelectOption[]>([]);
     const [toOptions, setToOptions] = useState<SelectOption[]>([]);
-    const [from, setFrom] = useState<string | undefined>();
-    const [to, setTo] = useState<string | undefined>();
+    const [from, setFrom] = useState<string | undefined>(subtractYears().toString());
+    const [to, setTo] = useState<string | undefined>(DateEndYear.toString());
 
     const setOptions = (filter: DateRangeOptionFilter) => {
         const years = getYearsArray(filter);
@@ -48,14 +48,14 @@ const DateRangeInput = <TInput extends FieldValues>({
                     placeholder="From Year"
                     setValue={setFrom}
                     options={fromOptions}
-                    defaultValue={fromOptions[0]}
+                    defaultValue={initDateOption(subtractYears().toString())}
                 />
                 {" - "}
                 <SelectInput
                     placeholder="To Year"
                     setValue={setTo}
                     options={toOptions}
-                    defaultValue={toOptions[toOptions.length]}
+                    defaultValue={initDateOption(DateEndYear.toString())}
                 />
             </div>
         </SelectLayout>

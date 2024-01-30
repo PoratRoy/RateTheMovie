@@ -8,12 +8,20 @@ export const initOptions = (values: string[]): SelectOption[] => {
     return res;
 };
 
+export const initDateOption = (value: string): SelectOption => {
+    return createOption(value, value);
+};
+
 export const initCountryOptions = (countries: CountryOptionFilter[]): SelectOption[] => {
     const options: SelectOption[] = countries.map((country: CountryOptionFilter) => {
-        const { emoji, name, iso_3166_1 } = country;
-        return createOption(`${emoji} - ${name}`, iso_3166_1);
+        return initCountryOption(country);
     });
     return options;
+};
+
+export const initCountryOption = (country: CountryOptionFilter): SelectOption => {
+    const { emoji, name, iso_3166_1 } = country;
+    return createOption(`${emoji} - ${name}`, iso_3166_1);
 };
 
 export const initGenreOptions = (genres: GenreOptionFilter[]): SelectOption[] => {

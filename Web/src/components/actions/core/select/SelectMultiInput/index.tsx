@@ -3,7 +3,12 @@ import selectStyles from "../../../../../style/select";
 import { SelectMultiInputProps } from "../../../../../models/types/props";
 import { SelectOption } from "../../../../../models/types/select";
 
-const SelectMultiInput: React.FC<SelectMultiInputProps> = ({ placeholder, setValue, options }) => {
+const SelectMultiInput: React.FC<SelectMultiInputProps> = ({
+    placeholder,
+    setValue,
+    options,
+    defaultValue,
+}) => {
     const onSelectOptions = (newValue: unknown) => {
         const options = newValue as SingleValue<SelectOption[]>;
         if (options) {
@@ -15,7 +20,7 @@ const SelectMultiInput: React.FC<SelectMultiInputProps> = ({ placeholder, setVal
     return (
         <Select
             isMulti
-            defaultValue={options[0]}
+            defaultValue={defaultValue}
             options={options}
             styles={selectStyles}
             placeholder={placeholder}
