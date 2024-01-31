@@ -1,6 +1,10 @@
 .cardLoading {
-    width: var(--card-width);
-    height: var(--card-height);
+    min-width: 120px;
+    width: 35vw;
+    max-width: var(--card-width);
+    min-height: 170px;
+    height: 200px;
+    max-height: var(--card-height);
 
     border-radius: var(--secondary-border-radius);
     background: linear-gradient(110deg, #cbcaca 8%, #d3d1d1 18%, #cbcaca 33%);

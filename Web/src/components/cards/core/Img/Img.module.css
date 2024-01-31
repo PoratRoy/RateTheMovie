@@ -5,8 +5,12 @@
 }
 
 .cardImgLarge{
-    width: var(--card-width);
-    height: var(--card-height);
+    min-width: 120px;
+    width: 35vw;
+    max-width: var(--card-width);
+    min-height: 170px;
+    height: 200px;
+    max-height: var(--card-height);
 }
 
 .cardImgSmall{
