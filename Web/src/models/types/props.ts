@@ -123,7 +123,6 @@ export type DraggableProps = ChildernsProps & {
 //--Layout--//
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     methods: UseFormReturn<TInput, any, undefined>;
-    isLoading: boolean;
 };
 
 export type LandingLayoutProps = ChildernsProps & {

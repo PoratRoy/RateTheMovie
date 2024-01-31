@@ -34,7 +34,7 @@ const LandingPage: React.FC = () => {
 
     return (
         <LandingLayout isFilterLayout={isFilterLayout}>
-            <FilterLayout<SelectInputSchema> methods={methods} isLoading={false}>
+            <FilterLayout<SelectInputSchema> methods={methods}>
                 <GenreInput
                     id={filterInputs.genre.id}
                     placeholder={filterInputs.genre.placeholder}

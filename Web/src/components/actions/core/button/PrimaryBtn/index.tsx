@@ -2,6 +2,7 @@ import React from "react";
 import style from "./PrimaryBtn.module.css";
 import { PrimaryBtnProps } from "../../../../../models/types/props";
 import useLoadingBtnAnimation from "../../../../../hooks/animation/useLoadingBtnAnimation";
+import { DONE_BTN_ID } from "../../../../../models/constants";
 
 const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     id,
@@ -12,7 +13,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     size = "large",
     type = "button",
 }) => {
-    const { scope } = useLoadingBtnAnimation(loading);
+    const { scope } = useLoadingBtnAnimation(loading, id || DONE_BTN_ID);
 
     const className =
         size === "large"

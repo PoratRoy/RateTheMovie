@@ -1,13 +1,11 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { DONE_BTN_ID } from "../../models/constants";
 
-const useLoadingBtnAnimation = (activate: boolean | undefined) => {
+const useLoadingBtnAnimation = (activate: boolean | undefined, id: string) => {
     const [scope, animation] = useAnimate();
-
     const handleAnimation = async () => {
         await animation(
-            `#${DONE_BTN_ID}`,
+            `#${id}`,
             {
                 backgroundColor: "rgba(99, 86, 240, 0)",
                 border: "7px solid #5548F4",
@@ -19,7 +17,7 @@ const useLoadingBtnAnimation = (activate: boolean | undefined) => {
             },
             { duration: 0.2 },
         );
-        await animation(`#${DONE_BTN_ID}`, { rotate: 360 }, { duration: 1, repeat: Infinity });
+        await animation(`#${id}`, { rotate: 360 }, { duration: 1, repeat: Infinity });
     };
 
     useEffect(() => {

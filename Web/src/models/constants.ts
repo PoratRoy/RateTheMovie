@@ -32,3 +32,4 @@ export const FILTER_LAYOUT_ID = "filter-layout";
 
 export const DONE_BTN_ID = "done-btn";
 export const LOADING_ID = "loading";
+export const START_BTN_ID = "start-btn";
