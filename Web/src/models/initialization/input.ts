@@ -3,6 +3,6 @@ import { SelectInputSchema } from "../types/inputSchema";
 
 export const initSelectDefaultValues: SelectInputSchema = {
     year: DateDefaultJSON,
-    country: "",
+    language: "en-US",
     genre: "[]",
 };
