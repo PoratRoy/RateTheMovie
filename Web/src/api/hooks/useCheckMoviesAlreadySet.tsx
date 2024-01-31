@@ -1,30 +1,25 @@
-import { useState } from "react";
 import { useMovieContext } from "../../context/MovieContext";
+import useHandleMovies from "../../hooks/context/useHandleMovies";
 import { useSingleton } from "../../hooks/useSingleton";
 import { SessionKey } from "../../models/enums/session";
 import Session from "../../utils/sessionStorage";
 import { checkMoviesAlreadySet } from "../utils";
 
-const useCheckMoviesAlreadySet = (shuffle: boolean = false) => {
-    const { movies, setMovies, setMovieLoading } = useMovieContext();
-    const [isExist, setIsExist] = useState<boolean>(false);
+const useCheckMoviesAlreadySet = () => {
+    const { movies, setMovieLoading } = useMovieContext();
+    const { handleMovies } = useHandleMovies();
 
     useSingleton(async () => {
-        if (shuffle) return;
         setMovieLoading(true);
-        if (!checkMoviesAlreadySet(movies)){
+        if (!checkMoviesAlreadySet(movies)) {
             const sessionMovies = Session.get(SessionKey.MOVIES);
             if (sessionMovies && sessionMovies.length > 0) {
-                setMovies(sessionMovies);
-                setMovieLoading(false);
-                setIsExist(true);
+                handleMovies(sessionMovies);
             }
-        }else{
+        } else {
             setMovieLoading(false);
         }
     });
-
-    return { isExist };
 };
 
 export default useCheckMoviesAlreadySet;

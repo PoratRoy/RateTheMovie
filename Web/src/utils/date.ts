@@ -1,13 +1,28 @@
 import { DateEndYear, DateStartYear } from "../models/constants";
 import { DateRangeOptionFilter } from "../models/types/filter";
+import { MovieFilters } from "../models/types/movie";
 import { datePattern } from "./format";
 
-export const extractYearFromDateString = (date: string | undefined): [boolean, string] => {
+
+export const extractYearFromDate = (date: string): string => {
+    return date.substring(0, 4);
+};
+
+export const isDateVaild = (date: string | undefined, filters?: MovieFilters): boolean => {
     if (date && datePattern.test(date)) {
-        const year = date.substring(0, 4);
-        return [true, year];
+        const filterYearsRange = filters?.year;
+        if (filterYearsRange) {
+            const [minS, maxS] = filterYearsRange;
+            const yearS = extractYearFromDate(date);
+            const min = parseInt(minS);
+            const max = parseInt(maxS);
+            const year = parseInt(yearS);
+            const isInRange = min <= year && year <= max;
+            return isInRange;
+        }
+        return true;
     }
-    return [false, "Invalid date format"];
+    return false;
 };
 
 export const getYearsArray = (date?: DateRangeOptionFilter): string[] => {

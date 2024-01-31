@@ -3,4 +3,5 @@ export enum SessionKey {
     MOVIES = "movies",
     CORRECT_ORDER = "correctMovies",
     FILTERS = "filters",
+    BACKUP = "backup",
 }

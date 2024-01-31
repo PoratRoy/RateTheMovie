@@ -6,9 +6,9 @@ import { DateDefaultJSON, FILTER_LAYOUT_ID } from "../../../models/constants";
 import { MovieFilters } from "../../../models/types/movie";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
-import useDiscoverMovies from "../../../api/hooks/useDiscoverMovies";
 import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
+import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 
 const FilterLayout = <TInput extends FieldValues>({
     children,
@@ -16,7 +16,7 @@ const FilterLayout = <TInput extends FieldValues>({
     isLoading,
 }: FilterLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
-    const { discoverMovies } = useDiscoverMovies();
+    const { firstRoundMovies } = useFirstRoundMovies();
     const navigate = useNavigate();
 
     const onSubmitFilter: SubmitHandler<TInput> = (data: TInput) => {
@@ -27,7 +27,7 @@ const FilterLayout = <TInput extends FieldValues>({
             country: country ? JSON.parse(country) : "",
         };
         Session.set(SessionKey.FILTERS, filters);
-        discoverMovies(filters);
+        firstRoundMovies(filters);
         navigate(path.game);
     };
 

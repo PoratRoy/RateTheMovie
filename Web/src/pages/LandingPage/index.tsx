@@ -41,6 +41,7 @@ const LandingPage: React.FC = () => {
                     label={filterInputs.genre.label}
                     setValue={setValue}
                 />
+                {/* TODO: Change the country to language */}
                 <CountryInput
                     id={filterInputs.country.id}
                     placeholder={filterInputs.country.placeholder}

@@ -32,7 +32,7 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
     const { title, id, backdrop_path, release_date, genre_ids, adult, overview } = tmdbMovie;
     const { imdbRating, imdbVotes, Poster, Director, Website, imdbID, Actors } = resultsOMDB;
 
-    if (title && id && Poster && Poster !== "N/A" && imdbRating && imdbRating !== "N/A") {
+    if (title && id && Poster && imdbRating) {
         // TODO: imdbRating !== "N/A" what shold I do?
         const movie: Movie = {
             title,
@@ -59,14 +59,10 @@ export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie
 export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
     movies.some((movie) => movie.title !== "" || movie.id !== "");
 
-// export const getMoviesOptions = (movies: MovieTMDB[]): MovieTMDB[][] => {
-//     const shuffledArray = movies.slice().sort(() => Math.random() - 0.5);
-
-//     const moviesOptions = [];
-//     for (let i = 0; i < MOVIES_OPTIONS; i++) {
-//         const movies = shuffledArray.slice(i * PACK_CARDS_NUM, (i + 1) * PACK_CARDS_NUM);
-//         moviesOptions.push(movies);
-//     }
-
-//     return moviesOptions;
-// };
+export const removeMovieFromRemaining = (remainingMovies: MovieTMDB[], movie: MovieTMDB) => {
+    const index = remainingMovies.indexOf(movie);
+    if (index !== -1) {
+        remainingMovies.splice(index, 1);
+    }
+    return remainingMovies;
+};

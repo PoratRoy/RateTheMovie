@@ -93,6 +93,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.PLAYERS);
         Session.remove(SessionKey.FILTERS);
         Session.remove(SessionKey.CORRECT_ORDER);
+        Session.remove(SessionKey.BACKUP);
         setFinishAnimation(initFinishAnimation);
         setCorrectOrder([]);
         setFinish(false);

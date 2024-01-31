@@ -27,7 +27,6 @@ export const MovieContextProvider = ({ children }: { children: React.ReactNode }
     const clearMovieContext = () => {
         Session.remove(SessionKey.MOVIES);
         setMovies(initMovieList());
-        setMovieLoading(undefined);
     };
 
     return (
