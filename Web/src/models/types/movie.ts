@@ -64,5 +64,5 @@ export type MovieOMDB = {
 export type MovieFilters = {
     year?: [string, string];
     genre?: string[];
-    country?: string;
+    language?: string;
 };

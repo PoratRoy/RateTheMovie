@@ -11,9 +11,9 @@ export const filterInputs: FilterInputs = {
         placeholder: "Select Genres",
         label: "Filter By Genre",
     },
-    country: {
-        id: "country",
-        placeholder: "Select Country",
-        label: "Filter By Country",
+    language: {
+        id: "language",
+        placeholder: "Select Native Language",
+        label: "Filter By Language",
     },
 };

@@ -20,5 +20,5 @@ export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & Labe
 export type FilterInputs = {
     year: InputTypeSelect<SelectInputSchema>;
     genre: InputTypeSelect<SelectInputSchema>;
-    country: InputTypeSelect<SelectInputSchema>;
+    language: InputTypeSelect<SelectInputSchema>;
 };

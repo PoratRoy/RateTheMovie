@@ -11,3 +11,9 @@ export type CountryOptionFilter = {
     image: string;
     iso_3166_1: string;
 };
+
+export type LanguageOptionFilter = {
+    id: string;
+    name: string;
+    emoji: string;
+}

@@ -189,7 +189,7 @@ export type GenreInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputLabelProps &
     FormSetValueProps;
 
-export type CountryInputProps<TInput extends FieldValues> = InputProps<TInput> &
+export type LanguageInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps &
     InputLabelProps &
     FormSetValueProps;

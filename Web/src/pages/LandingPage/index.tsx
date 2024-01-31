@@ -8,7 +8,7 @@ import PlayBtn from "../../components/actions/btn/PlayBtn";
 import PlayerBtn from "../../components/actions/btn/PlayerBtn";
 import FilterLayout from "../../components/layout/FilterLayout";
 import GenreInput from "../../components/actions/input/GenreInput";
-import CountryInput from "../../components/actions/input/CountryInput";
+import LanguageInput from "../../components/actions/input/LanguageInput";
 import DateRangeInput from "../../components/actions/input/DateRangeInput";
 import { filterInputs } from "../../models/initialization/form";
 import { PlayerColor } from "../../models/types/union";
@@ -41,11 +41,10 @@ const LandingPage: React.FC = () => {
                     label={filterInputs.genre.label}
                     setValue={setValue}
                 />
-                {/* TODO: Change the country to language */}
-                <CountryInput
-                    id={filterInputs.country.id}
-                    placeholder={filterInputs.country.placeholder}
-                    label={filterInputs.country.label}
+                <LanguageInput
+                    id={filterInputs.language.id}
+                    placeholder={filterInputs.language.placeholder}
+                    label={filterInputs.language.label}
                     setValue={setValue}
                 />
                 <DateRangeInput

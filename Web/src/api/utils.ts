@@ -4,7 +4,7 @@ export const setQueryParams = (page: number, filters?: MovieFilters) => {
     let release_date_gte = "";
     let release_date_lte = "";
     let genres = "";
-    let with_origin_country = "";
+    let language = "";
     if (filters) {
         if (filters.year) {
             release_date_gte = `${filters.year[0]}-01-01`;
@@ -13,8 +13,8 @@ export const setQueryParams = (page: number, filters?: MovieFilters) => {
         if (filters.genre) {
             genres = filters.genre.join(",");
         }
-        if (filters.country) {
-            with_origin_country = filters.country;
+        if (filters.language) {
+            language = filters.language;
         }
     }
 
@@ -24,7 +24,7 @@ export const setQueryParams = (page: number, filters?: MovieFilters) => {
         "release_date.gte": release_date_gte,
         "release_date.lte": release_date_lte,
         with_genres: genres,
-        with_origin_country,
+        language,
     };
 };
 

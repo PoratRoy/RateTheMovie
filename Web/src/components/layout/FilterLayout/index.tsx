@@ -22,11 +22,11 @@ const FilterLayout = <TInput extends FieldValues>({
 
     const onSubmitFilter: SubmitHandler<TInput> = (data: TInput) => {
         setIsLoading(true);
-        const { year, genre, country } = data;
+        const { year, genre, language } = data;
         const filters: MovieFilters = {
             year: year ? JSON.parse(year) : DateDefaultJSON,
             genre: genre ? JSON.parse(genre) : [],
-            country: country ? JSON.parse(country) : "",
+            language: language ? JSON.parse(language) : "",
         };
         Session.set(SessionKey.FILTERS, filters);
         firstRoundMovies(filters);
@@ -44,13 +44,13 @@ const FilterLayout = <TInput extends FieldValues>({
                 onSubmit={handleSubmit(onSubmitFilter)}
                 noValidate
             >
-                <div className={style.filterFormTitle}>Add some filters</div>
-                <section className={style.filterFormContainer}>
-                    <section className={style.filterFormChildrens}>{children}</section>
-                </section>
-
                 <section className={style.filterFormbtn}>
                     <PlayBtn id={START_BTN_ID} type="submit" title="Start" loading={isLoading} />
+                </section>
+
+                <div className={style.filterFormTitle}>Or change the defualt filters</div>
+                <section className={style.filterFormContainer}>
+                    <section className={style.filterFormChildrens}>{children}</section>
                 </section>
             </form>
         </FormProvider>

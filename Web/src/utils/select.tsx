@@ -1,4 +1,4 @@
-import { CountryOptionFilter, GenreOptionFilter } from "../models/types/filter";
+import { GenreOptionFilter, LanguageOptionFilter } from "../models/types/filter";
 import { SelectOption } from "../models/types/select";
 
 export const initOptions = (values: string[]): SelectOption[] => {
@@ -12,16 +12,16 @@ export const initDateOption = (value: string): SelectOption => {
     return createOption(value, value);
 };
 
-export const initCountryOptions = (countries: CountryOptionFilter[]): SelectOption[] => {
-    const options: SelectOption[] = countries.map((country: CountryOptionFilter) => {
-        return initCountryOption(country);
+export const initLanguageOptions = (countries: LanguageOptionFilter[]): SelectOption[] => {
+    const options: SelectOption[] = countries.map((country: LanguageOptionFilter) => {
+        return initLanguageOption(country);
     });
     return options;
 };
 
-export const initCountryOption = (country: CountryOptionFilter): SelectOption => {
-    const { emoji, name, iso_3166_1 } = country;
-    return createOption(`${emoji} - ${name}`, iso_3166_1);
+export const initLanguageOption = (country: LanguageOptionFilter): SelectOption => {
+    const { emoji, name, id } = country;
+    return createOption(`${emoji} - ${name}`, id);
 };
 
 export const initGenreOptions = (genres: GenreOptionFilter[]): SelectOption[] => {
