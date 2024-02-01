@@ -1,0 +1,34 @@
+.formInputContainer{
+    position: relative;
+    width: 100%;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+}
+
+.formInput{
+    border: 1px solid var(--primary-border-color);
+    background-color: var(--input-color);
+    width: 100%;
+    height: 100%;
+    min-height: var(--primary-input-height);
+    border-radius: var(--primary-border-radius);
+    color: var(--text-color);
+    box-sizing:border-box;
+    padding: var(--input-padding);
+    font-size: 1rem;
+}
+
+.formInputError{
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+.formInputErrorMsg{
+    color: var(--error-color);
+    font-size: 0.8rem;
+    text-align: right;
+    position: absolute;
+    right: 5px;
+    top: calc(40px + 5px);
+}

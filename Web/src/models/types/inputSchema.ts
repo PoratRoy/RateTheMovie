@@ -3,3 +3,7 @@ export type SelectInputSchema = {
     genre: string | undefined;
     language: string | undefined;
 };
+
+export type MultiplayerInputSchema = {
+    name: string | undefined;
+};

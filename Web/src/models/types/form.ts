@@ -1,5 +1,5 @@
 import { Path } from "react-hook-form";
-import { SelectInputSchema } from "./inputSchema";
+import { MultiplayerInputSchema, SelectInputSchema } from "./inputSchema";
 import { InputType } from "./union";
 
 export type RootInputType<TInput> = {
@@ -21,4 +21,8 @@ export type FilterInputs = {
     year: InputTypeSelect<SelectInputSchema>;
     genre: InputTypeSelect<SelectInputSchema>;
     language: InputTypeSelect<SelectInputSchema>;
+};
+
+export type MultiplayerInputs = {
+    name: InputTypeSelect<MultiplayerInputSchema>;
 };

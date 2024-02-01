@@ -1,9 +1,9 @@
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
-import { BtnSize, CardSide, CardSize, LogoSize } from "./union";
+import { BtnSize, CardSide, CardSize, InputType, LogoSize } from "./union";
 import { Card, placeholderCardType } from "./card";
 
 export type ChildernsProps = {
@@ -131,6 +131,8 @@ export type LandingLayoutProps = ChildernsProps & {
 
 export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
+export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
+
 export type PlayerLayoutProps = {
     player: Player;
 };
@@ -149,6 +151,12 @@ export type CardViewLayoutProps = ChildernsProps & {
     close: () => void;
 };
 
+export type FormInputLayoutProps<TInput extends FieldValues> = ChildernsProps &
+    InputProps<TInput> & {
+        errors?: FieldErrors<FieldValues>;
+        height?: string;
+    };
+
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
     id: Path<TInput>;
@@ -161,6 +169,14 @@ export type InputPlaceholderProps = {
 export type InputLabelProps = {
     label: string;
 };
+
+export type InputTypeProps = {
+    type?: InputType;
+};
+
+export type FormTextInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps &
+    InputTypeProps;
 
 export type FormSetValueProps = {
     // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
@@ -270,4 +286,8 @@ export type FooterProps = {
 
 export type BackLinkProps = {
     link: string;
+};
+
+export type RoomLinkProps = {
+    room: string;
 };

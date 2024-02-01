@@ -29,6 +29,7 @@ export const DESCRIPTION_ID = "description";
 export const MOVIES_POSTER_ID = "movies-poster";
 export const WAVE_ID = "wave";
 export const FILTER_LAYOUT_ID = "filter-layout";
+export const MULTI_LAYOUT_ID = "multi-layout";
 
 export const DONE_BTN_ID = "done-btn";
 export const LOADING_ID = "loading";
