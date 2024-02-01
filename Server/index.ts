@@ -10,7 +10,7 @@ export default class Server {
 
     private config(app: Application): void {
         const corsOptions: CorsOptions = {
-            origin: "http://localhost:8081",
+            origin: ["http://localhost:5173", "https://rate-the-movie.netlify.app/"],
         };
 
         app.use(cors(corsOptions));
