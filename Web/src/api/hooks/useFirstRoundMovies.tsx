@@ -12,7 +12,7 @@ const useFirstRoundMovies = () => {
     const { dataMovies } = useGetMovieData();
     const { backupMovies } = useSessionBackupMovies();
     const { setMovieLoading } = useMovieContext();
-    const { setError } = useErrorContext();
+    const { handleError } = useErrorContext();
     const { handleMovies } = useHandleMovies()
 
     const firstRoundMovies = async (filters?: MovieFilters | undefined) => {
@@ -37,7 +37,7 @@ const useFirstRoundMovies = () => {
             await backupMovies(remainingMovies);
 
         } catch (error) {
-            setError((error as Error).message || "Something went wrong");
+            handleError((error as Error).message || "Something went wrong");
         } finally {
             setMovieLoading(false);
         }

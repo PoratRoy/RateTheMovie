@@ -9,7 +9,7 @@ import fetchTMDB from "../fetch/fetchTMDB";
 import { useErrorContext } from "../../context/ErrorContext";
 
 const useDiscoverMovies = () => {
-    const { setError } = useErrorContext();
+    const { handleError } = useErrorContext();
 
     const discoverMovies = async (filters?: MovieFilters) => {
         const page = getRandomNumber(1, 500);
@@ -31,7 +31,7 @@ const useDiscoverMovies = () => {
             }
         } catch (error) {
             console.error(error);
-            setError((error as Error).message || "Something went wrong");
+            handleError((error as Error).message || "Something went wrong");
         }
         return [];
     };

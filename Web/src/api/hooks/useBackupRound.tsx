@@ -6,14 +6,14 @@ import useSessionBackupMovies from "./useSessionBackupMovies";
 const useBackupRound = () => {
     const { discoverMovies } = useDiscoverMovies();
     const { backupMovies } = useSessionBackupMovies();
-    const { setError } = useErrorContext();
+    const { handleError } = useErrorContext();
 
     const backupRoundMovies = async (filters?: MovieFilters | undefined) => {
         try {
             const moviesTMDB = await discoverMovies(filters);
             await backupMovies(moviesTMDB);
         } catch (error) {
-            setError((error as Error).message || "Something went wrong");
+            handleError((error as Error).message || "Something went wrong");
         } 
     };
 

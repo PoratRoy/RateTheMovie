@@ -7,7 +7,7 @@ import fetchOMDB from "../fetch/fetchOMDB";
 import { useErrorContext } from "../../context/ErrorContext";
 
 const useGetMovieData = () => {
-    const { setError } = useErrorContext();
+    const { handleError } = useErrorContext();
 
     const dataMovies = async (moviesTMDB: MovieTMDB[]): Promise<[Movie[], MovieTMDB[]]> => {
         let movies: Movie[] = [];
@@ -29,7 +29,7 @@ const useGetMovieData = () => {
                     remainingMovies = removeMovieFromRemaining(remainingMovies, tmdbMovie);
                 } catch (error) {
                     console.error(error)
-                    setError((error as Error).message || "Something went wrong");
+                    handleError((error as Error).message || "Something went wrong");
                 }
 
                 if (movies.length === PACK_CARDS_NUM) break;
