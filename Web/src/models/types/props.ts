@@ -5,6 +5,7 @@ import { Player } from "./player";
 import React from "react";
 import { BtnSize, CardSide, CardSize, InputType, LogoSize } from "./union";
 import { Card, placeholderCardType } from "./card";
+import { LandingOpt } from "../enums/landing";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -126,19 +127,17 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 };
 
 export type LandingLayoutProps = ChildernsProps & {
-    isFilterLayout: boolean;
+    layoutOption: LandingOpt;
 };
 
 export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
-export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
+export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+};
 
 export type PlayerLayoutProps = {
     player: Player;
-};
-
-export type SelectLayoutProps = ChildernsProps & {
-    label: string;
 };
 
 export type GameLayoutProps = ChildernsProps;
@@ -151,10 +150,10 @@ export type CardViewLayoutProps = ChildernsProps & {
     close: () => void;
 };
 
-export type FormInputLayoutProps<TInput extends FieldValues> = ChildernsProps &
+export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     InputProps<TInput> & {
         errors?: FieldErrors<FieldValues>;
-        height?: string;
+        label: string;
     };
 
 //--Input--//
@@ -173,10 +172,6 @@ export type InputLabelProps = {
 export type InputTypeProps = {
     type?: InputType;
 };
-
-export type FormTextInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps &
-    InputTypeProps;
 
 export type FormSetValueProps = {
     // setValue: (name: FieldPath<TInput>, value: any, options?: SetValueConfig) => void;
@@ -209,6 +204,11 @@ export type LanguageInputProps<TInput extends FieldValues> = InputProps<TInput> 
     InputPlaceholderProps &
     InputLabelProps &
     FormSetValueProps;
+
+export type NameInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps &
+    InputLabelProps &
+    InputTypeProps;
 
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
@@ -258,6 +258,15 @@ export type CloseBtnProps = {
 
 export type GenreProps = {
     genre: string;
+};
+
+//--Landing--//
+export type LandingProps = {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+};
+
+export type MultiplayerProps = {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
 };
 
 //--Common--//

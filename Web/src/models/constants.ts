@@ -23,6 +23,7 @@ export const PLAYER1_ID = "player1";
 export const PLAYER2_ID = "player2";
 
 export const PLAY_BTN_ID = "play-btn";
+export const MULTI_START_BTN_ID = "multi-start-btn";
 export const MULTIPLAYER_BTN_ID = "multiplayer-btn";
 export const LOGO_ID = "logo";
 export const DESCRIPTION_ID = "description";

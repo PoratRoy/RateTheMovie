@@ -8,7 +8,7 @@ export const filterInputs: FilterInputs = {
     },
     genre: {
         id: "genre",
-        placeholder: "Select Genres",
+        placeholder: "All Genres",
         label: "Filter By Genre",
     },
     language: {

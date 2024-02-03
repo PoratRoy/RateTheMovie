@@ -1,0 +1,18 @@
+.inputText{
+    background-color: var(--input-background-color);
+    min-width: 38vw;
+    width: 100%;
+    max-width: 100%;
+    min-height: var(--input-min-height);
+    height: 100%;
+    max-height: var(--input-max-height);
+    border-radius: var(--secondary-border-radius);
+    box-sizing:border-box;
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
+.inputTextError{
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}

@@ -8,7 +8,7 @@ import { initDateOption, initOptions } from "../../../../utils/select";
 import { SelectOption } from "../../../../models/types/select";
 import style from "./DateRangeInput.module.css";
 import { DateRangeOptionFilter } from "../../../../models/types/filter";
-import SelectLayout from "../../../layout/SelectLayout";
+import InputLayout from "../../../layout/InputLayout";
 
 const DateRangeInput = <TInput extends FieldValues>({
     id,
@@ -42,7 +42,7 @@ const DateRangeInput = <TInput extends FieldValues>({
     }, [from, to]);
 
     return (
-        <SelectLayout label={label}>
+        <InputLayout label={label} id={id}>
             <div className={style.dateRange}>
                 <SelectInput
                     placeholder="From Year"
@@ -58,7 +58,7 @@ const DateRangeInput = <TInput extends FieldValues>({
                     defaultValue={initDateOption(DateEndYear.toString())}
                 />
             </div>
-        </SelectLayout>
+        </InputLayout>
     );
 };
 

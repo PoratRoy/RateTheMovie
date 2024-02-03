@@ -24,6 +24,7 @@ const SelectMultiInput: React.FC<SelectMultiInputProps> = ({
             options={options}
             styles={selectStyles}
             placeholder={placeholder}
+            isSearchable={false}
             onChange={onSelectOptions}
         />
     );

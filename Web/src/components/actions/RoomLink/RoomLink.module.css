@@ -1,0 +1,17 @@
+.roomLinkInputContianer{
+    background-color: var(--secondary-color);
+    border-radius: var(--secondary-border-radius);
+    border: var(--secondary-border);
+    width: 100%;
+    min-height: var(--input-min-height);
+    height: 100%;
+    max-height: var(--input-max-height);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: var(--primary-color);
+}

@@ -6,7 +6,7 @@ import { FormSetValue } from "../../../../models/constants";
 import { initGenreOptions } from "../../../../utils/select";
 import { Genres } from "../../../../models/ganres";
 import { SelectOption } from "../../../../models/types/select";
-import SelectLayout from "../../../layout/SelectLayout";
+import InputLayout from "../../../layout/InputLayout";
 
 const GenreInput = <TInput extends FieldValues>({
     id,
@@ -31,13 +31,13 @@ const GenreInput = <TInput extends FieldValues>({
     }, [genres]);
 
     return (
-        <SelectLayout label={label}>
+        <InputLayout label={label} id={id}>
             <SelectMultiInput
                 placeholder={placeholder}
                 setValue={setGenres}
                 options={genresOptions}
             />
-        </SelectLayout>
+        </InputLayout>
     );
 };
 

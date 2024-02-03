@@ -8,9 +8,8 @@ import LanguageInput from "../../actions/input/LanguageInput";
 import FilterLayout from "../../layout/FilterLayout";
 
 const Filter: React.FC = () => {
-    const methods = useInitialForm<SelectInputSchema>(initSelectDefaultValues);
+    const methods = useInitialForm<SelectInputSchema>(undefined, initSelectDefaultValues);
     const { setValue } = methods;
-    
     return (
         <FilterLayout<SelectInputSchema> methods={methods}>
             <GenreInput

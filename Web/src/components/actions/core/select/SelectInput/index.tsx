@@ -22,6 +22,7 @@ const SelectInput: React.FC<SelectInputProps> = ({ placeholder, setValue, option
             styles={selectStyles}
             placeholder={placeholder}
             onChange={onSelectOption}
+            isSearchable={false}
             value={val}
         />
     );

@@ -5,7 +5,7 @@ import { FormSetValue } from "../../../../models/constants";
 import { initLanguageOption, initLanguageOptions } from "../../../../utils/select";
 import { SelectOption } from "../../../../models/types/select";
 import SelectInput from "../../core/select/SelectInput";
-import SelectLayout from "../../../layout/SelectLayout";
+import InputLayout from "../../../layout/InputLayout";
 import { Language } from "../../../../models/language";
 
 const LanguageInput = <TInput extends FieldValues>({
@@ -31,14 +31,14 @@ const LanguageInput = <TInput extends FieldValues>({
     }, [language]);
 
     return (
-        <SelectLayout label={label}>
+        <InputLayout label={label} id={id}>
             <SelectInput
                 placeholder={placeholder}
                 setValue={setLanguage}
                 options={languageOptions}
                 defaultValue={initLanguageOption(Language[1])}
             />
-        </SelectLayout>
+        </InputLayout>
     );
 };
 
