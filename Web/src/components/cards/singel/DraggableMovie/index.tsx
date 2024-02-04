@@ -1,35 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Img from "../../core/Img";
 import Draggable from "../../../dnd/Draggable";
 import { DraggableMovieProps } from "../../../../models/types/props";
 import style from "./DraggableMovie.module.css";
-import useCardEvent from "../../../../hooks/useCardEvents";
+import CardImgShadow from "../../core/CardImgShadow";
 
 const DraggableMovie: React.FC<DraggableMovieProps> = ({
     id,
     movie,
     player,
-    isHover,
-    isClickable,
-    side,
-    setOpen,
+    isShadow,
+    side = "all",
     size = "large",
 }) => {
-    const {
-        isHovered,
-        isDoubleClick,
-        handleMouseEnter,
-        handleMouseLeave,
-        handleMouseDown,
-        handleMouseUp,
-    } = useCardEvent();
     const { title, poster_path } = movie;
-
-    useEffect(() => {
-        if (isClickable && isDoubleClick) {
-            setOpen && setOpen(true);
-        }
-    }, [isDoubleClick, setOpen]);
 
     const className = //TODO: refactor this
         side === "all"
@@ -41,14 +25,8 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
     return (
         <div className={className}>
             <Draggable draggableId={id} props={{ movie, player }}>
-                <section
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseUp}
-                    className={style.draggableMovie}
-                >
-                    {isHover && isHovered && <div className={style.cardTitle}>{title}</div>}
+                <section className={style.draggableMovie}>
+                    {isShadow ? <CardImgShadow title={title} /> : null}
                     <Img alt={title} src={poster_path} size={size} />
                 </section>
             </Draggable>

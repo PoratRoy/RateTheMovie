@@ -23,7 +23,7 @@
 }
 
 .cardViewInfo{
-    height: 180px;
+    max-height: 30vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
