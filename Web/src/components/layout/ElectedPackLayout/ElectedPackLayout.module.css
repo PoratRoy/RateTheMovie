@@ -22,12 +22,18 @@
     align-items: center;
     gap: 2em;
     width: auto;
+    height: 85px;
 }
 
 .playAgain{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1em;
+    justify-content: space-between;
+    height: 85px;
+}
+
+.playAgainDescription{
+    color: var(--text-color);
+    font-size: 1.2rem;
 }

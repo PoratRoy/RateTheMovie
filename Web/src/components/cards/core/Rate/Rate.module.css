@@ -1,11 +1,12 @@
 .cardRate {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     color: var(--text-color);
     background-color: var(--primary-color);
     font-weight: 500;
-    cursor: pointer;
     border: var(--primary-border);
-    border-radius: var(--secondary-border-radius);
+    border-radius: var(--primary-border-radius);
     text-align: center;
-    width: var(--small-card-width);
+    width: calc(var(--small-card-width) - 13px);
 }
