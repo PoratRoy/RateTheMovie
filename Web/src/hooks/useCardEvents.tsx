@@ -1,39 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDoubleClick from "./useDoubleClick";
+import { useDragContext } from "../context/DndContext";
 
 const useCardEvent = () => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isClicked, setIsClicked] = useState<boolean>(false);
     const { isDoubleClick, handleDoubleClick } = useDoubleClick();
+    const { isDragging } = useDragContext();
 
-    const handleMouseEnter = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        if (event.buttons === 1) {
-            setIsHovered(false);
-        } else {
-            setIsHovered(true);
+    useEffect(() => {
+        if (isDragging) {
+            setIsClicked(false);
         }
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+    }, [isDragging]);
 
     const handleMouseDown = () => {
-        setIsHovered(false);
         handleDoubleClick();
-    };
-
-    const handleMouseUp = () => {
-        setIsHovered(true);
+        setIsClicked((prev) => !prev);
     };
 
     return {
-        isHovered,
+        isClicked,
         isDoubleClick,
-        handleMouseEnter,
-        handleMouseLeave,
         handleMouseDown,
-        handleMouseUp,
     };
 };
 
 export default useCardEvent;
+
+//const [isHovered, setIsHovered] = useState<boolean>(false);
+
+// const handleMouseEnter = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+//     if (event.buttons === 1) {
+//         setIsHovered(false);
+//     } else {
+//         setIsHovered(true);
+//     }
+// };
+
+// const handleMouseLeave = () => {
+//     setIsHovered(false);
+// };
+
+// const handleMouseUp = () => {
+//     setIsClicked(false);
+// };

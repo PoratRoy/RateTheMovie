@@ -9,7 +9,7 @@
     width: 35vw;
     max-width: var(--card-width);
     min-height: 170px;
-    height: 200px;
+    height: 25vh;
     max-height: var(--card-height);
 }
 

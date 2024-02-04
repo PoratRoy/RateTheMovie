@@ -7,6 +7,8 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 
 const ElectedPackLayout: React.FC = () => {
     const { finishAnimation } = useGamePlayContext();
+    const { players } = useGamePlayContext();
+
     return (
         <section className={style.electedPackContainer}>
             <div className={style.electedPack}>
@@ -14,6 +16,9 @@ const ElectedPackLayout: React.FC = () => {
             </div>
             {finishAnimation.playAgainBtn ? (
                 <div className={style.playAgain}>
+                    <div className={style.playAgainDescription}>
+                        You were right in {players[0].rightChoices.length} ratings!
+                    </div>
                     <PlayAgainBtn />
                 </div>
             ) : (

@@ -5,11 +5,18 @@ import { useGamePlayContext } from "./GamePlayContext";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { movieRating } from "../utils/format";
+import { createContext, useContext, useState } from "react";
+
+export const DragContext = createContext<{ isDragging: boolean }>({ isDragging: false });
+
+export const useDragContext = () => useContext(DragContext);
 
 export const DndContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { setPlayers } = useGamePlayContext();
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     function handleDragEnd(event: DragEndEvent) {
+        setIsDragging(false);
         const { over, active } = event;
         const id = over?.id.toString();
         const movie: Movie = active?.data?.current?.movie;
@@ -50,5 +57,15 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
         }
     }
 
-    return <DndContext onDragEnd={handleDragEnd}>{children}</DndContext>;
+    const handleDragStart = () => {
+        if(!isDragging){
+            setIsDragging(true);
+        }
+    };
+
+    return (
+        <DndContext onDragEnd={handleDragEnd} onDragMove={handleDragStart}>
+            <DragContext.Provider value={{ isDragging }}>{children}</DragContext.Provider>
+        </DndContext>
+    );
 };

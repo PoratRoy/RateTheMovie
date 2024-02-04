@@ -1,0 +1,23 @@
+.cardTitle {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 40% 10px 10px 10px;
+    box-sizing: border-box;
+    border-radius: var(--secondary-border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 120px;
+    width: 35vw;
+    max-width: var(--card-width);
+    min-height: 170px;
+    height: 25vh;
+    max-height: var(--card-height);
+}

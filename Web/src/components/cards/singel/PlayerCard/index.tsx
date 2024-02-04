@@ -5,31 +5,31 @@ import DraggableMovie from "../DraggableMovie";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
 import { placeholderCardType } from "../../../../models/types/card";
+import CardEventLayout from "../../../layout/CardEventLayout";
+import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
-    const [open, setOpen] = useState<boolean>(false);
+    const posotion = useCardOrderPosition(movie);
+    const [openCardView, setOpenCardView] = useState<boolean>(false);
+    const [openShadow, setOpenShadow] = useState<boolean>(false);
 
+    const isShadow = posotion === 0 ? openShadow : false;
     const cardId = `${movie.id}-${player.id}`;
-    const back = (
-        <DraggableMovie
-            isClickable
-            isHover
-            id={cardId}
-            movie={movie}
-            player={player}
-            setOpen={setOpen}
-            side="all"
-        />
-    );
+
+    const back = <DraggableMovie isShadow={isShadow} id={cardId} movie={movie} player={player} />;
+
     return (
         <React.Fragment>
-            <Card
-                type={{ t: "Player", movie } as placeholderCardType}
-                flip={loading != undefined && !loading}
-                front={<LoadingCard />}
-                back={back}
-            />
-            {open && <CardView movie={movie} close={() => setOpen(false)} />}
+            <CardEventLayout setOpenCardView={setOpenCardView} setOpenShadow={setOpenShadow}>
+                <Card
+                    type={{ t: "Player", movie } as placeholderCardType}
+                    flip={loading != undefined && !loading}
+                    front={<LoadingCard />}
+                    back={back}
+                    posotion={posotion}
+                />
+            </CardEventLayout>
+            {openCardView ? <CardView movie={movie} close={() => setOpenCardView(false)} /> : null}
         </React.Fragment>
     );
 };

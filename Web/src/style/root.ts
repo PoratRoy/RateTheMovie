@@ -29,7 +29,7 @@ export const TERTIARY_COLOR_OPACITY = "#34425150";
 export const TEXT_COLOR = "#FFFFFF";
 export const TEXT_COLOR_HOVER = "#FFFFFF90";
 export const TEXT_COLOR_ACTIVE = "#FFFFFF80";
-export const TEXT_COLOR_OPACITY = "#FFFFFF50";
+export const TEXT_COLOR_OPACITY = "#8996A1";
 
 export const INPUT_BACKGROUND_COLOR = "#FFFFFF";
 export const INPUT_BACKGROUND_COLOR_HOVER = "#E6E6E6";

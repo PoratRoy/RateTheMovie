@@ -29,6 +29,7 @@ export type CardProps = IdProps & {
     flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
+    posotion?: number;
 };
 
 export type CardInnerContainerProps = {
@@ -64,16 +65,18 @@ export type DraggableMovieProps = {
     id: string;
     movie: Movie;
     player: Player;
-    isHover?: boolean;
-    isClickable?: boolean;
-    side: CardSide;
+    isShadow?: boolean;
+    side?: CardSide;
     size?: CardSize;
-    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type ShadowCardProps = {
     movie?: Movie;
 };
+
+export type CardImgShadowProps = {
+    title: string;
+}
 
 export type ElectedCardProps = {
     index: number;
@@ -155,6 +158,11 @@ export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
         errors?: FieldErrors<FieldValues>;
         label: string;
     };
+
+export type CardEventLayoutProps = ChildernsProps & {
+    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>
+    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {

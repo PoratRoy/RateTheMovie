@@ -8,7 +8,7 @@
     transform: translateX(-50%);
     width: 90%;
     min-height: fit-content;
-    height: 85%;
+    height: 95%;
     max-height: 100%;
     background-color: var(--secondary-color);
     border-radius: var(--secondary-border-radius);
