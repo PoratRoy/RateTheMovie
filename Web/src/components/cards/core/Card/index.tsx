@@ -3,7 +3,7 @@ import style from "./Card.module.css";
 import { CardProps } from "../../../../models/types/props";
 import CardInnerContainer from "./CardInnerContainer";
 import Placeholder from "../Placeholder";
-import Position from "../Position";
+import Position from "../../shadow/Position";
 
 const Card: React.FC<CardProps> = ({id, type, front, back, flip, isFocus, position, size = "large"}) => {
     const isPlayerType = type.t === "Player";

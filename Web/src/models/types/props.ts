@@ -3,7 +3,7 @@ import { Movie } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
-import { BtnSize, CardSide, CardSize, LogoSize } from "./union";
+import { BtnSize, CardSide, CardSize, LogoSize, StarSize } from "./union";
 import { Card, placeholderCardType } from "./card";
 
 export type ChildernsProps = {
@@ -42,6 +42,7 @@ export type ElectedCardWrapperProps = ChildernsProps & {
     rate: number | string;
     index: string;
     setFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    isRightChoice: boolean;
 };
 
 export type CardSliceProps = {
@@ -97,7 +98,13 @@ export type PositionProps = IdProps & {
 
 export type RateStarProps = {
     amount: number;
+    size?: StarSize;
 };
+
+export type ElectedShadowProps = {
+    isRightChoice: boolean;
+};
+
 
 //--Pack--//
 export type PackProps = ChildernsProps & {

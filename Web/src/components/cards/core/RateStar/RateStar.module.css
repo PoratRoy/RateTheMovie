@@ -1,13 +1,21 @@
-.rateStars{
+.rateStars {
     display: flex;
     align-items: center;
     gap: 3px;
 }
 
-.rateStar{
+.rateStarSmall,
+.rateStarLarge {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.5rem;
     color: var(--text-color-opacity);
+}
+
+.rateStarSmall {
+    font-size: 0.5rem;
+}
+
+.rateStarLarge {
+    font-size: 1.4rem;
 }

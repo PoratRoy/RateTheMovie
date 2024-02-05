@@ -3,11 +3,13 @@ import style from "./RateStar.module.css";
 import { RateStarProps } from "../../../../models/types/props";
 import { FaStar } from "react-icons/fa";
 
-const RateStar: React.FC<RateStarProps> = ({ amount }) => {
+const RateStar: React.FC<RateStarProps> = ({ amount, size = "small" }) => {
+    const sizeClass = size === "small" ? style.rateStarSmall : style.rateStarLarge; //TODO: refactor this
+
     return (
         <div className={style.rateStars}>
             {[...Array(amount)].map((_, i: number) => (
-                <span key={i} className={style.rateStar}>
+                <span key={i} className={sizeClass}>
                     <FaStar />
                 </span>
             ))}

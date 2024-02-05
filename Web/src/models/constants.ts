@@ -16,9 +16,11 @@ export const Colors = ["red", "blue", "green", "yellow", "purple", "pink", "oran
 
 export const Players = ["1 Player", "2 Players", "Multiplayer"];
 
+//TODO: arrange the ids
 export const ABOVE_ID = "above";
 export const CARD_ID = "card";
 export const BELOW_ID = "below";
+export const SHADOW_ID = "shadow";
 export const PLAYER1_ID = "player1";
 export const PLAYER2_ID = "player2";
 
