@@ -2,88 +2,93 @@ import { LanguageOptionFilter } from "./types/filter";
 
 export const Language: LanguageOptionFilter[] = [
     {
-        id: "en-US",
+        id: "en",
         name: "All",
         emoji: "🌎"
     },
     {
-        id: "en-US",
+        id: "en",
         name: "English",
         emoji: "🇺🇸",
     },
     {
-        id: "fr-FR",
+        id: "fr",
         name: "French",
         emoji: "🇫🇷",
     },
     {
-        id: "es-ES",
+        id: "es",
         name: "Spanish",
         emoji: "🇪🇸",
     },
     {
-        id: "de-DE",
+        id: "de",
         name: "German",
         emoji: "🇩🇪",
     },
     {
-        id: "it-IT",
+        id: "it",
         name: "Italian",
         emoji: "🇮🇹",
     },
     {
-        id: "pt-PT",
+        id: "pt",
         name: "Portuguese",
         emoji: "🇵🇹",
     },
     {
-        id: "pt-BR",
+        id: "pt",
         name: "Brazilian",
         emoji: "🇧🇷",
     },
     {
-        id: "ru-RU",
+        id: "ru",
         name: "Russian",
         emoji: "🇷🇺",
     },
     {
-        id: "zh-CN",
+        id: "zh",
         name: "Chinese",
         emoji: "🇨🇳",
     },
     {
-        id: "ja-JP",
+        id: "ja",
         name: "Japanese",
         emoji: "🇯🇵",
     },
     {
-        id: "ko-KR",
+        id: "ko",
         name: "Korean",
         emoji: "🇰🇷",
     },
     {
-        id: "hi-IN",
+        id: "hi",
         name: "Hindi",
         emoji: "🇮🇳",
     },
     {
-        id: "pl-PL",
+        id: "pl",
         name: "Polish",
         emoji: "🇵🇱",
     },
     {
-        id: "nl-NL",
+        id: "nl",
         name: "Dutch",
         emoji: "🇳🇱",
     },
     {
-        id: "vi-VN",
+        id: "vi",
         name: "Vietnamese",
         emoji: "🇻🇳",
     },
     {
-        id: "th-TH",
+        id: "th",
         name: "Thai",
         emoji: "🇹🇭",
+    },
+    {
+        id: "cn",
+        name: "Chinese",
+        emoji: "🇨🇳",
     },
 ]

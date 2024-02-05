@@ -7,6 +7,7 @@ import { isDateVaild } from "../../utils/date";
 import { isGenreValid } from "../../utils/genre";
 import fetchTMDB from "../fetch/fetchTMDB";
 import { useErrorContext } from "../../context/ErrorContext";
+import { isLanguageValid } from "../../utils/filter";
 
 const useDiscoverMovies = () => {
     const { handleError } = useErrorContext();
@@ -19,11 +20,19 @@ const useDiscoverMovies = () => {
             const resultsTMDB: MovieTMDB[] = await fetchTMDB(URL, page, filters);
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 const movies: MovieTMDB[] = resultsTMDB.filter((movie) => {
-                    const { title, release_date, id, genre_ids } = movie;
+                    const { title, release_date, id, genre_ids, original_language } = movie;
                     const isValidDate = isDateVaild(release_date, filters);
                     const isValidGenre = isGenreValid(genre_ids, filters);
-    
-                    if (title && release_date && id && isValidDate && isValidGenre) {
+                    const isValidLanguage = isLanguageValid(original_language, filters);
+
+                    if (
+                        id &&
+                        title &&
+                        release_date &&
+                        isValidDate &&
+                        isValidGenre &&
+                        isValidLanguage
+                    ) {
                         return movie;
                     }
                 });
