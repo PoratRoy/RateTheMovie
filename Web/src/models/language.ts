@@ -2,7 +2,7 @@ import { LanguageOptionFilter } from "./types/filter";
 
 export const Language: LanguageOptionFilter[] = [
     {
-        id: "en",
+        id: "",
         name: "All",
         emoji: "🌎"
     },
@@ -22,6 +22,11 @@ export const Language: LanguageOptionFilter[] = [
         emoji: "🇪🇸",
     },
     {
+        id: "cn",
+        name: "Chinese",
+        emoji: "🇨🇳",
+    },  
+    {
         id: "de",
         name: "German",
         emoji: "🇩🇪",
@@ -33,11 +38,6 @@ export const Language: LanguageOptionFilter[] = [
     },
     {
         id: "pt",
-        name: "Portuguese",
-        emoji: "🇵🇹",
-    },
-    {
-        id: "pt",
         name: "Brazilian",
         emoji: "🇧🇷",
     },
@@ -45,11 +45,6 @@ export const Language: LanguageOptionFilter[] = [
         id: "ru",
         name: "Russian",
         emoji: "🇷🇺",
-    },
-    {
-        id: "zh",
-        name: "Chinese",
-        emoji: "🇨🇳",
     },
     {
         id: "ja",
@@ -85,10 +80,5 @@ export const Language: LanguageOptionFilter[] = [
         id: "th",
         name: "Thai",
         emoji: "🇹🇭",
-    },
-    {
-        id: "cn",
-        name: "Chinese",
-        emoji: "🇨🇳",
     },
 ]
