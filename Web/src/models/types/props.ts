@@ -28,7 +28,7 @@ export type CardProps = IdProps & {
     flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
-    posotion?: number;
+    position?: number;
 };
 
 export type CardInnerContainerProps = {
