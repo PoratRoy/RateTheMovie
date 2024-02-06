@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { ViewImgProps } from "../../../../models/types/props";
 import style from "./ViewImg.module.css";
+import ReactPlayer from "react-player";
+import { MdOndemandVideo } from "react-icons/md";
 
-const ViewImg: React.FC<ViewImgProps> = ({ src, alt }) => {
-    return <img className={style.cardViewImg} src={src} alt={alt} />;
+const ViewImg: React.FC<ViewImgProps> = ({ src, alt, video }) => {
+    const [isVideo, setIsVideo] = useState<boolean>(false);
+
+    const handleVideo = () => {
+        setIsVideo(true);
+    };
+
+    const handleVideoEnded = () => {
+        setIsVideo(false);
+    };
+
+    return (
+        <section className={style.cardViewImgContainer}>
+            {isVideo ? (
+                <ReactPlayer onEnded={handleVideoEnded} width={"100%"} controls url={video?.url} />
+            ) : (
+                <section>
+                    <img className={style.cardViewImg} src={src} alt={alt} />
+                    <div className={style.cardViewImgBtn} onClick={handleVideo}>
+                        <MdOndemandVideo />
+                    </div>
+                </section>
+            )}
+        </section>
+    );
 };
 
 export default ViewImg;

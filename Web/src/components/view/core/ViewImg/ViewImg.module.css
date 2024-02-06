@@ -1,4 +1,30 @@
+.cardViewImgContainer {
+    width: fit-content;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: var(--secondary-border-radius);
+    border: var(--secondary-border);
+    overflow: hidden;
+    background-color: black;
+    position: relative;
+    max-width: 220px;
+}
+
 .cardViewImg{
     object-fit: cover;
     height: 300px;
+}
+
+.cardViewImgBtn{
+    color: var(--text-color);
+    position: absolute;
+    bottom: 9px;
+    right: 5px;
+    border: 1px solid var(--text-color);
+    background-color: var(--secondary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

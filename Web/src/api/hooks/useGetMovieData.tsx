@@ -1,10 +1,13 @@
 import { extractYearFromDate } from "../../utils/date";
-import { OmdbBaseURL } from "../constants";
 import { Movie, MovieOMDB, MovieTMDB } from "../../models/types/movie";
-import { removeMovieFromRemaining, setNewMovie } from "../utils";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import fetchOMDB from "../fetch/fetchOMDB";
 import { useErrorContext } from "../../context/ErrorContext";
+import URL from "../path.json";
+import { setNewMovie } from "../utils/init";
+import { removeMovieFromRemaining } from "../utils/movie";
+import getMovieCast from "../utils/getMovieCast";
+import getMovieVideo from "../utils/getMovieVideo";
 
 const useGetMovieData = () => {
     const { handleError } = useErrorContext();
@@ -14,14 +17,17 @@ const useGetMovieData = () => {
         let remainingMovies: MovieTMDB[] = [...moviesTMDB];
 
         for (const tmdbMovie of moviesTMDB) {
-            const { title, release_date } = tmdbMovie;
-            if (title && release_date) {
+            const { id, title, release_date } = tmdbMovie;
+            if (id && title && release_date) {
                 const year = extractYearFromDate(release_date);
                 try {
-                    const resultsOMDB: MovieOMDB = await fetchOMDB(OmdbBaseURL, title, year);
+                    const resultsOMDB: MovieOMDB = await fetchOMDB(URL.omdb, title, year);
                     const { imdbRating, Poster } = resultsOMDB;
+                    //TODO: no duplicate rates
                     if (Poster && Poster !== "N/A" && imdbRating && imdbRating !== "N/A") {
-                        const movie = setNewMovie(tmdbMovie, resultsOMDB);
+                        const crew = await getMovieCast(tmdbMovie.id);   
+                        const video = await getMovieVideo(tmdbMovie.id);                
+                        const movie = setNewMovie(tmdbMovie, resultsOMDB, crew, video);
                         if (movie) {
                             movies.push(movie);
                         }

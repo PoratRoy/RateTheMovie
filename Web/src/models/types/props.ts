@@ -1,5 +1,5 @@
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Movie } from "./movie";
+import { CrewModel, Movie, VideoModel } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
@@ -76,7 +76,7 @@ export type ShadowCardProps = {
 
 export type CardImgShadowProps = {
     title: string;
-}
+};
 
 export type ElectedCardProps = {
     index: number;
@@ -104,7 +104,6 @@ export type RateStarProps = {
 export type ElectedShadowProps = {
     isRightChoice: boolean;
 };
-
 
 //--Pack--//
 export type PackProps = ChildernsProps & {
@@ -160,9 +159,9 @@ export type CardViewLayoutProps = ChildernsProps & {
 };
 
 export type CardEventLayoutProps = ChildernsProps & {
-    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>
-    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>
-}
+    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
@@ -244,6 +243,7 @@ export type PlayBtnProps = IdProps & {
 export type ViewImgProps = {
     src: string;
     alt: string;
+    video: VideoModel | undefined
 };
 
 export type CardViewProps = {
@@ -257,6 +257,20 @@ export type CloseBtnProps = {
 
 export type GenreProps = {
     genre: string;
+};
+
+export type CrewImgProps = {
+    src: string;
+    alt: string;
+};
+
+export type ActorProps = {
+    actor: CrewModel;
+};
+
+export type CrewProps = {
+    actors: CrewModel[];
+    director?: CrewModel;
 };
 
 //--Common--//

@@ -3,16 +3,12 @@ export type Movie = {
     id: string;
     poster_path: string;
     imdbRating: string;
-    imdbVotes?: string;
     imdbID?: string;
-    adult?: boolean;
-    backdrop_path?: string;
     genre_ids?: number[];
     release_date?: string;
-    video?: string;
-    actors?: string;
-    director?: string;
-    website?: string;
+    video?: VideoModel;
+    actors: CrewModel[];
+    director?: CrewModel;
     description?: string;
 };
 
@@ -60,6 +56,59 @@ export type MovieOMDB = {
     imdbRating?: string;
     imdbVotes?: string;
 };
+
+export type MovieVideo = {
+    iso_639_1: string;
+    iso_3166_1: string;
+    name: string;
+    key: string;
+    site: string;
+    size: number;
+    type: string;
+    official: boolean;
+    published_at: string;
+    id: string;
+};
+
+export type MovieCast = {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    order: number;
+};
+
+export type MovieCrew = {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    credit_id: string;
+    department: string;
+    job: string;
+}
+
+export type CrewModel = {
+    name: string;
+    img: string;
+    job: string;
+}
+
+export type VideoModel = {
+    url: string;
+    title: string;
+}
 
 export type MovieFilters = {
     year?: [string, string];

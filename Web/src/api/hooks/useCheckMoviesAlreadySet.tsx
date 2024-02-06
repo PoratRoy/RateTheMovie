@@ -3,7 +3,7 @@ import useHandleMovies from "../../hooks/context/useHandleMovies";
 import { useSingleton } from "../../hooks/useSingleton";
 import { SessionKey } from "../../models/enums/session";
 import Session from "../../utils/sessionStorage";
-import { checkMoviesAlreadySet } from "../utils";
+import { checkMoviesAlreadySet } from "../utils/movie";
 
 const useCheckMoviesAlreadySet = () => {
     const { movies, setMovieLoading } = useMovieContext();

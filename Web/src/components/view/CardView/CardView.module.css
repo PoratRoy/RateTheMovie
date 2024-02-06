@@ -1,12 +1,3 @@
-.cardViewImgContainer {
-    width: fit-content;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: var(--secondary-border-radius);
-    border: var(--secondary-border);
-    overflow: hidden;
-    background-color: black;
-}
-
 .cardViewDataContainer {
     display: flex;
     flex-direction: column;
@@ -15,6 +6,7 @@
     gap: 0.5em;
     width: 80%;
     min-width: 200px;
+    max-width: 250px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -41,4 +33,10 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
+}
+
+.cardDate{
+    color: var(--text-color);
+    margin-top: -20px;
+    margin-bottom: 5px;
 }

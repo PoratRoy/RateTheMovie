@@ -1,0 +1,11 @@
+.actorContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.actorName{
+    font-size: 0.7rem;
+    color: var(--text-color-opacity);
+    line-height: 11px;
+    margin-top: 5px;
+}

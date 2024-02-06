@@ -7,16 +7,12 @@ export const initMovie: Movie = {
     id: "",
     poster_path: "",
     imdbRating: "",
-    imdbVotes: undefined,
     imdbID: undefined,
-    adult: false,
-    backdrop_path: undefined,
     genre_ids: [],
     release_date: undefined,
     video: undefined,
-    actors: undefined,
+    actors: [],
     director: undefined,
-    website: undefined,
     description: undefined,
 };
 
