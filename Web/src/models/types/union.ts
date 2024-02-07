@@ -36,3 +36,5 @@ export type BtnSize = "small" | "medium" | "large";
 export type CardSize = "small" | "large";
 
 export type LogoSize = "small" | "large";
+
+export type StarSize = "small" | "large";

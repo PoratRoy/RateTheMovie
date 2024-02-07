@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGamePlayContext } from "../context/GamePlayContext";
 import { Movie } from "../models/types/movie";
-import { PACK_CARDS_NUM } from "../models/constants";
 
 const useCardOrderPosition = (movie: Movie) => {
     const { players, finishAnimation } = useGamePlayContext();
@@ -14,7 +13,7 @@ const useCardOrderPosition = (movie: Movie) => {
             selectedOrder.forEach((card, i) => {
                 if (!match && card?.movie?.imdbID) {
                     if (card?.movie === movie) {
-                        setPos(PACK_CARDS_NUM - i);
+                        setPos(i + 1);
                         match = true;
                     }
                 }

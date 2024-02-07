@@ -1,0 +1,31 @@
+.clickIconContainer {
+    position: absolute;
+    top: -40px;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-10%);
+}
+
+.clickIconHand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    color: var(--text-color-opacity);
+    transform: rotate(-25deg);
+}
+
+.clickIconMotion{
+    position: absolute;
+    top: -10px;
+    left: -15px;
+}
+
+.dragTap {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--text-color-opacity);
+    border-top-color: transparent;
+    transform: rotate(135deg);
+}

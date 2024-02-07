@@ -3,11 +3,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     color: var(--text-color);
     font-size: 1.1rem;
     text-align: center;
-    padding: 40% 10px 10px 10px;
     box-sizing: border-box;
     border-radius: var(--secondary-border-radius);
     display: flex;
@@ -20,4 +19,24 @@
     min-height: 170px;
     height: 25vh;
     max-height: var(--card-height);
+}
+
+.cardAnimation{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    color: var(--text-color-opacity);
+    width: 100%;
+}
+
+.cardShadowTitle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-color-opacity);
+    font-size: 1.1rem;
+    font-weight: 600;
 }

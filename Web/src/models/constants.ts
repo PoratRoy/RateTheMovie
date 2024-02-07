@@ -16,9 +16,11 @@ export const Colors = ["red", "blue", "green", "yellow", "purple", "pink", "oran
 
 export const Players = ["1 Player", "2 Players", "Multiplayer"];
 
+//TODO: arrange the ids
 export const ABOVE_ID = "above";
 export const CARD_ID = "card";
 export const BELOW_ID = "below";
+export const SHADOW_ID = "shadow";
 export const PLAYER1_ID = "player1";
 export const PLAYER2_ID = "player2";
 
@@ -35,3 +37,7 @@ export const MULTI_LAYOUT_ID = "multi-layout";
 export const DONE_BTN_ID = "done-btn";
 export const LOADING_ID = "loading";
 export const START_BTN_ID = "start-btn";
+
+export const DRAGGING_ID = "dragging";
+export const DOUBLE_CLICK_ID = "double-click";
+export const SHADOW_CARD_TITLE_ID = "shadow-card-title";

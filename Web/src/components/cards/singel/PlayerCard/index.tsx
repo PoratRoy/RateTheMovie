@@ -9,11 +9,11 @@ import CardEventLayout from "../../../layout/CardEventLayout";
 import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
-    const posotion = useCardOrderPosition(movie);
+    const position = useCardOrderPosition(movie);
     const [openCardView, setOpenCardView] = useState<boolean>(false);
     const [openShadow, setOpenShadow] = useState<boolean>(false);
 
-    const isShadow = posotion === 0 ? openShadow : false;
+    const isShadow = position === 0 ? openShadow : false;
     const cardId = `${movie.id}-${player.id}`;
 
     const back = <DraggableMovie isShadow={isShadow} id={cardId} movie={movie} player={player} />;
@@ -26,7 +26,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
                     flip={loading != undefined && !loading}
                     front={<LoadingCard />}
                     back={back}
-                    posotion={posotion}
+                    position={position}
                 />
             </CardEventLayout>
             {openCardView ? <CardView movie={movie} close={() => setOpenCardView(false)} /> : null}

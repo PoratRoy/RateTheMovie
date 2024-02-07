@@ -1,9 +1,9 @@
 import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Movie } from "./movie";
+import { Movie, VideoModel } from "./movie";
 import { SelectOption } from "./select";
 import { Player } from "./player";
 import React from "react";
-import { BtnSize, CardSide, CardSize, InputType, LogoSize } from "./union";
+import { BtnSize, CardSide, CardSize, InputType, LogoSize, StarSize } from "./union";
 import { Card, placeholderCardType } from "./card";
 import { LandingOpt } from "../enums/landing";
 
@@ -29,7 +29,7 @@ export type CardProps = IdProps & {
     flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
-    posotion?: number;
+    position?: number;
 };
 
 export type CardInnerContainerProps = {
@@ -43,6 +43,7 @@ export type ElectedCardWrapperProps = ChildernsProps & {
     rate: number | string;
     index: string;
     setFocus: React.Dispatch<React.SetStateAction<boolean>>;
+    isRightChoice: boolean;
 };
 
 export type CardSliceProps = {
@@ -76,7 +77,7 @@ export type ShadowCardProps = {
 
 export type CardImgShadowProps = {
     title: string;
-}
+};
 
 export type ElectedCardProps = {
     index: number;
@@ -98,6 +99,11 @@ export type PositionProps = IdProps & {
 
 export type RateStarProps = {
     amount: number;
+    size?: StarSize;
+};
+
+export type ElectedShadowProps = {
+    isRightChoice: boolean;
 };
 
 //--Pack--//
@@ -160,9 +166,9 @@ export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     };
 
 export type CardEventLayoutProps = ChildernsProps & {
-    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>
-    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>
-}
+    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
@@ -253,6 +259,7 @@ export type PlayBtnProps = IdProps & {
 export type ViewImgProps = {
     src: string;
     alt: string;
+    video: VideoModel | undefined
 };
 
 export type CardViewProps = {
@@ -266,15 +273,6 @@ export type CloseBtnProps = {
 
 export type GenreProps = {
     genre: string;
-};
-
-//--Landing--//
-export type LandingProps = {
-    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
-};
-
-export type MultiplayerProps = {
-    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
 };
 
 //--Common--//

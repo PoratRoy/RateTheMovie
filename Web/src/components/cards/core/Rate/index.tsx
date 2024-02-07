@@ -4,8 +4,8 @@ import { RateProps } from "../../../../models/types/props";
 
 const Rate: React.FC<RateProps> = ({ rate, id }) => {
     return (
-        <div id={id} className={style.cardRate}>
-            {rate}
+        <div id={id} className={style.cardRateWrapper} style={{ display: "none", opacity: 0 }}>
+            <div className={style.cardRate}>{rate}</div>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/date";
-import { BELOW_ID } from "../../models/constants";
+import { BELOW_ID, SHADOW_ID } from "../../models/constants";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
@@ -19,6 +19,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
         await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
         await delayPromise(1000);
         setCorrectPack(correctOrder);
+        await animation(`#${SHADOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
         const rightChoices = players[0].rightChoices;
         if(rightChoices.length > 0){
             setRemovePosition();

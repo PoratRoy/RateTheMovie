@@ -7,9 +7,16 @@ import { setElectedFrontCard } from "../../../../utils/card";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
     const [focus, setFocus] = useState<boolean>(false);
-
+    const isRightChoice = player.rightChoices[index] ? true : false;
+    const rate = card?.rate || 0;
+    
     return (
-        <ElectedCardWrapper rate={card?.rate || 0} index={index.toString()} setFocus={setFocus}>
+        <ElectedCardWrapper
+            isRightChoice={isRightChoice}
+            rate={rate}
+            index={index.toString()}
+            setFocus={setFocus}
+        >
             <Card
                 type={{ t: "Elected", index } as placeholderCardType}
                 front={setElectedFrontCard(player, card, index)}

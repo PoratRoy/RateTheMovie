@@ -10,3 +10,11 @@
     text-align: center;
     width: calc(var(--small-card-width) - 13px);
 }
+
+.cardRateWrapper{
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+}
