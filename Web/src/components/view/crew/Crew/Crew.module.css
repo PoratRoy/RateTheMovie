@@ -1,6 +1,10 @@
 .crewContainer{
     position: relative;
     width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .crewActorsContainer{

@@ -7,7 +7,7 @@ const Crew: React.FC<CrewProps> = ({ actors, director }) => {
     return (
         <section className={style.crewContainer}>
             {actors.length > 0 ? (
-                <React.Fragment>
+                <section>
                     <div className={style.crewTitle}>Actors</div>
                     <div className={style.crewActorsContainer}>
                         {actors.map((actor, i) => (
@@ -16,16 +16,16 @@ const Crew: React.FC<CrewProps> = ({ actors, director }) => {
                             </React.Fragment>
                         ))}
                     </div>
-                </React.Fragment>
+                </section>
             ) : null}
 
             {director ? (
-                <React.Fragment>
+                <section>
                     <div className={style.crewTitle}>Director</div>
                     <div className={style.crewActorsContainer}>
                         <Actor actor={director} />
                     </div>
-                </React.Fragment>
+                </section>
             ) : null}
         </section>
     );

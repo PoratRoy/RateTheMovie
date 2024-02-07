@@ -6,7 +6,11 @@
     overflow: hidden;
     background-color: black;
     position: relative;
-    max-width: 220px;
+    /* max-width: 220px; */
+}
+
+.cardViewImgVideo{
+    margin-top: 30px;
 }
 
 .cardViewImg{
@@ -27,4 +31,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.cardViewVideo{
+    height: fit-content;
 }

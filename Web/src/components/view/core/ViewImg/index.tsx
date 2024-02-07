@@ -16,9 +16,19 @@ const ViewImg: React.FC<ViewImgProps> = ({ src, alt, video }) => {
     };
 
     return (
-        <section className={style.cardViewImgContainer}>
+        <section
+            className={`${style.cardViewImgContainer} ${isVideo ? style.cardViewImgVideo : ""}`}
+        >
             {isVideo ? (
-                <ReactPlayer onEnded={handleVideoEnded} width={"100%"} controls url={video?.url} />
+                <section className={style.cardViewVideo}>
+                    <ReactPlayer
+                        onEnded={handleVideoEnded}
+                        width={"100%"}
+                        height={"100%"}
+                        controls
+                        url={video?.url}
+                    />
+                </section>
             ) : (
                 <section>
                     <img className={style.cardViewImg} src={src} alt={alt} />

@@ -28,7 +28,7 @@ const getMovieCast = async (
         const result = crewResults.find( //TODO: can be more than one director
             (option: MovieCrew) => option.job === Director,
         );
-        if (result) {
+        if (result && result.profile_path) {
             const { name, profile_path, job } = result;
             const director: CrewModel = setCrewModel(name, profile_path, job);
             return [actors, director];
