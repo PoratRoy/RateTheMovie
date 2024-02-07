@@ -1,9 +1,9 @@
 import React from "react";
-import style from "./DraggingAnimation.module.css";
+import style from "./Dragging.module.css";
 import { FaHandRock } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const DraggingAnimation: React.FC = () => {
+const Dragging: React.FC = () => {
     return (
         <motion.div className={style.dragIconContainer}>
             <motion.div
@@ -24,4 +24,4 @@ const DraggingAnimation: React.FC = () => {
     );
 };
 
-export default DraggingAnimation;
+export default Dragging;

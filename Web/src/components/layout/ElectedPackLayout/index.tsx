@@ -17,7 +17,7 @@ const ElectedPackLayout: React.FC = () => {
             {finishAnimation.playAgainBtn ? (
                 <div className={style.playAgain}>
                     <div className={style.playAgainDescription}>
-                        You were right in {players[0].rightChoices.length} ratings!
+                        {players[0].rightChoices.length} correct ratings !
                     </div>
                     <PlayAgainBtn />
                 </div>
