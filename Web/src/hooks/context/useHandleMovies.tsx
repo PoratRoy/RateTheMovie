@@ -10,17 +10,35 @@ const useHandleMovies = () => {
     const { setMovies, setMovieLoading } = useMovieContext();
 
     const handleMovies = (movies: Movie[]) => {
-        setMovieLoading(true);
         console.log(`Set ${PACK_CARDS_NUM} movies: `, movies);
+        setMovieLoading(true);
         setTimeout(() => {
-            setMovies(movies);
+            setMoviesOnStateAndSession(movies);
             correctOrder(movies);
-            Session.set(SessionKey.MOVIES, movies);
             setMovieLoading(false);
         }, 1000);
     };
 
-    return { handleMovies };
+    const handleMoreMovieData = (movies: Movie[]) => {
+        setMoviesOnStateAndSession(movies);
+    };
+
+    const handleBackupMovies = (movies: Movie[]) => {
+        Session.add(SessionKey.BACKUP, movies);
+    };
+
+    const handleMoreBackupMoviesDate = (movies: Movie[]) => {
+        Session.remove(SessionKey.BACKUP);
+        Session.add(SessionKey.BACKUP, movies);
+    };
+
+    const setMoviesOnStateAndSession = (movies: Movie[]) => {
+        setMovies(movies);
+        Session.remove(SessionKey.MOVIES);
+        Session.set(SessionKey.MOVIES, movies);
+    };
+
+    return { handleMovies, handleMoreMovieData, handleBackupMovies, handleMoreBackupMoviesDate };
 };
 
 export default useHandleMovies;

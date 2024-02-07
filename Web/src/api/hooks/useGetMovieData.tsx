@@ -4,7 +4,7 @@ import { PACK_CARDS_NUM } from "../../models/constants";
 import fetchOMDB from "../fetch/fetchOMDB";
 import { useErrorContext } from "../../context/ErrorContext";
 import URL from "../path.json";
-import { setNewMovie } from "../utils/init";
+import { addMovieDetails, setNewMovie } from "../utils/init";
 import { removeMovieFromRemaining } from "../utils/movie";
 import getMovieCast from "../utils/getMovieCast";
 import getMovieVideo from "../utils/getMovieVideo";
@@ -12,29 +12,29 @@ import getMovieVideo from "../utils/getMovieVideo";
 const useGetMovieData = () => {
     const { handleError } = useErrorContext();
 
-    const dataMovies = async (moviesTMDB: MovieTMDB[]): Promise<[Movie[], MovieTMDB[]]> => {
+    const getMovieRatingData = async (
+        moviesTMDB: MovieTMDB[],
+    ): Promise<[Movie[], MovieTMDB[]]> => {
         let movies: Movie[] = [];
         let remainingMovies: MovieTMDB[] = [...moviesTMDB];
 
         for (const tmdbMovie of moviesTMDB) {
-            const { id, title, release_date } = tmdbMovie;
-            if (id && title && release_date) {
+            const { id, title, release_date, poster_path } = tmdbMovie;
+            if (id && title && release_date && poster_path) {
                 const year = extractYearFromDate(release_date);
                 try {
                     const resultsOMDB: MovieOMDB = await fetchOMDB(URL.omdb, title, year);
-                    const { imdbRating, Poster } = resultsOMDB;
+                    const { imdbRating } = resultsOMDB;
                     //TODO: no duplicate rates
-                    if (Poster && Poster !== "N/A" && imdbRating && imdbRating !== "N/A") {
-                        const crew = await getMovieCast(tmdbMovie.id);   
-                        const video = await getMovieVideo(tmdbMovie.id);                
-                        const movie = setNewMovie(tmdbMovie, resultsOMDB, crew, video);
+                    if (imdbRating && imdbRating !== "N/A") {
+                        const movie = setNewMovie(tmdbMovie, resultsOMDB);
                         if (movie) {
                             movies.push(movie);
                         }
                     }
                     remainingMovies = removeMovieFromRemaining(remainingMovies, tmdbMovie);
                 } catch (error) {
-                    console.error(error)
+                    console.error(error);
                     handleError((error as Error).message || "Something went wrong");
                 }
 
@@ -44,7 +44,19 @@ const useGetMovieData = () => {
         return [movies, remainingMovies];
     };
 
-    return { dataMovies };
+    const getMovieViewData = async (remainingMovies: Movie[]): Promise<Movie[]> => {
+        let movies: Movie[] = [];
+
+        for (const movie of remainingMovies) {
+            const { id } = movie;
+            const crew = await getMovieCast(id);
+            const video = await getMovieVideo(id);
+            movies.push(addMovieDetails(movie, video, crew));
+        }
+        return movies;
+    };
+
+    return { getMovieRatingData, getMovieViewData };
 };
 
 export default useGetMovieData;

@@ -1,7 +1,7 @@
 import { MovieFilters, MovieTMDB } from "../../models/types/movie";
 import { getRandomNumber } from "../../utils/calc";
 import URL from "../path.json";
-import { PACK_CARDS_NUM } from "../../models/constants";
+import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM } from "../../models/constants";
 import { isDateVaild } from "../../utils/date";
 import { isGenreValid } from "../../utils/genre";
 import fetchTMDB from "../fetch/fetchTMDB";
@@ -11,14 +11,15 @@ import { isLanguageValid } from "../../utils/filter";
 const useDiscoverMovies = () => {
     const { handleError } = useErrorContext();
 
-    const discoverMovies = async (filters?: MovieFilters) => {
+    const discoverTmdbMovies = async (filters?: MovieFilters) => {
         const page = getRandomNumber(1, 500);
 
         try {
             const resultsTMDB: MovieTMDB[] = await fetchTMDB(URL.tmdb.discover, page, filters);
             if (resultsTMDB && resultsTMDB.length >= PACK_CARDS_NUM) {
                 const movies: MovieTMDB[] = resultsTMDB.filter((movie) => {
-                    const { title, release_date, id, genre_ids, original_language } = movie;
+                    const { title, release_date, id, genre_ids, original_language, poster_path } =
+                        movie;
                     const isValidDate = isDateVaild(release_date, filters);
                     const isValidGenre = isGenreValid(genre_ids, filters);
                     const isValidLanguage = isLanguageValid(original_language, filters);
@@ -27,6 +28,7 @@ const useDiscoverMovies = () => {
                         id &&
                         title &&
                         release_date &&
+                        poster_path &&
                         isValidDate &&
                         isValidGenre &&
                         isValidLanguage
@@ -42,6 +44,22 @@ const useDiscoverMovies = () => {
         }
         return [];
     };
+
+    const discoverMovies = async (filters?: MovieFilters) => {
+        let increment: number = 0;
+        let moviesTMDB: MovieTMDB[] = [];
+        do {
+            if (increment >= DISCOVERD_MOVIES_NUM / 2) {
+                throw new Error("Not enough movies with thouse filters");
+            }
+            const newMovies: MovieTMDB[] = await discoverTmdbMovies(filters);
+            moviesTMDB.push(...newMovies);
+            increment++;
+        } while (moviesTMDB.length <= DISCOVERD_MOVIES_NUM);
+
+        return moviesTMDB;
+    };
+
     return { discoverMovies };
 };
 

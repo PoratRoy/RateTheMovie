@@ -5,10 +5,8 @@ import URL from "../path.json";
 import { setCrewModel } from "./init";
 
 const getMovieCast = async (
-    movieId: number | undefined,
+    movieId: string,
 ): Promise<[CrewModel[], CrewModel | undefined]> => {
-    if (!movieId) return [[], undefined];
-
     const cast = await fetchCast(URL.tmdb.cast, movieId);
     const actorsResults: MovieCast[] = cast[0];
     const crewResults: MovieCrew[] = cast[1];

@@ -1,7 +1,7 @@
 import { useErrorContext } from "../../context/ErrorContext";
 import { useMovieContext } from "../../context/MovieContext";
 import useHandleMovies from "../../hooks/context/useHandleMovies";
-import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM } from "../../models/constants";
+import { PACK_CARDS_NUM } from "../../models/constants";
 import { MovieFilters, MovieTMDB } from "../../models/types/movie";
 import useDiscoverMovies from "./useDiscoverMovies";
 import useGetMovieData from "./useGetMovieData";
@@ -9,33 +9,26 @@ import useSessionBackupMovies from "./useSessionBackupMovies";
 
 const useFirstRoundMovies = () => {
     const { discoverMovies } = useDiscoverMovies();
-    const { dataMovies } = useGetMovieData();
+    const { getMovieRatingData, getMovieViewData } = useGetMovieData();
     const { backupMovies } = useSessionBackupMovies();
     const { setMovieLoading } = useMovieContext();
     const { handleError } = useErrorContext();
-    const { handleMovies } = useHandleMovies()
+    const { handleMovies, handleMoreMovieData } = useHandleMovies();
 
     const firstRoundMovies = async (filters?: MovieFilters | undefined) => {
         try {
             setMovieLoading(true);
-            let increment: number = 0;
-            let moviesTMDB: MovieTMDB[] = [];
-            do {
-                if (increment >= DISCOVERD_MOVIES_NUM / 2) {
-                    throw new Error("Not enough movies with thouse filters");
-                }
-                const newMovies: MovieTMDB[] = await discoverMovies(filters);
-                moviesTMDB.push(...newMovies);
-                increment++;
-            } while (moviesTMDB.length <= DISCOVERD_MOVIES_NUM);
+            const moviesTMDB: MovieTMDB[] = await discoverMovies(filters);
 
-            const [movies, remainingMovies] = await dataMovies(moviesTMDB);
-            if (movies.length === PACK_CARDS_NUM) {
-                handleMovies(movies);
+            const [moviesOMDB, remainingMovies] = await getMovieRatingData(moviesTMDB);
+            if (moviesOMDB.length === PACK_CARDS_NUM) {
+                handleMovies(moviesOMDB);
             }
 
-            await backupMovies(remainingMovies);
+            const movies = await getMovieViewData(moviesOMDB);
+            handleMoreMovieData(movies);
 
+            await backupMovies(remainingMovies);
         } catch (error) {
             handleError((error as Error).message || "Something went wrong");
         } finally {
