@@ -275,6 +275,15 @@ export type GenreProps = {
     genre: string;
 };
 
+//--Landing--//
+export type LandingProps = {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+};
+
+export type MultiplayerProps = {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+};
+
 //--Common--//
 export type ImgProps = {
     src: string;

@@ -9,7 +9,7 @@
     opacity: 0;
 }
 
-.multiFormContainer{
+.multiFormChildrens{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -17,16 +17,8 @@
     gap: 1em;
 }
 
-.multiFormChildrens{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 3em;
-}
-
 .multiFormbtn{
-    margin-top: 2em;
+    margin-top: 3em;
     width: 100%;
     display: flex;
     justify-content: center;

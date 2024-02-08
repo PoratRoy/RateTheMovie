@@ -8,5 +8,5 @@ export const initSelectDefaultValues: SelectInputSchema = {
 };
 
 export const initMultiDefaultValues: MultiplayerInputSchema = {
-    name: "",
+    name: "Player 1",
 };

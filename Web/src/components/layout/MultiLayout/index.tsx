@@ -3,7 +3,6 @@ import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
 import { MultiLayoutProps } from "../../../models/types/props";
 import { Colors, MULTI_LAYOUT_ID, MULTI_START_BTN_ID } from "../../../models/constants";
 import { useState } from "react";
-import RoomLink from "../../actions/RoomLink";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import { LandingOpt } from "../../../models/enums/landing";
 import { initPlayer } from "../../../models/initialization/player";
@@ -39,10 +38,8 @@ const MultiLayout = <TInput extends FieldValues>({
                 onSubmit={handleSubmit(onSubmitMutliForm)}
                 noValidate
             >
-                <section className={style.multiFormContainer}>
-                    <RoomLink room="https://url.url" />
-                    <section className={style.multiFormChildrens}>{children}</section>
-                </section>
+                <section className={style.multiFormChildrens}>{children}</section>
+
                 <section className={style.multiFormbtn}>
                     <PlayBtn
                         id={MULTI_START_BTN_ID}
