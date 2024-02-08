@@ -77,6 +77,40 @@ class GameSocket implements ISocket {
 
 export default GameSocket;
 
+// socket.on(connection.handshake, (callback: (uid: string, users: string[]) => void) => {
+//     console.info("Handshake received from: " + socket.id);
+
+//     const reconnected = Object.values(this.users).includes(socket.id);
+
+//     if (reconnected) {
+//         console.info("This user has reconnected.");
+
+//         const uid = getUidFromSocketID(socket.id, this.users);
+//         const users = Object.values(this.users);
+
+//         if (uid) {
+//             console.info("Sending callback for reconnect ...");
+//             callback(uid, users);
+//             return;
+//         }
+//     }
+
+//     const uid = v4();
+//     this.users[uid] = socket.id;
+
+//     const users = Object.values(this.users);
+//     console.info("Sending callback ...");
+//     callback(uid, users);
+
+//     const u = users.filter((id) => id !== socket.id);
+//     console.info("Emitting event: " + connection.user_connected + " to", u);
+//     u.forEach((id) =>
+//         users
+//             ? socket.to(id).emit(connection.user_connected, users)
+//             : socket.to(id).emit(connection.user_connected),
+//     );
+// });
+
 // // Upon connection - only to user
 // socket.emit("message", "Welcome to Chat App!");
 

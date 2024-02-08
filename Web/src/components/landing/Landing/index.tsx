@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import PlayerBtn from "../../actions/btn/PlayerBtn";
 import { Colors, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constants";
@@ -12,11 +12,9 @@ import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
 
 const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
-    const { socket } = useSocketContext();
-
-    useEffect(() => {
-        console.log(socket);
-    }, [socket]);
+    const { SocketState } = useSocketContext();
+    // const { socket, uid, users } = SocketState;
+    console.log("SocketState", SocketState);
 
     const { setPlayers } = useGamePlayContext();
 
