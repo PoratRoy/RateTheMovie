@@ -1,15 +1,18 @@
 import { Router } from "express";
-import { welcome } from "../controllers/home.controller";
+import HomeController from "../controllers/home.controller";
 
 class HomeRoutes {
     router = Router();
+    controller = new HomeController();
 
     constructor() {
         this.intializeRoutes();
     }
 
     intializeRoutes() {
-        this.router.get("/", welcome);
+        this.router.get("/", this.controller.home);
+        this.router.get("/ping", this.controller.ping);
+        this.router.get("/status", this.controller.status);
     }
 }
 

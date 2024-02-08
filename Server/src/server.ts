@@ -3,11 +3,11 @@ dotenv.config();
 import express, { Application } from "express";
 import Server from "../index";
 import Websocket from "./socket";
-import OrdersSocket from "./socket/orders.socket";
+import GameSocket from "./socket/game.socket";
 
 const app: Application = express();
-const server: Server = new Server(app);
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+new Server(app);
 
 const forSocket = app
     .listen(PORT, "localhost", function () {
@@ -22,4 +22,4 @@ const forSocket = app
     });
 
 const io = Websocket.getInstance(forSocket);
-io.initializeHandlers([{ path: "/orders", handler: new OrdersSocket() }]);
+io.initializeHandlers([{ path: "/game", handler: new GameSocket() }]);

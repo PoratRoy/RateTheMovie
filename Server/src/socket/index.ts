@@ -1,5 +1,6 @@
 import { Server as SocketServer, Socket } from "socket.io";
 import { InitSocket } from "../model/types/socket";
+import { Server as HttpServer } from 'http';
 
 const WEBSOCKET_CORS = {
     origin: "*",
@@ -7,25 +8,29 @@ const WEBSOCKET_CORS = {
 };
 
 class Websocket extends SocketServer {
-    private static io: Websocket;
+    private static instance: Websocket;
 
-    constructor(httpServer: any) {
-        super(httpServer, {
+    constructor(httpServer: HttpServer) {
+        super(httpServer, {  
+            serveClient: false,
+            pingInterval: 10000,
+            pingTimeout: 5000,
+            cookie: false,
             cors: WEBSOCKET_CORS,
         });
     }
 
     public static getInstance(httpServer?: any): Websocket {
-        if (!Websocket.io) {
-            Websocket.io = new Websocket(httpServer);
+        if (!Websocket.instance) {
+            Websocket.instance = new Websocket(httpServer);
         }
 
-        return Websocket.io;
+        return Websocket.instance;
     }
 
     public initializeHandlers(socketHandlers: Array<InitSocket>) {
         socketHandlers.forEach((element) => {
-            let namespace = Websocket.io.of(element.path, (socket: Socket) => {
+            let namespace = Websocket.instance.of(element.path, (socket: Socket) => {
                 element.handler.handleConnection(socket);
             });
 
