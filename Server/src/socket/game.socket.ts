@@ -13,9 +13,9 @@ class GameSocket implements ISocket {
     }
 
     handleConnection(socket: Socket) {
-        console.info("Message received from " + socket.id);
+        console.info("Connection start for user " + socket.id);
 
-        socket.on(connection.handshake, (callback: (uid: string, users: string[]) => void) => {
+        socket.on("handshake", (callback: (uid: string, users: string[]) => void) => {
             console.info("Handshake received from: " + socket.id);
 
             const reconnected = Object.values(this.users).includes(socket.id);
@@ -41,11 +41,11 @@ class GameSocket implements ISocket {
             callback(uid, users);
 
             const u = users.filter((id) => id !== socket.id);
-            console.info("Emitting event: " + connection.user_connected + " to", u);
+            console.info("Emitting event: " + "user_connected" + " to", u);
             u.forEach((id) =>
                 users
-                    ? socket.to(id).emit(connection.user_connected, users)
-                    : socket.to(id).emit(connection.user_connected),
+                    ? socket.to(id).emit("user_connected", users)
+                    : socket.to(id).emit("user_connected"),
             );
         });
 

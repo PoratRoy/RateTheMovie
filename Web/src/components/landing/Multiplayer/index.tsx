@@ -8,12 +8,12 @@ import RoomLink from "../../actions/RoomLink";
 import NameInput from "../../actions/input/NameInput";
 import MultiLayout from "../../layout/MultiLayout";
 
-const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption }) => {
+const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption, roomLink }) => {
     const methods = useInitialForm<MultiplayerInputSchema>(multiFormSchema, initMultiDefaultValues);
 
     return (
         <MultiLayout<MultiplayerInputSchema> methods={methods} setLayoutOption={setLayoutOption}>
-            <RoomLink room="http://localhost:5173/game/" />
+            <RoomLink room={roomLink} />
             <NameInput
                 id={multiplayerInputs.name.id}
                 placeholder={multiplayerInputs.name.placeholder}

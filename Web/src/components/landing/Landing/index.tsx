@@ -11,10 +11,8 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
 
-const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
-    const { SocketState } = useSocketContext();
-    // const { socket, uid, users } = SocketState;
-    console.log("SocketState", SocketState);
+const Landing: React.FC<LandingProps> = ({ setLayoutOption, setRoomLink }) => {
+    const { SocketState, handleSocketConnection } = useSocketContext();
 
     const { setPlayers } = useGamePlayContext();
 
@@ -27,6 +25,10 @@ const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
 
     const handleMulti = () => {
         setLayoutOption(LandingOpt.LANDING_MULTI);
+        handleSocketConnection();
+        //create socket connection and room (without players)
+        //get the room link and send it to <Multiplayer/>
+        //setRoomLink(roomLink);
     };
 
     return (

@@ -24,6 +24,7 @@ const MultiLayout = <TInput extends FieldValues>({
         setIsLoading(true);
         const { name } = data;
         const players = [initPlayer(0, Colors[0] as PlayerColor, name)];
+        //send the player to the socket room
         Session.set(SessionKey.PLAYERS, players);
         setPlayers(players);
         setLayoutOption(LandingOpt.MULTI_FILTER);
