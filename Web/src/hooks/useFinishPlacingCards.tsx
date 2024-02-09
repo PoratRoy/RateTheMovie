@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Player } from "../models/types/player";
+import { Player } from "../../../Common/model/player";
 import { isFinishPlacingElectedpCards } from "../utils/finish";
 
 const useFinishPlacingCards = (players: Player[]) => {

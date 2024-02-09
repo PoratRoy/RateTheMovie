@@ -1,4 +1,4 @@
-import { Card } from "../types/card";
+import { Card } from "../../../../Common/model/card";
 import { initMovie } from "./movie";
 
 export const initCard: Card = {

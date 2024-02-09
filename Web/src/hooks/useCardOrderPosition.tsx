@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { Movie } from "../models/types/movie";
+import { Movie } from "../../../Common/model/movie";
 
 const useCardOrderPosition = (movie: Movie) => {
     const { players, finishAnimation } = useGamePlayContext();

@@ -3,7 +3,7 @@ import { Movie } from "./movie";
 import { PlayerColor } from "./union";
 
 export type Player = {
-    id: number;
+    id: string;
     name: string;
     color: PlayerColor;
     score: number;

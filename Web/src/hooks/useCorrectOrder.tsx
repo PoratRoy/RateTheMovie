@@ -1,6 +1,6 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { Card } from "../models/types/card";
-import { Movie } from "../models/types/movie";
+import { Card } from "../../../Common/model/card";
+import { Movie } from "../../../Common/model/movie";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { movieRating } from "../utils/format";

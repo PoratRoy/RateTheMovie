@@ -1,7 +1,7 @@
 import { useMovieContext } from "../../context/MovieContext";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import { SessionKey } from "../../models/enums/session";
-import { Movie } from "../../models/types/movie";
+import { Movie } from "../../../../Common/model/movie";
 import Session from "../../utils/sessionStorage";
 import useCorrectOrder from "../useCorrectOrder";
 

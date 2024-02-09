@@ -1,10 +1,4 @@
-import { Movie } from "./movie";
-
-export type Card = {
-    id?: string;
-    movie: Movie;
-    rate?: number;
-};
+import { Movie } from "../../../../Common/model/movie";
 
 export type CardType = "Elected" | "Player" | "Shadow";
 

@@ -1,5 +1,5 @@
 import { extractYearFromDate } from "../../utils/date";
-import { Movie, MovieOMDB, MovieTMDB } from "../../models/types/movie";
+import { MovieOMDB, MovieTMDB } from "../../models/types/movie";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import fetchOMDB from "../fetch/fetchOMDB";
 import { useErrorContext } from "../../context/ErrorContext";
@@ -8,6 +8,7 @@ import { addMovieDetails, setNewMovie } from "../utils/init";
 import { removeMovieFromRemaining } from "../utils/movie";
 import getMovieCast from "../utils/getMovieCast";
 import getMovieVideo from "../utils/getMovieVideo";
+import { Movie } from "../../../../Common/model/movie";
 
 const useGetMovieData = () => {
     const { handleError } = useErrorContext();

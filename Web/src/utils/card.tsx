@@ -2,10 +2,10 @@ import PackWrapper from "../components/cards/wrapper/PackWrapper";
 import DraggableMovie from "../components/cards/singel/DraggableMovie";
 import ShadowPlayerCard from "../components/cards/singel/ShadowPlayerCard";
 import { PACK_CARDS_NUM, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
-import { Movie } from "../models/types/movie";
-import { Player } from "../models/types/player";
+import { Player } from "../../../Common/model/player";
+import { Movie } from "../../../Common/model/movie";
+import { Card } from "../../../Common/model/card";
 import { CardSide } from "../models/types/union";
-import { Card } from "../models/types/card";
 import React from "react";
 
 export const setElectedFrontCard = (player: Player, card: Card | undefined, index: number) => {

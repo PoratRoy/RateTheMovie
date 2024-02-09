@@ -1,4 +1,5 @@
-import { Movie, MovieTMDB } from "../../models/types/movie";
+import { MovieTMDB } from "../../models/types/movie";
+import { Movie } from "../../../../Common/model/movie";
 
 export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
     movies.some((movie) => movie.title !== "" || movie.id !== "");

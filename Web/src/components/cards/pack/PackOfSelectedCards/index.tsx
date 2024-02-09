@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ElectedCard from "../../singel/ElectedCard";
-import { Card as CardModal } from "../../../../models/types/card";
+import { Card as CardModal } from "../../../../../../Common/model/card";
 import Pack from "../../core/Pack";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { motion } from "framer-motion";

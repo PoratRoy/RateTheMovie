@@ -2,7 +2,7 @@ import React from "react";
 import PlayerCard from "../../singel/PlayerCard";
 import Pack from "../../core/Pack";
 import { useMovieContext } from "../../../../context/MovieContext";
-import { Movie } from "../../../../models/types/movie";
+import { Movie } from "../../../../../../Common/model/movie";
 import { PackOfCardsProps } from "../../../../models/types/props";
 import NotEnoughMovies from "../../../common/NotEnoughMovies";
 

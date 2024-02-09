@@ -1,9 +1,9 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { Card } from "../models/types/card";
 import { initCard } from "../models/initialization/card";
 import { useGamePlayContext } from "./GamePlayContext";
-import { Movie } from "../models/types/movie";
-import { Player } from "../models/types/player";
+import { Movie } from "../../../Common/model/movie";
+import { Card } from "../../../Common/model/card";
+import { Player } from "../../../Common/model/player";
 import { movieRating } from "../utils/format";
 import { createContext, useContext, useState } from "react";
 
@@ -27,8 +27,8 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
 
             setPlayers((prev) => {
                 const players = [...prev];
-                const playerId = player.id;
-                const selectedCards = players[playerId].selectedCards;
+                const playerId = player.id;//TODO: to fix
+                const selectedCards = players[0].selectedCards;
 
                 if (id) {
                     const cardId = parseInt(id);

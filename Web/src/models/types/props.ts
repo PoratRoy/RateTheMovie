@@ -1,11 +1,12 @@
 import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Movie, VideoModel } from "./movie";
 import { SelectOption } from "./select";
-import { Player } from "./player";
 import React from "react";
 import { BtnSize, CardSide, CardSize, InputType, LogoSize, StarSize } from "./union";
-import { Card, placeholderCardType } from "./card";
+import { placeholderCardType } from "./card";
 import { LandingOpt } from "../enums/landing";
+import { Card } from "../../../../Common/model/card";
+import { CrewModel, Movie, VideoModel } from "../../../../Common/model/movie";
+import { Player } from "../../../../Common/model/player";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -170,6 +171,20 @@ export type CardEventLayoutProps = ChildernsProps & {
     setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type CrewImgProps = {
+    src: string;
+    alt: string;
+};
+
+export type CrewProps = {
+    actors: CrewModel[];
+    director: CrewModel | undefined;
+};
+
+export type ActorProps = {
+    actor: CrewModel;
+};
+
 //--Input--//
 export type InputProps<TInput extends FieldValues> = {
     id: Path<TInput>;
@@ -259,7 +274,7 @@ export type PlayBtnProps = IdProps & {
 export type ViewImgProps = {
     src: string;
     alt: string;
-    video: VideoModel | undefined
+    video: VideoModel | undefined;
 };
 
 export type CardViewProps = {
@@ -278,12 +293,12 @@ export type GenreProps = {
 //--Landing--//
 export type LandingProps = {
     setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
-    setRoomLink: React.Dispatch<React.SetStateAction<string>>
+    setRoomLink: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type MultiplayerProps = {
     setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
-    roomLink: string
+    roomLink: string;
 };
 
 //--Common--//

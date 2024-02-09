@@ -1,4 +1,5 @@
-import { MovieVideo, VideoModel } from "../../models/types/movie";
+import { MovieVideo } from "../../models/types/movie";
+import { VideoModel } from "../../../../Common/model/movie";
 import { Trailer, YouTube } from "../constants";
 import fetchVideo from "../fetch/fetchVideo";
 import URL from "../path.json";

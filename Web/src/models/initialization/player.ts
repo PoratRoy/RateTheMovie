@@ -1,7 +1,7 @@
-import { Player } from "../types/player";
-import { PlayerColor } from "../types/union";
+import { Player } from "../../../../Common/model/player";
+import { PlayerColor } from "../../../../Common/model/union";
 
-export const initPlayer = (id: number, color: PlayerColor, name: string): Player => {
+export const initPlayer = (id: string, color: PlayerColor, name: string): Player => {
     return {
         id,
         name,

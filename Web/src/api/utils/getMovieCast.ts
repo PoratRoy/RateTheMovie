@@ -1,5 +1,6 @@
-import { CrewModel, MovieCast, MovieCrew } from "../../models/types/movie";
+import { MovieCast, MovieCrew } from "../../models/types/movie";
 import { Director, NUMBER_OF_ACTORS } from "../constants";
+import { CrewModel } from "../../../../Common/model/movie";
 import fetchCast from "../fetch/fetchCast";
 import URL from "../path.json";
 import { setCrewModel } from "./init";

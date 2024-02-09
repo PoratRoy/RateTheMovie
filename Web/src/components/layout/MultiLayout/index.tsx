@@ -6,7 +6,7 @@ import { useState } from "react";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import { LandingOpt } from "../../../models/enums/landing";
 import { initPlayer } from "../../../models/initialization/player";
-import { PlayerColor } from "../../../models/types/union";
+import { PlayerColor } from "../../../../../Common/model/union";
 import Session from "../../../utils/sessionStorage";
 import { SessionKey } from "../../../models/enums/session";
 import { useGamePlayContext } from "../../../context/GamePlayContext";

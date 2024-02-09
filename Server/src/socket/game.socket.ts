@@ -4,6 +4,7 @@ import { Player } from "../model/types/player";
 import { getUidFromSocketID } from "../utils/socket";
 import { v4 } from "uuid";
 import connection from "../model/socketConnection.json";
+import { SocketProps } from "../../../Common/model/socket";
 
 class GameSocket implements ISocket {
     public users: Player;
@@ -15,7 +16,14 @@ class GameSocket implements ISocket {
     handleConnection(socket: Socket) {
         console.info("Connection start for user " + socket.id);
 
-        socket.on("handshake", (callback: (uid: string, users: string[]) => void) => {
+        socket.on(
+            "handshake",
+            (props: SocketProps, callback: (uid: string, users: string[]) => void) => {
+                console.info("Handshake received from: " + socket.id);
+            },
+        );
+
+        socket.on("handshake2", (callback: (uid: string, users: string[]) => void) => {
             console.info("Handshake received from: " + socket.id);
 
             const reconnected = Object.values(this.users).includes(socket.id);

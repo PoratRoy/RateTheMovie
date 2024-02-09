@@ -1,5 +1,5 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { Player } from "../models/types/player";
+import { Player } from "../../../Common/model/player";
 import { movieRating } from "../utils/format";
 
 const useSetScore = () => {

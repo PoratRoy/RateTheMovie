@@ -1,6 +1,6 @@
 import { PACK_CARDS_NUM } from "../models/constants";
-import { Card } from "../models/types/card";
-import { Player } from "../models/types/player";
+import { Card } from "../../../Common/model/card";
+import { Player } from "../../../Common/model/player";
 
 export const isFinishPlacingElectedpCards = (players: Player[]) => {
     const sc: ((Card | undefined)[] | undefined)[] = players.map((player: Player) => {

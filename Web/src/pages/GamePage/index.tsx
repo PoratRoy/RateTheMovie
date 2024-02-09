@@ -1,6 +1,6 @@
 import React from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import { Player } from "../../models/types/player";
+import { Player } from "../../../../Common/model/player";
 import PlayerLayout from "../../components/layout/PlayerLayout";
 import GameLayout from "../../components/layout/GameLayout";
 import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
