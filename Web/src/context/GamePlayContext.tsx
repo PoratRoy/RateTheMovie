@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { Card } from "../../../Common/model/card";
-import { Player } from "../../../Common/model/player";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
 import { FinishAnimation } from "../models/types/game";
 import { initFinishAnimation } from "../models/initialization/context";
+import { Card } from "../models/types/card";
+import { Player } from "../models/types/player";
 
 export const GamePlayContext = createContext<{
     correctOrder: Card[];

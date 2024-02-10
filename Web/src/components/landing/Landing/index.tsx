@@ -3,13 +3,13 @@ import PlayBtn from "../../actions/btn/PlayBtn";
 import PlayerBtn from "../../actions/btn/PlayerBtn";
 import { Colors, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constants";
 import { initPlayer } from "../../../models/initialization/player";
-import { PlayerColor } from "../../../../../Common/model/union";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
 import { LandingOpt } from "../../../models/enums/landing";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
+import { PlayerColor } from "../../../models/types/union";
 
 const Landing: React.FC<LandingProps> = ({ setLayoutOption, setRoomLink }) => {
     const { handleSocketConnection } = useSocketContext();

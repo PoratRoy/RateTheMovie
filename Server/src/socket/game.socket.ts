@@ -4,7 +4,7 @@ import { Player } from "../model/types/player";
 import { getUidFromSocketID } from "../utils/socket";
 import { v4 } from "uuid";
 import connection from "../model/socketConnection.json";
-import { SocketProps } from "../../../Common/model/socket";
+import { SocketProps } from "../model/types/socket";
 
 class GameSocket implements ISocket {
     public users: Player;

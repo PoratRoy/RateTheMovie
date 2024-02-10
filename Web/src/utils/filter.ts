@@ -1,8 +1,8 @@
 import { Colors } from "../models/constants";
 import { initPlayer } from "../models/initialization/player";
 import { MovieFilters } from "../models/types/movie";
-import { Player } from "../../../Common/model/player";
-import { PlayerColor } from "../../../Common/model/union";
+import { Player } from "../models/types/player";
+import { PlayerColor } from "../models/types/union";
 
 export const switchPlayers = (numberOfPlayers: number): Player[] => {
     let players: Player[] = [];

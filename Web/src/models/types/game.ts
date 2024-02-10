@@ -1,4 +1,5 @@
-import { Card } from "../../../../Common/model/card";
+import { Card } from "./card";
+
 
 export type FinishAnimation = {
     playAgainBtn: boolean;

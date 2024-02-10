@@ -1,9 +1,9 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { Card } from "../../../Common/model/card";
-import { Movie } from "../../../Common/model/movie";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { movieRating } from "../utils/format";
+import { Movie } from "../models/types/movie";
+import { Card } from "../models/types/card";
 
 const useCorrectOrder = () => {
     const { setCorrectOrder } = useGamePlayContext();

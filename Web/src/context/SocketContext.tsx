@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { useSocket } from "../hooks/context/useSocket";
 import { initMultiplayerState } from "../models/initialization/context";
 import { MultiplayerState } from "../models/types/socket";
-import { Player } from "../../../Common/model/player";
+import { Player } from "../models/types/player";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Player } from "../../../Common/model/player";
 import { isFinishPlacingElectedpCards } from "../utils/finish";
+import { Player } from "../models/types/player";
 
 const useFinishPlacingCards = (players: Player[]) => {
     const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);

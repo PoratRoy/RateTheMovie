@@ -1,5 +1,4 @@
-import { MovieOMDB, MovieTMDB } from "../../models/types/movie";
-import { CrewModel, Movie, VideoModel } from "../../../../Common/model/movie";
+import { CrewModel, Movie, MovieOMDB, MovieTMDB, VideoModel } from "../../models/types/movie";
 import URL from "../path.json";
 
 export const setNewMovie = (tmdbMovie: MovieTMDB, resultsOMDB: MovieOMDB): Movie | undefined => {

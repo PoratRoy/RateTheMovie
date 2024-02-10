@@ -1,4 +1,5 @@
-import { Movie } from "../../../Common/model/movie";
+import { Movie } from "./types/movie";
+
 
 export const MOCK_MOVIES: Movie[] = [
     {

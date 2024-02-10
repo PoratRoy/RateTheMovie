@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
-import { Movie } from "../../../Common/model/movie";
 import { initMovieList } from "../models/initialization/movie";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
+import { Movie } from "../models/types/movie";
 
 export const MovieContext = createContext<{
     movies: Movie[];

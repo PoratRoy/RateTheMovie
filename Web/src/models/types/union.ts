@@ -19,6 +19,16 @@ export type InputType =
     | "submit"
     | "checkbox";
 
+export type PlayerColor =
+    | "red"
+    | "blue"
+    | "green"
+    | "yellow"
+    | "purple"
+    | "pink"
+    | "orange"
+    | "brown";
+
 export type CardSide = "left" | "right" | "all";
 
 export type BtnSize = "small" | "medium" | "large";
