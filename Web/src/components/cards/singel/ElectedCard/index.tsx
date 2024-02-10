@@ -5,11 +5,10 @@ import ElectedCardWrapper from "../../wrapper/ElectedCardWrapper";
 import { ElectedCardProps } from "../../../../models/types/props";
 import { setElectedFrontCard } from "../../../../utils/card";
 
-const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
+const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
     const [focus, setFocus] = useState<boolean>(false);
-    const isRightChoice = player.rightChoices[index] ? true : false;
-    const rate = card?.rate || 0;
-    
+    const isRightChoice = player.rightChoices[index] ? true : false;//TODO: to check
+    const rate = movie?.imdbRating || 0;
     return (
         <ElectedCardWrapper
             isRightChoice={isRightChoice}
@@ -19,7 +18,7 @@ const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
         >
             <Card
                 type={{ t: "Elected", index } as placeholderCardType}
-                front={setElectedFrontCard(player, card, index)}
+                front={setElectedFrontCard(player, movie)}
                 size="small"
                 isFocus={focus}
             />

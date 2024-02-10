@@ -1,9 +1,9 @@
 import { Movie } from "./movie";
 
 export type Card = {
+    position: number;
     id?: string;
     movie: Movie;
-    rate?: number;
 };
 
 export type CardType = "Elected" | "Player" | "Shadow";

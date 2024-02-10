@@ -5,11 +5,9 @@ import { PACK_CARDS_NUM, PLAYER1_ID, PLAYER2_ID } from "../models/constants";
 import { CardSide } from "../models/types/union";
 import React from "react";
 import { Player } from "../models/types/player";
-import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 
-export const setElectedFrontCard = (player: Player, card: Card | undefined, index: number) => {
-    const movie = card?.movie ? card?.movie : player.selectedCards[index]?.movie;
+export const setElectedFrontCard = (player: Player, movie: Movie | undefined) => {
     return (
         <PackWrapper>
             {movie && movie.title ? (

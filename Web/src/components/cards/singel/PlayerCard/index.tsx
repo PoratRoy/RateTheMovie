@@ -8,8 +8,8 @@ import { placeholderCardType } from "../../../../models/types/card";
 import CardEventLayout from "../../../layout/CardEventLayout";
 import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
-    const position = useCardOrderPosition(movie);
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, movie, loading }) => {
+    const position = useCardOrderPosition(movie);//TODO: possible to add the player
     const [openCardView, setOpenCardView] = useState<boolean>(false);
     const [openShadow, setOpenShadow] = useState<boolean>(false);
 

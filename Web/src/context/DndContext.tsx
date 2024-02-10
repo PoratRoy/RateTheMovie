@@ -1,7 +1,6 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { initCard } from "../models/initialization/card";
 import { useGamePlayContext } from "./GamePlayContext";
-import { movieRating } from "../utils/format";
 import { createContext, useContext, useState } from "react";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
@@ -18,21 +17,19 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
     function handleDragEnd(event: DragEndEvent) {
         setIsDragging(false);
         const { over, active } = event;
-        const id = over?.id.toString();
+        const cardPosition = parseInt(over?.id.toString() || "-1");
         const movie: Movie = active?.data?.current?.movie;
         const player: Player = active?.data?.current?.player;
 
         if (movie && player) {
-            const card: Card = { id, movie, rate: movieRating(movie.imdbRating) };
-
+            const card: Card = { id: movie.id, movie, position: cardPosition };
             setPlayers((prev) => {
                 const players = [...prev];
                 const playerId = player.id;
                 const selectedCards = players[playerId].selectedCards;
 
-                if (id) {
-                    const cardId = parseInt(id);
-                    const existingCard = selectedCards[cardId];
+                if (cardPosition !== -1) {
+                    const existingCard = selectedCards[cardPosition];
                     const existingIndex = selectedCards.findIndex(
                         (c) => c?.movie?.title === card?.movie?.title,
                     );
@@ -43,7 +40,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                         //alredy exists
                         selectedCards[existingIndex] = initCard;
                     }
-                    selectedCards[cardId] = card;
+                    selectedCards[cardPosition] = card;
                 } else {
                     //remove
                     const selectedCard = selectedCards.find((c) => c?.movie?.id === movie.id);

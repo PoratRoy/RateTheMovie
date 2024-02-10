@@ -82,7 +82,7 @@ export type CardImgShadowProps = {
 export type ElectedCardProps = {
     index: number;
     player: Player;
-    card: Card | undefined;
+    movie: Movie | undefined;
 };
 
 export type PlaceholderProps = {

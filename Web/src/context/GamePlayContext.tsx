@@ -3,12 +3,11 @@ import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
 import { FinishAnimation } from "../models/types/game";
 import { initFinishAnimation } from "../models/initialization/context";
-import { Card } from "../models/types/card";
 import { Player } from "../models/types/player";
 
 export const GamePlayContext = createContext<{
-    correctOrder: Card[];
-    setCorrectOrder: React.Dispatch<React.SetStateAction<Card[]>>;
+    correctOrder: string[];
+    setCorrectOrder: React.Dispatch<React.SetStateAction<string[]>>;
     players: Player[];
     setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     finish: boolean;
@@ -16,7 +15,7 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => void;
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
-    setCorrectPack: (showCorrectPack: (Card | undefined)[]) => void;
+    setCorrectPack: (showCorrectPack: string[]) => void;
     setPlayAgainBtn: () => void;
     setIncreaseScore: () => void;
     setRemovePosition: () => void;
@@ -39,7 +38,7 @@ export const GamePlayContext = createContext<{
 export const useGamePlayContext = () => useContext(GamePlayContext);
 
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [correctOrder, setCorrectOrder] = useState<Card[]>([]);
+    const [correctOrder, setCorrectOrder] = useState<string[]>([]);
     const [players, setPlayers] = useState<Player[]>([]);
     const [finish, setFinish] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
@@ -52,15 +51,15 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             }
         }
         if (!correctOrder || correctOrder.length === 0) {
-            const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
-            if (sessionCorrectOrder && sessionCorrectOrder.length > 0) {
-                setCorrectOrder(sessionCorrectOrder);
+            const sessionCorrectOrderIds = Session.get(SessionKey.CORRECT_ORDER);
+            if (sessionCorrectOrderIds && sessionCorrectOrderIds.length > 0) {
+                setCorrectOrder(sessionCorrectOrderIds);
             }
         }
     };
     setStateFromSession();
 
-    const setCorrectPack = (showCorrectPack: (Card | undefined)[]) =>
+    const setCorrectPack = (showCorrectPack: string[]) =>
         setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
 
     const setPlayAgainBtn = () => {
