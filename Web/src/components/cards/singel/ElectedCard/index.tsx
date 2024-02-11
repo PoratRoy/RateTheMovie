@@ -7,8 +7,9 @@ import { setElectedFrontCard } from "../../../../utils/card";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
     const [focus, setFocus] = useState<boolean>(false);
-    const isRightChoice = player.rightChoices[index] ? true : false;//TODO: to check
+    const isRightChoice = player.electedCards[index]?.correct || false;
     const rate = movie?.imdbRating || 0;
+
     return (
         <ElectedCardWrapper
             isRightChoice={isRightChoice}

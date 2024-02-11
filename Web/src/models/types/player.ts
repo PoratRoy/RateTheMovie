@@ -1,5 +1,4 @@
-import { Card } from "./card";
-import { Movie } from "./movie";
+import { PlayerCard } from "./card";
 import { PlayerColor } from "./union";
 
 export type Player = {
@@ -7,6 +6,5 @@ export type Player = {
     name: string;
     color: PlayerColor;
     score: number;
-    selectedCards: (Card | undefined)[];
-    rightChoices: Movie[]; //TODO: nameing
+    electedCards: (PlayerCard | undefined)[];
 };

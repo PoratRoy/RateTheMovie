@@ -1,28 +1,33 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { useMovieContext } from "../context/MovieContext";
+import { GameCard, PlayerCard } from "../models/types/card";
 import { Player } from "../models/types/player";
 import { movieRating } from "../utils/format";
-import { filterMoviesById } from "../utils/movie";
 
 const useSetScore = () => {
-    const { correctOrder, setPlayers } = useGamePlayContext();
-    const { movies } = useMovieContext();
+    const { gameCards, setPlayers } = useGamePlayContext();
 
     const setScore = () => {
         setPlayers((prev) => {
             return prev.map((player: Player) => {
                 let playerScore = 0;
-                let rightChoices = [];
-                for (let i = 0; i < correctOrder.length; i++) {
-                    const correctOrderMovies = filterMoviesById(correctOrder, movies);
-                    if (correctOrderMovies[i] === player.selectedCards[i]?.movie) {
-                        playerScore += movieRating(correctOrderMovies[i]?.imdbRating);
-                        rightChoices.push(correctOrderMovies[i]);
+                let electedCards: PlayerCard[] = [];
+
+                player.electedCards.forEach((elected: PlayerCard | undefined, i: number) => {
+                    if (elected) {
+                        //TODO: extract to function
+                        const card: GameCard | undefined = gameCards.find(
+                            (gameCard) => gameCard.id === elected?.movieId,
+                        );
+                        if (card && card.correctPosition === i) {
+                            playerScore += movieRating(card.movie.imdbRating);
+                            elected.correct = true;
+                        }
+                        electedCards.push(elected);
                     }
-                }
+                });
                 return {
                     ...player,
-                    rightChoices,
+                    electedCards,
                     score: player.score + playerScore,
                 };
             });
@@ -33,3 +38,11 @@ const useSetScore = () => {
 };
 
 export default useSetScore;
+
+// for (let i = 0; i < gameCards.length; i++) {
+//     const correctOrderMovies = filterMoviesById(correctOrder, movies);
+//     if (correctOrderMovies[i] === player.selectedCards[i]?.movie) {
+//         playerScore += movieRating(correctOrderMovies[i]?.imdbRating);
+//         electedCards.push(correctOrderMovies[i]);
+//     }
+// }

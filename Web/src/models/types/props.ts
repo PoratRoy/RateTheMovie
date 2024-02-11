@@ -2,7 +2,7 @@ import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { SelectOption } from "./select";
 import React from "react";
 import { BtnSize, CardSide, CardSize, InputType, LogoSize, StarSize } from "./union";
-import { Card, placeholderCardType } from "./card";
+import { GameCard, placeholderCardType } from "./card";
 import { LandingOpt } from "../enums/landing";
 import { Player } from "./player";
 import { CrewModel, Movie, VideoModel } from "./movie";
@@ -53,7 +53,7 @@ export type CardSliceProps = {
 };
 
 export type PlayerCardProps = {
-    movie: Movie;
+    card: GameCard;
     loading?: boolean;
     player: Player;
 };
@@ -268,6 +268,10 @@ export type PlayBtnProps = IdProps & {
     type?: "button" | "submit";
     onClicked?: () => void;
 };
+
+export type FinishBtnProps = {
+    isFinishPlacing: boolean
+}
 
 //--View--//
 export type ViewImgProps = {

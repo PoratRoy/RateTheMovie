@@ -1,7 +1,6 @@
 export enum SessionKey {
     PLAYERS = "players",
-    MOVIES = "movies",
-    CORRECT_ORDER = "correctMovies",
+    GAME_CARDS = "gameCards",
     FILTERS = "filters",
     BACKUP = "backup",
 }

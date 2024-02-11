@@ -1,13 +1,8 @@
-import { useGamePlayContext } from "../context/GamePlayContext";
-import Session from "../utils/sessionStorage";
-import { SessionKey } from "../models/enums/session";
 import { movieRating } from "../utils/format";
 import { Movie } from "../models/types/movie";
 
 const useCorrectOrder = () => {
-    const { setCorrectOrder } = useGamePlayContext();
-
-    const correctOrder = (movies: Movie[]) => {
+    const sortMoviesPosition = (movies: Movie[]): number[] | undefined => {
         if (movies && movies.length !== 0) {
             const sortedMovies = [...movies];
 
@@ -16,14 +11,14 @@ const useCorrectOrder = () => {
                 const votesB = movieRating(b.imdbRating);
                 return votesA - votesB;
             });
-
-            const moviesId = sortedMovies.map((movie) => movie.id);
-            Session.set(SessionKey.CORRECT_ORDER, moviesId);
-            setCorrectOrder(moviesId);
+            return sortedMovies?.map((movie) => movies.indexOf(movie));
         }
     };
 
-    return { correctOrder };
+    return { sortMoviesPosition };
 };
 
 export default useCorrectOrder;
+
+// const moviesId = sortedMovies.map((movie) => movie.id);
+//            Session.set(SessionKey.CORRECT_ORDER, moviesId);

@@ -1,20 +1,25 @@
 import { PACK_CARDS_NUM } from "../models/constants";
-import { Card } from "../models/types/card";
+import { GameCard, PlayerCard } from "../models/types/card";
+import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 
-export const isFinishPlacingElectedCards = (players: Player[]) => {
-    const moviesSelectedOrder: (string[] | undefined)[] = players.map((player: Player) => {
-        const selectedCards = player.selectedCards;
+export const isFinishPlacingElectedCards = (players: Player[], gameCards: GameCard[]) => {
+    const moviesSelectedOrder: (Movie[] | undefined)[] = players.map((player: Player) => {
+        const electedCards = player.electedCards;
 
-        if (selectedCards && selectedCards.length === PACK_CARDS_NUM) {
-            let moviesId: string[] = [];
-            selectedCards.forEach((card: Card | undefined) => {
-                if (card && card.id !== undefined) {
-                    moviesId.push(card.id);
+        if (electedCards && electedCards.length === PACK_CARDS_NUM) {
+            let movies: Movie[] = [];
+            electedCards.forEach((card: PlayerCard | undefined) => {
+                if (card && card.movieId !== undefined) {
+                    gameCards.forEach((gameCard: GameCard) => {
+                        if (gameCard.movie.id === card.movieId) {
+                            movies.push(gameCard.movie);
+                        }
+                    });
                 }
             });
-            if (moviesId.length === PACK_CARDS_NUM) {
-                return moviesId;
+            if (movies.length === PACK_CARDS_NUM) {
+                return movies;
             }
         }
     });

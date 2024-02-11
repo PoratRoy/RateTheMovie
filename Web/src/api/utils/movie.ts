@@ -1,7 +1,8 @@
-import { Movie, MovieTMDB } from "../../models/types/movie";
+import { GameCard } from "../../models/types/card";
+import { MovieTMDB } from "../../models/types/movie";
 
-export const checkMoviesAlreadySet = (movies: Movie[]): boolean =>
-    movies.some((movie) => movie.title !== "" || movie.id !== "");
+export const checkMoviesAlreadySet = (cards: GameCard[]): boolean =>
+    cards.some((card) => card.movie.title !== "" || card.movie.id !== "");
 
 export const removeMovieFromRemaining = (remainingMovies: MovieTMDB[], movie: MovieTMDB) => {
     const index = remainingMovies.indexOf(movie);

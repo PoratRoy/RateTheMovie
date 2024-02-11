@@ -5,21 +5,19 @@ import useGetMovieData from "./useGetMovieData";
 
 const useSessionBackupMovies = (iterations: number = 2) => {
     const { getMovieRatingData, getMovieViewData } = useGetMovieData();
-    const { handleBackupMovies, handleMoreBackupMoviesDate } = useHandleMovies();
+    const { handleBackupMovies } = useHandleMovies();
 
-    const backupMovies = async (moviesTMDB: MovieTMDB[]) => {
-        let movies = [...moviesTMDB]
+    const backupMovies = async (startMovies: MovieTMDB[]) => {
+        let remainingMovies = [...startMovies]
         
         for (let i = 0; i < iterations; i++) {
-            const [moviesOMDB, remainingMovies] = await getMovieRatingData(movies);
-            movies = [...remainingMovies]
+            const [moviesWithRate, remaining] = await getMovieRatingData(remainingMovies);
+            remainingMovies = [...remaining]
 
-            if (moviesOMDB.length === PACK_CARDS_NUM) {
-                handleBackupMovies(moviesOMDB);
+            if (moviesWithRate.length === PACK_CARDS_NUM) {
+                const movies = await getMovieViewData(moviesWithRate);
+                handleBackupMovies(movies);
             }
-
-            const moviess = await getMovieViewData(moviesOMDB);
-            handleMoreBackupMoviesDate(moviess);
         }
     };
 

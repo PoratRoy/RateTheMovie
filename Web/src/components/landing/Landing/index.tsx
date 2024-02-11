@@ -1,7 +1,7 @@
 import React from "react";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import PlayerBtn from "../../actions/btn/PlayerBtn";
-import { Colors, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constants";
+import { MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constants";
 import { initPlayer } from "../../../models/initialization/player";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
@@ -9,7 +9,6 @@ import { LandingOpt } from "../../../models/enums/landing";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
-import { PlayerColor } from "../../../models/types/union";
 
 const Landing: React.FC<LandingProps> = ({ setLayoutOption, setRoomLink }) => {
     const { handleSocketConnection } = useSocketContext();
@@ -17,7 +16,7 @@ const Landing: React.FC<LandingProps> = ({ setLayoutOption, setRoomLink }) => {
     const { setPlayers } = useGamePlayContext();
 
     const handlePlay = () => {
-        const players = [initPlayer(0, Colors[0] as PlayerColor, "Player 1")];
+        const players = [initPlayer(0, "Player 1")];
         Session.set(SessionKey.PLAYERS, players);
         setPlayers(players);
         setLayoutOption(LandingOpt.LANDING_FILTER);

@@ -9,7 +9,9 @@ import RateStar from "../RateStar";
 const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
     if (type.t === "Player") {
         const {
-            movie: { title, poster_path },
+            card: {
+                movie: { title, poster_path },
+            },
         } = type;
         return (
             <div style={{ transform: "rotateY(180deg)" }}>

@@ -1,5 +1,5 @@
 import { useErrorContext } from "../../context/ErrorContext";
-import { useMovieContext } from "../../context/MovieContext";
+import { useGamePlayContext } from "../../context/GamePlayContext";
 import useHandleMovies from "../../hooks/context/useHandleMovies";
 import { PACK_CARDS_NUM } from "../../models/constants";
 import { MovieFilters, MovieTMDB } from "../../models/types/movie";
@@ -8,31 +8,31 @@ import useGetMovieData from "./useGetMovieData";
 import useSessionBackupMovies from "./useSessionBackupMovies";
 
 const useFirstRoundMovies = () => {
+    const { setFetchLoading } = useGamePlayContext();
     const { discoverMovies } = useDiscoverMovies();
     const { getMovieRatingData, getMovieViewData } = useGetMovieData();
     const { backupMovies } = useSessionBackupMovies();
-    const { setMovieLoading } = useMovieContext();
     const { handleError } = useErrorContext();
-    const { handleMovies, handleMoreMovieData } = useHandleMovies();
+    const { handleMovieCards, handleGameCardsMoreData } = useHandleMovies();
 
     const firstRoundMovies = async (filters?: MovieFilters | undefined) => {
         try {
-            setMovieLoading(true);
+            setFetchLoading(true);
             const moviesTMDB: MovieTMDB[] = await discoverMovies(filters);
-
+            
             const [moviesOMDB, remainingMovies] = await getMovieRatingData(moviesTMDB);
             if (moviesOMDB.length === PACK_CARDS_NUM) {
-                handleMovies(moviesOMDB);
+                handleMovieCards(moviesOMDB);
             }
-
+            
             const movies = await getMovieViewData(moviesOMDB);
-            handleMoreMovieData(movies);
-
+            handleGameCardsMoreData(movies);
+            
             await backupMovies(remainingMovies);
         } catch (error) {
             handleError((error as Error).message || "Something went wrong");
         } finally {
-            setMovieLoading(false);
+            setFetchLoading(false);
         }
     };
 
