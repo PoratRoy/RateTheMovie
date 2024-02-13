@@ -5,8 +5,6 @@ import { createContext, useContext, useState } from "react";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { PlayerCard } from "../models/types/card";
-import Session from "../utils/sessionStorage";
-import { SessionKey } from "../models/enums/session";
 
 export const DragContext = createContext<{ isDragging: boolean }>({ isDragging: false });
 
@@ -52,8 +50,6 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                         selectedCards[index] = undefined;
                     }
                 }
-                Session.remove(SessionKey.PLAYERS)
-                Session.set(SessionKey.PLAYERS, players);
                 return players;
             });
         }

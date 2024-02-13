@@ -20,7 +20,6 @@ const useHandleMovies = () => {
     };
 
     const handleGameCards = (cards: GameCard[]) => {
-        setFetchLoading(true);
         setGameCardsOnStateAndSession(cards);
     };
 
@@ -38,12 +37,12 @@ const useHandleMovies = () => {
     };
 
     const setGameCardsOnStateAndSession = (cards: GameCard[]) => {
-        setGameCards(cards);
-        Session.remove(SessionKey.GAME_CARDS);
-        Session.set(SessionKey.GAME_CARDS, cards);
-        setFetchLoading(false);
-        // setTimeout(() => {
-        // }, 1000);
+        setTimeout(() => {
+            setGameCards(cards);
+            Session.remove(SessionKey.GAME_CARDS);
+            Session.set(SessionKey.GAME_CARDS, cards);
+            setFetchLoading(false);
+        }, 1000);
     };
 
     const handleBackupMovies = (movies: Movie[]) => {
