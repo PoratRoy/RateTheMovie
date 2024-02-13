@@ -22,7 +22,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
         const player: Player = active?.data?.current?.player;
 
         if (movie && player) {
-            const card: PlayerCard = { movieId: movie.id, correct: false};
+            const card: PlayerCard = { movie, correct: false};
             
             setPlayers((prev) => {
                 const players = [...prev];
@@ -32,7 +32,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                 if (cardPosition !== -1) {
                     const existingCard = selectedCards[cardPosition];
                     const existingIndex = selectedCards.findIndex(
-                        (c) => c?.movieId === card?.movieId,
+                        (c) => c?.movie === card?.movie,
                     );
                     if (existingCard) {
                         //swap
@@ -44,7 +44,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                     selectedCards[cardPosition] = card;
                 } else {
                     //remove
-                    const selectedCard = selectedCards.find((c) => c?.movieId === movie.id);
+                    const selectedCard = selectedCards.find((c) => c?.movie === movie);
                     if (selectedCard) {
                         const index = selectedCards.indexOf(selectedCard);
                         selectedCards[index] = undefined;

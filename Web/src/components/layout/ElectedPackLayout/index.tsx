@@ -8,12 +8,12 @@ import { isFinishPlacingElectedCards } from "../../../utils/finish";
 
 const ElectedPackLayout: React.FC = () => {
     const { finishAnimation } = useGamePlayContext();
-    const { players, gameCards, finish, setCorrectPack } = useGamePlayContext();
+    const { players, finish, setCorrectPack } = useGamePlayContext();
     const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);
 
     useEffect(() => {
         if (!finish) {
-            const selectedCards = isFinishPlacingElectedCards(players, gameCards);
+            const selectedCards = isFinishPlacingElectedCards(players);
             if (selectedCards) {
                 setCorrectPack(selectedCards);
                 setIsFinishPlacing(selectedCards[0] === undefined ? false : true);

@@ -10,7 +10,7 @@ export const initGameCard: GameCard = {
 };
 
 export const initPlayerCard: PlayerCard = {
-    movieId: undefined,
+    movie: initMovie,
     correct: false,
 };
 

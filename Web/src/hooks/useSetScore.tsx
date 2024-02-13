@@ -16,7 +16,7 @@ const useSetScore = () => {
                     if (elected) {
                         //TODO: extract to function
                         const card: GameCard | undefined = gameCards.find(
-                            (gameCard) => gameCard.id === elected?.movieId,
+                            (gameCard) => gameCard.movie === elected?.movie,
                         );
                         if (card && card.correctPosition === i) {
                             playerScore += movieRating(card.movie.imdbRating);

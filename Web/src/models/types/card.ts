@@ -8,7 +8,7 @@ export type GameCard = {
 }
 
 export type PlayerCard = {
-    movieId?: string;
+    movie?: Movie;
     correct: boolean;
 }
 
@@ -18,3 +18,14 @@ export type placeholderCardType =
     | { t: "Elected"; index: number }
     | { t: "Player"; card: GameCard }
     | { t: "Shadow" };
+
+
+    // export type Card = {
+    //     id: string;
+    //     movie: Movie;
+    // }
+    
+    // export type ElectedCards = {
+    //     order: Card[];
+    //     correctOrder: Card[];
+    // }

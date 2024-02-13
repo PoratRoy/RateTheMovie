@@ -13,8 +13,8 @@ const useCardOrderPosition = (player: Player, card: GameCard) => {
         if (electedCards && electedCards.length !== 0) {
             electedCards.forEach((playerCard: PlayerCard | undefined) => {
                 if (playerCard) {
-                    if (!match && playerCard.movieId) {
-                        if (playerCard.movieId === card.id) {
+                    if (!match && playerCard.movie) {
+                        if (playerCard.movie === card.movie) {
                             setPos(card.position + 1);
                             match = true;
                         }
@@ -29,7 +29,7 @@ const useCardOrderPosition = (player: Player, card: GameCard) => {
         if (finishAnimation.removePosition) {
             const electedCards = player?.electedCards;
             electedCards.forEach((playerCard: PlayerCard | undefined) => {
-                if (playerCard?.correct && playerCard.movieId === card.id) {
+                if (playerCard?.correct && playerCard.movie === card.movie) {
                     setPos(0);
                 }
             });
