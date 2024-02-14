@@ -1,6 +1,6 @@
 import { PACK_CARDS_NUM } from "../constants";
 import { FinishAnimation } from "../types/game";
-import { MultiplayerState } from "../types/socket";
+import { MultiplayerState } from "../types/multiplayer";
 
 export const initFinishAnimation: FinishAnimation = {
     playAgainBtn: false,
@@ -11,6 +11,14 @@ export const initFinishAnimation: FinishAnimation = {
 
 export const initMultiplayerState: MultiplayerState = {
     socket: undefined,
-    room: undefined,
-    players: [],
+    gameRoom: {
+        room: undefined,
+        players: [],
+        gameCards: [],
+        filters: {
+            year: undefined,
+            genre: undefined,
+            language: undefined,
+        },
+    },
 };

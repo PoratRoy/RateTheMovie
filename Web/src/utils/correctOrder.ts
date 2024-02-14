@@ -7,14 +7,14 @@ export const handleOrderEqualCorrectOrder = (
     player: Player,
     movie: Movie | undefined,
     index: number,
-    action: () => void,
+    callback: () => void,
 ) => {
     const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] = isCardsOrdrValid(player);
 
     if (movie && isValid) {
         if (electedCardsOrder[index]?.movie === movie) {
             if (electedCardsCorrectOrder?.[index].movie === movie) {
-                action();
+                callback();
             }
         }
     }

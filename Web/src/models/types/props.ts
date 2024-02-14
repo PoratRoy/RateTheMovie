@@ -296,12 +296,10 @@ export type GenreProps = {
 //--Landing--//
 export type LandingProps = {
     setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
-    setRoomLink: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type MultiplayerProps = {
     setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
-    roomLink: string;
 };
 
 //--Common--//

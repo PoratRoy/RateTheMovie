@@ -5,27 +5,21 @@ import { MULTI_LAYOUT_ID, MULTI_START_BTN_ID } from "../../../models/constants";
 import { useState } from "react";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import { LandingOpt } from "../../../models/enums/landing";
-import { initPlayer } from "../../../models/initialization/player";
-import Session from "../../../utils/sessionStorage";
-import { SessionKey } from "../../../models/enums/session";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { useSocketContext } from "../../../context/SocketContext";
 
 const MultiLayout = <TInput extends FieldValues>({
     children,
     methods,
     setLayoutOption,
 }: MultiLayoutProps<TInput>) => {
+    const { handleUpdatePlayerName } = useSocketContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { handleSubmit } = methods;
-    const { setPlayers } = useGamePlayContext();
 
     const onSubmitMutliForm: SubmitHandler<TInput> = (data: TInput) => {
         setIsLoading(true);
         const { name } = data;
-        const players = [initPlayer(0, name)];
-        //send the player to the socket room
-        Session.set(SessionKey.PLAYERS, players);
-        setPlayers(players);
+        handleUpdatePlayerName(name);
         setLayoutOption(LandingOpt.MULTI_FILTER);
         setIsLoading(false);
     };

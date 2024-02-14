@@ -10,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
 import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 import { useState } from "react";
+import { useSocketContext } from "../../../context/SocketContext";
 
 const FilterLayout = <TInput extends FieldValues>({
     children,
     methods,
 }: FilterLayoutProps<TInput>) => {
+    const { handleGameFilters } = useSocketContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { handleSubmit } = methods;
     const { firstRoundMovies } = useFirstRoundMovies();
@@ -28,12 +30,13 @@ const FilterLayout = <TInput extends FieldValues>({
             genre: genre ? JSON.parse(genre) : [],
             language: language ? JSON.parse(language) : "",
         };
-        Session.set(SessionKey.FILTERS, filters);
-        firstRoundMovies(filters);
-        setTimeout(() => {
-            setIsLoading(false);
-            navigate(path.game);
-        }, 2000);
+        handleGameFilters(filters);
+        // Session.set(SessionKey.FILTERS, filters);
+        // firstRoundMovies(filters);
+        // setTimeout(() => {
+        //     setIsLoading(false);
+        //     navigate(path.game);
+        // }, 2000);
     };
 
     return (

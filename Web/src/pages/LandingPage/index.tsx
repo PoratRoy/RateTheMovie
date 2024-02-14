@@ -7,13 +7,12 @@ import Landing from "../../components/landing/Landing";
 
 const LandingPage: React.FC = () => {
     const [layoutOption, setLayoutOption] = useState<LandingOpt>(LandingOpt.LANDING);
-    const [roomLink, setRoomLink] = useState<string>("");
 
     return (
         <LandingLayout layoutOption={layoutOption}>
             <Filter />
-            <Multiplayer setLayoutOption={setLayoutOption} roomLink={roomLink} />
-            <Landing setLayoutOption={setLayoutOption} setRoomLink={setRoomLink}/>
+            <Multiplayer setLayoutOption={setLayoutOption} />
+            <Landing setLayoutOption={setLayoutOption}/>
         </LandingLayout>
     );
 };

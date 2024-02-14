@@ -1,3 +1,4 @@
+import { useSocketContext } from "../../../context/SocketContext";
 import useInitialForm from "../../../hooks/useInitialForm";
 import { multiplayerInputs } from "../../../models/initialization/form";
 import { initMultiDefaultValues } from "../../../models/initialization/input";
@@ -8,12 +9,14 @@ import RoomLink from "../../actions/RoomLink";
 import NameInput from "../../actions/input/NameInput";
 import MultiLayout from "../../layout/MultiLayout";
 
-const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption, roomLink }) => {
+const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption }) => {
+    const { multiplayerState } = useSocketContext();
+    //TODO: default name from state
     const methods = useInitialForm<MultiplayerInputSchema>(multiFormSchema, initMultiDefaultValues);
 
     return (
         <MultiLayout<MultiplayerInputSchema> methods={methods} setLayoutOption={setLayoutOption}>
-            <RoomLink room={roomLink} />
+            <RoomLink room={multiplayerState.gameRoom?.room || ""} />
             <NameInput
                 id={multiplayerInputs.name.id}
                 placeholder={multiplayerInputs.name.placeholder}
