@@ -1,7 +1,7 @@
 import { Socket } from "socket.io-client";
-import { GameRoomProps } from "./gameRoom";
+import { WarRoomProps } from "./warRoom";
 
 export type MultiplayerState = {
     socket: Socket | undefined;
-    gameRoom: GameRoomProps | undefined;
+    warRoom: WarRoomProps | undefined;
 };

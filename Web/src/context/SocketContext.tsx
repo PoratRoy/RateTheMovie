@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useSocket } from "../hooks/context/useSocket";
 import { initMultiplayerState } from "../models/initialization/context";
-import { GameRoomProps, GameRooms } from "../models/types/gameRoom";
+import { WarRoomProps, WarRooms } from "../models/types/warRoom";
 import { MultiplayerState } from "../models/types/multiplayer";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
@@ -38,29 +38,29 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.connect();
 
         setMultiplayerState((prev) => ({ ...prev, socket }));
-        socket.emit("CreateNewRoom", async (gameRoom: GameRoomProps) => {
-            setMultiplayerState((prev) => ({ ...prev, gameRoom }));
-            Session.set(SessionKey.GAME_ROOM, gameRoom);
+        socket.emit("CreateNewRoom", async (warRoom: WarRoomProps) => {
+            setMultiplayerState((prev) => ({ ...prev, warRoom }));
+            Session.set(SessionKey.GAME_ROOM, warRoom);
         });
     };
 
     const handleUpdatePlayerName = (name: string) => {
-        socket.emit("UpdatePlayerName", name, async (gameRoom: GameRoomProps) => {
-            setMultiplayerState((prev) => ({ ...prev, gameRoom }));
-            Session.set(SessionKey.GAME_ROOM, gameRoom);
+        socket.emit("UpdatePlayerName", name, async (warRoom: WarRoomProps) => {
+            setMultiplayerState((prev) => ({ ...prev, warRoom }));
+            Session.set(SessionKey.GAME_ROOM, warRoom);
         });
     };
 
     const handleGameFilters = (filters: MovieFilters) => {
-        socket.emit("UpdateGameFilters", filters, async (gameRoom: GameRoomProps) => {
-            setMultiplayerState((prev) => ({ ...prev, gameRoom }));
-            Session.set(SessionKey.GAME_ROOM, gameRoom);
+        socket.emit("UpdateGameFilters", filters, async (warRoom: WarRoomProps) => {
+            setMultiplayerState((prev) => ({ ...prev, warRoom }));
+            Session.set(SessionKey.GAME_ROOM, warRoom);
         });
     };
 
-    const handleAddPlayerToRoom = (props: GameRoomProps) => {
-        socket.emit("AddPlayerToRoom", props, async (gameRooms: GameRooms, roomId: string) => {
-            setMultiplayerState((prev) => ({ ...prev, gameRooms }));
+    const handleAddPlayerToRoom = (props: WarRoomProps) => {
+        socket.emit("AddPlayerToRoom", props, async (warRooms: WarRooms, roomId: string) => {
+            setMultiplayerState((prev) => ({ ...prev, warRooms }));
             Session.set(SessionKey.GAME_ROOM, roomId);
         });
     };

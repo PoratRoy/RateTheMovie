@@ -1,4 +1,4 @@
-import { GameRoomProps } from "../model/types/gameRoom";
+import { WarRoomProps } from "../model/types/warRoom";
 import { Player } from "../model/types/player";
 
 export const getPlayerIndex = (players: Player[]) => {

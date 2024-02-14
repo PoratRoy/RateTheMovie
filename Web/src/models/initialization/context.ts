@@ -11,7 +11,7 @@ export const initFinishAnimation: FinishAnimation = {
 
 export const initMultiplayerState: MultiplayerState = {
     socket: undefined,
-    gameRoom: {
+    warRoom: {
         room: undefined,
         players: [],
         gameCards: [],

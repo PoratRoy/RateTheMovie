@@ -16,7 +16,7 @@ const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption }) => {
 
     return (
         <MultiLayout<MultiplayerInputSchema> methods={methods} setLayoutOption={setLayoutOption}>
-            <RoomLink room={multiplayerState.gameRoom?.room || ""} />
+            <RoomLink room={multiplayerState.warRoom?.room || ""} />
             <NameInput
                 id={multiplayerInputs.name.id}
                 placeholder={multiplayerInputs.name.placeholder}
