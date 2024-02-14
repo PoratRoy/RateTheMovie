@@ -15,8 +15,8 @@ const useHandleShuffle = () => {
         if (!moviesBackup) return; //TODO: show no more movies with this filter
         handleRefresh();
         backupRoundMovies(filters);
-        Session.removeFrom(SessionKey.BACKUP, 0); //TODO: this should be before movies = moviesBackup[0] ?
         const movies = moviesBackup[0];
+        Session.removeFrom(SessionKey.BACKUP, 0);
         handleMovieCards(movies);
     };
 

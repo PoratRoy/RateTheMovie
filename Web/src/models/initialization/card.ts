@@ -1,21 +1,14 @@
 import { PACK_CARDS_NUM } from "../constants";
-import { GameCard, PlayerCard } from "../types/card";
+import { Card } from "../types/card";
 import { initMovie } from "./movie";
 
-export const initGameCard: GameCard = {
+export const initGameCard: Card = {
     id: undefined,
     movie: initMovie,
-    position: -1,
-    correctPosition: -1,
 };
 
-export const initPlayerCard: PlayerCard = {
-    movie: initMovie,
-    correct: false,
-};
-
-export const initGameCardsList = (): GameCard[] => {
-    let cards: GameCard[] = [];
+export const initGameCardsList = (): Card[] => {
+    let cards: Card[] = [];
     for (let i = 0; i < PACK_CARDS_NUM; i++) {
         cards.push(initGameCard);
     }

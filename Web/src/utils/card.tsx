@@ -4,21 +4,15 @@ import { PACK_CARDS_NUM } from "../models/constants";
 import React from "react";
 import { Player } from "../models/types/player";
 import { Movie } from "../models/types/movie";
-import { GameCard } from "../models/types/card";
+import { Card } from "../models/types/card";
 
-export const initGameCard = (movie: Movie, index: number, correctPosition?: number): GameCard => {
-    return {
-        correctPosition,
-        position: index,
-        id: movie.id,
-        movie,
-    } as GameCard;
+export const initGameCard = (movie: Movie): Card => {
+    return { id: movie.id, movie } as Card;
 };
 
-export const initGameCards = (movies: Movie[], correctPositions?: number[]) => {
-    const cards: GameCard[] = movies.map((movie, index) => {
-        const correctPosition = correctPositions ? correctPositions[index] : undefined;
-        return initGameCard(movie, index, correctPosition);
+export const initGameCards = (movies: Movie[]) => {
+    const cards: Card[] = movies.map((movie) => {
+        return initGameCard(movie);
     });
     return cards;
 };

@@ -4,13 +4,13 @@ import Session from "../utils/sessionStorage";
 import { FinishAnimation } from "../models/types/game";
 import { initFinishAnimation } from "../models/initialization/context";
 import { Player } from "../models/types/player";
-import { GameCard } from "../models/types/card";
+import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 import { initGameCardsList } from "../models/initialization/card";
 
 export const GamePlayContext = createContext<{
-    gameCards: GameCard[];
-    setGameCards: React.Dispatch<React.SetStateAction<GameCard[]>>;
+    gameCards: Card[];
+    setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
     fetchLoading: boolean;
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -46,7 +46,7 @@ export const GamePlayContext = createContext<{
 export const useGamePlayContext = () => useContext(GamePlayContext);
 
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [gameCards, setGameCards] = useState<GameCard[]>(initGameCardsList());
+    const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
 
     const [players, setPlayers] = useState<Player[]>([]);
@@ -82,12 +82,11 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setFinishAnimation(initFinishAnimation);
         setFetchLoading(false);
         setFinish(false);
-        setPlayers((prev) => {
-            const player = [...prev];
-            player.forEach((player: Player) => {
-                player.electedCards = [];
-            });
-            return player;
+        setPlayers(prevPlayers => {
+            return prevPlayers.map(player => ({
+                ...player,
+                electedCards: {order: []}
+            }));
         });
     };
 
@@ -107,7 +106,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             value={{
                 gameCards,
                 setGameCards,
-                fetchLoading, 
+                fetchLoading,
                 setFetchLoading,
                 players,
                 setPlayers,

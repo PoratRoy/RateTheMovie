@@ -1,4 +1,6 @@
 import { DISCOVERD_MOVIES_NUM } from "../models/constants";
+import { Movie } from "../models/types/movie";
+import { movieRating } from "./format";
 
 export const getRandomNumber = (min: number = 1, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -24,3 +26,10 @@ export const sortNumbers = (numbers: number[]): number[] => {
 };
 
 export const roundToOneDecimal = (value: number) => Math.round(value * 10) / 10;
+
+export const sortMovies = (a: Movie, b: Movie) => {
+    const rateA = movieRating(a.imdbRating);
+    const rateB = movieRating(b.imdbRating);
+    return rateA - rateB;
+}
+

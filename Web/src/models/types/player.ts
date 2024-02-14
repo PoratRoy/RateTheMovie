@@ -1,4 +1,4 @@
-import { PlayerCard } from "./card";
+import { ElectedCards } from "./card";
 import { PlayerColor } from "./union";
 
 export type Player = {
@@ -6,5 +6,5 @@ export type Player = {
     name: string;
     color: PlayerColor;
     score: number;
-    electedCards: (PlayerCard | undefined)[];
+    electedCards: ElectedCards;
 };

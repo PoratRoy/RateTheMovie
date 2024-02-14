@@ -2,7 +2,7 @@ import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { SelectOption } from "./select";
 import React from "react";
 import { BtnSize, CardSide, CardSize, InputType, LogoSize, StarSize } from "./union";
-import { GameCard, placeholderCardType } from "./card";
+import { Card, placeholderCardType } from "./card";
 import { LandingOpt } from "../enums/landing";
 import { Player } from "./player";
 import { CrewModel, Movie, VideoModel } from "./movie";
@@ -53,7 +53,7 @@ export type CardSliceProps = {
 };
 
 export type PlayerCardProps = {
-    card: GameCard;
+    card: Card;
     loading?: boolean;
     player: Player;
 };

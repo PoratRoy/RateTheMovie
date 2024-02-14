@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PackOfSelectedCards from "../../cards/pack/PackOfSelectedCards";
 import FinishBtn from "../../actions/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
 import PlayAgainBtn from "../../actions/btn/PlayAgainBtn";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import { isFinishPlacingElectedCards } from "../../../utils/finish";
+import useHandleElectedCard from "../../../hooks/useHandleElectedCard";
+import { correctAnswers } from "../../../utils/correctOrder";
 
 const ElectedPackLayout: React.FC = () => {
-    const { finishAnimation } = useGamePlayContext();
-    const { players, finish, setCorrectPack } = useGamePlayContext();
-    const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (!finish) {
-            const selectedCards = isFinishPlacingElectedCards(players);
-            if (selectedCards) {
-                setCorrectPack(selectedCards);
-                setIsFinishPlacing(selectedCards[0] === undefined ? false : true);
-            }
-        }
-    }, [players]);
+    const { players, finishAnimation } = useGamePlayContext();
+    const { isFinishPlacing } = useHandleElectedCard();
 
     return (
         <section className={style.electedPackContainer}>
@@ -29,8 +19,7 @@ const ElectedPackLayout: React.FC = () => {
             {finishAnimation.playAgainBtn ? (
                 <div className={style.playAgain}>
                     <div className={style.playAgainDescription}>
-                        {/* TODO: fix it */}
-                        {players[0].electedCards.length} correct ratings !
+                        {correctAnswers(players[0])} correct ratings !
                     </div>
                     <PlayAgainBtn />
                 </div>

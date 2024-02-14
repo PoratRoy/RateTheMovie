@@ -4,7 +4,7 @@ import Pack from "../../core/Pack";
 import { PackOfCardsProps } from "../../../../models/types/props";
 import NotEnoughMovies from "../../../common/NotEnoughMovies";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import { GameCard } from "../../../../models/types/card";
+import { Card } from "../../../../models/types/card";
 
 const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
     const { fetchLoading, gameCards } = useGamePlayContext();
@@ -14,7 +14,7 @@ const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
                 <NotEnoughMovies />
             ) : (
                 <Pack isWrap>
-                    {gameCards.map((card: GameCard, i: number) => (
+                    {gameCards.map((card: Card, i: number) => (
                         <PlayerCard key={i} card={card} player={player} loading={fetchLoading} />
                     ))}
                 </Pack>

@@ -5,17 +5,11 @@ import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { motion } from "framer-motion";
 import { springAnimation } from "../../../../style/animation";
 import { Movie } from "../../../../models/types/movie";
+import { getElectedMovie } from "../../../../utils/movie";
 
 const PackOfSelectedCards: React.FC = () => {
     const { players, finishAnimation } = useGamePlayContext();
     
-    const getElectedMovie = (movie: Movie | undefined, index: number) => {
-        if (movie) return movie;
-
-        const cards = players[0].electedCards[index];
-        return cards?.movie;
-    };
-
     //TODO: swiching places after fill all the cards triger the animation and not the dnd
     return (
         <Pack>
@@ -24,7 +18,7 @@ const PackOfSelectedCards: React.FC = () => {
                     <ElectedCard
                         index={index}
                         player={players[0]}
-                        movie={getElectedMovie(movie, index)}
+                        movie={getElectedMovie(players, movie, index)}
                     />
                 </motion.span>
             ))}

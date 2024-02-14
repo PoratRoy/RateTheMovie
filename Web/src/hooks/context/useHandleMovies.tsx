@@ -1,6 +1,7 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
+import { PACK_CARDS_NUM } from "../../models/constants";
 import { SessionKey } from "../../models/enums/session";
-import { GameCard } from "../../models/types/card";
+import { Card } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
 import { initGameCards } from "../../utils/card";
 import { logMovies } from "../../utils/log";
@@ -8,26 +9,29 @@ import Session from "../../utils/sessionStorage";
 import useCorrectOrder from "../useCorrectOrder";
 
 const useHandleMovies = () => {
-    const { sortMoviesPosition } = useCorrectOrder();
-    const { setGameCards, setFetchLoading } = useGamePlayContext();
+    const { sortMoviesOrder, sortCardsOrder } = useCorrectOrder();
+    const { setGameCards, setPlayers, setFetchLoading } = useGamePlayContext();
 
     const handleMovieCards = (movies: Movie[]) => {
         setFetchLoading(true);
         logMovies(movies);
-        const correctPositions = sortMoviesPosition(movies);
-        const cards = initGameCards(movies, correctPositions);
-        setGameCardsOnStateAndSession(cards);
+        const correctMoviesOrder = sortMoviesOrder(movies);
+        const correctOrder = initGameCards(correctMoviesOrder || []);
+        const cards = initGameCards(movies);
+
+        setGameCardsOnStateAndSession(cards, correctOrder);
     };
 
-    const handleGameCards = (cards: GameCard[]) => {
-        setGameCardsOnStateAndSession(cards);
+    const handleGameCards = (cards: Card[]) => {
+        const correctOrder = sortCardsOrder(cards);
+        setGameCardsOnStateAndSession(cards, correctOrder);
     };
 
     const handleGameCardsMoreData = (movies: Movie[]) => {
-        let cards: GameCard[] = [];
+        let cards: Card[] = [];
         setGameCards((prev) => {
-            return prev.map((gameCard: GameCard, index: number) => {
-                const card = { ...gameCard, movie: movies[index] } as GameCard;
+            return prev.map((gameCard: Card, index: number) => {
+                const card = { ...gameCard, movie: movies[index] } as Card;
                 cards.push(card);
                 return card;
             });
@@ -36,8 +40,21 @@ const useHandleMovies = () => {
         Session.set(SessionKey.GAME_CARDS, cards);
     };
 
-    const setGameCardsOnStateAndSession = (cards: GameCard[]) => {
+    const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: Card[]) => {
         setTimeout(() => {
+            if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
+                setPlayers((prev) => {
+                    return prev.map((player) => {
+                        return {
+                            ...player,
+                            electedCards: {
+                                ...player.electedCards,
+                                correctOrder,
+                            },
+                        };
+                    });
+                });
+            }
             setGameCards(cards);
             Session.remove(SessionKey.GAME_CARDS);
             Session.set(SessionKey.GAME_CARDS, cards);

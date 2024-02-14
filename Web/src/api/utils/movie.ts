@@ -1,7 +1,7 @@
-import { GameCard } from "../../models/types/card";
+import { Card } from "../../models/types/card";
 import { MovieTMDB } from "../../models/types/movie";
 
-export const checkMoviesAlreadySet = (cards: GameCard[]): boolean =>
+export const checkMoviesAlreadySet = (cards: Card[]): boolean =>
     cards.some((card) => card.movie.title !== "" || card.movie.id !== "");
 
 export const removeMovieFromRemaining = (remainingMovies: MovieTMDB[], movie: MovieTMDB) => {
