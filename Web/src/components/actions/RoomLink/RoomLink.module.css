@@ -1,4 +1,4 @@
-.roomLinkInputContianer{
+.roomLinkInputContianer {
     background-color: var(--secondary-color);
     border-radius: var(--secondary-border-radius);
     border: var(--secondary-border);
@@ -12,6 +12,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
     color: var(--primary-color);
+    overflow: hidden;
+}
+
+.roomLinkText {
+    margin: 0 13px;
+    display: block;
+    white-space: nowrap;
+    overflow: scroll;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.roomCopyBtn {
+    color: var(--text-color);
+    width: 20%;
+    min-height: var(--input-min-height);
+    height: 100%;
+    max-height: var(--input-max-height);
+    background-color: var(--secondary-color-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: var(--secondary-border);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.roomCopyBtn:active {
+    background-color: var(--secondary-color-active);
+}
+
+.roomCopyBtn:focus {
+    background-color: var(--secondary-color-focus);
 }

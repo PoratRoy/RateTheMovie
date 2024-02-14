@@ -331,5 +331,5 @@ export type BackLinkProps = {
 };
 
 export type RoomLinkProps = {
-    room: string;
+    roomLink: string;
 };
