@@ -12,11 +12,13 @@ export const SocketContext = createContext<{
     multiplayerState: MultiplayerState;
     setMultiplayerState: React.Dispatch<React.SetStateAction<MultiplayerState>>;
     handleSocketConnection: () => void;
+    handleCreateNewRoom: () => void;
     handleUpdatePlayerName: (name: string) => void;
     handleGameFilters: (filters: MovieFilters) => void;
 }>({
     multiplayerState: initMultiplayerState,
     setMultiplayerState: () => {},
+    handleCreateNewRoom: () => {},
     handleSocketConnection: () => {},
     handleUpdatePlayerName: () => {},
     handleGameFilters: () => {},
@@ -36,6 +38,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handleSocketConnection = () => {
         socket.connect();
+    };
+
+    const handleCreateNewRoom = () => {
+        handleSocketConnection();
 
         setMultiplayerState((prev) => ({ ...prev, socket }));
         socket.emit("CreateNewRoom", async (warRoom: WarRoomProps) => {
@@ -70,6 +76,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             value={{
                 multiplayerState,
                 setMultiplayerState,
+                handleCreateNewRoom,
                 handleSocketConnection,
                 handleUpdatePlayerName,
                 handleGameFilters,

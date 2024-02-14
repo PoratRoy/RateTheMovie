@@ -24,7 +24,7 @@ class GameSocket implements ISocket {
             const playerId = socket.id;
             const warRoom = this.warRooms[roomId];
             if (!warRoom) {
-                const player: Player = initPlayer(playerId, getPlayerIndex([]));
+                const player: Player = initPlayer(playerId, getPlayerIndex([]), "host");
                 const props: WarRoomProps = initWarRoom(roomId, player);
                 this.warRooms[roomId] = props;
             }

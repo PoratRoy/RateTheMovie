@@ -7,3 +7,5 @@ export type PlayerColor =
   | "pink"
   | "orange"
   | "brown";
+
+export type PlayerRole = "player" | "host";

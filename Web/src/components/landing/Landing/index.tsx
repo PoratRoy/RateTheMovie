@@ -11,12 +11,12 @@ import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
 
 const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
-    const { handleSocketConnection } = useSocketContext();
+    const { handleCreateNewRoom } = useSocketContext();
 
     const { setPlayers } = useGamePlayContext();
 
     const handlePlay = () => {
-        const players = [initPlayer(0, "Player 1")];
+        const players = [initPlayer(0, "Player 1", "host")];
         Session.set(SessionKey.PLAYERS, players);
         setPlayers(players);
         setLayoutOption(LandingOpt.LANDING_FILTER);
@@ -24,7 +24,7 @@ const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
 
     const handleMulti = () => {
         setLayoutOption(LandingOpt.LANDING_MULTI);
-        handleSocketConnection();
+        handleCreateNewRoom();
     };
 
     return (
