@@ -8,6 +8,8 @@ export const FormSetValue = {
     shouldValidate: true,
 };
 
+export const SingelPlayerRoom = "single-player-room";
+
 export const DateStartYear = 1800;
 export const DateEndYear = new Date().getFullYear();
 export const DateDefaultJSON = '["1800","2023"]';

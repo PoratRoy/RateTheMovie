@@ -3,5 +3,8 @@ export enum SessionKey {
     GAME_CARDS = "gameCards",
     FILTERS = "filters",
     BACKUP = "backup",
-    GAME_ROOM = "warRoom",
+    ROOM = "room",
+
+
+    WAR_ROOM = "warRoom",
 }

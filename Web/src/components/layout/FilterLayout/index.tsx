@@ -2,7 +2,7 @@ import style from "./FilterLayout.module.css";
 import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
 import { FilterLayoutProps } from "../../../models/types/props";
 import PlayBtn from "../../actions/btn/PlayBtn";
-import { DateDefaultJSON, FILTER_LAYOUT_ID, START_BTN_ID } from "../../../models/constants";
+import { DateDefaultJSON, FILTER_LAYOUT_ID, START_BTN_ID, SingelPlayerRoom } from "../../../models/constants";
 import { MovieFilters } from "../../../models/types/movie";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
@@ -30,13 +30,16 @@ const FilterLayout = <TInput extends FieldValues>({
             genre: genre ? JSON.parse(genre) : [],
             language: language ? JSON.parse(language) : "",
         };
-        handleGameFilters(filters);
-        // Session.set(SessionKey.FILTERS, filters);
-        // firstRoundMovies(filters);
-        // setTimeout(() => {
-        //     setIsLoading(false);
-        //     navigate(path.game);
-        // }, 2000);
+        const room = Session.get(SessionKey.ROOM);
+        if(room !== SingelPlayerRoom){
+            handleGameFilters(filters);
+        }
+        Session.set(SessionKey.FILTERS, filters);
+        firstRoundMovies(filters);
+        setTimeout(() => {
+            setIsLoading(false);
+            navigate(path.game);
+        }, 2000);
     };
 
     return (

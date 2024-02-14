@@ -1,7 +1,7 @@
 import React from "react";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import PlayerBtn from "../../actions/btn/PlayerBtn";
-import { MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constants";
+import { MULTIPLAYER_BTN_ID, PLAY_BTN_ID, SingelPlayerRoom } from "../../../models/constants";
 import { initPlayer } from "../../../models/initialization/player";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
@@ -18,13 +18,14 @@ const Landing: React.FC<LandingProps> = ({ setLayoutOption }) => {
     const handlePlay = () => {
         const players = [initPlayer(0, "Player 1", "host")];
         Session.set(SessionKey.PLAYERS, players);
+        Session.set(SessionKey.ROOM, SingelPlayerRoom);
         setPlayers(players);
         setLayoutOption(LandingOpt.LANDING_FILTER);
     };
 
     const handleMulti = () => {
-        setLayoutOption(LandingOpt.LANDING_MULTI);
         handleCreateNewRoom();
+        setLayoutOption(LandingOpt.LANDING_MULTI);
     };
 
     return (

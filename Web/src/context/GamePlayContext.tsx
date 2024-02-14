@@ -13,7 +13,6 @@ export const GamePlayContext = createContext<{
     setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
     fetchLoading: boolean;
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
-
     players: Player[];
     setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     finish: boolean;
@@ -77,15 +76,16 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setRemovePosition = () =>
         setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
 
+
     const refreshGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
         setFinishAnimation(initFinishAnimation);
         setFetchLoading(false);
         setFinish(false);
-        setPlayers(prevPlayers => {
-            return prevPlayers.map(player => ({
+        setPlayers((prevPlayers) => {
+            return prevPlayers.map((player) => ({
                 ...player,
-                electedCards: {order: []}
+                electedCards: { order: [] },
             }));
         });
     };
@@ -95,6 +95,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.PLAYERS);
         Session.remove(SessionKey.FILTERS);
         Session.remove(SessionKey.BACKUP);
+        Session.remove(SessionKey.ROOM);
         setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
         setFetchLoading(false);
