@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { useSocket } from "../hooks/context/useSocket";
-import { WarRoomProps, WarRooms } from "../models/types/warRoom";
+import { WarRoomProps } from "../models/types/warRoom";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { MovieFilters } from "../models/types/movie";
@@ -9,27 +9,22 @@ import { SingelPlayerRoom } from "../models/constants";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
-    // multiplayerState: MultiplayerState;
-    // setMultiplayerState: React.Dispatch<React.SetStateAction<MultiplayerState>>;
     handleSocketConnection: () => void;
     handleCreateNewRoom: () => void;
     handleUpdatePlayerName: (name: string) => void;
     handleGameFilters: (filters: MovieFilters) => void;
+    handlePlayerJoinRoom: (roomId: string) => void;
 }>({
-    // multiplayerState: initMultiplayerState,
-    // setMultiplayerState: () => {},
     handleSocketConnection: () => {},
     handleCreateNewRoom: () => {},
     handleUpdatePlayerName: () => {},
     handleGameFilters: () => {},
+    handlePlayerJoinRoom: () => {},
 });
 
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-    // const [multiplayerState, setMultiplayerState] =
-    //     useState<MultiplayerState>(initMultiplayerState);
-
     const { setPlayers } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
@@ -42,8 +37,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.connect();
     };
 
-    // setMultiplayerState((prev) => ({ ...prev, socket }));
-    // setMultiplayerState((prev) => ({ ...prev, warRoom }));
     const handleCreateNewRoom = () => {
         handleSocketConnection();
         socket.emit("CreateNewRoom", async (warRoom: WarRoomProps) => {
@@ -67,12 +60,16 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleGameFilters = (filters: MovieFilters) => {
-        socket.emit("UpdateGameFilters", filters, async (warRoom: WarRoomProps) => {});
+        socket.emit("UpdateGameFilters", filters);
     };
 
-    const handleAddPlayerToRoom = (props: WarRoomProps) => {
-        socket.emit("AddPlayerToRoom", props, async (warRooms: WarRooms, roomId: string) => {
-            Session.set(SessionKey.WAR_ROOM, roomId);
+    const handlePlayerJoinRoom = (roomId: string) => {
+        socket.emit("PlayerJoinRoom", roomId, async (warRoom: WarRoomProps) => {
+            if (warRoom && warRoom.room) {
+                const { players } = warRoom;
+                Session.set(SessionKey.PLAYERS, players);
+                setPlayers(players);
+            }
         });
     };
 
@@ -83,6 +80,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleSocketConnection,
                 handleUpdatePlayerName,
                 handleGameFilters,
+                handlePlayerJoinRoom,
             }}
         >
             {children}
@@ -91,3 +89,13 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default SocketContextProvider;
+
+// multiplayerState: MultiplayerState;
+// setMultiplayerState: React.Dispatch<React.SetStateAction<MultiplayerState>>;
+// multiplayerState: initMultiplayerState,
+// setMultiplayerState: () => {},
+// const [multiplayerState, setMultiplayerState] =
+//     useState<MultiplayerState>(initMultiplayerState);
+
+// setMultiplayerState((prev) => ({ ...prev, socket }));
+// setMultiplayerState((prev) => ({ ...prev, warRoom }));

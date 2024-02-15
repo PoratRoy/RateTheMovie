@@ -1,7 +1,7 @@
 import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { SelectOption } from "./select";
 import React from "react";
-import { BtnSize, CardSide, CardSize, InputType, LogoSize, StarSize } from "./union";
+import { BtnSize, CardSide, CardSize, InputType, LogoSize, PlayerRole, StarSize } from "./union";
 import { Card, placeholderCardType } from "./card";
 import { LandingOpt } from "../enums/landing";
 import { Player } from "./player";
@@ -139,10 +139,13 @@ export type LandingLayoutProps = ChildernsProps & {
     layoutOption: LandingOpt;
 };
 
+export type GuestLayoutProps = ChildernsProps;
+
 export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
 export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
-    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    playerRole: PlayerRole;
 };
 
 export type PlayerLayoutProps = {
@@ -299,7 +302,9 @@ export type LandingProps = {
 };
 
 export type MultiplayerProps = {
-    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    layoutOption?: LandingOpt
+    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    playerRole: PlayerRole;
 };
 
 //--Common--//

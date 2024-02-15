@@ -8,18 +8,38 @@ import { multiFormSchema } from "../../../models/validation/form";
 import Session from "../../../utils/sessionStorage";
 import RoomLink from "../../actions/RoomLink";
 import NameInput from "../../actions/input/NameInput";
+import { useParams } from "react-router-dom";
 import MultiLayout from "../../layout/MultiLayout";
+import { useEffect, useState } from "react";
 
-const Multiplayer: React.FC<MultiplayerProps> = ({ setLayoutOption }) => {
+const Multiplayer: React.FC<MultiplayerProps> = ({ layoutOption, setLayoutOption, playerRole }) => {
     const { players } = useGamePlayContext();
-    const roomLink = Session.get(SessionKey.ROOM) || "";
+    const { room } = useParams();
+    const [roomLink, setRoomLink] = useState<string>("");
+
+    useEffect(() => {
+        if (playerRole === "player" && room) {
+            setRoomLink(`http://localhost:5173/guest/${room || ""}`);
+        } else {
+            setTimeout(() => {
+                const sessionRoom = Session.get(SessionKey.ROOM);
+                if (playerRole === "host" && sessionRoom) {
+                    setRoomLink(`http://localhost:5173/guest/${sessionRoom || ""}`);
+                }
+            }, 50);
+        }
+    }, [layoutOption]);
 
     const methods = useInitialForm<MultiplayerInputSchema>(multiFormSchema, {
-        name: players[players.length - 1].name || "", //TODO: fix this?
+        name: players[players.length - 1]?.name || "", //TODO: fix this
     });
-    
+
     return (
-        <MultiLayout<MultiplayerInputSchema> methods={methods} setLayoutOption={setLayoutOption}>
+        <MultiLayout<MultiplayerInputSchema> 
+            setLayoutOption={setLayoutOption} 
+            methods={methods}
+            playerRole={playerRole}
+        >
             <RoomLink roomLink={roomLink} />
             <NameInput
                 id={multiplayerInputs.name.id}

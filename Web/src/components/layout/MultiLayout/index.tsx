@@ -10,6 +10,7 @@ import { useSocketContext } from "../../../context/SocketContext";
 const MultiLayout = <TInput extends FieldValues>({
     children,
     methods,
+    playerRole,
     setLayoutOption,
 }: MultiLayoutProps<TInput>) => {
     const { handleUpdatePlayerName } = useSocketContext();
@@ -20,15 +21,17 @@ const MultiLayout = <TInput extends FieldValues>({
         setIsLoading(true);
         const { name } = data;
         handleUpdatePlayerName(name);
-        setLayoutOption(LandingOpt.MULTI_FILTER);
+        setLayoutOption && setLayoutOption(LandingOpt.MULTI_FILTER);
         setIsLoading(false);
     };
+
+    const className = playerRole === "host" ? style.multiFormHost : style.multiFormPlayer;//TODO: refactor this
 
     return (
         <FormProvider {...methods}>
             <form
                 id={MULTI_LAYOUT_ID}
-                className={style.multiForm}
+                className={className}
                 onSubmit={handleSubmit(onSubmitMutliForm)}
                 noValidate
             >

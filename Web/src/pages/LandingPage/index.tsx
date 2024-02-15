@@ -11,8 +11,12 @@ const LandingPage: React.FC = () => {
     return (
         <LandingLayout layoutOption={layoutOption}>
             <Filter />
-            <Multiplayer setLayoutOption={setLayoutOption} />
-            <Landing setLayoutOption={setLayoutOption}/>
+            <Multiplayer
+                layoutOption={layoutOption}
+                setLayoutOption={setLayoutOption}
+                playerRole="host"
+            />
+            <Landing setLayoutOption={setLayoutOption} />
         </LandingLayout>
     );
 };

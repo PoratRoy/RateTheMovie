@@ -35,9 +35,9 @@ class GameSocket implements ISocket {
         socket.on("UpdatePlayerName", (name: string, callback: (props: WarRoomProps) => void) => {
             console.info("Update player name: ", name);
             const playerId = socket.id;
-            const warRoom = getRoomByPlayer(this.warRooms, playerId)
+            const warRoom = getRoomByPlayer(this.warRooms, playerId);
             if (warRoom && warRoom.room) {
-                const player = getRoomPlayer(warRoom, playerId)
+                const player = getRoomPlayer(warRoom, playerId);
                 if (player) {
                     player.name = name;
                     this.warRooms[warRoom.room] = warRoom;
@@ -47,38 +47,29 @@ class GameSocket implements ISocket {
             }
         });
 
-        socket.on(
-            "UpdateGameFilters",
-            (filters: MovieFilters, callback: (props: WarRoomProps) => void) => {
-                console.info("Update game filters: ", filters);
-                const playerId = socket.id;
-                const warRoom = getRoomByPlayer(this.warRooms, playerId)
-                if (warRoom && warRoom.room) {
-                    warRoom.filters = filters;
-                    this.warRooms[warRoom.room] = warRoom;
-                    console.log("Game room: ", this.warRooms);
-                    callback(this.warRooms[warRoom.room]);
-                }
-            }
-        )
-
-        socket.on(
-            "AddPlayerToRoom",
-            (props: WarRoomProps, callback: (props: WarRooms, roomId: string) => void) => {
-                console.info("Add new player for props: ", props);
-                const playerId = socket.id;
-                const roomId = props.room || "";
-                const warRoom = this.warRooms[roomId];
-                if (warRoom) {
-                    const player: Player = initPlayer(playerId, getPlayerIndex(props.players));
-                    props.players.push(player);
-                    this.warRooms[roomId] = props;
-                }
-                //TODO: if room not found create one
+        socket.on("UpdateGameFilters", (filters: MovieFilters) => {
+            console.info("Update game filters: ", filters);
+            const playerId = socket.id;
+            const warRoom = getRoomByPlayer(this.warRooms, playerId);
+            if (warRoom && warRoom.room) {
+                warRoom.filters = filters;
+                this.warRooms[warRoom.room] = warRoom;
                 console.log("Game room: ", this.warRooms);
-                callback(this.warRooms, roomId);
-            },
-        );
+            }
+        });
+
+        socket.on("PlayerJoinRoom", (roomId: string, callback: (props: WarRoomProps) => void) => {
+            console.info("Join room: ", roomId);
+            const playerId = socket.id;
+            const warRoom = this.warRooms[roomId];
+            if (warRoom) {
+                const player: Player = initPlayer(playerId, getPlayerIndex(warRoom.players));
+                warRoom.players.push(player);
+                this.warRooms[roomId] = warRoom;
+                console.log("Game room: ", this.warRooms);
+                callback(this.warRooms[roomId]);
+            }
+        });
     }
 
     middlewareImplementation(socket: Socket, next: any) {

@@ -27,6 +27,7 @@
 
 .roomCopyBtn {
     color: var(--text-color);
+    min-width: 40px;
     width: 20%;
     min-height: var(--input-min-height);
     height: 100%;

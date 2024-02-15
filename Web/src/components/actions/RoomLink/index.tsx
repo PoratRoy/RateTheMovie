@@ -20,6 +20,8 @@ const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
             </section>
         </InputLayout>
     );
+
+    //TODO: copy tag when clicked
     //TODO: add button to share to social media
 };
 
