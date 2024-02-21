@@ -3,30 +3,26 @@ import { useEffect } from "react";
 import { delayPromise } from "../../utils/date";
 import { BELOW_ID, SHADOW_ID } from "../../models/constants";
 import { useGamePlayContext } from "../../context/GamePlayContext";
+import { getCorrectOrder } from "../../utils/correctOrder";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const {
-        players,
-        correctOrder,
-        setCorrectPack,
-        setPlayAgainBtn,
-        setIncreaseScore,
-        setRemovePosition,
-    } = useGamePlayContext();
+    const { players, setCorrectPack, setPlayAgainBtn, setIncreaseScore, setRemovePosition } =
+        useGamePlayContext();
 
     const handleAnimation = async () => {
+        const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(players[0]);
+        
         await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
         await delayPromise(1000);
-        setCorrectPack(correctOrder);
+        setCorrectPack(moviesInCorrectOrder);
         await animation(`#${SHADOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
-        const rightChoices = players[0].rightChoices;
-        if(rightChoices.length > 0){
+        if (correctAnswers > 0) {
             setRemovePosition();
             await delayPromise(1500);
             //below move to score
             setIncreaseScore();
-        }else{
+        } else {
             await delayPromise(1500);
             setPlayAgainBtn();
         }
@@ -42,3 +38,27 @@ const useFinishAnimation = (activate: boolean | undefined) => {
 };
 
 export default useFinishAnimation;
+
+// const correctChoices: boolean[] = electedCardsOrder
+// .map((card) => card?.correct)
+// .filter((value): value is boolean => value !== undefined);
+
+// // TODO: extract to function
+// const filteredCards = gameCards.filter(card => card.correctPosition !== -1);
+// filteredCards.sort((a, b) => (a.correctPosition! - b.correctPosition!));
+// const moviesInCorrectOrder = filteredCards.map(card => card.movie);
+
+// electedCardsCorrectOrder?.map((card) => card.movie);
+//         if (
+//             electedCardsOrder &&
+//             electedCardsCorrectOrder &&
+//             electedCardsOrder.length !== 0 &&
+//             electedCardsCorrectOrder.length !== 0 &&
+//             electedCardsOrder.length === electedCardsCorrectOrder.length
+//         ) {
+//             for (let i = 0; i < electedCardsOrder.length; i++) {
+//                 if(electedCardsOrder[i]?.movie === electedCardsCorrectOrder[i]?.movie) {
+//                     moviesInCorrectOrder.push(electedCardsCorrectOrder[i]?.movie);
+//                 }
+//             }
+//         }

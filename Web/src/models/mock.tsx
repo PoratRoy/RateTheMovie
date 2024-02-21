@@ -1,5 +1,6 @@
 import { Movie } from "./types/movie";
 
+
 export const MOCK_MOVIES: Movie[] = [
     {
         actors: [],

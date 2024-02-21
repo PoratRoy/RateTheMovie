@@ -5,6 +5,7 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import { dndStyle } from "../../style/dnd";
 
 //TODO: zIndex not working because of the transform
+//TODO: ...args: any[]
 const Draggable: React.FC<DraggableProps> = ({ children, draggableId, props }) => {
     const { finish } = useGamePlayContext();
 

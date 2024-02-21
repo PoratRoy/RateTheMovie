@@ -1,11 +1,10 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { Card } from "../models/types/card";
-import { initCard } from "../models/initialization/card";
 import { useGamePlayContext } from "./GamePlayContext";
+import { createContext, useContext, useState } from "react";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
-import { movieRating } from "../utils/format";
-import { createContext, useContext, useState } from "react";
+import { Card } from "../models/types/card";
+import { initGameCard } from "../models/initialization/card";
 
 export const DragContext = createContext<{ isDragging: boolean }>({ isDragging: false });
 
@@ -18,38 +17,37 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
     function handleDragEnd(event: DragEndEvent) {
         setIsDragging(false);
         const { over, active } = event;
-        const id = over?.id.toString();
+        const cardPosition = parseInt(over?.id.toString() || "-1");
         const movie: Movie = active?.data?.current?.movie;
         const player: Player = active?.data?.current?.player;
 
         if (movie && player) {
-            const card: Card = { id, movie, rate: movieRating(movie.imdbRating) };
+            const card: Card = { id: movie.id, movie };
 
             setPlayers((prev) => {
                 const players = [...prev];
                 const playerId = player.id;
-                const selectedCards = players[playerId].selectedCards;
+                const selectedCardsOrder = players[playerId].electedCards?.order;
 
-                if (id) {
-                    const cardId = parseInt(id);
-                    const existingCard = selectedCards[cardId];
-                    const existingIndex = selectedCards.findIndex(
-                        (c) => c?.movie?.title === card?.movie?.title,
+                if (cardPosition !== -1) {
+                    const existingCard = selectedCardsOrder[cardPosition];
+                    const existingIndex = selectedCardsOrder.findIndex(
+                        (c) => c?.movie === card?.movie,
                     );
                     if (existingCard) {
                         //swap
-                        selectedCards[existingIndex] = existingCard;
+                        selectedCardsOrder[existingIndex] = existingCard;
                     } else if (existingIndex !== -1) {
                         //alredy exists
-                        selectedCards[existingIndex] = initCard;
+                        selectedCardsOrder[existingIndex] = initGameCard;
                     }
-                    selectedCards[cardId] = card;
+                    selectedCardsOrder[cardPosition] = card;
                 } else {
                     //remove
-                    const selectedCard = selectedCards.find((c) => c?.movie?.id === movie.id);
+                    const selectedCard = selectedCardsOrder.find((c) => c?.movie === movie);
                     if (selectedCard) {
-                        const index = selectedCards.indexOf(selectedCard);
-                        selectedCards[index] = undefined;
+                        const index = selectedCardsOrder.indexOf(selectedCard);
+                        selectedCardsOrder[index] = undefined;
                     }
                 }
                 return players;
@@ -58,7 +56,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
     }
 
     const handleDragStart = () => {
-        if(!isDragging){
+        if (!isDragging) {
             setIsDragging(true);
         }
     };

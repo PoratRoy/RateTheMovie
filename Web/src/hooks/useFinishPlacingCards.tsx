@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { isFinishPlacingElectedCards } from "../utils/finish";
 import { Player } from "../models/types/player";
-import { isFinishPlacingElectedpCards } from "../utils/finish";
 
 const useFinishPlacingCards = (players: Player[]) => {
     const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);
 
     useEffect(() => {
-        const selectedCards = isFinishPlacingElectedpCards(players);
+        const selectedCards = isFinishPlacingElectedCards(players);
         setIsFinishPlacing(selectedCards[0] === undefined ? false : true);
     }, [players]);
 

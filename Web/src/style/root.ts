@@ -34,7 +34,7 @@ export const TEXT_COLOR_OPACITY = "#8996A1";
 export const INPUT_BACKGROUND_COLOR = "#FFFFFF";
 export const INPUT_BACKGROUND_COLOR_HOVER = "#E6E6E6";
 export const INPUT_TEXT_COLOR = "#181818";
-export const INPUT_LIGHT_TEXT_COLOR = "#222222"
+export const INPUT_LIGHT_TEXT_COLOR = "#222222";
 
 export const ERROR_COLOR = "#FF5A5F";
 
@@ -42,7 +42,22 @@ export const PRIMARY_BORDER_RADIUS = "20px";
 export const SECONDARY_BORDER_RADIUS = "10px";
 
 export const PRIMARY_BORDER = "2px solid #344251";
-export const SECONDARY_BORDER = "1px solid #344251"
+export const SECONDARY_BORDER = "1px solid #344251";
 
-export const CARD_WIDTH = 120;
-export const CARD_HEIGHT = 170;
+export const BTN_WIDTH_SMALL = "120px";
+export const BTN_WIDTH_MEDIUM = "150px";
+export const BTN_WIDTH_LARGE = "200px";
+export const BTN_HEIGHT_SMALL = "40px";
+export const BTN_HEIGHT_MEDIUM = "50px";
+export const BTN_HEIGHT_LARGE = "60px";
+
+export const CARD_WIDTH = 140;
+export const CARD_HEIGHT = 200;
+
+export const SMALL_CARD_WIDTH = 50;
+export const SMALL_CARD_HEIGHT = 80;
+
+export const MOBILE_WIDTH = "80vw";
+
+export const INPUT_MIN_HEIGHT = "50px";
+export const INPUT_MAX_HEIGHT = "180px";

@@ -12,6 +12,17 @@ export type Movie = {
     description?: string;
 };
 
+export type CrewModel = {
+    name: string;
+    img: string;
+    job: string;
+};
+
+export type VideoModel = {
+    url: string;
+    title: string;
+};
+
 export type MovieTMDB = {
     adult?: boolean;
     backdrop_path?: string;
@@ -97,18 +108,7 @@ export type MovieCrew = {
     credit_id: string;
     department: string;
     job: string;
-}
-
-export type CrewModel = {
-    name: string;
-    img: string;
-    job: string;
-}
-
-export type VideoModel = {
-    url: string;
-    title: string;
-}
+};
 
 export type MovieFilters = {
     year?: [string, string];

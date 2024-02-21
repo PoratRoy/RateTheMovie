@@ -8,6 +8,8 @@ export const FormSetValue = {
     shouldValidate: true,
 };
 
+export const SingelPlayerRoom = "single-player-room";
+
 export const DateStartYear = 1800;
 export const DateEndYear = new Date().getFullYear();
 export const DateDefaultJSON = '["1800","2023"]';
@@ -25,12 +27,14 @@ export const PLAYER1_ID = "player1";
 export const PLAYER2_ID = "player2";
 
 export const PLAY_BTN_ID = "play-btn";
+export const MULTI_START_BTN_ID = "multi-start-btn";
 export const MULTIPLAYER_BTN_ID = "multiplayer-btn";
 export const LOGO_ID = "logo";
 export const DESCRIPTION_ID = "description";
 export const MOVIES_POSTER_ID = "movies-poster";
 export const WAVE_ID = "wave";
 export const FILTER_LAYOUT_ID = "filter-layout";
+export const MULTI_LAYOUT_ID = "multi-layout";
 
 export const DONE_BTN_ID = "done-btn";
 export const LOADING_ID = "loading";

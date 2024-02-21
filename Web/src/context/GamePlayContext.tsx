@@ -1,14 +1,18 @@
 import { createContext, useContext, useState } from "react";
-import { Card } from "../models/types/card";
-import { Player } from "../models/types/player";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
 import { FinishAnimation } from "../models/types/game";
-import { initFinishAnimation } from "../models/initialization/game";
+import { initFinishAnimation } from "../models/initialization/context";
+import { Player } from "../models/types/player";
+import { Card } from "../models/types/card";
+import { Movie } from "../models/types/movie";
+import { initGameCardsList } from "../models/initialization/card";
 
 export const GamePlayContext = createContext<{
-    correctOrder: Card[];
-    setCorrectOrder: React.Dispatch<React.SetStateAction<Card[]>>;
+    gameCards: Card[];
+    setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
+    fetchLoading: boolean;
+    setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
     players: Player[];
     setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     finish: boolean;
@@ -16,13 +20,15 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => void;
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
-    setCorrectPack: (showCorrectPack: (Card | undefined)[]) => void;
+    setCorrectPack: (showCorrectPack: Movie[]) => void;
     setPlayAgainBtn: () => void;
     setIncreaseScore: () => void;
     setRemovePosition: () => void;
 }>({
-    correctOrder: [],
-    setCorrectOrder: () => {},
+    gameCards: [],
+    setGameCards: () => {},
+    fetchLoading: false,
+    setFetchLoading: () => {},
     players: [],
     setPlayers: () => {},
     finish: false,
@@ -39,7 +45,9 @@ export const GamePlayContext = createContext<{
 export const useGamePlayContext = () => useContext(GamePlayContext);
 
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [correctOrder, setCorrectOrder] = useState<Card[]>([]);
+    const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
+    const [fetchLoading, setFetchLoading] = useState<boolean>(false);
+
     const [players, setPlayers] = useState<Player[]>([]);
     const [finish, setFinish] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
@@ -51,20 +59,14 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPlayers(sessionPlayers);
             }
         }
-        if (!correctOrder || correctOrder.length === 0) {
-            const sessionCorrectOrder = Session.get(SessionKey.CORRECT_ORDER);
-            if (sessionCorrectOrder && sessionCorrectOrder.length > 0) {
-                setCorrectOrder(sessionCorrectOrder);
-            }
-        }
     };
     setStateFromSession();
 
-    const setCorrectPack = (showCorrectPack: (Card | undefined)[]) =>
+    const setCorrectPack = (showCorrectPack: Movie[]) =>
         setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
 
     const setPlayAgainBtn = () => {
-        if(!finishAnimation.playAgainBtn){
+        if (!finishAnimation.playAgainBtn) {
             setFinishAnimation((prev) => ({ ...prev, playAgainBtn: true }));
         }
     };
@@ -74,36 +76,39 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setRemovePosition = () =>
         setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
 
+
     const refreshGameContext = () => {
-        Session.remove(SessionKey.CORRECT_ORDER);
+        Session.remove(SessionKey.GAME_CARDS);
         setFinishAnimation(initFinishAnimation);
-        setCorrectOrder([]);
+        setFetchLoading(false);
         setFinish(false);
-        setPlayers((prev) => {
-            const player = [...prev];
-            player.forEach((player: Player) => {
-                player.rightChoices = [];
-                player.selectedCards = [];
-            });
-            return player;
+        setPlayers((prevPlayers) => {
+            return prevPlayers.map((player) => ({
+                ...player,
+                electedCards: { order: [] },
+            }));
         });
     };
 
     const clearGameContext = () => {
+        Session.remove(SessionKey.GAME_CARDS);
         Session.remove(SessionKey.PLAYERS);
         Session.remove(SessionKey.FILTERS);
-        Session.remove(SessionKey.CORRECT_ORDER);
         Session.remove(SessionKey.BACKUP);
+        Session.remove(SessionKey.ROOM);
         setFinishAnimation(initFinishAnimation);
-        setCorrectOrder([]);
+        setGameCards(initGameCardsList());
+        setFetchLoading(false);
         setFinish(false);
         setPlayers([]);
     };
     return (
         <GamePlayContext.Provider
             value={{
-                correctOrder,
-                setCorrectOrder,
+                gameCards,
+                setGameCards,
+                fetchLoading,
+                setFetchLoading,
                 players,
                 setPlayers,
                 finish,

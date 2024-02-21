@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import PrimaryBtn from "../../core/button/PrimaryBtn";
-import useFinishPlacingCards from "../../../../hooks/useFinishPlacingCards";
 import style from "./FinishBtn.module.css";
 import { DONE_BTN_ID } from "../../../../models/constants";
 import useSetScore from "../../../../hooks/useSetScore";
+import { FinishBtnProps } from "../../../../models/types/props";
 
-const FinishBtn: React.FC = () => {
+const FinishBtn: React.FC<FinishBtnProps> = ({isFinishPlacing}) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const { players, setFinish } = useGamePlayContext();
-    const { isFinishPlacing } = useFinishPlacingCards(players);
+    const { setFinish } = useGamePlayContext();
     const { setScore } = useSetScore();
 
     const handleFinish = () => {

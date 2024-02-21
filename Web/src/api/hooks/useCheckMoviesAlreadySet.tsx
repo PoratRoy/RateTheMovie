@@ -1,23 +1,23 @@
-import { useMovieContext } from "../../context/MovieContext";
+import { useGamePlayContext } from "../../context/GamePlayContext";
 import useHandleMovies from "../../hooks/context/useHandleMovies";
 import { useSingleton } from "../../hooks/useSingleton";
 import { SessionKey } from "../../models/enums/session";
+import { Card } from "../../models/types/card";
 import Session from "../../utils/sessionStorage";
 import { checkMoviesAlreadySet } from "../utils/movie";
 
 const useCheckMoviesAlreadySet = () => {
-    const { movies, setMovieLoading } = useMovieContext();
-    const { handleMovies } = useHandleMovies();
-
+    const { handleGameCards } = useHandleMovies();
+    const { gameCards, setFetchLoading } = useGamePlayContext();
     useSingleton(async () => {
-        setMovieLoading(true);
-        if (!checkMoviesAlreadySet(movies)) {
-            const sessionMovies = Session.get(SessionKey.MOVIES);
-            if (sessionMovies && sessionMovies.length > 0) {
-                handleMovies(sessionMovies);
+        setFetchLoading(true);
+        if (!checkMoviesAlreadySet(gameCards)) {
+            const sessionGameCards: Card[] = Session.get(SessionKey.GAME_CARDS);
+            if (sessionGameCards && sessionGameCards.length > 0) {
+                handleGameCards(sessionGameCards);
             }
         } else {
-            setMovieLoading(false);
+            setFetchLoading(false);
         }
     });
 };

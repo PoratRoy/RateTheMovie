@@ -38,3 +38,5 @@ export type CardSize = "small" | "large";
 export type LogoSize = "small" | "large";
 
 export type StarSize = "small" | "large";
+
+export type PlayerRole = "player" | "host";

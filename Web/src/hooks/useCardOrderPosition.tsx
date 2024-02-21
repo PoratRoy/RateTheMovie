@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { useGamePlayContext } from "../context/GamePlayContext";
-import { Movie } from "../models/types/movie";
+import { Card } from "../models/types/card";
+import { Player } from "../models/types/player";
+import { handleOrderEqualCorrectOrder } from "../utils/correctOrder";
 
-const useCardOrderPosition = (movie: Movie) => {
-    const { players, finishAnimation } = useGamePlayContext();
+const useCardOrderPosition = (player: Player, selectedCard: Card) => {
+    const { finishAnimation, players } = useGamePlayContext();
     const [pos, setPos] = useState<number>(0);
 
     useEffect(() => {
-        const selectedOrder = players[0]?.selectedCards;
+        const electedCardsOrder = player.electedCards.order;
         let match = false;
-        if (selectedOrder && selectedOrder.length !== 0) {
-            selectedOrder.forEach((card, i) => {
-                if (!match && card?.movie?.imdbID) {
-                    if (card?.movie === movie) {
+        if (electedCardsOrder && electedCardsOrder.length !== 0) {
+            electedCardsOrder.forEach((electedCard: Card | undefined, i: number) => {
+                if (electedCard && electedCard.id === selectedCard.id) {
+                    if (!match && electedCard.movie) {
                         setPos(i + 1);
                         match = true;
                     }
@@ -24,12 +26,10 @@ const useCardOrderPosition = (movie: Movie) => {
 
     useEffect(() => {
         if (finishAnimation.removePosition) {
-            const rightChoices = players[0]?.rightChoices;
-            rightChoices.forEach((m: Movie) => {
-                if (m === movie) {
-                    setPos(0);
-                }
-            });
+            const movie = selectedCard.movie;
+            for (let i = 0; i < player.electedCards.order.length; i++) {
+                handleOrderEqualCorrectOrder(player, movie, i, () => setPos(0));
+            }
         }
     }, [finishAnimation]);
 

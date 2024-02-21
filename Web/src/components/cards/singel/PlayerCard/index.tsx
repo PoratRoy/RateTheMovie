@@ -8,8 +8,9 @@ import { placeholderCardType } from "../../../../models/types/card";
 import CardEventLayout from "../../../layout/CardEventLayout";
 import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
-    const position = useCardOrderPosition(movie);
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, card, loading }) => {
+    const movie = card.movie;
+    const position = useCardOrderPosition(player, card);
     const [openCardView, setOpenCardView] = useState<boolean>(false);
     const [openShadow, setOpenShadow] = useState<boolean>(false);
 
@@ -22,7 +23,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ movie, loading, player }) => {
         <React.Fragment>
             <CardEventLayout setOpenCardView={setOpenCardView} setOpenShadow={setOpenShadow}>
                 <Card
-                    type={{ t: "Player", movie } as placeholderCardType}
+                    type={{ t: "Player", card } as placeholderCardType}
                     flip={loading != undefined && !loading}
                     front={<LoadingCard />}
                     back={back}

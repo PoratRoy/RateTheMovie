@@ -9,8 +9,8 @@ import useLandingAnimation from "../../../hooks/animation/useLandingAnimation";
 import { DESCRIPTION_ID, LOGO_ID, MOVIES_POSTER_ID } from "../../../models/constants";
 import WaveLayout from "../WaveLayout";
 
-const LandingLayout: React.FC<LandingLayoutProps> = ({ children, isFilterLayout }) => {
-    const { scope } = useLandingAnimation(isFilterLayout);
+const LandingLayout: React.FC<LandingLayoutProps> = ({ children, layoutOption }) => {
+    const { scope } = useLandingAnimation(layoutOption);
 
     return (
         <section ref={scope} className={style.landingBackground}>

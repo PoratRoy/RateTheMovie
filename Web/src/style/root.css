@@ -64,6 +64,9 @@
     --small-card-height: 80px;
 
     --mobile-width: 80vw;
+
+    --input-min-height: 50px;
+    --input-max-height: 180px;
 }
 
 body {

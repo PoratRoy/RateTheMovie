@@ -1,5 +1,6 @@
 {
     "land": "/",
+    "guest": "/guest/:room",
     "game": "/game",
     "all": "*"
 }

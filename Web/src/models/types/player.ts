@@ -1,11 +1,11 @@
-import { Card } from "./card";
-import { Movie } from "./movie";
-import { PlayerColor } from "./union";
+import { ElectedCards } from "./card";
+import { PlayerColor, PlayerRole } from "./union";
 
 export type Player = {
     id: number;
+    name: string;
+    role: PlayerRole;
     color: PlayerColor;
     score: number;
-    selectedCards: (Card | undefined)[];
-    rightChoices: Movie[];
+    electedCards: ElectedCards;
 };

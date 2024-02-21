@@ -1,22 +1,18 @@
 import { PACK_CARDS_NUM } from "../models/constants";
-import { Card } from "../models/types/card";
+import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
+import { getMoviesByCards } from "./movie";
 
-export const isFinishPlacingElectedpCards = (players: Player[]) => {
-    const sc: ((Card | undefined)[] | undefined)[] = players.map((player: Player) => {
-        const selectedCards = player.selectedCards;
+export const isFinishPlacingElectedCards = (players: Player[]) => {
+    const moviesSelectedOrder: (Movie[] | undefined)[] = players.map((player: Player) => {
+        const electedCardsOrder = player.electedCards.order;
 
-        if (selectedCards && selectedCards.length === PACK_CARDS_NUM) {
-            let ids: string[] = [];
-            selectedCards.forEach((card: Card | undefined) => {
-                if (card && card.id !== undefined) {
-                    ids.push(card.id);
-                }
-            });
-            if (ids.length === PACK_CARDS_NUM) {
-                return selectedCards;
+        if (electedCardsOrder && electedCardsOrder.length === PACK_CARDS_NUM) {
+            const movies: Movie[] = getMoviesByCards(electedCardsOrder);
+            if (movies.length === PACK_CARDS_NUM) {
+                return movies;
             }
         }
     });
-    return sc[0] ? sc[0] : [...Array(PACK_CARDS_NUM)];
+    return moviesSelectedOrder[0] ? moviesSelectedOrder[0] : [...Array(PACK_CARDS_NUM)];
 };

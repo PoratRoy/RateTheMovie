@@ -1,10 +1,11 @@
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { CrewModel, Movie, VideoModel } from "./movie";
+import { FieldErrors, FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { SelectOption } from "./select";
-import { Player } from "./player";
 import React from "react";
-import { BtnSize, CardSide, CardSize, LogoSize, StarSize } from "./union";
+import { BtnSize, CardSide, CardSize, InputType, LogoSize, PlayerRole, StarSize } from "./union";
 import { Card, placeholderCardType } from "./card";
+import { LandingOpt } from "../enums/landing";
+import { Player } from "./player";
+import { CrewModel, Movie, VideoModel } from "./movie";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -52,7 +53,7 @@ export type CardSliceProps = {
 };
 
 export type PlayerCardProps = {
-    movie: Movie;
+    card: Card;
     loading?: boolean;
     player: Player;
 };
@@ -81,7 +82,7 @@ export type CardImgShadowProps = {
 export type ElectedCardProps = {
     index: number;
     player: Player;
-    card: Card | undefined;
+    movie: Movie | undefined;
 };
 
 export type PlaceholderProps = {
@@ -135,17 +136,20 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 };
 
 export type LandingLayoutProps = ChildernsProps & {
-    isFilterLayout: boolean;
+    layoutOption: LandingOpt;
 };
+
+export type GuestLayoutProps = ChildernsProps;
 
 export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
-export type PlayerLayoutProps = {
-    player: Player;
+export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
+    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    playerRole: PlayerRole;
 };
 
-export type SelectLayoutProps = ChildernsProps & {
-    label: string;
+export type PlayerLayoutProps = {
+    player: Player;
 };
 
 export type GameLayoutProps = ChildernsProps;
@@ -158,9 +162,29 @@ export type CardViewLayoutProps = ChildernsProps & {
     close: () => void;
 };
 
+export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
+    InputProps<TInput> & {
+        errors?: FieldErrors<FieldValues>;
+        label: string;
+    };
+
 export type CardEventLayoutProps = ChildernsProps & {
     setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>;
     setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type CrewImgProps = {
+    src: string;
+    alt: string;
+};
+
+export type CrewProps = {
+    actors: CrewModel[];
+    director: CrewModel | undefined;
+};
+
+export type ActorProps = {
+    actor: CrewModel;
 };
 
 //--Input--//
@@ -174,6 +198,10 @@ export type InputPlaceholderProps = {
 
 export type InputLabelProps = {
     label: string;
+};
+
+export type InputTypeProps = {
+    type?: InputType;
 };
 
 export type FormSetValueProps = {
@@ -208,6 +236,11 @@ export type LanguageInputProps<TInput extends FieldValues> = InputProps<TInput> 
     InputLabelProps &
     FormSetValueProps;
 
+export type NameInputProps<TInput extends FieldValues> = InputProps<TInput> &
+    InputPlaceholderProps &
+    InputLabelProps &
+    InputTypeProps;
+
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
 //--Btn--//
@@ -239,11 +272,15 @@ export type PlayBtnProps = IdProps & {
     onClicked?: () => void;
 };
 
+export type FinishBtnProps = {
+    isFinishPlacing: boolean
+}
+
 //--View--//
 export type ViewImgProps = {
     src: string;
     alt: string;
-    video: VideoModel | undefined
+    video: VideoModel | undefined;
 };
 
 export type CardViewProps = {
@@ -259,18 +296,15 @@ export type GenreProps = {
     genre: string;
 };
 
-export type CrewImgProps = {
-    src: string;
-    alt: string;
+//--Landing--//
+export type LandingProps = {
+    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
 };
 
-export type ActorProps = {
-    actor: CrewModel;
-};
-
-export type CrewProps = {
-    actors: CrewModel[];
-    director?: CrewModel;
+export type MultiplayerProps = {
+    layoutOption?: LandingOpt
+    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    playerRole: PlayerRole;
 };
 
 //--Common--//
@@ -299,4 +333,8 @@ export type FooterProps = {
 
 export type BackLinkProps = {
     link: string;
+};
+
+export type RoomLinkProps = {
+    roomLink: string;
 };

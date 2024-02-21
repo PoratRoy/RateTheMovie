@@ -1,35 +1,46 @@
 /* Mobile 320px - 767px -- 812px */
-.selectContainer {
+.formInputContainer {
     display: flex;
     flex-direction: column;
     align-items: start;
     color: var(--text-color);
     gap: 5px;
+    position: relative;
 }
 
-.selectLabel {
+.formInputLabel {
     font-weight: 600;
     position: relative;
     left: 13px;
 }
 
-.selectSelect {
+.formInput {
     min-width: 80vw;
     width: 85vw;
     max-width: 400px;
+    position: relative;
+}
+
+.formInputErrorMsg{
+    color: var(--error-color);
+    font-size: 0.8rem;
+    text-align: right;
+    position: absolute;
+    right: 5px;
+    bottom: -20px;
 }
 
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
-    .selectContainer {
+    .formInputContainer {
         gap: 5px;
     }
 
-    .selectLabel {
+    .formInputLabel {
         left: 13px;
     }
 
-    .selectSelect {
+    .formInput {
         width: 400px;
     }
 }

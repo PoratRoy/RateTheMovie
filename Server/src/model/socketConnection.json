@@ -1,0 +1,6 @@
+{
+    "handshake": "handshake",
+    "user_connected": "user_connected",
+    "disconnect": "disconnect",
+    "user_disconnected": "user_disconnected"
+}

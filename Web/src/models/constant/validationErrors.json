@@ -1,0 +1,6 @@
+{
+    "name": {
+        "required": "Player name is required.",
+        "max": "Name can be maximum 50 characters."
+    }
+}

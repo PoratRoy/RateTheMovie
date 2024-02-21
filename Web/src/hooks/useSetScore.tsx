@@ -1,24 +1,16 @@
 import { useGamePlayContext } from "../context/GamePlayContext";
 import { Player } from "../models/types/player";
-import { movieRating } from "../utils/format";
+import { handlePlayerScore } from "../utils/correctOrder";
 
 const useSetScore = () => {
-    const { correctOrder, setPlayers } = useGamePlayContext();
+    const { setPlayers } = useGamePlayContext();
 
     const setScore = () => {
         setPlayers((prev) => {
             return prev.map((player: Player) => {
-                let playerScore = 0;
-                let rightChoices = [];
-                for (let i = 0; i < correctOrder.length; i++) {
-                    if (correctOrder[i].movie === player.selectedCards[i]?.movie) {
-                        playerScore += movieRating(correctOrder[i]?.movie?.imdbRating);
-                        rightChoices.push(correctOrder[i].movie);
-                    }
-                }
+                const playerScore = handlePlayerScore(player);
                 return {
                     ...player,
-                    rightChoices,
                     score: player.score + playerScore,
                 };
             });

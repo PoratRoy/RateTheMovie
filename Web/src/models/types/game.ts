@@ -1,8 +1,8 @@
-import { Card } from "./card";
+import { Movie } from "./movie";
 
 export type FinishAnimation = {
     playAgainBtn: boolean;
-    showCorrectPack: (Card | undefined)[];
+    showCorrectPack: Movie[];
     increaseScore: boolean;
     removePosition: boolean;
 };

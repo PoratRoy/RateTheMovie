@@ -2,7 +2,7 @@ import style from "./FilterLayout.module.css";
 import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
 import { FilterLayoutProps } from "../../../models/types/props";
 import PlayBtn from "../../actions/btn/PlayBtn";
-import { DateDefaultJSON, FILTER_LAYOUT_ID, START_BTN_ID } from "../../../models/constants";
+import { DateDefaultJSON, FILTER_LAYOUT_ID, START_BTN_ID, SingelPlayerRoom } from "../../../models/constants";
 import { MovieFilters } from "../../../models/types/movie";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
@@ -10,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
 import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 import { useState } from "react";
+import { useSocketContext } from "../../../context/SocketContext";
 
 const FilterLayout = <TInput extends FieldValues>({
     children,
     methods,
 }: FilterLayoutProps<TInput>) => {
+    const { handleGameFilters } = useSocketContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { handleSubmit } = methods;
     const { firstRoundMovies } = useFirstRoundMovies();
@@ -28,6 +30,10 @@ const FilterLayout = <TInput extends FieldValues>({
             genre: genre ? JSON.parse(genre) : [],
             language: language ? JSON.parse(language) : "",
         };
+        const room = Session.get(SessionKey.ROOM);
+        if(room !== SingelPlayerRoom){
+            handleGameFilters(filters);
+        }
         Session.set(SessionKey.FILTERS, filters);
         firstRoundMovies(filters);
         setTimeout(() => {

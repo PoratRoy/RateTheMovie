@@ -1,4 +1,4 @@
-import { FilterInputs } from "../types/form";
+import { FilterInputs, MultiplayerInputs } from "../types/form";
 
 export const filterInputs: FilterInputs = {
     genre: {
@@ -15,5 +15,13 @@ export const filterInputs: FilterInputs = {
         id: "year",
         placeholder: "Select Release Years",
         label: "Release Year",
+    },
+};
+
+export const multiplayerInputs: MultiplayerInputs = {
+    name: {
+        id: "name",
+        placeholder: "Enter Name",
+        label: "Your name",
     },
 };

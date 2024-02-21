@@ -1,12 +1,14 @@
+import { Colors } from "../constants";
 import { Player } from "../types/player";
-import { PlayerColor } from "../types/union";
+import { PlayerColor, PlayerRole } from "../types/union";
 
-export const initPlayer = (id: number, color: PlayerColor): Player => {
+export const initPlayer = (id: number, name: string, role: PlayerRole = "player"): Player => {
     return {
         id,
-        color,
+        name,
+        color: Colors[id] as PlayerColor,
+        role,
         score: 0,
-        selectedCards: [],
-        rightChoices: [],
+        electedCards: {order: []},
     } as Player;
 };
