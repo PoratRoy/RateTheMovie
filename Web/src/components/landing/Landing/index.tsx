@@ -28,12 +28,17 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
         Session.set(SessionKey.PLAYERS, players);
         Session.set(SessionKey.ROOM, SingelPlayerRoom);
         setPlayers(players);
-        setSetupOption(SetupOption.SINGEL);
+        setSetupOption({ option: SetupOption.SINGEL, player: players[0]}); //TODO: change all signel to single
     };
 
     const handleMulti = () => {
-        handleCreateNewRoom();
-        setSetupOption(SetupOption.MULTI);
+        handleCreateNewRoom((players) => {
+            if (players?.length > 0) {
+                setPlayers(players);
+                setSetupOption({ option: SetupOption.MULTI, player: players[0] });
+            }
+            //TODO: handle if there are no players
+        });
     };
 
     return (

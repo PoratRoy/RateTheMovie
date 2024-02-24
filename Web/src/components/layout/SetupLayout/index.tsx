@@ -4,6 +4,7 @@ import { SetupLayoutProps } from "../../../models/types/props";
 import { SETUP_ID } from "../../../models/constants";
 
 const SetupLayout = <TInput extends FieldValues>({
+    playerRole,
     children,
     methods,
 }: SetupLayoutProps<TInput>) => {
@@ -41,6 +42,17 @@ const SetupLayout = <TInput extends FieldValues>({
                 id={SETUP_ID}
                 className={style.setupContainer}
                 onSubmit={handleSubmit(onSubmitForm)}
+                // TODO: refactor it
+                style={
+                    playerRole === "host"
+                        ? { display: "none", opacity: 0 }
+                        : {
+                              opacity: 1,
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                          }
+                }
                 noValidate
             >
                 {children}

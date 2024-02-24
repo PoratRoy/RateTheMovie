@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { START_BTN_ID } from "../../../models/constants";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import RoundsNumber from "../../actions/RoundsNumber";
@@ -17,46 +17,32 @@ import LanguageInput from "../../actions/input/LanguageInput";
 import DateRangeInput from "../../actions/input/DateRangeInput";
 import RoomLink from "../../actions/RoomLink";
 import { SetupOption } from "../../../models/enums/landing";
-import useRoomLink from "../../../hooks/useRoomLink";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
-import Session from "../../../utils/sessionStorage";
-import { SessionKey } from "../../../models/enums/session";
 
-const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
+const Setup: React.FC<SetupProps> = ({ roomLink, setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
-    const { roomLink } = useRoomLink(setupOption, playerRole);
-
-    const [avaterName, setaAvaterName] = useState<string>("");
-    const [avaterId, setAvaterId] = useState<number>(0);
+    const { option, player } = setupOption;
 
     useEffect(() => {
-        if (setupOption === undefined) return;
-
-        setTimeout(() => {
-            const players = Session.get(SessionKey.PLAYERS);
-            if (players?.length > 0) {
-                const { name, avater } = players[0];
-                setaAvaterName(name || "Player 1");
-                setAvaterId(avater || 0);
-                setValue(setupInputs.name.id, name || "Player 1");
-                setValue(setupInputs.avater.id, avater.toString() || "0");
-            }
-        }, 50);
+        if (option === SetupOption.NONE || !player) return;
+        const { name, avater } = player;
+        setValue(setupInputs.name.id, name);
+        setValue(setupInputs.avater.id, avater.toString());
     }, [setupOption]);
 
     return (
-        <SetupLayout<SetupInputSchema> methods={methods}>
-            <PreviewProfile profileName={avaterName || "Player 1"} avaterId={avaterId}>
+        <SetupLayout<SetupInputSchema> methods={methods} playerRole={playerRole}>
+            <PreviewProfile profileName={player?.name || "Player"} avaterId={player?.avater || 0}>
                 <AvatersCarousel
                     setValue={setValue}
                     id={setupInputs.avater.id}
-                    defualt={avaterId}
+                    defualt={player?.avater || 0}
                 />
                 <NameInput id={setupInputs.name.id} placeholder={setupInputs.name.placeholder} />
             </PreviewProfile>
 
-            {setupOption === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
+            {option === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
             {playerRole === "host" ? (
                 <React.Fragment>

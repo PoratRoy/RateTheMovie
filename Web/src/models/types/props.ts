@@ -6,6 +6,7 @@ import { Card, placeholderCardType } from "./card";
 import { SetupOption } from "../enums/landing";
 import { Player } from "./player";
 import { CrewModel, Movie, VideoModel } from "./movie";
+import { SetupLayoutOption } from "./setup";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -136,12 +137,13 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 };
 
 export type LandingLayoutProps = ChildernsProps & {
-    setupOption: SetupOption | undefined;
+    setupOption: SetupLayoutOption;
 };
 
 export type GuestLayoutProps = ChildernsProps;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
+    playerRole: PlayerRole;
     setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
 };
 
@@ -304,12 +306,13 @@ export type GenreProps = {
 
 //--Landing--//
 export type LandingProps = {
-    setSetupOption: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>;
 };
 
 export type SetupProps = {
     playerRole: PlayerRole;
-    setupOption: SetupOption | undefined;
+    setupOption: SetupLayoutOption;
+    roomLink: string;
 };
 
 //--Filter--//

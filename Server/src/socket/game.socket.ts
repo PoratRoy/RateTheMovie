@@ -70,6 +70,21 @@ class GameSocket implements ISocket {
                 callback(this.warRooms[roomId]);
             }
         });
+
+        socket.on("disconnect", () => {
+            console.info("Disconnect received from: " + socket.id);
+            const playerId = socket.id;
+            const warRoom = getRoomByPlayer(this.warRooms, playerId);
+            if (warRoom && warRoom.room) {
+                const player = getRoomPlayer(warRoom, playerId);
+                if (player) {
+                    const index = warRoom.players.indexOf(player);
+                    warRoom.players.splice(index, 1);
+                    this.warRooms[warRoom.room] = warRoom;
+                }
+                console.log("Game room: ", this.warRooms);
+            }
+        });
     }
 
     middlewareImplementation(socket: Socket, next: any) {

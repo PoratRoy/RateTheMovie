@@ -9,7 +9,5 @@
     align-items: center;
     position: relative;
     z-index: 2;
-    display: none;
-    opacity: 0;
     overflow-y: scroll;
 }
