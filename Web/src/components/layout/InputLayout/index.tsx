@@ -10,7 +10,7 @@ const InputLayout = <TInput extends FieldValues>({
 }: InputLayoutProps<TInput>) => {
     return (
         <section className={style.formInputContainer}>
-            <div className={style.formInputLabel}>{label}</div>
+            {label ? <div className={style.formInputLabel}>{label}</div> : null}
             <div className={style.formInput}>{children}</div>
             {errors && errors[id] && (
                 <span className={style.formInputErrorMsg}>{errors[id]?.message as string}</span>

@@ -1,0 +1,23 @@
+.avatersContainer{
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 80vw;
+    width: 85vw;
+    max-width: 400px;
+    min-height: var(--input-min-height);
+    max-height: var(--input-max-height);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.avaterOption{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

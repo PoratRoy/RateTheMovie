@@ -3,9 +3,10 @@ import { SelectOption } from "./select";
 import React from "react";
 import { BtnSize, CardSide, CardSize, InputType, LogoSize, PlayerRole, StarSize } from "./union";
 import { Card, placeholderCardType } from "./card";
-import { LandingOpt } from "../enums/landing";
+import { SetupOption } from "../enums/landing";
 import { Player } from "./player";
 import { CrewModel, Movie, VideoModel } from "./movie";
+import { number } from "yup";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -136,16 +137,15 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 };
 
 export type LandingLayoutProps = ChildernsProps & {
-    layoutOption: LandingOpt;
+    setupOption: SetupOption | undefined;
 };
 
 export type GuestLayoutProps = ChildernsProps;
 
 export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
-export type MultiLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
-    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
-    playerRole: PlayerRole;
+export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
+    setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
 };
 
 export type PlayerLayoutProps = {
@@ -165,7 +165,7 @@ export type CardViewLayoutProps = ChildernsProps & {
 export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     InputProps<TInput> & {
         errors?: FieldErrors<FieldValues>;
-        label: string;
+        label?: string;
     };
 
 export type CardEventLayoutProps = ChildernsProps & {
@@ -238,10 +238,15 @@ export type LanguageInputProps<TInput extends FieldValues> = InputProps<TInput> 
 
 export type NameInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps &
-    InputLabelProps &
     InputTypeProps;
 
+export type RoundInputProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
+
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
+
+export type AvatersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps & {
+    defualt: number;
+};
 
 //--Btn--//
 export type PrimaryBtnProps = IdProps & {
@@ -256,12 +261,11 @@ export type PrimaryBtnProps = IdProps & {
 export type SecondaryBtnProps = IdProps & {
     title: string;
     onClicked?: () => void;
-    onFocused?: boolean;
+    size?: BtnSize;
 };
 
-export type PlayerBtnProps = IdProps & {
+export type MultiBtnProps = IdProps & {
     title: string;
-    onFocused: boolean;
     onClicked: () => void;
 };
 
@@ -273,8 +277,12 @@ export type PlayBtnProps = IdProps & {
 };
 
 export type FinishBtnProps = {
-    isFinishPlacing: boolean
-}
+    isFinishPlacing: boolean;
+};
+
+export type EditProfileBtnProps = {
+    onClicked: () => void;
+};
 
 //--View--//
 export type ViewImgProps = {
@@ -298,13 +306,32 @@ export type GenreProps = {
 
 //--Landing--//
 export type LandingProps = {
-    setLayoutOption: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
 };
 
 export type MultiplayerProps = {
-    layoutOption?: LandingOpt
-    setLayoutOption?: React.Dispatch<React.SetStateAction<LandingOpt>>;
+    setupOption?: SetupOption | undefined;
+    setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
     playerRole: PlayerRole;
+};
+
+export type SetupProps = {
+    playerRole: PlayerRole;
+    setupOption: SetupOption | undefined
+};
+
+//--Filter--//
+export type FilterCollapseProps = ChildernsProps;
+
+//--Profile--//
+export type PreviewProfileProps = ChildernsProps & {
+    profileName: string;
+    avaterId: number;
+};
+
+export type ProfileAvaterProps = {
+    img: string;
+    isFocus?: boolean;
 };
 
 //--Common--//
@@ -324,7 +351,7 @@ export type LogoProps = IdProps & {
 };
 
 export type DescriptionProps = IdProps & {
-    description: string;
+    description: string | React.ReactNode;
 };
 
 export type FooterProps = {

@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import MultiLayout from "../../layout/MultiLayout";
 import { useEffect, useState } from "react";
 
-const Multiplayer: React.FC<MultiplayerProps> = ({ layoutOption, setLayoutOption, playerRole }) => {
+const Multiplayer: React.FC<MultiplayerProps> = ({ setupOption, setSetupOption, playerRole }) => {
     const { players } = useGamePlayContext();
     const { room } = useParams();
     const [roomLink, setRoomLink] = useState<string>("");
@@ -28,25 +28,26 @@ const Multiplayer: React.FC<MultiplayerProps> = ({ layoutOption, setLayoutOption
                 }
             }, 50);
         }
-    }, [layoutOption]);
+    }, [setupOption]);
 
     const methods = useInitialForm<MultiplayerInputSchema>(multiFormSchema, {
         name: players[players.length - 1]?.name || "", //TODO: fix this
     });
 
     return (
-        <MultiLayout<MultiplayerInputSchema> 
-            setLayoutOption={setLayoutOption} 
-            methods={methods}
-            playerRole={playerRole}
-        >
-            <RoomLink roomLink={roomLink} />
-            <NameInput
-                id={multiplayerInputs.name.id}
-                placeholder={multiplayerInputs.name.placeholder}
-                label={multiplayerInputs.name.label}
-            />
-        </MultiLayout>
+        // <MultiLayout
+        //     setLayoutOption={setSetupOption}
+        //     methods={methods}
+        //     playerRole={playerRole}
+        // >
+        //     <RoomLink roomLink={roomLink} />
+        //     <NameInput
+        //         id={multiplayerInputs.name.id}
+        //         placeholder={multiplayerInputs.name.placeholder}
+        //         label={multiplayerInputs.name.label}
+        //     />
+        // </MultiLayout>
+        <div></div>
     );
 };
 

@@ -14,8 +14,6 @@ export const DateStartYear = 1800;
 export const DateEndYear = new Date().getFullYear();
 export const DateDefaultJSON = '["1800","2023"]';
 
-export const Colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange", "brown"];
-
 export const Players = ["1 Player", "2 Players", "Multiplayer"];
 
 //TODO: arrange the ids
@@ -35,6 +33,8 @@ export const MOVIES_POSTER_ID = "movies-poster";
 export const WAVE_ID = "wave";
 export const FILTER_LAYOUT_ID = "filter-layout";
 export const MULTI_LAYOUT_ID = "multi-layout";
+
+export const SETUP_ID = "setup";
 
 export const DONE_BTN_ID = "done-btn";
 export const LOADING_ID = "loading";

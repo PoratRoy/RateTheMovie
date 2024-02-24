@@ -6,7 +6,6 @@ import InputLayout from "../../../layout/InputLayout";
 const NameInput = <TInput extends FieldValues>({
     id,
     placeholder,
-    label,
     type = "text",
 }: NameInputProps<TInput>) => {
     const {
@@ -15,7 +14,7 @@ const NameInput = <TInput extends FieldValues>({
     } = useFormContext();
 
     return (
-        <InputLayout label={label} id={id} errors={errors}>
+        <InputLayout id={id} errors={errors}>
             <input
                 className={`${style.inputText} ${errors[id] ? style.inputTextError : ""}`}
                 type={type}

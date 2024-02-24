@@ -1,0 +1,7 @@
+.borderStyle {
+    min-width: 50px;
+    width: 5em;
+    max-width: 100px;
+    height: 1px;
+    background-color: #FFFFFF30;
+}

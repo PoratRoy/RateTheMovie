@@ -1,0 +1,13 @@
+.previewProfileContainer{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.previewProfileName{
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}

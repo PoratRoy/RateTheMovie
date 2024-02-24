@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import LandingLayout from "../../components/layout/LandingLayout";
-import Filter from "../../components/landing/Filter";
-import Multiplayer from "../../components/landing/Multiplayer";
-import { LandingOpt } from "../../models/enums/landing";
+import { SetupOption } from "../../models/enums/landing";
 import Landing from "../../components/landing/Landing";
+import Setup from "../../components/landing/Setup";
 
 const LandingPage: React.FC = () => {
-    const [layoutOption, setLayoutOption] = useState<LandingOpt>(LandingOpt.LANDING);
+    const [setupOption, setSetupOption] = useState<SetupOption | undefined>(undefined);
 
     return (
-        <LandingLayout layoutOption={layoutOption}>
-            <Filter />
-            <Multiplayer
-                layoutOption={layoutOption}
-                setLayoutOption={setLayoutOption}
-                playerRole="host"
-            />
-            <Landing setLayoutOption={setLayoutOption} />
+        <LandingLayout setupOption={setupOption}>
+            <Setup playerRole="host" setupOption={setupOption}/>
+            <Landing setSetupOption={setSetupOption} />
         </LandingLayout>
     );
 };
