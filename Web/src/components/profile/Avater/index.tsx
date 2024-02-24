@@ -1,12 +1,12 @@
 import React from "react";
-import style from "./ProfileAvater.module.css";
-import { ProfileAvaterProps } from "../../../../../models/types/props";
+import style from "./Avater.module.css";
+import { AvaterProps } from "../../../models/types/props";
 
-const ProfileAvater: React.FC<ProfileAvaterProps> = ({ img, isFocus = true }) => {
+const Avater: React.FC<AvaterProps> = ({ img, isFocus = false }) => {
     const className = isFocus ? style.profileAvaterFocus : style.profileAvater; //TODOCSS: refactor this
     //TODO: add animation
 
     return <div className={className}>{img ? <img src={img} alt="avater" /> : null}</div>;
 };
 
-export default ProfileAvater;
+export default Avater;

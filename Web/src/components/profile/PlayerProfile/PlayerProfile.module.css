@@ -1,0 +1,23 @@
+.PlayerProfile{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.PlayerProfileDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: right;
+}
+
+.PlayerProfileScore{
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.PlayerProfileName{
+    color: var(--text-color-opacity);
+    font-size: 0.9rem;
+}

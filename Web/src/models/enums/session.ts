@@ -5,6 +5,7 @@ export enum SessionKey {
     BACKUP = "backup",
     ROOM = "room",
     ROUNDS = "rounds",
+    CURRENT_PLAYER = "currentPlayer",
 
 
     WAR_ROOM = "warRoom",

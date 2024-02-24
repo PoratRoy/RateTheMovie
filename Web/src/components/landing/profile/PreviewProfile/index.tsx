@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./PreviewProfile.module.css";
 import { PreviewProfileProps } from "../../../../models/types/props";
-import ProfileAvater from "../common/ProfileAvater";
+import Avater from "../../../profile/Avater";
 import EditProfileBtn from "../../../actions/btn/EditProfileBtn";
 import { AvaterImgs } from "../../../../models/avaters";
 import { DefualtPlayerName } from "../../../../models/constants";
@@ -21,7 +21,7 @@ const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, 
             ) : (
                 <section className={style.previewProfileContainer}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <ProfileAvater img={img} />
+                        <Avater img={img} isFocus/>
                         <div className={style.previewProfileName}>
                             {profileName || DefualtPlayerName}
                         </div>

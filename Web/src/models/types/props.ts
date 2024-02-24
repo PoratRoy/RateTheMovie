@@ -326,7 +326,7 @@ export type PreviewProfileProps = ChildernsProps & {
     avaterId: number;
 };
 
-export type ProfileAvaterProps = {
+export type AvaterProps = {
     img?: string;
     isFocus?: boolean;
 };
