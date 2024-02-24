@@ -1,5 +1,5 @@
 import { Path } from "react-hook-form";
-import { MultiplayerInputSchema, SelectInputSchema, SetupInputSchema } from "./inputSchema";
+import { MultiplayerInputSchema, SetupInputSchema } from "./inputSchema";
 import { InputType } from "./union";
 
 export type RootInputType<TInput> = {
@@ -17,21 +17,11 @@ export type LabelTypeText = {
 
 export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & LabelTypeText;
 
-export type FilterInputs = {
-    year: InputTypeSelect<SelectInputSchema>;
-    genre: InputTypeSelect<SelectInputSchema>;
-    language: InputTypeSelect<SelectInputSchema>;
-};
-
-export type MultiplayerInputs = {
-    name: InputTypeSelect<MultiplayerInputSchema>;
-};
-
 export type SetupInputs = {
     name: InputTypeText<SetupInputSchema>;
     rounds: RootInputType<SetupInputSchema>;
     avater: RootInputType<SetupInputSchema>;
-    year: InputTypeSelect<SelectInputSchema>;
-    genre: InputTypeSelect<SelectInputSchema>;
-    language: InputTypeSelect<SelectInputSchema>;
+    year: InputTypeSelect<SetupInputSchema>;
+    genre: InputTypeSelect<SetupInputSchema>;
+    language: InputTypeSelect<SetupInputSchema>;
 };

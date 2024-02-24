@@ -9,8 +9,30 @@ const SetupLayout = <TInput extends FieldValues>({
 }: SetupLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
 
-    const onSubmitMutliForm: SubmitHandler<TInput> = (data: TInput) => {
+    // const { handleGameFilters } = useSocketContext();
+    // const [isLoading, setIsLoading] = useState<boolean>(false);
+    // const navigate = useNavigate();
+    // const { firstRoundMovies } = useFirstRoundMovies();
+
+    const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
         console.log("data", data);
+        // setIsLoading(true);
+        // const { year, genre, language } = data;
+        // const filters: MovieFilters = {
+        //     year: year ? JSON.parse(year) : DateDefaultJSON,
+        //     genre: genre ? JSON.parse(genre) : [],
+        //     language: language ? JSON.parse(language) : "",
+        // };
+        // const room = Session.get(SessionKey.ROOM);
+        // if(room !== SingelPlayerRoom){
+        //     handleGameFilters(filters);
+        // }
+        // Session.set(SessionKey.FILTERS, filters);
+        // firstRoundMovies(filters);
+        // setTimeout(() => {
+        //     setIsLoading(false);
+        //     navigate(path.game);
+        // }, 2000);
     };
 
     return (
@@ -18,7 +40,7 @@ const SetupLayout = <TInput extends FieldValues>({
             <form
                 id={SETUP_ID}
                 className={style.setupContainer}
-                onSubmit={handleSubmit(onSubmitMutliForm)}
+                onSubmit={handleSubmit(onSubmitForm)}
                 noValidate
             >
                 {children}

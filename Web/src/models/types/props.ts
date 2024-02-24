@@ -6,7 +6,6 @@ import { Card, placeholderCardType } from "./card";
 import { SetupOption } from "../enums/landing";
 import { Player } from "./player";
 import { CrewModel, Movie, VideoModel } from "./movie";
-import { number } from "yup";
 
 export type ChildernsProps = {
     children: React.ReactNode | React.ReactNode[];
@@ -141,8 +140,6 @@ export type LandingLayoutProps = ChildernsProps & {
 };
 
 export type GuestLayoutProps = ChildernsProps;
-
-export type FilterLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput>;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
     setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
@@ -307,12 +304,6 @@ export type GenreProps = {
 //--Landing--//
 export type LandingProps = {
     setSetupOption: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
-};
-
-export type MultiplayerProps = {
-    setupOption?: SetupOption | undefined;
-    setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
-    playerRole: PlayerRole;
 };
 
 export type SetupProps = {

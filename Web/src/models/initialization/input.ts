@@ -1,12 +1,6 @@
 import { getRandomNumber } from "../../utils/calc";
 import { DateDefaultJSON } from "../constants";
-import { MultiplayerInputSchema, SelectInputSchema, SetupInputSchema } from "../types/inputSchema";
-
-export const initSelectDefaultValues: SelectInputSchema = {
-    year: DateDefaultJSON,
-    language: "",
-    genre: "[]",
-};
+import { MultiplayerInputSchema, SetupInputSchema } from "../types/inputSchema";
 
 export const initMultiDefaultValues: MultiplayerInputSchema = {
     name: "Player 1",

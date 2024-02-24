@@ -3,7 +3,7 @@ import { START_BTN_ID } from "../../../models/constants";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import RoundsNumber from "../../actions/RoundsNumber";
 import Border from "../../common/Border";
-import FilterCollapse from "../filte/FilterCollapse";
+import FilterCollapse from "../filter/FilterCollapse";
 import { SetupProps } from "../../../models/types/props";
 import PreviewProfile from "../profile/PreviewProfile";
 import NameInput from "../../actions/input/NameInput";
