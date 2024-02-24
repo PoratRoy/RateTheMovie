@@ -40,7 +40,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
             setupOption={setupOption}
             roomLink={roomLink}
         >
-            <PreviewProfile profileName={player?.name} avaterId={player?.avater || 0}>
+            <PreviewProfile profileName={player?.name} avaterId={player?.avater || -1}>
                 <AvatersCarousel
                     setValue={setValue}
                     id={setupInputs.avater.id}

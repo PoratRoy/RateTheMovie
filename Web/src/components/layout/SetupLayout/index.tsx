@@ -9,6 +9,9 @@ import { updatePlayer } from "../../../models/initialization/player";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { useSocketContext } from "../../../context/SocketContext";
 import { SetupOption } from "../../../models/enums/landing";
+import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
+import { useNavigate } from "react-router-dom";
+import path from "../../../router/routePath.json"
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,
@@ -19,16 +22,20 @@ const SetupLayout = <TInput extends FieldValues>({
 }: SetupLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
     const { setPlayers, setRounds } = useGamePlayContext();
-    const { handlePlayerJoinRoom } = useSocketContext();
-    // const { firstRoundMovies } = useFirstRoundMovies();
-    // const navigate = useNavigate();
+    const { handlePlayerJoinRoom, handleGameFilters } = useSocketContext();
+    const { firstRoundMovies } = useFirstRoundMovies();
+    const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
+        console.log("data", data)
+        console.log("setupOption", setupOption)
+        console.log("playerRole", playerRole)
         const { year, genre, language, name, avater, rounds } = data;
         const { player, option } = setupOption;
 
         const updatedPlayer = updatePlayer(player, name, avater);
         if (updatedPlayer) {
+            console.log("updatedPlayer", updatedPlayer)
             if (option === SetupOption.SINGLE) {
                 Session.set(SessionKey.PLAYERS, [updatedPlayer]);
                 setPlayers([updatedPlayer]);
@@ -47,20 +54,19 @@ const SetupLayout = <TInput extends FieldValues>({
                 genre: genre ? JSON.parse(genre) : [],
                 language: language ? JSON.parse(language) : "",
             };
+            if (option === SetupOption.MULTI) {
+                handleGameFilters(filters);
+            }
             Session.set(SessionKey.FILTERS, filters);
+            firstRoundMovies(filters);
 
             setRounds(parseInt(rounds));
             Session.set(SessionKey.ROUNDS, rounds);
         }
+        setTimeout(() => {
+            navigate(path.game);
+        }, 100);
     };
-    // firstRoundMovies(filters);
-    // const room = Session.get(SessionKey.ROOM);
-    // if(room !== SinglePlayerRoom){
-    //     handleGameFilters(filters);
-    // }
-    // setTimeout(() => {
-    //     // navigate(path.game);
-    // }, 2000);
 
     return (
         <FormProvider {...methods}>
@@ -68,7 +74,7 @@ const SetupLayout = <TInput extends FieldValues>({
                 id={SETUP_ID}
                 className={style.setupContainer}
                 onSubmit={handleSubmit(onSubmitForm)}
-                // TODO: refactor it
+                // TODOCSS: refactor it
                 style={
                     playerRole === "host"
                         ? { display: "none", opacity: 0 }

@@ -6,9 +6,11 @@ import useLandingAnimation from "../../../hooks/animation/useLandingAnimation";
 import { LOGO_ID } from "../../../models/constants";
 import WaveLayout from "../WaveLayout";
 import BackgroundPoster from "../../common/BackgroundPoster";
+import { SetupOption } from "../../../models/enums/landing";
 
-const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption }) => {
+const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption, setSetupOption }) => {
     const { scope } = useLandingAnimation(setupOption);
+    const { option } = setupOption;
 
     return (
         <section ref={scope} className={style.landingBackground}>
@@ -18,7 +20,15 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption }) 
                     <Logo id={LOGO_ID} />
                     {children}
                 </section>
-                <Footer />
+                <Footer
+                    callback={
+                        option === SetupOption.NONE
+                            ? undefined
+                            : () => {
+                                  setSetupOption({ option: SetupOption.NONE });
+                              }
+                    }
+                />
             </WaveLayout>
         </section>
     );

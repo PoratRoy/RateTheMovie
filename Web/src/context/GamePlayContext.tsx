@@ -99,6 +99,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.FILTERS);
         Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.ROOM);
+        Session.remove(SessionKey.ROUNDS);
         setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
         setFetchLoading(false);

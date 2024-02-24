@@ -1,5 +1,5 @@
 import { Path } from "react-hook-form";
-import { MultiplayerInputSchema, SetupInputSchema } from "./inputSchema";
+import { SetupInputSchema } from "./inputSchema";
 import { InputType } from "./union";
 
 export type RootInputType<TInput> = {

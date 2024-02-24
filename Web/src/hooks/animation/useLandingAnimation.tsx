@@ -14,17 +14,34 @@ import { SetupOption } from "../../models/enums/landing";
 const useLandingAnimation = (activate: SetupLayoutOption) => {
     const [scope, animation] = useAnimate();
 
-    const handleSetUpAnimation = async () => {
+    const handleLandingAnimation = async () => {
+        await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
+        await Promise.all([
+            animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
+            animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
+            animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: 0.1 }),
+        ]);
+        await animation(`#${SETUP_ID}`, { display: "none" }),
+        await Promise.all([
+            animation(`#${PLAY_BTN_ID}`, { display: "flex" }),
+            animation(`#${DESCRIPTION_ID}`, { display: "block" }),
+            animation(`#${MULTIPLAYER_BTN_ID}`, { display: "flex" }),
+            animation(`#${MOVIES_POSTER_ID}`, { display: "block" }),
+        ]);
+    };
+
+    const handleSetupAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 });
         await Promise.all([
             animation(`#${DESCRIPTION_ID}`, { opacity: 0 }, { duration: 0.2 }),
             animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 0 }, { duration: 0.2 }),
         ]);
         await Promise.all([
-            animation(`#${PLAY_BTN_ID}`, { y: 200 }, { duration: 0.1 }),
+            animation(`#${PLAY_BTN_ID}`, { opacity: 0 }, { duration: 0.1 }),
             animation(`#${WAVE_ID}`, { height: "100%" }, { duration: 0.1 }),
         ]);
         await Promise.all([
+            animation(`#${PLAY_BTN_ID}`, { display: "none" }),
             animation(`#${DESCRIPTION_ID}`, { display: "none" }),
             animation(`#${MULTIPLAYER_BTN_ID}`, { display: "none" }),
             animation(`#${MOVIES_POSTER_ID}`, { display: "none" }),
@@ -37,8 +54,10 @@ const useLandingAnimation = (activate: SetupLayoutOption) => {
     };
 
     useEffect(() => {
-        if (activate.option !== SetupOption.NONE) {
-            handleSetUpAnimation();
+        if (activate.option === SetupOption.NONE) {
+            handleLandingAnimation();
+        }else{
+            handleSetupAnimation();
         }
     }, [activate]);
 

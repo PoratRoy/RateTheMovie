@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { useGamePlayContext } from "../context/GamePlayContext";
 
 const useClear = () => {
-    const navigate = useNavigate();
     const { clearGameContext, refreshGameContext } = useGamePlayContext();
 
-    const handleClear = (link?: string) => {
+    const handleClear = () => {
         clearGameContext();
-        if (link) navigate(link);
     };
 
     const handleRefresh = () => {

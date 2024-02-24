@@ -1,7 +1,3 @@
-export type MultiplayerInputSchema = {
-    name: string | undefined;
-};
-
 export type SetupInputSchema = {
     name: string | undefined;
     avater: string | undefined;

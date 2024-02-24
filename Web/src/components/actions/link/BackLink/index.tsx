@@ -3,12 +3,16 @@ import { BackLinkProps } from "../../../../models/types/props";
 import { FaArrowLeft } from "react-icons/fa";
 import style from "./BackLink.module.css";
 import useClear from "../../../../hooks/useClear";
+import { useNavigate } from "react-router-dom";
 
-const BackLink: React.FC<BackLinkProps> = ({ link }) => {
+const BackLink: React.FC<BackLinkProps> = ({ link, callback }) => {
     const { handleClear } = useClear();
+    const navigate = useNavigate();
 
     const handleBackLink = () => {
-        handleClear(link);
+        handleClear();
+        if (callback) callback();
+        else if (link) navigate(link);
     };
 
     return (

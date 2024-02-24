@@ -8,6 +8,7 @@ import { DefualtPlayerName } from "../../../../models/constants";
 
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, avaterId }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const img = avaterId === -1 ? undefined : AvaterImgs[avaterId];
 
     const handleOnClick = () => {
         setIsEdit(true);
@@ -20,7 +21,7 @@ const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, 
             ) : (
                 <section className={style.previewProfileContainer}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <ProfileAvater img={AvaterImgs[avaterId]} />
+                        <ProfileAvater img={img} />
                         <div className={style.previewProfileName}>
                             {profileName || DefualtPlayerName}
                         </div>

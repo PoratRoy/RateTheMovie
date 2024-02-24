@@ -2,12 +2,15 @@ import React from "react";
 import path from "../../../router/routePath.json";
 import style from "./NotEnoughMovies.module.css";
 import useClear from "../../../hooks/useClear";
+import { useNavigate } from "react-router-dom";
 
 const NotEnoughMovies: React.FC = () => {
     const { handleClear } = useClear();
+    const navigate = useNavigate();
 
     const handleBackLink = () => {
-        handleClear(path.land);
+        handleClear();
+        navigate(path.land);
     };
     return (
         <section className={style.notEnoughContainer}>

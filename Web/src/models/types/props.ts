@@ -138,6 +138,7 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 
 export type LandingLayoutProps = ChildernsProps & {
     setupOption: SetupLayoutOption;
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>
 };
 
 export type GuestLayoutProps = ChildernsProps;
@@ -326,7 +327,7 @@ export type PreviewProfileProps = ChildernsProps & {
 };
 
 export type ProfileAvaterProps = {
-    img: string;
+    img?: string;
     isFocus?: boolean;
 };
 
@@ -352,10 +353,12 @@ export type DescriptionProps = IdProps & {
 
 export type FooterProps = {
     link?: string;
+    callback?: () => void;
 };
 
 export type BackLinkProps = {
-    link: string;
+    link?: string;
+    callback?: () => void;
 };
 
 export type RoomLinkProps = {

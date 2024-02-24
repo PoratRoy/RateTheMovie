@@ -9,7 +9,7 @@ const LandingPage: React.FC = () => {
     const [setupOption, setSetupOption] = useState<SetupLayoutOption>({ option: SetupOption.NONE });
 
     return (
-        <LandingLayout setupOption={setupOption}>
+        <LandingLayout setupOption={setupOption} setSetupOption={setSetupOption}>
             <Setup playerRole="host" setupOption={setupOption} />
             <Landing setSetupOption={setSetupOption} />
         </LandingLayout>
