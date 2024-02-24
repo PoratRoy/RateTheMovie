@@ -29,7 +29,7 @@ const SetupLayout = <TInput extends FieldValues>({
 
         const updatedPlayer = updatePlayer(player, name, avater);
         if (updatedPlayer) {
-            if (option === SetupOption.SINGEL) {
+            if (option === SetupOption.SINGLE) {
                 Session.set(SessionKey.PLAYERS, [updatedPlayer]);
                 setPlayers([updatedPlayer]);
             } else if (option === SetupOption.MULTI) {
@@ -54,7 +54,7 @@ const SetupLayout = <TInput extends FieldValues>({
     };
     // firstRoundMovies(filters);
     // const room = Session.get(SessionKey.ROOM);
-    // if(room !== SingelPlayerRoom){
+    // if(room !== SinglePlayerRoom){
     //     handleGameFilters(filters);
     // }
     // setTimeout(() => {

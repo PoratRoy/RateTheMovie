@@ -8,7 +8,7 @@ export const FormSetValue = {
     shouldValidate: true,
 };
 
-export const SingelPlayerRoom = "single-player-room";
+export const SinglePlayerRoom = "single-player-room";
 
 export const DateStartYear = 1800;
 export const DateEndYear = new Date().getFullYear();

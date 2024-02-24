@@ -8,7 +8,7 @@ import Position from "../../shadow/Position";
 const Card: React.FC<CardProps> = ({id, type, front, back, flip, isFocus, position, size = "large"}) => {
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
-    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODO: refactor
+    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODOCSS: refactor
     return (
         <section id={id} className={sizeClass}>
             <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>

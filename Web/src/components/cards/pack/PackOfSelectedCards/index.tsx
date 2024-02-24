@@ -1,5 +1,5 @@
 import React from "react";
-import ElectedCard from "../../singel/ElectedCard";
+import ElectedCard from "../../single/ElectedCard";
 import Pack from "../../core/Pack";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { motion } from "framer-motion";

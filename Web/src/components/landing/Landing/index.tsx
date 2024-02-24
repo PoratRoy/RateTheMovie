@@ -6,7 +6,7 @@ import {
     DefualtPlayerName,
     MULTIPLAYER_BTN_ID,
     PLAY_BTN_ID,
-    SingelPlayerRoom,
+    SinglePlayerRoom,
 } from "../../../models/constants";
 import { initPlayer } from "../../../models/initialization/player";
 import { SessionKey } from "../../../models/enums/session";
@@ -23,15 +23,15 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
 
     const handlePlay = () => {
         const player = initPlayer(0, DefualtPlayerName, "host");
-        Session.set(SessionKey.ROOM, SingelPlayerRoom);
-        setSetupOption({ option: SetupOption.SINGEL, player }); //TODO: change all signel to single
+        Session.set(SessionKey.ROOM, SinglePlayerRoom);
+        setSetupOption({ option: SetupOption.SINGLE, player });
     };
 
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
             const { numberOfPlayers, roomId } = details;
             const player = initPlayer(numberOfPlayers, DefualtPlayerName, "host");
-            Session.set(SessionKey.ROOM, roomId || SingelPlayerRoom);
+            Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
             setSetupOption({ option: SetupOption.MULTI, player });
         });
     };

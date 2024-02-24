@@ -1,5 +1,5 @@
 export enum SetupOption {
     NONE = "None",
-    SINGEL = "SingelPlayer",
+    SINGLE = "SinglePlayer",
     MULTI = "Muiltplayer",
 }

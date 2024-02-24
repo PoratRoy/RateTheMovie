@@ -15,7 +15,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
 }) => {
     const { title, poster_path } = movie;
 
-    const className = //TODO: refactor this
+    const className = //TODOCSS: refactor this
         side === "all"
             ? style.cardSideAll
             : side === "left"

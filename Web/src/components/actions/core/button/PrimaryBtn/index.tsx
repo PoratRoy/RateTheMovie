@@ -20,7 +20,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
             ? style.btnPrimaryLarge
             : size === "medium"
               ? style.btnPrimaryMedium
-              : style.btnPrimarySmall; //TODO: refactor this
+              : style.btnPrimarySmall; //TODOCSS: refactor this
     return (
         <div ref={scope}>
             <input

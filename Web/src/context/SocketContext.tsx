@@ -5,7 +5,7 @@ import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { MovieFilters } from "../models/types/movie";
 import { useGamePlayContext } from "./GamePlayContext";
-import { SingelPlayerRoom } from "../models/constants";
+import { SinglePlayerRoom } from "../models/constants";
 import { Player } from "../models/types/player";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
@@ -63,7 +63,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit("CreateNewRoom", async (details: WarRoomDetails) => {
             if (details) {
                 const { roomId } = details;
-                Session.set(SessionKey.ROOM, roomId || SingelPlayerRoom);
+                Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
                 callback(details);
             }
         });

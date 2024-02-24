@@ -1,5 +1,5 @@
 import PackWrapper from "../components/cards/wrapper/PackWrapper";
-import DraggableMovie from "../components/cards/singel/DraggableMovie";
+import DraggableMovie from "../components/cards/single/DraggableMovie";
 import { PACK_CARDS_NUM } from "../models/constants";
 import React from "react";
 import { Player } from "../models/types/player";

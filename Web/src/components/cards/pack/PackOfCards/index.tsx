@@ -1,5 +1,5 @@
 import React from "react";
-import PlayerCard from "../../singel/PlayerCard";
+import PlayerCard from "../../single/PlayerCard";
 import Pack from "../../core/Pack";
 import { PackOfCardsProps } from "../../../../models/types/props";
 import NotEnoughMovies from "../../../common/NotEnoughMovies";

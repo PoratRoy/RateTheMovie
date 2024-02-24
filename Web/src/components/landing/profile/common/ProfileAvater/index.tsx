@@ -3,7 +3,7 @@ import style from "./ProfileAvater.module.css";
 import { ProfileAvaterProps } from "../../../../../models/types/props";
 
 const ProfileAvater: React.FC<ProfileAvaterProps> = ({ img, isFocus = true }) => {
-    const className = isFocus ? style.profileAvaterFocus : style.profileAvater; //TODO: refactor this
+    const className = isFocus ? style.profileAvaterFocus : style.profileAvater; //TODOCSS: refactor this
     //TODO: add animation
 
     return (
