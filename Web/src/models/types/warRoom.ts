@@ -12,3 +12,8 @@ export type WarRoomProps = {
     gameCards: Card[];
     filters: MovieFilters;
 };
+
+export type WarRoomDetails = {
+    numberOfPlayers: number;
+    roomId?: string;
+};

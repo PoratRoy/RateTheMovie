@@ -4,6 +4,7 @@ import { PreviewProfileProps } from "../../../../models/types/props";
 import ProfileAvater from "../common/ProfileAvater";
 import EditProfileBtn from "../../../actions/btn/EditProfileBtn";
 import { AvaterImgs } from "../../../../models/avaters";
+import { DefualtPlayerName } from "../../../../models/constants";
 
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, avaterId }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -20,7 +21,9 @@ const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, 
                 <section className={style.previewProfileContainer}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                         <ProfileAvater img={AvaterImgs[avaterId]} />
-                        <div className={style.previewProfileName}>{profileName}</div>
+                        <div className={style.previewProfileName}>
+                            {profileName || DefualtPlayerName}
+                        </div>
                     </div>
                     <EditProfileBtn onClicked={handleOnClick} />
                 </section>

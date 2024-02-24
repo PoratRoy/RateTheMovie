@@ -12,3 +12,8 @@ export type WarRoomProps = {
 export type WarRooms = {
     [key: string]: WarRoomProps;
 };
+
+export type WarRoomDetails = {
+    numberOfPlayers: number;
+    roomId?: string;
+}

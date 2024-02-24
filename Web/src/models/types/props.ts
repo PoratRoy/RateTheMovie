@@ -143,6 +143,8 @@ export type LandingLayoutProps = ChildernsProps & {
 export type GuestLayoutProps = ChildernsProps;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
+    setupOption: SetupLayoutOption
+    roomLink: string;
     playerRole: PlayerRole;
     setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
 };
@@ -319,7 +321,7 @@ export type FilterCollapseProps = ChildernsProps;
 
 //--Profile--//
 export type PreviewProfileProps = ChildernsProps & {
-    profileName: string;
+    profileName?: string;
     avaterId: number;
 };
 

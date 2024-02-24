@@ -3,6 +3,7 @@ import PlayBtn from "../../actions/btn/PlayBtn";
 import MultiBtn from "../../actions/btn/MultiBtn";
 import {
     DESCRIPTION_ID,
+    DefualtPlayerName,
     MULTIPLAYER_BTN_ID,
     PLAY_BTN_ID,
     SingelPlayerRoom,
@@ -11,7 +12,6 @@ import { initPlayer } from "../../../models/initialization/player";
 import { SessionKey } from "../../../models/enums/session";
 import Session from "../../../utils/sessionStorage";
 import { SetupOption } from "../../../models/enums/landing";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { LandingProps } from "../../../models/types/props";
 import { useSocketContext } from "../../../context/SocketContext";
 import Description from "../../common/Description";
@@ -21,23 +21,18 @@ import style from "./Landing.module.css";
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();
 
-    const { setPlayers } = useGamePlayContext();
-
     const handlePlay = () => {
-        const players = [initPlayer(0, "Player 1", "host")];
-        Session.set(SessionKey.PLAYERS, players);
+        const player = initPlayer(0, DefualtPlayerName, "host");
         Session.set(SessionKey.ROOM, SingelPlayerRoom);
-        setPlayers(players);
-        setSetupOption({ option: SetupOption.SINGEL, player: players[0]}); //TODO: change all signel to single
+        setSetupOption({ option: SetupOption.SINGEL, player }); //TODO: change all signel to single
     };
 
     const handleMulti = () => {
-        handleCreateNewRoom((players) => {
-            if (players?.length > 0) {
-                setPlayers(players);
-                setSetupOption({ option: SetupOption.MULTI, player: players[0] });
-            }
-            //TODO: handle if there are no players
+        handleCreateNewRoom((details) => {
+            const { numberOfPlayers, roomId } = details;
+            const player = initPlayer(numberOfPlayers, DefualtPlayerName, "host");
+            Session.set(SessionKey.ROOM, roomId || SingelPlayerRoom);
+            setSetupOption({ option: SetupOption.MULTI, player });
         });
     };
 

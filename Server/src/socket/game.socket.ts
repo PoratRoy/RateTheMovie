@@ -2,9 +2,7 @@ import { Socket } from "socket.io";
 import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
-import { WarRooms, WarRoomProps } from "../model/types/warRoom";
-import { initPlayer } from "../model/initialization/player";
-import { getPlayerIndex } from "../utils/calc";
+import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
 import { MovieFilters } from "../model/types/movie";
 import { getRoomByPlayer, getRoomPlayer, initWarRoom } from "../utils/warRoom";
 
@@ -18,17 +16,24 @@ class GameSocket implements ISocket {
     handleConnection(socket: Socket) {
         console.info("Connection start for user ID: ", socket.id);
 
-        socket.on("CreateNewRoom", (callback: (props: WarRoomProps) => void) => {
-            console.info("Create new room");
+        socket.on("CreateNewRoom", (callback: (props: WarRoomDetails) => void) => {
             const roomId = v4();
+            console.info("Create new room: ", roomId);
+            callback({ numberOfPlayers: 0, roomId });
+        });
+
+        socket.on("PlayerJoinRoom", (roomId: string, player: Player, callback: (props: WarRoomProps) => void) => {
+            console.info(`Join room: ${roomId}, Player: `, player);
             const playerId = socket.id;
+            const updatedPlayer = {...player, id: playerId};
             const warRoom = this.warRooms[roomId];
-            if (!warRoom) {
-                const player: Player = initPlayer(playerId, getPlayerIndex([]), "host");
-                const props: WarRoomProps = initWarRoom(roomId, player);
-                this.warRooms[roomId] = props;
+            if (warRoom) {
+                warRoom.players.push(updatedPlayer);
+                this.warRooms[roomId] = warRoom;
+            }else{
+                this.warRooms[roomId] = initWarRoom(roomId, updatedPlayer);
             }
-            console.log("New game room: ", this.warRooms[roomId]);
+            console.log("Game room: ", this.warRooms[roomId]);
             callback(this.warRooms[roomId]);
         });
 
@@ -58,18 +63,20 @@ class GameSocket implements ISocket {
             }
         });
 
-        socket.on("PlayerJoinRoom", (roomId: string, callback: (props: WarRoomProps) => void) => {
-            console.info("Join room: ", roomId);
-            const playerId = socket.id;
-            const warRoom = this.warRooms[roomId];
-            if (warRoom) {
-                const player: Player = initPlayer(playerId, getPlayerIndex(warRoom.players));
-                warRoom.players.push(player);
-                this.warRooms[roomId] = warRoom;
-                console.log("Game room: ", this.warRooms);
-                callback(this.warRooms[roomId]);
-            }
-        });
+        socket.on(
+            "PlayerWantToJoin",
+            (roomId: string | undefined, callback: (props: WarRoomDetails) => void) => {
+                console.info("Join room: ", roomId);
+                if (roomId) {
+                    const warRoom = this.warRooms[roomId];
+                    if (warRoom) {
+                        callback({ numberOfPlayers: warRoom.players.length, roomId });
+                    }
+                } else {
+                    callback({ numberOfPlayers: 0 });
+                }
+            },
+        );
 
         socket.on("disconnect", () => {
             console.info("Disconnect received from: " + socket.id);

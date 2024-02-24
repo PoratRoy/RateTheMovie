@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect } from "react";
 import { useSocket } from "../hooks/context/useSocket";
-import { WarRoomProps } from "../models/types/warRoom";
+import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { MovieFilters } from "../models/types/movie";
@@ -10,14 +10,23 @@ import { Player } from "../models/types/player";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
-    handleCreateNewRoom: (callback: (players: Player[]) => void) => void;
+    handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
     handleUpdatePlayerName: (name: string) => void;
     handleGameFilters: (filters: MovieFilters) => void;
-    handlePlayerJoinRoom: (roomId: string, callback: (players: Player[]) => void) => void;
+    handlePlayerWantToJoin: (
+        roomId: string | undefined,
+        callback: (details: WarRoomDetails) => void,
+    ) => void;
+    handlePlayerJoinRoom: (
+        roomId: string,
+        player: Player,
+        callback: (players: Player[]) => void,
+    ) => void;
 }>({
     handleCreateNewRoom: () => {},
     handleUpdatePlayerName: () => {},
     handleGameFilters: () => {},
+    handlePlayerWantToJoin: () => {},
     handlePlayerJoinRoom: () => {},
 });
 
@@ -50,14 +59,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
     }, []);
 
-    const handleCreateNewRoom = (callback: (players: Player[]) => void) => {
-        socket.emit("CreateNewRoom", async (warRoom: WarRoomProps) => {
-            if (warRoom && warRoom.room) {
-                const { players, room } = warRoom;
-                Session.set(SessionKey.PLAYERS, players);
-                Session.set(SessionKey.ROOM, room || SingelPlayerRoom);
-                setPlayers(players);
-                callback(players);
+    const handleCreateNewRoom = (callback: (details: WarRoomDetails) => void) => {
+        socket.emit("CreateNewRoom", async (details: WarRoomDetails) => {
+            if (details) {
+                const { roomId } = details;
+                Session.set(SessionKey.ROOM, roomId || SingelPlayerRoom);
+                callback(details);
             }
         });
     };
@@ -76,13 +83,23 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit("UpdateGameFilters", filters);
     };
 
-    const handlePlayerJoinRoom = (roomId: string, callback: (players: Player[]) => void) => {
-        socket.emit("PlayerJoinRoom", roomId, async (warRoom: WarRoomProps) => {
+    const handlePlayerWantToJoin = (
+        roomId: string | undefined,
+        callback: (details: WarRoomDetails) => void,
+    ) => {
+        socket.emit("PlayerWantToJoin", roomId, async (details: WarRoomDetails) => {
+            callback(details);
+        });
+    };
+
+    const handlePlayerJoinRoom = (
+        roomId: string,
+        player: Player,
+        callback: (players: Player[]) => void,
+    ) => {
+        socket.emit("PlayerJoinRoom", roomId, player, async (warRoom: WarRoomProps) => {
             if (warRoom && warRoom.room) {
-                const { players } = warRoom;
-                Session.set(SessionKey.PLAYERS, players);
-                setPlayers(players);
-                callback(players);
+                callback(warRoom.players);
             }
         });
     };
@@ -93,6 +110,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleCreateNewRoom,
                 handleUpdatePlayerName,
                 handleGameFilters,
+                handlePlayerWantToJoin,
                 handlePlayerJoinRoom,
             }}
         >

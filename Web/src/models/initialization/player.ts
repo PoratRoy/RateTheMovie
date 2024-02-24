@@ -9,6 +9,20 @@ export const initPlayer = (id: number, name: string, role: PlayerRole = "player"
         avater: getRandomNumber(0, 9),
         role,
         score: 0,
-        electedCards: {order: []},
+        electedCards: { order: [] },
     } as Player;
+};
+
+export const updatePlayer = (
+    player: Player | undefined,
+    name: string,
+    avater: number,
+): Player | undefined => {
+    if (player) {
+        return {
+            ...player,
+            name,
+            avater,
+        };
+    }
 };

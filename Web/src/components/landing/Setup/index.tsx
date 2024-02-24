@@ -24,7 +24,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
     const { option, player } = setupOption;
-    const { roomLink } = useRoomLink(option, playerRole)
+    const { roomLink } = useRoomLink(option, playerRole);
 
     useEffect(() => {
         if (option === SetupOption.NONE || !player) return;
@@ -34,8 +34,13 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
     }, [setupOption]);
 
     return (
-        <SetupLayout<SetupInputSchema> methods={methods} playerRole={playerRole}>
-            <PreviewProfile profileName={player?.name || "Player"} avaterId={player?.avater || 0}>
+        <SetupLayout<SetupInputSchema>
+            methods={methods}
+            playerRole={playerRole}
+            setupOption={setupOption}
+            roomLink={roomLink}
+        >
+            <PreviewProfile profileName={player?.name} avaterId={player?.avater || 0}>
                 <AvatersCarousel
                     setValue={setValue}
                     id={setupInputs.avater.id}
@@ -46,7 +51,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
 
             {option === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
-            
+
             {playerRole === "host" ? (
                 <React.Fragment>
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
