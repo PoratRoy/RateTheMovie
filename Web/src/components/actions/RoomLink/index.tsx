@@ -1,24 +1,25 @@
 import React from "react";
 import style from "./RoomLink.module.css";
 import { RoomLinkProps } from "../../../models/types/props";
-import InputLayout from "../../layout/InputLayout";
 import { FaRegCopy } from "react-icons/fa6";
 
 const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
-
     const handleCopy = () => {
         navigator.clipboard.writeText(roomLink);
-    }
+    };
 
     return (
-        <InputLayout label={"Room link"} id={""}>
-            <section className={style.roomLinkInputContianer}>
-                <span className={style.roomLinkText}>{roomLink}</span>
+        <section className={style.roomLink}>
+            <label className={style.roomLinkTitle}>Send the room link to your friends</label>
+            <section className={style.roomLinkContainer}>
+                <span className={style.roomLinkInput}>
+                    <span className={style.roomLinkText}>{roomLink}</span>
+                </span>
                 <span onClick={handleCopy} className={style.roomCopyBtn}>
                     <FaRegCopy />
                 </span>
             </section>
-        </InputLayout>
+        </section>
     );
 
     //TODO: copy tag when clicked

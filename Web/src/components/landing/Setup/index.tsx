@@ -12,7 +12,7 @@ import SetupLayout from "../../layout/SetupLayout";
 import { SetupInputSchema } from "../../../models/types/inputSchema";
 import useInitialForm from "../../../hooks/useInitialForm";
 import { setupFormSchema } from "../../../models/validation/form";
-import Avaters from "../../actions/Avaters";
+import AvatersCarousel from "../../actions/AvatersCarousel";
 import GenreInput from "../../actions/input/GenreInput";
 import LanguageInput from "../../actions/input/LanguageInput";
 import DateRangeInput from "../../actions/input/DateRangeInput";
@@ -31,32 +31,44 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
     return (
         <SetupLayout<SetupInputSchema> methods={methods}>
             <PreviewProfile profileName={name || "Player 1"} avaterId={avaterId}>
-                <Avaters setValue={setValue} id={setupInputs.avater.id} defualt={avaterId} />
+                <AvatersCarousel
+                    setValue={setValue}
+                    id={setupInputs.avater.id}
+                    defualt={avaterId}
+                />
                 <NameInput id={setupInputs.name.id} placeholder={setupInputs.name.placeholder} />
             </PreviewProfile>
+
             {setupOption === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
+            
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
-            <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
-            <Border />
-            <FilterCollapse>
-                <GenreInput
-                    id={setupInputs.genre.id}
-                    placeholder={setupInputs.genre.placeholder}
-                    label={setupInputs.genre.label}
-                    setValue={setValue}
-                />
-                <LanguageInput
-                    id={setupInputs.language.id}
-                    placeholder={setupInputs.language.placeholder}
-                    label={setupInputs.language.label}
-                    setValue={setValue}
-                />
-                <DateRangeInput
-                    id={setupInputs.year.id}
-                    label={setupInputs.year.label}
-                    setValue={setValue}
-                />
-            </FilterCollapse>
+            
+            {playerRole === "host" ? (
+                <React.Fragment>
+                    <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
+                    {/* <Border /> */}
+                    
+                    <FilterCollapse>
+                        <GenreInput
+                            id={setupInputs.genre.id}
+                            placeholder={setupInputs.genre.placeholder}
+                            label={setupInputs.genre.label}
+                            setValue={setValue}
+                        />
+                        <LanguageInput
+                            id={setupInputs.language.id}
+                            placeholder={setupInputs.language.placeholder}
+                            label={setupInputs.language.label}
+                            setValue={setValue}
+                        />
+                        <DateRangeInput
+                            id={setupInputs.year.id}
+                            label={setupInputs.year.label}
+                            setValue={setValue}
+                        />
+                    </FilterCollapse>
+                </React.Fragment>
+            ) : null}
         </SetupLayout>
     );
 };

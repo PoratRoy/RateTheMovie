@@ -241,9 +241,10 @@ export type RoundInputProps<TInput extends FieldValues> = InputProps<TInput> & F
 
 export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
-export type AvatersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps & {
-    defualt: number;
-};
+export type AvatersCarouselProps<TInput extends FieldValues> = InputProps<TInput> &
+    FormSetValueProps & {
+        defualt: number;
+    };
 
 //--Btn--//
 export type PrimaryBtnProps = IdProps & {
@@ -308,7 +309,7 @@ export type LandingProps = {
 
 export type SetupProps = {
     playerRole: PlayerRole;
-    setupOption: SetupOption | undefined
+    setupOption: SetupOption | undefined;
 };
 
 //--Filter--//

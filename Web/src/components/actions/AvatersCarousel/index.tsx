@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import style from "./Avaters.module.css";
-import { AvatersProps } from "../../../models/types/props";
+import { useState } from "react";
+import style from "./AvatersCarousel.module.css";
+import { AvatersCarouselProps } from "../../../models/types/props";
 import { FieldValues } from "react-hook-form";
 import { FormSetValue } from "../../../models/constants";
 import ProfileAvater from "../../landing/profile/common/ProfileAvater";
 import { AvaterImgs } from "../../../models/avaters";
 
-const Avaters = <TInput extends FieldValues>({ id, setValue, defualt }: AvatersProps<TInput>) => {
+//TODO: need to build the infinte carousel
+const AvatersCarousel = <TInput extends FieldValues>({
+    id,
+    setValue,
+    defualt,
+}: AvatersCarouselProps<TInput>) => {
     const [avater, setAvater] = useState<number>(defualt);
 
     const handleAvater = (avaterId: number) => {
@@ -25,4 +30,4 @@ const Avaters = <TInput extends FieldValues>({ id, setValue, defualt }: AvatersP
     );
 };
 
-export default Avaters;
+export default AvatersCarousel;

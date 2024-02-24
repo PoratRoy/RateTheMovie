@@ -6,9 +6,9 @@
     min-width: 80vw;
     width: 85vw;
     max-width: 400px;
-    min-height: var(--input-min-height);
-    max-height: var(--input-max-height);
+    height: 80px;
     overflow-x: scroll;
+    white-space: nowrap;
     overflow-y: hidden;
     padding: 10px;
     -webkit-box-sizing: border-box;
