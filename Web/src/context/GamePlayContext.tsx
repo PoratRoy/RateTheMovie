@@ -24,6 +24,8 @@ export const GamePlayContext = createContext<{
     setPlayAgainBtn: () => void;
     setIncreaseScore: () => void;
     setRemovePosition: () => void;
+    rounds: number;
+    setRounds: React.Dispatch<React.SetStateAction<number>>;
 }>({
     gameCards: [],
     setGameCards: () => {},
@@ -40,6 +42,8 @@ export const GamePlayContext = createContext<{
     setPlayAgainBtn: () => {},
     setIncreaseScore: () => {},
     setRemovePosition: () => {},
+    rounds: 0,
+    setRounds: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -47,7 +51,7 @@ export const useGamePlayContext = () => useContext(GamePlayContext);
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
-
+    const [rounds, setRounds] = useState<number>(0);
     const [players, setPlayers] = useState<Player[]>([]);
     const [finish, setFinish] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
@@ -75,7 +79,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const setRemovePosition = () =>
         setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
-
 
     const refreshGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
@@ -120,6 +123,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPlayAgainBtn,
                 setIncreaseScore,
                 setRemovePosition,
+                rounds,
+                setRounds,
             }}
         >
             {children}

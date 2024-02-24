@@ -18,7 +18,7 @@ const SetupLayout = <TInput extends FieldValues>({
     methods,
 }: SetupLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
-    const { setPlayers } = useGamePlayContext();
+    const { setPlayers, setRounds } = useGamePlayContext();
     const { handlePlayerJoinRoom } = useSocketContext();
     // const { firstRoundMovies } = useFirstRoundMovies();
     // const navigate = useNavigate();
@@ -49,7 +49,8 @@ const SetupLayout = <TInput extends FieldValues>({
             };
             Session.set(SessionKey.FILTERS, filters);
 
-            //TODO: add rounds to the session & game context
+            setRounds(parseInt(rounds));
+            Session.set(SessionKey.ROUNDS, rounds);
         }
     };
     // firstRoundMovies(filters);
