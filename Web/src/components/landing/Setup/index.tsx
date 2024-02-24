@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { START_BTN_ID } from "../../../models/constants";
 import PlayBtn from "../../actions/btn/PlayBtn";
 import RoundsNumber from "../../actions/RoundsNumber";
-import Border from "../../common/Border";
 import FilterCollapse from "../filter/FilterCollapse";
 import { SetupProps } from "../../../models/types/props";
 import PreviewProfile from "../profile/PreviewProfile";
@@ -20,17 +19,35 @@ import RoomLink from "../../actions/RoomLink";
 import { SetupOption } from "../../../models/enums/landing";
 import useRoomLink from "../../../hooks/useRoomLink";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
+import Session from "../../../utils/sessionStorage";
+import { SessionKey } from "../../../models/enums/session";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
-    const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues); //default values
+    const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
     const { roomLink } = useRoomLink(setupOption, playerRole);
-    const { name, avater } = initSetupDefaultValues;
-    const avaterId = parseInt(avater || "0");
+
+    const [avaterName, setaAvaterName] = useState<string>("");
+    const [avaterId, setAvaterId] = useState<number>(0);
+
+    useEffect(() => {
+        if (setupOption === undefined) return;
+
+        setTimeout(() => {
+            const players = Session.get(SessionKey.PLAYERS);
+            if (players?.length > 0) {
+                const { name, avater } = players[0];
+                setaAvaterName(name || "Player 1");
+                setAvaterId(avater || 0);
+                setValue(setupInputs.name.id, name || "Player 1");
+                setValue(setupInputs.avater.id, avater.toString() || "0");
+            }
+        }, 50);
+    }, [setupOption]);
 
     return (
         <SetupLayout<SetupInputSchema> methods={methods}>
-            <PreviewProfile profileName={name || "Player 1"} avaterId={avaterId}>
+            <PreviewProfile profileName={avaterName || "Player 1"} avaterId={avaterId}>
                 <AvatersCarousel
                     setValue={setValue}
                     id={setupInputs.avater.id}
@@ -40,14 +57,11 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
             </PreviewProfile>
 
             {setupOption === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
-            
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
-            
             {playerRole === "host" ? (
                 <React.Fragment>
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
                     {/* <Border /> */}
-                    
                     <FilterCollapse>
                         <GenreInput
                             id={setupInputs.genre.id}

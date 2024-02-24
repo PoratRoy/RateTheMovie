@@ -1,4 +1,3 @@
-import { getRandomNumber } from "../../utils/calc";
 import { DateDefaultJSON } from "../constants";
 import { MultiplayerInputSchema, SetupInputSchema } from "../types/inputSchema";
 
@@ -7,8 +6,8 @@ export const initMultiDefaultValues: MultiplayerInputSchema = {
 };
 
 export const initSetupDefaultValues: SetupInputSchema = {
-    name: "Player 1",
-    avater: getRandomNumber(0, 10).toString(),
+    name: "Player",
+    avater: "-1",
     rounds: "5",
     year: DateDefaultJSON,
     language: "",

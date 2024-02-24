@@ -1,5 +1,5 @@
 import { ElectedCards } from "./card";
-import { PlayerColor, PlayerRole } from "./union";
+import { PlayerRole } from "./union";
 
 export type Player = {
     id: string; //TODO: was number
