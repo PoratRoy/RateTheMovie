@@ -312,7 +312,6 @@ export type LandingProps = {
 export type SetupProps = {
     playerRole: PlayerRole;
     setupOption: SetupLayoutOption;
-    roomLink: string;
 };
 
 //--Filter--//

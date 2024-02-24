@@ -18,11 +18,13 @@ import DateRangeInput from "../../actions/input/DateRangeInput";
 import RoomLink from "../../actions/RoomLink";
 import { SetupOption } from "../../../models/enums/landing";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
+import useRoomLink from "../../../hooks/useRoomLink";
 
-const Setup: React.FC<SetupProps> = ({ roomLink, setupOption, playerRole = "player" }) => {
+const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
     const { option, player } = setupOption;
+    const { roomLink } = useRoomLink(option, playerRole)
 
     useEffect(() => {
         if (option === SetupOption.NONE || !player) return;
@@ -44,6 +46,7 @@ const Setup: React.FC<SetupProps> = ({ roomLink, setupOption, playerRole = "play
 
             {option === SetupOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
+            
             {playerRole === "host" ? (
                 <React.Fragment>
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />

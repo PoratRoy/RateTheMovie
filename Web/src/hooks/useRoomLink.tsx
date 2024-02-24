@@ -5,12 +5,14 @@ import Session from "../utils/sessionStorage";
 import { SetupOption } from "../models/enums/landing";
 import { PlayerRole } from "../models/types/union";
 
-const useRoomLink = (setupOption: SetupOption | undefined, playerRole: PlayerRole) => {
+const useRoomLink = (setupOption: SetupOption, playerRole: PlayerRole) => {
     const { room } = useParams();
 
     const [roomLink, setRoomLink] = useState<string>("");
 
     useEffect(() => {
+        if (setupOption === SetupOption.NONE) return;
+
         if (playerRole === "player" && room) {
             setRoomLink(`http://localhost:5173/guest/${room || ""}`);
         } else {
