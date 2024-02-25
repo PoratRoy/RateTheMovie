@@ -1,8 +1,8 @@
-import { SetupOption } from "../enums/landing";
+import { ModOption } from "../enums/landing";
 import { Player } from "./player";
 
-export type SetupLayoutOption = {
-    option: SetupOption;
+export type SetupOption = {
+    mod: ModOption;
     player?: Player;
     roomId?: string;
 };

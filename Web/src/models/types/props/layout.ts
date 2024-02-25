@@ -1,9 +1,9 @@
 import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form";
 import { ChildernsProps } from ".";
-import { SetupLayoutOption } from "../setup";
+import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 import { Player } from "../player";
-import { SetupOption } from "../../enums/landing";
+import { ModOption } from "../../enums/landing";
 import { InputProps } from "react-select";
 import { CrewModel } from "../movie";
 
@@ -12,17 +12,17 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 };
 
 export type LandingLayoutProps = ChildernsProps & {
-    setupOption: SetupLayoutOption;
-    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>;
+    setupOption: SetupOption;
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupOption>>;
 };
 
 export type GuestLayoutProps = ChildernsProps;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
-    setupOption: SetupLayoutOption;
+    setupOption: SetupOption;
     roomLink: string;
     playerRole: PlayerRole;
-    setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
+    setSetupOption?: React.Dispatch<React.SetStateAction<ModOption | undefined>>;
 };
 
 export type PlayerLayoutProps = {

@@ -4,7 +4,7 @@ import Footer from "../../../components/common/Footer";
 import useLandingAnimation from "../../../hooks/animation/useLandingAnimation";
 import WaveLayout from "../WaveLayout";
 import BackgroundPoster from "../../../components/common/BackgroundPoster";
-import { SetupOption } from "../../../models/enums/landing";
+import { ModOption } from "../../../models/enums/landing";
 import { LOGO_ID } from "../../../models/constant";
 import { LandingLayoutProps } from "../../../models/types/props/layout";
 
@@ -22,10 +22,10 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption, se
                 </section>
                 <Footer
                     callback={
-                        option === SetupOption.NONE
+                        option === ModOption.NONE
                             ? undefined
                             : () => {
-                                  setSetupOption({ option: SetupOption.NONE });
+                                  setSetupOption({ option: ModOption.NONE });
                               }
                     }
                 />

@@ -5,7 +5,7 @@ import { SessionKey } from "../../../models/enums/session";
 import { updatePlayer, updatePlayerId } from "../../../models/initialization/player";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { useSocketContext } from "../../../context/SocketContext";
-import { SetupOption } from "../../../models/enums/landing";
+import { ModOption } from "../../../models/enums/landing";
 import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
@@ -28,14 +28,14 @@ const SetupLayout = <TInput extends FieldValues>({
 
     const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
         const { year, genre, language, name, avater, rounds } = data;
-        const { player, option, roomId } = setupOption;
+        const { player, mod, roomId } = setupOption;
 
         const updatedPlayer = updatePlayer(player, name, avater);
         if (updatedPlayer) {
-            if (option === SetupOption.SINGLE) {
+            if (mod === ModOption.SINGLE) {
                 Session.set(SessionKey.CURRENT_PLAYER, updatedPlayer);
                 setCurrentPlayer(updatedPlayer);
-            } else if (option === SetupOption.MULTI && roomId) {
+            } else if (mod === ModOption.MULTI && roomId) {
                 handlePlayerJoinRoom(roomId, updatedPlayer, (playerId) => {
                     const updatedPlayerId = updatePlayerId(updatedPlayer, playerId);
                     if (updatedPlayerId) {
@@ -52,7 +52,7 @@ const SetupLayout = <TInput extends FieldValues>({
                 genre: genre ? JSON.parse(genre) : [],
                 language: language ? JSON.parse(language) : "",
             };
-            if (option === SetupOption.MULTI) {
+            if (mod === ModOption.MULTI) {
                 handleGameFilters(filters);
             }
             firstRoundMovies(filters);
@@ -62,6 +62,7 @@ const SetupLayout = <TInput extends FieldValues>({
                 roomId: roomId || SinglePlayerRoom,
                 filters,
                 currentRound: 1,
+                mod,
             };
             setGame(game);
             Session.set(SessionKey.GAME, game);

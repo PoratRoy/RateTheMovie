@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import LandingLayout from "../layout/LandingLayout";
-import { SetupOption } from "../../models/enums/landing";
+import { ModOption } from "../../models/enums/landing";
 import Landing from "../../components/landing/Landing";
 import Setup from "../../components/landing/Setup";
-import { SetupLayoutOption } from "../../models/types/setup";
+import { SetupOption } from "../../models/types/setup";
 
 const LandingPage: React.FC = () => {
-    const [setupOption, setSetupOption] = useState<SetupLayoutOption>({ option: SetupOption.NONE });
+    const [setupOption, setSetupOption] = useState<SetupOption>({ mod: ModOption.NONE });
 
     return (
         <LandingLayout setupOption={setupOption} setSetupOption={setSetupOption}>

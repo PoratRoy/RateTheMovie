@@ -31,7 +31,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     }, [fetchLoading]);
 
     // useEffect(() => {
-    //     if(setupOption.option === SetupOption.MULTI){
+    //     if(setupOption.option === ModOption.MULTI){
     //         if (players.length > 0) setLoading(false);
     //     }
     // }, [players]);

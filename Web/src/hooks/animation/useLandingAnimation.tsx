@@ -1,7 +1,7 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { SetupLayoutOption } from "../../models/types/setup";
-import { SetupOption } from "../../models/enums/landing";
+import { SetupOption } from "../../models/types/setup";
+import { ModOption } from "../../models/enums/landing";
 import {
     DESCRIPTION_ID,
     MOVIES_POSTER_ID,
@@ -11,7 +11,7 @@ import {
     WAVE_ID,
 } from "../../models/constant";
 
-const useLandingAnimation = (activate: SetupLayoutOption) => {
+const useLandingAnimation = (activate: SetupOption) => {
     const [scope, animation] = useAnimate();
 
     const handleLandingAnimation = async () => {
@@ -54,7 +54,7 @@ const useLandingAnimation = (activate: SetupLayoutOption) => {
     };
 
     useEffect(() => {
-        if (activate.option === SetupOption.NONE) {
+        if (activate.mod === ModOption.NONE) {
             handleLandingAnimation();
         } else {
             handleSetupAnimation();

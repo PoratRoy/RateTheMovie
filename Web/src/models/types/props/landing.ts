@@ -1,13 +1,13 @@
-import { SetupLayoutOption } from "../setup";
+import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 
 export type LandingProps = {
-    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>;
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupOption>>;
 };
 
 export type SetupProps = {
     playerRole: PlayerRole;
-    setupOption: SetupLayoutOption;
+    setupOption: SetupOption;
 };
 
 export type LoadingPageProps = {
