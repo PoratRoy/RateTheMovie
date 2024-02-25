@@ -9,19 +9,22 @@ import Header from "../../common/Header";
 import LoadingPage from "../../../pages/LoadingPage";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finish, fetchLoading } = useGamePlayContext();
+    const { finish, fetchLoading, gameCards } = useGamePlayContext();
     const { scope } = useFinishAnimation(finish);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const isLoadingRef = useRef<boolean>(true);
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (isLoadingRef.current === false) {
-                setIsLoading(false);
-            }
-        }, 3000);
-
-        return () => clearTimeout(timeoutId);
+        if(gameCards[0].id === undefined) {
+            const timeoutId = setTimeout(() => {
+                if (isLoadingRef.current === false) {
+                    setIsLoading(false);
+                }
+            }, 3000);
+            return () => clearTimeout(timeoutId);
+        }else{
+            setIsLoading(false);
+        }
     }, [isLoadingRef.current]);
 
     useEffect(() => {

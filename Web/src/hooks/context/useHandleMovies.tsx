@@ -28,16 +28,13 @@ const useHandleMovies = () => {
     };
 
     const handleGameCardsMoreData = (movies: Movie[]) => {
-        let cards: Card[] = [];
         setGameCards((prev) => {
-            return prev.map((gameCard: Card, index: number) => {
-                const card = { ...gameCard, movie: movies[index] } as Card;
-                cards.push(card);
-                return card;
+            const cards = prev.map((gameCard: Card, index: number) => {
+                return { ...gameCard, movie: movies[index] } as Card;
             });
+            Session.set(SessionKey.GAME_CARDS, cards);
+            return cards;
         });
-        Session.remove(SessionKey.GAME_CARDS);
-        Session.set(SessionKey.GAME_CARDS, cards);
     };
 
     const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: Card[]) => {
@@ -56,7 +53,6 @@ const useHandleMovies = () => {
                 });
             }
             setGameCards(cards);
-            Session.remove(SessionKey.GAME_CARDS);
             Session.set(SessionKey.GAME_CARDS, cards);
             setFetchLoading(false);
         }, 1000);

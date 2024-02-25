@@ -29,6 +29,31 @@
     height: 100%;
 }
 
+.electedCardInnerContainer::before {
+    background-color: var(--background-card-color);
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: calc(var(--small-card-width) - 10px);
+    height: calc(var(--small-card-height) - 10px);
+}
+
+.electedCardInnerContainer::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    box-shadow: calc(var(--small-card-width) - 17px) 2px 0px 0px var(--secondary-color),
+        2px calc(var(--small-card-height) - 17px) 0px 0px var(--secondary-color),
+        calc(var(--small-card-width) - 17px) calc(var(--small-card-height) - 17px) 0px 0px var(--secondary-color);
+}
+
 .playerCardInnerContainer {
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -48,6 +73,7 @@
 .cardFront {
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 .cardContainerFocus {
