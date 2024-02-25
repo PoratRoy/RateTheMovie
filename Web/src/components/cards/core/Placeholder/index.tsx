@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./Placeholder.module.css";
-import { PlaceholderProps } from "../../../../models/types/props";
 import { setPlaceholderText } from "../../../../utils/card";
 import Img from "../Img";
 import RateStar from "../RateStar";
+import { PlaceholderProps } from "../../../../models/types/props/card";
 
 const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
     if (type.t === "Player") {

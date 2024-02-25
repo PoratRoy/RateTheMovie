@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./LoadingPage.module.css";
-import Logo from "../../components/common/Logo";
-import StartGameBtn from "../../components/actions/btn/StartGameBtn";
-import { LoadingPageProps } from "../../models/types/props";
+import Logo from "../../components/common/widgets/Logo";
+import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
+import { LoadingPageProps } from "../../models/types/props/landing";
 
 const LoadingPage: React.FC<LoadingPageProps> = ({ isCanStart }) => {
     return (

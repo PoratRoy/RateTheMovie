@@ -1,10 +1,10 @@
 import React from "react";
-import { BELOW_ID } from "../../../../models/constants";
-import { ElectedCardWrapperProps } from "../../../../models/types/props";
 import style from "./ElectedCardWrapper.module.css";
 import Rate from "../../core/Rate";
 import Droppable from "../../../dnd/Droppable";
 import ElectedShadow from "../../shadow/ElectedShadow";
+import { BELOW_ID } from "../../../../models/constant";
+import { ElectedCardWrapperProps } from "../../../../models/types/props/card";
 
 const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
     children,

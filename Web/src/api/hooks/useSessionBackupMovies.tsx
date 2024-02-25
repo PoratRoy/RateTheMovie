@@ -1,5 +1,5 @@
-import useHandleMovies from "../../hooks/context/useHandleMovies";
-import { PACK_CARDS_NUM } from "../../models/constants";
+import useHandleMovies from "../../hooks/gameplay/useHandleMovies";
+import { PACK_CARDS_NUM } from "../../models/constant";
 import { MovieTMDB } from "../../models/types/movie";
 import useGetMovieData from "./useGetMovieData";
 

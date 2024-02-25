@@ -1,4 +1,5 @@
-import { PACK_CARDS_NUM } from "../models/constants";
+
+import { PACK_CARDS_NUM } from "../models/constant";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { getMoviesByCards } from "./movie";

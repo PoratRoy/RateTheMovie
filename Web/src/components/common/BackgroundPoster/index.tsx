@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./BackgroundPoster.module.css";
-import { MOVIES_POSTER_ID } from "../../../models/constants";
 import backgroundMoviesImg from "../../../assets/allMoviesPoster2.jpeg";
+import { MOVIES_POSTER_ID } from "../../../models/constant";
 //https://www.reduceimages.com/
 
 const BackgroundPoster: React.FC = () => {

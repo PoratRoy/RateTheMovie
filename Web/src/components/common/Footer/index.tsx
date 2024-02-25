@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./Footer.module.css";
-import { FooterProps } from "../../../models/types/props";
-import BackLink from "../../actions/link/BackLink";
-import MadeByLink from "../../actions/link/MadeByLink";
+import BackLink from "../../actions/widgets/link/BackLink";
+import MadeByLink from "../../actions/widgets/link/MadeByLink";
+import { FooterProps } from "../../../models/types/props/common";
 
 const Footer: React.FC<FooterProps> = ({ link, callback }) => {
     return (

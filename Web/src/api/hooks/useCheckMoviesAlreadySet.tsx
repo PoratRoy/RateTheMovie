@@ -1,6 +1,6 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import useHandleMovies from "../../hooks/context/useHandleMovies";
-import { useSingleton } from "../../hooks/useSingleton";
+import useHandleMovies from "../../hooks/gameplay/useHandleMovies";
+import { useSingleton } from "../../hooks/global/useSingleton";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
 import Session from "../../utils/sessionStorage";

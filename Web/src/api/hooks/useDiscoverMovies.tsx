@@ -1,12 +1,12 @@
 import { MovieFilters, MovieTMDB } from "../../models/types/movie";
 import { getRandomNumber } from "../../utils/calc";
 import URL from "../path.json";
-import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM } from "../../models/constants";
 import { isDateVaild } from "../../utils/date";
 import { isGenreValid } from "../../utils/genre";
 import fetchTMDB from "../fetch/fetchTMDB";
 import { useErrorContext } from "../../context/ErrorContext";
 import { isLanguageValid } from "../../utils/filter";
+import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM } from "../../models/constant";
 
 const useDiscoverMovies = () => {
     const { handleError } = useErrorContext();

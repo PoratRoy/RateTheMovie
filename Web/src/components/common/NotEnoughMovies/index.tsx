@@ -1,7 +1,7 @@
 import React from "react";
 import path from "../../../router/routePath.json";
 import style from "./NotEnoughMovies.module.css";
-import useClear from "../../../hooks/useClear";
+import useClear from "../../../hooks/gameplay/useClear";
 import { useNavigate } from "react-router-dom";
 
 const NotEnoughMovies: React.FC = () => {

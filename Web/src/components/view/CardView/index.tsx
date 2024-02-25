@@ -1,5 +1,4 @@
 import React from "react";
-import { CardViewProps } from "../../../models/types/props";
 import style from "./CardView.module.css";
 import ViewImg from "../core/ViewImg";
 import { getGenres } from "../../../utils/genre";
@@ -7,6 +6,7 @@ import CardViewLayout from "../../layout/CardViewLayout";
 import Genre from "../core/Genre";
 import Crew from "../crew/Crew";
 import { formatDate } from "../../../utils/format";
+import { CardViewProps } from "../../../models/types/props/view";
 
 const CardView: React.FC<CardViewProps> = ({ movie, close }) => {
     const { title, poster_path, actors, director, genre_ids, release_date, description, video } =

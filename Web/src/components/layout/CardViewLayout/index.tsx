@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
-import { CardViewLayoutProps } from "../../../models/types/props";
 import style from "./CardViewLayout.module.css";
 import CloseBtn from "../../view/core/CloseBtn";
-import useClickOutside from "../../../hooks/useClickOutside";
+import useClickOutside from "../../../hooks/global/useClickOutside";
+import { CardViewLayoutProps } from "../../../models/types/props/layout";
 
 const CardViewLayout: React.FC<CardViewLayoutProps> = ({ children, close }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);

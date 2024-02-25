@@ -1,9 +1,9 @@
 import DraggableMovie from "../components/cards/single/DraggableMovie";
-import { PACK_CARDS_NUM } from "../models/constants";
 import React from "react";
 import { Player } from "../models/types/player";
 import { Movie } from "../models/types/movie";
 import { Card } from "../models/types/card";
+import { PACK_CARDS_NUM } from "../models/constant";
 
 export const initGameCard = (movie: Movie): Card => {
     return { id: movie.id, movie } as Card;

@@ -1,10 +1,10 @@
 import React from "react";
-import PackOfSelectedCards from "../../cards/pack/PackOfSelectedCards";
-import FinishBtn from "../../actions/btn/FinishBtn";
+import PackOfElectedCards from "../../cards/pack/PackOfElectedCards";
+import FinishBtn from "../../actions/widgets/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
-import PlayAgainBtn from "../../actions/btn/PlayAgainBtn";
+import PlayAgainBtn from "../../actions/widgets/btn/PlayAgainBtn";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import useHandleElectedCard from "../../../hooks/useHandleElectedCard";
+import useHandleElectedCard from "../../../hooks/gameplay/useHandleElectedCard";
 import { correctAnswers } from "../../../utils/correctOrder";
 
 const ElectedPackLayout: React.FC = () => {
@@ -16,7 +16,7 @@ const ElectedPackLayout: React.FC = () => {
         <section className={style.electedPackContainer}>
             <div className={style.electedPack}>
                 {currentPlayer ? (
-                    <PackOfSelectedCards
+                    <PackOfElectedCards
                         currentPlayer={currentPlayer}
                         showCorrectPack={showCorrectPack}
                     />

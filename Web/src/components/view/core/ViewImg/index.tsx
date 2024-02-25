@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ViewImgProps } from "../../../../models/types/props";
 import style from "./ViewImg.module.css";
 import ReactPlayer from "react-player";
 import { MdOndemandVideo } from "react-icons/md";
+import { ViewImgProps } from "../../../../models/types/props/view";
 
 const ViewImg: React.FC<ViewImgProps> = ({ src, alt, video }) => {
     const [isVideo, setIsVideo] = useState<boolean>(false);

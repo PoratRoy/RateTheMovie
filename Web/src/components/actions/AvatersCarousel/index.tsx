@@ -1,10 +1,10 @@
 import { useState } from "react";
 import style from "./AvatersCarousel.module.css";
-import { AvatersCarouselProps } from "../../../models/types/props";
 import { FieldValues } from "react-hook-form";
-import { FormSetValue } from "../../../models/constants";
 import Avater from "../../profile/Avater";
-import { AvaterImgs } from "../../../models/avaters";
+import { AvaterImgs } from "../../../models/resources/avaters";
+import { FormSetValue } from "../../../models/constant";
+import { AvatersCarouselProps } from "../../../models/types/props/input";
 
 //TODO: need to build the infinte carousel
 const AvatersCarousel = <TInput extends FieldValues>({

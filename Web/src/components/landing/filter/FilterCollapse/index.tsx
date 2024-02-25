@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { FilterCollapseProps } from "../../../../models/types/props";
 import style from "./FilterCollapse.module.css";
+import { FilterCollapseProps } from "../../../../models/types/props/filter";
 
 const FilterCollapse: React.FC<FilterCollapseProps> = ({ children }) => {
     const [isCollapse, setIsCollapse] = useState<boolean>(false);

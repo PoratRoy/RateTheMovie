@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import useCardFlipAnimation from "../../../../hooks/animation/useCardFlipAnimation";
-import { CardInnerContainerProps } from "../../../../models/types/props";
-import { CARD_ID } from "../../../../models/constants";
 import style from "./Card.module.css";
+import { CARD_ID } from "../../../../models/constant";
+import { CardInnerContainerProps } from "../../../../models/types/props/card";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     type,

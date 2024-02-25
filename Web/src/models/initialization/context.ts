@@ -1,4 +1,5 @@
-import { PACK_CARDS_NUM } from "../constants";
+
+import { PACK_CARDS_NUM } from "../constant";
 import { FinishAnimation } from "../types/game";
 
 export const initFinishAnimation: FinishAnimation = {

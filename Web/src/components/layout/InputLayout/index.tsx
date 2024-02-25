@@ -1,4 +1,4 @@
-import { InputLayoutProps } from "../../../models/types/props";
+import { InputLayoutProps } from "../../../models/types/props/layout";
 import style from "./InputLayout.module.css";
 import { FieldValues } from "react-hook-form";
 
@@ -12,7 +12,7 @@ const InputLayout = <TInput extends FieldValues>({
         <section className={style.formInputContainer}>
             {label ? <div className={style.formInputLabel}>{label}</div> : null}
             <div className={style.formInput}>{children}</div>
-            {errors && errors[id] && (
+            {errors && id && errors[id] && (
                 <span className={style.formInputErrorMsg}>{errors[id]?.message as string}</span>
             )}
         </section>

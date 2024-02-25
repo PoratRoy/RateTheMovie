@@ -1,10 +1,10 @@
 import React from "react";
 import Modal from "../../core/Modal";
-import { PauseModalProps } from "../../../../models/types/props";
-import ShuffleBtn from "../../../actions/btn/ShuffleBtn";
-import RestartBtn from "../../../actions/btn/RestartBtn";
-import QuitBtn from "../../../actions/btn/QuitBtn";
+import ShuffleBtn from "../../../actions/widgets/btn/ShuffleBtn";
+import RestartBtn from "../../../actions/widgets/btn/RestartBtn";
+import QuitBtn from "../../../actions/widgets/btn/QuitBtn";
 import style from "./PauseModal.module.css";
+import { PauseModalProps } from "../../../../models/types/props/view";
 
 const PauseModal: React.FC<PauseModalProps> = ({ close }) => {
     return (

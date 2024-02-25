@@ -1,8 +1,8 @@
 import React from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { DraggableProps } from "../../models/types/props";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { dndStyle } from "../../style/dnd";
+import { DraggableProps } from "../../models/types/props/dnd";
 
 //TODO: zIndex not working because of the transform
 //TODO: ...args: any[]

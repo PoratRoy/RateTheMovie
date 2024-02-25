@@ -1,22 +1,22 @@
 import React from "react";
-import PlayBtn from "../../actions/btn/PlayBtn";
-import MultiBtn from "../../actions/btn/MultiBtn";
+import PlayBtn from "../../actions/widgets/btn/PlayBtn";
+import MultiBtn from "../../actions/widgets/btn/MultiBtn";
+import { initPlayer } from "../../../models/initialization/player";
+import { SessionKey } from "../../../models/enums/session";
+import Session from "../../../utils/sessionStorage";
+import { SetupOption } from "../../../models/enums/landing";
+import { useSocketContext } from "../../../context/SocketContext";
+import Description from "../../common/Description";
+import ImdbIcon from "../../common/widgets/ImdbIcon";
+import style from "./Landing.module.css";
 import {
     DESCRIPTION_ID,
     DefualtPlayerName,
     MULTIPLAYER_BTN_ID,
     PLAY_BTN_ID,
     SinglePlayerRoom,
-} from "../../../models/constants";
-import { initPlayer } from "../../../models/initialization/player";
-import { SessionKey } from "../../../models/enums/session";
-import Session from "../../../utils/sessionStorage";
-import { SetupOption } from "../../../models/enums/landing";
-import { LandingProps } from "../../../models/types/props";
-import { useSocketContext } from "../../../context/SocketContext";
-import Description from "../../common/Description";
-import ImdbIcon from "../../common/ImdbIcon";
-import style from "./Landing.module.css";
+} from "../../../models/constant";
+import { LandingProps } from "../../../models/types/props/landing";
 
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();

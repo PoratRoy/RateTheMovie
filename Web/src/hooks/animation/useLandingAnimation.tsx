@@ -1,33 +1,33 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import {
-    DESCRIPTION_ID,
-    MULTIPLAYER_BTN_ID,
-    PLAY_BTN_ID,
-    MOVIES_POSTER_ID,
-    WAVE_ID,
-    SETUP_ID,
-} from "../../models/constants";
 import { SetupLayoutOption } from "../../models/types/setup";
 import { SetupOption } from "../../models/enums/landing";
+import {
+    DESCRIPTION_ID,
+    MOVIES_POSTER_ID,
+    MULTIPLAYER_BTN_ID,
+    PLAY_BTN_ID,
+    SETUP_ID,
+    WAVE_ID,
+} from "../../models/constant";
 
 const useLandingAnimation = (activate: SetupLayoutOption) => {
     const [scope, animation] = useAnimate();
 
     const handleLandingAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
-        await Promise.all([
-            animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
-            animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
-            animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: 0.1 }),
-        ]);
+            await Promise.all([
+                animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
+                animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
+                animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: 0.1 }),
+            ]);
         await animation(`#${SETUP_ID}`, { display: "none" }),
-        await Promise.all([
-            animation(`#${PLAY_BTN_ID}`, { display: "flex" }),
-            animation(`#${DESCRIPTION_ID}`, { display: "block" }),
-            animation(`#${MULTIPLAYER_BTN_ID}`, { display: "flex" }),
-            animation(`#${MOVIES_POSTER_ID}`, { display: "block" }),
-        ]);
+            await Promise.all([
+                animation(`#${PLAY_BTN_ID}`, { display: "flex" }),
+                animation(`#${DESCRIPTION_ID}`, { display: "block" }),
+                animation(`#${MULTIPLAYER_BTN_ID}`, { display: "flex" }),
+                animation(`#${MOVIES_POSTER_ID}`, { display: "block" }),
+            ]);
     };
 
     const handleSetupAnimation = async () => {
@@ -56,7 +56,7 @@ const useLandingAnimation = (activate: SetupLayoutOption) => {
     useEffect(() => {
         if (activate.option === SetupOption.NONE) {
             handleLandingAnimation();
-        }else{
+        } else {
             handleSetupAnimation();
         }
     }, [activate]);

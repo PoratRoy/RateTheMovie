@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LandingLayout from "../../components/layout/LandingLayout";
+import LandingLayout from "../layout/LandingLayout";
 import { SetupOption } from "../../models/enums/landing";
 import Landing from "../../components/landing/Landing";
 import Setup from "../../components/landing/Setup";

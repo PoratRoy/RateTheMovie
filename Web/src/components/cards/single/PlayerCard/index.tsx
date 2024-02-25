@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Card from "../../core/Card";
-import { PlayerCardProps } from "../../../../models/types/props";
 import DraggableMovie from "../DraggableMovie";
 import CardView from "../../../view/CardView";
 import LoadingCard from "../../core/LoadingCard";
 import { placeholderCardType } from "../../../../models/types/card";
 import CardEventLayout from "../../../layout/CardEventLayout";
-import useCardOrderPosition from "../../../../hooks/useCardOrderPosition";
+import useCardOrderPosition from "../../../../hooks/gameplay/useCardOrderPosition";
+import { PlayerCardProps } from "../../../../models/types/props/card";
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ player, card, loading }) => {
     const movie = card.movie;

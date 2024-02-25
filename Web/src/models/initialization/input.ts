@@ -1,4 +1,4 @@
-import { DateDefaultJSON, DefualtPlayerName } from "../constants";
+import { DateDefaultJSON, DefualtPlayerName } from "../constant";
 import { SetupInputSchema } from "../types/inputSchema";
 
 export const initSetupDefaultValues: SetupInputSchema = {

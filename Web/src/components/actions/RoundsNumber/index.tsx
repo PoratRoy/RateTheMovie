@@ -3,8 +3,9 @@ import style from "./RoundsNumber.module.css";
 import { MdAdd } from "react-icons/md";
 import { MdRemove } from "react-icons/md";
 import { FieldValues } from "react-hook-form";
-import { RoundInputProps } from "../../../models/types/props";
-import { FormSetValue } from "../../../models/constants";
+import { FormSetValue } from "../../../models/constant";
+import { RoundInputProps } from "../../../models/types/props/input";
+
 
 const RoundsNumber = <TInput extends FieldValues>({ id, setValue }: RoundInputProps<TInput>) => {
     const [number, setNumber] = useState<number>(5);

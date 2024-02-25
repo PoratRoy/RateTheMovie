@@ -1,4 +1,4 @@
-import { PACK_CARDS_NUM } from "../constants";
+import { PACK_CARDS_NUM } from "../constant";
 import { Card } from "../types/card";
 import { initMovie } from "./movie";
 

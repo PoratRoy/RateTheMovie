@@ -1,8 +1,8 @@
 import React from "react";
 import Img from "../../core/Img";
-import { ShadowPlayerCardProps } from "../../../../models/types/props";
 import Card from "../../core/Card";
 import { placeholderCardType } from "../../../../models/types/card";
+import { ShadowPlayerCardProps } from "../../../../models/types/props/card";
 
 const ShadowPlayerCard: React.FC<ShadowPlayerCardProps> = ({ movie, id }) => {
     if (!movie) return null;

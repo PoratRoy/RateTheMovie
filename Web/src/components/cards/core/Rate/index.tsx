@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Rate.module.css";
-import { RateProps } from "../../../../models/types/props";
+import { RateProps } from "../../../../models/types/props/card";
 
 const Rate: React.FC<RateProps> = ({ rate, id }) => {
     return (

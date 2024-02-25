@@ -1,6 +1,6 @@
 import React from "react";
-import { BackdropProps } from "../../../../../models/types/props";
 import style from "../Modal.module.css";
+import { BackdropProps } from "../../../../../models/types/props/view";
 
 const Backdrop: React.FC<BackdropProps> = ({ close, showBackdrop }) => {
     return (

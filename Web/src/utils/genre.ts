@@ -1,4 +1,4 @@
-import { Genres } from "../models/ganres";
+import { Genres } from "../models/resources/ganres";
 import { MovieFilters } from "../models/types/movie";
 
 export const getGenres = (arrayOfIds?: number[]): string[] => {

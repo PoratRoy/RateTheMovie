@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import style from "./Header.module.css";
-import Logo from "../Logo";
+import Logo from "../widgets/Logo";
 import PlayerProfile from "../../profile/PlayerProfile";
 import RoundTitle from "../RoundTitle";
-import PauseBtn from "../../actions/btn/PauseBtn";
+import PauseBtn from "../../actions/widgets/btn/PauseBtn";
 import PauseModal from "../../view/modals/PauseModal";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 

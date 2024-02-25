@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect } from "react";
-import { useSocket } from "../hooks/context/useSocket";
+import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { MovieFilters } from "../models/types/movie";
 import { useGamePlayContext } from "./GamePlayContext";
-import { SinglePlayerRoom } from "../models/constants";
+import { SinglePlayerRoom } from "../models/constant";
 import { Player } from "../models/types/player";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 

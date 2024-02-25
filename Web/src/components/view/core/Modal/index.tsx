@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ModalProps } from "../../../../models/types/props";
 import Backdrop from "./Backdrop";
 import style from "./Modal.module.css";
 import ModalIcon from "./ModalIcon";
 import { FaArrowRight } from "react-icons/fa6";
+import { ModalProps } from "../../../../models/types/props/view";
 
 
 const Modal: React.FC<ModalProps> = ({ children, close, title }) => {

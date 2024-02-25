@@ -1,7 +1,7 @@
 import Select, { SingleValue } from "react-select";
 import selectStyles from "../../../../../style/select";
-import { SelectMultiInputProps } from "../../../../../models/types/props";
 import { SelectOption } from "../../../../../models/types/select";
+import { SelectMultiInputProps } from "../../../../../models/types/props/input";
 
 const SelectMultiInput: React.FC<SelectMultiInputProps> = ({
     placeholder,

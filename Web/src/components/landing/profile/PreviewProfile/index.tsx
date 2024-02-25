@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import style from "./PreviewProfile.module.css";
-import { PreviewProfileProps } from "../../../../models/types/props";
 import Avater from "../../../profile/Avater";
-import EditProfileBtn from "../../../actions/btn/EditProfileBtn";
-import { AvaterImgs } from "../../../../models/avaters";
-import { DefualtPlayerName } from "../../../../models/constants";
+import EditProfileBtn from "../../../actions/widgets/btn/EditProfileBtn";
+import { AvaterImgs } from "../../../../models/resources/avaters";
+import { DefualtPlayerName } from "../../../../models/constant";
+import { PreviewProfileProps } from "../../../../models/types/props/profile";
 
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, avaterId }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);

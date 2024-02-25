@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDroppable } from "@dnd-kit/core";
-import { DroppableProps } from "../../models/types/props";
+import { DroppableProps } from "../../models/types/props/dnd";
 
 const Droppable: React.FC<DroppableProps> = ({ children, droppableId, setFocus }) => {
     const { isOver, setNodeRef } = useDroppable({

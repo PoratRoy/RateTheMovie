@@ -1,7 +1,7 @@
 import React from "react";
-import { CrewProps } from "../../../../models/types/props";
 import Actor from "../Actor";
 import style from "./Crew.module.css";
+import { CrewProps } from "../../../../models/types/props/layout";
 
 const Crew: React.FC<CrewProps> = ({ actors, director }) => {
     return (

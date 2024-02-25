@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ScoreProps } from "../../../models/types/props";
 import style from "./Score.module.css";
 import useCountingScoreAnimation from "../../../hooks/animation/useCountingScoreAnimation";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { ScoreProps } from "../../../models/types/props/common";
 
 const Score: React.FC<ScoreProps> = ({ score }) => {
     const { finish, finishAnimation, setPlayAgainBtn } = useGamePlayContext();

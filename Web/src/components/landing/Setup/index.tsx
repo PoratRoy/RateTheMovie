@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
-import { START_BTN_ID } from "../../../models/constants";
-import PlayBtn from "../../actions/btn/PlayBtn";
+import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import RoundsNumber from "../../actions/RoundsNumber";
 import FilterCollapse from "../filter/FilterCollapse";
-import { SetupProps } from "../../../models/types/props";
 import PreviewProfile from "../profile/PreviewProfile";
-import NameInput from "../../actions/input/NameInput";
+import NameInput from "../../actions/widgets/input/NameInput";
 import { setupInputs } from "../../../models/initialization/form";
-import SetupLayout from "../../layout/SetupLayout";
+import SetupLayout from "../../../pages/layout/SetupLayout";
 import { SetupInputSchema } from "../../../models/types/inputSchema";
-import useInitialForm from "../../../hooks/useInitialForm";
+import useInitialForm from "../../../hooks/global/useInitialForm";
 import { setupFormSchema } from "../../../models/validation/form";
 import AvatersCarousel from "../../actions/AvatersCarousel";
-import GenreInput from "../../actions/input/GenreInput";
-import LanguageInput from "../../actions/input/LanguageInput";
-import DateRangeInput from "../../actions/input/DateRangeInput";
-import RoomLink from "../../actions/RoomLink";
+import GenreInput from "../../actions/widgets/input/GenreInput";
+import LanguageInput from "../../actions/widgets/input/LanguageInput";
+import DateRangeInput from "../../actions/widgets/input/DateRangeInput";
+import RoomLink from "../../actions/widgets/link/RoomLink";
 import { SetupOption } from "../../../models/enums/landing";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
-import useRoomLink from "../../../hooks/useRoomLink";
+import useRoomLink from "../../../hooks/multiplayer/useRoomLink";
+import { START_BTN_ID } from "../../../models/constant";
+import { SetupProps } from "../../../models/types/props/landing";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);

@@ -1,4 +1,5 @@
-import { DISCOVERD_MOVIES_NUM } from "../models/constants";
+
+import { DISCOVERD_MOVIES_NUM } from "../models/constant";
 import { Movie } from "../models/types/movie";
 import { movieRating } from "./format";
 

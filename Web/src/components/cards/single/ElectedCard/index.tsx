@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { placeholderCardType } from "../../../../models/types/card";
 import Card from "../../core/Card";
 import ElectedCardWrapper from "../../wrapper/ElectedCardWrapper";
-import { ElectedCardProps } from "../../../../models/types/props";
 import { setElectedFrontCard } from "../../../../utils/card";
 import { handleOrderEqualCorrectOrder } from "../../../../utils/correctOrder";
+import { ElectedCardProps } from "../../../../models/types/props/card";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
     //TODO: useMemo
