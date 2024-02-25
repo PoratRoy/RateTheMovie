@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GameLayoutProps } from "../../../models/types/props";
 import style from "./GameLayout.module.css";
-import Footer from "../../common/Footer";
-import path from "../../../router/routePath.json";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
 import Header from "../../common/Header";
@@ -15,14 +13,14 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const isLoadingRef = useRef<boolean>(true);
 
     useEffect(() => {
-        if(gameCards[0].id === undefined) {
+        if (gameCards[0].id === undefined) {
             const timeoutId = setTimeout(() => {
                 if (isLoadingRef.current === false) {
                     setIsLoading(false);
                 }
             }, 3000);
             return () => clearTimeout(timeoutId);
-        }else{
+        } else {
             setIsLoading(false);
         }
     }, [isLoadingRef.current]);
@@ -41,7 +39,6 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
-                    <Footer link={path.land} />
                 </section>
             )}
         </React.Fragment>

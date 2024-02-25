@@ -138,13 +138,13 @@ export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
 
 export type LandingLayoutProps = ChildernsProps & {
     setupOption: SetupLayoutOption;
-    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>
+    setSetupOption: React.Dispatch<React.SetStateAction<SetupLayoutOption>>;
 };
 
 export type GuestLayoutProps = ChildernsProps;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
-    setupOption: SetupLayoutOption
+    setupOption: SetupLayoutOption;
     roomLink: string;
     playerRole: PlayerRole;
     setSetupOption?: React.Dispatch<React.SetStateAction<SetupOption | undefined>>;
@@ -261,6 +261,14 @@ export type PrimaryBtnProps = IdProps & {
     loading?: boolean;
 };
 
+export type PrimaryIconBtnProps = IdProps & {
+    title: string | React.ReactNode;
+    onClicked?: () => void;
+    disabled?: boolean;
+    size: BtnSize;
+    loading?: boolean;
+};
+
 export type SecondaryBtnProps = IdProps & {
     title: string;
     onClicked?: () => void;
@@ -287,6 +295,22 @@ export type EditProfileBtnProps = {
     onClicked: () => void;
 };
 
+export type PauseBtnProps = {
+    onClicked: () => void;
+};
+
+export type ShuffleBtnProps = {
+    close: () => void;
+}
+
+export type RestartBtnProps = {
+    close: () => void;
+}
+
+export type QuitBtnProps = {
+    close: () => void;
+}
+
 //--View--//
 export type ViewImgProps = {
     src: string;
@@ -305,6 +329,20 @@ export type CloseBtnProps = {
 
 export type GenreProps = {
     genre: string;
+};
+
+export type ModalProps = ChildernsProps & {
+    close: () => void;
+    title: string;
+};
+
+export type BackdropProps = {
+    close: () => void;
+    showBackdrop: boolean;
+};
+
+export type PauseModalProps = {
+    close: () => void;
 };
 
 //--Landing--//
