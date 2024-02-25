@@ -1,12 +1,11 @@
 import { Card } from "./card";
-import { MovieFilters } from "./movie";
+import { Game } from "./game";
 import { Player } from "./player";
 
 export type WarRoomProps = {
-    room: string | undefined;
     players: Player[];
     gameCards: Card[];//TODO: maybe I only need the movies
-    filters: MovieFilters;//TODO: not sure I need this
+    game: Game;
 };
 
 export type WarRooms = {

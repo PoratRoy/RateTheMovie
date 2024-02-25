@@ -27,7 +27,6 @@ export const SocketContext = createContext<{
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
@@ -78,11 +77,16 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         player: Player,
         callback: (playerId: string) => void,
     ) => {
-        socket.emit("PlayerJoinRoom", roomId, player, async (warRoom: WarRoomProps, playerId: string) => {
-            if (warRoom && warRoom.room) {
-                callback(playerId);
-            }
-        });
+        socket.emit(
+            "PlayerJoinRoom",
+            roomId,
+            player,
+            async (warRoom: WarRoomProps, playerId: string) => {
+                if (warRoom && warRoom.game.roomId === roomId && playerId) {
+                    callback(playerId);
+                }
+            },
+        );
     };
 
     return (
