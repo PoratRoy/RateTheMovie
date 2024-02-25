@@ -26,8 +26,6 @@ export const GamePlayContext = createContext<{
     setPlayAgainBtn: () => void;
     setIncreaseScore: () => void;
     setRemovePosition: () => void;
-    rounds: number;
-    setRounds: React.Dispatch<React.SetStateAction<number>>;
 }>({
     game: undefined,
     setGame: () => {},
@@ -46,8 +44,6 @@ export const GamePlayContext = createContext<{
     setPlayAgainBtn: () => {},
     setIncreaseScore: () => {},
     setRemovePosition: () => {},
-    rounds: 0,
-    setRounds: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -56,16 +52,15 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [game, setGame] = useState<Game | undefined>();
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
-    const [rounds, setRounds] = useState<number>(0);
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
     const [finish, setFinish] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
 
     //TODO: extract to a hook
     const setStateFromSession = () => {
-        if (!rounds) {
-            const sessionRounds: number | undefined = Session.get(SessionKey.ROUNDS);
-            if (sessionRounds) setRounds(sessionRounds);
+        if (!game) {
+            const sessionGame: Game | undefined = Session.get(SessionKey.GAME);
+            if (sessionGame) setGame(sessionGame);
         }
         if (!currentPlayer) {
             const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
@@ -100,16 +95,15 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const clearGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
-        Session.remove(SessionKey.FILTERS);
         Session.remove(SessionKey.BACKUP);
-        Session.remove(SessionKey.ROOM);
-        Session.remove(SessionKey.ROUNDS);
+        Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
         setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
         setFetchLoading(false);
         setFinish(false);
         setCurrentPlayer(undefined);
+        setGame(undefined);
     };
     return (
         <GamePlayContext.Provider
@@ -131,8 +125,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPlayAgainBtn,
                 setIncreaseScore,
                 setRemovePosition,
-                rounds,//to remove
-                setRounds,
             }}
         >
             {children}

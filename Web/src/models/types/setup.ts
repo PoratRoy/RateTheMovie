@@ -4,4 +4,5 @@ import { Player } from "./player";
 export type SetupLayoutOption = {
     option: SetupOption;
     player?: Player;
+    roomId?: string;
 };

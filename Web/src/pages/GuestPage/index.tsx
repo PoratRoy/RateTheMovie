@@ -6,10 +6,7 @@ import { useSocketContext } from "../../context/SocketContext";
 import { useSingleton } from "../../hooks/global/useSingleton";
 import { SetupLayoutOption } from "../../models/types/setup";
 import { initPlayer } from "../../models/initialization/player";
-import { SessionKey } from "../../models/enums/session";
-import Session from "../../utils/sessionStorage";
 import { useParams } from "react-router-dom";
-import { SinglePlayerRoom } from "../../models/constant";
 
 const GuestPage: React.FC = () => {
     const { room } = useParams();
@@ -22,8 +19,7 @@ const GuestPage: React.FC = () => {
             const { numberOfPlayers, roomId } = details;
             const name = `Player ${numberOfPlayers + 1}`
             const player = initPlayer(numberOfPlayers.toString(), name, "player");
-            Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
-            setSetupOption({ option: SetupOption.MULTI, player });
+            setSetupOption({ option: SetupOption.MULTI, player, roomId });
         });
     });
 

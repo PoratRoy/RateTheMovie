@@ -2,8 +2,6 @@ import React from "react";
 import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import MultiBtn from "../../actions/widgets/btn/MultiBtn";
 import { initPlayer } from "../../../models/initialization/player";
-import { SessionKey } from "../../../models/enums/session";
-import Session from "../../../utils/sessionStorage";
 import { SetupOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
 import Description from "../../common/Description";
@@ -23,16 +21,14 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
 
     const handlePlay = () => {
         const player = initPlayer("0", DefualtPlayerName, "host");
-        Session.set(SessionKey.ROOM, SinglePlayerRoom);
-        setSetupOption({ option: SetupOption.SINGLE, player });
+        setSetupOption({ option: SetupOption.SINGLE, player, roomId: SinglePlayerRoom });
     };
 
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
             const { numberOfPlayers, roomId } = details;
             const player = initPlayer(numberOfPlayers.toString(), DefualtPlayerName, "host");
-            Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
-            setSetupOption({ option: SetupOption.MULTI, player });
+            setSetupOption({ option: SetupOption.MULTI, player, roomId });
         });
     };
 

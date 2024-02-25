@@ -23,8 +23,8 @@ import { SetupProps } from "../../../models/types/props/landing";
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
-    const { option, player } = setupOption;
-    const { roomLink } = useRoomLink(option, playerRole);
+    const { option, player, roomId } = setupOption;
+    const { roomLink } = useRoomLink(option, playerRole, roomId);
 
     useEffect(() => {
         if (option === SetupOption.NONE || !player) return;
