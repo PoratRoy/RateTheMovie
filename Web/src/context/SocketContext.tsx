@@ -1,16 +1,12 @@
 import { createContext, useContext, useEffect } from "react";
 import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
-import Session from "../utils/sessionStorage";
-import { SessionKey } from "../models/enums/session";
-import { useGamePlayContext } from "./GamePlayContext";
 import { Player } from "../models/types/player";
 import { MovieFilters } from "../models/types/filter";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
-    handleUpdatePlayerName: (name: string) => void;
     handleGameFilters: (filters: MovieFilters) => void;
     handlePlayerWantToJoin: (
         roomId: string | undefined,
@@ -19,11 +15,10 @@ export const SocketContext = createContext<{
     handlePlayerJoinRoom: (
         roomId: string,
         player: Player,
-        callback: (players: Player[]) => void,
+        callback: (playerId: string) => void,
     ) => void;
 }>({
     handleCreateNewRoom: () => {},
-    handleUpdatePlayerName: () => {},
     handleGameFilters: () => {},
     handlePlayerWantToJoin: () => {},
     handlePlayerJoinRoom: () => {},
@@ -32,7 +27,6 @@ export const SocketContext = createContext<{
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const { setCurrentPlayer } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -66,20 +60,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         });
     };
 
-    const handleUpdatePlayerName = (name: string) => {
-        socket.emit("UpdatePlayerName", name, async (warRoom: WarRoomProps) => {
-            if (warRoom && warRoom.room) {
-                const { players } = warRoom;
-                //TODO: fix it
-                const player = players.find((p) => p.name === name);
-                if(player){
-                    Session.set(SessionKey.CURRENT_PLAYER, player);
-                    setCurrentPlayer(player);
-                }
-            }
-        });
-    };
-
     const handleGameFilters = (filters: MovieFilters) => {
         socket.emit("UpdateGameFilters", filters);
     };
@@ -96,11 +76,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const handlePlayerJoinRoom = (
         roomId: string,
         player: Player,
-        callback: (players: Player[]) => void,
+        callback: (playerId: string) => void,
     ) => {
-        socket.emit("PlayerJoinRoom", roomId, player, async (warRoom: WarRoomProps) => {
+        socket.emit("PlayerJoinRoom", roomId, player, async (warRoom: WarRoomProps, playerId: string) => {
             if (warRoom && warRoom.room) {
-                callback(warRoom.players);
+                callback(playerId);
             }
         });
     };
@@ -109,7 +89,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         <SocketContext.Provider
             value={{
                 handleCreateNewRoom,
-                handleUpdatePlayerName,
                 handleGameFilters,
                 handlePlayerWantToJoin,
                 handlePlayerJoinRoom,

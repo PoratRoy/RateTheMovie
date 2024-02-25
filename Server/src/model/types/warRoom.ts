@@ -5,8 +5,8 @@ import { Player } from "./player";
 export type WarRoomProps = {
     room: string | undefined;
     players: Player[];
-    gameCards: Card[];
-    filters: MovieFilters;
+    gameCards: Card[];//TODO: maybe I only need the movies
+    filters: MovieFilters;//TODO: not sure I need this
 };
 
 export type WarRooms = {

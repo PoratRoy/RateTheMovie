@@ -26,3 +26,12 @@ export const updatePlayer = (
         };
     }
 };
+
+export const updatePlayerId = (player: Player | undefined, id: string): Player | undefined => {
+    if (player) {
+        return {
+            ...player,
+            id,
+        };
+    }
+};

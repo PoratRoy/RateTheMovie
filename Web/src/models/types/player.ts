@@ -1,4 +1,4 @@
-import { ElectedCards } from "./card";
+import { ElectedCards, RivalCard } from "./card";
 import { PlayerRole } from "./union";
 
 export type Player = {
@@ -8,4 +8,13 @@ export type Player = {
     avater: number;
     score: number;
     electedCards: ElectedCards;
+};
+
+export type RivalPlayer = {
+    id: string;
+    name: string;
+    avater: number;
+    score: number;
+    order: RivalCard;
+    isReady?: boolean;//TODO: do I need this?
 };

@@ -10,6 +10,12 @@ export type ElectedCards = {
     correctOrder?: Card[];
 };
 
+export type RivalCard = {
+    id: string;
+    movie: Movie;
+    isCorrect: boolean;
+};
+
 export type CardType = "Elected" | "Player" | "Shadow";
 
 export type placeholderCardType =

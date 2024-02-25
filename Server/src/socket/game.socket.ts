@@ -22,35 +22,27 @@ class GameSocket implements ISocket {
             callback({ numberOfPlayers: 0, roomId });
         });
 
-        socket.on("PlayerJoinRoom", (roomId: string, player: Player, callback: (props: WarRoomProps) => void) => {
-            console.info(`Join room: ${roomId}, Player: `, player);
-            const playerId = socket.id;
-            const updatedPlayer = {...player, id: playerId};
-            const warRoom = this.warRooms[roomId];
-            if (warRoom) {
-                warRoom.players.push(updatedPlayer);
-                this.warRooms[roomId] = warRoom;
-            }else{
-                this.warRooms[roomId] = initWarRoom(roomId, updatedPlayer);
-            }
-            console.log("Game room: ", this.warRooms[roomId]);
-            callback(this.warRooms[roomId]);
-        });
-
-        socket.on("UpdatePlayerName", (name: string, callback: (props: WarRoomProps) => void) => {
-            console.info("Update player name: ", name);
-            const playerId = socket.id;
-            const warRoom = getRoomByPlayer(this.warRooms, playerId);
-            if (warRoom && warRoom.room) {
-                const player = getRoomPlayer(warRoom, playerId);
-                if (player) {
-                    player.name = name;
-                    this.warRooms[warRoom.room] = warRoom;
+        socket.on(
+            "PlayerJoinRoom",
+            (
+                roomId: string,
+                player: Player,
+                callback: (props: WarRoomProps, playerId: string) => void,
+            ) => {
+                console.info(`Join room: ${roomId}, Player: `, player);
+                const playerId = socket.id;
+                const updatedPlayer = { ...player, id: playerId };
+                const warRoom = this.warRooms[roomId];
+                if (warRoom) {
+                    warRoom.players.push(updatedPlayer);
+                    this.warRooms[roomId] = warRoom;
+                } else {
+                    this.warRooms[roomId] = initWarRoom(roomId, updatedPlayer);
                 }
-                console.log("Game room: ", this.warRooms);
-                callback(this.warRooms[warRoom.room]);
-            }
-        });
+                console.log("Game room: ", this.warRooms[roomId]);
+                callback(this.warRooms[roomId], playerId);
+            },
+        );
 
         socket.on("UpdateGameFilters", (filters: MovieFilters) => {
             console.info("Update game filters: ", filters);

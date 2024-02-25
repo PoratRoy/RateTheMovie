@@ -2,7 +2,7 @@ import style from "./SetupLayout.module.css";
 import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
 import Session from "../../../utils/sessionStorage";
 import { SessionKey } from "../../../models/enums/session";
-import { updatePlayer } from "../../../models/initialization/player";
+import { updatePlayer, updatePlayerId } from "../../../models/initialization/player";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { useSocketContext } from "../../../context/SocketContext";
 import { SetupOption } from "../../../models/enums/landing";
@@ -36,10 +36,12 @@ const SetupLayout = <TInput extends FieldValues>({
                 Session.set(SessionKey.CURRENT_PLAYER, updatedPlayer);
                 setCurrentPlayer(updatedPlayer);
             } else if (option === SetupOption.MULTI && roomId) {
-                handlePlayerJoinRoom(roomId, updatedPlayer, (players) => {
-                    //TODO: players[0] ?
-                    Session.set(SessionKey.CURRENT_PLAYER, players[0]);
-                    setCurrentPlayer(players[0]);
+                handlePlayerJoinRoom(roomId, updatedPlayer, (playerId) => {
+                    const updatedPlayerId = updatePlayerId(updatedPlayer, playerId);
+                    if (updatedPlayerId) {
+                        Session.set(SessionKey.CURRENT_PLAYER, updatedPlayerId);
+                        setCurrentPlayer(updatedPlayerId);
+                    }
                 });
             }
         }
