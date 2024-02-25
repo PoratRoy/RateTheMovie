@@ -1,5 +1,5 @@
 import { useErrorContext } from "../../context/ErrorContext";
-import { MovieFilters } from "../../models/types/movie";
+import { MovieFilters } from "../../models/types/filter";
 import useDiscoverMovies from "./useDiscoverMovies";
 import useSessionBackupMovies from "./useSessionBackupMovies";
 

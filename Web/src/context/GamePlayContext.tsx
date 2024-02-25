@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
-import { FinishAnimation } from "../models/types/game";
+import { FinishAnimation, Game } from "../models/types/game";
 import { initFinishAnimation } from "../models/initialization/context";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
@@ -9,6 +9,8 @@ import { Movie } from "../models/types/movie";
 import { initGameCardsList } from "../models/initialization/card";
 
 export const GamePlayContext = createContext<{
+    game: Game | undefined;
+    setGame: React.Dispatch<React.SetStateAction<Game | undefined>>;
     gameCards: Card[];
     setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
     fetchLoading: boolean;
@@ -27,6 +29,8 @@ export const GamePlayContext = createContext<{
     rounds: number;
     setRounds: React.Dispatch<React.SetStateAction<number>>;
 }>({
+    game: undefined,
+    setGame: () => {},
     gameCards: [],
     setGameCards: () => {},
     fetchLoading: false,
@@ -49,6 +53,7 @@ export const GamePlayContext = createContext<{
 export const useGamePlayContext = () => useContext(GamePlayContext);
 
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
+    const [game, setGame] = useState<Game | undefined>();
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [rounds, setRounds] = useState<number>(0);
@@ -109,6 +114,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     return (
         <GamePlayContext.Provider
             value={{
+                game,
+                setGame,
                 gameCards,
                 setGameCards,
                 fetchLoading,
@@ -124,7 +131,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPlayAgainBtn,
                 setIncreaseScore,
                 setRemovePosition,
-                rounds,
+                rounds,//to remove
                 setRounds,
             }}
         >

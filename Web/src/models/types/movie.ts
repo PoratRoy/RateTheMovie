@@ -110,8 +110,3 @@ export type MovieCrew = {
     job: string;
 };
 
-export type MovieFilters = {
-    year?: [string, string];
-    genre?: string[];
-    language?: string;
-};

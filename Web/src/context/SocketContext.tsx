@@ -3,10 +3,10 @@ import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import Session from "../utils/sessionStorage";
 import { SessionKey } from "../models/enums/session";
-import { MovieFilters } from "../models/types/movie";
 import { useGamePlayContext } from "./GamePlayContext";
 import { SinglePlayerRoom } from "../models/constant";
 import { Player } from "../models/types/player";
+import { MovieFilters } from "../models/types/filter";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{

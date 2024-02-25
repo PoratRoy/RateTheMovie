@@ -1,7 +1,6 @@
 
 import { DateEndYear, DateStartYear } from "../models/constant";
-import { DateRangeOptionFilter } from "../models/types/filter";
-import { MovieFilters } from "../models/types/movie";
+import { DateRangeOptionFilter, MovieFilters } from "../models/types/filter";
 import { datePattern } from "./format";
 
 

@@ -1,5 +1,11 @@
 export type DateRangeOptionFilter = { start?: number; end?: number };
 
+export type MovieFilters = {
+    year?: [string, string];
+    genre?: string[];
+    language?: string;
+};
+
 export type GenreOptionFilter = {
     id: number;
     name: string;
@@ -16,4 +22,4 @@ export type LanguageOptionFilter = {
     id: string;
     name: string;
     emoji: string;
-}
+};

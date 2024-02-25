@@ -1,6 +1,5 @@
 import style from "./SetupLayout.module.css";
 import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
-import { MovieFilters } from "../../../models/types/movie";
 import Session from "../../../utils/sessionStorage";
 import { SessionKey } from "../../../models/enums/session";
 import { updatePlayer } from "../../../models/initialization/player";
@@ -13,6 +12,7 @@ import path from "../../../router/routePath.json";
 import { extractRoomId } from "../../../utils/format";
 import { DateDefaultJSON, SETUP_ID } from "../../../models/constant";
 import { SetupLayoutProps } from "../../../models/types/props/layout";
+import { MovieFilters } from "../../../models/types/filter";
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,

@@ -1,4 +1,5 @@
-import { MovieFilters } from "../../models/types/movie";
+import { MovieFilters } from "../../models/types/filter";
+
 
 export const discoverQueryParams = (page: number, filters?: MovieFilters) => {
     let release_date_gte = "";

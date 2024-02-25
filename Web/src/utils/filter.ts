@@ -1,4 +1,5 @@
-import { MovieFilters } from "../models/types/movie";
+import { MovieFilters } from "../models/types/filter";
+
 
 export const isLanguageValid = (language?: string, filters?: MovieFilters): boolean => {
     let isValid: boolean = true;

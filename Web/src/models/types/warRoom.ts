@@ -1,5 +1,5 @@
 import { Card } from "./card";
-import { MovieFilters } from "./movie";
+import { MovieFilters } from "./filter";
 import { Player } from "./player";
 
 export type WarRooms = {
