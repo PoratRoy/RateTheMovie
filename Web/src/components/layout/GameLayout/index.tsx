@@ -7,9 +7,10 @@ import Header from "../../common/Header";
 import LoadingPage from "../../../pages/LoadingPage";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finish, fetchLoading, gameCards } = useGamePlayContext();
+    const { finish, fetchLoading, gameCards, players } = useGamePlayContext();
     const { scope } = useFinishAnimation(finish);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isCanStart, setIsCanStart] = useState<boolean>(false);
     const isLoadingRef = useRef<boolean>(true);
 
     useEffect(() => {
@@ -29,10 +30,16 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
         isLoadingRef.current = fetchLoading;
     }, [fetchLoading]);
 
+    // useEffect(() => {
+    //     if(setupOption.option === SetupOption.MULTI){
+    //         if (players.length > 0) setLoading(false);
+    //     }
+    // }, [players]);
+
     return (
         <React.Fragment>
             {isLoading ? (
-                <LoadingPage />
+                <LoadingPage isCanStart={isCanStart}/>
             ) : (
                 <section className={style.gameContainer}>
                     <Header />

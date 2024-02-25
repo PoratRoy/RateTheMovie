@@ -311,6 +311,10 @@ export type QuitBtnProps = {
     close: () => void;
 }
 
+export type StartGameBtnProps = {
+    loading: boolean;
+}
+
 //--View--//
 export type ViewImgProps = {
     src: string;
@@ -354,6 +358,10 @@ export type SetupProps = {
     playerRole: PlayerRole;
     setupOption: SetupLayoutOption;
 };
+
+export type LoadingPageProps = {
+    isCanStart: boolean;
+}
 
 //--Filter--//
 export type FilterCollapseProps = ChildernsProps;
