@@ -13,8 +13,8 @@ export const GamePlayContext = createContext<{
     setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
     fetchLoading: boolean;
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    players: Player[];
-    setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+    currentPlayer: Player | undefined;
+    setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
     finish: boolean;
     setFinish: React.Dispatch<React.SetStateAction<boolean>>;
     clearGameContext: () => void;
@@ -31,8 +31,8 @@ export const GamePlayContext = createContext<{
     setGameCards: () => {},
     fetchLoading: false,
     setFetchLoading: () => {},
-    players: [],
-    setPlayers: () => {},
+    currentPlayer: undefined,
+    setCurrentPlayer: () => {},
     finish: false,
     setFinish: () => {},
     clearGameContext: () => {},
@@ -52,16 +52,19 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [rounds, setRounds] = useState<number>(0);
-    const [players, setPlayers] = useState<Player[]>([]);
+    const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
     const [finish, setFinish] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
 
+    //TODO: extract to a hook
     const setStateFromSession = () => {
-        if (!players || players.length === 0) {
-            const sessionPlayers = Session.get(SessionKey.PLAYERS);
-            if (sessionPlayers && sessionPlayers.length > 0) {
-                setPlayers(sessionPlayers);
-            }
+        if (!rounds) {
+            const sessionRounds: number | undefined = Session.get(SessionKey.ROUNDS);
+            if (sessionRounds) setRounds(sessionRounds);
+        }
+        if (!currentPlayer) {
+            const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
         }
     };
     setStateFromSession();
@@ -85,26 +88,23 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setFinishAnimation(initFinishAnimation);
         setFetchLoading(false);
         setFinish(false);
-        setPlayers((prevPlayers) => {
-            return prevPlayers.map((player) => ({
-                ...player,
-                electedCards: { order: [] },
-            }));
+        setCurrentPlayer((player) => {
+            return player ? { ...player, electedCards: { order: [] } } : player;
         });
     };
 
     const clearGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
-        Session.remove(SessionKey.PLAYERS);
         Session.remove(SessionKey.FILTERS);
         Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.ROOM);
         Session.remove(SessionKey.ROUNDS);
+        Session.remove(SessionKey.CURRENT_PLAYER);
         setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
         setFetchLoading(false);
         setFinish(false);
-        setPlayers([]);
+        setCurrentPlayer(undefined);
     };
     return (
         <GamePlayContext.Provider
@@ -113,8 +113,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setGameCards,
                 fetchLoading,
                 setFetchLoading,
-                players,
-                setPlayers,
+                currentPlayer,
+                setCurrentPlayer,
                 finish,
                 setFinish,
                 clearGameContext,

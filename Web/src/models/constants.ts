@@ -14,8 +14,6 @@ export const DateStartYear = 1800;
 export const DateEndYear = new Date().getFullYear();
 export const DateDefaultJSON = '["1800","2023"]';
 
-export const Players = ["1 Player", "2 Players", "Multiplayer"];
-
 export const DefualtPlayerName = "Player 1";
 
 //TODO: arrange the ids

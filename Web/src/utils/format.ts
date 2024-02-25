@@ -7,3 +7,7 @@ export const formatDate = (dateS: string) => {
     const formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
     return formattedDate;
 };
+
+export const extractRoomId = (roomLink: string) => {
+    return roomLink.substring(roomLink.lastIndexOf("/") + 1);
+};

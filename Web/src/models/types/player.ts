@@ -2,7 +2,7 @@ import { ElectedCards } from "./card";
 import { PlayerRole } from "./union";
 
 export type Player = {
-    id: number;
+    id: string;
     name: string;
     role: PlayerRole;
     avater: number;

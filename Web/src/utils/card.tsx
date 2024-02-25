@@ -1,4 +1,3 @@
-import PackWrapper from "../components/cards/wrapper/PackWrapper";
 import DraggableMovie from "../components/cards/single/DraggableMovie";
 import { PACK_CARDS_NUM } from "../models/constants";
 import React from "react";
@@ -18,8 +17,9 @@ export const initGameCards = (movies: Movie[]) => {
 };
 
 export const setElectedFrontCard = (player: Player, movie: Movie | undefined) => {
+    //TODO: was PackWrapper (deleted on 25.2) insted of section
     return (
-        <PackWrapper>
+        <section>
             {movie && movie.title ? (
                 <DraggableMovie
                     id={`${movie.imdbID}-${player.id}`}
@@ -31,7 +31,7 @@ export const setElectedFrontCard = (player: Player, movie: Movie | undefined) =>
             ) : (
                 <React.Fragment />
             )}
-        </PackWrapper>
+        </section>
     );
 };
 

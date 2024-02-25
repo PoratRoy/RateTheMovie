@@ -7,11 +7,11 @@ import { getCorrectOrder } from "../../utils/correctOrder";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { players, setCorrectPack, setPlayAgainBtn, setIncreaseScore, setRemovePosition } =
+    const { currentPlayer, setCorrectPack, setPlayAgainBtn, setIncreaseScore, setRemovePosition } =
         useGamePlayContext();
 
     const handleAnimation = async () => {
-        const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(players[0]);
+        const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(currentPlayer);
         
         await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
         await delayPromise(1000);
@@ -22,10 +22,9 @@ const useFinishAnimation = (activate: boolean | undefined) => {
             await delayPromise(1500);
             //below move to score
             setIncreaseScore();
-        } else {
-            await delayPromise(1500);
-            setPlayAgainBtn();
         }
+        await delayPromise(1500);
+        setPlayAgainBtn();
     };
 
     useEffect(() => {

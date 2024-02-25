@@ -34,12 +34,14 @@ export const handlePlayerScore = (player: Player) => {
     return playerScore;
 };
 
-export const correctAnswers = (player: Player) => {
+export const correctAnswers = (player: Player | undefined) => {
+    if(!player) return 0;
     const { correctAnswers } = getCorrectOrderAndAnswers(player);
     return correctAnswers.length;
 };
 
-export const getCorrectOrder = (player: Player) => {
+export const getCorrectOrder = (player: Player | undefined) => {
+    if(!player) return { moviesInCorrectOrder: [], correctAnswers: 0 };
     const { moviesInCorrectOrder, correctAnswers } = getCorrectOrderAndAnswers(player);
     return { moviesInCorrectOrder, correctAnswers: correctAnswers.length };
 };

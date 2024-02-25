@@ -21,7 +21,7 @@ const GuestPage: React.FC = () => {
         handlePlayerWantToJoin(room,(details) => {
             const { numberOfPlayers, roomId } = details;
             const name = `Player ${numberOfPlayers + 1}`
-            const player = initPlayer(numberOfPlayers, name, "player");
+            const player = initPlayer(numberOfPlayers.toString(), name, "player");
             Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
             setSetupOption({ option: SetupOption.MULTI, player });
         });

@@ -33,7 +33,7 @@ export const SocketContext = createContext<{
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const { setPlayers } = useGamePlayContext();
+    const { setCurrentPlayer } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -73,8 +73,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit("UpdatePlayerName", name, async (warRoom: WarRoomProps) => {
             if (warRoom && warRoom.room) {
                 const { players } = warRoom;
-                Session.set(SessionKey.PLAYERS, players);
-                setPlayers(players);
+                //TODO: fix it
+                const player = players.find((p) => p.name === name);
+                if(player){
+                    Session.set(SessionKey.CURRENT_PLAYER, player);
+                    setCurrentPlayer(player);
+                }
             }
         });
     };

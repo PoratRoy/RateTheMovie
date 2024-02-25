@@ -10,7 +10,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
     movie,
     player,
     isShadow,
-    side = "all",
+    side = "all", //TODO: to remove
     size = "large",
 }) => {
     const { title, poster_path } = movie;

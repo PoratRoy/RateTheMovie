@@ -5,7 +5,7 @@ import { Player } from "../models/types/player";
 import { handleOrderEqualCorrectOrder } from "../utils/correctOrder";
 
 const useCardOrderPosition = (player: Player, selectedCard: Card) => {
-    const { finishAnimation, players } = useGamePlayContext();
+    const { finishAnimation, currentPlayer } = useGamePlayContext();
     const [pos, setPos] = useState<number>(0);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const useCardOrderPosition = (player: Player, selectedCard: Card) => {
             });
         }
         if (!match) setPos(0);
-    }, [players]);
+    }, [currentPlayer]);
 
     useEffect(() => {
         if (finishAnimation.removePosition) {

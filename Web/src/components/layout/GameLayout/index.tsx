@@ -7,7 +7,7 @@ import Header from "../../common/Header";
 import LoadingPage from "../../../pages/LoadingPage";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finish, fetchLoading, gameCards, players } = useGamePlayContext();
+    const { finish, fetchLoading, gameCards } = useGamePlayContext();
     const { scope } = useFinishAnimation(finish);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCanStart, setIsCanStart] = useState<boolean>(false);

@@ -3,17 +3,16 @@ import { Player } from "../models/types/player";
 import { handlePlayerScore } from "../utils/correctOrder";
 
 const useSetScore = () => {
-    const { setPlayers } = useGamePlayContext();
+    const { setCurrentPlayer } = useGamePlayContext();
 
     const setScore = () => {
-        setPlayers((prev) => {
-            return prev.map((player: Player) => {
-                const playerScore = handlePlayerScore(player);
-                return {
-                    ...player,
-                    score: player.score + playerScore,
-                };
-            });
+        setCurrentPlayer((player: Player | undefined) => {
+            if (!player) return player;
+            const playerScore = handlePlayerScore(player);
+            return {
+                ...player,
+                score: player.score + playerScore,
+            };
         });
     };
 

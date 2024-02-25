@@ -5,9 +5,11 @@ import PlayerProfile from "../../profile/PlayerProfile";
 import RoundTitle from "../RoundTitle";
 import PauseBtn from "../../actions/btn/PauseBtn";
 import PauseModal from "../../view/modals/PauseModal";
+import { useGamePlayContext } from "../../../context/GamePlayContext";
 
 const Header: React.FC = () => {
     const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+    const { currentPlayer } = useGamePlayContext();
 
     const handlePause = () => {
         setShowPauseModal(true);
@@ -15,7 +17,7 @@ const Header: React.FC = () => {
 
     return (
         <section className={style.gameHeaderContainer}>
-            <PlayerProfile />
+            <PlayerProfile currentPlayer={currentPlayer} />
             <div className={style.gameHeaderCenter}>
                 <Logo size="small" />
                 <RoundTitle />

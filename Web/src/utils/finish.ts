@@ -3,8 +3,9 @@ import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 import { getMoviesByCards } from "./movie";
 
-export const isFinishPlacingElectedCards = (players: Player[]) => {
-    const moviesSelectedOrder: (Movie[] | undefined)[] = players.map((player: Player) => {
+export const isFinishPlacingElectedCards = (player: Player) => {
+    //TODO: fix it [player]
+    const moviesSelectedOrder: (Movie[] | undefined)[] = [player].map((player: Player) => {
         const electedCardsOrder = player.electedCards.order;
 
         if (electedCardsOrder && electedCardsOrder.length === PACK_CARDS_NUM) {

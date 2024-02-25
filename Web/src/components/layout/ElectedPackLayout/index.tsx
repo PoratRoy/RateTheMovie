@@ -8,18 +8,24 @@ import useHandleElectedCard from "../../../hooks/useHandleElectedCard";
 import { correctAnswers } from "../../../utils/correctOrder";
 
 const ElectedPackLayout: React.FC = () => {
-    const { players, finishAnimation } = useGamePlayContext();
+    const { currentPlayer, finishAnimation } = useGamePlayContext();
     const { isFinishPlacing } = useHandleElectedCard();
+    const { playAgainBtn, showCorrectPack } = finishAnimation;
 
     return (
         <section className={style.electedPackContainer}>
             <div className={style.electedPack}>
-                <PackOfSelectedCards />
+                {currentPlayer ? (
+                    <PackOfSelectedCards
+                        currentPlayer={currentPlayer}
+                        showCorrectPack={showCorrectPack}
+                    />
+                ) : null}
             </div>
-            {finishAnimation.playAgainBtn ? (
+            {playAgainBtn ? (
                 <div className={style.playAgain}>
                     <div className={style.playAgainDescription}>
-                        {correctAnswers(players[0])} correct ratings !
+                        {correctAnswers(currentPlayer)} correct ratings !
                     </div>
                     <PlayAgainBtn />
                 </div>

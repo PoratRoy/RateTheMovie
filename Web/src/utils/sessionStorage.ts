@@ -19,22 +19,22 @@ export default class Session {
 
     public static add = (key: Key, anyValue: string | number | Object) => {
         const value = this.get(key);
-        if(value && Array.isArray(value)){
+        if (value && Array.isArray(value)) {
             this.set(key, [...value, anyValue]);
         } else {
             this.set(key, [anyValue]);
         }
-    }
+    };
 
     public static removeFrom = (key: Key, index: number) => {
         const value = this.get(key);
-        if(value && Array.isArray(value)){
-            if(index > -1){
+        if (value && Array.isArray(value)) {
+            if (index > -1) {
                 value.splice(index, 1);
                 this.set(key, value);
             }
         }
-    }
+    };
 
     public static remove = (key: Key) => {
         sessionStorage.removeItem(key as string);

@@ -8,6 +8,8 @@ export const initFinishAnimation: FinishAnimation = {
     removePosition: false,
 };
 
+
+//TODO: in use?
 // export const initMultiplayerState: MultiplayerState = {
 //     socket: undefined,
 //     warRoom: {

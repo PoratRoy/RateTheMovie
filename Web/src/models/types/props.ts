@@ -120,6 +120,11 @@ export type PackWrapperProps = ChildernsProps;
 
 export type ElectedPackLayoutProps = ChildernsProps;
 
+export type PackOfSelectedCardsProps = {
+    currentPlayer: Player;
+    showCorrectPack: Movie[];
+};
+
 //--DND--//
 export type DroppableProps = ChildernsProps & {
     droppableId: string;
@@ -243,8 +248,6 @@ export type NameInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputTypeProps;
 
 export type RoundInputProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
-
-export type SwitchPlayersProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
 export type AvatersCarouselProps<TInput extends FieldValues> = InputProps<TInput> &
     FormSetValueProps & {
@@ -376,6 +379,10 @@ export type AvaterProps = {
     img?: string;
     isFocus?: boolean;
 };
+
+export type PlayerProfileProps = {
+    currentPlayer: Player | undefined
+}
 
 //--Common--//
 export type ImgProps = {

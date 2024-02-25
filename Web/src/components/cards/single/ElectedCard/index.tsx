@@ -7,6 +7,9 @@ import { setElectedFrontCard } from "../../../../utils/card";
 import { handleOrderEqualCorrectOrder } from "../../../../utils/correctOrder";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
+    //TODO: useMemo
+    if(!movie) movie = player.electedCards?.order[index]?.movie;
+
     const [focus, setFocus] = useState<boolean>(false);
     let isRightChoice = false;
     handleOrderEqualCorrectOrder(player, movie, index, () => {isRightChoice = true})

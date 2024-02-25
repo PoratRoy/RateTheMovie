@@ -22,7 +22,7 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();
 
     const handlePlay = () => {
-        const player = initPlayer(0, DefualtPlayerName, "host");
+        const player = initPlayer("0", DefualtPlayerName, "host");
         Session.set(SessionKey.ROOM, SinglePlayerRoom);
         setSetupOption({ option: SetupOption.SINGLE, player });
     };
@@ -30,7 +30,7 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
             const { numberOfPlayers, roomId } = details;
-            const player = initPlayer(numberOfPlayers, DefualtPlayerName, "host");
+            const player = initPlayer(numberOfPlayers.toString(), DefualtPlayerName, "host");
             Session.set(SessionKey.ROOM, roomId || SinglePlayerRoom);
             setSetupOption({ option: SetupOption.MULTI, player });
         });

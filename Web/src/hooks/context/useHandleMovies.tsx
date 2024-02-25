@@ -10,7 +10,7 @@ import useCorrectOrder from "../useCorrectOrder";
 
 const useHandleMovies = () => {
     const { sortMoviesOrder, sortCardsOrder } = useCorrectOrder();
-    const { setGameCards, setPlayers, setFetchLoading } = useGamePlayContext();
+    const { setGameCards, setCurrentPlayer, setFetchLoading } = useGamePlayContext();
 
     const handleMovieCards = (movies: Movie[]) => {
         setFetchLoading(true);
@@ -40,16 +40,15 @@ const useHandleMovies = () => {
     const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: Card[]) => {
         setTimeout(() => {
             if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
-                setPlayers((prev) => {
-                    return prev.map((player) => {
-                        return {
-                            ...player,
-                            electedCards: {
-                                ...player.electedCards,
-                                correctOrder,
-                            },
-                        };
-                    });
+                setCurrentPlayer((player) => {
+                    if (!player) return player;
+                    return {
+                        ...player,
+                        electedCards: {
+                            ...player.electedCards,
+                            correctOrder,
+                        },
+                    };
                 });
             }
             setGameCards(cards);

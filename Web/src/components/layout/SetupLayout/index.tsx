@@ -11,7 +11,8 @@ import { useSocketContext } from "../../../context/SocketContext";
 import { SetupOption } from "../../../models/enums/landing";
 import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 import { useNavigate } from "react-router-dom";
-import path from "../../../router/routePath.json"
+import path from "../../../router/routePath.json";
+import { extractRoomId } from "../../../utils/format";
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,
@@ -21,29 +22,26 @@ const SetupLayout = <TInput extends FieldValues>({
     methods,
 }: SetupLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
-    const { setPlayers, setRounds } = useGamePlayContext();
+    const { setRounds, setCurrentPlayer } = useGamePlayContext();
     const { handlePlayerJoinRoom, handleGameFilters } = useSocketContext();
     const { firstRoundMovies } = useFirstRoundMovies();
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
-        console.log("data", data)
-        console.log("setupOption", setupOption)
-        console.log("playerRole", playerRole)
         const { year, genre, language, name, avater, rounds } = data;
         const { player, option } = setupOption;
 
         const updatedPlayer = updatePlayer(player, name, avater);
         if (updatedPlayer) {
-            console.log("updatedPlayer", updatedPlayer)
             if (option === SetupOption.SINGLE) {
-                Session.set(SessionKey.PLAYERS, [updatedPlayer]);
-                setPlayers([updatedPlayer]);
+                Session.set(SessionKey.CURRENT_PLAYER, updatedPlayer);
+                setCurrentPlayer(updatedPlayer);
             } else if (option === SetupOption.MULTI) {
-                const roomId = roomLink.substring(roomLink.lastIndexOf("/") + 1);
+                const roomId = extractRoomId(roomLink)
                 handlePlayerJoinRoom(roomId, updatedPlayer, (players) => {
-                    Session.set(SessionKey.PLAYERS, players);
-                    setPlayers(players);
+                    //TODO: players[0] ?
+                    Session.set(SessionKey.CURRENT_PLAYER, players[0]);
+                    setCurrentPlayer(players[0]);
                 });
             }
         }
@@ -63,9 +61,7 @@ const SetupLayout = <TInput extends FieldValues>({
             setRounds(parseInt(rounds));
             Session.set(SessionKey.ROUNDS, rounds);
         }
-        setTimeout(() => {
-            navigate(path.game);
-        }, 100);
+        navigate(path.game);
     };
 
     return (
