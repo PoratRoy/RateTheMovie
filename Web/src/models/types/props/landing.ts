@@ -11,5 +11,5 @@ export type SetupProps = {
 };
 
 export type LoadingPageProps = {
-    isCanStart: boolean;
+    canStart: boolean;
 };

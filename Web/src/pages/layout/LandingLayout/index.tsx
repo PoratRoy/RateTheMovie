@@ -10,7 +10,7 @@ import { LandingLayoutProps } from "../../../models/types/props/layout";
 
 const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption, setSetupOption }) => {
     const { scope } = useLandingAnimation(setupOption);
-    const { option } = setupOption;
+    const { mod } = setupOption;
 
     return (
         <section ref={scope} className={style.landingBackground}>
@@ -22,10 +22,10 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption, se
                 </section>
                 <Footer
                     callback={
-                        option === ModOption.NONE
+                        mod === ModOption.NONE
                             ? undefined
                             : () => {
-                                  setSetupOption({ option: ModOption.NONE });
+                                  setSetupOption({ mod: ModOption.NONE });
                               }
                     }
                 />

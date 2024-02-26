@@ -48,7 +48,7 @@ class GameSocket implements ISocket {
             console.info("Update game filters: ", filters);
             const playerId = socket.id;
             const warRoom = getRoomByPlayer(this.warRooms, playerId);
-            if (warRoom && warRoom.game.roomId) {
+            if (warRoom && warRoom?.game?.roomId) {
                 warRoom.game.filters = filters;
                 this.warRooms[warRoom.game.roomId] = warRoom;
                 console.log("Game room: ", this.warRooms);
@@ -74,7 +74,7 @@ class GameSocket implements ISocket {
             console.info("Disconnect received from: " + socket.id);
             const playerId = socket.id;
             const warRoom = getRoomByPlayer(this.warRooms, playerId);
-            if (warRoom && warRoom.game.roomId) {
+            if (warRoom && warRoom?.game?.roomId) {
                 const player = getRoomPlayer(warRoom, playerId);
                 if (player) {
                     const index = warRoom.players.indexOf(player);

@@ -21,14 +21,14 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
 
     const handlePlay = () => {
         const player = initPlayer("0", DefualtPlayerName, "host");
-        setSetupOption({ option: ModOption.SINGLE, player, roomId: SinglePlayerRoom });
+        setSetupOption({ mod: ModOption.SINGLE, player, roomId: SinglePlayerRoom });
     };
 
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
             const { numberOfPlayers, roomId } = details;
             const player = initPlayer(numberOfPlayers.toString(), DefualtPlayerName, "host");
-            setSetupOption({ option: ModOption.MULTI, player, roomId });
+            setSetupOption({ mod: ModOption.MULTI, player, roomId });
         });
     };
 

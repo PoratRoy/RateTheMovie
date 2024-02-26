@@ -5,12 +5,13 @@ import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
 import Header from "../../../components/common/Header";
 import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
+import { ModOption } from "../../../models/enums/landing";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finish, fetchLoading, gameCards } = useGamePlayContext();
+    const { finish, fetchLoading, gameCards, game } = useGamePlayContext();
     const { scope } = useFinishAnimation(finish);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isCanStart, setIsCanStart] = useState<boolean>(false);
+    const [canStart, setCanStart] = useState<boolean>(false);
     const isLoadingRef = useRef<boolean>(true);
 
     useEffect(() => {
@@ -30,16 +31,18 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
         isLoadingRef.current = fetchLoading;
     }, [fetchLoading]);
 
-    // useEffect(() => {
-    //     if(setupOption.option === ModOption.MULTI){
-    //         if (players.length > 0) setLoading(false);
-    //     }
-    // }, [players]);
+    useEffect(() => {
+        if (game && game.mod === ModOption.MULTI) {
+            // if (players.length > 0) setCanStart(true);
+        } else {
+            // setCanStart(true);
+        }
+    }, []);
 
     return (
         <React.Fragment>
             {isLoading ? (
-                <LoadingPage isCanStart={isCanStart}/>
+                <LoadingPage canStart={canStart} />
             ) : (
                 <section className={style.gameContainer}>
                     <Header />

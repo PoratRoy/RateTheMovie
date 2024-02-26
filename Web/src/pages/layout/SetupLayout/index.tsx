@@ -67,6 +67,7 @@ const SetupLayout = <TInput extends FieldValues>({
             setGame(game);
             Session.set(SessionKey.GAME, game);
         }
+        //TODO: game also for player
         navigate(path.game);
     };
 

@@ -9,7 +9,7 @@ export type WarRooms = {
 export type WarRoomProps = {
     players: Player[];
     gameCards: Card[];
-    game: Game;
+    game?: Game;
 };
 
 export type WarRoomDetails = {

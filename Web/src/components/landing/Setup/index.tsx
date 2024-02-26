@@ -23,11 +23,11 @@ import { SetupProps } from "../../../models/types/props/landing";
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
-    const { option, player, roomId } = setupOption;
-    const { roomLink } = useRoomLink(option, playerRole, roomId);
+    const { mod, player, roomId } = setupOption;
+    const { roomLink } = useRoomLink(mod, playerRole, roomId);
 
     useEffect(() => {
-        if (option === ModOption.NONE || !player) return;
+        if (mod === ModOption.NONE || !player) return;
         const { name, avater } = player;
         setValue(setupInputs.name.id, name);
         setValue(setupInputs.avater.id, avater.toString());
@@ -49,7 +49,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
                 <NameInput id={setupInputs.name.id} placeholder={setupInputs.name.placeholder} />
             </PreviewProfile>
 
-            {option === ModOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
+            {mod === ModOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
 
             {playerRole === "host" ? (
