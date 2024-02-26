@@ -4,11 +4,19 @@
     flex-wrap: wrap;
     height: 100%;
     width: 100%;
-    max-width: 80vw;
     margin-bottom: 10px;
-    gap: 15px;
     justify-content: space-between;
     align-items: center;
+}
+
+.packContainer{
+    max-width: 80vw;
+    gap: 5px;
+}
+
+.packContainerWrap{
+    max-width: 90vw;
+    gap: 17px;
 }
 
 /* .packContainer {

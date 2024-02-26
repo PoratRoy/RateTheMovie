@@ -17,6 +17,7 @@ const Header: React.FC = () => {
 
     return (
         <section className={style.gameHeaderContainer}>
+            <section className={style.gameHeaderContainerFix} />
             <PlayerProfile currentPlayer={currentPlayer} />
             <div className={style.gameHeaderCenter}>
                 <Logo size="small" />

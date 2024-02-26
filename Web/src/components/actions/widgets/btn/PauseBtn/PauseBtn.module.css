@@ -1,7 +1,7 @@
 .pauseBtn {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
     color: var(--text-color-opacity);
     background-color: var(--secondary-color-opacity);
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .pauseBtn:hover {

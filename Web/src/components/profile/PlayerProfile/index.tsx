@@ -20,7 +20,17 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({ currentPlayer }) => {
                 </section>
             );
         } else {
-            return <div>TODO: skeleton profile</div>;
+            return (
+                <section className={style.PlayerProfile}>
+                    <div className={style.PlayerProfileAvater}>
+                        <Avater img={undefined} />
+                    </div>
+                    <div className={style.PlayerProfileDetailsSkeleton}>
+                        <div className={style.PlayerProfileScoreSkeleton}/>
+                        <div className={style.PlayerProfileNameSkeleton}/>
+                    </div>
+                </section>
+            );
         }
     };
 
