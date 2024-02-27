@@ -5,6 +5,8 @@ import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
 import { getRoomByPlayer, initWarRoom } from "../utils/warRoom";
 import { Game } from "../model/types/game";
+import { Card } from "../model/types/card";
+import { PACK_CARDS_NUM } from "../model/constant";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
@@ -59,6 +61,17 @@ class GameSocket implements ISocket {
             if (warRoom && game.roomId) {
                 warRoom.game = game;
                 this.warRooms[game.roomId] = warRoom;
+                console.log("Game room: ", this.warRooms);
+            }
+        });
+
+        socket.on("UpdateGameCards", (cards: Card[]) => {
+            console.info("Update war room game cards: ", cards);
+            const playerId = socket.id;
+            const { warRoom } = getRoomByPlayer(this.warRooms, playerId);
+            if (warRoom && warRoom.game?.roomId && cards.length === PACK_CARDS_NUM) {
+                warRoom.gameCards = cards;
+                this.warRooms[warRoom.game?.roomId] = warRoom;
                 console.log("Game room: ", this.warRooms);
             }
         });

@@ -1,4 +1,5 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
+import { useSocketContext } from "../../context/SocketContext";
 import { PACK_CARDS_NUM } from "../../models/constant";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
@@ -7,10 +8,13 @@ import { initGameCards } from "../../utils/card";
 import { logMovies } from "../../utils/log";
 import Session from "../../utils/sessionStorage";
 import useCorrectOrder from "./useCorrectOrder";
+import useMod from "./useMod";
 
 const useHandleMovies = () => {
     const { sortMoviesOrder, sortCardsOrder } = useCorrectOrder();
     const { setGameCards, setCurrentPlayer, setFetchLoading } = useGamePlayContext();
+    const { handleCards } = useSocketContext();
+    const { isMulti } = useMod();
 
     const handleMovieCards = (movies: Movie[]) => {
         setFetchLoading(true);
@@ -20,6 +24,9 @@ const useHandleMovies = () => {
         const cards = initGameCards(movies);
 
         setGameCardsOnStateAndSession(cards, correctOrder);
+        if (isMulti()) {
+            handleCards(cards);
+        }
     };
 
     const handleGameCards = (cards: Card[]) => {

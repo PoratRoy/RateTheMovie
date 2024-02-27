@@ -6,18 +6,18 @@ const useMod = () => {
 
     const isMulti = (mod?: ModOption) => {
         const gameMod = mod || game?.mod;
-        return gameMod === ModOption.MULTI;
+        return gameMod === ModOption.MULTI ? true : false;
     };
 
     const isSingle = (mod?: ModOption) => {
         const gameMod = mod || game?.mod;
-        return gameMod === ModOption.SINGLE;
+        return gameMod === ModOption.SINGLE ? true : false;
     };
 
     const isNoneMode = (mod?: ModOption) => {
         const gameMod = mod || game?.mod;
-        return gameMod === ModOption.NONE;
-    }
+        return gameMod === ModOption.NONE ? true : false;
+    };
 
     return { isSingle, isMulti, isNoneMode };
 };

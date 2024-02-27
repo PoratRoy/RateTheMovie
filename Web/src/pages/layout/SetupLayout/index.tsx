@@ -63,11 +63,10 @@ const SetupLayout = <TInput extends FieldValues>({
             };
             setGame(game);
             Session.set(SessionKey.GAME, game);
-
-            firstRoundMovies(filters);
-            if (isMulti()) {
+            if (isMulti(mod)) {
                 handleGame(game);
             }
+            firstRoundMovies(filters);
         }
         //TODO: crate game also for player role?
         navigate(path.game);

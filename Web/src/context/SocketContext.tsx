@@ -4,6 +4,7 @@ import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import { Player } from "../models/types/player";
 import { Game } from "../models/types/game";
 import { useErrorContext } from "./ErrorContext";
+import { Card } from "../models/types/card";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -20,6 +21,7 @@ export const SocketContext = createContext<{
         player: Player,
         callback: (currecntPlayer: Player) => void,
     ) => void;
+    handleCards: (cards: Card[]) => void;
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
@@ -27,6 +29,7 @@ export const SocketContext = createContext<{
     handleGame: () => {},
     handlePlayerWantToJoin: () => {},
     handlePlayerJoinRoom: () => {},
+    handleCards: () => {},
 });
 
 export const useSocketContext = () => useContext(SocketContext);
@@ -100,6 +103,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         );
     };
 
+    const handleCards = (cards: Card[]) => {
+        console.log("Emit cards: ", cards)
+        socket.emit("UpdateGameCards", cards);
+    };
+
     useEffect(() => {
         const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
@@ -133,6 +141,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleGame,
                 handlePlayerWantToJoin,
                 handlePlayerJoinRoom,
+                handleCards,
             }}
         >
             {children}
