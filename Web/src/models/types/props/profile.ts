@@ -3,7 +3,7 @@ import { Player } from "../player";
 
 export type PreviewProfileProps = ChildernsProps & {
     profileName?: string;
-    avaterId: number;
+    avaterId: number | undefined;
 };
 
 export type AvaterProps = {

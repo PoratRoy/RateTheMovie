@@ -8,7 +8,7 @@ import { PreviewProfileProps } from "../../../../models/types/props/profile";
 
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, avaterId }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const img = avaterId === -1 ? undefined : AvaterImgs[avaterId];
+    const img = (avaterId === undefined || avaterId === -1) ? undefined : AvaterImgs[avaterId];
 
     const handleOnClick = () => {
         setIsEdit(true);
