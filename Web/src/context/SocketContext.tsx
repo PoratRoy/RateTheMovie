@@ -1,13 +1,15 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import { Player } from "../models/types/player";
-import { MovieFilters } from "../models/types/filter";
+import { Game } from "../models/types/game";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
+    rivalPlayers: Player[];
+    setRivalPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
-    handleGameFilters: (filters: MovieFilters) => void;
+    handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
         roomId: string | undefined,
         callback: (details: WarRoomDetails) => void,
@@ -15,11 +17,13 @@ export const SocketContext = createContext<{
     handlePlayerJoinRoom: (
         roomId: string,
         player: Player,
-        callback: (playerId: string) => void,
+        callback: (currecntPlayer: Player) => void,
     ) => void;
 }>({
+    rivalPlayers: [],
+    setRivalPlayers: () => {},
     handleCreateNewRoom: () => {},
-    handleGameFilters: () => {},
+    handleGame: () => {},
     handlePlayerWantToJoin: () => {},
     handlePlayerJoinRoom: () => {},
 });
@@ -27,6 +31,8 @@ export const SocketContext = createContext<{
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
+    const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
+
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
@@ -59,8 +65,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         });
     };
 
-    const handleGameFilters = (filters: MovieFilters) => {
-        socket.emit("UpdateGameFilters", filters);
+    const handleGame = (game: Game) => {
+        socket.emit("UpdateGame", game);
     };
 
     const handlePlayerWantToJoin = (
@@ -75,25 +81,52 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const handlePlayerJoinRoom = (
         roomId: string,
         player: Player,
-        callback: (playerId: string) => void,
+        callback: (currecntPlayer: Player) => void,
     ) => {
         socket.emit(
             "PlayerJoinRoom",
             roomId,
             player,
-            async (warRoom: WarRoomProps, playerId: string) => {
-                if (warRoom && warRoom.game.roomId === roomId && playerId) {
-                    callback(playerId);
+            async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
+                if (warRoom && currecntPlayer) {
+                    setRivalPlayers((prev) => {
+                        return [...prev, ...rivalPlayers];
+                    });
+                    callback(currecntPlayer);
                 }
             },
         );
     };
 
+    useEffect(() => {
+        const handlePlayerJoined = (player: Player) => {
+            setRivalPlayers((prev) => {
+                return [...prev, player];
+            });
+        };
+
+        const handlePlayerDisconnected = (player: Player) => {
+            setRivalPlayers((prev) => {
+                return prev.filter((p) => p.id !== player.id);
+            });
+        };
+
+        socket.on("PlayerJoined", handlePlayerJoined);
+        socket.on("PlayerDisconnect", handlePlayerDisconnected);
+
+        return () => {
+            socket.off("PlayerJoined", handlePlayerJoined);
+            socket.off("PlayerDisconnect", handlePlayerDisconnected);
+        };
+    }, [socket]);
+
     return (
         <SocketContext.Provider
             value={{
+                rivalPlayers,
+                setRivalPlayers,
                 handleCreateNewRoom,
-                handleGameFilters,
+                handleGame,
                 handlePlayerWantToJoin,
                 handlePlayerJoinRoom,
             }}

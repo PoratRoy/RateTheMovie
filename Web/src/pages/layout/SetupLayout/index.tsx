@@ -2,7 +2,7 @@ import style from "./SetupLayout.module.css";
 import { FieldValues, FormProvider, SubmitHandler } from "react-hook-form";
 import Session from "../../../utils/sessionStorage";
 import { SessionKey } from "../../../models/enums/session";
-import { updatePlayer, updatePlayerId } from "../../../models/initialization/player";
+import { updatePlayer } from "../../../models/initialization/player";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { useSocketContext } from "../../../context/SocketContext";
 import { ModOption } from "../../../models/enums/landing";
@@ -13,6 +13,7 @@ import { DateDefaultJSON, SETUP_ID, SinglePlayerRoom } from "../../../models/con
 import { SetupLayoutProps } from "../../../models/types/props/layout";
 import { MovieFilters } from "../../../models/types/filter";
 import { Game } from "../../../models/types/game";
+import { Player } from "../../../models/types/player";
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,
@@ -22,7 +23,7 @@ const SetupLayout = <TInput extends FieldValues>({
 }: SetupLayoutProps<TInput>) => {
     const { handleSubmit } = methods;
     const { setCurrentPlayer, setGame } = useGamePlayContext();
-    const { handlePlayerJoinRoom, handleGameFilters } = useSocketContext();
+    const { handlePlayerJoinRoom, handleGame } = useSocketContext();
     const { firstRoundMovies } = useFirstRoundMovies();
     const navigate = useNavigate();
 
@@ -36,11 +37,10 @@ const SetupLayout = <TInput extends FieldValues>({
                 Session.set(SessionKey.CURRENT_PLAYER, updatedPlayer);
                 setCurrentPlayer(updatedPlayer);
             } else if (mod === ModOption.MULTI && roomId) {
-                handlePlayerJoinRoom(roomId, updatedPlayer, (playerId) => {
-                    const updatedPlayerId = updatePlayerId(updatedPlayer, playerId);
-                    if (updatedPlayerId) {
-                        Session.set(SessionKey.CURRENT_PLAYER, updatedPlayerId);
-                        setCurrentPlayer(updatedPlayerId);
+                handlePlayerJoinRoom(roomId, updatedPlayer, (player: Player) => {
+                    if (player) {
+                        Session.set(SessionKey.CURRENT_PLAYER, player);
+                        setCurrentPlayer(player);
                     }
                 });
             }
@@ -52,10 +52,6 @@ const SetupLayout = <TInput extends FieldValues>({
                 genre: genre ? JSON.parse(genre) : [],
                 language: language ? JSON.parse(language) : "",
             };
-            if (mod === ModOption.MULTI) {
-                handleGameFilters(filters);
-            }
-            firstRoundMovies(filters);
 
             const game: Game = {
                 rounds: rounds ? parseInt(rounds) : 0,
@@ -66,8 +62,13 @@ const SetupLayout = <TInput extends FieldValues>({
             };
             setGame(game);
             Session.set(SessionKey.GAME, game);
+
+            firstRoundMovies(filters);
+            if (mod === ModOption.MULTI) {
+                handleGame(game);
+            }
         }
-        //TODO: game also for player
+        //TODO: crate game also for player role?
         navigate(path.game);
     };
 

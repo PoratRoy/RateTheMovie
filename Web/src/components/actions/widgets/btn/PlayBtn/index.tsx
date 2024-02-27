@@ -6,7 +6,7 @@ const PlayBtn: React.FC<PlayBtnProps> = ({
     id,
     title,
     onClicked,
-    loading = false,
+    loading = undefined,
     type = "button",
 }) => {
     return (

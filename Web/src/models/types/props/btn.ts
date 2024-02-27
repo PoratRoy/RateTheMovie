@@ -62,4 +62,5 @@ export type QuitBtnProps = {
 
 export type StartGameBtnProps = {
     loading: boolean;
+    onClicked: () => void;
 }

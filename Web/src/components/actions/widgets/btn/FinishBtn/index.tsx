@@ -7,7 +7,7 @@ import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({isFinishPlacing}) => {
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean | undefined>(undefined);
     const { setFinish } = useGamePlayContext();
     const { setScore } = useSetScore();
 

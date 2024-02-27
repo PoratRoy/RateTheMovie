@@ -6,50 +6,70 @@ import Header from "../../../components/common/Header";
 import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { ModOption } from "../../../models/enums/landing";
+import { useSocketContext } from "../../../context/SocketContext";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finish, fetchLoading, gameCards, game } = useGamePlayContext();
+    const { finish, fetchLoading, gameCards, game, currentPlayer } = useGamePlayContext();
+    const { rivalPlayers } = useSocketContext();
     const { scope } = useFinishAnimation(finish);
+    const [isGame, setIsGame] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [canStart, setCanStart] = useState<boolean>(false);
-    const isLoadingRef = useRef<boolean>(true);
+    const isGameRef = useRef<boolean>(true);
 
     useEffect(() => {
-        if (gameCards[0].id === undefined) {
-            const timeoutId = setTimeout(() => {
-                if (isLoadingRef.current === false) {
-                    setIsLoading(false);
-                }
-            }, 3000);
-            return () => clearTimeout(timeoutId);
-        } else {
-            setIsLoading(false);
+        if (game?.mod === ModOption.MULTI && currentPlayer?.role === "host") {
+            if (
+                rivalPlayers.length >= 1 &&
+                fetchLoading === false &&
+                gameCards[0].id !== undefined
+            ) {
+                setIsLoading(rivalPlayers.length === 0 ? true : false);
+            }
         }
-    }, [isLoadingRef.current]);
+    }, [rivalPlayers, fetchLoading, gameCards]);
 
     useEffect(() => {
-        isLoadingRef.current = fetchLoading;
+        if (game?.mod === ModOption.SINGLE) {
+            if (gameCards[0].id === undefined) {
+                const timeoutId = setTimeout(() => {
+                    if (isGameRef.current === false) {
+                        setIsGame(true);
+                    }
+                }, 3000);
+                return () => clearTimeout(timeoutId);
+            } else {
+                setIsGame(true);
+            }
+        }
+    }, [isGameRef.current]);
+
+    useEffect(() => {
+        isGameRef.current = fetchLoading;
     }, [fetchLoading]);
 
-    useEffect(() => {
-        if (game && game.mod === ModOption.MULTI) {
-            // if (players.length > 0) setCanStart(true);
-        } else {
-            // setCanStart(true);
+    const handleClickStartGame = () => {
+        if (rivalPlayers.length > 1) {
+            setIsGame(true);
         }
-    }, []);
+    };
 
     return (
         <React.Fragment>
-            {isLoading ? (
-                <LoadingPage canStart={canStart} />
-            ) : (
+            {isGame ? (
                 <section className={style.gameContainer}>
                     <Header />
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
                 </section>
+            ) : (
+                <LoadingPage
+                    rivalPlayers={rivalPlayers}
+                    playerRole={currentPlayer?.role}
+                    onClicked={handleClickStartGame}
+                    isLoading={isLoading}
+                    gameMod={game?.mod || ModOption.MULTI}
+                />
             )}
         </React.Fragment>
     );

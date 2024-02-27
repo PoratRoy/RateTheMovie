@@ -2,13 +2,19 @@ import { Player } from "../model/types/player";
 import { WarRoomProps, WarRooms } from "../model/types/warRoom";
 
 export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
+    let player: Player | undefined;
     const warRoom = Object.values(warRooms).find((room) =>
-        room.players.find((player) => player.id === playerId),
+        room.players.find((p: Player) => {
+            if (p.id === playerId) {
+                player = p;
+                return p;
+            }
+        }),
     );
-    return warRoom;
+    return { warRoom, player };
 };
 
-export const initWarRoom = (roomId: string, player: Player) => {
+export const initWarRoom = (player: Player) => {
     return {
         players: [player],
         gameCards: [],
@@ -16,6 +22,3 @@ export const initWarRoom = (roomId: string, player: Player) => {
     } as WarRoomProps;
 };
 
-export const getRoomPlayer = (warRoom: WarRoomProps, playerId: string) => {
-    return warRoom.players.find((player) => player.id === playerId);
-};

@@ -14,3 +14,7 @@ export type AvaterProps = {
 export type PlayerProfileProps = {
     currentPlayer: Player | undefined;
 };
+
+export type RivalPlayerProfileProps = {
+    player: Player;
+};

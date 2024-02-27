@@ -1,0 +1,6 @@
+.textRotator{
+    color: var(--text-color-opacity);
+    width: 80vw;
+    height: 120px;
+    font-size: 1.6rem;
+}
