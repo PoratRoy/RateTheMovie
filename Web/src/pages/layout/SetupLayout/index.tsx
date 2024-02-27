@@ -5,7 +5,6 @@ import { SessionKey } from "../../../models/enums/session";
 import { updatePlayer } from "../../../models/initialization/player";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { useSocketContext } from "../../../context/SocketContext";
-import { ModOption } from "../../../models/enums/landing";
 import useFirstRoundMovies from "../../../api/hooks/useFirstRoundMovies";
 import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
@@ -14,6 +13,7 @@ import { SetupLayoutProps } from "../../../models/types/props/layout";
 import { MovieFilters } from "../../../models/types/filter";
 import { Game } from "../../../models/types/game";
 import { Player } from "../../../models/types/player";
+import useMod from "../../../hooks/gameplay/useMod";
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,
@@ -25,6 +25,7 @@ const SetupLayout = <TInput extends FieldValues>({
     const { setCurrentPlayer, setGame } = useGamePlayContext();
     const { handlePlayerJoinRoom, handleGame } = useSocketContext();
     const { firstRoundMovies } = useFirstRoundMovies();
+    const { isMulti, isSingle } = useMod();
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
@@ -33,10 +34,10 @@ const SetupLayout = <TInput extends FieldValues>({
 
         const updatedPlayer = updatePlayer(player, name, avater);
         if (updatedPlayer) {
-            if (mod === ModOption.SINGLE) {
+            if (isSingle(mod)) {
                 Session.set(SessionKey.CURRENT_PLAYER, updatedPlayer);
                 setCurrentPlayer(updatedPlayer);
-            } else if (mod === ModOption.MULTI && roomId) {
+            } else if (isMulti(mod) && roomId) {
                 handlePlayerJoinRoom(roomId, updatedPlayer, (player: Player) => {
                     if (player) {
                         Session.set(SessionKey.CURRENT_PLAYER, player);
@@ -64,7 +65,7 @@ const SetupLayout = <TInput extends FieldValues>({
             Session.set(SessionKey.GAME, game);
 
             firstRoundMovies(filters);
-            if (mod === ModOption.MULTI) {
+            if (isMulti()) {
                 handleGame(game);
             }
         }

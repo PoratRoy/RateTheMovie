@@ -3,6 +3,7 @@ import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
 import { Player } from "../models/types/player";
 import { Game } from "../models/types/game";
+import { useErrorContext } from "./ErrorContext";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -32,6 +33,7 @@ export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
+    const { handleAlert } = useErrorContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -109,6 +111,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setRivalPlayers((prev) => {
                 return prev.filter((p) => p.id !== player.id);
             });
+            const message = `${player.name} has left the game`;
+            handleAlert(message);
         };
 
         socket.on("PlayerJoined", handlePlayerJoined);

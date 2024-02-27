@@ -30,3 +30,5 @@ export type LogoSize = "small" | "large";
 export type StarSize = "small" | "large";
 
 export type PlayerRole = "player" | "host";
+
+export type NotificationType = "info" | "success" | "warning" | "danger";

@@ -7,17 +7,19 @@ import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
+import useMod from "../../../hooks/gameplay/useMod";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { finish, fetchLoading, gameCards, game, currentPlayer } = useGamePlayContext();
     const { rivalPlayers } = useSocketContext();
+    const { isMulti, isSingle } = useMod();
     const { scope } = useFinishAnimation(finish);
     const [isGame, setIsGame] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const isGameRef = useRef<boolean>(true);
 
     useEffect(() => {
-        if (game?.mod === ModOption.MULTI && currentPlayer?.role === "host") {
+        if (isMulti() && currentPlayer?.role === "host") {
             if (
                 rivalPlayers.length >= 1 &&
                 fetchLoading === false &&
@@ -29,7 +31,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     }, [rivalPlayers, fetchLoading, gameCards]);
 
     useEffect(() => {
-        if (game?.mod === ModOption.SINGLE) {
+        if (isSingle()) {
             if (gameCards[0].id === undefined) {
                 const timeoutId = setTimeout(() => {
                     if (isGameRef.current === false) {

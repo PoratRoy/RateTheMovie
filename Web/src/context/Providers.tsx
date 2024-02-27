@@ -7,13 +7,13 @@ import SocketContextProvider from "./SocketContext";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
-        <SocketContextProvider>
-            <ErrorContextProvider>
+        <ErrorContextProvider>
+            <SocketContextProvider>
                 <GamePlayContextProvider>
                     <DndContextProvider>{children}</DndContextProvider>
                 </GamePlayContextProvider>
-            </ErrorContextProvider>
-        </SocketContextProvider>
+            </SocketContextProvider>
+        </ErrorContextProvider>
     );
 };
 

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ModOption } from "../../models/enums/landing";
 import { PlayerRole } from "../../models/types/union";
+import useMod from "../gameplay/useMod";
 
 const useRoomLink = (mod: ModOption, playerRole: PlayerRole, roomId?: string) => {
+    const { isNoneMode } = useMod();
     const { room } = useParams();
     const [roomLink, setRoomLink] = useState<string>("");
 
     useEffect(() => {
-        if (mod === ModOption.NONE) return;
+        if (isNoneMode(mod)) return;
 
         if (playerRole === "player" && room) {
             setRoomLink(`http://localhost:5173/guest/${room || ""}`);

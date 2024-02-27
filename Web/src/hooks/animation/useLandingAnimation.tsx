@@ -1,7 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { SetupOption } from "../../models/types/setup";
-import { ModOption } from "../../models/enums/landing";
 import {
     DESCRIPTION_ID,
     MOVIES_POSTER_ID,
@@ -10,9 +9,11 @@ import {
     SETUP_ID,
     WAVE_ID,
 } from "../../models/constant";
+import useMod from "../gameplay/useMod";
 
 const useLandingAnimation = (activate: SetupOption) => {
     const [scope, animation] = useAnimate();
+    const { isNoneMode } = useMod();
 
     const handleLandingAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
@@ -54,7 +55,7 @@ const useLandingAnimation = (activate: SetupOption) => {
     };
 
     useEffect(() => {
-        if (activate.mod === ModOption.NONE) {
+        if (isNoneMode(activate.mod)) {
             handleLandingAnimation();
         } else {
             handleSetupAnimation();

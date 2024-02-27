@@ -6,7 +6,7 @@ import { LoadingPageProps } from "../../models/types/props/landing";
 import RivalPlayerProfile from "../../components/profile/RivalPlayerProfile";
 import { Player } from "../../models/types/player";
 import TextRotator from "../../components/common/widgets/TextRotator";
-import { ModOption } from "../../models/enums/landing";
+import useMod from "../../hooks/gameplay/useMod";
 
 const LoadingPage: React.FC<LoadingPageProps> = ({
     isLoading,
@@ -15,6 +15,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
     gameMod,
     onClicked,
 }) => {
+    const { isMulti } = useMod();
+    
     return (
         <section className={style.loadingPage}>
             <div className={style.loadingPageLogo}>
@@ -23,7 +25,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
             {/* TODO: animate to the center */}
             <section className={style.loadingPageBtnStatus}>
                 <StartGameBtn loading={isLoading} onClicked={onClicked} />
-                {gameMod === ModOption.MULTI && isLoading ? (
+                {isMulti(gameMod) && isLoading ? (
                     <div className={style.loadingGameStatus}>
                         {playerRole === "host"
                             ? "Wait for the players to join"

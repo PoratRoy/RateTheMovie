@@ -14,20 +14,21 @@ import GenreInput from "../../actions/widgets/input/GenreInput";
 import LanguageInput from "../../actions/widgets/input/LanguageInput";
 import DateRangeInput from "../../actions/widgets/input/DateRangeInput";
 import RoomLink from "../../actions/widgets/link/RoomLink";
-import { ModOption } from "../../../models/enums/landing";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
 import useRoomLink from "../../../hooks/multiplayer/useRoomLink";
 import { START_BTN_ID } from "../../../models/constant";
 import { SetupProps } from "../../../models/types/props/landing";
+import useMod from "../../../hooks/gameplay/useMod";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue } = methods;
     const { mod, player, roomId } = setupOption;
     const { roomLink } = useRoomLink(mod, playerRole, roomId);
+    const { isMulti, isNoneMode } = useMod();
 
     useEffect(() => {
-        if (mod === ModOption.NONE || !player) return;
+        if (isNoneMode(mod) || !player) return;
         const { name, avater } = player;
         setValue(setupInputs.name.id, name);
         setValue(setupInputs.avater.id, avater.toString());
@@ -49,7 +50,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
                 <NameInput id={setupInputs.name.id} placeholder={setupInputs.name.placeholder} />
             </PreviewProfile>
 
-            {mod === ModOption.MULTI ? <RoomLink roomLink={roomLink} /> : null}
+            {isMulti(mod) ? <RoomLink roomLink={roomLink} /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
 
             {playerRole === "host" ? (
