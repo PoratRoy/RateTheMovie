@@ -8,11 +8,11 @@ import SocketContextProvider from "./SocketContext";
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
         <ErrorContextProvider>
-            <SocketContextProvider>
-                <GamePlayContextProvider>
+            <GamePlayContextProvider>
+                <SocketContextProvider>
                     <DndContextProvider>{children}</DndContextProvider>
-                </GamePlayContextProvider>
-            </SocketContextProvider>
+                </SocketContextProvider>
+            </GamePlayContextProvider>
         </ErrorContextProvider>
     );
 };

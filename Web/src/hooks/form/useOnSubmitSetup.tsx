@@ -50,13 +50,13 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
         if (playerRole === "host") {
             const filters: MovieFilters = initFilters(year, genre, language);
             const game: Game = initGame(rounds, roomId, filters, mod);
-
-            setGame(game);
-            Session.set(SessionKey.GAME, game);
             if (isMulti(mod)) {
                 handleGame(game);
             }
-            firstRoundMovies(filters);
+            setGame(game);
+            Session.set(SessionKey.GAME, game);
+
+            firstRoundMovies(filters, mod);
         }
         //TODO: crate game also for player role?
         navigate(path.game);

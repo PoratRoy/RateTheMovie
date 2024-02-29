@@ -1,6 +1,7 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { PACK_CARDS_NUM } from "../../models/constant";
+import { ModOption } from "../../models/enums/landing";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
@@ -16,7 +17,7 @@ const useHandleMovies = () => {
     const { handleCards } = useSocketContext();
     const { isMulti } = useMod();
 
-    const handleMovieCards = (movies: Movie[]) => {
+    const handleMovieCards = (movies: Movie[], mod?: ModOption) => {
         setFetchLoading(true);
         logMovies(movies);
         const correctMoviesOrder = sortMoviesOrder(movies);
@@ -24,7 +25,7 @@ const useHandleMovies = () => {
         const cards = initGameCards(movies);
 
         setGameCardsOnStateAndSession(cards, correctOrder);
-        if (isMulti()) {
+        if (isMulti(mod)) {
             handleCards(cards);
         }
     };
@@ -45,23 +46,21 @@ const useHandleMovies = () => {
     };
 
     const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: Card[]) => {
-        setTimeout(() => {
-            if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
-                setCurrentPlayer((player) => {
-                    if (!player) return player;
-                    return {
-                        ...player,
-                        electedCards: {
-                            ...player.electedCards,
-                            correctOrder,
-                        },
-                    };
-                });
-            }
-            setGameCards(cards);
-            Session.set(SessionKey.GAME_CARDS, cards);
-            setFetchLoading(false);
-        }, 1000);
+        if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
+            setCurrentPlayer((player) => {
+                if (!player) return player;
+                return {
+                    ...player,
+                    electedCards: {
+                        ...player.electedCards,
+                        correctOrder,
+                    },
+                };
+            });
+        }
+        setGameCards(cards);
+        Session.set(SessionKey.GAME_CARDS, cards);
+        setFetchLoading(false);
     };
 
     const handleBackupMovies = (movies: Movie[]) => {

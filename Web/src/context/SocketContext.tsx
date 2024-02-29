@@ -5,6 +5,8 @@ import { Player } from "../models/types/player";
 import { Game } from "../models/types/game";
 import { useErrorContext } from "./ErrorContext";
 import { Card } from "../models/types/card";
+import useHandleMovies from "../hooks/gameplay/useHandleMovies";
+import { useGamePlayContext } from "./GamePlayContext";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -44,6 +46,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
+    const { handleGameCards } = useHandleMovies();
+    const { setGame } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -126,8 +130,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             });
         };
 
-        const handleGameStarted = () => {
-            console.log("Game started");
+        const handleGameStarted = (warRoom: WarRoomProps) => {
+            const { game, gameCards } = warRoom;
+            handleGameCards(gameCards);
+            setGame(game);
             setStartGame(true);
         };
 

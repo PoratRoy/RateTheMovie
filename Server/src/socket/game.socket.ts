@@ -99,7 +99,7 @@ class GameSocket implements ISocket {
                 const { game } = warRoom;
                 if (game?.roomId) {
                     console.log("Game room: ", this.warRooms);
-                    socket.to(game?.roomId).emit("GameStarted", game);
+                    socket.to(game?.roomId).emit("GameStarted", warRoom);
                 }
             }
         });
