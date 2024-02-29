@@ -60,3 +60,5 @@ export type AvatersCarouselProps<TInput extends FieldValues> = InputProps<TInput
     FormSetValueProps & {
         defualt: number;
     };
+
+export type FilterInputsProps = FormSetValueProps;

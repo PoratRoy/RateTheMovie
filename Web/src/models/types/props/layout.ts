@@ -4,8 +4,8 @@ import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 import { Player } from "../player";
 import { ModOption } from "../../enums/landing";
-import { InputProps } from "react-select";
 import { CrewModel } from "../movie";
+import { InputProps } from "./input";
 
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     methods: UseFormReturn<TInput, any, undefined>;

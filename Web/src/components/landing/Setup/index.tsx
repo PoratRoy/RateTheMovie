@@ -10,15 +10,13 @@ import { SetupInputSchema } from "../../../models/types/inputSchema";
 import useInitialForm from "../../../hooks/global/useInitialForm";
 import { setupFormSchema } from "../../../models/validation/form";
 import AvatersCarousel from "../../actions/AvatersCarousel";
-import GenreInput from "../../actions/widgets/input/GenreInput";
-import LanguageInput from "../../actions/widgets/input/LanguageInput";
-import DateRangeInput from "../../actions/widgets/input/DateRangeInput";
 import RoomLink from "../../actions/widgets/link/RoomLink";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
 import useRoomLink from "../../../hooks/multiplayer/useRoomLink";
 import { START_BTN_ID } from "../../../models/constant";
 import { SetupProps } from "../../../models/types/props/landing";
 import useMod from "../../../hooks/gameplay/useMod";
+import FilterInputs from "../filter/FilterInputs";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
@@ -58,23 +56,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
                     {/* <Border /> */}
                     <FilterCollapse>
-                        <GenreInput
-                            id={setupInputs.genre.id}
-                            placeholder={setupInputs.genre.placeholder}
-                            label={setupInputs.genre.label}
-                            setValue={setValue}
-                        />
-                        <LanguageInput
-                            id={setupInputs.language.id}
-                            placeholder={setupInputs.language.placeholder}
-                            label={setupInputs.language.label}
-                            setValue={setValue}
-                        />
-                        <DateRangeInput
-                            id={setupInputs.year.id}
-                            label={setupInputs.year.label}
-                            setValue={setValue}
-                        />
+                        <FilterInputs setValue={setValue} />
                     </FilterCollapse>
                 </React.Fragment>
             ) : null}
