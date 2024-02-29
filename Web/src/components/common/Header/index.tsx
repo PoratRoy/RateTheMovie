@@ -6,6 +6,7 @@ import RoundTitle from "../RoundTitle";
 import PauseBtn from "../../actions/widgets/btn/PauseBtn";
 import PauseModal from "../../view/modals/PauseModal";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
+import TimerBar from "../../actions/TimerBar";
 
 const Header: React.FC = () => {
     const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
@@ -25,6 +26,7 @@ const Header: React.FC = () => {
             </div>
             <PauseBtn onClicked={handlePause} />
             {showPauseModal ? <PauseModal close={() => setShowPauseModal(false)} /> : null}
+            <TimerBar/>
         </section>
     );
 };
