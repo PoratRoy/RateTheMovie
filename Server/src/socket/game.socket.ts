@@ -91,6 +91,19 @@ class GameSocket implements ISocket {
             },
         );
 
+        socket.on("StartGame", () => {
+            console.info("Start game received.");
+            const playerId = socket.id;
+            const { warRoom } = getRoomByPlayer(this.warRooms, playerId);
+            if (warRoom) {
+                const { game } = warRoom;
+                if (game?.roomId) {
+                    console.log("Game room: ", this.warRooms);
+                    socket.to(game?.roomId).emit("GameStarted", game);
+                }
+            }
+        });
+
         socket.on("disconnect", () => {
             console.info("Disconnect received from: " + socket.id);
             const playerId = socket.id;

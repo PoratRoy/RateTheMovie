@@ -10,6 +10,8 @@ import { Card } from "../models/types/card";
 export const SocketContext = createContext<{
     rivalPlayers: Player[];
     setRivalPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
+    startGame: boolean;
+    setStartGame: React.Dispatch<React.SetStateAction<boolean>>;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
@@ -22,20 +24,25 @@ export const SocketContext = createContext<{
         callback: (currecntPlayer: Player) => void,
     ) => void;
     handleCards: (cards: Card[]) => void;
+    handleStartGame: () => void;
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
+    startGame: false,
+    setStartGame: () => {},
     handleCreateNewRoom: () => {},
     handleGame: () => {},
     handlePlayerWantToJoin: () => {},
     handlePlayerJoinRoom: () => {},
     handleCards: () => {},
+    handleStartGame: () => {},
 });
 
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
+    const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
 
     const socket = useSocket("http://localhost:8080/game", {
@@ -104,8 +111,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleCards = (cards: Card[]) => {
-        console.log("Emit cards: ", cards)
         socket.emit("UpdateGameCards", cards);
+    };
+
+    const handleStartGame = () => {
+        setStartGame(true);
+        socket.emit("StartGame");
     };
 
     useEffect(() => {
@@ -113,6 +124,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setRivalPlayers((prev) => {
                 return [...prev, player];
             });
+        };
+
+        const handleGameStarted = () => {
+            console.log("Game started");
+            setStartGame(true);
         };
 
         const handlePlayerDisconnected = (player: Player) => {
@@ -124,10 +140,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         socket.on("PlayerJoined", handlePlayerJoined);
+        socket.on("GameStarted", handleGameStarted);
         socket.on("PlayerDisconnect", handlePlayerDisconnected);
 
         return () => {
             socket.off("PlayerJoined", handlePlayerJoined);
+            socket.off("GameStarted", handleGameStarted);
             socket.off("PlayerDisconnect", handlePlayerDisconnected);
         };
     }, [socket]);
@@ -137,11 +155,14 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             value={{
                 rivalPlayers,
                 setRivalPlayers,
+                startGame,
+                setStartGame,
                 handleCreateNewRoom,
                 handleGame,
                 handlePlayerWantToJoin,
                 handlePlayerJoinRoom,
                 handleCards,
+                handleStartGame,
             }}
         >
             {children}
@@ -150,13 +171,3 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default SocketContextProvider;
-
-// multiplayerState: MultiplayerState;
-// setMultiplayerState: React.Dispatch<React.SetStateAction<MultiplayerState>>;
-// multiplayerState: initMultiplayerState,
-// setMultiplayerState: () => {},
-// const [multiplayerState, setMultiplayerState] =
-//     useState<MultiplayerState>(initMultiplayerState);
-
-// setMultiplayerState((prev) => ({ ...prev, socket }));
-// setMultiplayerState((prev) => ({ ...prev, warRoom }));

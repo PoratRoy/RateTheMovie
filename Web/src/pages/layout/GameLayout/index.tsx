@@ -11,10 +11,9 @@ import useMod from "../../../hooks/gameplay/useMod";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { finish, fetchLoading, gameCards, game, currentPlayer } = useGamePlayContext();
-    const { rivalPlayers } = useSocketContext();
+    const { rivalPlayers, startGame, setStartGame, handleStartGame } = useSocketContext();
     const { isMulti, isSingle } = useMod();
     const { scope } = useFinishAnimation(finish);
-    const [isGame, setIsGame] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const isGameRef = useRef<boolean>(true);
 
@@ -35,12 +34,12 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
             if (gameCards[0].id === undefined) {
                 const timeoutId = setTimeout(() => {
                     if (isGameRef.current === false) {
-                        setIsGame(true);
+                        setStartGame(true);
                     }
                 }, 3000);
                 return () => clearTimeout(timeoutId);
             } else {
-                setIsGame(true);
+                setStartGame(true);
             }
         }
     }, [isGameRef.current]);
@@ -50,14 +49,14 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     }, [fetchLoading]);
 
     const handleClickStartGame = () => {
-        if (rivalPlayers.length > 1) {
-            setIsGame(true);
+        if (rivalPlayers.length >= 1) {
+            handleStartGame();
         }
     };
 
     return (
         <React.Fragment>
-            {isGame ? (
+            {startGame ? (
                 <section className={style.gameContainer}>
                     <Header />
                     <section ref={scope} className={style.gameChildrenContainer}>
