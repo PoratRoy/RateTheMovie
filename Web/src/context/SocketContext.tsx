@@ -7,6 +7,7 @@ import { useErrorContext } from "./ErrorContext";
 import { Card } from "../models/types/card";
 import useHandleMovies from "../hooks/gameplay/useHandleMovies";
 import { useGamePlayContext } from "./GamePlayContext";
+import { filterRivalPlayers } from "../utils/player";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -47,7 +48,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
-    const { setGame } = useGamePlayContext();
+    const { setGame, currentPlayer } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -131,15 +132,17 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         const handleGameStarted = (warRoom: WarRoomProps) => {
-            const { game, gameCards } = warRoom;
+            const { game, gameCards, players } = warRoom;
             handleGameCards(gameCards);
             setGame(game);
+            const rivalPlayers = filterRivalPlayers(players, currentPlayer);
+            setRivalPlayers(rivalPlayers);
             setStartGame(true);
         };
 
         const handlePlayerDisconnected = (player: Player) => {
             setRivalPlayers((prev) => {
-                return prev.filter((p) => p.id !== player.id);
+                return filterRivalPlayers(prev, player);
             });
             const message = `${player.name} has left the game`;
             handleAlert(message);

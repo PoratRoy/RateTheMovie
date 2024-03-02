@@ -33,3 +33,11 @@ export type BackdropProps = {
 export type PauseModalProps = {
     close: () => void;
 };
+
+export type GameOverModalProps = {
+    close: () => void;
+};
+
+export type RoundEndModalProps = {
+    close: () => void;
+};

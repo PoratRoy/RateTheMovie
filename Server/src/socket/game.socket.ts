@@ -3,10 +3,11 @@ import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
-import { getRoomByPlayer, initWarRoom } from "../utils/warRoom";
+import { initWarRoom } from "../utils/warRoom";
 import { Game } from "../model/types/game";
 import { Card } from "../model/types/card";
 import { PACK_CARDS_NUM } from "../model/constant";
+import { getPlayerWarRoomInfo } from "./utils";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
@@ -56,8 +57,7 @@ class GameSocket implements ISocket {
 
         socket.on("UpdateGame", (game: Game) => {
             console.info("Update war room game: ", game);
-            const playerId = socket.id;
-            const { warRoom } = getRoomByPlayer(this.warRooms, playerId);
+            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
             if (warRoom && game.roomId) {
                 warRoom.game = game;
                 this.warRooms[game.roomId] = warRoom;
@@ -67,8 +67,7 @@ class GameSocket implements ISocket {
 
         socket.on("UpdateGameCards", (cards: Card[]) => {
             console.info("Update war room game cards: ", cards);
-            const playerId = socket.id;
-            const { warRoom } = getRoomByPlayer(this.warRooms, playerId);
+            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
             if (warRoom && warRoom.game?.roomId && cards.length === PACK_CARDS_NUM) {
                 warRoom.gameCards = cards;
                 this.warRooms[warRoom.game?.roomId] = warRoom;
@@ -93,8 +92,7 @@ class GameSocket implements ISocket {
 
         socket.on("StartGame", () => {
             console.info("Start game received.");
-            const playerId = socket.id;
-            const { warRoom } = getRoomByPlayer(this.warRooms, playerId);
+            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
             if (warRoom) {
                 const { game } = warRoom;
                 if (game?.roomId) {
@@ -106,8 +104,7 @@ class GameSocket implements ISocket {
 
         socket.on("disconnect", () => {
             console.info("Disconnect received from: " + socket.id);
-            const playerId = socket.id;
-            const { warRoom, player } = getRoomByPlayer(this.warRooms, playerId);
+            const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
             if (warRoom && player) {
                 const { game, players } = warRoom;
                 if (game?.roomId) {

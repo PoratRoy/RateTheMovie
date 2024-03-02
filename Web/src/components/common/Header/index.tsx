@@ -7,10 +7,13 @@ import PauseBtn from "../../actions/widgets/btn/PauseBtn";
 import PauseModal from "../../view/modals/PauseModal";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import TimerBar from "../../actions/TimerBar";
+import RivalsProfiles from "../../profile/RivalsProfiles";
+import useMod from "../../../hooks/gameplay/useMod";
 
 const Header: React.FC = () => {
     const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
     const { currentPlayer } = useGamePlayContext();
+    const { isMulti } = useMod();
 
     const handlePause = () => {
         setShowPauseModal(true);
@@ -24,9 +27,9 @@ const Header: React.FC = () => {
                 <Logo size="small" />
                 <RoundTitle />
             </div>
-            <PauseBtn onClicked={handlePause} />
+            {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
             {showPauseModal ? <PauseModal close={() => setShowPauseModal(false)} /> : null}
-            <TimerBar/>
+            <TimerBar />
         </section>
     );
 };

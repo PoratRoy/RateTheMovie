@@ -1,0 +1,9 @@
+.rivalsProfiles{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.rivalProfile{
+    margin-left: -25px;
+}
