@@ -23,9 +23,8 @@ export const GamePlayContext = createContext<{
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
     setCorrectPack: (showCorrectPack: Movie[]) => void;
-    setPlayAgainBtn: () => void;
+    setNextRound: (nextRound?: boolean) => void;
     setIncreaseScore: () => void;
-    setRemovePosition: () => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -41,9 +40,8 @@ export const GamePlayContext = createContext<{
     refreshGameContext: () => {},
     finishAnimation: initFinishAnimation,
     setCorrectPack: () => {},
-    setPlayAgainBtn: () => {},
+    setNextRound: () => {},
     setIncreaseScore: () => {},
-    setRemovePosition: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -72,16 +70,13 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setCorrectPack = (showCorrectPack: Movie[]) =>
         setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
 
-    const setPlayAgainBtn = () => {
-        if (!finishAnimation.playAgainBtn) {
-            setFinishAnimation((prev) => ({ ...prev, playAgainBtn: true }));
+    const setNextRound = (nextRound: boolean = true) => {
+        if (!finishAnimation.nextRound) {
+            setFinishAnimation((prev) => ({ ...prev, nextRound }));
         }
     };
 
     const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));
-
-    const setRemovePosition = () =>
-        setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
 
     const refreshGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
@@ -122,9 +117,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 refreshGameContext,
                 finishAnimation,
                 setCorrectPack,
-                setPlayAgainBtn,
+                setNextRound,
                 setIncreaseScore,
-                setRemovePosition,
             }}
         >
             {children}

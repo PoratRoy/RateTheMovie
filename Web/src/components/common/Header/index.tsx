@@ -11,6 +11,7 @@ import RivalsProfiles from "../../profile/RivalsProfiles";
 import useMod from "../../../hooks/gameplay/useMod";
 
 const Header: React.FC = () => {
+    //TODO: extract to custom hook of open close modal
     const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
     const { currentPlayer } = useGamePlayContext();
     const { isMulti } = useMod();

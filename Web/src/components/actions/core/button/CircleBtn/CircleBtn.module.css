@@ -1,4 +1,4 @@
-.pauseBtn {
+.circleBtn {
     position: relative;
     width: 35px;
     height: 35px;
@@ -13,21 +13,21 @@
     font-size: 1.3rem;
 }
 
-.pauseBtn:hover {
+.circleBtn:hover {
     background-color: var(--secondary-color-hover);
     transform: scale(1.01);
 }
 
-.pauseBtn:focus {
+.circleBtn:focus {
     background-color: var(--secondary-color-focus);
 }
 
-.pauseBtn:active {
+.circleBtn:active {
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
 }
 
-.pauseIcon {
+.circleIcon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -38,6 +38,6 @@
     z-index: 0;
 }
 
-.pauseIcon svg {
+.circleIcon svg {
     color: var(--text-color-opacity);
 }

@@ -8,7 +8,7 @@ import { PauseModalProps } from "../../../../models/types/props/view";
 
 const PauseModal: React.FC<PauseModalProps> = ({ close }) => {
     return (
-        <Modal close={close} title="PAUSE">
+        <Modal close={close} title="PAUSE" hasCloseBtn>
             <section className={style.puaseModalBtns}>
                 <ShuffleBtn close={close} />
                 <RestartBtn close={close} />

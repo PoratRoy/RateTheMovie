@@ -8,7 +8,9 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({ id, title, onClicked, size 
             ? style.btnSecondaryLarge
             : size === "medium"
               ? style.btnSecondaryMedium
-              : style.btnSecondarySmall; //TODO: refactor this
+              : size === "mediom-wide"
+                ? style.btnSecondaryMediumWide
+                : style.btnSecondarySmall; //TODOCSS: refactor this
 
     return (
         <div id={id} onClick={onClicked} className={className}>

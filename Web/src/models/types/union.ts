@@ -21,7 +21,7 @@ export type InputType =
 
 export type CardSide = "left" | "right" | "all";
 
-export type BtnSize = "small" | "medium" | "large";
+export type BtnSize = "small" | "medium" | "mediom-wide" | "large";
 
 export type CardSize = "small" | "large";
 

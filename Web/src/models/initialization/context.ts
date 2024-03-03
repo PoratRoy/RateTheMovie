@@ -3,10 +3,9 @@ import { PACK_CARDS_NUM } from "../constant";
 import { FinishAnimation } from "../types/game";
 
 export const initFinishAnimation: FinishAnimation = {
-    playAgainBtn: false,
+    nextRound: false,
     showCorrectPack: [...Array(PACK_CARDS_NUM)],
     increaseScore: false,
-    removePosition: false,
 };
 
 

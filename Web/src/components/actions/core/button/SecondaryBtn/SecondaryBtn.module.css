@@ -1,6 +1,7 @@
 /* Mobile 320px - 767px -- 812px */
 .btnSecondaryLarge,
 .btnSecondaryMedium,
+.btnSecondaryMediumWide,
 .btnSecondarySmall {
     display: flex;
     justify-content: center;
@@ -26,6 +27,15 @@
     letter-spacing: 2px;
 }
 
+.btnSecondaryMediumWide {
+    width: fit-content;
+    max-width: var(--btn-width-large);
+    height: 35px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 0 10px;
+}
+
 .btnSecondarySmall {
     width: 90px;
     height: 20px;
@@ -35,6 +45,7 @@
 
 .btnSecondaryLarge:hover,
 .btnSecondaryMedium:hover,
+.btnSecondaryMediumWide:hover,
 .btnSecondarySmall:hover {
     background-color: var(--secondary-color-hover);
     transform: scale(1.01);
@@ -42,12 +53,14 @@
 
 .btnSecondaryLarge:focus,
 .btnSecondaryMedium:focus,
+.btnSecondaryMediumWide:focus,
 .btnSecondarySmall:focus {
     background-color: var(--secondary-color-focus);
 }
 
 .btnSecondaryLarge:active,
 .btnSecondaryMedium:active,
+.btnSecondaryMediumWide:active,
 .btnSecondarySmall:active {
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
@@ -58,6 +71,7 @@
 
     .btnSecondaryLarge,
     .btnSecondaryMedium,
+    .btnSecondaryMediumWide,
     .btnSecondarySmall {
         width: 200px;
         height: 60px;

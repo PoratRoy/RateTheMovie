@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { Card } from "../../models/types/card";
 import { Player } from "../../models/types/player";
-import { handleOrderEqualCorrectOrder } from "../../utils/correctOrder";
 
 const useCardOrderPosition = (player: Player, selectedCard: Card) => {
-    const { finishAnimation, currentPlayer } = useGamePlayContext();
+    const { currentPlayer } = useGamePlayContext();
     const [pos, setPos] = useState<number>(0);
 
     useEffect(() => {
@@ -24,14 +23,14 @@ const useCardOrderPosition = (player: Player, selectedCard: Card) => {
         if (!match) setPos(0);
     }, [currentPlayer]);
 
-    useEffect(() => {
-        if (finishAnimation.removePosition) {
-            const movie = selectedCard.movie;
-            for (let i = 0; i < player.electedCards.order.length; i++) {
-                handleOrderEqualCorrectOrder(player, movie, i, () => setPos(0));
-            }
-        }
-    }, [finishAnimation]);
+    // useEffect(() => {
+    //     if (finishAnimation.removePosition) {
+    //         const movie = selectedCard.movie;
+    //         for (let i = 0; i < player.electedCards.order.length; i++) {
+    //             handleOrderEqualCorrectOrder(player, movie, i, () => setPos(0));
+    //         }
+    //     }
+    // }, [finishAnimation]);
 
     return pos;
 };

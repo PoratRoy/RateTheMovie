@@ -23,10 +23,11 @@ export type GenreProps = {
 export type ModalProps = ChildernsProps & {
     close: () => void;
     title: string;
+    hasCloseBtn?: boolean;
 };
 
 export type BackdropProps = {
-    close: () => void;
+    close?: () => void;
     showBackdrop: boolean;
 };
 

@@ -11,8 +11,7 @@ export type Game = {
 };
 
 export type FinishAnimation = {
-    playAgainBtn: boolean;
+    nextRound: boolean;
     showCorrectPack: Movie[];
     increaseScore: boolean;
-    removePosition: boolean;
 };

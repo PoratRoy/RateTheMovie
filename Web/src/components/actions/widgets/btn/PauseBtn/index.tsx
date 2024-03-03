@@ -1,16 +1,10 @@
 import React from "react";
 import { FaPause } from "react-icons/fa6";
-import style from "./PauseBtn.module.css";
 import { PauseBtnProps } from "../../../../../models/types/props/btn";
+import CircleBtn from "../../../core/button/CircleBtn";
 
 const PauseBtn: React.FC<PauseBtnProps> = ({ onClicked }) => {
-    return (
-        <div onClick={onClicked} className={style.pauseBtn}>
-            <div className={style.pauseIcon}>
-                <FaPause />
-            </div>
-        </div>
-    );
+    return <CircleBtn onClicked={onClicked} Icon={<FaPause />} />;
 };
 
 export default PauseBtn;

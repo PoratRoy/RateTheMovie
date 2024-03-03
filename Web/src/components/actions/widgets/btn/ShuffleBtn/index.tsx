@@ -13,9 +13,9 @@ const ShuffleBtn: React.FC<ShuffleBtnProps> = ({ close }) => {
     };
 
     const title = (
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <GiCardExchange /> Shuffle
-        </div>
+        </span>
     );
 
     return <PrimaryIconBtn title={title} onClicked={handleShuffleBtn} size="medium" />;

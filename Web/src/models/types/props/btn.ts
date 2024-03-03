@@ -19,7 +19,7 @@ export type PrimaryIconBtnProps = IdProps & {
 };
 
 export type SecondaryBtnProps = IdProps & {
-    title: string;
+    title: string | React.ReactNode;
     onClicked?: () => void;
     size?: BtnSize;
 };
@@ -44,23 +44,48 @@ export type EditProfileBtnProps = {
     onClicked: () => void;
 };
 
+export type RevealOrderBtnProps = {
+    onClicked: () => void;
+};
+
+export type CircleBtnProps = {
+    onClicked: () => void;
+    Icon: React.ReactNode;
+};
+
 export type PauseBtnProps = {
+    onClicked: () => void;
+};
+
+export type RestartCircleBtnProps = {
     onClicked: () => void;
 };
 
 export type ShuffleBtnProps = {
     close: () => void;
-}
+};
+
+export type NextRoundBtnProps = {
+    onClicked: () => void;
+};
+
+export type MoviesBtnProps = {
+    onClicked: () => void;
+};
+
+export type QuitCircleBtnProps = {
+    close: () => void;
+};
 
 export type RestartBtnProps = {
     close: () => void;
-}
+};
 
 export type QuitBtnProps = {
     close: () => void;
-}
+};
 
 export type StartGameBtnProps = {
     loading: boolean;
     onClicked: () => void;
-}
+};

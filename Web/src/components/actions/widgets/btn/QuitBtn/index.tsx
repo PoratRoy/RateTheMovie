@@ -16,9 +16,9 @@ const QuitBtn: React.FC<QuitBtnProps> = ({ close }) => {
         navigate(path.land);
     };
     const title = (
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <TiHome /> Quit
-        </div>
+        </span>
     );
 
     return <PrimaryIconBtn title={title} onClicked={handleQuit} size="medium" />;
