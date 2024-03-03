@@ -28,8 +28,6 @@
     --tertiary-color-disabled: #34425130;
     --tertiary-color-opacity: #34425150;
 
-
-
     --text-color: #FFFFFF;
     --text-color-hover: #FFFFFF90;
     --text-color-active: #FFFFFF80;
@@ -41,8 +39,10 @@
     --input-text-color: #181818;
     --input_light_text_color: #222222;
 
-    --error-color: #FF5A5F;
-    --success-color: #00A699;
+    --error-color: #FF3D00;
+    --error-color-opacity: #8D262650;
+    --success-color: #0bec22;
+    --success-color-opacity: #268D4350;
 
     --primary-border-radius: 20px;
     --secondary-border-radius: 10px;
@@ -59,11 +59,10 @@
 
     --card-width: 140px;
     --card-height: 220px;
-    /* --card-width: 120px;
-    --card-height: 170px; */
-
-    --small-card-width: 50px;
-    --small-card-height: 80px;
+    --medium-card-width: 50px;
+    --medium-card-height: 80px;
+    --small-card-width: 40px;
+    --small-card-height: 70px;
 
     --mobile-width: 80vw;
 

@@ -3,6 +3,7 @@ import { FieldValues, FormProvider } from "react-hook-form";
 import { SETUP_ID } from "../../../models/constant";
 import { SetupLayoutProps } from "../../../models/types/props/layout";
 import useOnSubmitSetup from "../../../hooks/form/useOnSubmitSetup";
+import { DisplayFlex, DisplayNone } from "../../../style/style";
 
 const SetupLayout = <TInput extends FieldValues>({
     setupOption,
@@ -19,17 +20,7 @@ const SetupLayout = <TInput extends FieldValues>({
                 id={SETUP_ID}
                 className={style.setupContainer}
                 onSubmit={handleSubmit(onSubmitForm)}
-                // TODOCSS: refactor it
-                style={
-                    playerRole === "host"
-                        ? { display: "none", opacity: 0 }
-                        : {
-                              opacity: 1,
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                          }
-                }
+                style={playerRole === "host" ? DisplayNone : DisplayFlex}
                 noValidate
             >
                 {children}

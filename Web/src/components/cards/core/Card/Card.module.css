@@ -1,13 +1,19 @@
 /* Mobile 320px - 767px -- 812px */
 .cardContainerSmall,
+.cardContainerMedium,
 .cardContainerLarge {
     position: relative;
     perspective: 1000px;
 }
 
-.cardContainerSmall {
+.cardContainerSmall{
     width: var(--small-card-width);
     height: var(--small-card-height);
+}
+
+.cardContainerMedium {
+    width: var(--medium-card-width);
+    height: var(--medium-card-height);
 }
 
 .cardContainerLarge {
@@ -35,8 +41,8 @@
     position: absolute;
     top: 6px;
     left: 6px;
-    width: calc(var(--small-card-width) - 10px);
-    height: calc(var(--small-card-height) - 10px);
+    width: calc(var(--medium-card-width) - 10px);
+    height: calc(var(--medium-card-height) - 10px);
 }
 
 .electedCardInnerContainer::after {
@@ -49,9 +55,9 @@
     height: 15px;
     border-radius: 50%;
     background-color: var(--secondary-color);
-    box-shadow: calc(var(--small-card-width) - 17px) 2px 0px 0px var(--secondary-color),
-        2px calc(var(--small-card-height) - 17px) 0px 0px var(--secondary-color),
-        calc(var(--small-card-width) - 17px) calc(var(--small-card-height) - 17px) 0px 0px var(--secondary-color);
+    box-shadow: calc(var(--medium-card-width) - 17px) 2px 0px 0px var(--secondary-color),
+        2px calc(var(--medium-card-height) - 17px) 0px 0px var(--secondary-color),
+        calc(var(--medium-card-width) - 17px) calc(var(--medium-card-height) - 17px) 0px 0px var(--secondary-color);
 }
 
 .playerCardInnerContainer {

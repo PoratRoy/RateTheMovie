@@ -8,17 +8,21 @@ import MoviesBtn from "../../../actions/widgets/btn/MoviesBtn";
 import RestartCircleBtn from "../../../actions/widgets/btn/RestartCircleBtn";
 import CardsReveal from "../../../actions/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import useHandleShuffle from "../../../../hooks/gameplay/useHandleShuffle";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
-    const { setNextRound } = useGamePlayContext();
+    const { setNextRound, setNextRoundNumber, game } = useGamePlayContext();
+    const { handleShuffle } = useHandleShuffle();
 
     const handleNextRound = () => {
+        setNextRoundNumber();
         setNextRound(false);
+        handleShuffle();
         close();
     };
 
     return (
-        <Modal close={close} title={`ROUND`}>
+        <Modal close={close} title={`ROUND ${game?.currentRound || 1}`}>
             <section className={style.roundEndModal}>
                 <CardsReveal />
                 <NextRoundBtn onClicked={handleNextRound} />

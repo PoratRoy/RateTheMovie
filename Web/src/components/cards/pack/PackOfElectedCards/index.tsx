@@ -13,11 +13,14 @@ const PackOfElectedCards: React.FC<PackOfElectedCardsProps> = ({
     //TODO: swiching places after fill all the cards triger the animation and not the dnd
     return (
         <Pack>
-            {showCorrectPack.map((movie: Movie | undefined, index: number) => (
-                <motion.span key={movie?.id || index} layout transition={springAnimation}>
-                    <ElectedCard index={index} player={currentPlayer} movie={movie} />
-                </motion.span>
-            ))}
+            {showCorrectPack.map((movie: Movie | undefined, index: number) => {
+                if (!movie) movie = currentPlayer.electedCards?.order[index]?.movie;
+                return (
+                    <motion.span key={movie?.id || index} layout transition={springAnimation}>
+                        <ElectedCard index={index} player={currentPlayer} movie={movie} />
+                    </motion.span>
+                );
+            })}
         </Pack>
     );
 };

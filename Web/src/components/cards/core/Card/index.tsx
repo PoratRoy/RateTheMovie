@@ -5,10 +5,27 @@ import Placeholder from "../Placeholder";
 import Position from "../../shadow/Position";
 import { CardProps } from "../../../../models/types/props/card";
 
-const Card: React.FC<CardProps> = ({id, type, front, back, flip, isFocus, position, size = "large"}) => {
+const Card: React.FC<CardProps> = ({
+    id,
+    type,
+    front,
+    back,
+    flip,
+    isFocus,
+    position,
+    size = "large",
+}) => {
+
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
-    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODOCSS: refactor
+
+    const sizeClass =
+        size === "large"
+            ? style.cardContainerLarge
+            : size === "medium"
+              ? style.cardContainerMedium
+              : style.cardContainerSmall; //TODOCSS: refactor
+
     return (
         <section id={id} className={sizeClass}>
             <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>

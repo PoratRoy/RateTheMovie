@@ -10,20 +10,11 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
     movie,
     player,
     isShadow,
-    side = "all", //TODO: to remove
     size = "large",
 }) => {
     const { title, poster_path } = movie;
-
-    const className = //TODOCSS: refactor this
-        side === "all"
-            ? style.cardSideAll
-            : side === "left"
-              ? style.cardSideLeft
-              : style.cardSideRight;
-
     return (
-        <div className={className}>
+        <div className={style.draggableCard}>
             <Draggable draggableId={id} props={{ movie, player }}>
                 <section className={style.draggableMovie}>
                     {isShadow ? <CardImgShadow title={title} /> : null}

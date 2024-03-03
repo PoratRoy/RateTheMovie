@@ -2,7 +2,7 @@ import { ChildernsProps, IdProps } from ".";
 import { Card, placeholderCardType } from "../card";
 import { Movie } from "../movie";
 import { Player } from "../player";
-import { CardSide, CardSize, StarSize } from "../union";
+import { CardSize, StarSize } from "../union";
 
 export type CardProps = IdProps & {
     size?: CardSize;
@@ -28,10 +28,9 @@ export type ElectedCardWrapperProps = ChildernsProps & {
     isRightChoice: boolean;
 };
 
-export type CardSliceProps = {
-    side: CardSide;
-    player: Player;
-    index: number;
+export type ResultCardWrapperProps = ChildernsProps & {
+    rate: number | string;
+    isRightChoice: boolean;
 };
 
 export type PlayerCardProps = {
@@ -49,7 +48,6 @@ export type DraggableMovieProps = {
     movie: Movie;
     player: Player;
     isShadow?: boolean;
-    side?: CardSide;
     size?: CardSize;
 };
 
@@ -84,6 +82,12 @@ export type RateStarProps = {
     size?: StarSize;
 };
 
-export type ElectedShadowProps = {
+export type ElectedShadowProps = IdProps & {
     isRightChoice: boolean;
+};
+
+export type ResultCardProps = {
+    currentPlayer: Player;
+    movie: Movie | undefined;
+    index: number;
 };

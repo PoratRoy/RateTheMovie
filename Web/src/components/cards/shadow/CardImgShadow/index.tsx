@@ -5,6 +5,7 @@ import DoubleClick from "../../../actions/animation/DoubleClick";
 import useCardShadowAnimation from "../../../../hooks/animation/useCardShadowAnimation";
 import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../../../models/constant";
 import { CardImgShadowProps } from "../../../../models/types/props/card";
+import { DisplayNone } from "../../../../style/style";
 
 const CardImgShadow: React.FC<CardImgShadowProps> = ({ title }) => {
     const { scope } = useCardShadowAnimation();
@@ -12,7 +13,7 @@ const CardImgShadow: React.FC<CardImgShadowProps> = ({ title }) => {
     return (
         <div ref={scope} className={style.cardTitle}>
             <section
-                style={{ display: "none", opacity: 0 }}
+                style={DisplayNone}
                 id={DRAGGING_ID}
                 className={style.cardAnimation}
             >
@@ -21,7 +22,7 @@ const CardImgShadow: React.FC<CardImgShadowProps> = ({ title }) => {
             </section>
             <section
                 id={DOUBLE_CLICK_ID}
-                style={{ display: "none", opacity: 0 }}
+                style={DisplayNone}
                 className={style.cardAnimation}
             >
                 <DoubleClick />
@@ -29,7 +30,7 @@ const CardImgShadow: React.FC<CardImgShadowProps> = ({ title }) => {
             </section>
             <div
                 id={SHADOW_CARD_TITLE_ID}
-                style={{ display: "none", opacity: 0 }}
+                style={DisplayNone}
                 className={style.cardShadowTitle}
             >
                 {title}

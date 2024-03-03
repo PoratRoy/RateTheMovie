@@ -2,25 +2,20 @@ import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/date";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import { getCorrectOrder } from "../../utils/correctOrder";
-import { BELOW_ID, SHADOW_ID } from "../../models/constant";
+import { BELOW_ID, CARD_ID, SHADOW_ID } from "../../models/constant";
+import { PRIMARY_COLOR } from "../../style/root";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { currentPlayer, setCorrectPack, setNextRound, setIncreaseScore } = useGamePlayContext();
+    const { setNextRound, setIncreaseScore } = useGamePlayContext();
 
     const handleAnimation = async () => {
-        const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(currentPlayer);
-
-        await animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
-        //TODO: border on all the cards
+        await Promise.all([
+            animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
+            animation(`#${CARD_ID}`, { border: `2px solid ${PRIMARY_COLOR}` }, { duration: 0.2 }),
+        ]);
         await delayPromise(1000);
-        // setCorrectPack(moviesInCorrectOrder);
         await animation(`#${SHADOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 });
-        if (correctAnswers > 0) {
-            await delayPromise(1500);
-            setIncreaseScore();
-        }
         await delayPromise(1500);
         setNextRound();
     };
@@ -35,3 +30,10 @@ const useFinishAnimation = (activate: boolean | undefined) => {
 };
 
 export default useFinishAnimation;
+
+// const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(currentPlayer);
+// setCorrectPack(moviesInCorrectOrder);
+// if (correctAnswers > 0) {
+//     await delayPromise(1500);
+//     setIncreaseScore();
+// }

@@ -10,7 +10,7 @@ const ShadowPlayerCard: React.FC<ShadowPlayerCardProps> = ({ movie, id }) => {
     return (
         <Card
             id={id}
-            size="small"
+            size="medium"
             type={{ t: "Shadow" } as placeholderCardType}
             front={<Img alt={title} src={poster_path} size="small" />}
         />

@@ -4,6 +4,7 @@ import { Player } from "../models/types/player";
 import { Movie } from "../models/types/movie";
 import { Card } from "../models/types/card";
 import { PACK_CARDS_NUM } from "../models/constant";
+import { CardSize } from "../models/types/union";
 
 export const initGameCard = (movie: Movie): Card => {
     return { id: movie.id, movie } as Card;
@@ -16,8 +17,7 @@ export const initGameCards = (movies: Movie[]) => {
     return cards;
 };
 
-export const setElectedFrontCard = (player: Player, movie: Movie | undefined) => {
-    //TODO: was PackWrapper (deleted on 25.2) insted of section
+export const setElectedFrontCard = (player: Player, movie: Movie | undefined, size: CardSize = "medium") => {
     return (
         <section>
             {movie && movie.title ? (
@@ -25,8 +25,7 @@ export const setElectedFrontCard = (player: Player, movie: Movie | undefined) =>
                     id={`${movie.imdbID}-${player.id}`}
                     movie={movie}
                     player={player}
-                    side="all"
-                    size="small"
+                    size={size}
                 />
             ) : (
                 <React.Fragment />

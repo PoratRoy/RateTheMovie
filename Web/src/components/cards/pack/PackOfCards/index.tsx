@@ -13,7 +13,7 @@ const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
             {!gameCards[0]?.movie.imdbID && !fetchLoading ? (
                 <NotEnoughMovies />
             ) : (
-                <Pack isWrap>
+                <Pack packDisplay="wrap">
                     {gameCards.map((card: Card, i: number) => (
                         <PlayerCard key={i} card={card} player={player} loading={fetchLoading} />
                     ))}

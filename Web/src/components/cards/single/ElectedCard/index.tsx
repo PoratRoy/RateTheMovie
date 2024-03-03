@@ -7,9 +7,6 @@ import { handleOrderEqualCorrectOrder } from "../../../../utils/correctOrder";
 import { ElectedCardProps } from "../../../../models/types/props/card";
 
 const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
-    //TODO: useMemo
-    if(!movie) movie = player.electedCards?.order[index]?.movie;
-
     const [focus, setFocus] = useState<boolean>(false);
     let isRightChoice = false;
     handleOrderEqualCorrectOrder(player, movie, index, () => {isRightChoice = true})
@@ -25,7 +22,7 @@ const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
             <Card
                 type={{ t: "Elected", index } as placeholderCardType}
                 front={setElectedFrontCard(player, movie)}
-                size="small"
+                size="medium"
                 isFocus={focus}
             />
         </ElectedCardWrapper>

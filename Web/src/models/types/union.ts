@@ -19,15 +19,15 @@ export type InputType =
     | "submit"
     | "checkbox";
 
-export type CardSide = "left" | "right" | "all";
-
 export type BtnSize = "small" | "medium" | "mediom-wide" | "large";
 
-export type CardSize = "small" | "large";
+export type CardSize = "small" | "medium" | "large";
 
 export type LogoSize = "small" | "large";
 
 export type StarSize = "small" | "large";
+
+export type PackDisplay = "wrap" | "small" | "large";
 
 export type PlayerRole = "player" | "host";
 

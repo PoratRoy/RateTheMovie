@@ -13,6 +13,8 @@ export const GamePlayContext = createContext<{
     setGame: React.Dispatch<React.SetStateAction<Game | undefined>>;
     gameCards: Card[];
     setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
+    correctOrder: Movie[];
+    setCorrectOrder: React.Dispatch<React.SetStateAction<Movie[]>>;
     fetchLoading: boolean;
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
     currentPlayer: Player | undefined;
@@ -22,14 +24,16 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => void;
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
-    setCorrectPack: (showCorrectPack: Movie[]) => void;
     setNextRound: (nextRound?: boolean) => void;
     setIncreaseScore: () => void;
+    setNextRoundNumber: () => void;
 }>({
     game: undefined,
     setGame: () => {},
     gameCards: [],
     setGameCards: () => {},
+    correctOrder: [],
+    setCorrectOrder: () => {},
     fetchLoading: false,
     setFetchLoading: () => {},
     currentPlayer: undefined,
@@ -39,9 +43,9 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => {},
     refreshGameContext: () => {},
     finishAnimation: initFinishAnimation,
-    setCorrectPack: () => {},
     setNextRound: () => {},
     setIncreaseScore: () => {},
+    setNextRoundNumber: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -49,6 +53,7 @@ export const useGamePlayContext = () => useContext(GamePlayContext);
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [game, setGame] = useState<Game | undefined>();
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
+    const [correctOrder, setCorrectOrder] = useState<Movie[]>([]);
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
     const [finish, setFinish] = useState<boolean>(false);
@@ -67,8 +72,16 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
     setStateFromSession();
 
-    const setCorrectPack = (showCorrectPack: Movie[]) =>
-        setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
+    const setNextRoundNumber = () => {
+        setGame((prev) => {
+            if (prev) {
+                const game = { ...prev, currentRound: prev.currentRound + 1 };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
 
     const setNextRound = (nextRound: boolean = true) => {
         if (!finishAnimation.nextRound) {
@@ -100,6 +113,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setCurrentPlayer(undefined);
         setGame(undefined);
     };
+
     return (
         <GamePlayContext.Provider
             value={{
@@ -107,6 +121,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setGame,
                 gameCards,
                 setGameCards,
+                correctOrder,
+                setCorrectOrder,
                 fetchLoading,
                 setFetchLoading,
                 currentPlayer,
@@ -116,9 +132,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 clearGameContext,
                 refreshGameContext,
                 finishAnimation,
-                setCorrectPack,
                 setNextRound,
                 setIncreaseScore,
+                setNextRoundNumber,
             }}
         >
             {children}

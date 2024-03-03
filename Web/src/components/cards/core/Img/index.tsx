@@ -4,7 +4,13 @@ import NoImg from "../../../../assets/NoImg.svg";
 import { ImgProps } from "../../../../models/types/props/common";
 
 const Img: React.FC<ImgProps> = ({ src, alt, isShadow, size = "large" }) => {
-    const sizeClass = size === "large" ? style.cardImgLarge : style.cardImgSmall; //TODOCSS: refactor this
+    const sizeClass =
+        size === "large"
+            ? style.cardImgLarge
+            : size === "medium"
+              ? style.cardImgMedium
+              : style.cardImgSmall; //TODOCSS: refactor this
+
     return (
         <img
             className={`${sizeClass} ${isShadow ? style.cardImgShadow : ""}`}

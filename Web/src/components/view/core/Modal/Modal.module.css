@@ -28,7 +28,7 @@
     padding: 2em 2em;
     width: 85vw;
     max-width: 20em;
-    height: 100%;
+    height: fit-content;
     max-height: 25em;
     opacity: 0.5;
     transform: translateY(-100vh);

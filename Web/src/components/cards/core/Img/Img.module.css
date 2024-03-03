@@ -1,10 +1,11 @@
-.cardImgLarge, 
-.cardImgSmall{
+.cardImgLarge,
+.cardImgMedium,
+.cardImgSmall {
     object-fit: cover;
     border-radius: var(--secondary-border-radius);
 }
 
-.cardImgLarge{
+.cardImgLarge {
     min-width: 120px;
     width: 42vw;
     max-width: var(--card-width);
@@ -13,12 +14,17 @@
     max-height: var(--card-height);
 }
 
-.cardImgSmall{
+.cardImgMedium {
+    width: var(--medium-card-width);
+    height: var(--medium-card-height);
+}
+
+.cardImgSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
 }
 
-.cardImgShadow{
+.cardImgShadow {
     opacity: 0.5;
     position: absolute;
     top: 0;
