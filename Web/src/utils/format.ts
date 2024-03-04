@@ -11,3 +11,18 @@ export const formatDate = (dateS: string) => {
 export const extractRoomId = (roomLink: string) => {
     return roomLink.substring(roomLink.lastIndexOf("/") + 1);
 };
+
+export const formatShortNumber = (number: number) => {
+    const absNumber = Math.abs(number);
+    const suffixes = ["", "k", "m", "b", "t"];
+    const suffixNum = Math.floor(("" + absNumber).length / 3);
+    let shortNumber = "";
+
+    if (suffixNum > 0) {
+        shortNumber = (absNumber / Math.pow(1000, suffixNum)).toFixed(1) + suffixes[suffixNum];
+    } else {
+        shortNumber = "" + absNumber;
+    }
+
+    return shortNumber;
+};

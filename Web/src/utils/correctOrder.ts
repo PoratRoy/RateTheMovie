@@ -1,8 +1,16 @@
 import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
-import { movieRating } from "./format";
 
+/**
+ * Handles the case where the movie at a specific index in the elected cards order matches the provided movie
+ * and the elected cards order is valid.
+ * 
+ * @param player The player object containing information about elected cards.
+ * @param movie The movie to compare with the elected cards at the given index.
+ * @param index The index of the elected cards to compare.
+ * @param callback A callback function to execute if the movie at the given index matches the provided movie.
+ */
 export const handleOrderEqualCorrectOrder = (
     player: Player,
     movie: Movie | undefined,
@@ -20,6 +28,13 @@ export const handleOrderEqualCorrectOrder = (
     }
 };
 
+/**
+ * Calculates the player's score based on the correctness of their elected cards' order.
+ * Each correctly placed movie adds 100 points to the player's score.
+ * 
+ * @param player The player object containing information about elected cards.
+ * @returns The calculated score for the player.
+ */
 export const handlePlayerScore = (player: Player) => {
     const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] = isCardsOrdrValid(player);
     let playerScore = 0;
@@ -27,7 +42,7 @@ export const handlePlayerScore = (player: Player) => {
     if (isValid) {
         for (let i = 0; i < electedCardsOrder.length; i++) {
             if (electedCardsOrder[i]?.movie === electedCardsCorrectOrder[i]?.movie) {
-                playerScore += movieRating(electedCardsCorrectOrder[i].movie.imdbRating);
+                playerScore += 100;
             }
         }
     }
@@ -46,6 +61,12 @@ export const getCorrectOrder = (player: Player | undefined) => {
     return { moviesInCorrectOrder, correctAnswers: correctAnswers.length };
 };
 
+/**
+ * Retrieves the correct order of movies and correct answers based on the elected cards' order for a given player.
+ * 
+ * @param player The player object containing information about elected cards.
+ * @returns An object containing the movies in correct order and the correct answers.
+ */
 const getCorrectOrderAndAnswers = (player: Player) => {
     const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] = isCardsOrdrValid(player);
     let moviesInCorrectOrder: Movie[] = [];
@@ -62,6 +83,12 @@ const getCorrectOrderAndAnswers = (player: Player) => {
     return { moviesInCorrectOrder, correctAnswers };
 };
 
+/**
+ * Checks if the elected cards order for a given player is valid.
+ * 
+ * @param player The player object containing information about elected cards.
+ * @returns A tuple indicating whether the order is valid and providing the current and correct order of elected cards.
+ */
 const isCardsOrdrValid = (
     player: Player,
 ): [boolean, { electedCardsOrder: (Card | undefined)[]; electedCardsCorrectOrder: Card[] }] => {

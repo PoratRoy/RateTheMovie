@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 import PrimaryBtn from "../../../core/button/PrimaryBtn";
 import useSetScore from "../../../../../hooks/gameplay/useSetScore";
 import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
 
-const FinishBtn: React.FC<FinishBtnProps> = ({isFinishPlacing}) => {
+const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
-    const { setFinish } = useGamePlayContext();
+    const { setFinish, finish } = useGamePlayContext();
     const { setScore } = useSetScore();
 
     const handleFinish = () => {
@@ -15,6 +15,10 @@ const FinishBtn: React.FC<FinishBtnProps> = ({isFinishPlacing}) => {
         setScore();
         setFinish(true);
     };
+
+    useEffect(() => {
+        if (!isFinishPlacing && loading && !finish) setLoading(false);
+    }, [isFinishPlacing]);
 
     return (
         <React.Fragment>

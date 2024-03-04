@@ -102,6 +102,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const refreshGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
         setFinishAnimation(initFinishAnimation);
+        setCorrectOrder([]);
         setFetchLoading(false);
         setFinish(false);
         setCurrentPlayer((player) => {
@@ -116,6 +117,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.CURRENT_PLAYER);
         setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
+        setCorrectOrder([]);
         setFetchLoading(false);
         setFinish(false);
         setCurrentPlayer(undefined);
