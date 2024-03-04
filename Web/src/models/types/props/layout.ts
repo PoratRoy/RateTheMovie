@@ -63,3 +63,7 @@ export type CrewProps = {
 export type ActorProps = {
     actor: CrewModel;
 };
+
+export type PreviewLayoutProps = ChildernsProps & {
+    hasFooter?: boolean;
+};
