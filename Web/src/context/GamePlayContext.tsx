@@ -7,6 +7,7 @@ import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 import { initGameCardsList } from "../models/initialization/card";
+import { RoundAction } from "../models/types/union";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -26,7 +27,7 @@ export const GamePlayContext = createContext<{
     finishAnimation: FinishAnimation;
     setNextRound: (nextRound?: boolean) => void;
     setIncreaseScore: () => void;
-    setNextRoundNumber: () => void;
+    setRoundNumber: (action: RoundAction) => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -45,7 +46,7 @@ export const GamePlayContext = createContext<{
     finishAnimation: initFinishAnimation,
     setNextRound: () => {},
     setIncreaseScore: () => {},
-    setNextRoundNumber: () => {},
+    setRoundNumber: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -72,10 +73,17 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
     setStateFromSession();
 
-    const setNextRoundNumber = () => {
+    const setRoundNumber = (action: RoundAction) => {
         setGame((prev) => {
             if (prev) {
-                const game = { ...prev, currentRound: prev.currentRound + 1 };
+                const currentRound: number =
+                    action === "reset"
+                        ? 1
+                        : action === "increase"
+                          ? prev.currentRound + 1
+                          : prev.currentRound - 1;
+
+                const game = { ...prev, currentRound };
                 Session.set(SessionKey.GAME, game);
                 return game;
             }
@@ -134,7 +142,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 finishAnimation,
                 setNextRound,
                 setIncreaseScore,
-                setNextRoundNumber,
+                setRoundNumber,
             }}
         >
             {children}

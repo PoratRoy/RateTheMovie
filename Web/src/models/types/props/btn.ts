@@ -58,7 +58,7 @@ export type PauseBtnProps = {
 };
 
 export type RestartCircleBtnProps = {
-    onClicked: () => void;
+    close: () => void
 };
 
 export type ShuffleBtnProps = {

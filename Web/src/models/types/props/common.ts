@@ -33,3 +33,8 @@ export type BackLinkProps = {
 export type RoomLinkProps = {
     roomLink: string;
 };
+
+export type RoundTitleProps = {
+    current: number;
+    total: number;
+};

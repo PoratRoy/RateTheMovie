@@ -32,3 +32,5 @@ export type PackDisplay = "wrap" | "small" | "large";
 export type PlayerRole = "player" | "host";
 
 export type NotificationType = "info" | "success" | "warning" | "danger";
+
+export type RoundAction = "reset" | "increase" | "decrease";

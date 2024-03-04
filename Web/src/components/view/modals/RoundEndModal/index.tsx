@@ -8,17 +8,14 @@ import MoviesBtn from "../../../actions/widgets/btn/MoviesBtn";
 import RestartCircleBtn from "../../../actions/widgets/btn/RestartCircleBtn";
 import CardsReveal from "../../../actions/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import useHandleShuffle from "../../../../hooks/gameplay/useHandleShuffle";
+import useGameActions from "../../../../hooks/gameplay/useGameActions";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
-    const { setNextRound, setNextRoundNumber, game } = useGamePlayContext();
-    const { handleShuffle } = useHandleShuffle();
+    const { game } = useGamePlayContext();
+    const { handleRestart } = useGameActions(close);
 
     const handleNextRound = () => {
-        setNextRoundNumber();
-        setNextRound(false);
-        handleShuffle();
-        close();
+        handleRestart("increase");
     };
 
     return (
@@ -29,7 +26,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
                 <section className={style.roundEndModalBtns}>
                     <QuitCircleBtn close={close} />
                     <MoviesBtn onClicked={() => {}} />
-                    <RestartCircleBtn onClicked={() => {}} />
+                    <RestartCircleBtn close={close} />
                 </section>
             </section>
         </Modal>
