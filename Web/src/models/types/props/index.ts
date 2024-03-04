@@ -11,3 +11,7 @@ export type IdProps = {
 export type PropsObj<T = Record<string, any>> = {
     [key: string]: T;
 };
+
+export type CloseProps = {
+    close: () => void;
+};

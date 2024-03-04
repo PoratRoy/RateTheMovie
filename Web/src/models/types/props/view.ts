@@ -1,4 +1,4 @@
-import { ChildernsProps } from ".";
+import { ChildernsProps, CloseProps } from ".";
 import { Movie, VideoModel } from "../movie";
 
 export type ViewImgProps = {
@@ -7,38 +7,28 @@ export type ViewImgProps = {
     video: VideoModel | undefined;
 };
 
-export type CardViewProps = {
+export type CardViewProps = CloseProps & {
     movie: Movie;
-    close: () => void;
-};
-
-export type CloseBtnProps = {
-    close: () => void;
 };
 
 export type GenreProps = {
     genre: string;
 };
 
-export type ModalProps = ChildernsProps & {
-    close: () => void;
-    title: string;
-    hasCloseBtn?: boolean;
-};
+export type ModalProps = ChildernsProps &
+    CloseProps & {
+        title: string;
+        hasCloseBtn?: boolean;
+    };
 
-export type BackdropProps = {
-    close?: () => void;
+export type BackdropProps = CloseProps & {
     showBackdrop: boolean;
 };
 
-export type PauseModalProps = {
-    close: () => void;
-};
+export type PauseModalProps = CloseProps;
 
-export type GameOverModalProps = {
-    close: () => void;
-};
+export type GameOverModalProps = CloseProps;
 
-export type RoundEndModalProps = {
-    close: () => void;
-};
+export type RoundEndModalProps = CloseProps;
+
+export type CloseBtnProps = CloseProps;

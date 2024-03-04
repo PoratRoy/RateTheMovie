@@ -1,91 +1,72 @@
-import { IdProps } from ".";
+import { CloseProps, IdProps } from ".";
 import { BtnSize } from "../union";
 
-export type PrimaryBtnProps = IdProps & {
-    type?: "button" | "submit" | undefined;
-    title: string;
+type OnClickQProps = {
     onClicked?: () => void;
-    disabled?: boolean;
-    size: BtnSize;
-    loading?: boolean;
 };
 
-export type PrimaryIconBtnProps = IdProps & {
-    title: string | React.ReactNode;
-    onClicked?: () => void;
-    disabled?: boolean;
-    size: BtnSize;
-    loading?: boolean;
-};
-
-export type SecondaryBtnProps = IdProps & {
-    title: string | React.ReactNode;
-    onClicked?: () => void;
-    size?: BtnSize;
-};
-
-export type MultiBtnProps = IdProps & {
-    title: string;
+type OnClickProps = {
     onClicked: () => void;
 };
 
-export type PlayBtnProps = IdProps & {
+export type PrimaryBtnProps = IdProps & OnClickQProps & {
+    type?: "button" | "submit" | undefined;
+    title: string;
+    disabled?: boolean;
+    size: BtnSize;
+    loading?: boolean;
+};
+
+export type PrimaryIconBtnProps = IdProps & OnClickQProps & {
+    title: string | React.ReactNode;
+    disabled?: boolean;
+    size: BtnSize;
+    loading?: boolean;
+};
+
+export type SecondaryBtnProps = IdProps & OnClickQProps &{
+    title: string | React.ReactNode;
+    size?: BtnSize;
+};
+
+export type MultiBtnProps = IdProps & OnClickProps & {
+    title: string;
+};
+
+export type PlayBtnProps = IdProps & OnClickQProps & {
     title: string;
     loading?: boolean;
     type?: "button" | "submit";
-    onClicked?: () => void;
 };
 
 export type FinishBtnProps = {
     isFinishPlacing: boolean;
 };
 
-export type EditProfileBtnProps = {
-    onClicked: () => void;
-};
+export type EditProfileBtnProps = OnClickProps;
 
-export type RevealOrderBtnProps = {
-    onClicked: () => void;
-};
+export type RevealOrderBtnProps = OnClickProps;
 
-export type CircleBtnProps = {
-    onClicked: () => void;
+export type CircleBtnProps = OnClickProps & {
     Icon: React.ReactNode;
 };
 
-export type PauseBtnProps = {
-    onClicked: () => void;
-};
+export type PauseBtnProps = OnClickProps;
 
-export type RestartCircleBtnProps = {
-    close: () => void
-};
+export type NextRoundBtnProps = OnClickProps;
 
-export type ShuffleBtnProps = {
-    close: () => void;
-};
+export type MoviesBtnProps = OnClickProps;
 
-export type NextRoundBtnProps = {
-    onClicked: () => void;
-};
-
-export type MoviesBtnProps = {
-    onClicked: () => void;
-};
-
-export type QuitCircleBtnProps = {
-    close: () => void;
-};
-
-export type RestartBtnProps = {
-    close: () => void;
-};
-
-export type QuitBtnProps = {
-    close: () => void;
-};
-
-export type StartGameBtnProps = {
+export type StartGameBtnProps = OnClickProps & {
     loading: boolean;
-    onClicked: () => void;
 };
+
+export type QuitCircleBtnProps = CloseProps;
+
+export type RestartBtnProps = CloseProps;
+
+export type QuitBtnProps = CloseProps;
+
+export type RestartCircleBtnProps = CloseProps;
+
+export type ShuffleBtnProps = CloseProps;
