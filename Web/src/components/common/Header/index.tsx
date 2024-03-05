@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./Header.module.css";
 import Logo from "../widgets/Logo";
 import PlayerProfile from "../../profile/PlayerProfile";
@@ -10,15 +10,15 @@ import TimerBar from "../../actions/TimerBar";
 import RivalsProfiles from "../../profile/RivalsProfiles";
 import useMod from "../../../hooks/gameplay/useMod";
 import { ROUND_NUM } from "../../../models/constant";
+import useShowModal from "../../../hooks/global/useShowModal";
 
 const Header: React.FC = () => {
-    //TODO: extract to custom hook of open close modal
-    const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+    const { showModal, handleOpen, handleClose } = useShowModal();
     const { currentPlayer, game } = useGamePlayContext();
     const { isMulti } = useMod();
 
     const handlePause = () => {
-        setShowPauseModal(true);
+        handleOpen();
     };
 
     return (
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             </div>
             {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
             {isMulti() ? <TimerBar /> : null}
-            {showPauseModal ? <PauseModal close={() => setShowPauseModal(false)} /> : null}
+            {showModal ? <PauseModal close={handleClose} /> : null}
         </section>
     );
 };
