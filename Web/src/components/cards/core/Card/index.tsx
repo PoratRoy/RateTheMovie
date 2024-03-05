@@ -10,7 +10,6 @@ const Card: React.FC<CardProps> = ({
     type,
     front,
     back,
-    flip,
     isFocus,
     position,
     size = "large",
@@ -28,7 +27,7 @@ const Card: React.FC<CardProps> = ({
 
     return (
         <section id={id} className={sizeClass}>
-            <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>
+            <CardInnerContainer type={type.t} isFocus={isFocus}>
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 {isPlayerType ? <div className={style.cardBack}>{back}</div> : null}

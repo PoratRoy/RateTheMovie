@@ -16,7 +16,7 @@
 
 .modalPopup{
     position: fixed;
-    top: 25%;
+    top: 20%;
     left: calc((100vw - 85vw) / 2);
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -25,11 +25,11 @@
     border: var(--secondary-border);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     box-sizing: border-box;
-    padding: 2em 2em;
+    padding: 2em 1.5em;
     width: 85vw;
     max-width: 20em;
     height: fit-content;
-    max-height: 25em;
+    max-height: 30em;
     opacity: 0.5;
     transform: translateY(-100vh);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);

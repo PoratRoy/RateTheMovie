@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/sessionStorage";
-import { FinishAnimation, Game } from "../models/types/game";
-import { initFinishAnimation } from "../models/initialization/context";
+import { Game } from "../models/types/game";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
@@ -27,9 +26,6 @@ export const GamePlayContext = createContext<{
     setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
     clearGameContext: () => void;
     refreshGameContext: () => void;
-    finishAnimation: FinishAnimation;
-    setNextRound: (nextRound?: boolean) => void;
-    setIncreaseScore: () => void;
     setRoundNumber: (action: RoundAction) => void;
 }>({
     game: undefined,
@@ -48,9 +44,6 @@ export const GamePlayContext = createContext<{
     setGameOver: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
-    finishAnimation: initFinishAnimation,
-    setNextRound: () => {},
-    setIncreaseScore: () => {},
     setRoundNumber: () => {},
 });
 
@@ -64,7 +57,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
     const [finishRound, setFinishRound] = useState<boolean>(false);
     const [gameOver, setGameOver] = useState<boolean>(false);
-    const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
     const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
@@ -99,17 +91,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         });
     };
 
-    const setNextRound = (nextRound: boolean = true) => {
-        if (!finishAnimation.nextRound) {
-            setFinishAnimation((prev) => ({ ...prev, nextRound }));
-        }
-    };
-
-    const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));
-
     const refreshGameContext = () => {
         Session.remove(SessionKey.GAME_CARDS);
-        setFinishAnimation(initFinishAnimation);
         setCorrectOrder([]);
         setFetchLoading(false);
         setFinishRound(false);
@@ -124,7 +107,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
-        setFinishAnimation(initFinishAnimation);
         setGameCards(initGameCardsList());
         setCorrectOrder([]);
         setFetchLoading(false);
@@ -153,9 +135,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setGameOver,
                 clearGameContext,
                 refreshGameContext,
-                finishAnimation,
-                setNextRound,
-                setIncreaseScore,
                 setRoundNumber,
             }}
         >

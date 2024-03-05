@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAnimationContext } from "../../context/AnimationContext";
 
-const useCardFlipAnimation = (flip: boolean | undefined) => {
-    const [isFlipped, setIsFlipped] = useState<boolean>(false);
+const useCardFlipAnimation = () => {
+    const { setIsFlipCard, isFlipCard } = useAnimationContext();
+    const [isFlipped, setIsFlipped] = useState<number>(360);
     const [isAnimation, setIsAnimation] = useState<boolean>(false);
 
     const onAnimationComplete = () => {
@@ -9,13 +11,12 @@ const useCardFlipAnimation = (flip: boolean | undefined) => {
     };
 
     useEffect(() => {
-        if(!isAnimation){
-            setIsFlipped(flip ? true : false);
-            if (flip) {
-                setIsAnimation(true);
-            }
+        if(!isAnimation && isFlipCard){
+            setIsFlipped((prev) => (prev === 180 ? 360 : 180));
+            setIsFlipCard(false);
+            setIsAnimation(true);
         }
-    }, [flip]);
+    }, [isFlipCard]);
 
     return { isFlipped, onAnimationComplete };
 };

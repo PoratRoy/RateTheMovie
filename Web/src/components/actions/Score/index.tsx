@@ -4,9 +4,11 @@ import style from "./Score.module.css";
 import useCountingScoreAnimation from "../../../hooks/animation/useCountingScoreAnimation";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { ScoreProps } from "../../../models/types/props/common";
+import { useAnimationContext } from "../../../context/AnimationContext";
 
 const Score: React.FC<ScoreProps> = ({ score }) => {
-    const { finishRound, finishAnimation, setNextRound } = useGamePlayContext();
+    const { finishRound } = useGamePlayContext();
+    const { finishAnimation, setNextRound } = useAnimationContext();
     const handleComplete = () => {
         if (finishRound) {
             setTimeout(() => {

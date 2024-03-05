@@ -6,10 +6,11 @@ import Session from "../../utils/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 import useBackupRound from "../../api/hooks/useBackupRound";
 import useHandleMovies from "./useHandleMovies";
+import { useAnimationContext } from "../../context/AnimationContext";
 
 const useGameActions = (close: () => void) => {
-    const { refreshGameContext, clearGameContext, setNextRound, setRoundNumber, game } =
-        useGamePlayContext();
+    const { refreshGameContext, clearGameContext, setRoundNumber, game } = useGamePlayContext();
+    const { setIsFlipCard, clearAnimationContext, setNextRound } = useAnimationContext();
     const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const useGameActions = (close: () => void) => {
     const handleQuit = () => {
         close();
         clearGameContext();
+        clearAnimationContext();
         navigate(path.land);
     };
 
@@ -24,18 +26,21 @@ const useGameActions = (close: () => void) => {
         setRoundNumber(action || "reset");
         setNextRound(false);
         handleShuffle();
-        close();
     };
 
     const handleShuffle = () => {
+        setIsFlipCard(true);
         const moviesBackup = Session.get(SessionKey.BACKUP);
         if (!moviesBackup) return; //TODO: show no more movies with this filter
         refreshGameContext();
         backupRoundMovies(game?.filters);
         const movies = moviesBackup[0];
         Session.removeFrom(SessionKey.BACKUP, 0);
-        handleMovieCards(movies);
         close();
+        setTimeout(() => {
+            handleMovieCards(movies);
+            setIsFlipCard(true);
+        }, 1000);
     };
 
     return { handleQuit, handleRestart, handleShuffle };

@@ -8,7 +8,6 @@ export type CardProps = IdProps & {
     size?: CardSize;
     type: placeholderCardType;
     isFocus?: boolean;
-    flip?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
     position?: number;
@@ -16,7 +15,6 @@ export type CardProps = IdProps & {
 
 export type CardInnerContainerProps = {
     type: string;
-    flip?: boolean;
     children: React.ReactNode[];
     isFocus: boolean | undefined;
 };

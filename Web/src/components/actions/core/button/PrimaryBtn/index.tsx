@@ -14,7 +14,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     size = "large",
     type = "button",
 }) => {
-    const { scope } = useLoadingBtnAnimation(loading, id || DONE_BTN_ID);
+    const { scope } = useLoadingBtnAnimation(loading, id || DONE_BTN_ID, size);
 
     const className =
         size === "large"

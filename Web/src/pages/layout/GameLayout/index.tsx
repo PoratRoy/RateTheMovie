@@ -10,10 +10,12 @@ import { useSocketContext } from "../../../context/SocketContext";
 import useStartGame from "../../../hooks/gameplay/useStartGame";
 import RoundEndModal from "../../../components/view/modals/RoundEndModal";
 import useShowModal from "../../../hooks/global/useShowModal";
+import { useAnimationContext } from "../../../context/AnimationContext";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { showModal, handleOpen, handleClose } = useShowModal();
-    const { finishRound, game, currentPlayer, finishAnimation } = useGamePlayContext();
+    const { finishRound, game, currentPlayer } = useGamePlayContext();
+    const { finishAnimation } = useAnimationContext();
     const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
     const { scope } = useFinishAnimation(finishRound);
     const { isLoading } = useStartGame();

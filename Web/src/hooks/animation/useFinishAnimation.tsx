@@ -1,13 +1,13 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/date";
-import { useGamePlayContext } from "../../context/GamePlayContext";
 import { BELOW_ID, CARD_ID, SHADOW_ID } from "../../models/constant";
 import { PRIMARY_COLOR } from "../../style/root";
+import { useAnimationContext } from "../../context/AnimationContext";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { setNextRound, setIncreaseScore } = useGamePlayContext();
+    const { setNextRound } = useAnimationContext();
 
     const handleAnimation = async () => {
         await Promise.all([

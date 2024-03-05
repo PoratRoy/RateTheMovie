@@ -30,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({ children, close, title, hasCloseBtn = fal
                     </div>
                 ) : null}
                 <div className={style.modalTitle}>{title}</div>
-                <section className={style.modalContent}>{children}</section>
+                {children}
             </section>
         </React.Fragment>
     );

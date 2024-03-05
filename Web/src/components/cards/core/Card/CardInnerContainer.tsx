@@ -7,10 +7,9 @@ import { CardInnerContainerProps } from "../../../../models/types/props/card";
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     type,
     children,
-    flip,
     isFocus,
 }) => {
-    const { isFlipped, onAnimationComplete } = useCardFlipAnimation(flip);
+    const { isFlipped, onAnimationComplete } = useCardFlipAnimation();
     const isElectedType = type === "Elected";
 
     if (isElectedType) {
@@ -29,7 +28,7 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
             <motion.div
                 className={style.playerCardInnerContainer}
                 initial={false}
-                animate={{ rotateY: isFlipped ? 180 : 360 }}
+                animate={{ rotateY: isFlipped }}
                 transition={{ duration: 0.3, animationDiraction: "normal" }}
                 onAnimationComplete={onAnimationComplete}
             >
