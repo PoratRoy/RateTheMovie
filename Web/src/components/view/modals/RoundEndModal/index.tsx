@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import Modal from "../../core/Modal";
 import style from "./RoundEndModal.module.css";
 import { RoundEndModalProps } from "../../../../models/types/props/view";
@@ -8,25 +8,31 @@ import MoviesBtn from "../../../actions/widgets/btn/MoviesBtn";
 import RestartCircleBtn from "../../../actions/widgets/btn/RestartCircleBtn";
 import CardsReveal from "../../../actions/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import useGameActions from "../../../../hooks/gameplay/useGameActions";
+import PlayAgainBtn from "../../../actions/widgets/btn/PlayAgainBtn";
+import LeaderBoardCircleBtn from "../../../actions/widgets/btn/LeaderBoardCircleBtn";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
-    const { game } = useGamePlayContext();
-    const { handleRestart } = useGameActions(close);
+    const { game, gameOver, currentPlayer } = useGamePlayContext();
+    const [title, setTitle] = useState<string>("");
 
-    const handleNextRound = () => {
-        handleRestart("increase");
-    };
+    useMemo(() => {
+        setTitle(gameOver ? "GAME OVER" : `ROUND ${game?.currentRound || 1}`);
+    }, []);
 
     return (
-        <Modal close={close} title={`ROUND ${game?.currentRound || 1}`}>
+        <Modal close={close} title={title}>
             <section className={style.roundEndModal}>
+                <div className={style.roundEndScore}>Score: {currentPlayer?.score}</div>
                 <CardsReveal />
-                <NextRoundBtn onClicked={handleNextRound} />
+                {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
                 <section className={style.roundEndModalBtns}>
                     <QuitCircleBtn close={close} />
                     <MoviesBtn onClicked={() => {}} />
-                    <RestartCircleBtn close={close} />
+                    {gameOver ? (
+                        <LeaderBoardCircleBtn close={close} />
+                    ) : (
+                        <RestartCircleBtn close={close} />
+                    )}
                 </section>
             </section>
         </Modal>

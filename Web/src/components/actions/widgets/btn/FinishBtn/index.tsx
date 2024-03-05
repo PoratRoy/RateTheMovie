@@ -7,17 +7,18 @@ import { FinishBtnProps } from "../../../../../models/types/props/btn";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
-    const { setFinish, finish } = useGamePlayContext();
+    const { setFinishRound, finishRound, setGame } = useGamePlayContext();
     const { setScore } = useSetScore();
 
     const handleFinish = () => {
         setLoading(true);
         setScore();
-        setFinish(true);
+        setFinishRound(true);
+        //TODO: setGame round
     };
 
     useEffect(() => {
-        if (!isFinishPlacing && loading && !finish) setLoading(false);
+        if (!isFinishPlacing && loading && !finishRound) setLoading(false);
     }, [isFinishPlacing]);
 
     return (

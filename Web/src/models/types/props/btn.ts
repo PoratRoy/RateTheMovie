@@ -53,7 +53,7 @@ export type CircleBtnProps = OnClickProps & {
 
 export type PauseBtnProps = OnClickProps;
 
-export type NextRoundBtnProps = OnClickProps;
+export type NextRoundBtnProps = CloseProps;
 
 export type MoviesBtnProps = OnClickProps;
 
@@ -65,8 +65,12 @@ export type QuitCircleBtnProps = CloseProps;
 
 export type RestartBtnProps = CloseProps;
 
+export type PlayAgainBtnProps = CloseProps;
+
 export type QuitBtnProps = CloseProps;
 
 export type RestartCircleBtnProps = CloseProps;
+
+export type LeaderBoardCircleBtnProps = CloseProps;
 
 export type ShuffleBtnProps = CloseProps;

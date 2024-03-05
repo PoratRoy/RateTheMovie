@@ -8,6 +8,7 @@ import { Card } from "../models/types/card";
 import { Movie } from "../models/types/movie";
 import { initGameCardsList } from "../models/initialization/card";
 import { RoundAction } from "../models/types/union";
+import { LeaderBoard } from "../models/types/leaderBoard";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -20,8 +21,10 @@ export const GamePlayContext = createContext<{
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
     currentPlayer: Player | undefined;
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
-    finish: boolean;
-    setFinish: React.Dispatch<React.SetStateAction<boolean>>;
+    finishRound: boolean;
+    setFinishRound: React.Dispatch<React.SetStateAction<boolean>>;
+    gameOver: boolean;
+    setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
     clearGameContext: () => void;
     refreshGameContext: () => void;
     finishAnimation: FinishAnimation;
@@ -39,8 +42,10 @@ export const GamePlayContext = createContext<{
     setFetchLoading: () => {},
     currentPlayer: undefined,
     setCurrentPlayer: () => {},
-    finish: false,
-    setFinish: () => {},
+    finishRound: false,
+    setFinishRound: () => {},
+    gameOver: false,
+    setGameOver: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
     finishAnimation: initFinishAnimation,
@@ -57,8 +62,11 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [correctOrder, setCorrectOrder] = useState<Movie[]>([]);
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
-    const [finish, setFinish] = useState<boolean>(false);
+    const [finishRound, setFinishRound] = useState<boolean>(false);
+    const [gameOver, setGameOver] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
+    const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
+    const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
     //TODO: extract to a hook
     const setStateFromSession = () => {
@@ -104,7 +112,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setFinishAnimation(initFinishAnimation);
         setCorrectOrder([]);
         setFetchLoading(false);
-        setFinish(false);
+        setFinishRound(false);
+        setGameOver(false);
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] } } : player;
         });
@@ -119,7 +128,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setGameCards(initGameCardsList());
         setCorrectOrder([]);
         setFetchLoading(false);
-        setFinish(false);
+        setFinishRound(false);
+        setGameOver(false);
         setCurrentPlayer(undefined);
         setGame(undefined);
     };
@@ -137,8 +147,10 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setFetchLoading,
                 currentPlayer,
                 setCurrentPlayer,
-                finish,
-                setFinish,
+                finishRound,
+                setFinishRound,
+                gameOver,
+                setGameOver,
                 clearGameContext,
                 refreshGameContext,
                 finishAnimation,

@@ -3,11 +3,11 @@ import { isFinishPlacingElectedCards } from "../../utils/finish";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 
 const useHandleElectedCard = () => {
-    const { currentPlayer, finish, setCorrectOrder } = useGamePlayContext();
+    const { currentPlayer, finishRound, setCorrectOrder } = useGamePlayContext();
     const [isFinishPlacing, setIsFinishPlacing] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!finish && currentPlayer) {
+        if (!finishRound && currentPlayer) {
             const selectedCards = isFinishPlacingElectedCards(currentPlayer);
             if (selectedCards) {
                 setCorrectOrder(selectedCards);

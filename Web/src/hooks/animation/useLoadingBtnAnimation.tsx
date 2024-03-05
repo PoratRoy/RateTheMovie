@@ -1,15 +1,12 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import {
-    BTN_HEIGHT_LARGE,
-    BTN_WIDTH_LARGE,
-    PRIMARY_COLOR,
-    SECONDARY_BORDER_RADIUS,
-    TEXT_COLOR,
-} from "../../style/root";
+import { PRIMARY_COLOR, SECONDARY_BORDER_RADIUS, TEXT_COLOR } from "../../style/root";
+import { BtnSize } from "../../models/types/union";
+import { setSize } from "../../style/btn";
 
-const useLoadingBtnAnimation = (activate: boolean | undefined, id: string) => {
+const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?: BtnSize) => {
     const [scope, animation] = useAnimate();
+    const { height, width } = setSize(size);
 
     const handleBtnToLoadingAnimation = async () => {
         await animation(
@@ -18,8 +15,8 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string) => {
                 backgroundColor: "rgba(85, 72, 244, 0)",
                 border: "7px solid #5548F4",
                 borderBottomColor: "rgba(85, 72, 244, 0)",
-                width: 60,
-                height: 60,
+                width: height,
+                height,
                 borderRadius: "50%",
                 color: "rgba(255, 255, 255, 0)",
             },
@@ -35,8 +32,8 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string) => {
             {
                 backgroundColor: PRIMARY_COLOR,
                 border: "2px solid #344251",
-                width: BTN_WIDTH_LARGE,
-                height: BTN_HEIGHT_LARGE,
+                width,
+                height,
                 borderRadius: SECONDARY_BORDER_RADIUS,
                 color: TEXT_COLOR,
             },

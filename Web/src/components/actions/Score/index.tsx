@@ -6,9 +6,9 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { ScoreProps } from "../../../models/types/props/common";
 
 const Score: React.FC<ScoreProps> = ({ score }) => {
-    const { finish, finishAnimation, setNextRound } = useGamePlayContext();
+    const { finishRound, finishAnimation, setNextRound } = useGamePlayContext();
     const handleComplete = () => {
-        if (finish) {
+        if (finishRound) {
             setTimeout(() => {
                 setNextRound();
             }, 500);
