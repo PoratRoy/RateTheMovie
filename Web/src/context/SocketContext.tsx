@@ -8,6 +8,17 @@ import { Card } from "../models/types/card";
 import useHandleMovies from "../hooks/gameplay/useHandleMovies";
 import { useGamePlayContext } from "./GamePlayContext";
 import { filterRivalPlayers } from "../utils/player";
+import {
+    CreateNewRoom,
+    GameStarted,
+    PlayerDisconnect,
+    PlayerJoinRoom,
+    PlayerJoined,
+    PlayerWantToJoin,
+    StartGame,
+    UpdateGame,
+    UpdateGameCards,
+} from "../models/constant/socketEvents";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -75,7 +86,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const handleCreateNewRoom = (callback: (details: WarRoomDetails) => void) => {
-        socket.emit("CreateNewRoom", async (details: WarRoomDetails) => {
+        socket.emit(CreateNewRoom, async (details: WarRoomDetails) => {
             if (details) {
                 callback(details);
             }
@@ -83,14 +94,14 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleGame = (game: Game) => {
-        socket.emit("UpdateGame", game);
+        socket.emit(UpdateGame, game);
     };
 
     const handlePlayerWantToJoin = (
         roomId: string | undefined,
         callback: (details: WarRoomDetails) => void,
     ) => {
-        socket.emit("PlayerWantToJoin", roomId, async (details: WarRoomDetails) => {
+        socket.emit(PlayerWantToJoin, roomId, async (details: WarRoomDetails) => {
             callback(details);
         });
     };
@@ -101,7 +112,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         callback: (currecntPlayer: Player) => void,
     ) => {
         socket.emit(
-            "PlayerJoinRoom",
+            PlayerJoinRoom,
             roomId,
             player,
             async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
@@ -116,12 +127,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleCards = (cards: Card[]) => {
-        socket.emit("UpdateGameCards", cards);
+        socket.emit(UpdateGameCards, cards);
     };
 
     const handleStartGame = () => {
         setStartGame(true);
-        socket.emit("StartGame");
+        socket.emit(StartGame);
     };
 
     useEffect(() => {
@@ -148,14 +159,14 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             handleAlert(message);
         };
 
-        socket.on("PlayerJoined", handlePlayerJoined);
-        socket.on("GameStarted", handleGameStarted);
-        socket.on("PlayerDisconnect", handlePlayerDisconnected);
+        socket.on(PlayerJoined, handlePlayerJoined);
+        socket.on(GameStarted, handleGameStarted);
+        socket.on(PlayerDisconnect, handlePlayerDisconnected);
 
         return () => {
-            socket.off("PlayerJoined", handlePlayerJoined);
-            socket.off("GameStarted", handleGameStarted);
-            socket.off("PlayerDisconnect", handlePlayerDisconnected);
+            socket.off(PlayerJoined, handlePlayerJoined);
+            socket.off(GameStarted, handleGameStarted);
+            socket.off(PlayerDisconnect, handlePlayerDisconnected);
         };
     }, [socket]);
 

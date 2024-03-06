@@ -14,9 +14,9 @@ export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
     return { warRoom, player };
 };
 
-export const initWarRoom = (player: Player) => {
+export const initWarRoom = () => {
     return {
-        players: [player],
+        players: [],
         gameCards: [],
         game: undefined,
     } as WarRoomProps;
