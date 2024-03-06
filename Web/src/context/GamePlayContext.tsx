@@ -24,6 +24,7 @@ export const GamePlayContext = createContext<{
     setFinishRound: React.Dispatch<React.SetStateAction<boolean>>;
     gameOver: boolean;
     setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+    resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
     setRoundNumber: (action: RoundAction) => void;
@@ -42,6 +43,7 @@ export const GamePlayContext = createContext<{
     setFinishRound: () => {},
     gameOver: false,
     setGameOver: () => {},
+    resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
     setRoundNumber: () => {},
@@ -91,26 +93,35 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         });
     };
 
-    const refreshGameContext = () => {
+    const resetRoundContextState = () => {
         Session.remove(SessionKey.GAME_CARDS);
         setCorrectOrder([]);
         setFetchLoading(false);
         setFinishRound(false);
         setGameOver(false);
+    };
+
+    const resetGameContext = () => {
+        resetRoundContextState();
+        setRoundNumber("reset");
+        setCurrentPlayer((player) => {
+            return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
+        });
+    };
+
+    const refreshGameContext = () => {
+        resetRoundContextState();
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] } } : player;
         });
     };
 
     const clearGameContext = () => {
-        Session.remove(SessionKey.GAME_CARDS);
+        resetRoundContextState();
         Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
         setGameCards(initGameCardsList());
-        setCorrectOrder([]);
-        setFetchLoading(false);
-        setFinishRound(false);
         setGameOver(false);
         setCurrentPlayer(undefined);
         setGame(undefined);
@@ -133,6 +144,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setFinishRound,
                 gameOver,
                 setGameOver,
+                resetGameContext,
                 clearGameContext,
                 refreshGameContext,
                 setRoundNumber,

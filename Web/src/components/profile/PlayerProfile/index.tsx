@@ -4,7 +4,6 @@ import { AvaterImgs } from "../../../models/resources/avaters";
 import style from "./PlayerProfile.module.css";
 import { PlayerProfileProps } from "../../../models/types/props/profile";
 import Skeleton from "./Skeleton";
-import { formatShortNumber } from "../../../utils/format";
 
 const PlayerProfile: React.FC<PlayerProfileProps> = ({ currentPlayer }) => {
     const Profile = (): React.ReactNode => {
@@ -16,7 +15,7 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({ currentPlayer }) => {
                         <Avater img={AvaterImgs[avater]} />
                     </div>
                     <div className={style.PlayerProfileDetails}>
-                        <div className={style.PlayerProfileScore}>{formatShortNumber(score)}</div>
+                        <div className={style.PlayerProfileScore}>{score}</div>
                         <div className={style.PlayerProfileName}>{name}</div>
                     </div>
                 </section>

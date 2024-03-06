@@ -13,9 +13,9 @@ import useShowModal from "../../../hooks/global/useShowModal";
 import { useAnimationContext } from "../../../context/AnimationContext";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { showModal, handleOpen, handleClose } = useShowModal();
+    const { finishAnimation, setNextRound } = useAnimationContext();
+    const { showModal, handleOpen, handleClose } = useShowModal(() => setNextRound(false));
     const { finishRound, game, currentPlayer } = useGamePlayContext();
-    const { finishAnimation } = useAnimationContext();
     const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
     const { scope } = useFinishAnimation(finishRound);
     const { isLoading } = useStartGame();

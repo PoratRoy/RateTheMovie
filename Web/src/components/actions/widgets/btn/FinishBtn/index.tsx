@@ -14,7 +14,7 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
         setLoading(true);
         setScore();
         setFinishRound(true);
-        //TODO: setGame round
+        setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
     };
 
     useEffect(() => {

@@ -9,8 +9,10 @@ import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 
 const useGameActions = (close: () => void) => {
-    const { refreshGameContext, clearGameContext, setRoundNumber, game } = useGamePlayContext();
-    const { setIsFlipCard, clearAnimationContext, setNextRound } = useAnimationContext();
+    const { refreshGameContext, clearGameContext, resetGameContext, setRoundNumber, game } =
+        useGamePlayContext();
+    const { setIsFlipCard, clearAnimationContext, refreshAnimationContext, setNextRound } =
+        useAnimationContext();
     const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
@@ -22,17 +24,28 @@ const useGameActions = (close: () => void) => {
         navigate(path.land);
     };
 
-    const handleRestart = (action?: RoundAction) => {
-        setRoundNumber(action || "reset");
+    const handleRestart = () => {
         setNextRound(false);
-        handleShuffle();
+        resetGameContext();
+        handelNewMovies();
+    };
+
+    const handleContinue = (action: RoundAction) => {
+        setRoundNumber(action);
+        setNextRound(false);
+        refreshGameContext();
+        handelNewMovies();
     };
 
     const handleShuffle = () => {
+        refreshGameContext();
+        handelNewMovies();
+    };
+
+    const handelNewMovies = () => {
         setIsFlipCard(true);
         const moviesBackup = Session.get(SessionKey.BACKUP);
         if (!moviesBackup) return; //TODO: show no more movies with this filter
-        refreshGameContext();
         backupRoundMovies(game?.filters);
         const movies = moviesBackup[0];
         Session.removeFrom(SessionKey.BACKUP, 0);
@@ -40,10 +53,11 @@ const useGameActions = (close: () => void) => {
         setTimeout(() => {
             handleMovieCards(movies);
             setIsFlipCard(true);
+            refreshAnimationContext();
         }, 1000);
     };
 
-    return { handleQuit, handleRestart, handleShuffle };
+    return { handleQuit, handleRestart, handleShuffle, handleContinue };
 };
 
 export default useGameActions;

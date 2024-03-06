@@ -27,9 +27,7 @@ export const AnimationContextProvider = ({ children }: { children: React.ReactNo
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
 
     const setNextRound = (nextRound: boolean = true) => {
-        if (!finishAnimation.nextRound) {
-            setFinishAnimation((prev) => ({ ...prev, nextRound }));
-        }
+        setFinishAnimation((prev) => ({ ...prev, nextRound }));
     };
 
     const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));

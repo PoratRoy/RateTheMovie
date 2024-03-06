@@ -5,10 +5,10 @@ import { NextRoundBtnProps } from "../../../../../models/types/props/btn";
 import useGameActions from "../../../../../hooks/gameplay/useGameActions";
 
 const NextRoundBtn: React.FC<NextRoundBtnProps> = ({ close }) => {
-    const { handleRestart } = useGameActions(close);
+    const { handleContinue } = useGameActions(close);
     
     const handleNextRound = () => {
-        handleRestart("increase");
+        handleContinue("increase");
     };
 
     const title = (

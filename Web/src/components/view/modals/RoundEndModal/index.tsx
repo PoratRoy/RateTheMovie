@@ -12,8 +12,9 @@ import PlayAgainBtn from "../../../actions/widgets/btn/PlayAgainBtn";
 import LeaderBoardCircleBtn from "../../../actions/widgets/btn/LeaderBoardCircleBtn";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
-    const { game, gameOver, currentPlayer } = useGamePlayContext();
+    const { game, currentPlayer } = useGamePlayContext();
     const [title, setTitle] = useState<string>("");
+    const gameOver = game?.currentRound === game?.rounds;
 
     useMemo(() => {
         setTitle(gameOver ? "GAME OVER" : `ROUND ${game?.currentRound || 1}`);
