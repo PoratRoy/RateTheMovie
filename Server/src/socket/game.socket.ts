@@ -1,11 +1,11 @@
 import { Socket } from "socket.io";
 import { ISocket } from "../model/interfaces/socket";
-import { RivalPlayer } from "../model/types/player";
+import { Player } from "../model/types/player";
 import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
 import { initWarRoom } from "../utils/warRoom";
 import { Game } from "../model/types/game";
-import { Card, RivalCard } from "../model/types/card";
+import { Card, ElectedCards } from "../model/types/card";
 import { PACK_CARDS_NUM } from "../model/constant";
 import { getPlayerWarRoomInfo } from "./utils";
 import {
@@ -44,11 +44,11 @@ class GameSocket implements ISocket {
             PlayerJoinRoom,
             (
                 roomId: string,
-                player: RivalPlayer,
+                player: Player,
                 callback: (
                     props: WarRoomProps,
-                    currecntPlayer: RivalPlayer,
-                    rivalPlayers: RivalPlayer[],
+                    currecntPlayer: Player,
+                    rivalPlayers: Player[],
                 ) => void,
             ) => {
                 logEvent(PlayerJoinRoom);
@@ -56,7 +56,7 @@ class GameSocket implements ISocket {
                 const playerId = socket.id;
                 const updatedPlayer = { ...player, id: playerId };
                 const warRoom = this.warRooms[roomId];
-                let rivalPlayers: RivalPlayer[] = [];
+                let rivalPlayers: Player[] = [];
                 if (warRoom) {
                     rivalPlayers = [...warRoom.players];
                     warRoom.players.push(updatedPlayer);
@@ -119,7 +119,7 @@ class GameSocket implements ISocket {
             });
         });
 
-        socket.on(SubmitElectedCards, (cards: RivalCard[]) => {
+        socket.on(SubmitElectedCards, (electedCards: ElectedCards) => {
             this.wrapper(SubmitElectedCards, () => {
                 const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
                 if (warRoom && player) {
@@ -127,7 +127,7 @@ class GameSocket implements ISocket {
                     if (game?.roomId) {
                         const { roomId } = game;
                         const index = players.indexOf(player);
-                        players[index].cards = cards;
+                        players[index].electedCards = electedCards;
                         this.warRooms[game.roomId] = warRoom;
                         socket.to(roomId).emit(PlayerSubmitedHisCards, warRoom);
                     }

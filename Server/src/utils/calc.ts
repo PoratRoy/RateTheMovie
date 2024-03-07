@@ -1,6 +1,6 @@
-import { RivalPlayer } from "../model/types/player";
+import { Player } from "../model/types/player";
 
-export const getPlayerIndex = (players: RivalPlayer[]) => {
+export const getPlayerIndex = (players: Player[]) => {
     return players.length;
 }
 

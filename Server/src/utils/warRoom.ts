@@ -1,10 +1,10 @@
-import { RivalPlayer } from "../model/types/player";
+import { Player } from "../model/types/player";
 import { WarRoomProps, WarRooms } from "../model/types/warRoom";
 
 export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
-    let player: RivalPlayer | undefined;
+    let player: Player | undefined;
     const warRoom = Object.values(warRooms).find((room) =>
-        room.players.find((p: RivalPlayer) => {
+        room.players.find((p: Player) => {
             if (p.id === playerId) {
                 player = p;
                 return p;

@@ -3,7 +3,7 @@ import style from "./LoadingPage.module.css";
 import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import { LoadingPageProps } from "../../models/types/props/landing";
 import RivalPlayerProfile from "../../components/profile/RivalPlayerProfile";
-import { RivalPlayer } from "../../models/types/player";
+import { Player } from "../../models/types/player";
 import TextRotator from "../../components/common/widgets/TextRotator";
 import useMod from "../../hooks/gameplay/useMod";
 import PreviewLayout from "../layout/PreviewLayout";
@@ -39,7 +39,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
                 <section className={style.loadingPageRivals}>
                     <div>In the room</div>
                     <section className={style.loadingPageRivalsRivals}>
-                        {rivalPlayers.map((player: RivalPlayer, i: number) => {
+                        {rivalPlayers.map((player: Player, i: number) => {
                             return <RivalPlayerProfile key={i} player={player} />;
                         })}
                     </section>

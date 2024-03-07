@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSocket } from "../hooks/multiplayer/useSocket";
 import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
-import { RivalPlayer } from "../models/types/player";
+import { Player } from "../models/types/player";
 import { Game } from "../models/types/game";
 import { useErrorContext } from "./ErrorContext";
-import { Card, RivalCard } from "../models/types/card";
+import { Card, ElectedCards } from "../models/types/card";
 import useHandleMovies from "../hooks/gameplay/useHandleMovies";
 import { useGamePlayContext } from "./GamePlayContext";
 import { filterRivalPlayers } from "../utils/player";
@@ -24,8 +24,8 @@ import {
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
-    rivalPlayers: RivalPlayer[];
-    setRivalPlayers: React.Dispatch<React.SetStateAction<RivalPlayer[]>>;
+    rivalPlayers: Player[];
+    setRivalPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     startGame: boolean;
     setStartGame: React.Dispatch<React.SetStateAction<boolean>>;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
@@ -36,12 +36,12 @@ export const SocketContext = createContext<{
     ) => void;
     handlePlayerJoinRoom: (
         roomId: string,
-        player: RivalPlayer,
-        callback: (currecntPlayer: RivalPlayer) => void,
+        player: Player,
+        callback: (currecntPlayer: Player) => void,
     ) => void;
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
-    handleSubmitElectedCards: (cards: RivalCard) => void;
+    handleSubmitElectedCards: (electedCards: ElectedCards) => void;
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
@@ -59,7 +59,7 @@ export const SocketContext = createContext<{
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [rivalPlayers, setRivalPlayers] = useState<RivalPlayer[]>([]);
+    const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
@@ -112,8 +112,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handlePlayerJoinRoom = (
         roomId: string,
-        player: RivalPlayer,
-        callback: (currecntPlayer: RivalPlayer) => void,
+        player: Player,
+        callback: (currecntPlayer: Player) => void,
     ) => {
         socket.emit(
             PlayerJoinRoom,
@@ -121,8 +121,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             player,
             async (
                 warRoom: WarRoomProps,
-                currecntPlayer: RivalPlayer,
-                rivalPlayers: RivalPlayer[],
+                currecntPlayer: Player,
+                rivalPlayers: Player[],
             ) => {
                 if (warRoom && currecntPlayer) {
                     setRivalPlayers((prev) => {
@@ -143,23 +143,21 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit(StartGame);
     };
 
-    const handleSubmitElectedCards = (cards: RivalCard) => {
-        socket.emit(SubmitElectedCards, cards);
+    const handleSubmitElectedCards = (electedCards: ElectedCards) => {
+        socket.emit(SubmitElectedCards, electedCards);
     };
 
     useEffect(() => {
-        const handlePlayerJoined = (player: RivalPlayer) => {
+        const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
                 return [...prev, player];
             });
         };
 
         const handleGameStarted = (warRoom: WarRoomProps) => {
-            const { game, gameCards, players } = warRoom;
+            const { game, gameCards } = warRoom;
             handleGameCards(gameCards);
             setGame(game);
-            const rivalPlayers = filterRivalPlayers(players, currentPlayer?.id);
-            setRivalPlayers(rivalPlayers);
             setStartGame(true);
         };
 
@@ -169,7 +167,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setRivalPlayers(rivalPlayers);
         };
 
-        const handlePlayerDisconnected = (player: RivalPlayer) => {
+        const handlePlayerDisconnected = (player: Player) => {
             setRivalPlayers((prev) => {
                 return filterRivalPlayers(prev, player.id);
             });

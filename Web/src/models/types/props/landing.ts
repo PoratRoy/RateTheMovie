@@ -1,5 +1,5 @@
 import { ModOption } from "../../enums/landing";
-import { RivalPlayer } from "../player";
+import { Player } from "../player";
 import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 
@@ -13,7 +13,7 @@ export type SetupProps = {
 };
 
 export type LoadingPageProps = {
-    rivalPlayers: RivalPlayer[];
+    rivalPlayers: Player[];
     playerRole?: PlayerRole;
     onClicked: () => void;
     isLoading: boolean;

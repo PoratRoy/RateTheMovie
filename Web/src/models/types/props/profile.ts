@@ -1,5 +1,5 @@
 import { ChildernsProps } from ".";
-import { Player, RivalPlayer } from "../player";
+import { Player } from "../player";
 
 export type PreviewProfileProps = ChildernsProps & {
     profileName?: string;
@@ -16,5 +16,5 @@ export type PlayerProfileProps = {
 };
 
 export type RivalPlayerProfileProps = {
-    player: RivalPlayer;
+    player: Player;
 };

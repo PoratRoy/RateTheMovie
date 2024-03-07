@@ -1,11 +1,11 @@
-import { RivalCard } from "./card";
+import { ElectedCards } from "./card";
 import { PlayerRole } from "./union";
 
-export type RivalPlayer = {
+export type Player = {
     id: string;
     name: string;
     avater: number;
     role: PlayerRole
     score: number;
-    cards: RivalCard[];
+    electedCards: ElectedCards;
 };

@@ -1,8 +1,8 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { RivalPlayerToPlayer, initRivalPlayer, updatePlayer } from "../../models/initialization/player";
+import { updatePlayer } from "../../models/initialization/player";
 import Session from "../../utils/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
-import { Player, RivalPlayer } from "../../models/types/player";
+import { Player } from "../../models/types/player";
 import { MovieFilters } from "../../models/types/filter";
 import { Game } from "../../models/types/game";
 import { useGamePlayContext } from "../../context/GamePlayContext";
@@ -35,13 +35,12 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
         };
 
         if (player) {
+            const updatedPlayer = updatePlayer(player, name, avater);
             if (isSingle(mod)) {
-                const updatedPlayer = updatePlayer(player, name, avater);
                 setPlayer(updatedPlayer);
             } else if (isMulti(mod) && roomId) {
-                const updatedPlayer = initRivalPlayer(player, name, avater);
-                handlePlayerJoinRoom(roomId, updatedPlayer, (player: RivalPlayer) => {
-                    setPlayer(RivalPlayerToPlayer(player));
+                handlePlayerJoinRoom(roomId, updatedPlayer, (player: Player) => {
+                    setPlayer(player);
                 });
             }
         }
