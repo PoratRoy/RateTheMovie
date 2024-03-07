@@ -4,13 +4,11 @@ import { ResultCardProps } from "../../../../models/types/props/card";
 import { placeholderCardType } from "../../../../models/types/card";
 import { setElectedFrontCard } from "../../../../utils/card";
 import ResultCardWrapper from "../../wrapper/ResultCardWrapper";
-import { handleOrderEqualCorrectOrder } from "../../../../utils/correctOrder";
 
-const ResultCard: React.FC<ResultCardProps> = ({ currentPlayer, movie, index }) => {
-    let isRightChoice = false;
-    handleOrderEqualCorrectOrder(currentPlayer, movie, index, () => {isRightChoice = true})
+const ResultCard: React.FC<ResultCardProps> = ({ currentPlayer, card, index }) => {
+    let isRightChoice = card?.isCorrect;
+    const movie = card ? card.movie : currentPlayer.electedCards?.order[index]?.movie;
     const rate = movie?.imdbRating || 0;
-    
     return (
         <ResultCardWrapper rate={rate} isRightChoice={isRightChoice}>
             <Card

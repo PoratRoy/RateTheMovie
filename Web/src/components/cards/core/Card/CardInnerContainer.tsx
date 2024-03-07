@@ -12,6 +12,7 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     const { isFlipped, onAnimationComplete } = useCardFlipAnimation();
     const isElectedType = type === "Elected";
 
+    //TODO: border not animated when result card
     if (isElectedType) {
         return (
             <div

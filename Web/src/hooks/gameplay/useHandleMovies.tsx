@@ -19,8 +19,7 @@ const useHandleMovies = () => {
 
     const handleMovieCards = (movies: Movie[], mod?: ModOption) => {
         logMovies(movies);
-        const correctMoviesOrder = sortMoviesOrder(movies);
-        const correctOrder = initGameCards(correctMoviesOrder || []);
+        const correctOrder = sortMoviesOrder(movies);
         const cards = initGameCards(movies);
 
         setGameCardsOnStateAndSession(cards, correctOrder);
@@ -44,7 +43,7 @@ const useHandleMovies = () => {
         });
     };
 
-    const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: Card[]) => {
+    const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: string[]) => {
         if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
             setCurrentPlayer((player) => {
                 if (!player) return player;

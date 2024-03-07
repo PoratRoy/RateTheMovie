@@ -1,5 +1,5 @@
 import { ChildernsProps } from ".";
-import { Movie } from "../movie";
+import { Card } from "../card";
 import { Player } from "../player";
 import { PackDisplay } from "../union";
 
@@ -18,10 +18,10 @@ export type ElectedPackLayoutProps = ChildernsProps;
 
 export type PackOfElectedCardsProps = {
     currentPlayer: Player;
-    showCorrectPack: Movie[];
+    showCorrectPack: Card[];
 };
 
 export type PackOfResultProps = {
-    revealCards: Movie[];
+    revealCards: Card[];
     currentPlayer: Player | undefined;
 }

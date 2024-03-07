@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import RevealOrderBtn from "../widgets/btn/RevealOrderBtn";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import { Movie } from "../../../models/types/movie";
 import { getCorrectOrder } from "../../../utils/correctOrder";
 import PackOfResult from "../../cards/pack/PackOfResult";
 import style from "./CardsReveal.module.css";
+import { Card } from "../../../models/types/card";
 
 const CardsReveal: React.FC = () => {
-    const [revealCards, setRevealCards] = useState<Movie[]>([]);
+    const [revealCards, setRevealCards] = useState<Card[]>([]);
     const [isReveal, setIsReveal] = useState<boolean>(false);
     const { currentPlayer, correctOrder } = useGamePlayContext();
-    const { moviesInCorrectOrder } = getCorrectOrder(currentPlayer);
+    const moviesInCorrectOrder = getCorrectOrder(currentPlayer);
 
     useEffect(() => {
         if (revealCards.length === 0) {

@@ -9,7 +9,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
     const { setNextRound } = useAnimationContext();
 
-    const handleAnimation = async () => {
+    const handleFinishAnimation = async () => {
         await Promise.all([
             animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
             animation(`#${CARD_ID}`, { border: `2px solid ${PRIMARY_COLOR}` }, { duration: 0.2 }),
@@ -22,7 +22,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
 
     useEffect(() => {
         if (activate) {
-            handleAnimation();
+            handleFinishAnimation();
         }
     }, [activate]);
 
@@ -30,10 +30,3 @@ const useFinishAnimation = (activate: boolean | undefined) => {
 };
 
 export default useFinishAnimation;
-
-// const { moviesInCorrectOrder, correctAnswers } = getCorrectOrder(currentPlayer);
-// setCorrectPack(moviesInCorrectOrder);
-// if (correctAnswers > 0) {
-//     await delayPromise(1500);
-//     setIncreaseScore();
-// }

@@ -9,10 +9,8 @@ const useHandleElectedCard = () => {
     useEffect(() => {
         if (!finishRound && currentPlayer) {
             const selectedCards = isFinishPlacingElectedCards(currentPlayer);
-            if (selectedCards) {
-                setCorrectOrder(selectedCards);
-                setIsFinishPlacing(selectedCards[0] === undefined ? false : true);
-            }
+            setCorrectOrder(selectedCards);
+            setIsFinishPlacing(selectedCards[0] === undefined ? false : true);
         }
     }, [currentPlayer]);
 

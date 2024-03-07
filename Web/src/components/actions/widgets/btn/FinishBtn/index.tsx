@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 import PrimaryBtn from "../../../core/button/PrimaryBtn";
-import useSetScore from "../../../../../hooks/gameplay/useSetScore";
 import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
+import useFinish from "../../../../../hooks/gameplay/useFinish";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
-    const { setFinishRound, finishRound, setGame } = useGamePlayContext();
-    const { setScore } = useSetScore();
+    const { setFinishRound, finishRound } = useGamePlayContext();
+    const { finishGame } = useFinish();
 
     const handleFinish = () => {
+        finishGame();
         setLoading(true);
-        setScore();
         setFinishRound(true);
-        setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
     };
 
     useEffect(() => {

@@ -23,15 +23,6 @@ const useCardOrderPosition = (player: Player, selectedCard: Card) => {
         if (!match) setPos(0);
     }, [currentPlayer]);
 
-    // useEffect(() => {
-    //     if (finishAnimation.removePosition) {
-    //         const movie = selectedCard.movie;
-    //         for (let i = 0; i < player.electedCards.order.length; i++) {
-    //             handleOrderEqualCorrectOrder(player, movie, i, () => setPos(0));
-    //         }
-    //     }
-    // }, [finishAnimation]);
-
     return pos;
 };
 

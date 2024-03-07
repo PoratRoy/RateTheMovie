@@ -1,6 +1,6 @@
 import { ModOption } from "../enums/landing";
+import { Card } from "./card";
 import { MovieFilters } from "./filter";
-import { Movie } from "./movie";
 
 export type Game = {
     mod: ModOption; 
@@ -12,6 +12,6 @@ export type Game = {
 
 export type FinishAnimation = {
     nextRound: boolean;
-    showCorrectPack: Movie[];
+    showCorrectPack: Card[];
     increaseScore: boolean;
 };

@@ -5,6 +5,7 @@ import { initMovie } from "./movie";
 export const initGameCard: Card = {
     id: undefined,
     movie: initMovie,
+    isCorrect: undefined,
 };
 
 export const initGameCardsList = (): Card[] => {

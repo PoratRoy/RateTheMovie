@@ -4,13 +4,10 @@ import FinishBtn from "../../actions/widgets/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import useHandleElectedCard from "../../../hooks/gameplay/useHandleElectedCard";
-import { useAnimationContext } from "../../../context/AnimationContext";
 
 const ElectedPackLayout: React.FC = () => {
-    const { currentPlayer } = useGamePlayContext();
-    const { finishAnimation } = useAnimationContext();
+    const { currentPlayer, correctOrder } = useGamePlayContext();
     const { isFinishPlacing } = useHandleElectedCard();
-    const { showCorrectPack } = finishAnimation;
 
     return (
         <section className={style.electedPackContainer}>
@@ -18,7 +15,7 @@ const ElectedPackLayout: React.FC = () => {
                 {currentPlayer ? (
                     <PackOfElectedCards
                         currentPlayer={currentPlayer}
-                        showCorrectPack={showCorrectPack}
+                        showCorrectPack={correctOrder}
                     />
                 ) : null}
             </div>

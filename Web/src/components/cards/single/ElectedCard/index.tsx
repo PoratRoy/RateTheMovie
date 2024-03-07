@@ -3,13 +3,12 @@ import { placeholderCardType } from "../../../../models/types/card";
 import Card from "../../core/Card";
 import ElectedCardWrapper from "../../wrapper/ElectedCardWrapper";
 import { setElectedFrontCard } from "../../../../utils/card";
-import { handleOrderEqualCorrectOrder } from "../../../../utils/correctOrder";
 import { ElectedCardProps } from "../../../../models/types/props/card";
 
-const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, movie }) => {
+const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
     const [focus, setFocus] = useState<boolean>(false);
-    let isRightChoice = false;
-    handleOrderEqualCorrectOrder(player, movie, index, () => {isRightChoice = true})
+    let isRightChoice = card?.isCorrect || false;
+    const movie = card ? card.movie : player.electedCards?.order[index]?.movie;
     const rate = movie?.imdbRating || 0;
 
     return (

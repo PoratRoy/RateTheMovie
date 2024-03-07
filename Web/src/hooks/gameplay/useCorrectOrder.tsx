@@ -4,25 +4,27 @@ import { sortMovies } from "../../utils/calc";
 import { PACK_CARDS_NUM } from "../../models/constant";
 
 const useCorrectOrder = () => {
-    const sortMoviesOrder = (movies: Movie[]): Movie[] | undefined => {
+    const sortMoviesOrder = (movies: Movie[]): string[] | undefined => {
         if (movies && movies.length === PACK_CARDS_NUM) {
             const sortedMovies = [...movies];
-
             sortedMovies.sort((a, b) => {
                 return sortMovies(a, b);
             });
-            return sortedMovies;
+            const movieIds = sortedMovies.map(movie => movie.id);
+            return movieIds;
         }
     };
 
-    const sortCardsOrder = (cards: Card[]): Card[] | undefined => {
+    const sortCardsOrder = (cards: Card[]): string[] | undefined => {
         if (cards && cards.length === PACK_CARDS_NUM) {
             const sortedCards = [...cards];
-
+    
             sortedCards.sort((a, b) => {
                 return sortMovies(a.movie, b.movie);
             });
-            return sortedCards;
+    
+            const movieIds = sortedCards.map(card => card.movie.id);
+            return movieIds;
         }
     };
 

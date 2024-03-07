@@ -57,7 +57,6 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
 
             firstRoundMovies(filters, mod);
         }
-        //TODO: crate game also for player role?
         navigate(path.game);
     };
 

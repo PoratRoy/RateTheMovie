@@ -18,7 +18,10 @@ const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
             <Droppable droppableId={index} setFocus={setFocus}>
                 {children}
             </Droppable>
-            <ElectedShadow isRightChoice={isRightChoice} id={SHADOW_ID} />
+            <ElectedShadow
+                isRightChoice={isRightChoice}
+                id={SHADOW_ID}
+            />
             <Rate rate={rate} id={BELOW_ID} />
         </section>
     );

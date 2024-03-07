@@ -1,24 +1,20 @@
 import React from "react";
 import ElectedCard from "../../single/ElectedCard";
 import Pack from "../../core/Pack";
-import { motion } from "framer-motion";
-import { springAnimation } from "../../../../style/animation";
-import { Movie } from "../../../../models/types/movie";
 import { PackOfElectedCardsProps } from "../../../../models/types/props/pack";
+import { Card } from "../../../../models/types/card";
 
 const PackOfElectedCards: React.FC<PackOfElectedCardsProps> = ({
     currentPlayer,
     showCorrectPack,
 }) => {
-    //TODO: swiching places after fill all the cards triger the animation and not the dnd
     return (
         <Pack>
-            {showCorrectPack.map((movie: Movie | undefined, index: number) => {
-                if (!movie) movie = currentPlayer.electedCards?.order[index]?.movie;
+            {showCorrectPack.map((card: Card | undefined, index: number) => {
                 return (
-                    <motion.span key={movie?.id || index} layout transition={springAnimation}>
-                        <ElectedCard index={index} player={currentPlayer} movie={movie} />
-                    </motion.span>
+                    <React.Fragment key={index}>
+                        <ElectedCard index={index} player={currentPlayer} card={card} />
+                    </React.Fragment>
                 );
             })}
         </Pack>

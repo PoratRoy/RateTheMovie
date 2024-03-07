@@ -1,20 +1,18 @@
-
 import { PACK_CARDS_NUM } from "../models/constant";
-import { Movie } from "../models/types/movie";
+import { Card } from "../models/types/card";
 import { Player } from "../models/types/player";
-import { getMoviesByCards } from "./movie";
+import { getElectedCardsFromCards } from "./card";
 
-export const isFinishPlacingElectedCards = (player: Player) => {
-    //TODO: fix it [player]
-    const moviesSelectedOrder: (Movie[] | undefined)[] = [player].map((player: Player) => {
-        const electedCardsOrder = player.electedCards.order;
+export const isFinishPlacingElectedCards = (player: Player): Card[] => {
+    let cardsSelectedOrder: Card[] | undefined;
+    const electedCardsOrder = player.electedCards.order;
 
-        if (electedCardsOrder && electedCardsOrder.length === PACK_CARDS_NUM) {
-            const movies: Movie[] = getMoviesByCards(electedCardsOrder);
-            if (movies.length === PACK_CARDS_NUM) {
-                return movies;
-            }
+    if (electedCardsOrder && electedCardsOrder.length === PACK_CARDS_NUM) {
+        const cards: Card[] = getElectedCardsFromCards(electedCardsOrder);
+        if (cards.length === PACK_CARDS_NUM) {
+            cardsSelectedOrder = cards;
         }
-    });
-    return moviesSelectedOrder[0] ? moviesSelectedOrder[0] : [...Array(PACK_CARDS_NUM)];
+    }
+
+    return cardsSelectedOrder ? cardsSelectedOrder : [...Array(PACK_CARDS_NUM)];
 };

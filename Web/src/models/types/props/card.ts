@@ -28,7 +28,7 @@ export type ElectedCardWrapperProps = ChildernsProps & {
 
 export type ResultCardWrapperProps = ChildernsProps & {
     rate: number | string;
-    isRightChoice: boolean;
+    isRightChoice?: boolean;
 };
 
 export type PlayerCardProps = {
@@ -60,7 +60,7 @@ export type CardImgShadowProps = {
 export type ElectedCardProps = {
     index: number;
     player: Player;
-    movie: Movie | undefined;
+    card: Card | undefined;
 };
 
 export type PlaceholderProps = {
@@ -86,6 +86,6 @@ export type ElectedShadowProps = IdProps & {
 
 export type ResultCardProps = {
     currentPlayer: Player;
-    movie: Movie | undefined;
+    card: Card | undefined;
     index: number;
 };

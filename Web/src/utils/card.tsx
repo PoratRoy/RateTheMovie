@@ -41,3 +41,13 @@ export const setPlaceholderText = (index: number): string | undefined => {
         return "Best";
     }
 };
+
+export const getElectedCardsFromCards = (electedCardsOrder: (Card | undefined)[]) => {
+    let cards: Card[] = [];
+    electedCardsOrder.forEach((card: Card | undefined) => {
+        if (card && card.id !== undefined) {
+            cards.push(card);
+        }
+    });
+    return cards;
+};
