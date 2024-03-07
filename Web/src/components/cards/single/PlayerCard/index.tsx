@@ -17,8 +17,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, card, loading }) => {
     const [openShadow, setOpenShadow] = useState<boolean>(false);
 
     useEffect(() => {
-        setIsFlipCard(loading != undefined && !loading);
-    }, []);
+        setIsFlipCard(loading === false);
+    }, [loading]);
 
     const isShadow = position === 0 ? openShadow : false;
     const cardId = `${movie.id}-${player.id}`;

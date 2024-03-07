@@ -18,7 +18,6 @@ const useHandleMovies = () => {
     const { isMulti } = useMod();
 
     const handleMovieCards = (movies: Movie[], mod?: ModOption) => {
-        setFetchLoading(true);
         logMovies(movies);
         const correctMoviesOrder = sortMoviesOrder(movies);
         const correctOrder = initGameCards(correctMoviesOrder || []);

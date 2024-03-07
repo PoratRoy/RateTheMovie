@@ -38,3 +38,8 @@ export type RoundTitleProps = {
     current: number;
     total: number;
 };
+
+export type CountDownProps = {
+    closeTimer: () => void;
+    time: number;
+}

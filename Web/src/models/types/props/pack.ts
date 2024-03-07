@@ -9,6 +9,7 @@ export type PackProps = ChildernsProps & {
 
 export type PackOfCardsProps = {
     player: Player;
+    cardLoading: boolean;
 };
 
 export type PackWrapperProps = ChildernsProps;

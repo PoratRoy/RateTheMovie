@@ -1,14 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
+import { START_TIMER } from "../../models/constant";
 
 const useStartGame = () => {
     const { fetchLoading, gameCards, currentPlayer } = useGamePlayContext();
-    const { rivalPlayers, setStartGame } = useSocketContext();
+    const { rivalPlayers, setStartGame, startGame } = useSocketContext();
     const { isMulti, isSingle } = useMod();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const isGameRef = useRef<boolean>(true);
+    const [timerExpired, setTimerExpired] = useState<boolean>(false);
+
+    const [cardLoading, setCardLoading] = useState<boolean>(true);
+    const [showTimer, setShowTimer] = useState<boolean>(true);
+    const timeout = useMemo(() => START_TIMER * 1000 + 500, []);
 
     useEffect(() => {
         if (isMulti() && currentPlayer?.role === "host") {
@@ -23,25 +28,51 @@ const useStartGame = () => {
     }, [rivalPlayers, fetchLoading, gameCards]);
 
     useEffect(() => {
-        if (isSingle()) {
-            if (gameCards[0].id === undefined) {
-                const timeoutId = setTimeout(() => {
-                    if (isGameRef.current === false) {
+        let timer: ReturnType<typeof setTimeout>;
+        let isMounted = true;
+
+        const startTimer = () => {
+            setTimerExpired(false);
+            if (isSingle()) {
+                timer = setTimeout(() => {
+                    if (isMounted) {
+                        setTimerExpired(true);
                         setStartGame(true);
                     }
-                }, 3000);
-                return () => clearTimeout(timeoutId);
-            } else {
-                setStartGame(true);
+                }, 10000);
             }
-        }
-    }, [isGameRef.current]);
+        };
+
+        startTimer();
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timer);
+        };
+    }, []);
 
     useEffect(() => {
-        isGameRef.current = fetchLoading;
+        if (fetchLoading === false && timerExpired) {
+            setStartGame(true);
+        }
     }, [fetchLoading]);
 
-    return { isLoading };
+    useEffect(() => {
+        if (isMulti()) {
+            if (startGame) {
+                setTimeout(() => {
+                    setCardLoading(false);
+                }, timeout);
+            } else {
+                setCardLoading(true);
+            }
+        } else {
+            setShowTimer(false);
+            setCardLoading(false);
+        }
+    }, [startGame]);
+
+    return { isLoading, cardLoading, showTimer, closeTimer: () => setShowTimer(false) };
 };
 
 export default useStartGame;

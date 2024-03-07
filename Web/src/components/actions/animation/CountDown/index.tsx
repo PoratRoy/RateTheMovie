@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import style from "./CountDown.module.css";
+import { CountDownProps } from "../../../../models/types/props/common";
 
-const CountDown: React.FC = () => {
-    const time = 3;
-    const [second, setSecond] = useState<string | number>(time);
+const CountDown: React.FC<CountDownProps> = ({ time, closeTimer }) => {
+    const [counter, setCounter] = useState<number>(time);
 
     useEffect(() => {
-        for (let s = time; s <= 0; s--) {
-            const intervalId = setInterval(() => {
-                setSecond(s === 0 ? "GO" : s);
+        let timer: any;
+        if (counter === -1) {
+            closeTimer();
+        } else {
+            timer = setInterval(() => {
+                setCounter((prev) => prev - 1);
             }, 1000);
-
-            return () => clearInterval(intervalId);
         }
-    }, []);
+        return () => clearInterval(timer);
+    }, [counter]);
 
     return (
-        <motion.div
-            initial={{ scale: 0.1 }}
-            animate={{
-                scale: [1, 0.1],
-                transition: { duration: 1, repeat: time },
-            }}
-            className={style.countDown}
-        >
-            {second}
-        </motion.div>
+        <div className={style.countDown}>
+            <div
+                className={style.countDownBox}
+                style={{ animation: `fadeOut ${time + 1}s ease forwards` }}
+            />
+            <h1 className={style.countDownNumber}>{counter === 0 ? "GO" : counter}</h1>
+        </div>
     );
 };
 

@@ -27,6 +27,7 @@ export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInpu
 
 export type PlayerLayoutProps = {
     player: Player;
+    cardLoading: boolean;
 };
 
 export type GameLayoutProps = ChildernsProps;

@@ -6,16 +6,16 @@ import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { Card } from "../../../../models/types/card";
 import { PackOfCardsProps } from "../../../../models/types/props/pack";
 
-const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
-    const { fetchLoading, gameCards } = useGamePlayContext();
+const PackOfCards: React.FC<PackOfCardsProps> = ({ player, cardLoading }) => {
+    const { gameCards } = useGamePlayContext();
     return (
         <React.Fragment>
-            {!gameCards[0]?.movie.imdbID && !fetchLoading ? (
+            {!gameCards[0]?.movie.imdbID && !cardLoading ? (
                 <NotEnoughMovies />
             ) : (
                 <Pack packDisplay="wrap">
                     {gameCards.map((card: Card, i: number) => (
-                        <PlayerCard key={i} card={card} player={player} loading={fetchLoading} />
+                        <PlayerCard key={i} card={card} player={player} loading={cardLoading} />
                     ))}
                 </Pack>
             )}
