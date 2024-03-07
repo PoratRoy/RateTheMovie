@@ -1,9 +1,9 @@
 import { Card } from "./card";
 import { Game } from "./game";
-import { Player } from "./player";
+import { RivalPlayer } from "./player";
 
 export type WarRoomProps = {
-    players: Player[];
+    players: RivalPlayer[];
     gameCards: Card[];//TODO: maybe I only need the movies
     game?: Game;
 };

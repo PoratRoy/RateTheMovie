@@ -1,13 +1,13 @@
 import { Card } from "./card";
 import { Game } from "./game";
-import { Player } from "./player";
+import { RivalPlayer } from "./player";
 
 export type WarRooms = {
     [key: string]: WarRoomProps;
 };
 
 export type WarRoomProps = {
-    players: Player[];
+    players: RivalPlayer[];
     gameCards: Card[];
     game?: Game;
 };

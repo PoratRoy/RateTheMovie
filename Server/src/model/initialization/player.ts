@@ -1,5 +1,5 @@
 import { getRandomNumber } from "../../utils/calc";
-import { Player } from "../types/player";
+import { RivalPlayer } from "../types/player";
 import { PlayerRole } from "../types/union";
 
 //TODO: not in use
@@ -10,6 +10,6 @@ export const initPlayer = (playerId: string, index: number, role: PlayerRole = "
         avater: getRandomNumber(0, 9),
         role,
         score: 0,
-        electedCards: { order: [] },
-    } as Player;
+        cards: [],
+    } as RivalPlayer;
 };

@@ -1,14 +1,27 @@
 import { Socket } from "socket.io";
 import { ISocket } from "../model/interfaces/socket";
-import { Player } from "../model/types/player";
+import { RivalPlayer } from "../model/types/player";
 import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
 import { initWarRoom } from "../utils/warRoom";
 import { Game } from "../model/types/game";
-import { Card } from "../model/types/card";
+import { Card, RivalCard } from "../model/types/card";
 import { PACK_CARDS_NUM } from "../model/constant";
 import { getPlayerWarRoomInfo } from "./utils";
-import { CreateNewRoom, Disconnect, GameStarted, PlayerDisconnect, PlayerJoinRoom, PlayerJoined, PlayerWantToJoin, StartGame, UpdateGame, UpdateGameCards } from "../model/constant/events";
+import {
+    CreateNewRoom,
+    Disconnect,
+    GameStarted,
+    PlayerDisconnect,
+    PlayerJoinRoom,
+    PlayerJoined,
+    PlayerSubmitedHisCards,
+    PlayerWantToJoin,
+    StartGame,
+    SubmitElectedCards,
+    UpdateGame,
+    UpdateGameCards,
+} from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
 
 class GameSocket implements ISocket {
@@ -31,11 +44,11 @@ class GameSocket implements ISocket {
             PlayerJoinRoom,
             (
                 roomId: string,
-                player: Player,
+                player: RivalPlayer,
                 callback: (
                     props: WarRoomProps,
-                    currecntPlayer: Player,
-                    rivalPlayers: Player[],
+                    currecntPlayer: RivalPlayer,
+                    rivalPlayers: RivalPlayer[],
                 ) => void,
             ) => {
                 logEvent(PlayerJoinRoom);
@@ -43,48 +56,46 @@ class GameSocket implements ISocket {
                 const playerId = socket.id;
                 const updatedPlayer = { ...player, id: playerId };
                 const warRoom = this.warRooms[roomId];
-                let rivalPlayers: Player[] = [];
+                let rivalPlayers: RivalPlayer[] = [];
                 if (warRoom) {
                     rivalPlayers = [...warRoom.players];
                     warRoom.players.push(updatedPlayer);
                     this.warRooms[roomId] = warRoom;
                 } else {
-                    console.error("Error: War room not found")
+                    console.error("Error: War room not found");
                 }
                 socket.to(roomId).emit(PlayerJoined, updatedPlayer);
                 callback(this.warRooms[roomId], updatedPlayer, rivalPlayers);
-                logBack({warRoom: this.warRooms[roomId], updatedPlayer, rivalPlayers});
+                logBack({ warRoom: this.warRooms[roomId], updatedPlayer, rivalPlayers });
             },
         );
 
         socket.on(UpdateGame, (game: Game) => {
-            logEvent(UpdateGame);
-            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-            if (warRoom && game.roomId) {
-                warRoom.game = game;
-                this.warRooms[game.roomId] = warRoom;
-            }
-            logFinish(this.warRooms);
+            this.wrapper(UpdateGame, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && game.roomId) {
+                    warRoom.game = game;
+                    this.warRooms[game.roomId] = warRoom;
+                }
+            });
         });
 
         socket.on(UpdateGameCards, (cards: Card[]) => {
-            logEvent(UpdateGameCards);
-            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-            if (warRoom && warRoom.game?.roomId && cards.length === PACK_CARDS_NUM) {
-                warRoom.gameCards = cards;
-                this.warRooms[warRoom.game?.roomId] = warRoom;
-            }
-            logFinish(this.warRooms);
+            this.wrapper(UpdateGameCards, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && warRoom.game?.roomId && cards.length === PACK_CARDS_NUM) {
+                    warRoom.gameCards = cards;
+                    this.warRooms[warRoom.game?.roomId] = warRoom;
+                }
+            });
         });
 
         socket.on(
             PlayerWantToJoin,
             (roomId: string | undefined, callback: (props: WarRoomDetails) => void) => {
                 logEvent(PlayerWantToJoin);
-                console.log("PlayerWantToJoin1", roomId);
                 if (roomId) {
                     const warRoom = this.warRooms[roomId];
-                    console.log("PlayerWantToJoin2", warRoom);
                     if (warRoom) {
                         callback({ numberOfPlayers: warRoom.players.length, roomId });
                         logBack({ numberOfPlayers: warRoom.players.length, roomId });
@@ -97,30 +108,54 @@ class GameSocket implements ISocket {
         );
 
         socket.on(StartGame, () => {
-            logEvent(StartGame);
-            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-            if (warRoom && warRoom.game) {
-                const { game: {roomId} } = warRoom;
-                socket.to(roomId).emit(GameStarted, warRoom);
-            }
-            logFinish(this.warRooms);
+            this.wrapper(StartGame, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && warRoom.game) {
+                    const {
+                        game: { roomId },
+                    } = warRoom;
+                    socket.to(roomId).emit(GameStarted, warRoom);
+                }
+            });
+        });
+
+        socket.on(SubmitElectedCards, (cards: RivalCard[]) => {
+            this.wrapper(SubmitElectedCards, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        const index = players.indexOf(player);
+                        players[index].cards = cards;
+                        this.warRooms[game.roomId] = warRoom;
+                        socket.to(roomId).emit(PlayerSubmitedHisCards, warRoom);
+                    }
+                }
+            })
         });
 
         socket.on(Disconnect, () => {
-            logEvent(Disconnect);
-            const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
-            if (warRoom && player) {
-                const { game, players } = warRoom;
-                if (game?.roomId) {
-                    const index = players.indexOf(player);
-                    players.splice(index, 1);
-                    this.warRooms[game.roomId] = warRoom;
-                    socket.to(game?.roomId).emit(PlayerDisconnect, player);
+            this.wrapper(Disconnect, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const index = players.indexOf(player);
+                        players.splice(index, 1);
+                        this.warRooms[game.roomId] = warRoom;
+                        socket.to(game?.roomId).emit(PlayerDisconnect, player);
+                    }
                 }
-            }
-            logFinish(this.warRooms);
+            });
         });
     }
+
+    wrapper = (event: string, func: any) => {
+        logEvent(event);
+        func();
+        logFinish(this.warRooms);
+    };
 
     middlewareImplementation(socket: Socket, next: any) {
         console.info("Connection start for user ID: ", socket.id);

@@ -13,8 +13,8 @@ export type Player = {
 export type RivalPlayer = {
     id: string;
     name: string;
+    role: PlayerRole;
     avater: number;
     score: number;
-    order: RivalCard;
-    isReady?: boolean;//TODO: do I need this?
+    cards: RivalCard[];
 };

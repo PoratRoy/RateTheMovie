@@ -5,7 +5,8 @@ export type Card = {
   movie: Movie;
 };
 
-export type ElectedCards = {
-  order: (Card | undefined)[];
-  correctOrder?: Card[];
+export type RivalCard = {
+  id: string;
+  movie: Movie;
+  isCorrect: boolean;
 };
