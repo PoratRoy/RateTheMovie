@@ -1,13 +1,18 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
+import { useSocketContext } from "../../context/SocketContext";
 import { ElectedCards } from "../../models/types/card";
 import { Player } from "../../models/types/player";
 import { isCardsOrdrValid } from "../../utils/correctOrder";
+import useMod from "./useMod";
 
 const useFinish = () => {
-    const { setCurrentPlayer, currentPlayer, setGame } = useGamePlayContext();
+    const { setCurrentPlayer, currentPlayer, setGame, setFinishRound } = useGamePlayContext();
+    const { handleSubmitElectedCards } = useSocketContext();
+    const { isMulti } = useMod();
 
     const finishGame = () => {
         setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
+        setFinishRound(true);
 
         const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] =
             isCardsOrdrValid(currentPlayer);
@@ -27,6 +32,10 @@ const useFinish = () => {
                             playerScore += 100;
                         }
                     }
+                }
+
+                if(isMulti()){
+                    handleSubmitElectedCards(electedCards);
                 }
 
                 return {

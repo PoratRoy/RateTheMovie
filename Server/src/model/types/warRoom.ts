@@ -14,5 +14,6 @@ export type WarRooms = {
 
 export type WarRoomDetails = {
     numberOfPlayers: number;
+    numberOfFinishedPlayers: number;
     roomId?: string;
 }

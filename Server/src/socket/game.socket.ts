@@ -3,7 +3,7 @@ import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
-import { initWarRoom } from "../utils/warRoom";
+import { initWarRoom, initWarRoomDetails, setWarRoomDetails } from "../utils/warRoom";
 import { Game } from "../model/types/game";
 import { Card, ElectedCards } from "../model/types/card";
 import { PACK_CARDS_NUM } from "../model/constant";
@@ -15,12 +15,14 @@ import {
     PlayerDisconnect,
     PlayerJoinRoom,
     PlayerJoined,
-    PlayerSubmitedHisCards,
+    PlayerFinishPlacingCards,
     PlayerWantToJoin,
     StartGame,
     SubmitElectedCards,
     UpdateGame,
     UpdateGameCards,
+    FinishRound,
+    RoundFinished,
 } from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
 
@@ -36,8 +38,9 @@ class GameSocket implements ISocket {
             logEvent(CreateNewRoom);
             const roomId = v4();
             this.warRooms[roomId] = initWarRoom();
-            callback({ numberOfPlayers: 0, roomId });
-            logBack({ numberOfPlayers: 0, roomId });
+            const details = initWarRoomDetails(roomId);
+            callback(details);
+            logBack(details);
         });
 
         socket.on(
@@ -97,12 +100,13 @@ class GameSocket implements ISocket {
                 if (roomId) {
                     const warRoom = this.warRooms[roomId];
                     if (warRoom) {
-                        callback({ numberOfPlayers: warRoom.players.length, roomId });
-                        logBack({ numberOfPlayers: warRoom.players.length, roomId });
+                        const details = setWarRoomDetails(warRoom, roomId);
+                        callback(details);
+                        logBack(details);
                     }
                 } else {
-                    callback({ numberOfPlayers: 0 });
-                    logBack({ numberOfPlayers: 0 });
+                    callback(initWarRoomDetails());
+                    logBack(initWarRoomDetails());
                 }
             },
         );
@@ -129,10 +133,23 @@ class GameSocket implements ISocket {
                         const index = players.indexOf(player);
                         players[index].electedCards = electedCards;
                         this.warRooms[game.roomId] = warRoom;
-                        socket.to(roomId).emit(PlayerSubmitedHisCards, warRoom);
+                        socket
+                            .to(roomId)
+                            .emit(PlayerFinishPlacingCards, setWarRoomDetails(warRoom, roomId));
                     }
                 }
-            })
+            });
+        });
+
+        socket.on(FinishRound, () => {
+            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+            console.log("FinishRound", warRoom)
+            if (warRoom) {
+                const roomId = warRoom.game?.roomId;
+                if(roomId){
+                    socket.in(roomId).emit(RoundFinished, this.warRooms[roomId]);
+                }
+            }
         });
 
         socket.on(Disconnect, () => {

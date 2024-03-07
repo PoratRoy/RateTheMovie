@@ -14,12 +14,14 @@ import {
     PlayerDisconnect,
     PlayerJoinRoom,
     PlayerJoined,
-    PlayerSubmitedHisCards,
+    PlayerFinishPlacingCards,
     PlayerWantToJoin,
     StartGame,
     SubmitElectedCards,
     UpdateGame,
     UpdateGameCards,
+    FinishRound,
+    RoundFinished,
 } from "../models/constant/socketEvents";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
@@ -63,7 +65,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
-    const { setGame, currentPlayer } = useGamePlayContext();
+    const { setGame } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -119,11 +121,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             PlayerJoinRoom,
             roomId,
             player,
-            async (
-                warRoom: WarRoomProps,
-                currecntPlayer: Player,
-                rivalPlayers: Player[],
-            ) => {
+            async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
                 if (warRoom && currecntPlayer) {
                     setRivalPlayers((prev) => {
                         return [...prev, ...rivalPlayers];
@@ -161,10 +159,18 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setStartGame(true);
         };
 
-        const handlePlayerSubmitedHisCards = (warRoom: WarRoomProps) => {
-            const { players } = warRoom;
-            const rivalPlayers = filterRivalPlayers(players, currentPlayer?.id);
-            setRivalPlayers(rivalPlayers);
+        const handlePlayerFinishPlacingCards = (details: WarRoomDetails) => {
+            const { numberOfFinishedPlayers, numberOfPlayers } = details;
+            if (numberOfFinishedPlayers === numberOfPlayers) {
+                console.log("All players finished placing cards");
+                socket.emit(FinishRound);
+            }
+        };
+
+        const handleRoundFinished = (warRoom: WarRoomProps) => {
+            const { game, gameCards, players } = warRoom;
+            console.log("Round finished", game);
+            console.log("Round players", players);
         };
 
         const handlePlayerDisconnected = (player: Player) => {
@@ -177,7 +183,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         socket.on(PlayerJoined, handlePlayerJoined);
         socket.on(GameStarted, handleGameStarted);
-        socket.on(PlayerSubmitedHisCards, handlePlayerSubmitedHisCards);
+        socket.on(PlayerFinishPlacingCards, handlePlayerFinishPlacingCards);
+        socket.on(RoundFinished, handleRoundFinished);
         socket.on(PlayerDisconnect, handlePlayerDisconnected);
 
         return () => {
