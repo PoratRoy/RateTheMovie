@@ -1,0 +1,20 @@
+.placeContainer{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border-radius: var(--primary-border-radius);
+}
+
+.placeTopThree{
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    text-align: center;
+}
+
+.placeNormal{
+    display: none;
+}

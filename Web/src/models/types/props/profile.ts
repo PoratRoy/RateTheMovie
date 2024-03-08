@@ -18,3 +18,12 @@ export type PlayerProfileProps = {
 export type RivalPlayerProfileProps = {
     player: Player;
 };
+
+export type ResultPlayerProfileProps = {
+    player: Player;
+    place: number;
+};
+
+export type PlaceProps = ChildernsProps & {
+    place: number;
+};

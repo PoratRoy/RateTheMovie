@@ -1,4 +1,5 @@
 import { IdProps } from ".";
+import { Player } from "../player";
 import { CardSize, LogoSize } from "../union";
 
 export type ImgProps = {
@@ -43,3 +44,7 @@ export type CountDownProps = {
     closeTimer: () => void;
     time: number;
 }
+
+export type GameOverBoardProps = {
+    players: Player[];
+};

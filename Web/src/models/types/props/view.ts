@@ -31,4 +31,6 @@ export type GameOverModalProps = CloseProps;
 
 export type RoundEndModalProps = CloseProps;
 
+export type MultiRoundEndModalProps = CloseProps;
+
 export type CloseBtnProps = CloseProps;

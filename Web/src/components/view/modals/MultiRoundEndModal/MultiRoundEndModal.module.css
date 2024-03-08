@@ -1,25 +1,23 @@
-.roundEndModal{
+.MultiRoundEndModal {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     gap: 1em;
 }
 
-.roundEndScore{
+.MultiRoundEndScore {
     font-size: 1.1rem;
 }
 
-.roundEndModalBtns{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.MultiRoundEndModalBtns {
     gap: 1em;
+    width: 100%;
 }
 
-.roundEndModalBtnsBtns{
+.MultiRoundEndModalBtnsBtns {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1em;
     max-width: 90%;
 }

@@ -10,11 +10,11 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
         <ErrorContextProvider>
             <GamePlayContextProvider>
-                <SocketContextProvider>
-                    <AnimationContextProvider>
+                <AnimationContextProvider>
+                    <SocketContextProvider>
                         <DndContextProvider>{children}</DndContextProvider>
-                    </AnimationContextProvider>
-                </SocketContextProvider>
+                    </SocketContextProvider>
+                </AnimationContextProvider>
             </GamePlayContextProvider>
         </ErrorContextProvider>
     );

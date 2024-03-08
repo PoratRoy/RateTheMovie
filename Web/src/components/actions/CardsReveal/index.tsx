@@ -5,6 +5,7 @@ import { getCorrectOrder } from "../../../utils/correctOrder";
 import PackOfResult from "../../cards/pack/PackOfResult";
 import style from "./CardsReveal.module.css";
 import { Card } from "../../../models/types/card";
+import { REVEAL_ACTION_ID } from "../../../models/constant";
 
 const CardsReveal: React.FC = () => {
     const [revealCards, setRevealCards] = useState<Card[]>([]);
@@ -28,7 +29,7 @@ const CardsReveal: React.FC = () => {
     };
 
     return (
-        <section className={style.cardsReveal}>
+        <section className={style.cardsReveal} id={REVEAL_ACTION_ID}>
             <PackOfResult revealCards={revealCards} currentPlayer={currentPlayer} />
             <RevealOrderBtn onClicked={handleReveal} />
         </section>

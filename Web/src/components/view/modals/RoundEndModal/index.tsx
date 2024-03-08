@@ -25,15 +25,17 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close }) => {
             <section className={style.roundEndModal}>
                 <div className={style.roundEndScore}>Score: {currentPlayer?.score}</div>
                 <CardsReveal />
-                {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
                 <section className={style.roundEndModalBtns}>
-                    <QuitCircleBtn close={close} />
-                    <MoviesBtn onClicked={() => {}} />
-                    {gameOver ? (
-                        <LeaderBoardCircleBtn close={close} />
-                    ) : (
-                        <RestartCircleBtn close={close} />
-                    )}
+                    {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
+                    <section className={style.roundEndModalBtnsBtns}>
+                        <QuitCircleBtn close={close} />
+                        <MoviesBtn onClicked={() => {}} />
+                        {gameOver ? (
+                            <LeaderBoardCircleBtn close={close} />
+                        ) : (
+                            <RestartCircleBtn close={close} />
+                        )}
+                    </section>
                 </section>
             </section>
         </Modal>

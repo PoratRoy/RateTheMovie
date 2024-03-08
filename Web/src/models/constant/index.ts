@@ -39,3 +39,8 @@ export const DOUBLE_CLICK_ID = "double-click";
 export const SHADOW_CARD_TITLE_ID = "shadow-card-title";
 
 export const LOADING_START_BTN_ID = "loading-start-btn";
+
+export const REVEAL_ACTION_ID = "reveal-action";
+export const SCORE_ID = "score";
+export const GAMEOVER_BOARD_ID = "gameover-board";
+export const NEXT_ROUND_BTN_ID = "next-round-btn";

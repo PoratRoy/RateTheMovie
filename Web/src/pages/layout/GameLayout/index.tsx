@@ -8,7 +8,7 @@ import { GameLayoutProps } from "../../../models/types/props/layout";
 import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
 import useStartGame from "../../../hooks/gameplay/useStartGame";
-import RoundEndModal from "../../../components/view/modals/RoundEndModal";
+import MultiRoundEndModal from "../../../components/view/modals/MultiRoundEndModal";
 import useShowModal from "../../../hooks/global/useShowModal";
 import { useAnimationContext } from "../../../context/AnimationContext";
 
@@ -39,7 +39,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
-                    {showModal ? <RoundEndModal close={handleClose} /> : null}
+                    {showModal ? <MultiRoundEndModal close={handleClose} /> : null}
                 </section>
             ) : (
                 <LoadingPage

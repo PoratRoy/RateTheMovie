@@ -44,6 +44,7 @@ export const SocketContext = createContext<{
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
     handleSubmitElectedCards: (electedCards: ElectedCards) => void;
+    leaderBoardPlayers: Player[];
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
@@ -56,12 +57,14 @@ export const SocketContext = createContext<{
     handleCards: () => {},
     handleStartGame: () => {},
     handleSubmitElectedCards: () => {},
+    leaderBoardPlayers: [],
 });
 
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
+    const [leaderBoardPlayers, setLeaderBoardPlayers] = useState<Player[]>([]);
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
@@ -162,15 +165,13 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         const handlePlayerFinishPlacingCards = (details: WarRoomDetails) => {
             const { numberOfFinishedPlayers, numberOfPlayers } = details;
             if (numberOfFinishedPlayers === numberOfPlayers) {
-                console.log("All players finished placing cards");
                 socket.emit(FinishRound);
             }
         };
 
         const handleRoundFinished = (warRoom: WarRoomProps) => {
-            const { game, gameCards, players } = warRoom;
-            console.log("Round finished", game);
-            console.log("Round players", players);
+            const { players } = warRoom;
+            setLeaderBoardPlayers(players);
         };
 
         const handlePlayerDisconnected = (player: Player) => {
@@ -208,6 +209,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleCards,
                 handleStartGame,
                 handleSubmitElectedCards,
+                leaderBoardPlayers,
             }}
         >
             {children}
