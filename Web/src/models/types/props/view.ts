@@ -34,3 +34,19 @@ export type RoundEndModalProps = CloseProps;
 export type MultiRoundEndModalProps = CloseProps;
 
 export type CloseBtnProps = CloseProps;
+
+export type AdditionalBtnsProps = CloseProps & {
+    gameOver: boolean;
+    isSingle?: boolean;
+};
+
+export type RoundModalBtnsProps = CloseProps & {
+    id?: string;
+    gameOver: boolean;
+    isSingle?: boolean;
+};
+
+export type PlayerScoreProps = {
+    id?: string;
+    score: number;
+};

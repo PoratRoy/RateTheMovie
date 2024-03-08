@@ -14,10 +14,10 @@ import {
     PlayerDisconnect,
     PlayerJoinRoom,
     PlayerJoined,
-    PlayerFinishPlacingCards,
+    PlayerFinished,
     PlayerWantToJoin,
     StartGame,
-    SubmitElectedCards,
+    PlayerFinish,
     UpdateGame,
     UpdateGameCards,
     FinishRound,
@@ -43,7 +43,7 @@ export const SocketContext = createContext<{
     ) => void;
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
-    handleSubmitElectedCards: (electedCards: ElectedCards) => void;
+    handlePlayerFinish: (electedCards: ElectedCards, score: number) => void;
     leaderBoardPlayers: Player[];
 }>({
     rivalPlayers: [],
@@ -56,7 +56,7 @@ export const SocketContext = createContext<{
     handlePlayerJoinRoom: () => {},
     handleCards: () => {},
     handleStartGame: () => {},
-    handleSubmitElectedCards: () => {},
+    handlePlayerFinish: () => {},
     leaderBoardPlayers: [],
 });
 
@@ -144,8 +144,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit(StartGame);
     };
 
-    const handleSubmitElectedCards = (electedCards: ElectedCards) => {
-        socket.emit(SubmitElectedCards, electedCards);
+    const handlePlayerFinish = (electedCards: ElectedCards, score: number) => {
+        socket.emit(PlayerFinish, electedCards ,score);
     };
 
     useEffect(() => {
@@ -162,7 +162,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setStartGame(true);
         };
 
-        const handlePlayerFinishPlacingCards = (details: WarRoomDetails) => {
+        const handlePlayerFinished = (details: WarRoomDetails) => {
             const { numberOfFinishedPlayers, numberOfPlayers } = details;
             if (numberOfFinishedPlayers === numberOfPlayers) {
                 socket.emit(FinishRound);
@@ -184,7 +184,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         socket.on(PlayerJoined, handlePlayerJoined);
         socket.on(GameStarted, handleGameStarted);
-        socket.on(PlayerFinishPlacingCards, handlePlayerFinishPlacingCards);
+        socket.on(PlayerFinished, handlePlayerFinished);
         socket.on(RoundFinished, handleRoundFinished);
         socket.on(PlayerDisconnect, handlePlayerDisconnected);
 
@@ -208,7 +208,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handlePlayerJoinRoom,
                 handleCards,
                 handleStartGame,
-                handleSubmitElectedCards,
+                handlePlayerFinish,
                 leaderBoardPlayers,
             }}
         >

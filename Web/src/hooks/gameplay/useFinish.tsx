@@ -7,7 +7,7 @@ import useMod from "./useMod";
 
 const useFinish = () => {
     const { setCurrentPlayer, currentPlayer, setGame, setFinishRound } = useGamePlayContext();
-    const { handleSubmitElectedCards } = useSocketContext();
+    const { handlePlayerFinish } = useSocketContext();
     const { isMulti } = useMod();
 
     const finishGame = () => {
@@ -35,7 +35,7 @@ const useFinish = () => {
                 }
 
                 if(isMulti()){
-                    handleSubmitElectedCards(electedCards);
+                    handlePlayerFinish(electedCards, playerScore);
                 }
 
                 return {

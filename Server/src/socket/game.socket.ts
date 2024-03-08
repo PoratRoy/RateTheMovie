@@ -15,10 +15,10 @@ import {
     PlayerDisconnect,
     PlayerJoinRoom,
     PlayerJoined,
-    PlayerFinishPlacingCards,
+    PlayerFinish,
     PlayerWantToJoin,
     StartGame,
-    SubmitElectedCards,
+    PlayerFinished,
     UpdateGame,
     UpdateGameCards,
     FinishRound,
@@ -123,8 +123,8 @@ class GameSocket implements ISocket {
             });
         });
 
-        socket.on(SubmitElectedCards, (electedCards: ElectedCards) => {
-            this.wrapper(SubmitElectedCards, () => {
+        socket.on(PlayerFinish, (electedCards: ElectedCards, score: number) => {
+            this.wrapper(PlayerFinish, () => {
                 const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
                 if (warRoom && player) {
                     const { game, players } = warRoom;
@@ -132,10 +132,11 @@ class GameSocket implements ISocket {
                         const { roomId } = game;
                         const index = players.indexOf(player);
                         players[index].electedCards = electedCards;
+                        players[index].score = score;
                         this.warRooms[game.roomId] = warRoom;
                         socket
                             .to(roomId)
-                            .emit(PlayerFinishPlacingCards, setWarRoomDetails(warRoom, roomId));
+                            .emit(PlayerFinished, setWarRoomDetails(warRoom, roomId));
                     }
                 }
             });
@@ -143,11 +144,14 @@ class GameSocket implements ISocket {
 
         socket.on(FinishRound, () => {
             const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-            console.log("FinishRound", warRoom)
+            console.log("FinishRound", warRoom);
             if (warRoom) {
                 const roomId = warRoom.game?.roomId;
-                if(roomId){
+                if (roomId) {
                     socket.in(roomId).emit(RoundFinished, this.warRooms[roomId]);
+                    // warRoom.players.forEach((player) => {
+                    //     socket.broadcast.to(player.id).emit(RoundFinished, this.warRooms[roomId]);
+                    // });
                 }
             }
         });

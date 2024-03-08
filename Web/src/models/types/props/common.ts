@@ -45,6 +45,6 @@ export type CountDownProps = {
     time: number;
 }
 
-export type GameOverBoardProps = {
+export type RankingBoardProps = {
     players: Player[];
 };

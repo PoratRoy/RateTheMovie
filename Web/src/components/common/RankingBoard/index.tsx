@@ -1,30 +1,30 @@
-import React from "react";
-import style from "./GameOverBoard.module.css";
-import { GameOverBoardProps } from "../../../models/types/props/common";
-import { groupPlayersByRank, sortPlayersByScore } from "../../../utils/calc";
+import React, { useCallback } from "react";
+import style from "./RankingBoard.module.css";
+import { RankingBoardProps } from "../../../models/types/props/common";
+import { sortPlayersByScore } from "../../../utils/calc";
 import ResultPlayerProfile from "../../profile/ResultPlayerProfile";
 import { Player } from "../../../models/types/player";
 import { GAMEOVER_BOARD_ID } from "../../../models/constant";
 import { DisplayNone } from "../../../style/style";
+import { groupPlayersByRank } from "../../../utils/ranking";
 
-const GameOverBoard: React.FC<GameOverBoardProps> = ({ players }) => {
-    //TODO: useCallback
-    const sortedPlayers = sortPlayersByScore(players);
-    const playersOrder = groupPlayersByRank(sortedPlayers);
-    const levelOne = playersOrder[0];
-    const levelTwo = playersOrder[1];
-    const levelThree = playersOrder[2];
+const RankingBoard: React.FC<RankingBoardProps> = ({ players }) => {
+    const sortedPlayers = useCallback(() => sortPlayersByScore(players), [players]);
+    const playersOrder = useCallback(() => groupPlayersByRank(sortedPlayers()), [sortedPlayers]);
+    const levelOne = playersOrder()[0];
+    const levelTwo = playersOrder()[1];
+    const levelThree = playersOrder()[2];
 
     return (
         <section id={GAMEOVER_BOARD_ID} style={DisplayNone}>
             {!levelOne[0] || !levelTwo[0] ? (
                 <React.Fragment />
             ) : (
-                <section className={style.gameOverBoard}>
-                    <div className={style.gameOverBoardLevelOne}>
+                <section className={style.rankingBoard}>
+                    <div className={style.rankingBoardLevelOne}>
                         <ResultPlayerProfile player={levelOne[0]} place={1} />
                     </div>
-                    <div className={style.gameOverBoardLevelTwo}>
+                    <div className={style.rankingBoardLevelTwo}>
                         {levelTwo.map((player: Player, index: number) => {
                             return (
                                 <React.Fragment key={index}>
@@ -33,7 +33,7 @@ const GameOverBoard: React.FC<GameOverBoardProps> = ({ players }) => {
                             );
                         })}
                     </div>
-                    <div className={style.gameOverBoardLevelThree}>
+                    <div className={style.rankingBoardLevelThree}>
                         {levelThree &&
                             levelThree.map((player: Player, index: number) => {
                                 return (
@@ -49,4 +49,4 @@ const GameOverBoard: React.FC<GameOverBoardProps> = ({ players }) => {
     );
 };
 
-export default GameOverBoard;
+export default RankingBoard;

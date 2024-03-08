@@ -4,20 +4,3 @@
     width: 100%;
     gap: 1em;
 }
-
-.MultiRoundEndScore {
-    font-size: 1.1rem;
-}
-
-.MultiRoundEndModalBtns {
-    gap: 1em;
-    width: 100%;
-}
-
-.MultiRoundEndModalBtnsBtns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    max-width: 90%;
-}

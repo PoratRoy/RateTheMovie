@@ -23,13 +23,15 @@ const Place: React.FC<PlaceProps> = ({ children, place }) => {
     }, []);
 
     return (
-        <section style={{ border: `3px solid ${color}` }} className={style.placeContainer}>
+        <section className={style.placeContainer}>
             {isTopThree ? (
                 <div style={{ color }} className={className}>
                     {title}
                 </div>
             ) : null}
-            {children}
+            <section style={{ border: `3px solid ${color}` }} className={style.placeBorder}>
+                {children}
+            </section>
         </section>
     );
 };
