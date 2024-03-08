@@ -24,7 +24,12 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
                 <PlayerScore id={SCORE_ID} score={currentPlayer?.score || 0} />
                 <CardsReveal />
                 <RankingBoard players={leaderBoardPlayers} />
-                <RoundModalBtns id={NEXT_ROUND_BTN_ID} close={close} gameOver={gameOver} isSingle />
+                <RoundModalBtns
+                    id={NEXT_ROUND_BTN_ID}
+                    close={close}
+                    gameOver={gameOver}
+                    role={currentPlayer?.role || "player"}
+                />
             </section>
         </Modal>
     );

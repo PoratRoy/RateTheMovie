@@ -30,6 +30,10 @@ const useGameActions = (close: () => void) => {
         handelNewMovies();
     };
 
+
+    //You have submitted your masterpiece.
+// Let's wait for the others...
+
     const handleContinue = (action: RoundAction) => {
         setRoundNumber(action);
         setNextRound(false);

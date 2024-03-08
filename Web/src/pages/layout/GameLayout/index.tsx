@@ -11,6 +11,8 @@ import useStartGame from "../../../hooks/gameplay/useStartGame";
 import MultiRoundEndModal from "../../../components/view/modals/MultiRoundEndModal";
 import useShowModal from "../../../hooks/global/useShowModal";
 import { useAnimationContext } from "../../../context/AnimationContext";
+import useMod from "../../../hooks/gameplay/useMod";
+import RoundEndModal from "../../../components/view/modals/RoundEndModal";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { finishAnimation, setNextRound } = useAnimationContext();
@@ -20,6 +22,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { scope } = useFinishAnimation(finishRound);
     const { isLoading } = useStartGame();
     const { nextRound } = finishAnimation;
+    const { isMulti } = useMod();
 
     const handleClickStartGame = () => {
         if (rivalPlayers.length >= 1) {
@@ -39,7 +42,13 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
-                    {showModal ? <MultiRoundEndModal close={handleClose} /> : null}
+                    {showModal ? (
+                        isMulti() ? (
+                            <MultiRoundEndModal close={handleClose} />
+                        ) : (
+                            <RoundEndModal close={handleClose} />
+                        )
+                    ) : null}
                 </section>
             ) : (
                 <LoadingPage

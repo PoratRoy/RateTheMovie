@@ -6,18 +6,17 @@ import LeaderBoardCircleBtn from "../../../actions/widgets/btn/LeaderBoardCircle
 import RestartCircleBtn from "../../../actions/widgets/btn/RestartCircleBtn";
 import { AdditionalBtnsProps } from "../../../../models/types/props/view";
 
-const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ gameOver, close, isSingle = true }) => {
+const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ gameOver, close, isSingle }) => {
+    const GameOverBtn = gameOver ? (
+        <LeaderBoardCircleBtn close={close} />
+    ) : (
+        <RestartCircleBtn close={close} />
+    );
     return (
         <section className={style.additionalBtns}>
             <QuitCircleBtn close={close} />
             {isSingle ? <MoviesBtn onClicked={() => {}} /> : null}
-            {isSingle ? (
-                gameOver ? (
-                    <LeaderBoardCircleBtn close={close} />
-                ) : (
-                    <RestartCircleBtn close={close} />
-                )
-            ) : null}
+            {isSingle ? GameOverBtn : null}
         </section>
     );
 };

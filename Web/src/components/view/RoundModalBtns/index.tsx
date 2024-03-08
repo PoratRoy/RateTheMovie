@@ -6,14 +6,18 @@ import PlayAgainBtn from "../../actions/widgets/btn/PlayAgainBtn";
 import NextRoundBtn from "../../actions/widgets/btn/NextRoundBtn";
 import AdditionalBtns from "../core/AdditionalBtns";
 
-const RoundModalBtns: React.FC<RoundModalBtnsProps> = ({ id, close, gameOver, isSingle }) => {
+const RoundModalBtns: React.FC<RoundModalBtnsProps> = ({ id, close, gameOver, isSingle = false, role = "host" }) => {
     return (
-        <section
-            className={style.roundModalBtns}
-            id={id}
-            style={id ? DisplayNone : DisplayFlex}
-        >
-            {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
+        <section className={style.roundModalBtns} id={id} style={id ? DisplayNone : DisplayFlex}>
+            {role === "host" ? (
+                gameOver ? (
+                    <PlayAgainBtn close={close} />
+                ) : (
+                    <NextRoundBtn close={close} />
+                )
+            ) : (
+                <div>Wait for the Host to start the next round</div>
+            )}
             <AdditionalBtns close={close} gameOver={gameOver} isSingle={isSingle} />
         </section>
     );
