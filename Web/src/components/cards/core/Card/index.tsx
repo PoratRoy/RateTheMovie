@@ -14,7 +14,6 @@ const Card: React.FC<CardProps> = ({
     position,
     size = "large",
 }) => {
-
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
 
@@ -23,7 +22,9 @@ const Card: React.FC<CardProps> = ({
             ? style.cardContainerLarge
             : size === "medium"
               ? style.cardContainerMedium
-              : style.cardContainerSmall; //TODOCSS: refactor
+              : size === "small"
+                ? style.cardContainerSmall
+                : style.cardContainerXSmall; //TODOCSS: refactor
 
     return (
         <section id={id} className={sizeClass}>

@@ -1,7 +1,7 @@
 import { Player } from "../player";
 
 export type RankingPlayerProps = {
-    index: number;
+    place: number;
     player: Player;
 };
 

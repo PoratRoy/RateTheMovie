@@ -9,7 +9,9 @@ const Img: React.FC<ImgProps> = ({ src, alt, isShadow, size = "large" }) => {
             ? style.cardImgLarge
             : size === "medium"
               ? style.cardImgMedium
-              : style.cardImgSmall; //TODOCSS: refactor this
+              : size === "small"
+                ? style.cardImgSmall
+                : style.cardImgXSmall; //TODOCSS: refactor this
 
     return (
         <img

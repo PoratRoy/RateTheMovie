@@ -58,8 +58,10 @@ export const CARD_WIDTH = 140;
 export const CARD_HEIGHT = 200;
 export const MEDIUM_CARD_WIDTH = 50;
 export const MEDIUM_CARD_HEIGHT = 80;
-export const SMALL_CARD_WIDTH = 40;
+export const SMALL_CARD_WIDTH = 45;
 export const SMALL_CARD_HEIGHT = 70;
+export const X_SMALL_CARD_WIDTH = 40;
+export const X_SMALL_CARD_HEIGHT = 65;
 
 export const MOBILE_WIDTH = "80vw";
 

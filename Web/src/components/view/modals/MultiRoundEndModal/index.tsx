@@ -11,7 +11,7 @@ import RoundModalBtns from "../../RoundModalBtns";
 import PlayerScore from "../../core/PlayerScore";
 import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
 import TimerBar from "../../../actions/TimerBar";
-import RankingBoardTwo from "../../../common/RankingBoardTwo";
+import RankingBoardTwo from "../../../ranking/RankingBoardTwo";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
     const { leaderBoardPlayers } = useSocketContext();

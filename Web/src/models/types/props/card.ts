@@ -89,4 +89,5 @@ export type ResultCardProps = {
     card: Card | undefined;
     index: number;
     showRate?: boolean;
+    size?: CardSize;
 };

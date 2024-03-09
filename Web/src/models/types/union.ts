@@ -21,13 +21,13 @@ export type InputType =
 
 export type BtnSize = "small" | "medium" | "mediom-wide" | "large";
 
-export type CardSize = "small" | "medium" | "large";
+export type CardSize = "Xsmall" | "small" | "medium" | "large";
 
 export type LogoSize = "small" | "large";
 
 export type StarSize = "small" | "large";
 
-export type PackDisplay = "wrap" | "small" | "large";
+export type PackDisplay = "Xsmall" | "small" | "large" | "wrap";
 
 export type PlayerRole = "player" | "host";
 

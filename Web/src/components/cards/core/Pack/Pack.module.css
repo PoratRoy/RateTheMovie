@@ -1,4 +1,5 @@
 .packContainer,
+.packContainerXSmall,
 .packContainerSmall,
 .packContainerWrap {
     display: flex;
@@ -7,6 +8,11 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+}
+
+.packContainerXSmall{
+    max-width: 100%;
+    gap: 5px;
 }
 
 .packContainerSmall{

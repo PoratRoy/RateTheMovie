@@ -15,7 +15,7 @@ const RankingBoardTwo: React.FC<RankingBoardTwoProps> = ({ players }) => {
         <section className={style.rankingBoard} id={GAMEOVER_BOARD_ID} style={DisplayNone}>
             {sortedPlayers.map((player: Player, index: number) => (
                 <React.Fragment key={index}>
-                    <RankingPlayer player={player} index={index} />
+                    <RankingPlayer player={player} place={index + 1} />
                 </React.Fragment>
             ))}
         </section>

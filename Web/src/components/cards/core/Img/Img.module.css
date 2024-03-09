@@ -1,6 +1,7 @@
 .cardImgLarge,
 .cardImgMedium,
-.cardImgSmall {
+.cardImgSmall,
+.cardImgXSmall {
     object-fit: cover;
     border-radius: var(--secondary-border-radius);
 }
@@ -22,6 +23,11 @@
 .cardImgSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
+}
+
+.cardImgXSmall{
+    width: var(--x-small-card-width);
+    height: var(--x-small-card-height);
 }
 
 .cardImgShadow {

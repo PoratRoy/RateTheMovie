@@ -1,4 +1,5 @@
 /* Mobile 320px - 767px -- 812px */
+.cardContainerXSmall,
 .cardContainerSmall,
 .cardContainerMedium,
 .cardContainerLarge {
@@ -6,7 +7,12 @@
     perspective: 1000px;
 }
 
-.cardContainerSmall{
+.cardContainerXSmall {
+    width: var(--x-small-card-width);
+    height: var(--x-small-card-height);
+}
+
+.cardContainerSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
 }

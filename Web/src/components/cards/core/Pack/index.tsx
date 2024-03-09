@@ -7,9 +7,11 @@ const Pack: React.FC<PackProps> = ({ children, packDisplay = "large" }) => {
     const classStyle =
         packDisplay === "wrap"
             ? style.packContainerWrap
-            : packDisplay === "small"
-              ? style.packContainerSmall
-              : style.packContainer; //TODOCSS: refactor this
+            : packDisplay === "Xsmall"
+              ? style.packContainerXSmall
+              : packDisplay === "small"
+                ? style.packContainerSmall
+                : style.packContainer; //TODOCSS: refactor this
 
     return <section className={classStyle}>{children}</section>;
 };
