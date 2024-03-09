@@ -14,6 +14,6 @@ export type ElectedCards = {
 export type CardType = "Elected" | "Player" | "Shadow";
 
 export type placeholderCardType =
-    | { t: "Elected"; index: number }
+    | { t: "Elected"; index: number, hasDecoration?: boolean}
     | { t: "Player"; card: Card }
     | { t: "Shadow" };

@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({
 
     return (
         <section id={id} className={sizeClass}>
-            <CardInnerContainer type={type.t} isFocus={isFocus}>
+            <CardInnerContainer type={type} isFocus={isFocus}>
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 {isPlayerType ? <div className={style.cardBack}>{back}</div> : null}

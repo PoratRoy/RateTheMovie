@@ -9,7 +9,7 @@ const ResultCardWrapper: React.FC<ResultCardWrapperProps> = ({ children, rate, i
         <section className={style.resultWrapper}>
             {children}
             <ElectedShadow isRightChoice={isRightChoice} />
-            <Rate rate={rate} />
+            {rate ? <Rate rate={rate} /> : null}
         </section>
     );
 };

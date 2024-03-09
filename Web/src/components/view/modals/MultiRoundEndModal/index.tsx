@@ -4,7 +4,6 @@ import style from "./MultiRoundEndModal.module.css";
 import { MultiRoundEndModalProps } from "../../../../models/types/props/view";
 import CardsReveal from "../../../actions/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
-import RankingBoard from "../../../common/RankingBoard";
 import { useSocketContext } from "../../../../context/SocketContext";
 import { NEXT_ROUND_BTN_ID, SCORE_ID } from "../../../../models/constant";
 import useMultiGameOverAnimation from "../../../../hooks/animation/useMultiGameOverAnimation";
@@ -12,6 +11,7 @@ import RoundModalBtns from "../../RoundModalBtns";
 import PlayerScore from "../../core/PlayerScore";
 import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
 import TimerBar from "../../../actions/TimerBar";
+import RankingBoardTwo from "../../../common/RankingBoardTwo";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
     const { leaderBoardPlayers } = useSocketContext();
@@ -24,7 +24,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
             <section ref={scope} className={style.MultiRoundEndModal}>
                 <PlayerScore id={SCORE_ID} score={currentPlayer?.score || 0} />
                 <CardsReveal />
-                <RankingBoard players={leaderBoardPlayers} />
+                <RankingBoardTwo players={leaderBoardPlayers} />
                 <RoundModalBtns
                     id={NEXT_ROUND_BTN_ID}
                     close={close}

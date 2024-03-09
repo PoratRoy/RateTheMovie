@@ -14,7 +14,7 @@ export type CardProps = IdProps & {
 };
 
 export type CardInnerContainerProps = {
-    type: string;
+    type: placeholderCardType;
     children: React.ReactNode[];
     isFocus: boolean | undefined;
 };
@@ -27,8 +27,8 @@ export type ElectedCardWrapperProps = ChildernsProps & {
 };
 
 export type ResultCardWrapperProps = ChildernsProps & {
-    rate: number | string;
-    isRightChoice?: boolean;
+    rate?: number | string;
+    isRightChoice: boolean;
 };
 
 export type PlayerCardProps = {
@@ -85,7 +85,8 @@ export type ElectedShadowProps = IdProps & {
 };
 
 export type ResultCardProps = {
-    currentPlayer: Player;
+    player: Player;
     card: Card | undefined;
     index: number;
+    showRate?: boolean;
 };

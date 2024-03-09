@@ -48,3 +48,8 @@ export type CountDownProps = {
 export type RankingBoardProps = {
     players: Player[];
 };
+
+export type ToggelArrowProps = {
+    isOpen: boolean;
+    handleOnClick: () => void;
+};

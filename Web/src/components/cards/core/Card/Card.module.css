@@ -26,6 +26,7 @@
 }
 
 .electedCardInnerContainer,
+.electedCardInnerDecoration,
 .playerCardInnerContainer {
     border: 1px solid var(--tertiary-color);
     border-radius: var(--secondary-border-radius);
@@ -35,7 +36,7 @@
     height: 100%;
 }
 
-.electedCardInnerContainer::before {
+.electedCardInnerDecoration::before {
     background-color: var(--background-card-color);
     content: "";
     position: absolute;
@@ -45,7 +46,7 @@
     height: calc(var(--medium-card-height) - 10px);
 }
 
-.electedCardInnerContainer::after {
+.electedCardInnerDecoration::after {
     content: "";
     position: absolute;
     z-index: 1;

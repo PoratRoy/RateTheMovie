@@ -4,23 +4,18 @@ import style from "./Card.module.css";
 import { CARD_ID } from "../../../../models/constant";
 import { CardInnerContainerProps } from "../../../../models/types/props/card";
 
-const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
-    type,
-    children,
-    isFocus,
-}) => {
+const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ type, children, isFocus }) => {
     const { isFlipped, onAnimationComplete } = useCardFlipAnimation();
-    const isElectedType = type === "Elected";
+    const isElectedType = type.t === "Elected";
 
     //TODO: border not animated when result card
     if (isElectedType) {
+        const className = type.hasDecoration
+            ? `${style.electedCardInnerDecoration} ${isFocus ? style.cardContainerFocus : ""}`
+            : style.electedCardInnerContainer; //TODOCSS: refactor
+
         return (
-            <div
-                id={CARD_ID}
-                className={`${style.electedCardInnerContainer} ${
-                    isFocus ? style.cardContainerFocus : ""
-                }`}
-            >
+            <div id={CARD_ID} className={className}>
                 {children}
             </div>
         );

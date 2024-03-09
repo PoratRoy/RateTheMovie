@@ -19,7 +19,7 @@ const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
             setFocus={setFocus}
         >
             <Card
-                type={{ t: "Elected", index } as placeholderCardType}
+                type={{ t: "Elected", index, hasDecoration: true } as placeholderCardType}
                 front={setElectedFrontCard(player, movie)}
                 size="medium"
                 isFocus={focus}

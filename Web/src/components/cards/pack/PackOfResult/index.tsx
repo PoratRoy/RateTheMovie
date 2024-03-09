@@ -13,7 +13,7 @@ const PackOfResult: React.FC<PackOfResultProps> = ({ revealCards, currentPlayer 
                 revealCards.map((card: Card | undefined, index: number) => {
                     return (
                         <motion.span key={card?.movie.id || index} layout transition={springAnimation}>
-                            <ResultCard currentPlayer={currentPlayer} card={card} index={index} />
+                            <ResultCard player={currentPlayer} card={card} index={index} showRate />
                         </motion.span>
                     );
                 })}

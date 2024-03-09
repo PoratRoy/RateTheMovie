@@ -1,0 +1,9 @@
+.toggelArrow{
+    color: var(--light-text-color);
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+}
+.toggelArrow:hover{
+    color: var(--light-text-color-hover);
+}

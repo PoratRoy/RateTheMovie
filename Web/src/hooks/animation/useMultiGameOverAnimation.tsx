@@ -23,7 +23,11 @@ const useMultiGameOverAnimation = (activate: boolean) => {
             animation(`#${SCORE_ID}`, { display: "none" }),
         ]);
         await Promise.all([
-            animation(`#${GAMEOVER_BOARD_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
+            animation(
+                `#${GAMEOVER_BOARD_ID}`,
+                { opacity: 1, display: "flex", flexDirection: "column", alignItems: "center" },
+                { duration: 0.3 },
+            ),
             animation(
                 `#${NEXT_ROUND_BTN_ID}`,
                 { opacity: 1, display: "flex", flexDirection: "column", alignItems: "center" },
