@@ -6,13 +6,13 @@ import { isCardsOrdrValid } from "../../utils/correctOrder";
 import useMod from "./useMod";
 
 const useFinish = () => {
-    const { setCurrentPlayer, currentPlayer, setGame, setFinishRound } = useGamePlayContext();
+    const { setCurrentPlayer, currentPlayer, setGame, setPlayerFinishRound } = useGamePlayContext();
     const { handlePlayerFinish } = useSocketContext();
     const { isMulti } = useMod();
 
     const finishGame = () => {
         setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
-        setFinishRound(true);
+        setPlayerFinishRound(true);
 
         const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] =
             isCardsOrdrValid(currentPlayer);

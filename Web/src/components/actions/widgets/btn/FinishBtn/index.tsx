@@ -7,7 +7,7 @@ import useFinish from "../../../../../hooks/gameplay/useFinish";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
-    const { finishRound } = useGamePlayContext();
+    const { playerFinishRound } = useGamePlayContext();
     const { finishGame } = useFinish();
 
     const handleFinish = () => {
@@ -16,7 +16,7 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     };
 
     useEffect(() => {
-        if (!isFinishPlacing && loading && !finishRound) setLoading(false);
+        if (!isFinishPlacing && loading && !playerFinishRound) setLoading(false);
     }, [isFinishPlacing]);
 
     return (

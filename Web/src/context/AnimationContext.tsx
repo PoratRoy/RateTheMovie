@@ -6,7 +6,6 @@ export const AnimationContext = createContext<{
     isFlipCard: boolean;
     setIsFlipCard: (value: boolean) => void;
     finishAnimation: FinishAnimation;
-    setNextRound: (nextRound?: boolean) => void;
     setIncreaseScore: () => void;
     refreshAnimationContext: () => void;
     clearAnimationContext: () => void;
@@ -14,7 +13,6 @@ export const AnimationContext = createContext<{
     isFlipCard: false,
     setIsFlipCard: () => {},
     finishAnimation: initFinishAnimation,
-    setNextRound: () => {},
     setIncreaseScore: () => {},
     refreshAnimationContext: () => {},
     clearAnimationContext: () => {},
@@ -25,10 +23,6 @@ export const useAnimationContext = () => useContext(AnimationContext);
 export const AnimationContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [isFlipCard, setIsFlipCard] = useState<boolean>(false);
     const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
-
-    const setNextRound = (nextRound: boolean = true) => {
-        setFinishAnimation((prev) => ({ ...prev, nextRound }));
-    };
 
     const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));
 
@@ -47,7 +41,6 @@ export const AnimationContextProvider = ({ children }: { children: React.ReactNo
                 isFlipCard,
                 setIsFlipCard,
                 finishAnimation,
-                setNextRound,
                 setIncreaseScore,
                 refreshAnimationContext,
                 clearAnimationContext,

@@ -9,10 +9,15 @@ import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 
 const useGameActions = (close: () => void) => {
-    const { refreshGameContext, clearGameContext, resetGameContext, setRoundNumber, game } =
-        useGamePlayContext();
-    const { setIsFlipCard, clearAnimationContext, refreshAnimationContext, setNextRound } =
-        useAnimationContext();
+    const {
+        game,
+        refreshGameContext,
+        clearGameContext,
+        resetGameContext,
+        setRoundNumber,
+        setIsRoundFinished,
+    } = useGamePlayContext();
+    const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
     const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
@@ -25,18 +30,17 @@ const useGameActions = (close: () => void) => {
     };
 
     const handleRestart = () => {
-        setNextRound(false);
+        setIsRoundFinished(false);
         resetGameContext();
         handelNewMovies();
     };
 
-
     //You have submitted your masterpiece.
-// Let's wait for the others...
+    // Let's wait for the others...
 
     const handleContinue = (action: RoundAction) => {
         setRoundNumber(action);
-        setNextRound(false);
+        setIsRoundFinished(false);
         refreshGameContext();
         handelNewMovies();
     };

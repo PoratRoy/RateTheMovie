@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./GameLayout.module.css";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
@@ -8,31 +8,19 @@ import { GameLayoutProps } from "../../../models/types/props/layout";
 import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
 import useStartGame from "../../../hooks/gameplay/useStartGame";
-import MultiRoundEndModal from "../../../components/view/modals/MultiRoundEndModal";
-import useShowModal from "../../../hooks/global/useShowModal";
-import { useAnimationContext } from "../../../context/AnimationContext";
-import useMod from "../../../hooks/gameplay/useMod";
-import RoundEndModal from "../../../components/view/modals/RoundEndModal";
+import GameModal from "./GameModal";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { finishAnimation, setNextRound } = useAnimationContext();
-    const { showModal, handleOpen, handleClose } = useShowModal(() => setNextRound(false));
-    const { finishRound, game, currentPlayer } = useGamePlayContext();
+    const { playerFinishRound, game, currentPlayer } = useGamePlayContext();
     const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
-    const { scope } = useFinishAnimation(finishRound);
+    const { scope } = useFinishAnimation(playerFinishRound);
     const { isLoading } = useStartGame();
-    const { nextRound } = finishAnimation;
-    const { isMulti } = useMod();
 
     const handleClickStartGame = () => {
         if (rivalPlayers.length >= 1) {
             handleStartGame();
         }
     };
-
-    useEffect(() => {
-        if (nextRound) handleOpen();
-    }, [nextRound]);
 
     return (
         <React.Fragment>
@@ -42,13 +30,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
-                    {showModal ? (
-                        isMulti() ? (
-                            <MultiRoundEndModal close={handleClose} />
-                        ) : (
-                            <RoundEndModal close={handleClose} />
-                        )
-                    ) : null}
+                    <GameModal />
                 </section>
             ) : (
                 <LoadingPage

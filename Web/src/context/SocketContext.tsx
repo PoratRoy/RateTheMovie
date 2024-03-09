@@ -68,7 +68,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
-    const { setGame } = useGamePlayContext();
+    const { setGame, setIsRoundFinished } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -172,6 +172,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         const handleRoundFinished = (warRoom: WarRoomProps) => {
             const { players } = warRoom;
             setLeaderBoardPlayers(players);
+            setTimeout(() => {
+                setIsRoundFinished(true);
+            }, 2500); //the time of the finish animation
         };
 
         const handlePlayerDisconnected = (player: Player) => {

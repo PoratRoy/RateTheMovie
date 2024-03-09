@@ -11,7 +11,6 @@ export type Game = {
 };
 
 export type FinishAnimation = {
-    nextRound: boolean;
     showCorrectPack: Card[];
     increaseScore: boolean;
 };

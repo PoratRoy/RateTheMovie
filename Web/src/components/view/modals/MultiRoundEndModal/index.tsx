@@ -11,6 +11,7 @@ import useMultiGameOverAnimation from "../../../../hooks/animation/useMultiGameO
 import RoundModalBtns from "../../RoundModalBtns";
 import PlayerScore from "../../core/PlayerScore";
 import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
+import TimerBar from "../../../actions/TimerBar";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
     const { leaderBoardPlayers } = useSocketContext();
@@ -30,6 +31,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
                     gameOver={gameOver}
                     role={currentPlayer?.role || "player"}
                 />
+                <TimerBar />
             </section>
         </Modal>
     );
