@@ -23,6 +23,12 @@ import {
     UpdateGameCards,
     FinishRound,
     RoundFinished,
+    LeaveRoom,
+    PlayerLeft,
+    NextRound,
+    NextRoundStarted,
+    GameOver,
+    GameEnded,
 } from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
 
@@ -134,26 +140,81 @@ class GameSocket implements ISocket {
                         players[index].electedCards = electedCards;
                         players[index].score = score;
                         this.warRooms[game.roomId] = warRoom;
-                        socket
-                            .to(roomId)
-                            .emit(PlayerFinished, setWarRoomDetails(warRoom, roomId));
+                        socket.to(roomId).emit(PlayerFinished, setWarRoomDetails(warRoom, roomId));
                     }
                 }
             });
         });
 
         socket.on(FinishRound, () => {
-            const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-            console.log("FinishRound", warRoom);
-            if (warRoom) {
-                const roomId = warRoom.game?.roomId;
-                if (roomId) {
-                    socket.in(roomId).emit(RoundFinished, this.warRooms[roomId]);
-                    // warRoom.players.forEach((player) => {
-                    //     socket.broadcast.to(player.id).emit(RoundFinished, this.warRooms[roomId]);
-                    // });
+            this.wrapper(FinishRound, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom) {
+                    const roomId = warRoom.game?.roomId;
+                    if (roomId) {
+                        socket.in(roomId).emit(RoundFinished, this.warRooms[roomId]);
+                        //TODO: finish game not sending to the second player if there are only two players
+                        // warRoom.players.forEach((player) => {
+                        //     socket.broadcast.to(player.id).emit(RoundFinished, this.warRooms[roomId]);
+                        // });
+                    }
                 }
-            }
+            });
+        });
+
+        socket.on(NextRound, (currentRound: number) => {
+            this.wrapper(NextRound, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        players.forEach((player) => {
+                            player.electedCards = { order: []} as ElectedCards;
+                        });
+                        warRoom.players = players;
+                        game.currentRound = currentRound;
+                        warRoom.gameCards = [];
+                        this.warRooms[roomId] = warRoom;
+                        socket
+                            .to(roomId)
+                            .emit(NextRoundStarted, setWarRoomDetails(warRoom, roomId));
+                    }
+                }
+            });
+        });
+
+        socket.on(GameOver, () => {
+            this.wrapper(GameOver, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
+                        delete this.warRooms[roomId];
+                        socket.to(roomId).emit(GameEnded);
+                    }
+                }
+            });
+        });
+
+        socket.on(LeaveRoom, () => {
+            this.wrapper(LeaveRoom, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
+                        const index = players.indexOf(player);
+                        players.splice(index, 1);
+                        //TODO: players.length === 0, game over
+                        this.warRooms[roomId] = warRoom;
+                        socket.to(roomId).emit(PlayerLeft, player);
+                    }
+                }
+            });
         });
 
         socket.on(Disconnect, () => {
@@ -162,10 +223,12 @@ class GameSocket implements ISocket {
                 if (warRoom && player) {
                     const { game, players } = warRoom;
                     if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
                         const index = players.indexOf(player);
                         players.splice(index, 1);
-                        this.warRooms[game.roomId] = warRoom;
-                        socket.to(game?.roomId).emit(PlayerDisconnect, player);
+                        this.warRooms[roomId] = warRoom;
+                        socket.to(roomId).emit(PlayerDisconnect, player);
                     }
                 }
             });
