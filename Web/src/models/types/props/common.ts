@@ -53,3 +53,7 @@ export type ToggelArrowProps = {
     isOpen: boolean;
     handleOnClick: () => void;
 };
+
+export type HeaderProps = {
+    activateTimer: boolean;
+}

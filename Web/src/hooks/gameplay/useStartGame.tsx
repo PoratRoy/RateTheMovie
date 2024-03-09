@@ -59,6 +59,8 @@ const useStartGame = () => {
 
     useEffect(() => {
         if (isMulti()) {
+            setShowTimer(true);
+            setCardLoading(true);
             if (startGame) {
                 setTimeout(() => {
                     setCardLoading(false);

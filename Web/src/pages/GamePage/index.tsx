@@ -12,9 +12,9 @@ const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
     const { currentPlayer } = useGamePlayContext();
     const { cardLoading, showTimer, closeTimer } = useStartGame();
-
+    
     return (
-        <GameLayout>
+        <GameLayout activateTimer={cardLoading ? false : true}>
             <ElectedPackLayout />
             {currentPlayer ? (
                 <PlayerLayout cardLoading={cardLoading} player={currentPlayer} />

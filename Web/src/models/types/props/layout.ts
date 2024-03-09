@@ -30,7 +30,9 @@ export type PlayerLayoutProps = {
     cardLoading: boolean;
 };
 
-export type GameLayoutProps = ChildernsProps;
+export type GameLayoutProps = ChildernsProps & {
+    activateTimer: boolean;
+};
 
 export type PlayersPackLayoutProps = ChildernsProps;
 

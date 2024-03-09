@@ -10,7 +10,7 @@ import { useSocketContext } from "../../../context/SocketContext";
 import useStartGame from "../../../hooks/gameplay/useStartGame";
 import GameModal from "./GameModal";
 
-const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
+const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer }) => {
     const { playerFinishRound, game, currentPlayer } = useGamePlayContext();
     const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
     const { scope } = useFinishAnimation(playerFinishRound);
@@ -26,7 +26,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
         <React.Fragment>
             {startGame ? (
                 <section className={style.gameContainer}>
-                    <Header />
+                    <Header activateTimer={activateTimer} />
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>

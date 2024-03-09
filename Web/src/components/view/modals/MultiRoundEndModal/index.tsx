@@ -31,7 +31,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
                     gameOver={gameOver}
                     role={currentPlayer?.role || "player"}
                 />
-                <TimerBar />
+                <TimerBar activate />
             </section>
         </Modal>
     );

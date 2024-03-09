@@ -11,8 +11,9 @@ import RivalsProfiles from "../../profile/RivalsProfiles";
 import useMod from "../../../hooks/gameplay/useMod";
 import { ROUND_NUM } from "../../../models/constant";
 import useShowModal from "../../../hooks/global/useShowModal";
+import { HeaderProps } from "../../../models/types/props/common";
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({ activateTimer }) => {
     const { showModal, handleOpen, handleClose } = useShowModal();
     const { currentPlayer, game } = useGamePlayContext();
     const { isMulti } = useMod();
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
                 <RoundTitle current={game?.currentRound || 1} total={game?.rounds || ROUND_NUM} />
             </div>
             {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
-            {isMulti() ? <TimerBar /> : null}
+            {isMulti() ? <TimerBar position="absolute" activate={activateTimer} /> : null}
             {showModal ? <PauseModal close={handleClose} /> : null}
         </section>
     );
