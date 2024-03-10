@@ -6,24 +6,25 @@ import { FieldValues } from "react-hook-form";
 import { FormSetValue, ROUND_NUM } from "../../../models/constant";
 import { RoundInputProps } from "../../../models/types/props/input";
 
-
 const RoundsNumber = <TInput extends FieldValues>({ id, setValue }: RoundInputProps<TInput>) => {
     const [number, setNumber] = useState<number>(ROUND_NUM);
 
     const handleIncrement = () => {
-        setNumber((prev) => {
-            let number = prev;
-            if (number < 10) return number + 1;
-            setValue(id, JSON.stringify(number), FormSetValue);
+        setNumber((number) => {
+            if (number < 10) {
+                setValue(id, JSON.stringify(number + 1), FormSetValue);
+                return number + 1;
+            }
             return number;
         });
     };
 
     const handleDecrement = () => {
-        setNumber((prev) => {
-            let number = prev;
-            if (number > 1) return number - 1;
-            setValue(id, JSON.stringify(number), FormSetValue);
+        setNumber((number) => {
+            if (number > 1) {
+                setValue(id, JSON.stringify(number - 1), FormSetValue);
+                return number - 1;
+            }
             return number;
         });
     };

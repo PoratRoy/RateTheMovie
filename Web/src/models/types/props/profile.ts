@@ -2,6 +2,7 @@ import { UseFormWatch } from "react-hook-form";
 import { ChildernsProps } from ".";
 import { Player } from "../player";
 import { SetupInputSchema } from "../inputSchema";
+import { AvatarSize } from "../union";
 
 export type PreviewProfileProps = {
     player: Player | undefined;
@@ -12,7 +13,7 @@ export type PreviewProfileProps = {
 
 export type AvatarProps = {
     img?: string;
-    isFocus?: boolean;
+    size?: AvatarSize;
 };
 
 export type PlayerProfileProps = {

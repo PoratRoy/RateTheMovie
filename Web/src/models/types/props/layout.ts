@@ -32,6 +32,7 @@ export type PlayerLayoutProps = {
 
 export type GameLayoutProps = ChildernsProps & {
     activateTimer: boolean;
+    isLoading: boolean;
 };
 
 export type PlayersPackLayoutProps = ChildernsProps;

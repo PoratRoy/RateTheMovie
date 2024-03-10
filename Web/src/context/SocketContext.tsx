@@ -45,6 +45,8 @@ export const SocketContext = createContext<{
     handleStartGame: () => void;
     handlePlayerFinish: (electedCards: ElectedCards, score: number) => void;
     leaderBoardPlayers: Player[];
+    resetSocketContext: () => void;
+    clearSocketContext: () => void;
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
@@ -58,6 +60,8 @@ export const SocketContext = createContext<{
     handleStartGame: () => {},
     handlePlayerFinish: () => {},
     leaderBoardPlayers: [],
+    resetSocketContext: () => {},
+    clearSocketContext: () => {},
 });
 
 export const useSocketContext = () => useContext(SocketContext);
@@ -198,6 +202,17 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
     }, [socket]);
 
+    const resetSocketContext = () => {
+        setStartGame(false);
+        setLeaderBoardPlayers([]);
+    };
+
+    const clearSocketContext = () => {
+        setStartGame(false);
+        setRivalPlayers([]);
+        setLeaderBoardPlayers([]);
+    };
+
     return (
         <SocketContext.Provider
             value={{
@@ -213,6 +228,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleStartGame,
                 handlePlayerFinish,
                 leaderBoardPlayers,
+                resetSocketContext,
+                clearSocketContext,
             }}
         >
             {children}

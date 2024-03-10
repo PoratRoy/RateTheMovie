@@ -11,7 +11,7 @@ const ResultPlayerProfile: React.FC<ResultPlayerProfileProps> = ({ player, place
     return (
         <Place place={place}>
             <section className={style.resultPlayerProfile}>
-                <Avatar img={AvatarImgs[avatar]} />
+                <Avatar img={AvatarImgs[avatar]}/>
                 <div className={style.resultPlayerName}>{name}</div>
                 <div className={style.resultPlayerScore}>{score}</div>
             </section>

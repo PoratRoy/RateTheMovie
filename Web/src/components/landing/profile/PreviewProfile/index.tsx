@@ -48,7 +48,7 @@ const PreviewProfile: React.FC<PreviewProfileProps> = ({ setValue, player, avata
                 </section>
             ) : (
                 <section className={style.previewProfileForm}>
-                    <Avatar img={avatar} isFocus />
+                    <Avatar img={avatar} size="large"  />
                     <div className={style.previewProfileName}>{name}</div>
                 </section>
             )}

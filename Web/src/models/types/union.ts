@@ -29,6 +29,8 @@ export type LogoSize = "small" | "large";
 
 export type StarSize = "small" | "large";
 
+export type AvatarSize = "small" | "large";
+
 export type PackDisplay = "Xsmall" | "small" | "large" | "wrap";
 
 export type PlayerRole = "player" | "host";

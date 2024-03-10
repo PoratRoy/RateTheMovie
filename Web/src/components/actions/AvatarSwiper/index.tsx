@@ -49,7 +49,7 @@ const AvatarSwiper = <TInput extends FieldValues>({
         >
             {AvatarImgs.map((img: string, i: number) => (
                 <SwiperSlide key={i} data-hash={`avatar${i}`}>
-                    <Avatar img={img} isFocus={true} />
+                    <Avatar img={img} size="large" />
                 </SwiperSlide>
             ))}
         </Swiper>

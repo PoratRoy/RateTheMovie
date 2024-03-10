@@ -7,14 +7,12 @@ import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
-import useStartGame from "../../../hooks/gameplay/useStartGame";
 import GameModal from "./GameModal";
 
-const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer }) => {
+const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer, isLoading }) => {
     const { playerFinishRound, game, currentPlayer } = useGamePlayContext();
     const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
     const { scope } = useFinishAnimation(playerFinishRound);
-    const { isLoading } = useStartGame();
 
     const handleClickStartGame = () => {
         if (rivalPlayers.length >= 1) {

@@ -7,6 +7,7 @@ import { SessionKey } from "../../models/enums/session";
 import useBackupRound from "../../api/hooks/useBackupRound";
 import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
+import { useSocketContext } from "../../context/SocketContext";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -18,6 +19,7 @@ const useGameActions = (close: () => void) => {
         setIsRoundFinished,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
+    const { resetSocketContext, clearSocketContext} = useSocketContext();
     const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
@@ -25,12 +27,14 @@ const useGameActions = (close: () => void) => {
     const handleQuit = () => {
         close();
         clearGameContext();
+        clearSocketContext();
         clearAnimationContext();
         navigate(path.land);
     };
 
     const handleRestart = () => {
         setIsRoundFinished(false);
+        resetSocketContext();
         resetGameContext();
         handelNewMovies();
     };

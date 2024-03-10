@@ -11,10 +11,10 @@ import useStartGame from "../../hooks/gameplay/useStartGame";
 const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
     const { currentPlayer } = useGamePlayContext();
-    const { cardLoading, showTimer, closeTimer } = useStartGame();
-    
+    const { cardLoading, isLoading, showTimer, closeTimer } = useStartGame();
+
     return (
-        <GameLayout activateTimer={cardLoading ? false : true}>
+        <GameLayout activateTimer={cardLoading ? false : true} isLoading={isLoading}>
             <ElectedPackLayout />
             {currentPlayer ? (
                 <PlayerLayout cardLoading={cardLoading} player={currentPlayer} />
