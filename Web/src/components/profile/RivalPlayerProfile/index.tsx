@@ -1,14 +1,14 @@
 import React from "react";
-import Avater from "../Avater";
-import { AvaterImgs } from "../../../models/resources/avaters";
+import Avatar from "../Avatar";
+import { AvatarImgs } from "../../../models/resources/avatars";
 import { RivalPlayerProfileProps } from "../../../models/types/props/profile";
 import style from "./RivalPlayerProfile.module.css";
 
 const RivalPlayerProfile: React.FC<RivalPlayerProfileProps> = ({ player }) => {
-    const { avater, name } = player;
+    const { avatar, name } = player;
     return (
         <section className={style.rivalPlayerProfile}>
-            <Avater img={AvaterImgs[avater]} />
+            <Avatar img={AvatarImgs[avatar]} />
             <div className={style.rivalPlayerName}>{name}</div>
         </section>
     );

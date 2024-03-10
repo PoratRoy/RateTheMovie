@@ -1,12 +1,16 @@
+import { UseFormWatch } from "react-hook-form";
 import { ChildernsProps } from ".";
 import { Player } from "../player";
+import { SetupInputSchema } from "../inputSchema";
 
-export type PreviewProfileProps = ChildernsProps & {
-    profileName?: string;
-    avaterId: number | undefined;
+export type PreviewProfileProps = {
+    player: Player | undefined;
+    avatarId: number | undefined;
+    setValue: any;
+    watch: UseFormWatch<SetupInputSchema>
 };
 
-export type AvaterProps = {
+export type AvatarProps = {
     img?: string;
     isFocus?: boolean;
 };

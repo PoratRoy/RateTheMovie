@@ -1,6 +1,6 @@
 export type SetupInputSchema = {
     name: string | undefined;
-    avater: string | undefined;
+    avatar: string | undefined;
     rounds: string | undefined;
     year: string | undefined;
     genre: string | undefined;

@@ -1,12 +1,12 @@
 import React from "react";
 import style from "./PlayerProfile.module.css";
-import Avater from "../Avater";
+import Avatar from "../Avatar";
 
 const Skeleton: React.FC = () => {
     return (
         <section className={style.PlayerProfile}>
-            <div className={style.PlayerProfileAvater}>
-                <Avater img={undefined} />
+            <div className={style.PlayerProfileAvatar}>
+                <Avatar img={undefined} />
             </div>
             <div className={style.PlayerProfileDetailsSkeleton}>
                 <div className={style.PlayerProfileScoreSkeleton} />

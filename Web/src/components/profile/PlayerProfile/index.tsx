@@ -1,18 +1,18 @@
 import React from "react";
-import Avater from "../Avater";
-import { AvaterImgs } from "../../../models/resources/avaters";
+import { AvatarImgs } from "../../../models/resources/avatars";
 import style from "./PlayerProfile.module.css";
 import { PlayerProfileProps } from "../../../models/types/props/profile";
 import Skeleton from "./Skeleton";
+import Avatar from "../Avatar";
 
 const PlayerProfile: React.FC<PlayerProfileProps> = ({ currentPlayer }) => {
     const Profile = (): React.ReactNode => {
         if (currentPlayer) {
-            const { avater, score, name } = currentPlayer;
+            const { avatar, score, name } = currentPlayer;
             return (
                 <section className={style.PlayerProfile}>
-                    <div className={style.PlayerProfileAvater}>
-                        <Avater img={AvaterImgs[avater]} />
+                    <div className={style.PlayerProfileAvatar}>
+                        <Avatar img={AvatarImgs[avatar]} />
                     </div>
                     <div className={style.PlayerProfileDetails}>
                         <div className={style.PlayerProfileScore}>{score}</div>

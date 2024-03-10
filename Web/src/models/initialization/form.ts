@@ -10,8 +10,8 @@ export const setupInputs: SetupInputs = {
         id: "rounds",
         type: "number",
     },
-    avater:{
-        id: "avater",
+    avatar:{
+        id: "avatar",
         type: "number",
     },
     genre: {

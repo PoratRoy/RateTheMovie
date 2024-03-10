@@ -7,7 +7,7 @@ export const initPlayer = (playerId: string, index: number, role: PlayerRole = "
     return {
         id: playerId,
         name: `Player ${index + 1}`,
-        avater: getRandomNumber(0, 9),
+        avatar: getRandomNumber(0, 9),
         role,
         score: 0,
         electedCards: {order: []},

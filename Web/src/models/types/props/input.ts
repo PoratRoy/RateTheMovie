@@ -56,7 +56,7 @@ export type NameInputProps<TInput extends FieldValues> = InputProps<TInput> &
 
 export type RoundInputProps<TInput extends FieldValues> = InputProps<TInput> & FormSetValueProps;
 
-export type AvatersCarouselProps<TInput extends FieldValues> = InputProps<TInput> &
+export type AvatarSwiperProps<TInput extends FieldValues> = InputProps<TInput> &
     FormSetValueProps & {
         defualt: number;
     };

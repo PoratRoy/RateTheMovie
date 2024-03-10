@@ -1,8 +1,8 @@
 import React from "react";
 import { useSocketContext } from "../../../context/SocketContext";
-import { AvaterImgs } from "../../../models/resources/avaters";
-import Avater from "../Avater";
+import { AvatarImgs } from "../../../models/resources/avatars";
 import style from "./RivalsProfiles.module.css";
+import Avatar from "../Avatar";
 
 const RivalsProfiles: React.FC = () => {
     const { rivalPlayers } = useSocketContext();
@@ -11,7 +11,7 @@ const RivalsProfiles: React.FC = () => {
             {rivalPlayers.map((player, index) => {
                 return (
                     <span key={index} className={style.rivalProfile}>
-                        <Avater img={AvaterImgs[player.avater]} />
+                        <Avatar img={AvatarImgs[player.avatar]} />
                     </span>
                 );
             })}

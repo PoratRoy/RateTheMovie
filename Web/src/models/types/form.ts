@@ -20,7 +20,7 @@ export type InputTypeSelect<TInput> = Omit<InputTypeText<TInput>, "type"> & Labe
 export type SetupInputs = {
     name: InputTypeText<SetupInputSchema>;
     rounds: RootInputType<SetupInputSchema>;
-    avater: RootInputType<SetupInputSchema>;
+    avatar: RootInputType<SetupInputSchema>;
     year: InputTypeSelect<SetupInputSchema>;
     genre: InputTypeSelect<SetupInputSchema>;
     language: InputTypeSelect<SetupInputSchema>;

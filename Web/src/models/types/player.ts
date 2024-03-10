@@ -5,7 +5,7 @@ export type Player = {
     id: string;
     name: string;
     role: PlayerRole;
-    avater: number;
+    avatar: number;
     score: number;
     electedCards: ElectedCards;
 };

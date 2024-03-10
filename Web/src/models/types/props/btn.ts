@@ -43,7 +43,9 @@ export type FinishBtnProps = {
     isFinishPlacing: boolean;
 };
 
-export type EditProfileBtnProps = OnClickProps;
+export type EditProfileBtnProps = OnClickProps & {
+    toggle: boolean;
+};
 
 export type RevealOrderBtnProps = OnClickProps;
 

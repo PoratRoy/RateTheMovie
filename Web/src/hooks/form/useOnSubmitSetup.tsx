@@ -26,7 +26,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = (data: TInput) => {
-        const { year, genre, language, name, avater, rounds } = data;
+        const { year, genre, language, name, avatar, rounds } = data;
         const { player, mod, roomId } = setupOption;
 
         const setPlayer = (player: Player) => {
@@ -35,7 +35,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
         };
 
         if (player) {
-            const updatedPlayer = updatePlayer(player, name, avater);
+            const updatedPlayer = updatePlayer(player, name, avatar);
             if (isSingle(mod)) {
                 setPlayer(updatedPlayer);
             } else if (isMulti(mod) && roomId) {

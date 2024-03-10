@@ -6,17 +6,17 @@ export const initPlayer = (id: string, name: string, role: PlayerRole = "player"
     return {
         id,
         name,
-        avater: getRandomNumber(0, 9),
+        avatar: getRandomNumber(0, 9),
         role,
         score: 0,
         electedCards: { order: [] },
     } as Player;
 };
 
-export const updatePlayer = (player: Player, name: string, avater: number): Player => {
+export const updatePlayer = (player: Player, name: string, avatar: number): Player => {
     return {
         ...player,
         name,
-        avater,
+        avatar,
     };
 };

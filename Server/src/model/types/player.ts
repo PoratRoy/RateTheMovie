@@ -4,7 +4,7 @@ import { PlayerRole } from "./union";
 export type Player = {
     id: string;
     name: string;
-    avater: number;
+    avatar: number;
     role: PlayerRole
     score: number;
     electedCards: ElectedCards;

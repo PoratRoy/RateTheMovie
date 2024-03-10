@@ -1,7 +1,6 @@
-.profileAvater,
-.profileAvaterFocus {
+.profileAvatar,
+.profileAvatarFocus {
     border-radius: 50%;
-    border: var(--primary-border);
     background-color: var(--secondary-color);
     display: flex;
     align-items: center;
@@ -10,23 +9,25 @@
     transition: height 0.1s linear, width 0.1s linear;
 }
 
-.profileAvater {
-    width: 35px;
-    height: 35px;
-}
-
-.profileAvaterFocus{
+.profileAvatar {
+    /* width: 35px;
+    height: 35px; */
     width: 70px;
     height: 70px;
 }
 
-.profileAvater img {
+.profileAvatarFocus{
+    width: 70px;
+    height: 70px;
+}
+
+.profileAvatar img {
     width: 100%;
     height: 35px;
     object-fit: cover;
 }
 
-.profileAvaterFocus img {
+.profileAvatarFocus img {
     width: 100%;
     object-fit: cover;
 }
