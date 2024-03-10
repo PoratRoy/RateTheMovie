@@ -15,7 +15,7 @@ const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ gameOver, close, isSing
     return (
         <section className={style.additionalBtns}>
             <QuitCircleBtn close={close} />
-            {isSingle ? <MoviesBtn onClicked={() => {}} /> : null}
+            {isSingle ? <MoviesBtn close={close} /> : null}
             {isSingle ? GameOverBtn : null}
         </section>
     );

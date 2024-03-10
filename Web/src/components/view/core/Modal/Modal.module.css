@@ -78,12 +78,6 @@
     transform: translate(-50%, -50%);
 }
 
-.modalTitle{
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-}
-
 .modalClose{
     position: absolute;
     top: 0.5em;

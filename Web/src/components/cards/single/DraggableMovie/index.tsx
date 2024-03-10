@@ -1,9 +1,9 @@
 import React from "react";
-import Img from "../../core/Img";
 import Draggable from "../../../dnd/Draggable";
 import style from "./DraggableMovie.module.css";
-import CardImgShadow from "../../shadow/CardImgShadow";
 import { DraggableMovieProps } from "../../../../models/types/props/card";
+import Movie from "../../core/Movie";
+import { cardAnimation_all } from "../../../../models/initialization/card";
 
 const DraggableMovie: React.FC<DraggableMovieProps> = ({
     id,
@@ -12,14 +12,10 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
     isShadow,
     size = "large",
 }) => {
-    const { title, poster_path } = movie;
     return (
         <div className={style.draggableCard}>
             <Draggable draggableId={id} props={{ movie, player }}>
-                <section className={style.draggableMovie}>
-                    {isShadow ? <CardImgShadow title={title} /> : null}
-                    <Img alt={title} src={poster_path} size={size} />
-                </section>
+                <Movie movie={movie} isShadow={isShadow} size={size} actions={cardAnimation_all} />
             </Draggable>
         </div>
     );

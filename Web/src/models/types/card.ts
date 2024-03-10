@@ -11,9 +11,10 @@ export type ElectedCards = {
     correctOrder?: string[];
 };
 
-export type CardType = "Elected" | "Player" | "Shadow";
+export type CardType = "Elected" | "Player" | "Shadow" | "Preview";
 
 export type placeholderCardType =
     | { t: "Elected"; index: number, hasDecoration?: boolean}
     | { t: "Player"; card: Card }
-    | { t: "Shadow" };
+    | { t: "Shadow" }
+    | { t: "Preview" };

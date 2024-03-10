@@ -24,11 +24,13 @@ export type DescriptionProps = IdProps & {
 export type FooterProps = {
     link?: string;
     callback?: () => void;
+    toClear?: boolean;
 };
 
 export type BackLinkProps = {
     link?: string;
     callback?: () => void;
+    toClear?: boolean;
 };
 
 export type RoomLinkProps = {
@@ -59,4 +61,8 @@ export type ToggelArrowProps = {
 
 export type HeaderProps = {
     activateTimer: boolean;
+};
+
+export type TitleProps = {
+    title: string;
 };

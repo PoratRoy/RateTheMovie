@@ -4,6 +4,7 @@ import style from "./Modal.module.css";
 import ModalIcon from "./ModalIcon";
 import { FaArrowRight } from "react-icons/fa6";
 import { ModalProps } from "../../../../models/types/props/view";
+import Title from "../../../common/widgets/Title";
 
 const Modal: React.FC<ModalProps> = ({ children, close, title, hasCloseBtn = false }) => {
     const [showContent, setShowContent] = useState<boolean>(false);
@@ -29,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({ children, close, title, hasCloseBtn = fal
                         <FaArrowRight />
                     </div>
                 ) : null}
-                <div className={style.modalTitle}>{title}</div>
+                <Title title={title} />
                 {children}
             </section>
         </React.Fragment>

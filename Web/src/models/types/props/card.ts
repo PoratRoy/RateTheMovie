@@ -1,4 +1,5 @@
 import { ChildernsProps, IdProps } from ".";
+import { CardAnimation } from "../../enums/animation";
 import { Card, placeholderCardType } from "../card";
 import { Movie } from "../movie";
 import { Player } from "../player";
@@ -37,6 +38,10 @@ export type PlayerCardProps = {
     player: Player;
 };
 
+export type PreviewCardProps = {
+    movie: Movie;
+};
+
 export type ShadowPlayerCardProps = IdProps & {
     movie?: Movie;
 };
@@ -55,6 +60,7 @@ export type ShadowCardProps = {
 
 export type CardImgShadowProps = {
     title: string;
+    actions: CardAnimation[];
 };
 
 export type ElectedCardProps = {

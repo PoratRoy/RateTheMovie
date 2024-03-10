@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { BackLinkProps } from "../../../../../models/types/props/common";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 
-const BackLink: React.FC<BackLinkProps> = ({ link, callback }) => {
+const BackLink: React.FC<BackLinkProps> = ({ link, callback, toClear = true }) => {
     const { clearGameContext } = useGamePlayContext();
     const navigate = useNavigate();
 
     const handleBackLink = () => {
-        clearGameContext();
+        if(toClear) clearGameContext();
         if (callback) callback();
         else if (link) navigate(link);
     };

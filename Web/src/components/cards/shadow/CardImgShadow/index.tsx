@@ -7,8 +7,8 @@ import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../../../
 import { CardImgShadowProps } from "../../../../models/types/props/card";
 import { DisplayNone } from "../../../../style/style";
 
-const CardImgShadow: React.FC<CardImgShadowProps> = ({ title }) => {
-    const { scope } = useCardShadowAnimation();
+const CardImgShadow: React.FC<CardImgShadowProps> = ({ title, actions }) => {
+    const { scope } = useCardShadowAnimation(actions);
 
     return (
         <div ref={scope} className={style.cardTitle}>

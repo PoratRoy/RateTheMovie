@@ -6,6 +6,7 @@ import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
 import { RoundAction } from "../models/types/union";
+import { Movie } from "../models/types/movie";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -24,6 +25,8 @@ export const GamePlayContext = createContext<{
     setIsRoundFinished: React.Dispatch<React.SetStateAction<boolean | undefined>>;
     gameOver: boolean;
     setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+    previewMovies: Movie[];
+    setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
@@ -45,6 +48,8 @@ export const GamePlayContext = createContext<{
     setIsRoundFinished: () => {},
     gameOver: false,
     setGameOver: () => {},
+    previewMovies: [],
+    setPreviewMovies: () => {},
     resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
@@ -63,7 +68,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [isRoundFinished, setIsRoundFinished] = useState<boolean | undefined>();
     const [gameOver, setGameOver] = useState<boolean>(false);
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
-    // const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
+    const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
     //TODO: extract to a hook
     const setStateFromSession = () => {
@@ -150,6 +155,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setIsRoundFinished,
                 gameOver,
                 setGameOver,
+                previewMovies,
+                setPreviewMovies,
                 resetGameContext,
                 clearGameContext,
                 refreshGameContext,
