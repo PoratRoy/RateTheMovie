@@ -10,7 +10,7 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({ children, hasFooter = fal
             <div className={style.previewLayoutLogo}>
                 <Logo size="small" />
             </div>
-            <section>{children}</section>
+            <section className={style.previewLayoutContianer}>{children}</section>
             {/* TODO: link back to the game with the popup */}
             {hasFooter ? <Footer link="" /> : null}
         </section>

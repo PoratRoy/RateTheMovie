@@ -23,6 +23,8 @@ import {
     FinishRound,
     RoundFinished,
 } from "../models/constant/socketEvents";
+import Session from "../utils/sessionStorage";
+import { SessionKey } from "../models/enums/session";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -39,7 +41,7 @@ export const SocketContext = createContext<{
     handlePlayerJoinRoom: (
         roomId: string,
         player: Player,
-        callback: (currecntPlayer: Player) => void,
+        callback: (currecntPlayer: Player, game?: Game) => void,
     ) => void;
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
@@ -122,7 +124,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const handlePlayerJoinRoom = (
         roomId: string,
         player: Player,
-        callback: (currecntPlayer: Player) => void,
+        callback: (currecntPlayer: Player, game?: Game) => void,
     ) => {
         socket.emit(
             PlayerJoinRoom,
@@ -133,7 +135,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                     setRivalPlayers((prev) => {
                         return [...prev, ...rivalPlayers];
                     });
-                    callback(currecntPlayer);
+                    callback(currecntPlayer, warRoom.game);
                 }
             },
         );
@@ -149,7 +151,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handlePlayerFinish = (electedCards: ElectedCards, score: number) => {
-        socket.emit(PlayerFinish, electedCards ,score);
+        socket.emit(PlayerFinish, electedCards, score);
     };
 
     useEffect(() => {
@@ -162,8 +164,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         const handleGameStarted = (warRoom: WarRoomProps) => {
             const { game, gameCards } = warRoom;
             handleGameCards(gameCards);
-            setGame(game);
-            setStartGame(true);
+            if (game) {
+                setGame(game);
+                Session.set(SessionKey.GAME, game);
+                setStartGame(true);
+            }
         };
 
         const handlePlayerFinished = (details: WarRoomDetails) => {

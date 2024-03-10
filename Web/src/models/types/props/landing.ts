@@ -1,4 +1,4 @@
-import { ModOption } from "../../enums/landing";
+import { Game } from "../game";
 import { Player } from "../player";
 import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
@@ -17,5 +17,5 @@ export type LoadingPageProps = {
     playerRole?: PlayerRole;
     onClicked: () => void;
     isLoading: boolean;
-    gameMod: ModOption;
+    game: Game | undefined;
 };

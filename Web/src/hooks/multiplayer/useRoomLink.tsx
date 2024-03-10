@@ -21,7 +21,7 @@ const useRoomLink = (mod: ModOption, playerRole: PlayerRole, roomId?: string) =>
                 }
             }, 50);
         }
-    }, [mod]);
+    }, [mod, roomId]);
 
     return { roomLink };
 };

@@ -6,6 +6,7 @@ import style from "./RivalPlayerProfile.module.css";
 
 const RivalPlayerProfile: React.FC<RivalPlayerProfileProps> = ({ player }) => {
     const { avatar, name } = player;
+    //TODO: add fade animation when initial render
     return (
         <section className={style.rivalPlayerProfile}>
             <Avatar img={AvatarImgs[avatar]} />

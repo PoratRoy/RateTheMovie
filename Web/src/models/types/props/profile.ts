@@ -8,7 +8,7 @@ export type PreviewProfileProps = {
     player: Player | undefined;
     avatarId: number | undefined;
     setValue: any;
-    watch: UseFormWatch<SetupInputSchema>
+    watch: UseFormWatch<SetupInputSchema>;
 };
 
 export type AvatarProps = {
@@ -31,4 +31,8 @@ export type ResultPlayerProfileProps = {
 
 export type PlaceProps = ChildernsProps & {
     place: number;
+};
+
+export type WatingRoomProps = {
+    rivalPlayers: Player[];
 };

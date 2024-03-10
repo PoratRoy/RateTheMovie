@@ -16,3 +16,11 @@
     position: absolute;
     top: 1em;
 }
+
+.previewLayoutContianer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+}

@@ -1,4 +1,5 @@
 .loadingGameStatus{
+    color: var(--text-color-opacity);
     margin-top: 1em;
 }
 
@@ -10,7 +11,7 @@
     width: 80vw;
     text-align: center;
     font-size: 1.2rem;
-    height: 140px;
+    height: fit-content;
 }
 
 .loadingPageDescription{
@@ -27,21 +28,4 @@
     font-weight: 500;
     width: 80%;
     color: var(--text-color-opacity);
-}
-
-.loadingPageRivals{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-color);
-    width: 80vw;
-    text-align: center;
-    font-size: 1.1rem;
-}
-
-.loadingPageRivalsRivals{
-    max-width: 80vw;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
 }

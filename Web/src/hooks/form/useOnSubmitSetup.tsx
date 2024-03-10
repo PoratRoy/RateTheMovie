@@ -39,8 +39,12 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
             if (isSingle(mod)) {
                 setPlayer(updatedPlayer);
             } else if (isMulti(mod) && roomId) {
-                handlePlayerJoinRoom(roomId, updatedPlayer, (player: Player) => {
+                handlePlayerJoinRoom(roomId, updatedPlayer, (player: Player, game: Game | undefined) => {
                     setPlayer(player);
+                    if (game && playerRole === "player"){
+                        setGame(game);
+                        Session.set(SessionKey.GAME, game);
+                    }
                 });
             }
         }

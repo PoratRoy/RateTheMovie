@@ -5,7 +5,6 @@ import useFinishAnimation from "../../../hooks/animation/useFinishAnimation";
 import Header from "../../../components/common/Header";
 import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
-import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
 import GameModal from "./GameModal";
 
@@ -36,7 +35,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer, isLoad
                     playerRole={currentPlayer?.role}
                     onClicked={handleClickStartGame}
                     isLoading={isLoading}
-                    gameMod={game?.mod || ModOption.MULTI}
+                    game={game}
                 />
             )}
         </React.Fragment>
