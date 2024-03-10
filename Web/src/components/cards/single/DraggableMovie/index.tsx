@@ -1,9 +1,9 @@
 import React from "react";
 import Draggable from "../../../dnd/Draggable";
 import style from "./DraggableMovie.module.css";
-import { DraggableMovieProps } from "../../../../models/types/props/card";
 import Movie from "../../core/Movie";
 import { cardAnimation_all } from "../../../../models/initialization/card";
+import { DraggableMovieProps } from "../../../../models/types/props/movie";
 
 const DraggableMovie: React.FC<DraggableMovieProps> = ({
     id,

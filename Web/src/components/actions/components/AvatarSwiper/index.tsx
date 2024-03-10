@@ -1,4 +1,4 @@
-import { AvatarImgs } from "../../../models/resources/avatars";
+import { AvatarImgs } from "../../../../models/resources/avatars";
 import { Swiper as SwiperCore } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Mousewheel, HashNavigation, Navigation } from "swiper/modules";
@@ -9,9 +9,9 @@ import "swiper/css/mousewheel";
 import "swiper/css/effect-coverflow";
 import "./AvatarSwiper.css";
 import { FieldValues } from "react-hook-form";
-import { AvatarSwiperProps } from "../../../models/types/props/input";
-import { FormSetValue } from "../../../models/constant";
-import Avatar from "../../profile/Avatar";
+import { AvatarSwiperProps } from "../../../../models/types/props/input";
+import { FormSetValue } from "../../../../models/constant";
+import Avatar from "../../../profile/Avatar";
 
 const AvatarSwiper = <TInput extends FieldValues>({
     id,

@@ -7,7 +7,7 @@ import { RankingPlayerProps } from "../../../models/types/props/ranking";
 import useToggle from "../../../hooks/global/useToggle";
 import ResultCard from "../../cards/single/ResultCard";
 import { Card } from "../../../models/types/card";
-import Collapse from "../../actions/Collapse";
+import Collapse from "../../actions/widgets/Collapse";
 
 const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
     const [isOpen, toggle] = useToggle(false);

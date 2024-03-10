@@ -4,7 +4,7 @@ import EditProfileBtn from "../../../actions/widgets/btn/EditProfileBtn";
 import { AvatarImgs } from "../../../../models/resources/avatars";
 import { DefualtPlayerName } from "../../../../models/constant";
 import { PreviewProfileProps } from "../../../../models/types/props/profile";
-import AvatarSwiper from "../../../actions/AvatarSwiper";
+import AvatarSwiper from "../../../actions/components/AvatarSwiper";
 import { setupInputs } from "../../../../models/initialization/form";
 import NameInput from "../../../actions/widgets/input/NameInput";
 import Avatar from "../../../profile/Avatar";

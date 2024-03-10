@@ -3,7 +3,7 @@ import style from "./FilterCollapse.module.css";
 import { FilterCollapseProps } from "../../../../models/types/props/filter";
 import ToggelArrow from "../../../actions/widgets/ToggelArrow";
 import useToggle from "../../../../hooks/global/useToggle";
-import Collapse from "../../../actions/Collapse";
+import Collapse from "../../../actions/widgets/Collapse";
 
 const FilterCollapse: React.FC<FilterCollapseProps> = ({ children }) => {
     const [isOpen, toggle] = useToggle(false);

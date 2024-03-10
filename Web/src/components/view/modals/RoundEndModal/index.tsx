@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../../core/Modal";
 import style from "./RoundEndModal.module.css";
 import { RoundEndModalProps } from "../../../../models/types/props/view";
-import CardsReveal from "../../../actions/CardsReveal";
+import CardsReveal from "../../../actions/components/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import RoundModalBtns from "../../RoundModalBtns";
 import PlayerScore from "../../core/PlayerScore";

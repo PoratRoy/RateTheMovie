@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import RevealOrderBtn from "../widgets/btn/RevealOrderBtn";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
-import { getCorrectOrder } from "../../../utils/correctOrder";
-import PackOfResult from "../../cards/pack/PackOfResult";
+import RevealOrderBtn from "../../widgets/btn/RevealOrderBtn";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import { getCorrectOrder } from "../../../../utils/correctOrder";
+import PackOfResult from "../../../cards/pack/PackOfResult";
 import style from "./CardsReveal.module.css";
-import { Card } from "../../../models/types/card";
-import { REVEAL_ACTION_ID } from "../../../models/constant";
+import { Card } from "../../../../models/types/card";
+import { REVEAL_ACTION_ID } from "../../../../models/constant";
 
 const CardsReveal: React.FC = () => {
     const [revealCards, setRevealCards] = useState<Card[]>([]);

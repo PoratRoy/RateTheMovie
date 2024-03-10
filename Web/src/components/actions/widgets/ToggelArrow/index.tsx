@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import style from "./ToggelArrow.module.css";
-import { ToggelArrowProps } from "../../../../models/types/props/common";
 import { motion } from "framer-motion";
 import { getRotation, getStartIcon } from "../../../../utils/icon";
+import { ToggelArrowProps } from "../../../../models/types/props/action";
 
 const ToggelArrow: React.FC<ToggelArrowProps> = ({
     isOpen,

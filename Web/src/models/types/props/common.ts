@@ -1,6 +1,5 @@
 import { IdProps } from ".";
-import { Player } from "../player";
-import { CardSize, Diraction, IconSize, LogoSize } from "../union";
+import { CardSize, LogoSize } from "../union";
 
 export type ImgProps = {
     src: string;
@@ -40,23 +39,6 @@ export type RoomLinkProps = {
 export type RoundTitleProps = {
     current: number;
     total: number;
-};
-
-export type CountDownProps = {
-    closeTimer: () => void;
-    time: number;
-};
-
-export type RankingBoardProps = {
-    players: Player[];
-};
-
-export type ToggelArrowProps = {
-    isOpen: boolean;
-    handleOnClick: () => void;
-    startDirection?: Diraction;
-    endDirection?: Diraction;
-    size?: IconSize;
 };
 
 export type HeaderProps = {

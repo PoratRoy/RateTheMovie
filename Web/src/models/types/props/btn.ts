@@ -76,3 +76,5 @@ export type RestartCircleBtnProps = CloseProps;
 export type LeaderBoardCircleBtnProps = CloseProps;
 
 export type ShuffleBtnProps = CloseProps;
+
+export type CloseBtnProps = CloseProps;

@@ -1,7 +1,7 @@
 import React from "react";
-import { CollapseProps } from "../../../models/types/props/action";
+import { CollapseProps } from "../../../../models/types/props/action";
 import { m, LazyMotion, domAnimation } from "framer-motion";
-import { tweenAnimation } from "../../../style/animation";
+import { tweenAnimation } from "../../../../style/animation";
 
 const Collapse: React.FC<CollapseProps> = ({ children, isOpen }) => {
     return (

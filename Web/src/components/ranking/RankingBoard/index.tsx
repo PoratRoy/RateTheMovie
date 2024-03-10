@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import style from "./RankingBoard.module.css";
-import { RankingBoardProps } from "../../../models/types/props/common";
 import { sortPlayersByScore } from "../../../utils/calc";
 import ResultPlayerProfile from "../../profile/ResultPlayerProfile";
 import { Player } from "../../../models/types/player";
 import { GAMEOVER_BOARD_ID } from "../../../models/constant";
 import { DisplayNone } from "../../../style/style";
 import { groupPlayersByRank } from "../../../utils/ranking";
+import { RankingBoardProps } from "../../../models/types/props/action";
 
 const RankingBoard: React.FC<RankingBoardProps> = ({ players }) => {
     const sortedPlayers = useCallback(() => sortPlayersByScore(players), [players]);

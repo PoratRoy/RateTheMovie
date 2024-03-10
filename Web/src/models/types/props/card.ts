@@ -42,18 +42,6 @@ export type PreviewCardProps = {
     movie: Movie;
 };
 
-export type ShadowPlayerCardProps = IdProps & {
-    movie?: Movie;
-};
-
-export type DraggableMovieProps = {
-    id: string;
-    movie: Movie;
-    player: Player;
-    isShadow?: boolean;
-    size?: CardSize;
-};
-
 export type ShadowCardProps = {
     movie?: Movie;
 };

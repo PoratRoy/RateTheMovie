@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "./TimerBar.module.css";
 import { motion } from "framer-motion";
-import { TimerBarProps } from "../../../models/types/props/action";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { TimerBarProps } from "../../../../models/types/props/action";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate }) => {
     const { playerFinishRound } = useGamePlayContext();

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../../core/Modal";
 import style from "./MultiRoundEndModal.module.css";
 import { MultiRoundEndModalProps } from "../../../../models/types/props/view";
-import CardsReveal from "../../../actions/CardsReveal";
+import CardsReveal from "../../../actions/components/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { useSocketContext } from "../../../../context/SocketContext";
 import { NEXT_ROUND_BTN_ID, SCORE_ID } from "../../../../models/constant";
@@ -10,7 +10,7 @@ import useMultiGameOverAnimation from "../../../../hooks/animation/useMultiGameO
 import RoundModalBtns from "../../RoundModalBtns";
 import PlayerScore from "../../core/PlayerScore";
 import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
-import TimerBar from "../../../actions/TimerBar";
+import TimerBar from "../../../actions/animation/TimerBar";
 import RankingBoardTwo from "../../../ranking/RankingBoardTwo";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {

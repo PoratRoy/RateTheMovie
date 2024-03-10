@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PlayBtn from "../../actions/widgets/btn/PlayBtn";
-import RoundsNumber from "../../actions/RoundsNumber";
+import RoundsNumber from "../../actions/components/RoundsNumber";
 import FilterCollapse from "../filter/FilterCollapse";
 import PreviewProfile from "../profile/PreviewProfile";
 import { setupInputs } from "../../../models/initialization/form";

@@ -6,7 +6,7 @@ import RoundTitle from "../RoundTitle";
 import PauseBtn from "../../actions/widgets/btn/PauseBtn";
 import PauseModal from "../../view/modals/PauseModal";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import TimerBar from "../../actions/TimerBar";
+import TimerBar from "../../actions/animation/TimerBar";
 import RivalsProfiles from "../../profile/RivalsProfiles";
 import useMod from "../../../hooks/gameplay/useMod";
 import { ROUND_NUM } from "../../../models/constant";

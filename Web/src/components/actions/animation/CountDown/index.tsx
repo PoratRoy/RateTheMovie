@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./CountDown.module.css";
-import { CountDownProps } from "../../../../models/types/props/common";
+import { CountDownProps } from "../../../../models/types/props/action";
 
 const CountDown: React.FC<CountDownProps> = ({ time, closeTimer }) => {
     const [counter, setCounter] = useState<number>(time);

@@ -6,19 +6,3 @@ export const initFinishAnimation: FinishAnimation = {
     showCorrectPack: [...Array(PACK_CARDS_NUM)],
     increaseScore: false,
 };
-
-
-//TODO: in use?
-// export const initMultiplayerState: MultiplayerState = {
-//     socket: undefined,
-//     warRoom: {
-//         room: undefined,
-//         players: [],
-//         gameCards: [],
-//         filters: {
-//             year: undefined,
-//             genre: undefined,
-//             language: undefined,
-//         },
-//     },
-// };

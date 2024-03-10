@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import style from "./Score.module.css";
-import useCountingScoreAnimation from "../../../hooks/animation/useCountingScoreAnimation";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
-import { ScoreProps } from "../../../models/types/props/common";
-import { useAnimationContext } from "../../../context/AnimationContext";
-
+import useCountingScoreAnimation from "../../../../hooks/animation/useCountingScoreAnimation";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import { ScoreProps } from "../../../../models/types/props/common";
+import { useAnimationContext } from "../../../../context/AnimationContext";
+//TODO: not in use
 const Score: React.FC<ScoreProps> = ({ score }) => {
     const { playerFinishRound, setIsRoundFinished } = useGamePlayContext();
     const { finishAnimation } = useAnimationContext();
