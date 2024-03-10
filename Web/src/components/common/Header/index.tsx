@@ -26,10 +26,10 @@ const Header: React.FC<HeaderProps> = ({ activateTimer }) => {
         <section className={style.gameHeaderContainer}>
             <section className={style.gameHeaderContainerFix} />
             <PlayerProfile currentPlayer={currentPlayer} />
-            <div className={style.gameHeaderCenter}>
+            {/* <div className={style.gameHeaderCenter}>
                 <Logo size="small" />
                 <RoundTitle current={game?.currentRound || 1} total={game?.rounds || ROUND_NUM} />
-            </div>
+            </div> */}
             {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
             {isMulti() ? <TimerBar position="absolute" activate={activateTimer} /> : null}
             {showModal ? <PauseModal close={handleClose} /> : null}

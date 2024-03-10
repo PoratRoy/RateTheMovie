@@ -8,6 +8,7 @@
 
 .PlayerProfileDetails{
     width: 100%;
+    max-width: 120px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -29,6 +30,9 @@
     color: var(--text-color-opacity);
     font-size: 0.9rem;
     line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .PlayerProfileDetailsSkeleton{

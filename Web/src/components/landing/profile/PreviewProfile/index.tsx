@@ -8,27 +8,25 @@ import { PreviewProfileProps } from "../../../../models/types/props/profile";
 
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ children, profileName, avaterId }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const img = (avaterId === undefined || avaterId === -1) ? undefined : AvaterImgs[avaterId];
+    const img = avaterId === undefined || avaterId === -1 ? undefined : AvaterImgs[avaterId];
 
     const handleOnClick = () => {
-        setIsEdit(true);
+        setIsEdit((prev) => !prev);
     };
 
     return (
-        <section>
+        <section className={style.previewProfileContainer}>
             {isEdit ? (
-                <section className={style.previewProfileContainer}>{children}</section>
+                <section className={style.previewProfileForm}>{children}</section>
             ) : (
-                <section className={style.previewProfileContainer}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <Avater img={img} isFocus/>
-                        <div className={style.previewProfileName}>
-                            {profileName || DefualtPlayerName}
-                        </div>
+                <section className={style.previewProfileForm}>
+                    <Avater img={img} isFocus />
+                    <div className={style.previewProfileName}>
+                        {profileName || DefualtPlayerName}
                     </div>
-                    <EditProfileBtn onClicked={handleOnClick} />
                 </section>
             )}
+            <EditProfileBtn onClicked={handleOnClick} />
         </section>
     );
 };

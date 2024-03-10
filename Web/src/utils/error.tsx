@@ -1,7 +1,12 @@
 import { Store } from "react-notifications-component";
 import { NotificationType } from "../models/types/union";
 
-export const notification = (title: string, message: any, type: NotificationType) => {
+export const notification = (
+    title: string,
+    message: any,
+    type: NotificationType,
+    dismiss?: { duration: number; onScreen: boolean },
+) => {
     return Store.addNotification({
         title,
         message: message,
@@ -10,9 +15,6 @@ export const notification = (title: string, message: any, type: NotificationType
         container: "bottom-full",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-            duration: 3000,
-            onScreen: true,
-        },
-    });
+        dismiss: dismiss || { duration: 3000, onScreen: true }
+    })
 };

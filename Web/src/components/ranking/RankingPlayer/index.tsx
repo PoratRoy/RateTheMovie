@@ -31,13 +31,19 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
             style={{
                 border: isTopThree ? `3px solid ${color}` : "none",
                 gap: isOpen ? "1rem" : "0",
-                transition: "gap 0.3s linear"
+                transition: "gap 0.3s linear",
             }}
         >
             <div className={style.rankingPlayerTabTop}>
                 <span className={style.rankingNumber}>{place}</span>
                 <PlayerProfile currentPlayer={player} />
-                <ToggelArrow isOpen={isOpen} handleOnClick={toggle} />
+                <ToggelArrow
+                    isOpen={isOpen}
+                    handleOnClick={toggle}
+                    startDirection="right"
+                    endDirection="down"
+                    size="small"
+                />
             </div>
 
             <Collapse isOpen={isOpen}>

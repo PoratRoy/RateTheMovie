@@ -1,6 +1,6 @@
 import { IdProps } from ".";
 import { Player } from "../player";
-import { CardSize, LogoSize } from "../union";
+import { CardSize, Diraction, IconSize, LogoSize } from "../union";
 
 export type ImgProps = {
     src: string;
@@ -43,7 +43,7 @@ export type RoundTitleProps = {
 export type CountDownProps = {
     closeTimer: () => void;
     time: number;
-}
+};
 
 export type RankingBoardProps = {
     players: Player[];
@@ -52,8 +52,11 @@ export type RankingBoardProps = {
 export type ToggelArrowProps = {
     isOpen: boolean;
     handleOnClick: () => void;
+    startDirection?: Diraction;
+    endDirection?: Diraction;
+    size?: IconSize;
 };
 
 export type HeaderProps = {
     activateTimer: boolean;
-}
+};

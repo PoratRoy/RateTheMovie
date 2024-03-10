@@ -1,29 +1,31 @@
-import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
+import React from "react";
 import style from "./FilterCollapse.module.css";
 import { FilterCollapseProps } from "../../../../models/types/props/filter";
+import ToggelArrow from "../../../actions/widgets/ToggelArrow";
+import useToggle from "../../../../hooks/global/useToggle";
+import Collapse from "../../../actions/Collapse";
 
 const FilterCollapse: React.FC<FilterCollapseProps> = ({ children }) => {
-    const [isCollapse, setIsCollapse] = useState<boolean>(false);
-    const [isIconClose, setIsIconClose] = useState<boolean>(false);
+    const [isOpen, toggle] = useToggle(false);
 
     const handleCollapse = () => {
-        setIsCollapse((prev) => !prev);
-        setIsIconClose((prev) => !prev);
-        //TODO: add scrolling 
+        toggle();
+        //TODO: add scrolling
         //TODO: change all the height
     };
 
     return (
         <section className={style.filterCollapseContainer}>
             <div>Change filters</div>
-            <div
-                onClick={handleCollapse}
-                className={isIconClose ? style.collapseBtnOpen : style.collapseBtnClose}
-            >
-                <IoIosArrowDown />
-            </div>
-            {isCollapse ? <section className={style.collapseForm}>{children}</section> : null}
+            <ToggelArrow
+                startDirection="down"
+                endDirection="up"
+                isOpen={isOpen}
+                handleOnClick={handleCollapse}
+            />
+            <Collapse isOpen={isOpen}>
+                <section className={style.collapseForm}>{children}</section>
+            </Collapse>
         </section>
     );
 };

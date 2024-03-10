@@ -2,10 +2,13 @@ import React from "react";
 import style from "./RoomLink.module.css";
 import { FaRegCopy } from "react-icons/fa6";
 import { RoomLinkProps } from "../../../../../models/types/props/common";
+import { useErrorContext } from "../../../../../context/ErrorContext";
 
 const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
+    const { handleSuccess } = useErrorContext();
     const handleCopy = () => {
         navigator.clipboard.writeText(roomLink);
+        handleSuccess("Link copied");
     };
 
     return (
@@ -22,8 +25,8 @@ const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
         </section>
     );
 
-    //TODO: copy tag when clicked
     //TODO: add button to share to social media
+    //https://www.npmjs.com/package/react-share
 };
 
 export default RoomLink;
