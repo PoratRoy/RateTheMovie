@@ -1,5 +1,4 @@
 import { ModOption } from "../enums/landing";
-import { Card } from "./card";
 import { MovieFilters } from "./filter";
 
 export type Game = {
@@ -8,9 +7,4 @@ export type Game = {
     filters: MovieFilters;
     currentRound: number;
     rounds: number;
-};
-
-export type FinishAnimation = {
-    showCorrectPack: Card[];
-    increaseScore: boolean;
 };

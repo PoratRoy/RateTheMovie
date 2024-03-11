@@ -7,7 +7,7 @@ import { Card } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
 import { initGameCards } from "../../utils/card";
 import { logMovies } from "../../utils/log";
-import Session from "../../utils/sessionStorage";
+import Session from "../../utils/storage/sessionStorage";
 import useCorrectOrder from "./useCorrectOrder";
 import useMod from "./useMod";
 

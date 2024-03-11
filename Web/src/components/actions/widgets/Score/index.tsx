@@ -8,7 +8,7 @@ import { useAnimationContext } from "../../../../context/AnimationContext";
 //TODO: not in use
 const Score: React.FC<ScoreProps> = ({ score }) => {
     const { playerFinishRound, setIsRoundFinished } = useGamePlayContext();
-    const { finishAnimation } = useAnimationContext();
+    const { increaseScore } = useAnimationContext();
     const handleComplete = () => {
         if (playerFinishRound) {
             setTimeout(() => {
@@ -16,11 +16,7 @@ const Score: React.FC<ScoreProps> = ({ score }) => {
             }, 500);
         }
     };
-    const { scoreRes } = useCountingScoreAnimation(
-        score,
-        finishAnimation.increaseScore,
-        handleComplete,
-    );
+    const { scoreRes } = useCountingScoreAnimation(score, increaseScore, handleComplete);
 
     return (
         <section className={style.score}>

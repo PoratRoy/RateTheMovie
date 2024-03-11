@@ -1,6 +1,6 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { updatePlayer } from "../../models/initialization/player";
-import Session from "../../utils/sessionStorage";
+import Session from "../../utils/storage/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 import { Player } from "../../models/types/player";
 import { MovieFilters } from "../../models/types/filter";

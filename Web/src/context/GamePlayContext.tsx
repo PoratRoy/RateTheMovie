@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { SessionKey } from "../models/enums/session";
-import Session from "../utils/sessionStorage";
+import Session from "../utils/storage/sessionStorage";
 import { Game } from "../models/types/game";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
@@ -71,6 +71,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
     //TODO: extract to a hook
+    //TODO: put as useCallBack
     const setStateFromSession = () => {
         if (!game) {
             const sessionGame: Game | undefined = Session.get(SessionKey.GAME);

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import path from "../../router/routePath.json";
 import { RoundAction } from "../../models/types/union";
-import Session from "../../utils/sessionStorage";
+import Session from "../../utils/storage/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 import useBackupRound from "../../api/hooks/useBackupRound";
 import useHandleMovies from "./useHandleMovies";

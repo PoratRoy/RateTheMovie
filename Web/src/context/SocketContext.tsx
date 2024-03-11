@@ -23,7 +23,7 @@ import {
     FinishRound,
     RoundFinished,
 } from "../models/constant/socketEvents";
-import Session from "../utils/sessionStorage";
+import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
