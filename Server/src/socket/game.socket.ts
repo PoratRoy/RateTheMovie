@@ -140,7 +140,8 @@ class GameSocket implements ISocket {
                         players[index].electedCards = electedCards;
                         players[index].score = score;
                         this.warRooms[game.roomId] = warRoom;
-                        socket.to(roomId).emit(PlayerFinished, setWarRoomDetails(warRoom, roomId));
+                        const warDetails = setWarRoomDetails(warRoom, roomId);
+                        socket.nsp.to(roomId).emit(PlayerFinished, warDetails);
                     }
                 }
             });
@@ -152,11 +153,7 @@ class GameSocket implements ISocket {
                 if (warRoom) {
                     const roomId = warRoom.game?.roomId;
                     if (roomId) {
-                        socket.in(roomId).emit(RoundFinished, this.warRooms[roomId]);
-                        //TODO: finish game not sending to the second player if there are only two players
-                        // warRoom.players.forEach((player) => {
-                        //     socket.broadcast.to(player.id).emit(RoundFinished, this.warRooms[roomId]);
-                        // });
+                        socket.to(roomId).emit(RoundFinished, this.warRooms[roomId]);
                     }
                 }
             });

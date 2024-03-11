@@ -163,8 +163,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         const handleGameStarted = (warRoom: WarRoomProps) => {
             const { game, gameCards } = warRoom;
-            handleGameCards(gameCards);
             if (game) {
+                handleGameCards(gameCards);
                 setGame(game);
                 Session.set(SessionKey.GAME, game);
                 setStartGame(true);

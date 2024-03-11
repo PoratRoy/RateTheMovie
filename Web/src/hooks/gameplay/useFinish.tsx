@@ -26,10 +26,11 @@ const useFinish = () => {
         if (isValid) {
             setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
             setPlayerFinishRound(true);
-    
+            
             const movies: Movie[] = getMoviesFromCards(gameCards);
             setPreviewMovies((prev) => [...prev, ...movies]);
-
+            
+            let check = false;
             setCurrentPlayer((player: Player | undefined) => {
                 let playerScore = 0;
                 if (!player) return player;
@@ -46,8 +47,11 @@ const useFinish = () => {
                     }
                 }
 
-                if (isMulti()) {
+                //TODO: setCurrentPlayer run twice, so I put the "check" variable to prevent the handlePlayerFinish run twice
+                // not sure why setCurrentPlayer run twice if finishGame run only once
+                if (isMulti() && !check) {
                     handlePlayerFinish(electedCards, playerScore);
+                    check = true;
                 }
 
                 return {

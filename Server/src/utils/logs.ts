@@ -2,7 +2,7 @@ import { WarRooms } from "../model/types/warRoom";
 
 export const logEvent = (event: string) => {
     console.log(`${event} event received`);
-    console.log("<--------------------------------->");
+    console.log("----------------");
 };
 
 export const logBack = (args: Object) => {

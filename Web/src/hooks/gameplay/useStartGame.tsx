@@ -58,7 +58,10 @@ const useStartGame = () => {
     }, [fetchLoading]);
 
     useEffect(() => {
-        if (isMulti()) {
+        if (isSingle()) {
+            setShowTimer(false);
+            setCardLoading(false);
+        } else {
             setShowTimer(true);
             setCardLoading(true);
             if (startGame) {
@@ -68,9 +71,6 @@ const useStartGame = () => {
             } else {
                 setCardLoading(true);
             }
-        } else {
-            setShowTimer(false);
-            setCardLoading(false);
         }
     }, [startGame]);
 
