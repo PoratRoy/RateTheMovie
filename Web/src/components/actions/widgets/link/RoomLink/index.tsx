@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./RoomLink.module.css";
 import { FaRegCopy } from "react-icons/fa6";
-import { RoomLinkProps } from "../../../../../models/types/props/common";
 import { useErrorContext } from "../../../../../context/ErrorContext";
+import { RoomLinkProps } from "../../../../../models/types/props/link";
 
 const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
     const { handleSuccess } = useErrorContext();

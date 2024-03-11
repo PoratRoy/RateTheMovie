@@ -18,7 +18,7 @@ const RoundModalBtns: React.FC<RoundModalBtnsProps> = ({ id, close, gameOver, is
             ) : (
                 <div>Wait for the Host to start the next round</div>
             )}
-            <AdditionalBtns close={close} gameOver={gameOver} isSingle={isSingle} />
+            <AdditionalBtns close={close} isSingle={isSingle} isGameOver={gameOver} />
         </section>
     );
 };

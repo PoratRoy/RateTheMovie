@@ -35,8 +35,8 @@ export type RoundEndModalProps = CloseProps;
 export type MultiRoundEndModalProps = CloseProps;
 
 export type AdditionalBtnsProps = CloseProps & {
-    gameOver: boolean;
     isSingle: boolean;
+    isGameOver: boolean;
 };
 
 export type RoundModalBtnsProps = CloseProps & {

@@ -1,0 +1,14 @@
+.movieListLink {
+    color: var(--text-color-opacity);
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.movieListLink:hover {
+    color: var(--text-color-opacity-hover);
+}
+
+.movieListLink:active {
+    color: var(--text-color-opacity-active);
+}

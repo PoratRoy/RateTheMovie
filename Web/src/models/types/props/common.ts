@@ -26,16 +26,6 @@ export type FooterProps = {
     toClear?: boolean;
 };
 
-export type BackLinkProps = {
-    link?: string;
-    callback?: () => void;
-    toClear?: boolean;
-};
-
-export type RoomLinkProps = {
-    roomLink: string;
-};
-
 export type RoundTitleProps = {
     current: number;
     total: number;

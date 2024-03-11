@@ -30,6 +30,9 @@ export const TEXT_COLOR = "#FFFFFF";
 export const TEXT_COLOR_HOVER = "#FFFFFF90";
 export const TEXT_COLOR_ACTIVE = "#FFFFFF80";
 export const TEXT_COLOR_OPACITY = "#8996A1";
+export const TEXT_COLOR_OPACITY_HOVER = "#94a0aa";
+export const TEXT_COLOR_OPACITY_ACTIVE = "#9da8b2";
+export const TEXT_COLOR_OPACITY_REAL = "#FFFFFF30";
 
 export const INPUT_BACKGROUND_COLOR = "#FFFFFF";
 export const INPUT_BACKGROUND_COLOR_HOVER = "#E6E6E6";

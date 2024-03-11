@@ -2,8 +2,8 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import style from "./BackLink.module.css";
 import { useNavigate } from "react-router-dom";
-import { BackLinkProps } from "../../../../../models/types/props/common";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
+import { BackLinkProps } from "../../../../../models/types/props/link";
 
 const BackLink: React.FC<BackLinkProps> = ({ link, callback, toClear = true }) => {
     const { clearGameContext } = useGamePlayContext();
