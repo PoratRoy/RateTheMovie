@@ -23,6 +23,7 @@ const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate }) 
     useEffect(() => {
         if (activate) {
             setInitial(false);
+            time()
         }
     }, [activate]);
 
@@ -35,6 +36,16 @@ const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate }) 
                     animationRef.current.parentElement.offsetWidth;
             setRemainingTime(remaining); // Calculate remaining time and store it
         }
+    };
+
+    const time = () => {
+        let timer = 20;
+        const intervalId = setInterval(() => {
+            if (timer === 0) {
+                clearInterval(intervalId);
+            }
+            timer--;
+        }, 1000);
     };
 
     return (

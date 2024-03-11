@@ -39,13 +39,6 @@ export type AdditionalBtnsProps = CloseProps & {
     isGameOver: boolean;
 };
 
-export type RoundModalBtnsProps = CloseProps & {
-    id?: string;
-    gameOver: boolean;
-    role?: PlayerRole;
-    isSingle?: boolean;
-};
-
 export type PlayerScoreProps = {
     id?: string;
     score: number;

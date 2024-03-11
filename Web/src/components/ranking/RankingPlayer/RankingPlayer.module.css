@@ -8,6 +8,7 @@
 }
 
 .rankingPlayerTabTop {
+    position: relative;
     width: 100%;
     height: fit-content;
     display: flex;
@@ -20,6 +21,9 @@
 }
 
 .rankingNumber {
-    font-size: 1.2rem;
+    position: absolute;
+    right: 15px;
+    font-size: 1.6rem;
     font-weight: 600;
+    color: var(--text-color);
 }

@@ -203,6 +203,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         return () => {
             socket.off(PlayerJoined, handlePlayerJoined);
             socket.off(GameStarted, handleGameStarted);
+            socket.off(PlayerFinished, handlePlayerFinished);
+            socket.off(RoundFinished, handleRoundFinished);
             socket.off(PlayerDisconnect, handlePlayerDisconnected);
         };
     }, [socket]);

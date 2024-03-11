@@ -10,8 +10,8 @@ import { Card } from "../../../models/types/card";
 import Collapse from "../../actions/widgets/Collapse";
 
 const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
-    const [isOpen, toggle] = useToggle(false);
-    const [color, setColor] = useState<string>("red");
+    const [isOpen, toggle] = useToggle(true);
+    const [color, setColor] = useState<string>("white");
 
     const isTopThree = place <= 3 ? true : false;
 
@@ -35,7 +35,6 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
             }}
         >
             <div className={style.rankingPlayerTabTop}>
-                <span className={style.rankingNumber}>{place}</span>
                 <PlayerProfile currentPlayer={player} />
                 <ToggelArrow
                     isOpen={isOpen}
@@ -44,6 +43,7 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
                     endDirection="down"
                     size="small"
                 />
+                <span className={style.rankingNumber} style={{color}}>{place}</span>
             </div>
 
             <Collapse isOpen={isOpen}>

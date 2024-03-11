@@ -39,9 +39,12 @@ const useGameActions = (close: () => void) => {
         handelNewMovies();
     };
 
+    //TODO:
     //You have submitted your masterpiece.
     // Let's wait for the others...
 
+
+    //TODO: after round modal timeout the socket will emit the next round and the game will continue
     const handleContinue = (action: RoundAction) => {
         setRoundNumber(action);
         setIsRoundFinished(false);
