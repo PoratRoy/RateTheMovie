@@ -23,9 +23,11 @@ const useHandleMovies = () => {
         const cards = initGameCards(movies);
 
         setGameCardsOnStateAndSession(cards, correctOrder);
+
         if (isMulti(mod)) {
             handleCards(cards);
         }
+        return cards;
     };
 
     const handleGameCards = (cards: Card[]) => {

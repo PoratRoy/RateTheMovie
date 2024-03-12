@@ -8,10 +8,13 @@ import useBackupRound from "../../api/hooks/useBackupRound";
 import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
+import useMod from "./useMod";
+import { setRoundNum } from "../../utils/game";
 
 const useGameActions = (close: () => void) => {
     const {
         game,
+        currentPlayer,
         refreshGameContext,
         clearGameContext,
         resetGameContext,
@@ -19,10 +22,11 @@ const useGameActions = (close: () => void) => {
         setIsRoundFinished,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
-    const { resetSocketContext, clearSocketContext} = useSocketContext();
+    const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
     const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
+    const { isMulti } = useMod();
 
     const handleQuit = () => {
         close();
@@ -43,13 +47,34 @@ const useGameActions = (close: () => void) => {
     //You have submitted your masterpiece.
     // Let's wait for the others...
 
-
-    //TODO: after round modal timeout the socket will emit the next round and the game will continue
-    const handleContinue = (action: RoundAction) => {
-        setRoundNumber(action);
-        setIsRoundFinished(false);
-        refreshGameContext();
-        handelNewMovies();
+    const handleContinue = (action: RoundAction = "increase") => {
+        if (game && currentPlayer) {
+            const { currentRound } = game;
+            const round = setRoundNum(action, currentRound);
+            setRoundNumber(round);
+            setIsRoundFinished(false);
+            refreshGameContext();
+            if (isMulti()) {
+                if (currentPlayer.role === "host") {
+                    const moviesBackup = Session.get(SessionKey.BACKUP);
+                    if (!moviesBackup) return; //TODO: show no more movies with this filter
+                    backupRoundMovies(game?.filters);
+                    const movies = moviesBackup[0];
+                    Session.removeFrom(SessionKey.BACKUP, 0);
+                    //TODO: for woriking without flip remove this
+                    setIsFlipCard(true);
+                    setTimeout(() => {
+                        const cards = handleMovieCards(movies);
+                        handleNextRound(round, cards);
+                        //TODO: for woriking without flip remove this
+                        setIsFlipCard(false);
+                    }, 1000);
+                }
+                close();
+            } else {
+                handelNewMovies();
+            }
+        }
     };
 
     const handleShuffle = () => {

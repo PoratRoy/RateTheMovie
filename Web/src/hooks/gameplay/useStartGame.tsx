@@ -20,7 +20,7 @@ const useStartGame = () => {
             if (
                 rivalPlayers.length >= 1 &&
                 fetchLoading === false &&
-                gameCards[0].id !== undefined
+                gameCards[0]?.id !== undefined
             ) {
                 setIsLoading(rivalPlayers.length === 0 ? true : false);
             }

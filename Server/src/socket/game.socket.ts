@@ -92,9 +92,12 @@ class GameSocket implements ISocket {
         socket.on(UpdateGameCards, (cards: Card[]) => {
             this.wrapper(UpdateGameCards, () => {
                 const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if (warRoom && warRoom.game?.roomId && cards.length === PACK_CARDS_NUM) {
-                    warRoom.gameCards = cards;
-                    this.warRooms[warRoom.game?.roomId] = warRoom;
+                if(warRoom){
+                    const { game } = warRoom;
+                    if (game?.roomId && cards.length === PACK_CARDS_NUM) {
+                        warRoom.gameCards = cards;
+                        this.warRooms[game?.roomId] = warRoom;
+                    }
                 }
             });
         });
@@ -159,7 +162,7 @@ class GameSocket implements ISocket {
             });
         });
 
-        socket.on(NextRound, (currentRound: number) => {
+        socket.on(NextRound, (round: number, cards: Card[]) => {
             this.wrapper(NextRound, () => {
                 const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
                 if (warRoom) {
@@ -167,15 +170,13 @@ class GameSocket implements ISocket {
                     if (game?.roomId) {
                         const { roomId } = game;
                         players.forEach((player) => {
-                            player.electedCards = { order: []} as ElectedCards;
+                            player.electedCards = { order: [] } as ElectedCards;
                         });
                         warRoom.players = players;
-                        game.currentRound = currentRound;
-                        warRoom.gameCards = [];
+                        game.currentRound = round;
+                        warRoom.gameCards = cards;
                         this.warRooms[roomId] = warRoom;
-                        socket
-                            .to(roomId)
-                            .emit(NextRoundStarted, setWarRoomDetails(warRoom, roomId));
+                        socket.to(roomId).emit(NextRoundStarted, this.warRooms[roomId]);
                     }
                 }
             });

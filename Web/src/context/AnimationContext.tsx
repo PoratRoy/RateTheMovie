@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 export const AnimationContext = createContext<{
     isFlipCard: boolean;
-    setIsFlipCard: (value: boolean) => void;
+    setIsFlipCard: React.Dispatch<React.SetStateAction<boolean>>
     increaseScore: boolean;
     setIncreaseScore: React.Dispatch<React.SetStateAction<boolean>>;
     refreshAnimationContext: () => void;

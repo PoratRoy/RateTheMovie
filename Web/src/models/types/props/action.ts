@@ -9,6 +9,7 @@ export type CollapseProps = ChildernsProps & {
 export type TimerBarProps = {
     position?: "absolute" | "relative";
     activate: boolean;
+    callback?: () => void;
 };
 
 export type CountDownProps = {

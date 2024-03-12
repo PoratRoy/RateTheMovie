@@ -22,6 +22,8 @@ import {
     UpdateGameCards,
     FinishRound,
     RoundFinished,
+    NextRoundStarted,
+    NextRound,
 } from "../models/constant/socketEvents";
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
@@ -46,6 +48,7 @@ export const SocketContext = createContext<{
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
     handlePlayerFinish: (electedCards: ElectedCards, score: number) => void;
+    handleNextRound: (currentRound: number, cards: Card[]) => void;
     leaderBoardPlayers: Player[];
     resetSocketContext: () => void;
     clearSocketContext: () => void;
@@ -61,6 +64,7 @@ export const SocketContext = createContext<{
     handleCards: () => {},
     handleStartGame: () => {},
     handlePlayerFinish: () => {},
+    handleNextRound: () => {},
     leaderBoardPlayers: [],
     resetSocketContext: () => {},
     clearSocketContext: () => {},
@@ -154,6 +158,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit(PlayerFinish, electedCards, score);
     };
 
+    const handleNextRound = (round: number, cards: Card[]) => {
+        socket.emit(NextRound, round, cards);
+    };
+
     useEffect(() => {
         const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
@@ -186,6 +194,16 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             }, 2500); //the time of the finish animation
         };
 
+        const handleNextRoundStarted = (warRoom: WarRoomProps) => {
+            const { game, gameCards } = warRoom;
+            if (game) {
+                handleGameCards(gameCards);
+                setGame(game);
+                Session.set(SessionKey.GAME, game);
+                setStartGame(true);
+            }
+        };
+
         const handlePlayerDisconnected = (player: Player) => {
             setRivalPlayers((prev) => {
                 return filterRivalPlayers(prev, player.id);
@@ -198,6 +216,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.on(GameStarted, handleGameStarted);
         socket.on(PlayerFinished, handlePlayerFinished);
         socket.on(RoundFinished, handleRoundFinished);
+        socket.on(NextRoundStarted, handleNextRoundStarted);
         socket.on(PlayerDisconnect, handlePlayerDisconnected);
 
         return () => {
@@ -205,6 +224,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             socket.off(GameStarted, handleGameStarted);
             socket.off(PlayerFinished, handlePlayerFinished);
             socket.off(RoundFinished, handleRoundFinished);
+            socket.off(NextRoundStarted, handleNextRoundStarted);
             socket.off(PlayerDisconnect, handlePlayerDisconnected);
         };
     }, [socket]);
@@ -234,6 +254,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleCards,
                 handleStartGame,
                 handlePlayerFinish,
+                handleNextRound,
                 leaderBoardPlayers,
                 resetSocketContext,
                 clearSocketContext,

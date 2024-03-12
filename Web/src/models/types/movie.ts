@@ -31,7 +31,7 @@ export type MovieTMDB = {
     original_language?: string;
     original_title?: string;
     overview?: string;
-    popularity?: number;
+    popularity?: number;///
     poster_path?: string;
     release_date?: string;
     title?: string;
@@ -42,8 +42,8 @@ export type MovieTMDB = {
 
 export type MovieOMDB = {
     Actors?: string;
-    Awards?: string;
-    BoxOffice?: string;
+    Awards?: string;///
+    BoxOffice?: string;///
     Country?: string;
     DVD?: string;
     Director?: string;

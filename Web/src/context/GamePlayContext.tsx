@@ -5,8 +5,8 @@ import { Game } from "../models/types/game";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
-import { RoundAction } from "../models/types/union";
 import { Movie } from "../models/types/movie";
+import { setRoundNum } from "../utils/game";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -30,7 +30,7 @@ export const GamePlayContext = createContext<{
     resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
-    setRoundNumber: (action: RoundAction) => void;
+    setRoundNumber: (currentRound: number) => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -84,16 +84,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
     setStateFromSession();
 
-    const setRoundNumber = (action: RoundAction) => {
+    const setRoundNumber = (currentRound: number) => {
         setGame((prev) => {
             if (prev) {
-                const currentRound: number =
-                    action === "reset"
-                        ? 1
-                        : action === "increase"
-                          ? prev.currentRound + 1
-                          : prev.currentRound - 1;
-
                 const game = { ...prev, currentRound };
                 Session.set(SessionKey.GAME, game);
                 return game;
@@ -113,7 +106,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const resetGameContext = () => {
         resetRoundContextState();
-        setRoundNumber("reset");
+        const round = setRoundNum("reset");
+        setRoundNumber(round);
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
         });

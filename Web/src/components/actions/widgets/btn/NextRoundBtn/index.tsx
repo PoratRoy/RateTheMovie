@@ -8,7 +8,7 @@ const NextRoundBtn: React.FC<NextRoundBtnProps> = ({ close }) => {
     const { handleContinue } = useGameActions(close);
     
     const handleNextRound = () => {
-        handleContinue("increase");
+        handleContinue();
     };
 
     const title = (
