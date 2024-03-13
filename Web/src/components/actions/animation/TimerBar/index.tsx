@@ -4,11 +4,16 @@ import { motion } from "framer-motion";
 import { TimerBarProps } from "../../../../models/types/props/action";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
-const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate, callback }) => {
+const TimerBar: React.FC<TimerBarProps> = ({
+    position = "relative",
+    time = 20,
+    activate,
+    callback,
+}) => {
     const { playerFinishRound } = useGamePlayContext();
     const [initial, setInitial] = useState<boolean>(true);
     const [freezeAnimation, setFreezeAnimation] = useState<boolean>(false);
-    const [remainingTime, setRemainingTime] = useState<number>(20); // Initial duration of 2 minutes in seconds
+    const [remainingTime, setRemainingTime] = useState<number>(time); // Initial duration of 2 minutes in seconds
     const animationRef = useRef<any>(null);
     const checkRef = useRef<any>(false);
 
@@ -25,7 +30,7 @@ const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate, ca
         if (activate && checkRef.current === false) {
             checkRef.current = true;
             setInitial(false);
-            time();
+            timer();
         }
     }, [activate]);
 
@@ -33,15 +38,15 @@ const TimerBar: React.FC<TimerBarProps> = ({ position = "relative", activate, ca
         setFreezeAnimation((prev) => !prev);
         if (!freezeAnimation && animationRef.current) {
             const remaining =
-                20 -
-                (20 * animationRef.current.offsetWidth) /
+                time -
+                (time * animationRef.current.offsetWidth) /
                     animationRef.current.parentElement.offsetWidth;
             setRemainingTime(remaining); // Calculate remaining time and store it
         }
     };
 
-    const time = () => {
-        let timer = 20;
+    const timer = () => {
+        let timer = time;
         const intervalId = setInterval(() => {
             if (timer === 0) {
                 clearInterval(intervalId);

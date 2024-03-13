@@ -23,7 +23,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
             <section className={style.MultiRoundEndModal}>
                 <RankingBoardTwo players={leaderBoardPlayers} />
                 <AdditionalBtns close={close} isSingle={false} isGameOver={gameOver} />
-                <TimerBar activate callback={handleTimeOut} />
+                <TimerBar activate callback={handleTimeOut} time={10} />
             </section>
         </Modal>
     );
