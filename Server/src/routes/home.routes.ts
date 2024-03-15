@@ -12,7 +12,7 @@ class HomeRoutes {
     intializeRoutes() {
         this.router.get("/", this.controller.home);
         this.router.get("/ping", this.controller.ping);
-        this.router.get("/status", this.controller.status);
+        this.router.post("/connect", this.controller.connectDB);
     }
 }
 

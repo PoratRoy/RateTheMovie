@@ -1,0 +1,44 @@
+{
+    "movies": {
+        "success": {
+            "get": "Movies has been successfully located.",
+            "create": "Movie has successfully created.",
+            "delete": "Movie has successfully deleted."
+        },
+        "error": {
+            "notExists": "Movie does not exists.",
+            "create": "Failed to create project.",
+            "delete": "Failed to delete project."
+        }
+    },
+    "actors": {
+        "success": {
+            "get": "Actors has been successfully located.",
+            "create": "Actor has successfully created.",
+            "delete": "Actor has successfully deleted."
+        },
+        "error": {
+            "notExists": "Actor does not exists.",
+            "create": "Failed to create project.",
+            "delete": "Failed to delete project."
+        }
+    },
+    "directors": {
+        "success": {
+            "get": "Directors has been successfully located.",
+            "create": "Director has successfully created.",
+            "delete": "Director has successfully deleted."
+        },
+        "error": {
+            "notExists": "Director does not exists.",
+            "create": "Failed to create project.",
+            "delete": "Failed to delete project."
+        }
+    },
+    "error":{
+        "server": "Internal Server Error.",
+        "invalid": "Invalid Request!",
+        "credentials": "Invalid credentials.",
+        "create": "Failed to create"
+    }
+}

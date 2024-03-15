@@ -1,5 +1,5 @@
 import { ModOption } from "../enum/mod";
-import { MovieFilters } from "./movie";
+import { MovieFilters } from "./filter";
 
 export type Game = {
     mod: ModOption; 

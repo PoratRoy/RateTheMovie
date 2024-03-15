@@ -1,0 +1,12 @@
+{
+    "tmdb": {
+        "discover": "https://api.themoviedb.org/3/discover/movie",
+        "cast": "https://api.themoviedb.org/3/movie",
+        "video": "https://api.themoviedb.org/3/movie",
+        "credits": "credits",
+        "videos": "videos"
+    },
+    "omdb": "https://www.omdbapi.com/",
+    "youtube": "https://www.youtube.com/watch?v=",
+    "image": "https://image.tmdb.org/t/p/w300"
+}
