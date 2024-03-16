@@ -63,15 +63,10 @@ const useHandleMovies = () => {
         setFetchLoading(false);
     };
 
-    const handleBackupMovies = (movies: Movie[]) => {
-        Session.add(SessionKey.BACKUP, movies);
-    };
-
     return {
         handleMovieCards,
         handleGameCards,
         handleGameCardsMoreData,
-        handleBackupMovies,
     };
 };
 

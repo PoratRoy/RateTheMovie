@@ -10,12 +10,12 @@ const app: Application = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 new Server(app);
 
-let httpServer: any;
+// let httpServer: any;
 mongoose
-    .connect(process.env.MONGO_KEY as string || "")
+    .connect((process.env.MONGO_KEY as string) || "")
     .then(() => {
         console.log("Connected to database");
-        httpServer = app
+        const httpServer = app
             .listen(PORT, "localhost", function () {
                 console.log(`Server is running on port ${PORT}.`);
             })
@@ -26,10 +26,24 @@ mongoose
                     console.error(err);
                 }
             });
+        const io = ServerSocket.getInstance(httpServer);
+        io.initializeHandlers([{ path: "/game", handler: new GameSocket() }]);
     })
     .catch((err) => {
         console.log("Error: ", err);
     });
 
-const io = ServerSocket.getInstance(httpServer);
-io.initializeHandlers([{ path: "/game", handler: new GameSocket() }]);
+// const httpServer = app
+// .listen(PORT, "localhost", function () {
+//     console.log(`Server is running on port ${PORT}.`);
+// })
+// .on("error", (err: any) => {
+//     if (err.code === "EADDRINUSE") {
+//         console.error("Error: address already in use");
+//     } else {
+//         console.error(err);
+//     }
+// });
+
+// const io = ServerSocket.getInstance(httpServer);
+// io.initializeHandlers([{ path: "/game", handler: new GameSocket() }]);

@@ -1,8 +1,7 @@
 export enum SessionKey {
     CURRENT_PLAYER = "currentPlayer",
     GAME_CARDS = "gameCards",
-    BACKUP = "backup",
     GAME = "game",
-
+    BACKUP = "backup",
     WAR_ROOM = "warRoom",
 }

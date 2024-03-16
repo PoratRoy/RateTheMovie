@@ -10,8 +10,8 @@ class MoviesRoutes {
     }
 
     intializeRoutes() {
-        this.router.get("/", this.controller.getMovies);
-        this.router.post("/", this.controller.create);
+        this.router.post("/", this.controller.getMovies);
+        this.router.post("/create", this.controller.create);
         this.router.get("/crew", this.controller.getCrew);
         this.router.delete("/:id", this.controller.delete);
     }

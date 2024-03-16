@@ -1,13 +1,17 @@
-import { DateDefaultJSON, SinglePlayerRoom } from "../models/constant";
+import { SinglePlayerRoom } from "../models/constant";
 import { ModOption } from "../models/enums/landing";
-import { MovieFilters } from "../models/types/filter";
+import { Filters } from "../models/types/filter";
 import { Game } from "../models/types/game";
 
-export const initFilters = (year: any, genre: any, language: any) => {
-    const filters: MovieFilters = {
-        year: year ? JSON.parse(year) : DateDefaultJSON,
-        genre: genre ? JSON.parse(genre) : [],
-        language: language ? JSON.parse(language) : "",
+export const initFilters = () => {
+    // const filters: MovieFilters = {
+    //     year: year ? JSON.parse(year) : DateDefaultJSON,
+    //     genre: genre ? JSON.parse(genre) : [],
+    //     language: language ? JSON.parse(language) : "",
+    // };
+    const filters: Filters = {
+        difficulty: "easy",
+        type: { byTopRated: true },
     };
     return filters;
 };
@@ -15,7 +19,7 @@ export const initFilters = (year: any, genre: any, language: any) => {
 export const initGame = (
     rounds: any,
     roomId: string | undefined,
-    filters: MovieFilters,
+    filters: Filters,
     mod: ModOption,
 ) => {
     const game: Game = {

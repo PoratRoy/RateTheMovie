@@ -2,9 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import path from "../../router/routePath.json";
 import { RoundAction } from "../../models/types/union";
-import Session from "../../utils/storage/sessionStorage";
-import { SessionKey } from "../../models/enums/session";
-import useBackupRound from "../../api/hooks/useBackupRound";
 import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
@@ -20,10 +17,10 @@ const useGameActions = (close: () => void) => {
         resetGameContext,
         setRoundNumber,
         setIsRoundFinished,
+        backupMovies,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
     const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
-    const { backupRoundMovies } = useBackupRound();
     const { handleMovieCards } = useHandleMovies();
     const navigate = useNavigate();
     const { isMulti } = useMod();
@@ -56,11 +53,7 @@ const useGameActions = (close: () => void) => {
             refreshGameContext();
             if (isMulti()) {
                 if (currentPlayer.role === "host") {
-                    const moviesBackup = Session.get(SessionKey.BACKUP);
-                    if (!moviesBackup) return; //TODO: show no more movies with this filter
-                    backupRoundMovies(game?.filters);
-                    const movies = moviesBackup[0];
-                    Session.removeFrom(SessionKey.BACKUP, 0);
+                    const movies = backupMovies[(currentRound) - 1];
                     //TODO: for woriking without flip remove this
                     setIsFlipCard(true);
                     setTimeout(() => {
@@ -84,11 +77,7 @@ const useGameActions = (close: () => void) => {
 
     const handelNewMovies = () => {
         setIsFlipCard(true);
-        const moviesBackup = Session.get(SessionKey.BACKUP);
-        if (!moviesBackup) return; //TODO: show no more movies with this filter
-        backupRoundMovies(game?.filters);
-        const movies = moviesBackup[0];
-        Session.removeFrom(SessionKey.BACKUP, 0);
+        const movies = backupMovies[(game?.currentRound || 1)];
         close();
         setTimeout(() => {
             handleMovieCards(movies);

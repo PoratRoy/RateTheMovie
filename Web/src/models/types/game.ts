@@ -1,10 +1,10 @@
 import { ModOption } from "../enums/landing";
-import { MovieFilters } from "./filter";
+import { Filters } from "./filter";
 
 export type Game = {
     mod: ModOption; 
     roomId: string;
-    filters: MovieFilters;
+    filters: Filters;
     currentRound: number;
     rounds: number;
 };

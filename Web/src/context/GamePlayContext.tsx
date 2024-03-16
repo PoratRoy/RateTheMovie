@@ -26,6 +26,8 @@ export const GamePlayContext = createContext<{
     gameOver: boolean;
     setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
     previewMovies: Movie[];
+    backupMovies: Movie[][];
+    setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][]>>;
     setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     resetGameContext: () => void;
     clearGameContext: () => void;
@@ -49,6 +51,8 @@ export const GamePlayContext = createContext<{
     gameOver: false,
     setGameOver: () => {},
     previewMovies: [],
+    backupMovies: [],
+    setBackupMovies: () => {},
     setPreviewMovies: () => {},
     resetGameContext: () => {},
     clearGameContext: () => {},
@@ -70,6 +74,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
+    const [backupMovies, setBackupMovies] = useState<Movie[][]>([]);
+
     //TODO: extract to a hook
     //TODO: put as useCallBack
     const setStateFromSession = () => {
@@ -80,6 +86,10 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         if (!currentPlayer) {
             const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
             if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
+        }
+        if(!backupMovies){
+            const sessionBackupMovies: Movie[][] = Session.get(SessionKey.BACKUP);
+            if (sessionBackupMovies) setBackupMovies(sessionBackupMovies);
         }
     };
     setStateFromSession();
@@ -108,6 +118,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         resetRoundContextState();
         const round = setRoundNum("reset");
         setRoundNumber(round);
+        setBackupMovies([]);
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
         });
@@ -122,13 +133,13 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const clearGameContext = () => {
         resetRoundContextState();
-        Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
         setGameCards(initGameCardsList());
         setGameOver(false);
         setCurrentPlayer(undefined);
         setGame(undefined);
+        setBackupMovies([]);
     };
 
     return (
@@ -151,6 +162,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 gameOver,
                 setGameOver,
                 previewMovies,
+                backupMovies,
+                setBackupMovies,
                 setPreviewMovies,
                 resetGameContext,
                 clearGameContext,

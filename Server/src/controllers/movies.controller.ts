@@ -111,6 +111,7 @@ export default class MoviesController {
         res: Response<ResponseBody<{ movies: MovieOutput[]; amount: number }>>,
     ) {
         try {
+            console.log("req", req.body)
             const { filters, amount } = req.body;
             const { type, difficulty } = filters;
             let DBmovies: MovieOutput[] | null = null;
@@ -135,6 +136,7 @@ export default class MoviesController {
                 message: msg.movies.success.get,
                 data: { movies, amount: movies.length },
             });
+
         } catch (error) {
             handleError(res, error);
         }
