@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 
 const app: Application = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+const URL: string = process.env.URL || "localhost";
 new Server(app);
 
 // let httpServer: any;
@@ -16,7 +17,7 @@ mongoose
     .then(() => {
         console.log("Connected to database");
         const httpServer = app
-            .listen(PORT, "0.0.0.0", function () {
+            .listen(PORT, URL, function () {
                 console.log(`Server is running on port ${PORT}.`);
             })
             .on("error", (err: any) => {
