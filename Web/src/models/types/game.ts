@@ -7,4 +7,5 @@ export type Game = {
     filters: Filters;
     currentRound: number;
     rounds: number;
+    shuffleAttempt: number;
 };

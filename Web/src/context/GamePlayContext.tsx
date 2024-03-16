@@ -26,9 +26,9 @@ export const GamePlayContext = createContext<{
     gameOver: boolean;
     setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
     previewMovies: Movie[];
+    setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     backupMovies: Movie[][];
     setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][]>>;
-    setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
@@ -51,9 +51,9 @@ export const GamePlayContext = createContext<{
     gameOver: false,
     setGameOver: () => {},
     previewMovies: [],
+    setPreviewMovies: () => {},
     backupMovies: [],
     setBackupMovies: () => {},
-    setPreviewMovies: () => {},
     resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
@@ -87,7 +87,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
             if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
         }
-        if(!backupMovies){
+        if (!backupMovies) {
             const sessionBackupMovies: Movie[][] = Session.get(SessionKey.BACKUP);
             if (sessionBackupMovies) setBackupMovies(sessionBackupMovies);
         }
@@ -162,9 +162,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 gameOver,
                 setGameOver,
                 previewMovies,
+                setPreviewMovies,
                 backupMovies,
                 setBackupMovies,
-                setPreviewMovies,
                 resetGameContext,
                 clearGameContext,
                 refreshGameContext,

@@ -13,22 +13,16 @@ import { SetupOption } from "../../models/types/setup";
 import { PlayerRole } from "../../models/types/union";
 import path from "../../router/routePath.json";
 import { initFilters, initGame } from "../../utils/init";
-import useGetMovies from "../../api/hooks/useGetMovies";
-import { culcNumOfMovies } from "../../utils/calc";
-import { Movie } from "../../models/types/movie";
-import { splitMoviesBackup } from "../../utils/movie";
-import { GetMovieResponse } from "../../api/model/types/responses";
-import useHandleMovies from "../gameplay/useHandleMovies";
+import useMoviesGame from "../gameplay/useBackup";
 
 const useOnSubmitSetup = <TInput extends FieldValues>(
     setupOption: SetupOption,
     playerRole: PlayerRole,
 ) => {
-    const { setCurrentPlayer, setGame, setBackupMovies } = useGamePlayContext();
+    const { setCurrentPlayer, setGame } = useGamePlayContext();
     const { handlePlayerJoinRoom, handleGame } = useSocketContext();
     const { isMulti, isSingle } = useMod();
-    const { getMovies } = useGetMovies();
-    const { handleMovieCards } = useHandleMovies();
+    const { setMoviesGame } = useMoviesGame();
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = async (data: TInput) => {
@@ -61,7 +55,6 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
 
         if (playerRole === "host") {
             const filters: Filters = initFilters();
-            const numOfMovies = culcNumOfMovies(rounds);
             const game: Game = initGame(rounds, roomId, filters, mod);
             if (isMulti(mod)) {
                 handleGame(game);
@@ -69,11 +62,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
             setGame(game);
             Session.set(SessionKey.GAME, game);
 
-            const movies: GetMovieResponse = await getMovies(numOfMovies, filters);
-            const splitMovies = splitMoviesBackup(movies.movies, rounds);
-            setBackupMovies(splitMovies);
-            Session.set(SessionKey.BACKUP, splitMovies);
-            handleMovieCards(splitMovies[0], mod);
+            setMoviesGame(game);
         }
         navigate(path.game);
     };

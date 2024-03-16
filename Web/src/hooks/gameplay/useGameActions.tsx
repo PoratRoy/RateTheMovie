@@ -7,6 +7,7 @@ import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
 import { setRoundNum } from "../../utils/game";
+import useMoviesGame from "./useBackup";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -17,11 +18,13 @@ const useGameActions = (close: () => void) => {
         resetGameContext,
         setRoundNumber,
         setIsRoundFinished,
+        setGame,
         backupMovies,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
     const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
     const { handleMovieCards } = useHandleMovies();
+    const { setMoviesGame } = useMoviesGame();
     const navigate = useNavigate();
     const { isMulti } = useMod();
 
@@ -37,7 +40,7 @@ const useGameActions = (close: () => void) => {
         setIsRoundFinished(false);
         resetSocketContext();
         resetGameContext();
-        handelNewMovies();
+        setMoviesGame(game);
     };
 
     //TODO:
@@ -53,7 +56,7 @@ const useGameActions = (close: () => void) => {
             refreshGameContext();
             if (isMulti()) {
                 if (currentPlayer.role === "host") {
-                    const movies = backupMovies[(currentRound) - 1];
+                    const movies = backupMovies[currentRound - 1];
                     //TODO: for woriking without flip remove this
                     setIsFlipCard(true);
                     setTimeout(() => {
@@ -65,19 +68,30 @@ const useGameActions = (close: () => void) => {
                 }
                 close();
             } else {
-                handelNewMovies();
+                handelNewMovies(game.currentRound);
             }
         }
     };
 
     const handleShuffle = () => {
         refreshGameContext();
-        handelNewMovies();
+        if (game) {
+            const { rounds, shuffleAttempt } = game;
+            const index = rounds + shuffleAttempt - 1;
+            handelNewMovies(index);
+            setGame((prev) => {
+                if (prev) {
+                    const game = { ...prev, shuffleAttempt: prev.shuffleAttempt - 1 };
+                    return game;
+                }
+                return prev;
+            });
+        }
     };
 
-    const handelNewMovies = () => {
+    const handelNewMovies = (index: number) => {
         setIsFlipCard(true);
-        const movies = backupMovies[(game?.currentRound || 1)];
+        const movies = backupMovies[index];
         close();
         setTimeout(() => {
             handleMovieCards(movies);
