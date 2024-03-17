@@ -27,6 +27,7 @@ import {
 } from "../models/constant/socketEvents";
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
+import { PACK_CARDS_NUM } from "../models/constant";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -187,11 +188,13 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         const handleRoundFinished = (warRoom: WarRoomProps) => {
+            //the time of the finish animation
+            const time = 2000 + (PACK_CARDS_NUM * 1300);
             const { players } = warRoom;
             setLeaderBoardPlayers(players);
             setTimeout(() => {
                 setIsRoundFinished(true);
-            }, 2500); //the time of the finish animation
+            }, time);
         };
 
         const handleNextRoundStarted = (warRoom: WarRoomProps) => {

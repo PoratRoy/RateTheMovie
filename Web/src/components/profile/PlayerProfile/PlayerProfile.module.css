@@ -19,13 +19,6 @@
 
 }
 
-.PlayerProfileScore{
-    color: var(--text-color);
-    font-size: 1.1rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
 .PlayerProfileName{
     color: var(--text-color-opacity);
     font-size: 0.9rem;

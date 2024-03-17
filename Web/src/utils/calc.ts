@@ -25,7 +25,7 @@ export const sortNumbers = (numbers: number[]): number[] => {
     return sortedArray;
 };
 
-export const roundToOneDecimal = (value: number) => Math.round(value * 10) / 10;
+export const roundToOneDecimal = (value: number) => Math.round(value);
 
 export const sortMovies = (a: Movie, b: Movie) => {
     const rateA = a.imdbRating;

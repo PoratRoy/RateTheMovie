@@ -21,7 +21,7 @@ const useGameActions = (close: () => void) => {
         setGame,
         backupMovies,
     } = useGamePlayContext();
-    const { setIsFlipCard, clearAnimationContext, refreshAnimationContext } = useAnimationContext();
+    const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
     const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
     const { handleMovieCards } = useHandleMovies();
     const { setMoviesGame } = useMoviesGame();
@@ -38,6 +38,7 @@ const useGameActions = (close: () => void) => {
 
     const handleRestart = () => {
         setIsRoundFinished(false);
+        clearAnimationContext();
         resetSocketContext();
         resetGameContext();
         setMoviesGame(game);
@@ -96,7 +97,6 @@ const useGameActions = (close: () => void) => {
         setTimeout(() => {
             handleMovieCards(movies);
             setIsFlipCard(true);
-            refreshAnimationContext();
         }, 1000);
     };
 

@@ -8,8 +8,12 @@ export type ImgProps = {
     isShadow?: boolean;
 };
 
-export type ScoreProps = {
-    score: number;
+export type ScoreProps = {};
+
+export type CardPointsProps = {
+    score?: number;
+    index: string;
+    isRightChoice: boolean;
 };
 
 export type LogoProps = IdProps & {

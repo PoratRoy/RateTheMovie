@@ -35,6 +35,7 @@ export const DirectionMap: { [key: string]: number } = {
 export const CARD_ID = "card";
 export const BELOW_ID = "below";
 export const SHADOW_ID = "shadow";
+export const POINTS_ID = "points";
 
 export const PLAY_BTN_ID = "play-btn";
 export const MULTIPLAYER_BTN_ID = "multiplayer-btn";

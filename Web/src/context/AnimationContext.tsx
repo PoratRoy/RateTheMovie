@@ -2,17 +2,15 @@ import { createContext, useContext, useState } from "react";
 
 export const AnimationContext = createContext<{
     isFlipCard: boolean;
-    setIsFlipCard: React.Dispatch<React.SetStateAction<boolean>>
-    increaseScore: boolean;
-    setIncreaseScore: React.Dispatch<React.SetStateAction<boolean>>;
-    refreshAnimationContext: () => void;
+    setIsFlipCard: React.Dispatch<React.SetStateAction<boolean>>;
+    increaseScore: number;
+    setIncreaseScore: React.Dispatch<React.SetStateAction<number>>;
     clearAnimationContext: () => void;
 }>({
     isFlipCard: false,
     setIsFlipCard: () => {},
-    increaseScore: false,
+    increaseScore: 0,
     setIncreaseScore: () => {},
-    refreshAnimationContext: () => {},
     clearAnimationContext: () => {},
 });
 
@@ -20,14 +18,10 @@ export const useAnimationContext = () => useContext(AnimationContext);
 
 export const AnimationContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [isFlipCard, setIsFlipCard] = useState<boolean>(false);
-    const [increaseScore, setIncreaseScore] = useState<boolean>(false);
+    const [increaseScore, setIncreaseScore] = useState<number>(0);
 
-    const refreshAnimationContext = () => {
-        setIncreaseScore(false);
-    };
-    
     const clearAnimationContext = () => {
-        setIncreaseScore(false);
+        setIncreaseScore(0);
         setIsFlipCard(false);
     };
 
@@ -38,7 +32,6 @@ export const AnimationContextProvider = ({ children }: { children: React.ReactNo
                 setIsFlipCard,
                 increaseScore,
                 setIncreaseScore,
-                refreshAnimationContext,
                 clearAnimationContext,
             }}
         >

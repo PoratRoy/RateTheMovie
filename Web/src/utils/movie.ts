@@ -25,7 +25,7 @@ export const splitMoviesBackup = (movies: Movie[], rounds: any) => {
         const addedRatings = new Set<number>();
 
         while (selectedMovies.size < PACK_CARDS_NUM) {
-            const randomIndex = getRandomNumber(1, movies.length);
+            const randomIndex = getRandomNumber(0, movies.length - 1);
             const selectedMovie = movies[randomIndex];
             if (!addedRatings.has(selectedMovie.imdbRating)) {
                 round.push(selectedMovie);
