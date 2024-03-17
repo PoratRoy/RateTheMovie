@@ -12,7 +12,7 @@ export const response = <T extends any>(
         ...(message !== undefined && { message }),
     };
 
-    console.info("Response body: ", JSON.stringify(body.data));
+    console.info("Response body: ", body.data);
 
     return res.status(statusCode).json({
         message,

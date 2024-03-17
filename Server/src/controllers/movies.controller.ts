@@ -19,6 +19,7 @@ import { delayPromise, extractYearFromDate } from "../utils/date";
 import { setIsBoxOffice } from "../utils/boxOffice";
 import ActorDatabaseService from "../database/ActorTable";
 import DirectorDatabaseService from "../database/DirectorTable";
+import { Difficulty } from "../model/types/union";
 
 export default class MoviesController {
     async create(
@@ -111,26 +112,26 @@ export default class MoviesController {
         res: Response<ResponseBody<{ movies: MovieOutput[]; amount: number }>>,
     ) {
         try {
-            console.log("req", req.body)
             const { filters, amount } = req.body;
             const { type, difficulty } = filters;
+            const props: [number, Difficulty] = [amount, difficulty]
             let DBmovies: MovieOutput[] | null = null;
 
             if ("byDetails" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDetails(amount, type.byDetails);
+                DBmovies = await MovieDatabaseService.getMoviesByDetails(...props, type.byDetails);
             } else if ("byDirector" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDirector(amount, type.byDirector);
+                DBmovies = await MovieDatabaseService.getMoviesByDirector(...props, type.byDirector);
             } else if ("byActor" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByActor(amount, type.byActor);
+                DBmovies = await MovieDatabaseService.getMoviesByActor(...props, type.byActor);
             } else if ("byBoxOffice" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(amount);
+                DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(...props);
             } else if ("byTopRated" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByTopRated(amount);
+                DBmovies = await MovieDatabaseService.getMoviesByTopRated(...props);
             } else if ("byNewRelease" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByNewRelease(amount);
+                DBmovies = await MovieDatabaseService.getMoviesByNewRelease(...props);
             }
-
             const movies: MovieOutput[] = DBmovies ? [...DBmovies] : [];
+
             response(res, {
                 statusCode: StatusCode.OK,
                 message: msg.movies.success.get,

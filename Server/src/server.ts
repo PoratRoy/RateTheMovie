@@ -8,10 +8,10 @@ import mongoose from "mongoose";
 
 const app: Application = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
-const URL: string = process.env.URL || "localhost";
+// const URL: string = process.env.URL || "localhost";
+const URL: string = "localhost";
 new Server(app);
 
-// let httpServer: any;
 mongoose
     .connect((process.env.MONGO_KEY as string) || "")
     .then(() => {
@@ -33,18 +33,3 @@ mongoose
     .catch((err) => {
         console.log("Error: ", err);
     });
-
-// const httpServer = app
-// .listen(PORT, "localhost", function () {
-//     console.log(`Server is running on port ${PORT}.`);
-// })
-// .on("error", (err: any) => {
-//     if (err.code === "EADDRINUSE") {
-//         console.error("Error: address already in use");
-//     } else {
-//         console.error(err);
-//     }
-// });
-
-// const io = ServerSocket.getInstance(httpServer);
-// io.initializeHandlers([{ path: "/game", handler: new GameSocket() }]);

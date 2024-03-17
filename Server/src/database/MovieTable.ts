@@ -8,6 +8,7 @@ import ActorDatabaseService from "./ActorTable";
 import DirectorDatabaseService from "./DirectorTable";
 import { TOP_RATED_NUM } from "../model/constant";
 import { currentYear } from "../utils/date";
+import { Difficulty } from "../model/types/union";
 
 export default class MovieDatabaseService {
     public static createMovie = async (movieProps: Movie): Promise<MovieOutput> => {
@@ -37,6 +38,7 @@ export default class MovieDatabaseService {
 
     public static getMoviesByDetails = async (
         amount: number,
+        difficulty: Difficulty,
         filters: ByDetailsFilter,
     ): Promise<MovieOutput[] | null> => {
         const { year, genre, language } = filters;
@@ -62,6 +64,7 @@ export default class MovieDatabaseService {
 
     public static getMoviesByActor = async (
         amount: number,
+        difficulty: Difficulty,
         filters: ByActorFilter,
     ): Promise<MovieOutput[] | null> => {
         const { name } = filters;
@@ -84,6 +87,7 @@ export default class MovieDatabaseService {
 
     public static getMoviesByDirector = async (
         amount: number,
+        difficulty: Difficulty,
         filters: ByDirectorFilter,
     ): Promise<MovieOutput[] | null> => {
         const { name } = filters;
@@ -104,7 +108,10 @@ export default class MovieDatabaseService {
         }
     };
 
-    public static getMoviesByBoxOffice = async (amount: number): Promise<MovieOutput[] | null> => {
+    public static getMoviesByBoxOffice = async (
+        amount: number,
+        difficulty: Difficulty,
+    ): Promise<MovieOutput[] | null> => {
         try {
             const movies = await MovieModel.aggregate([
                 { $match: { isBoxOffice: true } },
@@ -117,7 +124,10 @@ export default class MovieDatabaseService {
         }
     };
 
-    public static getMoviesByTopRated = async (amount: number): Promise<MovieOutput[] | null> => {
+    public static getMoviesByTopRated = async (
+        amount: number,
+        difficulty: Difficulty,
+    ): Promise<MovieOutput[] | null> => {
         try {
             const movies = await MovieModel.aggregate([
                 { $match: { imdbRating: { $gt: TOP_RATED_NUM } } },
@@ -130,7 +140,10 @@ export default class MovieDatabaseService {
         }
     };
 
-    public static getMoviesByNewRelease = async (amount: number): Promise<MovieOutput[] | null> => {
+    public static getMoviesByNewRelease = async (
+        amount: number,
+        difficulty: Difficulty,
+    ): Promise<MovieOutput[] | null> => {
         try {
             const movies = await MovieModel.aggregate([
                 { $match: { release_date: currentYear } },
