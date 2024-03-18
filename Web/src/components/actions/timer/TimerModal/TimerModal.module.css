@@ -1,0 +1,16 @@
+.timerBarModal {
+    width: 100%;
+    height: 5px;
+    background-color: black;
+}
+
+.timerBarModal {
+    position: relative;
+    border-radius: 50px;
+}
+
+.progressBar {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+}

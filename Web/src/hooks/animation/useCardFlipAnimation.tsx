@@ -11,8 +11,10 @@ const useCardFlipAnimation = () => {
     };
 
     useEffect(() => {
+        const front = 180;
+        const back = 360;
         if(!isAnimation && isFlipCard){
-            setIsFlipped((prev) => (prev === 180 ? 360 : 180));
+            setIsFlipped((prev) => (prev === front ? back : front));
             setIsFlipCard(false);
             setIsAnimation(true);
         }

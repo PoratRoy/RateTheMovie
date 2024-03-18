@@ -28,6 +28,7 @@ import {
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { PACK_CARDS_NUM } from "../models/constant";
+import { useAnimationContext } from "./AnimationContext";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -79,6 +80,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
+    const { setIsFlipCard } = useAnimationContext();
     const { setGame, setIsRoundFinished } = useGamePlayContext();
 
     const socket = useSocket("http://localhost:8080/game", {
@@ -189,12 +191,19 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         const handleRoundFinished = (warRoom: WarRoomProps) => {
             //the time of the finish animation
-            const time = 2000 + (PACK_CARDS_NUM * 1300);
+            const time = 3000 + PACK_CARDS_NUM * 1300;
             const { players } = warRoom;
             setLeaderBoardPlayers(players);
+            let isAllPlacedCards = true;
+            for (const player of players) {
+                if (!player.electedCards.order[0]?.id) {
+                    isAllPlacedCards = false;
+                    break;
+                }
+            }
             setTimeout(() => {
                 setIsRoundFinished(true);
-            }, time);
+            }, isAllPlacedCards ? time : 0);
         };
 
         const handleNextRoundStarted = (warRoom: WarRoomProps) => {
@@ -203,7 +212,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleGameCards(gameCards);
                 setGame(game);
                 Session.set(SessionKey.GAME, game);
-                setStartGame(true);
+                setIsFlipCard((prev) => !prev);
             }
         };
 

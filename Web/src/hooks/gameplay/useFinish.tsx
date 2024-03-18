@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
+import { initGameCardsList } from "../../models/initialization/card";
 import { ElectedCards } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
 import { Player } from "../../models/types/player";
@@ -18,6 +20,7 @@ const useFinish = () => {
     } = useGamePlayContext();
     const { handlePlayerFinish } = useSocketContext();
     const { isMulti } = useMod();
+    const checkRef = useRef<any>(false);
 
     const finishGame = () => {
         const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] =
@@ -26,11 +29,10 @@ const useFinish = () => {
         if (isValid) {
             setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
             setPlayerFinishRound(true);
-            
+
             const movies: Movie[] = getMoviesFromCards(gameCards);
             setPreviewMovies((prev) => [...prev, ...movies]);
-            
-            let check = false;
+
             setCurrentPlayer((player: Player | undefined) => {
                 let playerScore = 0;
                 if (!player) return player;
@@ -49,9 +51,9 @@ const useFinish = () => {
 
                 //TODO: setCurrentPlayer run twice, so I put the "check" variable to prevent the handlePlayerFinish run twice
                 // not sure why setCurrentPlayer run twice if finishGame run only once
-                if (isMulti() && !check) {
+                if (isMulti() && !checkRef.current) {
                     handlePlayerFinish(electedCards, playerScore);
-                    check = true;
+                    checkRef.current = true;
                 }
 
                 return {
@@ -60,7 +62,19 @@ const useFinish = () => {
                     electedCards,
                 };
             });
-        }//TODO: if not valid
+        } else {
+            setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
+            setPlayerFinishRound(true);
+            const movies: Movie[] = getMoviesFromCards(gameCards);
+            setPreviewMovies((prev) => [...prev, ...movies]);
+
+            let check = false;
+            if (isMulti() && !check) {
+                const electedCards = { order: initGameCardsList() } as ElectedCards;
+                handlePlayerFinish(electedCards, 0);
+                check = true;
+            }
+        }
     };
 
     return { finishGame };

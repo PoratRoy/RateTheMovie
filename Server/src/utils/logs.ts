@@ -1,5 +1,10 @@
 import { WarRooms } from "../model/types/warRoom";
 
+export const logMovieCount = (count: number) => {
+    console.log("Movie number: ", count);
+    console.log("<------>");
+}
+
 export const logEvent = (event: string) => {
     console.log(`${event} event received`);
     console.log("----------------");

@@ -9,7 +9,7 @@ import { useAnimationContext } from "../../context/AnimationContext";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { setIsRoundFinished } = useGamePlayContext();
+    const { setIsRoundFinished, currentPlayer } = useGamePlayContext();
     const { setIncreaseScore } = useAnimationContext();
     const { isSingle } = useMod();
 
@@ -45,7 +45,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
     };
 
     useEffect(() => {
-        if (activate) {
+        if (activate && currentPlayer?.electedCards.order.length === PACK_CARDS_NUM) {
             handleFinishAnimation();
         }
     }, [activate]);

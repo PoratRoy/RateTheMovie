@@ -20,6 +20,7 @@ import { setIsBoxOffice } from "../utils/boxOffice";
 import ActorDatabaseService from "../database/ActorTable";
 import DirectorDatabaseService from "../database/DirectorTable";
 import { Difficulty } from "../model/types/union";
+import { logMovieCount } from "../utils/logs";
 
 export default class MoviesController {
     async create(
@@ -89,6 +90,7 @@ export default class MoviesController {
                                 const createOutput =
                                     await MovieDatabaseService.createMovie(newMovie);
                                 moviesOutput.push(createOutput);
+                                logMovieCount(created);
                                 created++;
                             }
                         }

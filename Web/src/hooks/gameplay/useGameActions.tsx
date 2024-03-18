@@ -56,15 +56,13 @@ const useGameActions = (close: () => void) => {
             setIsRoundFinished(false);
             refreshGameContext();
             if (isMulti()) {
+                setIsFlipCard(true);
                 if (currentPlayer.role === "host") {
-                    const movies = backupMovies[currentRound - 1];
-                    //TODO: for woriking without flip remove this
-                    setIsFlipCard(true);
+                    const movies = backupMovies[currentRound];
                     setTimeout(() => {
                         const cards = handleMovieCards(movies);
                         handleNextRound(round, cards);
-                        //TODO: for woriking without flip remove this
-                        setIsFlipCard(false);
+                        setIsFlipCard(prev => !prev);
                     }, 1000);
                 }
                 close();

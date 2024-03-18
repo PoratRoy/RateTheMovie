@@ -13,7 +13,7 @@ import useMod from "./useMod";
 
 const useHandleMovies = () => {
     const { sortMoviesOrder, sortCardsOrder } = useCorrectOrder();
-    const { setGameCards, setCurrentPlayer, setFetchLoading } = useGamePlayContext();
+    const { setGameCards, setCurrentPlayer } = useGamePlayContext();
     const { handleCards } = useSocketContext();
     const { isMulti } = useMod();
 
@@ -59,7 +59,6 @@ const useHandleMovies = () => {
         }
         setGameCards(cards);
         Session.set(SessionKey.GAME_CARDS, cards);
-        setFetchLoading(false);
     };
 
     return {

@@ -13,6 +13,17 @@ export type TimerBarProps = {
     callback?: () => void;
 };
 
+export type TimerHeaderProps = {
+    activate: boolean;
+    time?: number;
+};
+
+export type TimerModalProps = {
+    activate: boolean;
+    time?: number;
+    close: () => void;
+};
+
 export type CountDownProps = {
     closeTimer: () => void;
     time: number;
