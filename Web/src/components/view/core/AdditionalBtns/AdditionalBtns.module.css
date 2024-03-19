@@ -1,0 +1,14 @@
+.AdditionalBtnsContianer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.additionalBtns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    max-width: 100%;
+}

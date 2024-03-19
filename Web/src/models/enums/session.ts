@@ -1,10 +1,7 @@
 export enum SessionKey {
-    PLAYERS = "players",
+    CURRENT_PLAYER = "currentPlayer",
     GAME_CARDS = "gameCards",
-    FILTERS = "filters",
+    GAME = "game",
     BACKUP = "backup",
-    ROOM = "room",
-
-
     WAR_ROOM = "warRoom",
 }

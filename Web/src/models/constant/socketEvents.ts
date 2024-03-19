@@ -1,0 +1,21 @@
+export const CreateNewRoom = "createNewRoom";
+export const PlayerJoinRoom = "playerJoinRoom";
+export const PlayerWantToJoin = "playerWantToJoin";
+export const UpdateGame = "updateGame";
+export const UpdateGameCards = "updateGameCards";
+export const StartGame = "startGame";
+export const PlayerFinish = "playerFinish";
+export const FinishRound = "finishRound";
+export const NextRound = "nextRound";
+export const LeaveRoom = "leaveRoom";
+export const GameOver = "gameOver";//
+export const Disconnect = "disconnect";
+
+export const GameStarted = "gameStarted";
+export const PlayerJoined = "playerJoined";
+export const PlayerFinished = "PlayerFinished";
+export const RoundFinished = "roundFinished";
+export const NextRoundStarted = "nextRoundStarted";
+export const PlayerLeft = "playerLeft";//
+export const GameEnded = "gameEnded";
+export const PlayerDisconnect = "playerDisconnect";

@@ -1,5 +1,5 @@
 import { Card } from "./card";
-import { MovieFilters } from "./movie";
+import { Game } from "./game";
 import { Player } from "./player";
 
 export type WarRooms = {
@@ -7,8 +7,13 @@ export type WarRooms = {
 };
 
 export type WarRoomProps = {
-    room: string | undefined;
     players: Player[];
     gameCards: Card[];
-    filters: MovieFilters;
+    game?: Game;
+};
+
+export type WarRoomDetails = {
+    numberOfPlayers: number;
+    numberOfFinishedPlayers: number;
+    roomId?: string;
 };

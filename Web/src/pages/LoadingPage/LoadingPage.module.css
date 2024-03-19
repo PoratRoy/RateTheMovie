@@ -1,0 +1,31 @@
+.loadingGameStatus{
+    color: var(--text-color-opacity);
+    margin-top: 1em;
+}
+
+.loadingPageBtnStatus{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    width: 80vw;
+    text-align: center;
+    font-size: 1.2rem;
+    height: fit-content;
+}
+
+.loadingPageDescription{
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    width: 80vw;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.gameStatus{
+    font-size: 1.1rem;
+    font-weight: 500;
+    width: 80%;
+    color: var(--text-color-opacity);
+}

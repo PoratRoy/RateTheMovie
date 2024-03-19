@@ -1,6 +1,6 @@
-import { DISCOVERD_MOVIES_NUM } from "../models/constants";
+import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM, SHUFFLE_ATTEMPT } from "../models/constant";
 import { Movie } from "../models/types/movie";
-import { movieRating } from "./format";
+import { Player } from "../models/types/player";
 
 export const getRandomNumber = (min: number = 1, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -25,11 +25,18 @@ export const sortNumbers = (numbers: number[]): number[] => {
     return sortedArray;
 };
 
-export const roundToOneDecimal = (value: number) => Math.round(value * 10) / 10;
+export const roundToOneDecimal = (value: number) => Math.round(value);
 
 export const sortMovies = (a: Movie, b: Movie) => {
-    const rateA = movieRating(a.imdbRating);
-    const rateB = movieRating(b.imdbRating);
+    const rateA = a.imdbRating;
+    const rateB = b.imdbRating;
     return rateA - rateB;
-}
+};
 
+export const sortPlayersByScore = (players: Player[]): Player[] => {
+    return players.slice().sort((playerA, playerB) => playerB.score - playerA.score);
+};
+
+export const culcNumOfMovies = (rounds: number) => {
+    return (rounds * PACK_CARDS_NUM) + (SHUFFLE_ATTEMPT * PACK_CARDS_NUM);
+};

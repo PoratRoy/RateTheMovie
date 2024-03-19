@@ -5,6 +5,7 @@
     --background-color-active: #1e4467;
     --background-color-disabled: #132C4330;
     --background-color-opacity: #132C4350;
+    --background-card-color: #13202C;
 
     --primary-color: #5548F4;
     --primary-color-hover: #6356f0;
@@ -27,20 +28,30 @@
     --tertiary-color-disabled: #34425130;
     --tertiary-color-opacity: #34425150;
 
-
-
     --text-color: #FFFFFF;
     --text-color-hover: #FFFFFF90;
     --text-color-active: #FFFFFF80;
     --text-color-opacity: #8996A1;
+    --color-white-opacity-hover: #94a0aa;
+    --color-white-opacity-active: #9da8b2;
+    --text-color-opacity-real: #FFFFFF30;
 
     --input-background-color: #FFFFFF;
     --input-background-color-hover: #E6E6E6;
     --input-text-color: #181818;
     --input_light_text_color: #222222;
 
-    --error-color: #FF5A5F;
-    --success-color: #00A699;
+    --error-color: #FF3D00;
+    --error-color-opacity: #8D262650;
+    --success-color: #0bec22;
+    --success-color-opacity: #268D4350;
+
+    --gold-color: #FFD700;
+    --gold-color-opacity: #FFD70050;
+    --silver-color: #C0C0C0;
+    --silver-color-opacity: #C0C0C050;
+    --bronze-color: #CD7F32;
+    --bronze-color-opacity: #CD7F3250;
 
     --primary-border-radius: 20px;
     --secondary-border-radius: 10px;
@@ -49,19 +60,20 @@
     --secondary-border: 1px solid var(--tertiary-color);
 
     --btn-width-small: 120px;
-    --btn-width-medium: 150px;
+    --btn-width-medium: 190px;
     --btn-width-large: 200px;
     --btn-height-small: 40px;
     --btn-height-medium: 50px;
     --btn-height-large: 60px;
 
     --card-width: 140px;
-    --card-height: 200px;
-    /* --card-width: 120px;
-    --card-height: 170px; */
-
-    --small-card-width: 50px;
-    --small-card-height: 80px;
+    --card-height: 220px;
+    --medium-card-width: 50px;
+    --medium-card-height: 80px;
+    --small-card-width: 45px;
+    --small-card-height: 70px;
+    --x-small-card-width: 40px;
+    --x-small-card-height: 65px;
 
     --mobile-width: 80vw;
 

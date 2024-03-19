@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import LandingLayout from "../../components/layout/LandingLayout";
-import Filter from "../../components/landing/Filter";
-import Multiplayer from "../../components/landing/Multiplayer";
-import { LandingOpt } from "../../models/enums/landing";
+import LandingLayout from "../layout/LandingLayout";
+import { ModOption } from "../../models/enums/landing";
 import Landing from "../../components/landing/Landing";
+import Setup from "../../components/landing/Setup";
+import { SetupOption } from "../../models/types/setup";
 
 const LandingPage: React.FC = () => {
-    const [layoutOption, setLayoutOption] = useState<LandingOpt>(LandingOpt.LANDING);
+    //TODO: can be in the URL instade of state
+    const [setupOption, setSetupOption] = useState<SetupOption>({ mod: ModOption.NONE });
 
     return (
-        <LandingLayout layoutOption={layoutOption}>
-            <Filter />
-            <Multiplayer
-                layoutOption={layoutOption}
-                setLayoutOption={setLayoutOption}
-                playerRole="host"
-            />
-            <Landing setLayoutOption={setLayoutOption} />
+        <LandingLayout setupOption={setupOption} setSetupOption={setSetupOption}>
+            <Setup playerRole="host" setupOption={setupOption} />
+            <Landing setSetupOption={setSetupOption} />
         </LandingLayout>
     );
 };

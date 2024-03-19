@@ -2,11 +2,34 @@ import { Socket } from "socket.io";
 import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
-import { WarRooms, WarRoomProps } from "../model/types/warRoom";
-import { initPlayer } from "../model/initialization/player";
-import { getPlayerIndex } from "../utils/calc";
-import { MovieFilters } from "../model/types/movie";
-import { getRoomByPlayer, getRoomPlayer, initWarRoom } from "../utils/warRoom";
+import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
+import { initWarRoom, initWarRoomDetails, setWarRoomDetails } from "../utils/warRoom";
+import { Game } from "../model/types/game";
+import { Card, ElectedCards } from "../model/types/card";
+import { PACK_CARDS_NUM } from "../model/constant";
+import { getPlayerWarRoomInfo } from "./utils";
+import {
+    CreateNewRoom,
+    Disconnect,
+    GameStarted,
+    PlayerDisconnect,
+    PlayerJoinRoom,
+    PlayerJoined,
+    PlayerFinish,
+    PlayerWantToJoin,
+    StartGame,
+    PlayerFinished,
+    UpdateGame,
+    UpdateGameCards,
+    FinishRound,
+    RoundFinished,
+    LeaveRoom,
+    NextRound,
+    NextRoundStarted,
+    GameOver,
+    GameEnded,
+} from "../model/constant/events";
+import { logBack, logEvent, logFinish } from "../utils/logs";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
@@ -16,64 +39,211 @@ class GameSocket implements ISocket {
     }
 
     handleConnection(socket: Socket) {
-        console.info("Connection start for user ID: ", socket.id);
-
-        socket.on("CreateNewRoom", (callback: (props: WarRoomProps) => void) => {
-            console.info("Create new room");
+        socket.on(CreateNewRoom, (callback: (props: WarRoomDetails) => void) => {
+            logEvent(CreateNewRoom);
             const roomId = v4();
-            const playerId = socket.id;
-            const warRoom = this.warRooms[roomId];
-            if (!warRoom) {
-                const player: Player = initPlayer(playerId, getPlayerIndex([]), "host");
-                const props: WarRoomProps = initWarRoom(roomId, player);
-                this.warRooms[roomId] = props;
-            }
-            console.log("New game room: ", this.warRooms[roomId]);
-            callback(this.warRooms[roomId]);
+            this.warRooms[roomId] = initWarRoom();
+            const details = initWarRoomDetails(roomId);
+            callback(details);
+            logBack(details);
         });
 
-        socket.on("UpdatePlayerName", (name: string, callback: (props: WarRoomProps) => void) => {
-            console.info("Update player name: ", name);
-            const playerId = socket.id;
-            const warRoom = getRoomByPlayer(this.warRooms, playerId);
-            if (warRoom && warRoom.room) {
-                const player = getRoomPlayer(warRoom, playerId);
-                if (player) {
-                    player.name = name;
-                    this.warRooms[warRoom.room] = warRoom;
+        socket.on(
+            PlayerJoinRoom,
+            (
+                roomId: string,
+                player: Player,
+                callback: (
+                    props: WarRoomProps,
+                    currecntPlayer: Player,
+                    rivalPlayers: Player[],
+                ) => void,
+            ) => {
+                logEvent(PlayerJoinRoom);
+                socket.join(roomId);
+                const playerId = socket.id;
+                const updatedPlayer = { ...player, id: playerId };
+                const warRoom = this.warRooms[roomId];
+                let rivalPlayers: Player[] = [];
+                if (warRoom) {
+                    rivalPlayers = [...warRoom.players];
+                    warRoom.players.push(updatedPlayer);
+                    this.warRooms[roomId] = warRoom;
+                } else {
+                    console.error("Error: War room not found");
                 }
-                console.log("Game room: ", this.warRooms);
-                callback(this.warRooms[warRoom.room]);
-            }
+                socket.to(roomId).emit(PlayerJoined, updatedPlayer);
+                callback(this.warRooms[roomId], updatedPlayer, rivalPlayers);
+                logBack({ warRoom: this.warRooms[roomId], updatedPlayer, rivalPlayers });
+            },
+        );
+
+        socket.on(UpdateGame, (game: Game) => {
+            this.wrapper(UpdateGame, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && game.roomId) {
+                    warRoom.game = game;
+                    this.warRooms[game.roomId] = warRoom;
+                }
+            });
         });
 
-        socket.on("UpdateGameFilters", (filters: MovieFilters) => {
-            console.info("Update game filters: ", filters);
-            const playerId = socket.id;
-            const warRoom = getRoomByPlayer(this.warRooms, playerId);
-            if (warRoom && warRoom.room) {
-                warRoom.filters = filters;
-                this.warRooms[warRoom.room] = warRoom;
-                console.log("Game room: ", this.warRooms);
-            }
+        socket.on(UpdateGameCards, (cards: Card[]) => {
+            this.wrapper(UpdateGameCards, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom) {
+                    const { game } = warRoom;
+                    if (game?.roomId && cards.length === PACK_CARDS_NUM) {
+                        warRoom.gameCards = cards;
+                        this.warRooms[game?.roomId] = warRoom;
+                    }
+                }
+            });
         });
 
-        socket.on("PlayerJoinRoom", (roomId: string, callback: (props: WarRoomProps) => void) => {
-            console.info("Join room: ", roomId);
-            const playerId = socket.id;
-            const warRoom = this.warRooms[roomId];
-            if (warRoom) {
-                const player: Player = initPlayer(playerId, getPlayerIndex(warRoom.players));
-                warRoom.players.push(player);
-                this.warRooms[roomId] = warRoom;
-                console.log("Game room: ", this.warRooms);
-                callback(this.warRooms[roomId]);
-            }
+        socket.on(
+            PlayerWantToJoin,
+            (roomId: string | undefined, callback: (props: WarRoomDetails) => void) => {
+                logEvent(PlayerWantToJoin);
+                if (roomId) {
+                    const warRoom = this.warRooms[roomId];
+                    if (warRoom) {
+                        const details = setWarRoomDetails(warRoom, roomId);
+                        callback(details);
+                        logBack(details);
+                    }
+                } else {
+                    callback(initWarRoomDetails());
+                    logBack(initWarRoomDetails());
+                }
+            },
+        );
+
+        socket.on(StartGame, () => {
+            this.wrapper(StartGame, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && warRoom.game) {
+                    const {
+                        game: { roomId },
+                    } = warRoom;
+                    socket.to(roomId).emit(GameStarted, warRoom);
+                }
+            });
+        });
+
+        socket.on(PlayerFinish, (electedCards: ElectedCards, score: number) => {
+            this.wrapper(PlayerFinish, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        const index = players.indexOf(player);
+                        players[index].electedCards = electedCards;
+                        players[index].score = score;
+                        this.warRooms[game.roomId] = warRoom;
+                        const warDetails = setWarRoomDetails(warRoom, roomId);
+                        socket.nsp.to(roomId).emit(PlayerFinished, warDetails);
+                    }
+                }
+            });
+        });
+
+        socket.on(FinishRound, () => {
+            this.wrapper(FinishRound, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom) {
+                    const roomId = warRoom.game?.roomId;
+                    if (roomId) {
+                        socket.to(roomId).emit(RoundFinished, this.warRooms[roomId]);
+                    }
+                }
+            });
+        });
+
+        socket.on(NextRound, (round: number, cards: Card[]) => {
+            this.wrapper(NextRound, () => {
+                const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        players.forEach((player) => {
+                            player.electedCards = { order: [] } as ElectedCards;
+                        });
+                        warRoom.players = players;
+                        game.currentRound = round;
+                        warRoom.gameCards = cards;
+                        this.warRooms[roomId] = warRoom;
+                        socket.to(roomId).emit(NextRoundStarted, this.warRooms[roomId]);
+                    }
+                }
+            });
+        });
+
+        socket.on(GameOver, () => {
+            this.wrapper(GameOver, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
+                        delete this.warRooms[roomId];
+                        socket.nsp.to(roomId).emit(GameEnded);
+                    }
+                }
+            });
+        });
+
+        socket.on(LeaveRoom, () => {
+            this.wrapper(LeaveRoom, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
+                        const index = players.indexOf(player);
+                        players.splice(index, 1);
+                        if (players.length === 1) {
+                            delete this.warRooms[roomId];
+                            socket.nsp.to(roomId).emit(GameEnded);
+                        } else {
+                            this.warRooms[roomId] = warRoom;
+                            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                        }
+                    }
+                }
+            });
+        });
+
+        socket.on(Disconnect, () => {
+            this.wrapper(Disconnect, () => {
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    const { game, players } = warRoom;
+                    if (game?.roomId) {
+                        const { roomId } = game;
+                        socket.leave(roomId);
+                        const index = players.indexOf(player);
+                        players.splice(index, 1);
+                        this.warRooms[roomId] = warRoom;
+                        socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                    }
+                }
+            });
         });
     }
 
+    wrapper = (event: string, func: any) => {
+        logEvent(event);
+        func();
+        logFinish(this.warRooms);
+    };
+
     middlewareImplementation(socket: Socket, next: any) {
-        //Implement your middleware for orders here
+        console.info("Connection start for user ID: ", socket.id);
         return next();
     }
 }

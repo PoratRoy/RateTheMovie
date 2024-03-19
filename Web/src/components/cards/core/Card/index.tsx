@@ -1,17 +1,35 @@
 import React from "react";
 import style from "./Card.module.css";
-import { CardProps } from "../../../../models/types/props";
 import CardInnerContainer from "./CardInnerContainer";
 import Placeholder from "../Placeholder";
 import Position from "../../shadow/Position";
+import { CardProps } from "../../../../models/types/props/card";
 
-const Card: React.FC<CardProps> = ({id, type, front, back, flip, isFocus, position, size = "large"}) => {
+const Card: React.FC<CardProps> = ({
+    id,
+    type,
+    front,
+    back,
+    isFocus,
+    position,
+    size = "large",
+    hasBorder = false,
+}) => {
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
-    const sizeClass = size === "large" ? style.cardContainerLarge : style.cardContainerSmall; //TODO: refactor
+
+    const sizeClass =
+        size === "large"
+            ? style.cardContainerLarge
+            : size === "medium"
+              ? style.cardContainerMedium
+              : size === "small"
+                ? style.cardContainerSmall
+                : style.cardContainerXSmall; //TODOCSS: refactor
+
     return (
         <section id={id} className={sizeClass}>
-            <CardInnerContainer type={type.t} flip={flip} isFocus={isFocus}>
+            <CardInnerContainer type={type} isFocus={isFocus} hasBorder={hasBorder}>
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 {isPlayerType ? <div className={style.cardBack}>{back}</div> : null}

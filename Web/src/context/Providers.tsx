@@ -4,16 +4,22 @@ import { ErrorContextProvider } from "./ErrorContext";
 import { GamePlayContextProvider } from "./GamePlayContext";
 import { DndContextProvider } from "./DndContext";
 import SocketContextProvider from "./SocketContext";
+import { AnimationContextProvider } from "./AnimationContext";
+import { GameStatusContextProvider } from "./GameStatusContext";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
-        <SocketContextProvider>
-            <ErrorContextProvider>
-                <GamePlayContextProvider>
-                    <DndContextProvider>{children}</DndContextProvider>
-                </GamePlayContextProvider>
-            </ErrorContextProvider>
-        </SocketContextProvider>
+        <ErrorContextProvider>
+            <GamePlayContextProvider>
+                <AnimationContextProvider>
+                    <GameStatusContextProvider>
+                        <SocketContextProvider>
+                            <DndContextProvider>{children}</DndContextProvider>
+                        </SocketContextProvider>
+                    </GameStatusContextProvider>
+                </AnimationContextProvider>
+            </GamePlayContextProvider>
+        </ErrorContextProvider>
     );
 };
 

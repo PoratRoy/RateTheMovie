@@ -1,6 +1,6 @@
 import React from "react";
-import { DescriptionProps } from "../../../models/types/props";
 import style from "./Description.module.css";
+import { DescriptionProps } from "../../../models/types/props/common";
 
 const Description: React.FC<DescriptionProps> = ({ id, description }) => {
     return (

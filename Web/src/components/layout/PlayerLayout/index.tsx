@@ -1,12 +1,12 @@
 import React from "react";
 import PackOfCards from "../../cards/pack/PackOfCards";
-import { PlayerLayoutProps } from "../../../models/types/props";
-import style from "./PlayerLayout.module.css"
+import style from "./PlayerLayout.module.css";
+import { PlayerLayoutProps } from "../../../models/types/props/layout";
 
-const PlayerLayout: React.FC<PlayerLayoutProps> = ({ player }) => {
+const PlayerLayout: React.FC<PlayerLayoutProps> = (props) => {
     return (
         <section className={style.playerLayoutContainer}>
-            <PackOfCards player={player}/>
+            <PackOfCards {...props} />
         </section>
     );
 };

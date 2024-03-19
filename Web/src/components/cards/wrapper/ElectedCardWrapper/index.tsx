@@ -1,10 +1,11 @@
 import React from "react";
-import { BELOW_ID } from "../../../../models/constants";
-import { ElectedCardWrapperProps } from "../../../../models/types/props";
 import style from "./ElectedCardWrapper.module.css";
 import Rate from "../../core/Rate";
 import Droppable from "../../../dnd/Droppable";
 import ElectedShadow from "../../shadow/ElectedShadow";
+import { BELOW_ID, SHADOW_ID } from "../../../../models/constant";
+import { ElectedCardWrapperProps } from "../../../../models/types/props/card";
+import CardPoints from "../../../actions/score/CardPoints";
 
 const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
     children,
@@ -18,7 +19,8 @@ const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
             <Droppable droppableId={index} setFocus={setFocus}>
                 {children}
             </Droppable>
-            <ElectedShadow isRightChoice={isRightChoice} />
+            <ElectedShadow isRightChoice={isRightChoice} id={`${SHADOW_ID}-${index}`} />
+            <CardPoints index={index} isRightChoice={isRightChoice} />
             <Rate rate={rate} id={BELOW_ID} />
         </section>
     );

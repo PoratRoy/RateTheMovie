@@ -1,0 +1,26 @@
+.previewProfileContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    /* TODO: v collapse the profile */
+    overflow-x: hidden;
+}
+
+.previewProfileForm{
+    gap: 10px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.previewProfileName{
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    height: 36px;
+}

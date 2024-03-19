@@ -1,14 +1,22 @@
-import { Colors } from "../constants";
+import { getRandomNumber } from "../../utils/calc";
 import { Player } from "../types/player";
-import { PlayerColor, PlayerRole } from "../types/union";
+import { PlayerRole } from "../types/union";
 
-export const initPlayer = (id: number, name: string, role: PlayerRole = "player"): Player => {
+export const initPlayer = (id: string, name: string, role: PlayerRole = "player"): Player => {
     return {
         id,
         name,
-        color: Colors[id] as PlayerColor,
+        avatar: getRandomNumber(0, 9),
         role,
         score: 0,
-        electedCards: {order: []},
+        electedCards: { order: [] },
     } as Player;
+};
+
+export const updatePlayer = (player: Player, name: string, avatar: number): Player => {
+    return {
+        ...player,
+        name,
+        avatar,
+    };
 };

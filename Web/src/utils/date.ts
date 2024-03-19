@@ -1,8 +1,6 @@
-import { DateEndYear, DateStartYear } from "../models/constants";
-import { DateRangeOptionFilter } from "../models/types/filter";
-import { MovieFilters } from "../models/types/movie";
+import { DateEndYear, DateStartYear } from "../models/constant";
+import { DateRangeOptionFilter, MovieFilters } from "../models/types/filter";
 import { datePattern } from "./format";
-
 
 export const extractYearFromDate = (date: string): string => {
     return date.substring(0, 4);
@@ -42,3 +40,14 @@ export const delayPromise = (duration: number) =>
 
 export const subtractYears = (year: number = DateEndYear, subtract: number = 4): number =>
     year - subtract;
+
+export const timer = (time: number, callback?: () => void) => {
+    let timer = time;
+    const intervalId = setInterval(() => {
+        if (timer === 0) {
+            clearInterval(intervalId);
+            callback && callback();
+        }
+        timer--;
+    }, 1000);
+};

@@ -1,0 +1,33 @@
+.rankingBoard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    height: fit-content;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.rankingBoardLevelOne {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rankingBoardLevelTwo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.rankingBoardLevelThree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}

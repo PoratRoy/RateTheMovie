@@ -1,0 +1,31 @@
+.profileAvatarLarge,
+.profileAvatarSmall {
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: height 0.1s linear, width 0.1s linear;
+}
+
+.profileAvatarSmall {
+    width: 35px;
+    height: 35px;
+}
+
+.profileAvatarLarge {
+    width: 70px;
+    height: 70px;
+}
+
+.profileAvatarSmall img {
+    width: 100%;
+    height: 35px;
+    object-fit: cover;
+}
+
+.profileAvatarLarge img {
+    width: 100%;
+    object-fit: cover;
+}

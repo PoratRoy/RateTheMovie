@@ -8,7 +8,7 @@
     border: var(--primary-border);
     border-radius: var(--primary-border-radius);
     text-align: center;
-    width: calc(var(--small-card-width) - 13px);
+    width: calc(var(--medium-card-width) - 13px);
 }
 
 .cardRateWrapper{

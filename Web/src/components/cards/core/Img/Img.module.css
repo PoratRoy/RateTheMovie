@@ -1,24 +1,36 @@
-.cardImgLarge, 
-.cardImgSmall{
+.cardImgLarge,
+.cardImgMedium,
+.cardImgSmall,
+.cardImgXSmall {
     object-fit: cover;
     border-radius: var(--secondary-border-radius);
 }
 
-.cardImgLarge{
+.cardImgLarge {
     min-width: 120px;
-    width: 35vw;
+    width: 42vw;
     max-width: var(--card-width);
     min-height: 170px;
-    height: 25vh;
+    height: 30vh;
     max-height: var(--card-height);
 }
 
-.cardImgSmall{
+.cardImgMedium {
+    width: var(--medium-card-width);
+    height: var(--medium-card-height);
+}
+
+.cardImgSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
 }
 
-.cardImgShadow{
+.cardImgXSmall{
+    width: var(--x-small-card-width);
+    height: var(--x-small-card-height);
+}
+
+.cardImgShadow {
     opacity: 0.5;
     position: absolute;
     top: 0;

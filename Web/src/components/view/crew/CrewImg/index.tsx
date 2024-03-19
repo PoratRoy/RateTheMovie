@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./CrewImg.module.css";
-import { CrewImgProps } from "../../../../models/types/props";
+import { CrewImgProps } from "../../../../models/types/props/layout";
 
 const CrewImg: React.FC<CrewImgProps> = ({ src, alt }) => {
     return <img className={style.crewImg} src={src} alt={alt} />;

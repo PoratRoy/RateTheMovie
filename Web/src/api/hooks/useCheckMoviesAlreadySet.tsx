@@ -1,12 +1,13 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import useHandleMovies from "../../hooks/context/useHandleMovies";
-import { useSingleton } from "../../hooks/useSingleton";
+import useHandleMovies from "../../hooks/gameplay/useHandleMovies";
+import { useSingleton } from "../../hooks/global/useSingleton";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
-import Session from "../../utils/sessionStorage";
+import Session from "../../utils/storage/sessionStorage";
 import { checkMoviesAlreadySet } from "../utils/movie";
 
 const useCheckMoviesAlreadySet = () => {
+    //TODO: maybe I can move it to the game context with setStateFromSession
     const { handleGameCards } = useHandleMovies();
     const { gameCards, setFetchLoading } = useGamePlayContext();
     useSingleton(async () => {

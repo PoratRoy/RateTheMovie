@@ -1,6 +1,19 @@
-import { FilterInputs, MultiplayerInputs } from "../types/form";
+import { SetupInputs } from "../types/form";
 
-export const filterInputs: FilterInputs = {
+export const setupInputs: SetupInputs = {
+    name: {
+        type: "text",
+        id: "name",
+        placeholder: "Enter Name",
+    },
+    rounds: {
+        id: "rounds",
+        type: "number",
+    },
+    avatar:{
+        id: "avatar",
+        type: "number",
+    },
     genre: {
         id: "genre",
         placeholder: "All Genres",
@@ -15,13 +28,5 @@ export const filterInputs: FilterInputs = {
         id: "year",
         placeholder: "Select Release Years",
         label: "Release Year",
-    },
-};
-
-export const multiplayerInputs: MultiplayerInputs = {
-    name: {
-        id: "name",
-        placeholder: "Enter Name",
-        label: "Your name",
     },
 };

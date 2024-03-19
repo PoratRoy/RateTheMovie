@@ -5,8 +5,8 @@
     text-align: center;
     font-size: 1.1rem;
     color: var(--text-color-opacity);
-    margin: 0.5em;
     display: block;
+    box-sizing: border-box;
 }
 
 /* Tablet 768px - 1279px -- 800px*/

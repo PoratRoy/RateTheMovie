@@ -1,0 +1,72 @@
+.roomLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.roomLinkTitle {
+    color: var(--text-color-opacity);
+}
+
+.roomLinkContainer{
+    display: flex;
+    align-items: center;
+    min-width: 80vw;
+    width: 85vw;
+    max-width: 400px;
+    min-height: var(--input-min-height);
+    height: 100%;
+    max-height: var(--input-max-height);
+}
+
+.roomLinkInput {
+    background-color: var(--secondary-color);
+    border-radius: var(--secondary-border-radius) 0 0 var(--secondary-border-radius);
+    border: var(--secondary-border);
+    border-right: none;
+    width: 100%;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--primary-color);
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: scroll;
+}
+
+.roomLinkText {
+    margin: 0 13px;
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.roomCopyBtn {
+    color: var(--text-color);
+    min-width: 40px;
+    width: 20%;
+    min-height: var(--input-min-height);
+    height: 100%;
+    max-height: var(--input-max-height);
+    background-color: var(--secondary-color-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 var(--secondary-border-radius) var(--secondary-border-radius) 0;
+    border: var(--secondary-border);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.roomCopyBtn:active {
+    background-color: var(--secondary-color-active);
+}
+
+.roomCopyBtn:focus {
+    background-color: var(--secondary-color-focus);
+}

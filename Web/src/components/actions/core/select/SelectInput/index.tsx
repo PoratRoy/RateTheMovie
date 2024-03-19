@@ -1,8 +1,8 @@
 import Select, { SingleValue } from "react-select";
 import selectStyles from "../../../../../style/select";
-import { SelectInputProps } from "../../../../../models/types/props";
 import { SelectOption } from "../../../../../models/types/select";
 import React, { useState } from "react";
+import { SelectInputProps } from "../../../../../models/types/props/input";
 
 const SelectInput: React.FC<SelectInputProps> = ({ placeholder, setValue, options, defaultValue }) => {
     const [val, setVal] = useState<SelectOption>(defaultValue || options[0]);

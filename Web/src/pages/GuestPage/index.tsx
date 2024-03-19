@@ -1,11 +1,16 @@
 import React from "react";
-import Multiplayer from "../../components/landing/Multiplayer";
-import GuestLayout from "../../components/layout/GuestLayout";
+import GuestLayout from "../layout/GuestLayout";
+import Setup from "../../components/landing/Setup";
+import { useParams } from "react-router-dom";
+import useGuestPlayer from "../../hooks/multiplayer/useGuestPlayer";
 
 const GuestPage: React.FC = () => {
+    const { room } = useParams();
+    const { setupOption } = useGuestPlayer(room);
+
     return (
         <GuestLayout>
-            <Multiplayer playerRole="player"/>
+            <Setup playerRole="player" setupOption={setupOption} />
         </GuestLayout>
     );
 };

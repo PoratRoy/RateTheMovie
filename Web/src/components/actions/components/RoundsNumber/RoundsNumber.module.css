@@ -1,0 +1,56 @@
+.roundNum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.roundNumTitle {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.roundNumAction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color);
+    width: 120px;
+}
+
+.roundNumDecrement,
+.roundNumIncrement {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    border: var(--secondary-border);
+}
+
+.roundNumDecrement:hover,
+.roundNumIncrement:hover {
+    background-color: var(--secondary-color-hover);
+    transform: scale(1.01);
+}
+
+.roundNumDecrement:focus,
+.roundNumIncrement:focus {
+    background-color: var(--secondary-color-focus);
+}
+
+.roundNumDecrement:active,
+.roundNumIncrement:active {
+    background-color: var(--secondary-color-active);
+    transform: scale(1.02);
+}
+
+.roundNumNum {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+}

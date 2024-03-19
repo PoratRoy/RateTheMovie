@@ -14,10 +14,10 @@
     align-items: center;
     gap: 5px;
     min-width: 120px;
-    width: 35vw;
+    width: 42vw;
     max-width: var(--card-width);
     min-height: 170px;
-    height: 25vh;
+    height: 30vh;
     max-height: var(--card-height);
 }
 

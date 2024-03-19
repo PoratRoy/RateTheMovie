@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { CardEventLayoutProps } from "../../../models/types/props";
-import useCardEvent from "../../../hooks/useCardEvents";
+import useCardEvent from "../../../hooks/gameplay/useCardEvents";
+import { CardEventLayoutProps } from "../../../models/types/props/layout";
 
 const CardEventLayout: React.FC<CardEventLayoutProps> = ({
     children,

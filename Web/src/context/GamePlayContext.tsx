@@ -1,125 +1,149 @@
 import { createContext, useContext, useState } from "react";
 import { SessionKey } from "../models/enums/session";
-import Session from "../utils/sessionStorage";
-import { FinishAnimation } from "../models/types/game";
-import { initFinishAnimation } from "../models/initialization/context";
+import Session from "../utils/storage/sessionStorage";
+import { Game } from "../models/types/game";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
-import { Movie } from "../models/types/movie";
 import { initGameCardsList } from "../models/initialization/card";
+import { Movie } from "../models/types/movie";
+import { setRoundNum } from "../utils/game";
 
 export const GamePlayContext = createContext<{
+    game: Game | undefined;
+    setGame: React.Dispatch<React.SetStateAction<Game | undefined>>;
     gameCards: Card[];
     setGameCards: React.Dispatch<React.SetStateAction<Card[]>>;
+    correctOrder: Card[];
+    setCorrectOrder: React.Dispatch<React.SetStateAction<Card[]>>;
     fetchLoading: boolean;
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    players: Player[];
-    setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
-    finish: boolean;
-    setFinish: React.Dispatch<React.SetStateAction<boolean>>;
+    currentPlayer: Player | undefined;
+    setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
+    previewMovies: Movie[];
+    setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+    backupMovies: Movie[][];
+    setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][]>>;
+    resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
-    finishAnimation: FinishAnimation;
-    setCorrectPack: (showCorrectPack: Movie[]) => void;
-    setPlayAgainBtn: () => void;
-    setIncreaseScore: () => void;
-    setRemovePosition: () => void;
+    setRoundNumber: (currentRound: number) => void;
 }>({
+    game: undefined,
+    setGame: () => {},
     gameCards: [],
     setGameCards: () => {},
+    correctOrder: [],
+    setCorrectOrder: () => {},
     fetchLoading: false,
     setFetchLoading: () => {},
-    players: [],
-    setPlayers: () => {},
-    finish: false,
-    setFinish: () => {},
+    currentPlayer: undefined,
+    setCurrentPlayer: () => {},
+    previewMovies: [],
+    setPreviewMovies: () => {},
+    backupMovies: [],
+    setBackupMovies: () => {},
+    resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
-    finishAnimation: initFinishAnimation,
-    setCorrectPack: () => {},
-    setPlayAgainBtn: () => {},
-    setIncreaseScore: () => {},
-    setRemovePosition: () => {},
+    setRoundNumber: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
 
 export const GamePlayContextProvider = ({ children }: { children: React.ReactNode }) => {
+    const [game, setGame] = useState<Game | undefined>();
     const [gameCards, setGameCards] = useState<Card[]>(initGameCardsList());
+    const [correctOrder, setCorrectOrder] = useState<Card[]>([]);
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
+    const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
+    // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
+    const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
-    const [players, setPlayers] = useState<Player[]>([]);
-    const [finish, setFinish] = useState<boolean>(false);
-    const [finishAnimation, setFinishAnimation] = useState<FinishAnimation>(initFinishAnimation);
+    const [backupMovies, setBackupMovies] = useState<Movie[][]>([]);
 
+    //TODO: extract to a hook
+    //TODO: put as useCallBack
     const setStateFromSession = () => {
-        if (!players || players.length === 0) {
-            const sessionPlayers = Session.get(SessionKey.PLAYERS);
-            if (sessionPlayers && sessionPlayers.length > 0) {
-                setPlayers(sessionPlayers);
-            }
+        if (!game) {
+            const sessionGame: Game | undefined = Session.get(SessionKey.GAME);
+            if (sessionGame) setGame(sessionGame);
+        }
+        if (!currentPlayer) {
+            const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
+        }
+        if (!backupMovies) {
+            const sessionBackupMovies: Movie[][] = Session.get(SessionKey.BACKUP);
+            if (sessionBackupMovies) setBackupMovies(sessionBackupMovies);
         }
     };
     setStateFromSession();
 
-    const setCorrectPack = (showCorrectPack: Movie[]) =>
-        setFinishAnimation((prev) => ({ ...prev, showCorrectPack }));
-
-    const setPlayAgainBtn = () => {
-        if (!finishAnimation.playAgainBtn) {
-            setFinishAnimation((prev) => ({ ...prev, playAgainBtn: true }));
-        }
+    const setRoundNumber = (currentRound: number) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = { ...prev, currentRound };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
     };
 
-    const setIncreaseScore = () => setFinishAnimation((prev) => ({ ...prev, increaseScore: true }));
+    const resetRoundContextState = () => {
+        Session.remove(SessionKey.GAME_CARDS);
+        setCorrectOrder([]);
+        setFetchLoading(false);
+    };
 
-    const setRemovePosition = () =>
-        setFinishAnimation((prev) => ({ ...prev, removePosition: true }));
-
+    const resetGameContext = () => {
+        resetRoundContextState();
+        const round = setRoundNum("reset");
+        setRoundNumber(round);
+        setBackupMovies([]);
+        setCurrentPlayer((player) => {
+            return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
+        });
+    };
 
     const refreshGameContext = () => {
-        Session.remove(SessionKey.GAME_CARDS);
-        setFinishAnimation(initFinishAnimation);
-        setFetchLoading(false);
-        setFinish(false);
-        setPlayers((prevPlayers) => {
-            return prevPlayers.map((player) => ({
-                ...player,
-                electedCards: { order: [] },
-            }));
+        resetRoundContextState();
+        setCurrentPlayer((player) => {
+            return player ? { ...player, electedCards: { order: [] } } : player;
         });
     };
 
     const clearGameContext = () => {
-        Session.remove(SessionKey.GAME_CARDS);
-        Session.remove(SessionKey.PLAYERS);
-        Session.remove(SessionKey.FILTERS);
-        Session.remove(SessionKey.BACKUP);
-        Session.remove(SessionKey.ROOM);
-        setFinishAnimation(initFinishAnimation);
+        resetRoundContextState();
+        Session.remove(SessionKey.GAME);
+        Session.remove(SessionKey.CURRENT_PLAYER);
         setGameCards(initGameCardsList());
-        setFetchLoading(false);
-        setFinish(false);
-        setPlayers([]);
+        setCurrentPlayer(undefined);
+        setGame(undefined);
+        setBackupMovies([]);
     };
+
     return (
         <GamePlayContext.Provider
             value={{
+                game,
+                setGame,
                 gameCards,
                 setGameCards,
+                correctOrder,
+                setCorrectOrder,
                 fetchLoading,
                 setFetchLoading,
-                players,
-                setPlayers,
-                finish,
-                setFinish,
+                currentPlayer,
+                setCurrentPlayer,
+                previewMovies,
+                setPreviewMovies,
+                backupMovies,
+                setBackupMovies,
+                resetGameContext,
                 clearGameContext,
                 refreshGameContext,
-                finishAnimation,
-                setCorrectPack,
-                setPlayAgainBtn,
-                setIncreaseScore,
-                setRemovePosition,
+                setRoundNumber,
             }}
         >
             {children}

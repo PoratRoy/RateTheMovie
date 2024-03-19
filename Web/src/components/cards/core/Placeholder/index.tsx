@@ -1,10 +1,9 @@
 import React from "react";
 import style from "./Placeholder.module.css";
-import { BiSolidCameraMovie } from "react-icons/bi";
-import { PlaceholderProps } from "../../../../models/types/props";
 import { setPlaceholderText } from "../../../../utils/card";
 import Img from "../Img";
 import RateStar from "../RateStar";
+import { PlaceholderProps } from "../../../../models/types/props/card";
 
 const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
     if (type.t === "Player") {
@@ -23,11 +22,8 @@ const Placeholder: React.FC<PlaceholderProps> = ({ type }) => {
         const text = setPlaceholderText(index || 0);
         return (
             <div className={style.cardPlaceholder}>
-                <RateStar amount={index + 1} />
-                <div className={style.cardMovieIcon}>
-                    <BiSolidCameraMovie />
-                </div>
                 <div className={style.cardPlaceholderText}>{text}</div>
+                <RateStar amount={index + 1} />
             </div>
         );
     } else {

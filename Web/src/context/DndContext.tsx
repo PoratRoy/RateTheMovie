@@ -11,7 +11,7 @@ export const DragContext = createContext<{ isDragging: boolean }>({ isDragging: 
 export const useDragContext = () => useContext(DragContext);
 
 export const DndContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const { setPlayers } = useGamePlayContext();
+    const { setCurrentPlayer } = useGamePlayContext();
     const [isDragging, setIsDragging] = useState<boolean>(false);
 
     function handleDragEnd(event: DragEndEvent) {
@@ -23,12 +23,10 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
 
         if (movie && player) {
             const card: Card = { id: movie.id, movie };
-
-            setPlayers((prev) => {
-                const players = [...prev];
-                const playerId = player.id;
-                const selectedCardsOrder = players[playerId].electedCards?.order;
-
+            setCurrentPlayer((prev) => {
+                const currentPlayer = {...prev} as Player | undefined;
+                if (!currentPlayer || currentPlayer.id !== player.id) return currentPlayer;
+                const selectedCardsOrder = currentPlayer.electedCards?.order;
                 if (cardPosition !== -1) {
                     const existingCard = selectedCardsOrder[cardPosition];
                     const existingIndex = selectedCardsOrder.findIndex(
@@ -50,7 +48,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
                         selectedCardsOrder[index] = undefined;
                     }
                 }
-                return players;
+                return currentPlayer;
             });
         }
     }

@@ -1,0 +1,43 @@
+.circleBtn {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--secondary-border);
+    border-radius: 50%;
+    color: var(--text-color-opacity);
+    background-color: var(--secondary-color-opacity);
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+.circleBtn:hover {
+    background-color: var(--secondary-color-hover);
+    transform: scale(1.01);
+}
+
+.circleBtn:focus {
+    background-color: var(--secondary-color-focus);
+}
+
+.circleBtn:active {
+    background-color: var(--secondary-color-active);
+    transform: scale(1.02);
+}
+
+.circleIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 1.5rem;
+    color: var(--text-color-opacity);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.circleIcon svg {
+    color: var(--text-color-opacity);
+}

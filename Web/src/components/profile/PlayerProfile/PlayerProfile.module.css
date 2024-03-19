@@ -1,0 +1,51 @@
+.PlayerProfile{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.PlayerProfileDetails{
+    width: 100%;
+    max-width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 4px;
+    /* align-items: start; */
+    /* padding: 0 0 1px 0; */
+
+}
+
+.PlayerProfileName{
+    color: var(--text-color-opacity);
+    font-size: 0.9rem;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.PlayerProfileDetailsSkeleton{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 4px;
+}
+
+.PlayerProfileScoreSkeleton{
+    width: 30px;
+    height: 12px;
+    background-color: var(--text-color-opacity-real);
+    border-radius: 10px;
+}
+
+.PlayerProfileNameSkeleton{
+    width: 70px;
+    height: 12px;
+    background-color: var(--text-color-opacity-real);
+    border-radius: 10px;
+}

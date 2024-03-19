@@ -1,8 +1,11 @@
-import { Movie } from "./movie";
+import { ModOption } from "../enums/landing";
+import { Filters } from "./filter";
 
-export type FinishAnimation = {
-    playAgainBtn: boolean;
-    showCorrectPack: Movie[];
-    increaseScore: boolean;
-    removePosition: boolean;
+export type Game = {
+    mod: ModOption; 
+    roomId: string;
+    filters: Filters;
+    currentRound: number;
+    rounds: number;
+    shuffleAttempt: number;
 };

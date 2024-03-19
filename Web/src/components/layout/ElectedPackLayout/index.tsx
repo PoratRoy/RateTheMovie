@@ -1,33 +1,27 @@
 import React from "react";
-import PackOfSelectedCards from "../../cards/pack/PackOfSelectedCards";
-import FinishBtn from "../../actions/btn/FinishBtn";
+import PackOfElectedCards from "../../cards/pack/PackOfElectedCards";
+import FinishBtn from "../../actions/widgets/btn/FinishBtn";
 import style from "./ElectedPackLayout.module.css";
-import PlayAgainBtn from "../../actions/btn/PlayAgainBtn";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
-import useHandleElectedCard from "../../../hooks/useHandleElectedCard";
-import { correctAnswers } from "../../../utils/correctOrder";
+import useHandleElectedCard from "../../../hooks/gameplay/useHandleElectedCard";
 
 const ElectedPackLayout: React.FC = () => {
-    const { players, finishAnimation } = useGamePlayContext();
+    const { currentPlayer, correctOrder } = useGamePlayContext();
     const { isFinishPlacing } = useHandleElectedCard();
 
     return (
         <section className={style.electedPackContainer}>
             <div className={style.electedPack}>
-                <PackOfSelectedCards />
+                {currentPlayer ? (
+                    <PackOfElectedCards
+                        currentPlayer={currentPlayer}
+                        showCorrectPack={correctOrder}
+                    />
+                ) : null}
             </div>
-            {finishAnimation.playAgainBtn ? (
-                <div className={style.playAgain}>
-                    <div className={style.playAgainDescription}>
-                        {correctAnswers(players[0])} correct ratings !
-                    </div>
-                    <PlayAgainBtn />
-                </div>
-            ) : (
-                <div className={style.electedPackBtns}>
-                    <FinishBtn isFinishPlacing={isFinishPlacing} />
-                </div>
-            )}
+            <div className={style.electedPackBtns}>
+                <FinishBtn isFinishPlacing={isFinishPlacing} />
+            </div>
         </section>
     );
 };

@@ -1,0 +1,92 @@
+.modalBackdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    transform: opacity 0.5s ease;
+}
+
+.modalShowBackdrop{
+    opacity: 1;
+}
+
+.modalPopup{
+    position: fixed;
+    top: 20%;
+    left: calc((100vw - 85vw) / 2);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    z-index: 101;
+    border-radius: var(--secondary-border-radius);
+    border: var(--secondary-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    box-sizing: border-box;
+    padding: 2em 1.5em;
+    width: 85vw;
+    max-width: 20em;
+    height: fit-content;
+    max-height: 35em;
+    opacity: 0.5;
+    transform: translateY(-100vh);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.showModalPopup{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modalIcon{
+    position: absolute;
+    top: -30px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 60px;
+    height: 30px;
+    border-right: 1px solid var(--tertiary-color);
+    border-left: 1px solid var(--tertiary-color);
+    border-top: 1px solid var(--tertiary-color);
+    border-radius: 30px 30px 0 0;
+    background-color:  var(--secondary-color);
+    color: var(--text-color);
+}
+
+.modalIcon::before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.modalIcon svg{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modalClose{
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
+.modalClose:hover{
+    color: var(--text-color-hover);
+}

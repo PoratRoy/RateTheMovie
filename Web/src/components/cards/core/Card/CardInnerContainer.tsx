@@ -1,25 +1,30 @@
 import { motion } from "framer-motion";
-import useCardFlipAnimation from "../../../../hooks/animation/useCardFlipAnimation";
-import { CardInnerContainerProps } from "../../../../models/types/props";
-import { CARD_ID } from "../../../../models/constants";
 import style from "./Card.module.css";
+import { CARD_ID } from "../../../../models/constant";
+import { CardInnerContainerProps } from "../../../../models/types/props/card";
+import { useAnimationContext } from "../../../../context/AnimationContext";
+import { PRIMARY_COLOR } from "../../../../style/root";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     type,
     children,
-    flip,
     isFocus,
+    hasBorder = false,
 }) => {
-    const { isFlipped, onAnimationComplete } = useCardFlipAnimation(flip);
-    const isElectedType = type === "Elected";
+    const { isFlipCard } = useAnimationContext();
+    const isElectedType = type.t === "Elected";
 
+    //TODO: border not animated when result card
     if (isElectedType) {
+        const className = type.hasDecoration
+            ? `${style.electedCardInnerDecoration} ${isFocus ? style.cardContainerFocus : ""}`
+            : style.electedCardInnerContainer; //TODOCSS: refactor
+
         return (
             <div
                 id={CARD_ID}
-                className={`${style.electedCardInnerContainer} ${
-                    isFocus ? style.cardContainerFocus : ""
-                }`}
+                className={className}
+                style={{ border: hasBorder ? `2px solid ${PRIMARY_COLOR}` : "none" }}
             >
                 {children}
             </div>
@@ -29,9 +34,8 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
             <motion.div
                 className={style.playerCardInnerContainer}
                 initial={false}
-                animate={{ rotateY: isFlipped ? 180 : 360 }}
+                animate={{ rotateY: isFlipCard }}
                 transition={{ duration: 0.3, animationDiraction: "normal" }}
-                onAnimationComplete={onAnimationComplete}
             >
                 {children}
             </motion.div>

@@ -1,14 +1,19 @@
 import React from "react";
-import { SecondaryBtnProps } from "../../../../../models/types/props";
 import style from "./SecondaryBtn.module.css";
+import { SecondaryBtnProps } from "../../../../../models/types/props/btn";
 
-const SecondaryBtn: React.FC<SecondaryBtnProps> = ({ id, title, onClicked, onFocused }) => {
+const SecondaryBtn: React.FC<SecondaryBtnProps> = ({ id, title, onClicked, size = "large" }) => {
+    const className =
+        size === "large"
+            ? style.btnSecondaryLarge
+            : size === "medium"
+              ? style.btnSecondaryMedium
+              : size === "mediom-wide"
+                ? style.btnSecondaryMediumWide
+                : style.btnSecondarySmall; //TODOCSS: refactor this
+
     return (
-        <div
-            id={id}
-            onClick={onClicked}
-            className={`${style.btnSecondary} ${onFocused && style.btnSecondaryGlow}`}
-        >
+        <div id={id} onClick={onClicked} className={className}>
             {title}
         </div>
     );

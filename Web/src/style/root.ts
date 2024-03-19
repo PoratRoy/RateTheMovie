@@ -30,13 +30,26 @@ export const TEXT_COLOR = "#FFFFFF";
 export const TEXT_COLOR_HOVER = "#FFFFFF90";
 export const TEXT_COLOR_ACTIVE = "#FFFFFF80";
 export const TEXT_COLOR_OPACITY = "#8996A1";
+export const TEXT_COLOR_OPACITY_HOVER = "#94a0aa";
+export const TEXT_COLOR_OPACITY_ACTIVE = "#9da8b2";
+export const TEXT_COLOR_OPACITY_REAL = "#FFFFFF30";
 
 export const INPUT_BACKGROUND_COLOR = "#FFFFFF";
 export const INPUT_BACKGROUND_COLOR_HOVER = "#E6E6E6";
 export const INPUT_TEXT_COLOR = "#181818";
 export const INPUT_LIGHT_TEXT_COLOR = "#222222";
 
-export const ERROR_COLOR = "#FF5A5F";
+export const ERROR_COLOR = "#FF3D00";
+export const ERROR_COLOR_OPACITY = "#8D262650";
+export const SUCCESS_COLOR = "#0bec22";
+export const SUCCESS_COLOR_OPACITY = "#268D4350";
+
+export const GOLD_COLOR = "#FFD700";
+export const GOLD_COLOR_OPACITY = "#FFD70020";
+export const SILVER_COLOR = "#C0C0C0";
+export const SILVER_COLOR_OPACITY = "#C0C0C020";
+export const BRONZE_COLOR = "#CD7F32";
+export const BRONZE_COLOR_OPACITY = "#CD7F3220";
 
 export const PRIMARY_BORDER_RADIUS = "20px";
 export const SECONDARY_BORDER_RADIUS = "10px";
@@ -53,9 +66,12 @@ export const BTN_HEIGHT_LARGE = "60px";
 
 export const CARD_WIDTH = 140;
 export const CARD_HEIGHT = 200;
-
-export const SMALL_CARD_WIDTH = 50;
-export const SMALL_CARD_HEIGHT = 80;
+export const MEDIUM_CARD_WIDTH = 50;
+export const MEDIUM_CARD_HEIGHT = 80;
+export const SMALL_CARD_WIDTH = 45;
+export const SMALL_CARD_HEIGHT = 70;
+export const X_SMALL_CARD_WIDTH = 40;
+export const X_SMALL_CARD_HEIGHT = 65;
 
 export const MOBILE_WIDTH = "80vw";
 

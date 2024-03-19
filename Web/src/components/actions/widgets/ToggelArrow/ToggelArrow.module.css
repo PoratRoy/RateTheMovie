@@ -1,0 +1,29 @@
+.toggelArrowLarge,
+.toggelArrowMedium,
+.toggelArrowSmall {
+    color: var(--text-color-opacity);
+    cursor: pointer;
+    position: relative;
+}
+
+.toggelArrowLarge{
+    font-size: 1.7rem;
+}
+
+.toggelArrowMedium{
+    font-size: 1.5rem;
+}
+
+.toggelArrowSmall{
+    font-size: 1rem;
+}
+
+.toggelArrowAnimation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggelArrow:hover {
+    color: var(--text-color-active);
+}

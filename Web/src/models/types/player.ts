@@ -1,11 +1,11 @@
 import { ElectedCards } from "./card";
-import { PlayerColor, PlayerRole } from "./union";
+import { PlayerRole } from "./union";
 
 export type Player = {
-    id: number;
+    id: string;
     name: string;
     role: PlayerRole;
-    color: PlayerColor;
+    avatar: number;
     score: number;
     electedCards: ElectedCards;
 };

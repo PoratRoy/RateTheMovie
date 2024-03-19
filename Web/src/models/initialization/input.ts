@@ -1,12 +1,11 @@
-import { DateDefaultJSON } from "../constants";
-import { MultiplayerInputSchema, SelectInputSchema } from "../types/inputSchema";
+import { DateDefaultJSON, DefualtPlayerName } from "../constant";
+import { SetupInputSchema } from "../types/inputSchema";
 
-export const initSelectDefaultValues: SelectInputSchema = {
+export const initSetupDefaultValues: SetupInputSchema = {
+    name: DefualtPlayerName,
+    avatar: "-1",
+    rounds: "5",
     year: DateDefaultJSON,
     language: "",
     genre: "[]",
-};
-
-export const initMultiDefaultValues: MultiplayerInputSchema = {
-    name: "Player 1",
 };

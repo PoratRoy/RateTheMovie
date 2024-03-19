@@ -1,0 +1,97 @@
+/* Mobile 320px - 767px -- 812px */
+
+.loadingBtnPrimary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnPrimarySmall,
+.btnPrimaryMedium,
+.btnPrimaryLarge {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    border: var(--secondary-border);
+    border-radius: var(--secondary-border-radius);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnPrimarySmall:hover,
+.btnPrimaryMedium:hover,
+.btnPrimaryLarge:hover {
+    background-color: var(--primary-color-hover);
+    transform: scale(1.01);
+}
+
+.btnPrimarySmall:focus,
+.btnPrimaryMedium:focus,
+.btnPrimaryLarge:focus {
+    background-color: var(--primary-color-focus);
+}
+
+.btnPrimarySmall:active,
+.btnPrimaryMedium:active,
+.btnPrimaryLarge:active {
+    background-color: var(--primary-color-active);
+    transform: scale(1.02);
+}
+
+.btnPrimarySmall:disabled,
+.btnPrimaryMedium:disabled,
+.btnPrimaryLarge:disabled {
+    color: var(--text-color-opacity);
+    background-color: var(--primary-color-disabled);
+    cursor: default;
+}
+
+.btnPrimarySmall {
+    width: var(--btn-width-small);
+    height: var(--btn-height-small);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border: var(--secondary-border);
+}
+
+.btnPrimaryMedium {
+    width: var(--btn-width-medium);
+    height: var(--btn-height-medium);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.btnPrimaryLarge {
+    width: var(--btn-width-large);
+    height: var(--btn-height-large);
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+}
+
+/* Tablet 768px - 1279px -- 800px*/
+@media screen and (min-width: 768px) {
+
+    .btnPrimarySmall {
+        width: 120px;
+        height: 40px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .btnPrimaryMedium {
+        width: 200px;
+        height: 60px;
+        font-size: 1rem;
+        letter-spacing: 5px;
+    }
+
+    .btnPrimaryLarge {
+        width: 300px;
+        height: 90px;
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+    }
+}
