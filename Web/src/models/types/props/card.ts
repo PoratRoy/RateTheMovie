@@ -9,12 +9,14 @@ export type CardProps = IdProps & {
     size?: CardSize;
     type: placeholderCardType;
     isFocus?: boolean;
+    hasBorder?: boolean;
     front?: React.ReactNode;
     back?: React.ReactNode;
     position?: number;
 };
 
 export type CardInnerContainerProps = {
+    hasBorder?: boolean;
     type: placeholderCardType;
     children: React.ReactNode[];
     isFocus: boolean | undefined;

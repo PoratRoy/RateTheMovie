@@ -26,7 +26,6 @@ const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, isSingle, isGame
                 {restartOrLeaderBoard()}
             </section>
             {movieList()}
-            {isSingle ? <MovieListLink close={close} /> : null}
         </section>
     );
 };

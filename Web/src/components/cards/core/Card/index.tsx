@@ -13,6 +13,7 @@ const Card: React.FC<CardProps> = ({
     isFocus,
     position,
     size = "large",
+    hasBorder = false,
 }) => {
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
@@ -28,7 +29,7 @@ const Card: React.FC<CardProps> = ({
 
     return (
         <section id={id} className={sizeClass}>
-            <CardInnerContainer type={type} isFocus={isFocus}>
+            <CardInnerContainer type={type} isFocus={isFocus} hasBorder={hasBorder}>
                 <Placeholder type={type} />
                 <div className={style.cardFront}>{front}</div>
                 {isPlayerType ? <div className={style.cardBack}>{back}</div> : null}

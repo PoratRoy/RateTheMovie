@@ -63,7 +63,7 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
         <div
             className={style.rankingPlayerTab}
             style={{
-                boxShadow: isCurrentPlayer ? `0px 0px 20px 3px ${PRIMARY_COLOR}` : "none",
+                boxShadow: isCurrentPlayer ? `0px 0px 10px 3px ${PRIMARY_COLOR}` : "none",
                 border: `3px solid ${border}`,
                 gap: isOpen ? "1rem" : "0",
                 transition: "gap 0.3s linear",

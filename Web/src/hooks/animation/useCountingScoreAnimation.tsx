@@ -8,7 +8,7 @@ const useCountingScoreAnimation = (score: number) => {
 
     useEffect(() => {
         if (score >= 0) {
-            const animation = animate(count, score, { duration: 1 });
+            const animation = animate(count, score, { duration: 0.5 });
             return animation.stop;
         }
     }, [score]);

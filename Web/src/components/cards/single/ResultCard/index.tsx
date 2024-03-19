@@ -21,6 +21,8 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 type={{ t: "Elected", index } as placeholderCardType}
                 front={setElectedFrontCard(player, movie, size)}
                 size={size}
+                isFocus
+                hasBorder
             />
         </ResultCardWrapper>
     );

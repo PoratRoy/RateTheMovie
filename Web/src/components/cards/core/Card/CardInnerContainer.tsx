@@ -3,8 +3,14 @@ import style from "./Card.module.css";
 import { CARD_ID } from "../../../../models/constant";
 import { CardInnerContainerProps } from "../../../../models/types/props/card";
 import { useAnimationContext } from "../../../../context/AnimationContext";
+import { PRIMARY_COLOR } from "../../../../style/root";
 
-const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ type, children, isFocus }) => {
+const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
+    type,
+    children,
+    isFocus,
+    hasBorder = false,
+}) => {
     const { isFlipCard } = useAnimationContext();
     const isElectedType = type.t === "Elected";
 
@@ -15,7 +21,11 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ type, children,
             : style.electedCardInnerContainer; //TODOCSS: refactor
 
         return (
-            <div id={CARD_ID} className={className}>
+            <div
+                id={CARD_ID}
+                className={className}
+                style={{ border: hasBorder ? `2px solid ${PRIMARY_COLOR}` : "none" }}
+            >
                 {children}
             </div>
         );

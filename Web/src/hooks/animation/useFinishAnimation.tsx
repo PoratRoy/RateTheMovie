@@ -27,7 +27,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                 { opacity: 1, display: "block" },
                 { duration: 0.3 },
             );
-            await delayPromise(500);
+            await delayPromise(300);
             try {
                 await animation(
                     `#${POINTS_ID}-${i}`,
@@ -40,7 +40,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                 );
                 setIncreaseScore((prev) => prev + 100);
             } catch (error) {}
-            await delayPromise(800);
+            await delayPromise(600);
         }
         await delayPromise(1000);
         if (isSingle()) setIsRoundFinished(true);
