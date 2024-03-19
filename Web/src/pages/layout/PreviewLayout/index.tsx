@@ -3,13 +3,14 @@ import Logo from "../../../components/common/widgets/Logo";
 import style from "./PreviewLayout.module.css";
 import { PreviewLayoutProps } from "../../../models/types/props/layout";
 import Footer from "../../../components/common/Footer";
-import { useNavigate } from "react-router-dom";
+import { useGameStatusContext } from "../../../context/GameStatusContext";
 
 const PreviewLayout: React.FC<PreviewLayoutProps> = ({ children, hasFooter = false }) => {
-    const navigate = useNavigate();
+    const { setIsPreview } = useGameStatusContext();
+
 
     const handleGoBack = () => {
-        navigate(-1);
+        setIsPreview(prev => !prev);
     };
 
     return (

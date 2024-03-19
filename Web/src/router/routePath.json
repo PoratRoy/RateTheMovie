@@ -2,6 +2,5 @@
     "land": "/",
     "guest": "/guest/:room",
     "game": "/game",
-    "preview": "/preview",
     "all": "*"
 }

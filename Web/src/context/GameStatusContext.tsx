@@ -9,6 +9,8 @@ export const GameStatusContext = createContext<{
     setWaitingRoom: React.Dispatch<React.SetStateAction<WaitingRoom>>;
     activateTimer: boolean;
     setActivateTimer: React.Dispatch<React.SetStateAction<boolean>>;
+    isPreview: boolean;
+    setIsPreview: React.Dispatch<React.SetStateAction<boolean>>;
     setIsGameStart: (isGameStart: boolean) => void;
     setIsRoundStart: (isRoundStart: boolean) => void;
     setIsPlayerFinishRound: (isPlayerFinishRound: boolean) => void;
@@ -23,6 +25,8 @@ export const GameStatusContext = createContext<{
     waitingRoom: initWaitingRoom,
     setWaitingRoom: () => {},
     activateTimer: true,
+    isPreview: false,
+    setIsPreview: () => {},
     setActivateTimer: () => {},
     setIsGameStart: () => {},
     setIsRoundStart: () => {},
@@ -40,6 +44,7 @@ export const GameStatusContextProvider = ({ children }: { children: React.ReactN
     const [gameStatus, setGameStatus] = useState<GameStatus>(initGameStatus);
     const [waitingRoom, setWaitingRoom] = useState<WaitingRoom>(initWaitingRoom);
     const [activateTimer, setActivateTimer] = useState<boolean>(true);
+    const [isPreview, setIsPreview] = useState<boolean>(false);
 
     const setIsGameStart = (isGameStart: boolean) => {
         setGameStatus((prev) => ({ ...prev, isGameStart }));
@@ -106,6 +111,8 @@ export const GameStatusContextProvider = ({ children }: { children: React.ReactN
                 setWaitingRoom,
                 activateTimer,
                 setActivateTimer,
+                isPreview,
+                setIsPreview,
                 setIsGameStart,
                 setIsRoundStart,
                 setIsPlayerFinishRound,

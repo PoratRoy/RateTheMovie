@@ -57,8 +57,6 @@ export type PauseBtnProps = OnClickProps;
 
 export type NextRoundBtnProps = CloseProps;
 
-export type MoviesBtnProps = CloseProps;
-
 export type StartGameBtnProps = OnClickProps & {
     loading: boolean;
 };
