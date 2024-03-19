@@ -24,7 +24,6 @@ import {
     FinishRound,
     RoundFinished,
     LeaveRoom,
-    PlayerLeft,
     NextRound,
     NextRoundStarted,
     GameOver,
@@ -92,7 +91,7 @@ class GameSocket implements ISocket {
         socket.on(UpdateGameCards, (cards: Card[]) => {
             this.wrapper(UpdateGameCards, () => {
                 const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if(warRoom){
+                if (warRoom) {
                     const { game } = warRoom;
                     if (game?.roomId && cards.length === PACK_CARDS_NUM) {
                         warRoom.gameCards = cards;
@@ -191,7 +190,7 @@ class GameSocket implements ISocket {
                         const { roomId } = game;
                         socket.leave(roomId);
                         delete this.warRooms[roomId];
-                        socket.to(roomId).emit(GameEnded);
+                        socket.nsp.to(roomId).emit(GameEnded);
                     }
                 }
             });
@@ -207,9 +206,13 @@ class GameSocket implements ISocket {
                         socket.leave(roomId);
                         const index = players.indexOf(player);
                         players.splice(index, 1);
-                        //TODO: players.length === 0, game over
-                        this.warRooms[roomId] = warRoom;
-                        socket.to(roomId).emit(PlayerLeft, player);
+                        if (players.length === 1) {
+                            delete this.warRooms[roomId];
+                            socket.nsp.to(roomId).emit(GameEnded);
+                        } else {
+                            this.warRooms[roomId] = warRoom;
+                            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                        }
                     }
                 }
             });
@@ -226,7 +229,7 @@ class GameSocket implements ISocket {
                         const index = players.indexOf(player);
                         players.splice(index, 1);
                         this.warRooms[roomId] = warRoom;
-                        socket.to(roomId).emit(PlayerDisconnect, player);
+                        socket.nsp.to(roomId).emit(PlayerDisconnect, player);
                     }
                 }
             });

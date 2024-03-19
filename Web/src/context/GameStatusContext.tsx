@@ -13,6 +13,7 @@ export const GameStatusContext = createContext<{
     setIsRoundStart: (isRoundStart: boolean) => void;
     setIsPlayerFinishRound: (isPlayerFinishRound: boolean) => void;
     setIsRoundFinished: (isRoundFinished: boolean) => void;
+    setIsGameOver: (isGameOver: boolean) => void;
     setWaitingIsWaiting: (isWaiting: boolean) => void;
     resetGameStatusContext: () => void;
     clearGameStatusContext: () => void;
@@ -27,6 +28,7 @@ export const GameStatusContext = createContext<{
     setIsRoundStart: () => {},
     setIsPlayerFinishRound: () => {},
     setIsRoundFinished: () => {},
+    setIsGameOver: () => {},
     setWaitingIsWaiting: () => {},
     resetGameStatusContext: () => {},
     clearGameStatusContext: () => {},
@@ -54,6 +56,10 @@ export const GameStatusContextProvider = ({ children }: { children: React.ReactN
     const setIsRoundFinished = (isRoundFinished: boolean) => {
         setGameStatus((prev) => ({ ...prev, isRoundFinished }));
     };
+
+    const setIsGameOver = (isGameOver: boolean) => {
+        setGameStatus((prev) => ({ ...prev, isGameOver }));
+    }
 
     const setWaitingIsWaiting = (isWaiting: boolean) => {
         setWaitingRoom((prev) => ({ ...prev, isWaiting }));
@@ -104,6 +110,7 @@ export const GameStatusContextProvider = ({ children }: { children: React.ReactN
                 setIsRoundStart,
                 setIsPlayerFinishRound,
                 setIsRoundFinished,
+                setIsGameOver,
                 setWaitingIsWaiting,
                 resetGameStatusContext,
                 clearGameStatusContext,

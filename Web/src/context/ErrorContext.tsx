@@ -3,7 +3,7 @@ import { notification } from "../utils/error";
 
 export const ErrorContext = createContext<{
     handleError: (error: Error | string | undefined) => void;
-    handleAlert: (message: string) => void;
+    handleAlert: (message: string, duration?: number) => void;
     handleSuccess: (message: string) => void;
 }>({
     handleError: () => {},
@@ -18,8 +18,8 @@ export const ErrorContextProvider = ({ children }: { children: React.ReactNode }
         notification("Error", error?.toString() || "", "danger");
     };
 
-    const handleAlert = (message: string) => {
-        notification("Alert", message, "info");
+    const handleAlert = (message: string, duration?: number) => {
+        notification("Alert", message, "info", { duration: duration || 3000, onScreen: true });
     };
 
     const handleSuccess = (message: string) => {

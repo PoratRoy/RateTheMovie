@@ -7,13 +7,25 @@ import { AdditionalBtnsProps } from "../../../../models/types/props/view";
 import MovieListLink from "../../../actions/widgets/link/MovieListLink";
 
 const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, isSingle, isGameOver }) => {
+    const quit = () => <QuitCircleBtn close={close} />;
+    const movieList = () => (isSingle ? <MovieListLink close={close} /> : null);
+    const restartOrLeaderBoard = () => {
+        if (isSingle) {
+            return isGameOver ? (
+                <LeaderBoardCircleBtn close={close} />
+            ) : (
+                <RestartCircleBtn close={close} />
+            );
+        }
+    };
+
     return (
         <section className={style.AdditionalBtnsContianer}>
             <section className={style.additionalBtns}>
-                <QuitCircleBtn close={close} />
-                {isSingle && isGameOver ? <LeaderBoardCircleBtn close={close} /> : null}
-                {isSingle ? <RestartCircleBtn close={close} /> : null}
+                {quit()}
+                {restartOrLeaderBoard()}
             </section>
+            {movieList()}
             {isSingle ? <MovieListLink close={close} /> : null}
         </section>
     );

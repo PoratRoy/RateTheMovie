@@ -24,6 +24,9 @@ import {
     RoundFinished,
     NextRoundStarted,
     NextRound,
+    GameOver,
+    LeaveRoom,
+    GameEnded,
 } from "../models/constant/socketEvents";
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
@@ -31,6 +34,7 @@ import { PACK_CARDS_NUM } from "../models/constant";
 import { useAnimationContext } from "./AnimationContext";
 import { useGameStatusContext } from "./GameStatusContext";
 import { CardFace } from "../models/enums/animation";
+import useGameActions from "../hooks/gameplay/useGameActions";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -50,6 +54,7 @@ export const SocketContext = createContext<{
     handleCards: (cards: Card[]) => void;
     handleStartGame: () => void;
     handlePlayerFinish: (electedCards: ElectedCards, score: number) => void;
+    handlePlayerLeave: () => void;
     handleNextRound: (currentRound: number, cards: Card[]) => void;
     leaderBoardPlayers: Player[];
     resetSocketContext: () => void;
@@ -65,6 +70,7 @@ export const SocketContext = createContext<{
     handleStartGame: () => {},
     handlePlayerFinish: () => {},
     handleNextRound: () => {},
+    handlePlayerLeave: () => {},
     leaderBoardPlayers: [],
     resetSocketContext: () => {},
     clearSocketContext: () => {},
@@ -79,6 +85,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { handleGameCards } = useHandleMovies();
     const { setIsFlipCard } = useAnimationContext();
     const { setGame } = useGamePlayContext();
+    const { handleQuit } = useGameActions(() => {});
     const { setIsGameStart, setIsRoundStart, setIsRoundFinished } = useGameStatusContext();
 
     const socket = useSocket("http://localhost:8080/game", {
@@ -163,6 +170,18 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit(NextRound, round, cards);
     };
 
+    const handlePlayerLeave = () => {
+        socket.emit(LeaveRoom);
+        socket.disconnect();
+    };
+
+    const handleGameOver = () => {
+        socket.emit(GameOver);
+        socket.disconnect();
+    };
+
+    //  <<-----------------  Socket Events  ----------------->>
+
     useEffect(() => {
         const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
@@ -223,8 +242,15 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             setRivalPlayers((prev) => {
                 return filterRivalPlayers(prev, player.id);
             });
-            const message = `${player.name} has left the game`;
+            const message = `${player.name} has left the game.`;
             handleAlert(message);
+        };
+
+        const handleGameEnded = () => {
+            setRivalPlayers([]);
+            const message = "Last survivor standing. Game concluding as no opponents remain.";
+            handleAlert(message, 5000);
+            handleQuit();
         };
 
         socket.on(PlayerJoined, handlePlayerJoined);
@@ -233,6 +259,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.on(RoundFinished, handleRoundFinished);
         socket.on(NextRoundStarted, handleNextRoundStarted);
         socket.on(PlayerDisconnect, handlePlayerDisconnected);
+        socket.on(GameEnded, handleGameEnded);
 
         return () => {
             socket.off(PlayerJoined, handlePlayerJoined);
@@ -241,6 +268,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             socket.off(RoundFinished, handleRoundFinished);
             socket.off(NextRoundStarted, handleNextRoundStarted);
             socket.off(PlayerDisconnect, handlePlayerDisconnected);
+            socket.off(GameEnded, handleGameEnded);
         };
     }, [socket]);
 
@@ -266,6 +294,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleStartGame,
                 handlePlayerFinish,
                 handleNextRound,
+                handlePlayerLeave,
                 leaderBoardPlayers,
                 resetSocketContext,
                 clearSocketContext,

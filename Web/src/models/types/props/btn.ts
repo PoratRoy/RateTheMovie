@@ -71,6 +71,8 @@ export type PlayAgainBtnProps = CloseProps;
 
 export type QuitBtnProps = CloseProps;
 
+export type ExitGameBtnProps = CloseProps;
+
 export type RestartCircleBtnProps = CloseProps;
 
 export type LeaderBoardCircleBtnProps = CloseProps;

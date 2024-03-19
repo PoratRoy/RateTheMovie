@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { TimerModalProps } from "../../../../models/types/props/action";
 import { timer } from "../../../../utils/date";
 import useGameActions from "../../../../hooks/gameplay/useGameActions";
+import { MODAL_TIME } from "../../../../models/constant";
 
-const TimerModal: React.FC<TimerModalProps> = ({ time = 20, activate, close }) => {
+const TimerModal: React.FC<TimerModalProps> = ({ activate, close, time = MODAL_TIME }) => {
     const animationRef = useRef<any>(null);
     const checkRef = useRef<any>(false);
     const { handleContinue } = useGameActions(close);

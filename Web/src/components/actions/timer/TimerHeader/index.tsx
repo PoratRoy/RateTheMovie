@@ -5,8 +5,9 @@ import { TimerHeaderProps } from "../../../../models/types/props/action";
 import { timer } from "../../../../utils/date";
 import useFinish from "../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../context/GameStatusContext";
+import { GAME_TIME } from "../../../../models/constant";
 
-const TimerHeader: React.FC<TimerHeaderProps> = ({ time = 20 }) => {
+const TimerHeader: React.FC<TimerHeaderProps> = ({ time = GAME_TIME }) => {
     const { gameStatus, activateTimer } = useGameStatusContext();
     const { finishGame } = useFinish();
     const [initial, setInitial] = useState<boolean>(true);

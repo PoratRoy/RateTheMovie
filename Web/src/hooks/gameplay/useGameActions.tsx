@@ -23,7 +23,8 @@ const useGameActions = (close: () => void) => {
         backupMovies,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
-    const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
+    const { resetSocketContext, clearSocketContext, handleNextRound, handlePlayerLeave } =
+        useSocketContext();
     const {
         setIsRoundFinished,
         setIsPlayerFinishRound,
@@ -38,6 +39,7 @@ const useGameActions = (close: () => void) => {
 
     const handleQuit = () => {
         close();
+        if (isMulti()) handlePlayerLeave();
         clearGameContext();
         clearSocketContext();
         clearAnimationContext();
