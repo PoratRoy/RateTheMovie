@@ -5,11 +5,19 @@ import useCountingScoreAnimation from "../../../../hooks/animation/useCountingSc
 import { ScoreProps } from "../../../../models/types/props/common";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 
-const Score: React.FC<ScoreProps> = () => {
+const Score: React.FC<ScoreProps> = ({ score, isMotion = false }) => {
     const { increaseScore } = useAnimationContext();
     const { scoreRes } = useCountingScoreAnimation(increaseScore);
 
-    return <motion.div className={style.PlayerProfileScore}>{scoreRes}</motion.div>;
+    return (
+        <React.Fragment>
+            {isMotion ? (
+                <motion.div className={style.PlayerProfileScore}>{scoreRes}</motion.div>
+            ) : (
+                <div className={style.PlayerProfileScore}>{score}</div>
+            )}
+        </React.Fragment>
+    );
 };
 
 export default Score;

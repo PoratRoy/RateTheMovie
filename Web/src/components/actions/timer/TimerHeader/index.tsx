@@ -18,29 +18,29 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ time = GAME_TIME }) => {
     const timeoutRef = useRef<any>(false);
 
     const handleTimeOut = () => {
-        console.log("handleTimeOut 3", timeoutRef.current);
+        // console.log("handleTimeOut 3", timeoutRef.current);
         if (!timeoutRef.current) {
             finishGame();
         }
     };
 
     useEffect(() => {
-        console.log("isPlayerFinishRound 4");
+        // console.log("isPlayerFinishRound 4");
     }, [gameStatus.isPlayerFinishRound]);
 
     useEffect(() => {
         timeoutRef.current = true;
         if (activateTimer) {
-            console.log("activateTimer", timeoutRef.current);
-            console.log("activateTimer - change to false");
-            console.log("-------------------");
+            // console.log("activateTimer", timeoutRef.current);
+            // console.log("activateTimer - change to false");
+            // console.log("-------------------");
             setInitial(false);
             timeoutRef.current = false;
             timer(time, handleTimeOut);
         } else {
-            console.log("else activateTimer", timeoutRef.current);
-            console.log("else activateTimer - change to true");
-            console.log("-------------------");
+            // console.log("else activateTimer", timeoutRef.current);
+            // console.log("else activateTimer - change to true");
+            // console.log("-------------------");
             timeoutRef.current = true;
             setInitial(true);
         }

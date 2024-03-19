@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = () => {
     return (
         <section className={style.gameHeaderContainer}>
             <section className={style.gameHeaderContainerFix} />
-            <PlayerProfile currentPlayer={currentPlayer} />
+            <PlayerProfile currentPlayer={currentPlayer} isMotion />
             <div className={style.gameHeaderCenter}>
                 <Logo size="small" />
                 <RoundTitle current={game?.currentRound || 1} total={game?.rounds || ROUND_NUM} />

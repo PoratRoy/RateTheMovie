@@ -46,6 +46,13 @@
     --success-color: #0bec22;
     --success-color-opacity: #268D4350;
 
+    --gold-color: #FFD700;
+    --gold-color-opacity: #FFD70050;
+    --silver-color: #C0C0C0;
+    --silver-color-opacity: #C0C0C050;
+    --bronze-color: #CD7F32;
+    --bronze-color-opacity: #CD7F3250;
+
     --primary-border-radius: 20px;
     --secondary-border-radius: 10px;
 

@@ -18,6 +18,7 @@ export type AvatarProps = {
 
 export type PlayerProfileProps = {
     currentPlayer: Player | undefined;
+    isMotion?: boolean;
 };
 
 export type RivalPlayerProfileProps = {

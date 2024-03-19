@@ -44,6 +44,13 @@ export const ERROR_COLOR_OPACITY = "#8D262650";
 export const SUCCESS_COLOR = "#0bec22";
 export const SUCCESS_COLOR_OPACITY = "#268D4350";
 
+export const GOLD_COLOR = "#FFD700";
+export const GOLD_COLOR_OPACITY = "#FFD70020";
+export const SILVER_COLOR = "#C0C0C0";
+export const SILVER_COLOR_OPACITY = "#C0C0C020";
+export const BRONZE_COLOR = "#CD7F32";
+export const BRONZE_COLOR_OPACITY = "#CD7F3220";
+
 export const PRIMARY_BORDER_RADIUS = "20px";
 export const SECONDARY_BORDER_RADIUS = "10px";
 
