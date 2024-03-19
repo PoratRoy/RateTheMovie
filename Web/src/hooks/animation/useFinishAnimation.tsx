@@ -6,10 +6,12 @@ import { PRIMARY_COLOR } from "../../style/root";
 import useMod from "../gameplay/useMod";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useAnimationContext } from "../../context/AnimationContext";
+import { useGameStatusContext } from "../../context/GameStatusContext";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { setIsRoundFinished, currentPlayer } = useGamePlayContext();
+    const { currentPlayer } = useGamePlayContext();
+    const { setIsRoundFinished } = useGameStatusContext();
     const { setIncreaseScore } = useAnimationContext();
     const { isSingle } = useMod();
 

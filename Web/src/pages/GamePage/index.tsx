@@ -6,18 +6,18 @@ import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
 import useCheckMoviesAlreadySet from "../../api/hooks/useCheckMoviesAlreadySet";
 import CountDown from "../../components/actions/animation/CountDown";
 import { START_TIMER } from "../../models/constant";
-import useStartGame from "../../hooks/gameplay/useStartGame";
+import useGameTimer from "../../hooks/gameplay/useGameTimer";
 
 const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
     const { currentPlayer } = useGamePlayContext();
-    const { cardLoading, isLoading, showTimer, closeTimer } = useStartGame();
+    const { showTimer, closeTimer } = useGameTimer();
 
     return (
-        <GameLayout activateTimer={cardLoading ? false : true} isLoading={isLoading}>
+        <GameLayout>
             <ElectedPackLayout />
             {currentPlayer ? (
-                <PlayerLayout cardLoading={cardLoading} player={currentPlayer} />
+                <PlayerLayout player={currentPlayer} />
             ) : null}
             {showTimer ? <CountDown time={START_TIMER} closeTimer={closeTimer} /> : null}
         </GameLayout>

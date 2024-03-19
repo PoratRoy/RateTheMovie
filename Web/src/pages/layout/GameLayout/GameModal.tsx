@@ -3,16 +3,22 @@ import MultiRoundEndModal from "../../../components/view/modals/MultiRoundEndMod
 import RoundEndModal from "../../../components/view/modals/RoundEndModal";
 import useMod from "../../../hooks/gameplay/useMod";
 import useShowModal from "../../../hooks/global/useShowModal";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+import { useGameStatusContext } from "../../../context/GameStatusContext";
+import { useAnimationContext } from "../../../context/AnimationContext";
+import { CardFace } from "../../../models/enums/animation";
 
 const GameModal: React.FC = () => {
     const { isMulti } = useMod();
-    const { setIsRoundFinished, isRoundFinished } = useGamePlayContext();
+    const { setIsRoundFinished, gameStatus } = useGameStatusContext();
+    const { setIsFlipCard } = useAnimationContext();
     const { showModal, handleOpen, handleClose } = useShowModal(() => setIsRoundFinished(false));
 
     useEffect(() => {
-        if (isRoundFinished) handleOpen();
-    }, [isRoundFinished]);
+        if (gameStatus.isRoundFinished) {
+            handleOpen();
+            setIsFlipCard(CardFace.BACK);
+        }
+    }, [gameStatus.isRoundFinished]);
 
     return showModal ? (
         isMulti() ? (

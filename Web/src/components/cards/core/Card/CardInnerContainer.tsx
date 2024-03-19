@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import useCardFlipAnimation from "../../../../hooks/animation/useCardFlipAnimation";
 import style from "./Card.module.css";
 import { CARD_ID } from "../../../../models/constant";
 import { CardInnerContainerProps } from "../../../../models/types/props/card";
+import { useAnimationContext } from "../../../../context/AnimationContext";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ type, children, isFocus }) => {
-    const { isFlipped, onAnimationComplete } = useCardFlipAnimation();
+    const { isFlipCard } = useAnimationContext();
     const isElectedType = type.t === "Elected";
 
     //TODO: border not animated when result card
@@ -24,9 +24,8 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({ type, children,
             <motion.div
                 className={style.playerCardInnerContainer}
                 initial={false}
-                animate={{ rotateY: isFlipped }}
+                animate={{ rotateY: isFlipCard }}
                 transition={{ duration: 0.3, animationDiraction: "normal" }}
-                onAnimationComplete={onAnimationComplete}
             >
                 {children}
             </motion.div>

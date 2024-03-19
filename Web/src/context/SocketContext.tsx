@@ -29,13 +29,13 @@ import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { PACK_CARDS_NUM } from "../models/constant";
 import { useAnimationContext } from "./AnimationContext";
+import { useGameStatusContext } from "./GameStatusContext";
+import { CardFace } from "../models/enums/animation";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
     rivalPlayers: Player[];
     setRivalPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
-    startGame: boolean;
-    setStartGame: React.Dispatch<React.SetStateAction<boolean>>;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
@@ -57,8 +57,6 @@ export const SocketContext = createContext<{
 }>({
     rivalPlayers: [],
     setRivalPlayers: () => {},
-    startGame: false,
-    setStartGame: () => {},
     handleCreateNewRoom: () => {},
     handleGame: () => {},
     handlePlayerWantToJoin: () => {},
@@ -77,11 +75,11 @@ export const useSocketContext = () => useContext(SocketContext);
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
     const [leaderBoardPlayers, setLeaderBoardPlayers] = useState<Player[]>([]);
-    const [startGame, setStartGame] = useState<boolean>(false);
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
     const { setIsFlipCard } = useAnimationContext();
-    const { setGame, setIsRoundFinished } = useGamePlayContext();
+    const { setGame } = useGamePlayContext();
+    const { setIsGameStart, setIsRoundStart, setIsRoundFinished } = useGameStatusContext();
 
     const socket = useSocket("http://localhost:8080/game", {
         reconnectionAttempts: 5,
@@ -153,7 +151,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleStartGame = () => {
-        setStartGame(true);
+        setIsGameStart(true);
         socket.emit(StartGame);
     };
 
@@ -178,7 +176,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleGameCards(gameCards);
                 setGame(game);
                 Session.set(SessionKey.GAME, game);
-                setStartGame(true);
+                setIsRoundStart(true);
+                setIsGameStart(true);
             }
         };
 
@@ -201,18 +200,22 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                     break;
                 }
             }
-            setTimeout(() => {
-                setIsRoundFinished(true);
-            }, isAllPlacedCards ? time : 0);
+            setTimeout(
+                () => {
+                    setIsRoundFinished(true);
+                },
+                isAllPlacedCards ? time : 0,
+            );
         };
 
         const handleNextRoundStarted = (warRoom: WarRoomProps) => {
             const { game, gameCards } = warRoom;
             if (game) {
                 handleGameCards(gameCards);
+                setIsRoundStart(true);
                 setGame(game);
                 Session.set(SessionKey.GAME, game);
-                setIsFlipCard((prev) => !prev);
+                setIsFlipCard((prev) => (prev === CardFace.BACK ? CardFace.FRONT : CardFace.BACK));
             }
         };
 
@@ -242,12 +245,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     }, [socket]);
 
     const resetSocketContext = () => {
-        setStartGame(false);
         setLeaderBoardPlayers([]);
     };
 
     const clearSocketContext = () => {
-        setStartGame(false);
         setRivalPlayers([]);
         setLeaderBoardPlayers([]);
     };
@@ -257,8 +258,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             value={{
                 rivalPlayers,
                 setRivalPlayers,
-                startGame,
-                setStartGame,
                 handleCreateNewRoom,
                 handleGame,
                 handlePlayerWantToJoin,

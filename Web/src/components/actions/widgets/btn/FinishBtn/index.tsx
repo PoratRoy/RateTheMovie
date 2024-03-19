@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 import PrimaryBtn from "../../../core/button/PrimaryBtn";
 import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
 import useFinish from "../../../../../hooks/gameplay/useFinish";
+import { useGameStatusContext } from "../../../../../context/GameStatusContext";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
-    const { playerFinishRound } = useGamePlayContext();
+    const { gameStatus } = useGameStatusContext();
     const { finishGame } = useFinish();
 
     const handleFinish = () => {
@@ -16,7 +16,7 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     };
 
     useEffect(() => {
-        if (!isFinishPlacing && loading && !playerFinishRound) setLoading(false);
+        if (!isFinishPlacing && loading && !gameStatus.isPlayerFinishRound) setLoading(false);
     }, [isFinishPlacing]);
 
     return (

@@ -13,7 +13,7 @@ import useShowModal from "../../../hooks/global/useShowModal";
 import { HeaderProps } from "../../../models/types/props/common";
 import TimerHeader from "../../actions/timer/TimerHeader";
 
-const Header: React.FC<HeaderProps> = ({ activateTimer }) => {
+const Header: React.FC<HeaderProps> = () => {
     const { showModal, handleOpen, handleClose } = useShowModal();
     const { currentPlayer, game } = useGamePlayContext();
     const { isMulti } = useMod();
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ activateTimer }) => {
             </div>
             {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
             {isMulti() ? (
-                <TimerHeader activate={activateTimer} time={30}/>
+                <TimerHeader time={30}/>
             ) : null}
             {showModal ? <PauseModal close={handleClose} /> : null}
         </section>

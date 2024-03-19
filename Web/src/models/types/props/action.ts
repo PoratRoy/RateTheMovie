@@ -14,7 +14,6 @@ export type TimerBarProps = {
 };
 
 export type TimerHeaderProps = {
-    activate: boolean;
     time?: number;
 };
 

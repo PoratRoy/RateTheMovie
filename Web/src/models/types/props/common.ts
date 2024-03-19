@@ -35,9 +35,7 @@ export type RoundTitleProps = {
     total: number;
 };
 
-export type HeaderProps = {
-    activateTimer: boolean;
-};
+export type HeaderProps = {};
 
 export type TitleProps = {
     title: string;

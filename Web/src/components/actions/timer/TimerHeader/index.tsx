@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
-import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { timer } from "../../../../utils/date";
 import useFinish from "../../../../hooks/gameplay/useFinish";
+import { useGameStatusContext } from "../../../../context/GameStatusContext";
 
-const TimerHeader: React.FC<TimerHeaderProps> = ({ time = 20, activate }) => {
-    const { playerFinishRound } = useGamePlayContext();
+const TimerHeader: React.FC<TimerHeaderProps> = ({ time = 20 }) => {
+    const { gameStatus, activateTimer } = useGameStatusContext();
     const { finishGame } = useFinish();
     const [initial, setInitial] = useState<boolean>(true);
     const [freezeAnimation, setFreezeAnimation] = useState<boolean>(false);
@@ -17,39 +17,33 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ time = 20, activate }) => {
     const timeoutRef = useRef<any>(false);
 
     const handleTimeOut = () => {
-        if(!timeoutRef.current){
+        console.log("handleTimeOut 3", timeoutRef.current);
+        if (!timeoutRef.current) {
             finishGame();
         }
     };
 
     useEffect(() => {
-        if (playerFinishRound) {
-            timeoutRef.current = true;
-            // freeze();
-        }
-    }, [playerFinishRound]);
+        console.log("isPlayerFinishRound 4");
+    }, [gameStatus.isPlayerFinishRound]);
 
     useEffect(() => {
-        console.log("activate", activate)
-        if (activate && checkRef.current === false) {
-            checkRef.current = true;
+        timeoutRef.current = true;
+        if (activateTimer) {
+            console.log("activateTimer", timeoutRef.current);
+            console.log("activateTimer - change to false");
+            console.log("-------------------");
             setInitial(false);
+            timeoutRef.current = false;
             timer(time, handleTimeOut);
-        } else if (!activate && checkRef.current === false) {
+        } else {
+            console.log("else activateTimer", timeoutRef.current);
+            console.log("else activateTimer - change to true");
+            console.log("-------------------");
+            timeoutRef.current = true;
             setInitial(true);
         }
-    }, [activate]);
-
-    const freeze = () => {
-        setFreezeAnimation((prev) => !prev);
-        if (!freezeAnimation && animationRef.current) {
-            const remaining =
-                time -
-                (time * animationRef.current.offsetWidth) /
-                    animationRef.current.parentElement.offsetWidth;
-            setRemainingTime(remaining); // Calculate remaining time and store it
-        }
-    };
+    }, [activateTimer]);
 
     return (
         <div className={style.timerBarHeader}>
@@ -70,3 +64,14 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ time = 20, activate }) => {
 };
 
 export default TimerHeader;
+
+// const freeze = () => {
+//     setFreezeAnimation((prev) => !prev);
+//     if (!freezeAnimation && animationRef.current) {
+//         const remaining =
+//             time -
+//             (time * animationRef.current.offsetWidth) /
+//                 animationRef.current.parentElement.offsetWidth;
+//         setRemainingTime(remaining); // Calculate remaining time and store it
+//     }
+// };

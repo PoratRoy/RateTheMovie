@@ -1,18 +1,20 @@
 import React from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { useGamePlayContext } from "../../context/GamePlayContext";
 import { dndStyle } from "../../style/dnd";
 import { DraggableProps } from "../../models/types/props/dnd";
+import { useGameStatusContext } from "../../context/GameStatusContext";
 
 //TODO: zIndex not working because of the transform
 //TODO: ...args: any[]
 const Draggable: React.FC<DraggableProps> = ({ children, draggableId, props }) => {
-    const { playerFinishRound } = useGamePlayContext();
+    const {
+        gameStatus: { isPlayerFinishRound },
+    } = useGameStatusContext();
 
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: draggableId,
         data: props,
-        disabled: playerFinishRound ? true : false,
+        disabled: isPlayerFinishRound ? true : false,
     });
 
     return (

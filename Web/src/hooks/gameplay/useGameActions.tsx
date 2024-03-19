@@ -8,6 +8,8 @@ import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
 import { setRoundNum } from "../../utils/game";
 import useMoviesGame from "./useBackup";
+import { useGameStatusContext } from "../../context/GameStatusContext";
+import { CardFace } from "../../models/enums/animation";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -17,12 +19,18 @@ const useGameActions = (close: () => void) => {
         clearGameContext,
         resetGameContext,
         setRoundNumber,
-        setIsRoundFinished,
         setGame,
         backupMovies,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
     const { resetSocketContext, clearSocketContext, handleNextRound } = useSocketContext();
+    const {
+        setIsRoundFinished,
+        setIsPlayerFinishRound,
+        setIsRoundStart,
+        resetGameStatusContext,
+        clearGameStatusContext,
+    } = useGameStatusContext();
     const { handleMovieCards } = useHandleMovies();
     const { setMoviesGame } = useMoviesGame();
     const navigate = useNavigate();
@@ -33,15 +41,17 @@ const useGameActions = (close: () => void) => {
         clearGameContext();
         clearSocketContext();
         clearAnimationContext();
+        clearGameStatusContext();
         navigate(path.land);
     };
 
     const handleRestart = () => {
-        setIsRoundFinished(false);
+        resetGameStatusContext();
         clearAnimationContext();
         resetSocketContext();
         resetGameContext();
         setMoviesGame(game);
+        close();
     };
 
     //TODO:
@@ -54,16 +64,17 @@ const useGameActions = (close: () => void) => {
             const round = setRoundNum(action, currentRound);
             setRoundNumber(round);
             setIsRoundFinished(false);
+            setIsPlayerFinishRound(false);
             refreshGameContext();
             if (isMulti()) {
-                setIsFlipCard(true);
                 if (currentPlayer.role === "host") {
                     const movies = backupMovies[currentRound];
+                    const cards = handleMovieCards(movies);
+                    handleNextRound(round, cards);
+                    setIsRoundStart(true);
                     setTimeout(() => {
-                        const cards = handleMovieCards(movies);
-                        handleNextRound(round, cards);
-                        setIsFlipCard(prev => !prev);
-                    }, 1000);
+                        setIsFlipCard(CardFace.FRONT);
+                    }, 300);
                 }
                 close();
             } else {
@@ -89,13 +100,12 @@ const useGameActions = (close: () => void) => {
     };
 
     const handelNewMovies = (index: number) => {
-        setIsFlipCard(true);
         const movies = backupMovies[index];
+        handleMovieCards(movies);
         close();
         setTimeout(() => {
-            handleMovieCards(movies);
-            setIsFlipCard(true);
-        }, 1000);
+            setIsFlipCard(CardFace.FRONT);
+        }, 300);
     };
 
     return { handleQuit, handleRestart, handleShuffle, handleContinue };

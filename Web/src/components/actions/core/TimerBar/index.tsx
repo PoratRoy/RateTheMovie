@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./TimerBar.module.css";
 import { motion } from "framer-motion";
 import { TimerBarProps } from "../../../../models/types/props/action";
-import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { timer } from "../../../../utils/date";
+import { useGameStatusContext } from "../../../../context/GameStatusContext";
 
 const TimerBar: React.FC<TimerBarProps> = ({ time = 20, activate, callback }) => {
-    const { playerFinishRound } = useGamePlayContext();
+    const { gameStatus } = useGameStatusContext();
     const [initial, setInitial] = useState<boolean>(true);
     const [freezeAnimation, setFreezeAnimation] = useState<boolean>(false);
     const [remainingTime, setRemainingTime] = useState<number>(time); // Initial duration of 2 minutes in seconds
@@ -14,10 +14,10 @@ const TimerBar: React.FC<TimerBarProps> = ({ time = 20, activate, callback }) =>
     const checkRef = useRef<any>(false);
 
     useEffect(() => {
-        if (playerFinishRound) {
+        if (gameStatus.isPlayerFinishRound) {
             freeze();
         }
-    }, [playerFinishRound]);
+    }, [gameStatus.isPlayerFinishRound]);
 
     useEffect(() => {
         if (activate && checkRef.current === false) {

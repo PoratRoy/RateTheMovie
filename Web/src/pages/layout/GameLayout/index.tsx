@@ -7,23 +7,28 @@ import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { useSocketContext } from "../../../context/SocketContext";
 import GameModal from "./GameModal";
+import { useGameStatusContext } from "../../../context/GameStatusContext";
+import useWaitingRoom from "../../../hooks/gameplay/useWaitingRoom";
 
-const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer, isLoading }) => {
-    const { playerFinishRound, game, currentPlayer } = useGamePlayContext();
-    const { rivalPlayers, startGame, handleStartGame } = useSocketContext();
-    const { scope } = useFinishAnimation(playerFinishRound);
+const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
+    const { game, currentPlayer } = useGamePlayContext();
+    const { rivalPlayers, handleStartGame } = useSocketContext();
+    const { gameStatus, setIsGameStart } = useGameStatusContext();
+    const { isWaiting } = useWaitingRoom();
+    const { scope } = useFinishAnimation(gameStatus.isPlayerFinishRound);
 
     const handleClickStartGame = () => {
         if (rivalPlayers.length >= 1) {
             handleStartGame();
+            setIsGameStart(true);
         }
     };
 
     return (
         <React.Fragment>
-            {startGame ? (
+            {gameStatus.isGameStart ? (
                 <section className={style.gameContainer}>
-                    <Header activateTimer={activateTimer} />
+                    <Header />
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
                     </section>
@@ -34,7 +39,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children, activateTimer, isLoad
                     rivalPlayers={rivalPlayers}
                     playerRole={currentPlayer?.role}
                     onClicked={handleClickStartGame}
-                    isLoading={isLoading}
+                    isLoading={isWaiting}
                     game={game}
                 />
             )}

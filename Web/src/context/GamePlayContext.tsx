@@ -19,12 +19,6 @@ export const GamePlayContext = createContext<{
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
     currentPlayer: Player | undefined;
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
-    playerFinishRound: boolean | undefined;
-    setPlayerFinishRound: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-    isRoundFinished: boolean | undefined;
-    setIsRoundFinished: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-    gameOver: boolean;
-    setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
     previewMovies: Movie[];
     setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     backupMovies: Movie[][];
@@ -44,12 +38,6 @@ export const GamePlayContext = createContext<{
     setFetchLoading: () => {},
     currentPlayer: undefined,
     setCurrentPlayer: () => {},
-    playerFinishRound: false,
-    setPlayerFinishRound: () => {},
-    isRoundFinished: false,
-    setIsRoundFinished: () => {},
-    gameOver: false,
-    setGameOver: () => {},
     previewMovies: [],
     setPreviewMovies: () => {},
     backupMovies: [],
@@ -68,9 +56,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [correctOrder, setCorrectOrder] = useState<Card[]>([]);
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
-    const [playerFinishRound, setPlayerFinishRound] = useState<boolean | undefined>();
-    const [isRoundFinished, setIsRoundFinished] = useState<boolean | undefined>();
-    const [gameOver, setGameOver] = useState<boolean>(false);
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
@@ -109,9 +94,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.GAME_CARDS);
         setCorrectOrder([]);
         setFetchLoading(false);
-        setPlayerFinishRound(false);
-        setIsRoundFinished(false);
-        setGameOver(false);
     };
 
     const resetGameContext = () => {
@@ -136,7 +118,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
         setGameCards(initGameCardsList());
-        setGameOver(false);
         setCurrentPlayer(undefined);
         setGame(undefined);
         setBackupMovies([]);
@@ -155,12 +136,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setFetchLoading,
                 currentPlayer,
                 setCurrentPlayer,
-                playerFinishRound,
-                setPlayerFinishRound,
-                isRoundFinished,
-                setIsRoundFinished,
-                gameOver,
-                setGameOver,
                 previewMovies,
                 setPreviewMovies,
                 backupMovies,

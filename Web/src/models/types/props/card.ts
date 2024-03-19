@@ -34,7 +34,6 @@ export type ResultCardWrapperProps = ChildernsProps & {
 
 export type PlayerCardProps = {
     card: Card;
-    loading?: boolean;
     player: Player;
 };
 

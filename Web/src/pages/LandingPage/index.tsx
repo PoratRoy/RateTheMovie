@@ -6,6 +6,7 @@ import Setup from "../../components/landing/Setup";
 import { SetupOption } from "../../models/types/setup";
 
 const LandingPage: React.FC = () => {
+    //TODO: can be in the URL instade of state
     const [setupOption, setSetupOption] = useState<SetupOption>({ mod: ModOption.NONE });
 
     return (
