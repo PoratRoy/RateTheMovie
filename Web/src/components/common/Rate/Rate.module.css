@@ -11,10 +11,14 @@
     width: calc(var(--medium-card-width) - 13px);
 }
 
-.cardRateWrapper{
+.cardRateWrapperAbsolute{
     position: absolute;
     bottom: -15px;
     left: 50%;
     width: 100%;
     transform: translateX(-50%);
+}
+
+.cardRateWrapperRelative{
+    position: relative;
 }

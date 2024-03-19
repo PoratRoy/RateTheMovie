@@ -4,9 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5em;
-    width: 80%;
-    min-width: 200px;
-    max-width: 250px;
+    width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -14,17 +12,35 @@
     overflow-wrap:break-word;
 }
 
-.cardViewInfo{
+.cardViewInfoScroll{
     max-height: 30vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
+    width: 100%;
+}
+
+.cardViewInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: start;
+    width: 80%;
+    min-width: 200px;
+    max-width: 250px;
 }
 
 .cardViewTitle {
     margin: 0.5em 0 0.7em 0;
+}
+
+.cardViewDateRate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
 }
 
 .cardViewGenres{
@@ -33,7 +49,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
-    width: 100%;
 }
 
 .cardDate{

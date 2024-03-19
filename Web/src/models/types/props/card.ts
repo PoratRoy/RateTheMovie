@@ -62,10 +62,6 @@ export type PlaceholderProps = {
     type: placeholderCardType;
 };
 
-export type RateProps = IdProps & {
-    rate: number | string;
-};
-
 export type PositionProps = IdProps & {
     position: number;
 };

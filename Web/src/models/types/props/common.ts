@@ -1,5 +1,5 @@
 import { IdProps } from ".";
-import { CardSize, LogoSize } from "../union";
+import { CardSize, LogoSize, RatePosition } from "../union";
 
 export type ImgProps = {
     src: string;
@@ -42,4 +42,9 @@ export type HeaderProps = {};
 
 export type TitleProps = {
     title: string;
+};
+
+export type RateProps = IdProps & {
+    rate: number | string;
+    position?: RatePosition
 };

@@ -43,6 +43,8 @@ export type RoundAction = "reset" | "increase" | "decrease";
 
 export type Diraction = "up" | "down" | "left" | "right";
 
+export type RatePosition = "relative" | "absolute";
+
 export type LanguageType =
     | "en" // English
     | "es" // Spanish
