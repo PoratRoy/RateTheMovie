@@ -8,7 +8,7 @@ import MovieListLink from "../../../actions/widgets/link/MovieListLink";
 
 const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, isSingle, isGameOver }) => {
     const quit = () => <QuitCircleBtn close={close} />;
-    const movieList = () => (isSingle ? <MovieListLink close={close} /> : null);
+    const movieList = () => (isSingle ? <MovieListLink /> : null);
     const restartOrLeaderBoard = () => {
         if (isSingle) {
             return isGameOver ? (

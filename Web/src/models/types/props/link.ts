@@ -8,6 +8,4 @@ export type RoomLinkProps = {
     roomLink: string;
 };
 
-export type MovieListLinkProps = {
-    close: () => void;
-};
+export type MovieListLinkProps = {};

@@ -23,4 +23,5 @@
     flex-direction: column;
     gap: 2em;
     align-items: center;
+    width: 100%;
 }

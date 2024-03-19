@@ -4,11 +4,10 @@ import { MovieListLinkProps } from "../../../../../models/types/props/link";
 import { useNavigate } from "react-router-dom";
 import path from "../../../../../router/routePath.json";
 
-const MovieListLink: React.FC<MovieListLinkProps> = ({ close }) => {
+const MovieListLink: React.FC<MovieListLinkProps> = () => {
     const navigate = useNavigate();
 
     const handleOnClick = () => {
-        close();
         navigate(path.preview);
     };
 
