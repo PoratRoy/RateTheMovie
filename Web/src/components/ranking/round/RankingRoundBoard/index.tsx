@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import style from "./RankingRoundBoard.module.css";
 import { sortPlayersByScore } from "../../../../utils/calc";
 import { Player } from "../../../../models/types/player";
-import RankingPlayer from "../RoundPlayerPlace";
+import RoundPlayerPlace from "../RoundPlayerPlace";
 import { RankingRoundBoardProps } from "../../../../models/types/props/ranking";
 
 const RankingRoundBoard: React.FC<RankingRoundBoardProps> = ({ players }) => {
@@ -13,7 +13,7 @@ const RankingRoundBoard: React.FC<RankingRoundBoardProps> = ({ players }) => {
         <section className={style.rankingBoard}>
             {sortedPlayers.map((player: Player, index: number) => (
                 <React.Fragment key={index}>
-                    <RankingPlayer player={player} place={index + 1} />
+                    <RoundPlayerPlace player={player} place={index + 1} />
                 </React.Fragment>
             ))}
         </section>

@@ -4,8 +4,8 @@ import style from "./MultiRoundEndModal.module.css";
 import { MultiRoundEndModalProps } from "../../../../models/types/props/view";
 import { useSocketContext } from "../../../../context/SocketContext";
 import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
-import RankingBoardTwo from "../../../ranking/round/RankingRoundBoard";
-import RankingBoard from "../../../ranking/gameOver/RankingGameOverBoard";
+import RankingRoundBoard from "../../../ranking/round/RankingRoundBoard";
+import RankingGameOverBoard from "../../../ranking/gameOver/RankingGameOverBoard";
 import AdditionalBtns from "../../core/AdditionalBtns";
 import TimerModal from "../../../actions/timer/TimerModal";
 import ExitGameBtn from "../../../actions/widgets/btn/ExitGameBtn";
@@ -21,17 +21,18 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
         gameOver ? setFinish(true) : handleContinue();
     };
 
+    console.log("leaderBoardPlayers", leaderBoardPlayers)
     return (
         <Modal close={close} title={title}>
             {finish && gameOver ? (
                 <section className={style.MultiRoundGameOver}>
-                    <RankingBoard players={leaderBoardPlayers} />
+                    <RankingGameOverBoard players={leaderBoardPlayers} />
                     <ExitGameBtn close={close} />
                     <AdditionalBtns close={close} btns={["movieList"]} />
                 </section>
             ) : (
                 <section className={style.MultiRoundEndModal}>
-                    <RankingBoardTwo players={leaderBoardPlayers} />
+                    <RankingRoundBoard players={leaderBoardPlayers} />
                     <AdditionalBtns close={close} btns={["quit"]} />
                     <TimerModal activate handleTimeOut={handleTimeOut} />
                 </section>

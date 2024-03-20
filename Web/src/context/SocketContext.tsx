@@ -211,6 +211,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             //the time of the finish animation
             const time = 3000 + PACK_CARDS_NUM * 1300;
             const { players } = warRoom;
+            console.log("handleRoundFinished players", players)
             setLeaderBoardPlayers(players);
             let isAllPlacedCards = true;
             for (const player of players) {

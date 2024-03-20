@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import style from "./RankingGameOverBoard.module.css";
 import { sortPlayersByScore } from "../../../../utils/calc";
-import ResultPlayerProfile from "../ResultPlayerPlace";
+import ResultPlayerPlace from "../ResultPlayerPlace";
 import { Player } from "../../../../models/types/player";
 import { groupPlayersByRank } from "../../../../utils/ranking";
 import { RankingGameOverBoardProps } from "../../../../models/types/props/ranking";
@@ -20,13 +20,13 @@ const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) 
             ) : (
                 <section className={style.rankingBoard}>
                     <div className={style.rankingBoardLevelOne}>
-                        <ResultPlayerProfile player={levelOne[0]} place={1} />
+                        <ResultPlayerPlace player={levelOne[0]} place={1} />
                     </div>
                     <div className={style.rankingBoardLevelTwo}>
                         {levelTwo.map((player: Player, index: number) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <ResultPlayerProfile player={player} place={index + 2} />
+                                    <ResultPlayerPlace player={player} place={index + 2} />
                                 </React.Fragment>
                             );
                         })}
@@ -36,7 +36,7 @@ const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) 
                             levelThree.map((player: Player, index: number) => {
                                 return (
                                     <React.Fragment key={index}>
-                                        <ResultPlayerProfile player={player} place={index + 4} />
+                                        <ResultPlayerPlace player={player} place={index + 4} />
                                     </React.Fragment>
                                 );
                             })}
