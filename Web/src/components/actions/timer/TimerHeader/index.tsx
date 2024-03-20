@@ -7,7 +7,24 @@ import useFinish from "../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../context/GameStatusContext";
 import { GAME_TIME } from "../../../../models/constant";
 
+import { useTimer } from "react-timer-hook";
+
 const TimerHeader: React.FC<TimerHeaderProps> = ({ time = GAME_TIME }) => {
+
+    const t = new Date();
+    t.setSeconds(t.getSeconds() + time);
+    const {
+        totalSeconds,
+        seconds,
+        minutes,
+        hours,
+        days,
+        isRunning,
+        start,
+        pause,
+        restart,
+    } = useTimer({ expiryTimestamp: t, onExpire: () => console.warn("onExpire called") });
+
     const { gameStatus, activateTimer } = useGameStatusContext();
     const { finishGame } = useFinish();
     const [initial, setInitial] = useState<boolean>(true);
@@ -48,6 +65,7 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ time = GAME_TIME }) => {
 
     return (
         <div className={style.timerBarHeader}>
+            <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
             {initial ? (
                 <div className={style.progressBar}></div>
             ) : (
