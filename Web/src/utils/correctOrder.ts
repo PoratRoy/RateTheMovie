@@ -1,3 +1,4 @@
+import { PACK_CARDS_NUM } from "../models/constant";
 import { Card } from "../models/types/card";
 import { Player } from "../models/types/player";
 
@@ -30,12 +31,11 @@ export const isCardsOrdrValid = (
     if (player) {
         const electedCardsOrder = player.electedCards.order;
         const electedCardsCorrectOrder = player.electedCards.correctOrder;
-        //TODO: electedCardsOrder.length !== constant movie count
         if (
             electedCardsCorrectOrder &&
             electedCardsOrder &&
-            electedCardsOrder.length !== 0 &&
-            electedCardsCorrectOrder.length !== 0 &&
+            electedCardsOrder.length !== PACK_CARDS_NUM &&
+            electedCardsCorrectOrder.length !== PACK_CARDS_NUM &&
             electedCardsOrder.length === electedCardsCorrectOrder.length
         ) {
             return [true, { electedCardsOrder, electedCardsCorrectOrder }];

@@ -13,6 +13,7 @@ export const extractRoomId = (roomLink: string) => {
     return roomLink.substring(roomLink.lastIndexOf("/") + 1);
 };
 
+//TODO: not in use
 export const formatShortNumber = (number: number) => {
     const absNumber = Math.abs(number);
     const suffixes = ["", "k", "m", "b", "t"];

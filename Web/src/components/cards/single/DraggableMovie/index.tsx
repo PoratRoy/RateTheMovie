@@ -14,7 +14,7 @@ const DraggableMovie: React.FC<DraggableMovieProps> = ({
 }) => {
     return (
         <div className={style.draggableCard}>
-            <Draggable draggableId={id} props={{ movie, player }}>
+            <Draggable draggableId={id} args={{ movie, player }}>
                 <Movie movie={movie} isShadow={isShadow} size={size} actions={cardAnimation_all} />
             </Draggable>
         </div>

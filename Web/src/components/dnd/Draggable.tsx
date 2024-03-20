@@ -5,15 +5,14 @@ import { DraggableProps } from "../../models/types/props/dnd";
 import { useGameStatusContext } from "../../context/GameStatusContext";
 
 //TODO: zIndex not working because of the transform
-//TODO: ...args: any[]
-const Draggable: React.FC<DraggableProps> = ({ children, draggableId, props }) => {
+const Draggable: React.FC<DraggableProps> = ({ children, draggableId, args }) => {
     const {
         gameStatus: { isPlayerFinishRound },
     } = useGameStatusContext();
 
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: draggableId,
-        data: props,
+        data: args,
         disabled: isPlayerFinishRound ? true : false,
     });
 

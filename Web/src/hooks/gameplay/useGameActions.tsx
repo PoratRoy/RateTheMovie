@@ -56,10 +56,6 @@ const useGameActions = (close: () => void) => {
         close();
     };
 
-    //TODO:
-    //You have submitted your masterpiece.
-    // Let's wait for the others...
-
     const handleContinue = (action: RoundAction = "increase") => {
         if (game && currentPlayer) {
             const { currentRound } = game;

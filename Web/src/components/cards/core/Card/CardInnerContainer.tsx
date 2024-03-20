@@ -14,7 +14,6 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     const { isFlipCard } = useAnimationContext();
     const isElectedType = type.t === "Elected";
 
-    //TODO: border not animated when result card
     if (isElectedType) {
         const className = type.hasDecoration
             ? `${style.electedCardInnerDecoration} ${isFocus ? style.cardContainerFocus : ""}`

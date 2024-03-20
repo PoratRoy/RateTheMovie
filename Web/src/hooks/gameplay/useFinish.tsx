@@ -27,7 +27,10 @@ const useFinish = () => {
         setActivateTimer(false);
 
         const movies: Movie[] = getMoviesFromCards(gameCards);
-        setPreviewMovies((prev) => [...prev, ...movies]);
+        setPreviewMovies(prev => {
+            const filteredMovies = movies.filter(movie => !prev.some(prevMovie => prevMovie.id === movie.id));
+            return [...prev, ...filteredMovies];
+        });
     };
 
     const finishGame = () => {

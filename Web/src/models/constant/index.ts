@@ -34,7 +34,7 @@ export const DirectionMap: { [key: string]: number } = {
     "down-up": -180,
 };
 
-//TODO: arrange the ids
+//TODO: move to IDs file
 export const CARD_ID = "card";
 export const BELOW_ID = "below";
 export const SHADOW_ID = "shadow";

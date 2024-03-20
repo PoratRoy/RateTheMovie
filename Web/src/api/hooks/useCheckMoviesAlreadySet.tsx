@@ -7,7 +7,6 @@ import Session from "../../utils/storage/sessionStorage";
 import { checkMoviesAlreadySet } from "../utils/movie";
 
 const useCheckMoviesAlreadySet = () => {
-    //TODO: maybe I can move it to the game context with setStateFromSession
     const { handleGameCards } = useHandleMovies();
     const { gameCards, setFetchLoading } = useGamePlayContext();
     useSingleton(async () => {

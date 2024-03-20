@@ -7,5 +7,5 @@ export type DroppableProps = ChildernsProps & {
 
 export type DraggableProps = ChildernsProps & {
     draggableId: string;
-    props: PropsObj;
+    args: PropsObj;
 };
