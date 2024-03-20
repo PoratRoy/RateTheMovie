@@ -15,7 +15,7 @@ import { handleError } from "../libs/error";
 import { setCrew } from "../utils/crew";
 import { setVideo } from "../utils/video";
 import { validation } from "../model/validation";
-import { delayPromise, extractYearFromDate } from "../utils/date";
+import { delayPromise, extractYearFromDate } from "../utils/time";
 import { setIsBoxOffice } from "../utils/boxOffice";
 import ActorDatabaseService from "../database/ActorTable";
 import DirectorDatabaseService from "../database/DirectorTable";

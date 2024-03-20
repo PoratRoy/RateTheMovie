@@ -7,7 +7,7 @@ import { ByActorFilter, ByDetailsFilter, ByDirectorFilter } from "../model/types
 import ActorDatabaseService from "./ActorTable";
 import DirectorDatabaseService from "./DirectorTable";
 import { TOP_RATED_NUM } from "../model/constant";
-import { currentYear } from "../utils/date";
+import { currentYear } from "../utils/time";
 import { Difficulty } from "../model/types/union";
 
 export default class MovieDatabaseService {

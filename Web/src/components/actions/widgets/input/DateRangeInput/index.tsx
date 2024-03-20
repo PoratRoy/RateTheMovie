@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import SelectInput from "../../../core/select/SelectInput";
-import { getYearsArray, subtractYears } from "../../../../../utils/date";
+import { getYearsArray, subtractYears } from "../../../../../utils/time";
 import { initDateOption, initOptions } from "../../../../../utils/select";
 import { SelectOption } from "../../../../../models/types/select";
 import style from "./DateRangeInput.module.css";

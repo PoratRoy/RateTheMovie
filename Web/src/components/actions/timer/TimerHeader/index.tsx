@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
-import { timer } from "../../../../utils/date";
+import { timer } from "../../../../utils/time";
 import useFinish from "../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../context/GameStatusContext";
 import { GAME_TIME } from "../../../../models/constant";

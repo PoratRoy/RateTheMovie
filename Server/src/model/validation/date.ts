@@ -1,4 +1,4 @@
-import { extractYearFromDate } from "../../utils/date";
+import { extractYearFromDate } from "../../utils/time";
 import { datePattern } from "../constant";
 import { MovieFilters } from "../types/filter";
 

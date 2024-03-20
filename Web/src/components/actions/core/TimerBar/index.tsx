@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./TimerBar.module.css";
 import { motion } from "framer-motion";
 import { TimerBarProps } from "../../../../models/types/props/action";
-import { timer } from "../../../../utils/date";
+import { timer } from "../../../../utils/time";
 import { useGameStatusContext } from "../../../../context/GameStatusContext";
 
 const TimerBar: React.FC<TimerBarProps> = ({ time = 20, activate, callback }) => {

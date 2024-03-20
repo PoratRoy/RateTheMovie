@@ -5,7 +5,7 @@ import ActorDatabaseService from "../database/ActorTable";
 import { Director, NUMBER_OF_ACTORS } from "../model/constant";
 import DirectorDatabaseService from "../database/DirectorTable";
 import { setCrewModel } from "./init";
-import { delayPromise } from "./date";
+import { delayPromise } from "./time";
 
 export const setCrew = async (id: number) => {
     const cast: [MovieCast[], MovieCrew[]] = await fetchCast(

@@ -1,6 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { delayPromise } from "../../utils/date";
+import { delayPromise } from "../../utils/time";
 import { BELOW_ID, CARD_ID, PACK_CARDS_NUM, POINTS_ID, SHADOW_ID } from "../../models/constant";
 import { PRIMARY_COLOR } from "../../style/root";
 import useMod from "../gameplay/useMod";

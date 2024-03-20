@@ -1,6 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { delayPromise } from "../../utils/date";
+import { delayPromise } from "../../utils/time";
 import {
     REVEAL_ACTION_ID,
     SCORE_ID,
