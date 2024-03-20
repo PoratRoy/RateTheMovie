@@ -4,7 +4,6 @@ import { initGameStatus, initWaitingRoom } from "../models/initialization/gameSt
 
 export const GameStatusContext = createContext<{
     gameStatus: GameStatus;
-    setGameStatus: React.Dispatch<React.SetStateAction<GameStatus>>;
     waitingRoom: WaitingRoom;
     setWaitingRoom: React.Dispatch<React.SetStateAction<WaitingRoom>>;
     activateTimer: boolean;
@@ -21,7 +20,6 @@ export const GameStatusContext = createContext<{
     clearGameStatusContext: () => void;
 }>({
     gameStatus: initGameStatus,
-    setGameStatus: () => {},
     waitingRoom: initWaitingRoom,
     setWaitingRoom: () => {},
     activateTimer: true,
@@ -106,7 +104,6 @@ export const GameStatusContextProvider = ({ children }: { children: React.ReactN
         <GameStatusContext.Provider
             value={{
                 gameStatus,
-                setGameStatus,
                 waitingRoom,
                 setWaitingRoom,
                 activateTimer,

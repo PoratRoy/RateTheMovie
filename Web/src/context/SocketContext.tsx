@@ -24,7 +24,6 @@ import {
     RoundFinished,
     NextRoundStarted,
     NextRound,
-    GameOver,
     LeaveRoom,
     GameEnded,
 } from "../models/constant/socketEvents";
@@ -39,7 +38,6 @@ import useGameActions from "../hooks/gameplay/useGameActions";
 
 export const SocketContext = createContext<{
     rivalPlayers: Player[];
-    setRivalPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
@@ -61,7 +59,6 @@ export const SocketContext = createContext<{
     clearSocketContext: () => void;
 }>({
     rivalPlayers: [],
-    setRivalPlayers: () => {},
     handleCreateNewRoom: () => {},
     handleGame: () => {},
     handlePlayerWantToJoin: () => {},
@@ -174,10 +171,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.emit(LeaveRoom);
     };
 
-    const handleGameOver = () => {
-        socket.emit(GameOver);
-    };
-
     //  <<-----------------  Socket Events  ----------------->>
 
     useEffect(() => {
@@ -246,13 +239,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         const handleGameEnded = (player: Player) => {
             const isGameOver: boolean | undefined = Session.get(SessionKey.GAME_OVER);
-            if(isGameOver){
-                setRivalPlayers((prev) => {
-                    return filterRivalPlayers(prev, player.id);
-                });
-                const message = `${player.name} has left the game.`;
-                handleAlert(message);
-            }else{
+            if (isGameOver) {
+                handlePlayerDisconnected(player);
+            } else {
                 setRivalPlayers([]);
                 const message = "Last survivor standing. Game concluding as no opponents remain.";
                 handleAlert(message, 5000);
@@ -292,7 +281,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         <SocketContext.Provider
             value={{
                 rivalPlayers,
-                setRivalPlayers,
                 handleCreateNewRoom,
                 handleGame,
                 handlePlayerWantToJoin,

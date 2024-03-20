@@ -26,10 +26,10 @@ import {
     LeaveRoom,
     NextRound,
     NextRoundStarted,
-    GameOver,
     GameEnded,
 } from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
@@ -181,63 +181,15 @@ class GameSocket implements ISocket {
             });
         });
 
-        //
-        socket.on(GameOver, () => {
-            this.wrapper(GameOver, () => {
-                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if (warRoom && player) {
-                    const { game } = warRoom;
-                    if (game?.roomId) {
-                        const { roomId } = game;
-                        socket.leave(roomId);
-                        delete this.warRooms[roomId];
-                        socket.nsp.to(roomId).emit(GameEnded, player);
-                    }
-                }
-            });
-        });
-
         socket.on(LeaveRoom, () => {
             this.wrapper(LeaveRoom, () => {
-                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if (warRoom && player) {
-                    const { game, players } = warRoom;
-                    if (game?.roomId) {
-                        const { roomId } = game;
-                        socket.leave(roomId);
-                        const index = players.indexOf(player);
-                        players.splice(index, 1);
-                        if (players.length === 1) {
-                            delete this.warRooms[roomId];
-                            socket.nsp.to(roomId).emit(GameEnded, player);
-                        } else {
-                            this.warRooms[roomId] = warRoom;
-                            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
-                        }
-                    }
-                }
+                this.handleLeavingPlayer(socket);
             });
         });
 
         socket.on(Disconnect, () => {
             this.wrapper(Disconnect, () => {
-                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if (warRoom && player) {
-                    const { game, players } = warRoom;
-                    if (game?.roomId) {
-                        const { roomId } = game;
-                        socket.leave(roomId);
-                        const index = players.indexOf(player);
-                        players.splice(index, 1);
-                        if (players.length === 1) {
-                            delete this.warRooms[roomId];
-                            socket.nsp.to(roomId).emit(GameEnded, player);
-                        } else {
-                            this.warRooms[roomId] = warRoom;
-                            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
-                        }
-                    }
-                }
+                this.handleLeavingPlayer(socket);
             });
         });
     }
@@ -246,6 +198,28 @@ class GameSocket implements ISocket {
         logEvent(event);
         func();
         logFinish(this.warRooms);
+    };
+
+    handleLeavingPlayer = (
+        socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
+    ) => {
+        const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+        if (warRoom && player) {
+            const { game, players } = warRoom;
+            if (game?.roomId) {
+                const { roomId } = game;
+                socket.leave(roomId);
+                const index = players.indexOf(player);
+                players.splice(index, 1);
+                if (players.length === 1) {
+                    delete this.warRooms[roomId];
+                    socket.nsp.to(roomId).emit(GameEnded, player);
+                } else {
+                    this.warRooms[roomId] = warRoom;
+                    socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                }
+            }
+        }
     };
 
     middlewareImplementation(socket: Socket, next: any) {
