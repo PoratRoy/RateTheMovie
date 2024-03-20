@@ -172,12 +172,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handlePlayerLeave = () => {
         socket.emit(LeaveRoom);
-        socket.disconnect();
     };
 
     const handleGameOver = () => {
         socket.emit(GameOver);
-        socket.disconnect();
     };
 
     //  <<-----------------  Socket Events  ----------------->>
@@ -211,7 +209,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             //the time of the finish animation
             const time = 3000 + PACK_CARDS_NUM * 1300;
             const { players } = warRoom;
-            console.log("handleRoundFinished players", players)
             setLeaderBoardPlayers(players);
             let isAllPlacedCards = true;
             for (const player of players) {
@@ -247,11 +244,20 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             handleAlert(message);
         };
 
-        const handleGameEnded = () => {
-            setRivalPlayers([]);
-            const message = "Last survivor standing. Game concluding as no opponents remain.";
-            handleAlert(message, 5000);
-            handleQuit();
+        const handleGameEnded = (player: Player) => {
+            const isGameOver: boolean | undefined = Session.get(SessionKey.GAME_OVER);
+            if(isGameOver){
+                setRivalPlayers((prev) => {
+                    return filterRivalPlayers(prev, player.id);
+                });
+                const message = `${player.name} has left the game.`;
+                handleAlert(message);
+            }else{
+                setRivalPlayers([]);
+                const message = "Last survivor standing. Game concluding as no opponents remain.";
+                handleAlert(message, 5000);
+                handleQuit();
+            }
         };
 
         socket.on(PlayerJoined, handlePlayerJoined);

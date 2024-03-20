@@ -10,6 +10,7 @@ import { setRoundNum } from "../../utils/game";
 import useMoviesGame from "./useBackup";
 import { useGameStatusContext } from "../../context/GameStatusContext";
 import { CardFace } from "../../models/enums/animation";
+import Session from "../../utils/storage/sessionStorage";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -44,6 +45,7 @@ const useGameActions = (close: () => void) => {
         clearSocketContext();
         clearAnimationContext();
         clearGameStatusContext();
+        Session.clear();
         navigate(path.land);
     };
 

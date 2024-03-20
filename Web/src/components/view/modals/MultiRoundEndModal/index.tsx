@@ -3,7 +3,6 @@ import Modal from "../../core/Modal";
 import style from "./MultiRoundEndModal.module.css";
 import { MultiRoundEndModalProps } from "../../../../models/types/props/view";
 import { useSocketContext } from "../../../../context/SocketContext";
-import useRoundEndModal from "../../../../hooks/gameplay/useRoundEndModal";
 import RankingRoundBoard from "../../../ranking/round/RankingRoundBoard";
 import RankingGameOverBoard from "../../../ranking/gameOver/RankingGameOverBoard";
 import AdditionalBtns from "../../core/AdditionalBtns";
@@ -11,9 +10,8 @@ import TimerModal from "../../../actions/timer/TimerModal";
 import ExitGameBtn from "../../../actions/widgets/btn/ExitGameBtn";
 import useGameActions from "../../../../hooks/gameplay/useGameActions";
 
-const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
+const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, gameOver }) => {
     const { leaderBoardPlayers } = useSocketContext();
-    const { title, gameOver } = useRoundEndModal();
     const [finish, setFinish] = useState<boolean>(false);
     const { handleContinue } = useGameActions(close);
 
@@ -21,7 +19,6 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close }) => {
         gameOver ? setFinish(true) : handleContinue();
     };
 
-    console.log("leaderBoardPlayers", leaderBoardPlayers)
     return (
         <Modal close={close} title={title}>
             {finish && gameOver ? (

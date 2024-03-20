@@ -30,9 +30,15 @@ export type PauseModalProps = CloseProps;
 
 export type GameOverModalProps = CloseProps;
 
-export type RoundEndModalProps = CloseProps;
+export type RoundEndModalProps = CloseProps & {
+    title: string;
+    gameOver: boolean;
+};
 
-export type MultiRoundEndModalProps = CloseProps;
+export type MultiRoundEndModalProps = CloseProps & {
+    title: string;
+    gameOver: boolean;
+};
 
 export type AdditionalBtnsProps = CloseProps & {
     btns: AdditionalBtns[];

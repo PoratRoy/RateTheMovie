@@ -191,7 +191,7 @@ class GameSocket implements ISocket {
                         const { roomId } = game;
                         socket.leave(roomId);
                         delete this.warRooms[roomId];
-                        socket.nsp.to(roomId).emit(GameEnded);
+                        socket.nsp.to(roomId).emit(GameEnded, player);
                     }
                 }
             });
@@ -209,7 +209,7 @@ class GameSocket implements ISocket {
                         players.splice(index, 1);
                         if (players.length === 1) {
                             delete this.warRooms[roomId];
-                            socket.nsp.to(roomId).emit(GameEnded);
+                            socket.nsp.to(roomId).emit(GameEnded, player);
                         } else {
                             this.warRooms[roomId] = warRoom;
                             socket.nsp.to(roomId).emit(PlayerDisconnect, player);
@@ -231,7 +231,7 @@ class GameSocket implements ISocket {
                         players.splice(index, 1);
                         if (players.length === 1) {
                             delete this.warRooms[roomId];
-                            socket.nsp.to(roomId).emit(GameEnded);
+                            socket.nsp.to(roomId).emit(GameEnded, player);
                         } else {
                             this.warRooms[roomId] = warRoom;
                             socket.nsp.to(roomId).emit(PlayerDisconnect, player);

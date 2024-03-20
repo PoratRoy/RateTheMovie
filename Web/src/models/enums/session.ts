@@ -4,4 +4,5 @@ export enum SessionKey {
     GAME = "game",
     BACKUP = "backup",
     WAR_ROOM = "warRoom",
+    GAME_OVER = "isGameOver",
 }
