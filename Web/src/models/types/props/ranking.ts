@@ -1,3 +1,4 @@
+import { ChildernsProps } from ".";
 import { Player } from "../player";
 
 export type RankingPlayerProps = {
@@ -5,6 +6,16 @@ export type RankingPlayerProps = {
     player: Player;
 };
 
-export type RankingBoardTwoProps = {
+export type RankingRoundBoardProps = {
     players: Player[];
+};
+
+export type RankingGameOverBoardProps = {
+    players: Player[];
+};
+
+export type PlaceProps = ChildernsProps & {
+    place: number;
+    playerId?: string;
+    isOpen?: boolean;
 };

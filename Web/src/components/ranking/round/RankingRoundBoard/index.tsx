@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import style from "./RankingBoardTwo.module.css";
-import { sortPlayersByScore } from "../../../utils/calc";
-import { Player } from "../../../models/types/player";
-import RankingPlayer from "../RankingPlayer";
-import { RankingBoardTwoProps } from "../../../models/types/props/ranking";
+import style from "./RankingRoundBoard.module.css";
+import { sortPlayersByScore } from "../../../../utils/calc";
+import { Player } from "../../../../models/types/player";
+import RankingPlayer from "../RoundPlayerPlace";
+import { RankingRoundBoardProps } from "../../../../models/types/props/ranking";
 
-const RankingBoardTwo: React.FC<RankingBoardTwoProps> = ({ players }) => {
+const RankingRoundBoard: React.FC<RankingRoundBoardProps> = ({ players }) => {
     const sortedPlayersFunc = useCallback(() => sortPlayersByScore(players), [players]);
     const sortedPlayers = sortedPlayersFunc();
 
@@ -20,4 +20,4 @@ const RankingBoardTwo: React.FC<RankingBoardTwoProps> = ({ players }) => {
     );
 };
 
-export default RankingBoardTwo;
+export default RankingRoundBoard;

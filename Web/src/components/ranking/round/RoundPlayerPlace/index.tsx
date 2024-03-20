@@ -1,36 +1,26 @@
 import React, { useMemo } from "react";
-import style from "./RankingPlayer.module.css";
-import PlayerProfile from "../../profile/PlayerProfile";
-import ToggelArrow from "../../actions/widgets/ToggelArrow";
-import Pack from "../../cards/core/Pack";
-import { RankingPlayerProps } from "../../../models/types/props/ranking";
-import useToggle from "../../../hooks/global/useToggle";
-import ResultCard from "../../cards/single/ResultCard";
-import { Card } from "../../../models/types/card";
-import Collapse from "../../actions/widgets/Collapse";
+import style from "./RoundPlayerPlace.module.css";
+import PlayerProfile from "../../../profile/PlayerProfile";
+import ToggelArrow from "../../../actions/widgets/ToggelArrow";
+import Pack from "../../../cards/core/Pack";
+import { RankingPlayerProps } from "../../../../models/types/props/ranking";
+import useToggle from "../../../../hooks/global/useToggle";
+import ResultCard from "../../../cards/single/ResultCard";
+import { Card } from "../../../../models/types/card";
+import Collapse from "../../../actions/widgets/Collapse";
+import { PACK_CARDS_NUM } from "../../../../models/constant";
 import {
     BRONZE_COLOR,
-    BRONZE_COLOR_OPACITY,
     GOLD_COLOR,
-    GOLD_COLOR_OPACITY,
-    PRIMARY_COLOR,
     SILVER_COLOR,
-    SILVER_COLOR_OPACITY,
     TEXT_COLOR,
-    TEXT_COLOR_OPACITY_REAL,
     X_SMALL_CARD_WIDTH,
-} from "../../../style/root";
-import { PACK_CARDS_NUM } from "../../../models/constant";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+} from "../../../../style/root";
+import Place from "./Place";
 
-const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
-    const { currentPlayer } = useGamePlayContext();
+const RoundPlayerPlace: React.FC<RankingPlayerProps> = ({ place, player }) => {
     const [isOpen, toggle] = useToggle(true);
 
-    const isCurrentPlayer = useMemo(() => {
-        return currentPlayer?.id === player.id;
-    }, []);
-    
     const color = useMemo(() => {
         return place === 1
             ? GOLD_COLOR
@@ -40,36 +30,9 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
                 ? BRONZE_COLOR
                 : TEXT_COLOR;
     }, []);
-    const border = useMemo(() => {
-        return place === 1
-            ? GOLD_COLOR
-            : place === 2
-              ? SILVER_COLOR
-              : place === 3
-                ? BRONZE_COLOR
-                : TEXT_COLOR_OPACITY_REAL;
-    }, []);
-    const backgroundColor = useMemo(() => {
-        return place === 1
-            ? GOLD_COLOR_OPACITY
-            : place === 2
-              ? SILVER_COLOR_OPACITY
-              : place === 3
-                ? BRONZE_COLOR_OPACITY
-                : "none";
-    }, []);
 
     return (
-        <div
-            className={style.rankingPlayerTab}
-            style={{
-                boxShadow: isCurrentPlayer ? `0px 0px 10px 3px ${PRIMARY_COLOR}` : "none",
-                border: `3px solid ${border}`,
-                gap: isOpen ? "1rem" : "0",
-                transition: "gap 0.3s linear",
-                backgroundColor,
-            }}
-        >
+        <Place place={place} playerId={player.id} isOpen={isOpen}>
             <div className={style.rankingPlayerTabTop}>
                 <PlayerProfile currentPlayer={player} />
                 <ToggelArrow
@@ -111,8 +74,8 @@ const RankingPlayer: React.FC<RankingPlayerProps> = ({ place, player }) => {
                     </Pack>
                 )}
             </Collapse>
-        </div>
+        </Place>
     );
 };
 
-export default RankingPlayer;
+export default RoundPlayerPlace;

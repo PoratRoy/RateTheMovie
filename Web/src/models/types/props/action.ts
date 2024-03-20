@@ -1,5 +1,4 @@
 import { ChildernsProps } from ".";
-import { Player } from "../player";
 import { Diraction, IconSize } from "../union";
 
 export type CollapseProps = ChildernsProps & {
@@ -26,10 +25,6 @@ export type TimerModalProps = {
 export type CountDownProps = {
     closeTimer: () => void;
     time: number;
-};
-
-export type RankingBoardProps = {
-    players: Player[];
 };
 
 export type ToggelArrowProps = {

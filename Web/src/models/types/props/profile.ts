@@ -1,5 +1,4 @@
 import { UseFormWatch } from "react-hook-form";
-import { ChildernsProps } from ".";
 import { Player } from "../player";
 import { SetupInputSchema } from "../inputSchema";
 import { AvatarSize } from "../union";
@@ -27,10 +26,6 @@ export type RivalPlayerProfileProps = {
 
 export type ResultPlayerProfileProps = {
     player: Player;
-    place: number;
-};
-
-export type PlaceProps = ChildernsProps & {
     place: number;
 };
 

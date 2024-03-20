@@ -1,0 +1,8 @@
+.rankingPlayerTab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: var(--primary-border-radius);
+    padding: 15px 10px;
+    box-sizing: border-box;
+}

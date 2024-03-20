@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
-import style from "./RankingBoard.module.css";
-import { sortPlayersByScore } from "../../../utils/calc";
-import ResultPlayerProfile from "../../profile/ResultPlayerProfile";
-import { Player } from "../../../models/types/player";
-import { groupPlayersByRank } from "../../../utils/ranking";
-import { RankingBoardProps } from "../../../models/types/props/action";
+import style from "./RankingGameOverBoard.module.css";
+import { sortPlayersByScore } from "../../../../utils/calc";
+import ResultPlayerProfile from "../ResultPlayerPlace";
+import { Player } from "../../../../models/types/player";
+import { groupPlayersByRank } from "../../../../utils/ranking";
+import { RankingGameOverBoardProps } from "../../../../models/types/props/ranking";
 
-const RankingBoard: React.FC<RankingBoardProps> = ({ players }) => {
+const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) => {
     const sortedPlayers = useCallback(() => sortPlayersByScore(players), [players]);
     const playersOrder = useCallback(() => groupPlayersByRank(sortedPlayers()), [sortedPlayers]);
     const levelOne = playersOrder()[0];
@@ -47,4 +47,4 @@ const RankingBoard: React.FC<RankingBoardProps> = ({ players }) => {
     );
 };
 
-export default RankingBoard;
+export default RankingGameOverBoard;
