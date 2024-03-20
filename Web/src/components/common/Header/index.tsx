@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <RoundTitle current={game?.currentRound || 1} total={game?.rounds || ROUND_NUM} />
             </div>
             {isMulti() ? <RivalsProfiles /> : <PauseBtn onClicked={handlePause} />}
-            {isMulti() ? <TimerHeader /> : null}
+            {/* {isMulti() ? <TimerHeader /> : null} */}
             {showModal ? <PauseModal close={handleClose} /> : null}
         </section>
     );

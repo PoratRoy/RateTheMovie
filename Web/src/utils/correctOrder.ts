@@ -34,8 +34,8 @@ export const isCardsOrdrValid = (
         if (
             electedCardsCorrectOrder &&
             electedCardsOrder &&
-            electedCardsOrder.length !== PACK_CARDS_NUM &&
-            electedCardsCorrectOrder.length !== PACK_CARDS_NUM &&
+            electedCardsOrder.length === PACK_CARDS_NUM &&
+            electedCardsCorrectOrder.length === PACK_CARDS_NUM &&
             electedCardsOrder.length === electedCardsCorrectOrder.length
         ) {
             return [true, { electedCardsOrder, electedCardsCorrectOrder }];

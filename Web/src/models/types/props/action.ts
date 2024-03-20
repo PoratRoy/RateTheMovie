@@ -20,7 +20,7 @@ export type TimerHeaderProps = {
 export type TimerModalProps = {
     activate: boolean;
     time?: number;
-    close: () => void;
+    handleTimeOut: () => void
 };
 
 export type CountDownProps = {

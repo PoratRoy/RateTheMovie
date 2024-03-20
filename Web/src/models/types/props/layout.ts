@@ -67,3 +67,7 @@ export type ActorProps = {
 export type PreviewLayoutProps = ChildernsProps & {
     hasFooter?: boolean;
 };
+
+export type ElectedPackLayoutProps = {
+    currentPlayer: Player
+};

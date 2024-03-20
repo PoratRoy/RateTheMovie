@@ -6,24 +6,19 @@ import RestartCircleBtn from "../../../actions/widgets/btn/RestartCircleBtn";
 import { AdditionalBtnsProps } from "../../../../models/types/props/view";
 import MovieListLink from "../../../actions/widgets/link/MovieListLink";
 
-const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, isSingle, isGameOver }) => {
-    const quit = () => <QuitCircleBtn close={close} />;
-    const movieList = () => (isSingle ? <MovieListLink /> : null);
-    const restartOrLeaderBoard = () => {
-        if (isSingle) {
-            return isGameOver ? (
-                <LeaderBoardCircleBtn close={close} />
-            ) : (
-                <RestartCircleBtn close={close} />
-            );
-        }
-    };
+const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, btns }) => {
+    const movieList = () => (btns.includes("movieList") ? <MovieListLink /> : null);
+    const quit = () => (btns.includes("quit") ? <QuitCircleBtn close={close} /> : null);
+    const restart = () => (btns.includes("restart") ? <RestartCircleBtn close={close} /> : null);
+    const leaderBoard = () =>
+        btns.includes("leaderboard") ? <LeaderBoardCircleBtn close={close} /> : null;
 
     return (
         <section className={style.AdditionalBtnsContianer}>
             <section className={style.additionalBtns}>
                 {quit()}
-                {restartOrLeaderBoard()}
+                {restart()}
+                {leaderBoard()}
             </section>
             {movieList()}
         </section>

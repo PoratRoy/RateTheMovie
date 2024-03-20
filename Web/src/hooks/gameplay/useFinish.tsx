@@ -36,7 +36,6 @@ const useFinish = () => {
     const finishGame = () => {
         const [isValid, { electedCardsOrder, electedCardsCorrectOrder }] =
             isCardsOrdrValid(currentPlayer);
-
         if (isValid) {
             setNewRoundStatus();
 

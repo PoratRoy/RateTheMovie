@@ -117,6 +117,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         resetRoundContextState();
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
+        Session.remove(SessionKey.BACKUP);
         setGameCards(initGameCardsList());
         setCurrentPlayer(undefined);
         setGame(undefined);

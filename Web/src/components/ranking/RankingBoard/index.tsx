@@ -3,8 +3,6 @@ import style from "./RankingBoard.module.css";
 import { sortPlayersByScore } from "../../../utils/calc";
 import ResultPlayerProfile from "../../profile/ResultPlayerProfile";
 import { Player } from "../../../models/types/player";
-import { GAMEOVER_BOARD_ID } from "../../../models/constant";
-import { DisplayNone } from "../../../style/style";
 import { groupPlayersByRank } from "../../../utils/ranking";
 import { RankingBoardProps } from "../../../models/types/props/action";
 
@@ -16,7 +14,7 @@ const RankingBoard: React.FC<RankingBoardProps> = ({ players }) => {
     const levelThree = playersOrder()[2];
 
     return (
-        <section id={GAMEOVER_BOARD_ID} style={DisplayNone}>
+        <section>
             {!levelOne[0] || !levelTwo[0] ? (
                 <React.Fragment />
             ) : (

@@ -11,7 +11,7 @@ export const FormSetValue = {
 };
 
 export const GAME_TIME = 50;
-export const MODAL_TIME = 120;
+export const MODAL_TIME = 10;
 
 export const SinglePlayerRoom = "single-player-room";
 

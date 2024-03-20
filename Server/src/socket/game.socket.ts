@@ -181,6 +181,7 @@ class GameSocket implements ISocket {
             });
         });
 
+        //
         socket.on(GameOver, () => {
             this.wrapper(GameOver, () => {
                 const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
@@ -228,8 +229,13 @@ class GameSocket implements ISocket {
                         socket.leave(roomId);
                         const index = players.indexOf(player);
                         players.splice(index, 1);
-                        this.warRooms[roomId] = warRoom;
-                        socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                        if (players.length === 1) {
+                            delete this.warRooms[roomId];
+                            socket.nsp.to(roomId).emit(GameEnded);
+                        } else {
+                            this.warRooms[roomId] = warRoom;
+                            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                        }
                     }
                 }
             });

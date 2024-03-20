@@ -45,6 +45,8 @@ export type Diraction = "up" | "down" | "left" | "right";
 
 export type RatePosition = "relative" | "absolute";
 
+export type AdditionalBtns = "quit" | "restart" | "leaderboard" | "movieList";
+
 export type LanguageType =
     | "en" // English
     | "es" // Spanish

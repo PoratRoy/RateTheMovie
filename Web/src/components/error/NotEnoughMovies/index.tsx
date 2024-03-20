@@ -1,17 +1,14 @@
 import React from "react";
-import path from "../../../router/routePath.json";
 import style from "./NotEnoughMovies.module.css";
-import { useNavigate } from "react-router-dom";
-import { useGamePlayContext } from "../../../context/GamePlayContext";
+import useGameActions from "../../../hooks/gameplay/useGameActions";
 
 const NotEnoughMovies: React.FC = () => {
-    const { clearGameContext } = useGamePlayContext();
-    const navigate = useNavigate();
+    const { handleQuit } = useGameActions(() => {});
 
     const handleBackLink = () => {
-        clearGameContext();
-        navigate(path.land);
+        handleQuit();
     };
+
     return (
         <section className={style.notEnoughContainer}>
             <div className={style.notEnoughText}>There are not enough movies with this filter</div>

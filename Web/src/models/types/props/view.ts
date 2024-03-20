@@ -1,6 +1,6 @@
 import { ChildernsProps, CloseProps } from ".";
 import { Movie, VideoModel } from "../movie";
-import { PlayerRole } from "../union";
+import { AdditionalBtns } from "../union";
 
 export type ViewImgProps = {
     src: string;
@@ -35,8 +35,7 @@ export type RoundEndModalProps = CloseProps;
 export type MultiRoundEndModalProps = CloseProps;
 
 export type AdditionalBtnsProps = CloseProps & {
-    isSingle: boolean;
-    isGameOver: boolean;
+    btns: AdditionalBtns[];
 };
 
 export type PlayerScoreProps = {

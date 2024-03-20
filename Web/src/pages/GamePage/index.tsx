@@ -7,6 +7,7 @@ import useCheckMoviesAlreadySet from "../../api/hooks/useCheckMoviesAlreadySet";
 import CountDown from "../../components/actions/animation/CountDown";
 import { START_TIMER } from "../../models/constant";
 import useGameTimer from "../../hooks/gameplay/useGameTimer";
+import SomethingWentWrong from "../../components/error/SomethingWentWrong";
 
 const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
@@ -14,13 +15,19 @@ const GamePage: React.FC = () => {
     const { showTimer, closeTimer } = useGameTimer();
 
     return (
-        <GameLayout>
-            <ElectedPackLayout />
+        <React.Fragment>
             {currentPlayer ? (
-                <PlayerLayout player={currentPlayer} />
-            ) : null}
-            {showTimer ? <CountDown time={START_TIMER} closeTimer={closeTimer} /> : null}
-        </GameLayout>
+                <GameLayout>
+                    <ElectedPackLayout currentPlayer={currentPlayer} />
+                    <PlayerLayout player={currentPlayer} />
+                    {showTimer ? <CountDown time={START_TIMER} closeTimer={closeTimer} /> : null}
+                </GameLayout>
+            ) : (
+                <GameLayout>
+                    <SomethingWentWrong />
+                </GameLayout>
+            )}
+        </React.Fragment>
     );
 };
 
