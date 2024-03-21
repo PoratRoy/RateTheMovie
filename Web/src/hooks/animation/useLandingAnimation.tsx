@@ -19,6 +19,7 @@ const useLandingAnimation = (activate: SetupOption) => {
         await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
             await Promise.all([
                 animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
+                animation(`#${DESCRIPTION_ID}`, { opacity: 1 }, { duration: 0.1 }),
                 animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
                 animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: 0.1 }),
             ]);

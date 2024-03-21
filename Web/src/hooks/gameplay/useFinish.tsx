@@ -2,11 +2,10 @@ import { useRef } from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { initGameCardsList } from "../../models/initialization/card";
-import { ElectedCards } from "../../models/types/card";
+import { Card, ElectedCards } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
 import { Player } from "../../models/types/player";
 import { isCardsOrdrValid } from "../../utils/correctOrder";
-import { getMoviesFromCards } from "../../utils/movie";
 import useMod from "./useMod";
 import { useGameStatusContext } from "../../context/GameStatusContext";
 
@@ -26,9 +25,13 @@ const useFinish = () => {
         setIsRoundStart(false);
         setActivateTimer(false);
 
-        const movies: Movie[] = getMoviesFromCards(gameCards);
-        setPreviewMovies(prev => {
-            const filteredMovies = movies.filter(movie => !prev.some(prevMovie => prevMovie.id === movie.id));
+        setPreviewMovies((prev) => {
+            let filteredMovies: Movie[] = [];
+            gameCards.forEach((card: Card) => {
+                if (!prev.some((prevMovie) => prevMovie.id === card.movie.id)) {
+                    filteredMovies.push(card.movie);
+                }
+            });
             return [...prev, ...filteredMovies];
         });
     };
