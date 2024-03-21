@@ -10,7 +10,7 @@ export const FormSetValue = {
     shouldValidate: true,
 };
 
-export const GAME_TIME = 50;
+export const GAME_TIME = 40;
 export const MODAL_TIME = 10;
 
 export const SinglePlayerRoom = "single-player-room";

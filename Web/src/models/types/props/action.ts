@@ -13,12 +13,11 @@ export type TimerBarProps = {
 };
 
 export type TimerHeaderProps = {
-    time?: number;
+    duration?: number;
 };
 
 export type TimerModalProps = {
-    activate: boolean;
-    time?: number;
+    duration?: number;
     handleTimeOut: () => void
 };
 

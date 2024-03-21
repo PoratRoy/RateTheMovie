@@ -41,13 +41,3 @@ export const delayPromise = (duration: number) =>
 export const subtractYears = (year: number = DateEndYear, subtract: number = 4): number =>
     year - subtract;
 
-export const timer = (time: number, callback?: () => void) => {
-    let timer = time;
-    const intervalId = setInterval(() => {
-        if (timer === 0) {
-            clearInterval(intervalId);
-            callback && callback();
-        }
-        timer--;
-    }, 1000);
-};

@@ -116,7 +116,7 @@ export default class MovieDatabaseService {
             const movies = await MovieModel.aggregate([
                 { $match: { isBoxOffice: true } },
                 { $sample: { size: amount } },
-            ]);
+            ]).exec();
             console.info(`Box office movies: `, movies);
             return movies;
         } catch (error) {

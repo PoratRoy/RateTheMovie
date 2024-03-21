@@ -1,29 +1,33 @@
-import React, { useEffect, useRef } from "react";
+import React, { useMemo } from "react";
 import style from "./TimerModal.module.css";
 import { motion } from "framer-motion";
 import { TimerModalProps } from "../../../../models/types/props/action";
-import { timer } from "../../../../utils/time";
 import { MODAL_TIME } from "../../../../models/constant";
+import { useTimer } from "react-timer-hook";
 
-const TimerModal: React.FC<TimerModalProps> = ({ activate, handleTimeOut, time = MODAL_TIME }) => {
-    const animationRef = useRef<any>(null);
-    const checkRef = useRef<any>(false);
+const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
+    const expiryTimestamp = new Date();
+    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + duration);
 
-    useEffect(() => {
-        if (activate && checkRef.current === false) {
-            checkRef.current = true;
-            timer(time, handleTimeOut);
-        }
-    }, [activate]);
+    const { seconds, minutes } = useTimer({
+        expiryTimestamp,
+        autoStart: true,
+        onExpire: handleTimeOut,
+    });
+
+    // Calculate progress percentage
+    const progress = useMemo(() => {
+        const totalSeconds = duration;
+        const remainingSeconds = minutes * 60 + seconds;
+        return (remainingSeconds / totalSeconds) * 100;
+    }, [minutes, seconds]);
 
     return (
         <div className={style.timerBarModal}>
             <motion.div
-                ref={animationRef}
-                animate={{
-                    width: "0%",
-                    transition: { duration: time, ease: "linear" },
-                }}
+                initial={{ width: "100%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 1, ease: "linear" }}
                 className={style.progressBar}
             ></motion.div>
         </div>

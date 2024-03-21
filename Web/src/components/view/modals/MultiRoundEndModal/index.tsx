@@ -16,7 +16,9 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
     const { handleContinue } = useGameActions(close);
 
     const handleTimeOut = () => {
-        gameOver ? setFinish(true) : handleContinue();
+        setTimeout(() => {
+            gameOver ? setFinish(true) : handleContinue();
+        }, 1000);
     };
 
     return (
@@ -31,7 +33,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
                 <section className={style.MultiRoundEndModal}>
                     <RankingRoundBoard players={leaderBoardPlayers} />
                     <AdditionalBtns close={close} btns={["quit"]} />
-                    <TimerModal activate handleTimeOut={handleTimeOut} />
+                    <TimerModal handleTimeOut={handleTimeOut} />
                 </section>
             )}
         </Modal>

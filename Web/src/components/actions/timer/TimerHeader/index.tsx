@@ -1,96 +1,61 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
-import { timer } from "../../../../utils/time";
 import useFinish from "../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../context/GameStatusContext";
 import { GAME_TIME } from "../../../../models/constant";
-
 import { useTimer } from "react-timer-hook";
 
-const TimerHeader: React.FC<TimerHeaderProps> = ({ time = GAME_TIME }) => {
-
-    const t = new Date();
-    t.setSeconds(t.getSeconds() + time);
-    const {
-        totalSeconds,
-        seconds,
-        minutes,
-        hours,
-        days,
-        isRunning,
-        start,
-        pause,
-        restart,
-    } = useTimer({ expiryTimestamp: t, onExpire: () => console.warn("onExpire called") });
-
+const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     const { gameStatus, activateTimer } = useGameStatusContext();
     const { finishGame } = useFinish();
-    const [initial, setInitial] = useState<boolean>(true);
-    const [freezeAnimation, setFreezeAnimation] = useState<boolean>(false);
-    const [remainingTime, setRemainingTime] = useState<number>(time); // Initial duration of 2 minutes in seconds
-    const animationRef = useRef<any>(null);
-    const checkRef = useRef<any>(false);
-    const timeoutRef = useRef<any>(false);
+
+    const expiryTimestamp = new Date();
+    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + duration);
 
     const handleTimeOut = () => {
-        // console.log("handleTimeOut 3", timeoutRef.current);
-        if (!timeoutRef.current) {
+        setTimeout(() => {
+            pause();
             finishGame();
-        }
+        }, 1000);
     };
 
+    const { seconds, minutes, restart, pause } = useTimer({
+        expiryTimestamp,
+        autoStart: false,
+        onExpire: handleTimeOut,
+    });
+
+    // Calculate progress percentage
+    const progress = useMemo(() => {
+        const totalSeconds = duration;
+        const remainingSeconds = minutes * 60 + seconds;
+        return (remainingSeconds / totalSeconds) * 100;
+    }, [minutes, seconds]);
+
     useEffect(() => {
-        // console.log("isPlayerFinishRound 4");
+        if (gameStatus.isPlayerFinishRound) {
+            pause();
+        }
     }, [gameStatus.isPlayerFinishRound]);
 
     useEffect(() => {
-        timeoutRef.current = true;
         if (activateTimer) {
-            // console.log("activateTimer", timeoutRef.current);
-            // console.log("activateTimer - change to false");
-            // console.log("-------------------");
-            setInitial(false);
-            timeoutRef.current = false;
-            timer(time, handleTimeOut);
-        } else {
-            // console.log("else activateTimer", timeoutRef.current);
-            // console.log("else activateTimer - change to true");
-            // console.log("-------------------");
-            timeoutRef.current = true;
-            setInitial(true);
+            restart(expiryTimestamp);
         }
     }, [activateTimer]);
 
     return (
         <div className={style.timerBarHeader}>
-            <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-            {initial ? (
-                <div className={style.progressBar}></div>
-            ) : (
-                <motion.div
-                    ref={animationRef}
-                    animate={{
-                        width: freezeAnimation ? animationRef.current.offsetWidth : "0%",
-                        transition: { duration: remainingTime, ease: "linear" },
-                    }}
-                    className={style.progressBar}
-                ></motion.div>
-            )}
+            <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 1, ease: "linear" }}
+                className={style.progressBar}
+            />
         </div>
     );
 };
 
 export default TimerHeader;
-
-// const freeze = () => {
-//     setFreezeAnimation((prev) => !prev);
-//     if (!freezeAnimation && animationRef.current) {
-//         const remaining =
-//             time -
-//             (time * animationRef.current.offsetWidth) /
-//                 animationRef.current.parentElement.offsetWidth;
-//         setRemainingTime(remaining); // Calculate remaining time and store it
-//     }
-// };
