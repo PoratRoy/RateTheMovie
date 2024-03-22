@@ -5,13 +5,6 @@ export type CollapseProps = ChildernsProps & {
     isOpen: boolean;
 };
 
-export type TimerBarProps = {
-    position?: "absolute" | "relative";
-    activate: boolean;
-    time?: number;
-    callback?: () => void;
-};
-
 export type TimerHeaderProps = {
     duration?: number;
 };

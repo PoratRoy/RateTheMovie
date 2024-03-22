@@ -3,7 +3,7 @@ import { IoTrophy } from "react-icons/io5";
 import { LeaderBoardCircleBtnProps } from "../../../../../models/types/props/btn";
 import CircleBtn from "../../../core/button/CircleBtn";
 
-const LeaderBoardCircleBtn: React.FC<LeaderBoardCircleBtnProps> = ({ close }) => {
+const LeaderBoardCircleBtn: React.FC<LeaderBoardCircleBtnProps> = () => {
 
     return <CircleBtn onClicked={() => {}} Icon={<IoTrophy />} />;
 };

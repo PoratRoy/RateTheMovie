@@ -6,11 +6,9 @@ import CardViewLayout from "../../layout/CardViewLayout";
 import Genre from "../core/Genre";
 import Crew from "../crew/Crew";
 import { CardViewProps } from "../../../models/types/props/view";
-import { useGameStatusContext } from "../../../context/GameStatusContext";
 import Rate from "../../common/Rate";
 
 const CardView: React.FC<CardViewProps> = ({ movie, close }) => {
-    const { isPreview } = useGameStatusContext();
     const {
         title,
         poster_path,

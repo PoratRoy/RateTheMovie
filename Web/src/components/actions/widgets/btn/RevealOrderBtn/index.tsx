@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SecondaryBtn from "../../../core/button/SecondaryBtn";
 import { RevealOrderBtnProps } from "../../../../../models/types/props/btn";
-import { SiRevealdotjs } from "react-icons/si";
 
 const RevealOrderBtn: React.FC<RevealOrderBtnProps> = ({ onClicked }) => {
     const [toggle, setToggle] = useState<boolean>(false);

@@ -26,7 +26,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = async (data: TInput) => {
-        const { year, genre, language, name, avatar, rounds } = data;
+        const { name, avatar, rounds } = data;
         const { player, mod, roomId } = setupOption;
 
         const setPlayer = (player: Player) => {

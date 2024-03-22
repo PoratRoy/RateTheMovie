@@ -1,5 +1,5 @@
 import { PACK_CARDS_NUM, SHUFFLE_ATTEMPT } from "../models/constant";
-import { Movie, PreviewMovie } from "../models/types/movie";
+import { Movie } from "../models/types/movie";
 import { getRandomNumber } from "./calc";
 
 export const splitMovies = (movies: Movie[]): Movie[][] => {
@@ -33,14 +33,4 @@ export const splitMoviesBackup = (movies: Movie[], rounds: any) => {
     }
 
     return matrix;
-};
-
-export const getPreviewFromMovies = (movies: Movie[]) => {
-    const previewMovies: PreviewMovie[] = movies.map((movie) => {
-        return {
-            movie,
-            isPreview: false,
-        } as PreviewMovie;
-    });
-    return previewMovies;
 };
