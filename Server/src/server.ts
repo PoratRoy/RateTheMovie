@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express, { Application } from "express";
 import Server from "../index";
 import ServerSocket from "./socket";
@@ -8,8 +6,8 @@ import mongoose from "mongoose";
 
 const app: Application = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
-// const URL: string = process.env.URL || "localhost";
-const URL: string = "localhost";
+const URL: string = process.env.URL || "localhost";
+
 new Server(app);
 
 mongoose

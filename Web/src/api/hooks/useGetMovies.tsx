@@ -7,7 +7,7 @@ import { GetMovieResponse } from "../model/types/responses";
 const useGetMovies = () => {
     const { setFetchLoading } = useGamePlayContext();
     const getMovies = async (amount: number, filters: Filters) => {
-        const URL = "http://localhost:8080/api/movie";
+        const URL = `${import.meta.env.VITE_BE_URL}/api/movie`
         const body: GetMovieRequestBody = {
             filters,
             amount,

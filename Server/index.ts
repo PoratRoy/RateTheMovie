@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import express, { Application } from "express";
 import cors, { CorsOptions } from "cors";
 import Routes from "./src/routes";
@@ -10,7 +12,7 @@ export default class Server {
 
     private config(app: Application): void {
         const corsOptions: CorsOptions = {
-            origin: ["http://localhost:5173", "https://rate-the-movie.netlify.app/"],
+            origin: [process.env.FE_URL || "http://localhost:5173"],
         };
         //TODO: middlewares
         app.use(cors(corsOptions));

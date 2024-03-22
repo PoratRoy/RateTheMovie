@@ -85,7 +85,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { handleQuit } = useGameActions(() => {});
     const { setIsGameStart, setIsRoundStart, setIsRoundFinished } = useGameStatusContext();
 
-    const socket = useSocket("http://localhost:8080/game", {
+    const socket = useSocket(`${import.meta.env.VITE_BE_URL}/game`, {
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
         autoConnect: false,
