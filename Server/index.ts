@@ -11,11 +11,11 @@ export default class Server {
     }
 
     private config(app: Application): void {
-        const corsOptions: CorsOptions = {
-            origin: [process.env.FE_URL || "http://localhost:5173"],
-        };
+        // const corsOptions: CorsOptions = {
+        //     origin: [process.env.FE_URL || "http://localhost:5173"],
+        // };
         //TODO: middlewares
-        app.use(cors(corsOptions));
+        app.use(cors());
         app.use((req, res, next) => {
             console.info(
                 `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`,
