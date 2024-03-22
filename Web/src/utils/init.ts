@@ -26,9 +26,10 @@ export const initGame = (
         rounds: rounds ? parseInt(rounds) : 0,
         roomId: roomId || SinglePlayerRoom,
         filters,
-        shuffleAttempt: SHUFFLE_ATTEMPT,
         currentRound: 1,
+        shuffleAttempt: SHUFFLE_ATTEMPT,
         mod,
+        isStarted: false,
     };
     return game;
 };

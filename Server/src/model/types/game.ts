@@ -7,4 +7,6 @@ export type Game = {
     filters: MovieFilters;
     currentRound: number;
     rounds: number;
+    shuffleAttempt: number;
+    isStarted: boolean;
 };

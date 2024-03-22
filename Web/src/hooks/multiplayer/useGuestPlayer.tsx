@@ -11,10 +11,12 @@ const useGuestPlayer = (room: string | undefined) => {
 
     useSingleton(async () => {
         handlePlayerWantToJoin(room, (details) => {
-            const { numberOfPlayers, roomId } = details;
-            const name = `Player ${numberOfPlayers + 1}`;
-            const player = initPlayer(numberOfPlayers.toString(), name, "player");
-            setSetupOption({ mod: ModOption.MULTI, player, roomId });
+            if(details){
+                const { numberOfPlayers, roomId } = details;
+                const name = `Player ${numberOfPlayers + 1}`;
+                const player = initPlayer(numberOfPlayers.toString(), name, "player");
+                setSetupOption({ mod: ModOption.MULTI, player, roomId });
+            }
         });
     });
 

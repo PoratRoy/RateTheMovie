@@ -1,0 +1,17 @@
+.gameStartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 70%;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.gameStartLink {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: underline;
+}

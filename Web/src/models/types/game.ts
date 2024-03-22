@@ -8,4 +8,5 @@ export type Game = {
     currentRound: number;
     rounds: number;
     shuffleAttempt: number;
+    isStarted: boolean;
 };

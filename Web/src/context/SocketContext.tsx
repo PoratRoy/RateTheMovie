@@ -42,7 +42,7 @@ export const SocketContext = createContext<{
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
         roomId: string | undefined,
-        callback: (details: WarRoomDetails) => void,
+        callback: (details?: WarRoomDetails) => void,
     ) => void;
     handlePlayerJoinRoom: (
         roomId: string,
@@ -123,9 +123,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handlePlayerWantToJoin = (
         roomId: string | undefined,
-        callback: (details: WarRoomDetails) => void,
+        callback: (details?: WarRoomDetails) => void,
     ) => {
-        socket.emit(PlayerWantToJoin, roomId, async (details: WarRoomDetails) => {
+        socket.emit(PlayerWantToJoin, roomId, async (details?: WarRoomDetails) => {
             callback(details);
         });
     };

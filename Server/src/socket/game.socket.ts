@@ -103,14 +103,20 @@ class GameSocket implements ISocket {
 
         socket.on(
             PlayerWantToJoin,
-            (roomId: string | undefined, callback: (props: WarRoomDetails) => void) => {
+            (roomId: string | undefined, callback: (props?: WarRoomDetails) => void) => {
                 logEvent(PlayerWantToJoin);
                 if (roomId) {
                     const warRoom = this.warRooms[roomId];
                     if (warRoom) {
-                        const details = setWarRoomDetails(warRoom, roomId);
-                        callback(details);
-                        logBack(details);
+                        const isStarted = warRoom.game?.isStarted;
+                        if (isStarted) {
+                            callback();
+                            logBack({ message: "Game already started" });
+                        } else {
+                            const details = setWarRoomDetails(warRoom, roomId);
+                            callback(details);
+                            logBack(details);
+                        }
                     }
                 } else {
                     callback(initWarRoomDetails());
@@ -126,6 +132,7 @@ class GameSocket implements ISocket {
                     const {
                         game: { roomId },
                     } = warRoom;
+                    warRoom.game.isStarted = true;
                     socket.to(roomId).emit(GameStarted, warRoom);
                 }
             });
