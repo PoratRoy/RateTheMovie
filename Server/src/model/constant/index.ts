@@ -1,5 +1,5 @@
 export const PACK_CARDS_NUM = 4;
-export const NUMBER_OF_ACTORS = 5;
+export const NUMBER_OF_ACTORS = 4;
 export const FETCH_MOVIES_NUM = 20;
 export const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
