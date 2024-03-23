@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "node ./build/src/server.js",
-    "start": "NODE_ENV=development tsc && npm run dev",
-    "start:prod": "NODE_ENV=production tsc && npm run dev"
+    "start": "tsc && NODE_ENV=development npm run dev",
+    "start:prod": "tsc && NODE_ENV=production npm run dev"
   },
   "author": "",
   "license": "ISC",
