@@ -17,7 +17,6 @@ const useGameTimer = () => {
 
         if (isSingle()) {
             setShowTimer(false);
-            setIsFlipCard(CardFace.FRONT);
         } else {
             if (gameStatus.isGameStart) {
                 setShowTimer(true);

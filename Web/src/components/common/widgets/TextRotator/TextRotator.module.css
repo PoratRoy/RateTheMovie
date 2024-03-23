@@ -2,7 +2,7 @@
     position: relative;
     color: var(--text-color-opacity);
     width: 70vw;
-    max-width: 300px;
+    min-width: 200px;
     height: 180px;
     font-size: 1.6rem;
     font-weight: 600;

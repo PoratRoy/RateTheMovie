@@ -16,6 +16,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
     const { isSingle } = useMod();
 
     const handleFinishAnimation = async () => {
+        const order = currentPlayer?.electedCards.order;
         await Promise.all([
             animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
             animation(`#${CARD_ID}`, { border: `2px solid ${PRIMARY_COLOR}` }, { duration: 0.2 }),
@@ -28,7 +29,8 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                 { duration: 0.3 },
             );
             await delayPromise(300);
-            try {
+
+            if (order && order[i]?.isCorrect === true) {
                 await animation(
                     `#${POINTS_ID}-${i}`,
                     {
@@ -39,7 +41,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                     { duration: 0.9 },
                 );
                 setIncreaseScore((prev) => prev + 100);
-            } catch (error) {}
+            }
             await delayPromise(600);
         }
         await delayPromise(1000);
