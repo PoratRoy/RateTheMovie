@@ -13,11 +13,11 @@ const useRoomLink = (mod: ModOption, playerRole: PlayerRole, roomId?: string) =>
         if (isNoneMode(mod)) return;
 
         if (playerRole === "player" && room) {
-            setRoomLink(`http://localhost:5173/guest/${room || ""}`);
+            setRoomLink(`${import.meta.env.VITE_FE_URL}/guest/${room || ""}`);
         } else {
             setTimeout(() => {
                 if (playerRole === "host" && roomId) {
-                    setRoomLink(`http://localhost:5173/guest/${roomId || ""}`);
+                    setRoomLink(`${import.meta.env.VITE_FE_URL}/guest/${roomId || ""}`);
                 }
             }, 50);
         }
