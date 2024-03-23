@@ -6,7 +6,8 @@ import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
 import { Movie } from "../models/types/movie";
-import { setRoundNum } from "../utils/game";
+import { SHUFFLE_ATTEMPT } from "../models/constant";
+import { RoundAction } from "../models/types/union";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -26,7 +27,8 @@ export const GamePlayContext = createContext<{
     resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
-    setRoundNumber: (currentRound: number) => void;
+    setRoundNumber: (action: RoundAction, round?: number) => number;
+    setShuffle: (action: RoundAction) => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -45,7 +47,8 @@ export const GamePlayContext = createContext<{
     resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
-    setRoundNumber: () => {},
+    setRoundNumber: () => 1,
+    setShuffle: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -79,10 +82,36 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
     setStateFromSession();
 
-    const setRoundNumber = (currentRound: number) => {
+    const setRoundNumber = (action: RoundAction, round?: number) => {
+        let currentRound = 1;
+        if (round) currentRound = action === "increase" ? round + 1 : round - 1;
+
         setGame((prev) => {
             if (prev) {
-                const game = { ...prev, currentRound };
+                const game = {
+                    ...prev,
+                    currentRound,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+        return currentRound;
+    };
+
+    const setShuffle = (action: RoundAction) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    shuffleAttempt:
+                        action === "reset"
+                            ? SHUFFLE_ATTEMPT
+                            : action === "decrease"
+                              ? prev.shuffleAttempt - 1
+                              : prev.shuffleAttempt + 1,
+                };
                 Session.set(SessionKey.GAME, game);
                 return game;
             }
@@ -98,8 +127,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const resetGameContext = () => {
         resetRoundContextState();
-        const round = setRoundNum("reset");
-        setRoundNumber(round);
+        setRoundNumber("reset");
+        setShuffle("reset");
         setBackupMovies([]);
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
@@ -145,6 +174,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 clearGameContext,
                 refreshGameContext,
                 setRoundNumber,
+                setShuffle,
             }}
         >
             {children}
