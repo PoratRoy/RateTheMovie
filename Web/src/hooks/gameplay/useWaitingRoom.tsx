@@ -29,27 +29,17 @@ const useWaitingRoom = () => {
     }, [rivalPlayers, fetchLoading, gameCards]);
 
     useEffect(() => {
-        let timer1: ReturnType<typeof setTimeout>;
-        let timer2: ReturnType<typeof setTimeout>;
+        let timer: ReturnType<typeof setTimeout>;
         let isMounted = true;
 
-        const startTimer = async () => {
+        const startTimer = () => {
             setTimerExpired(false);
             if (isSingle()) {
-                await Promise.all([
-                    (timer1 = setTimeout(() => {
-                        if (isMounted) {
-                            setTimerExpired(true);
-                            setIsGameStart(true);
-                        }
-                    }, START_GAME_TIME)),
-
-                    (timer2 = setTimeout(() => {
-                        if (isMounted) {
-                            setIsFlipCard(CardFace.FRONT);
-                        }
-                    }, START_GAME_TIME + 200)),
-                ]);
+                timer = setTimeout(() => {
+                    if (isMounted) {
+                        setTimerExpired(true);
+                    }
+                }, START_GAME_TIME);
             }
         };
 
@@ -57,17 +47,30 @@ const useWaitingRoom = () => {
 
         return () => {
             isMounted = false;
-            clearTimeout(timer1);
-            clearTimeout(timer2);
+            clearTimeout(timer);
         };
     }, []);
 
     useEffect(() => {
-        if (fetchLoading === false && timerExpired) {
+        let timer: ReturnType<typeof setTimeout>;
+        let isMounted = true;
+
+        const startGame = () => {
             setIsGameStart(true);
-            setIsFlipCard(CardFace.FRONT);
-        }
-    }, [fetchLoading]);
+            timer = setTimeout(() => {
+                if (isMounted) {
+                    setIsFlipCard(CardFace.FRONT);
+                }
+            }, 200);
+        };
+
+        if (fetchLoading === false && timerExpired) startGame();
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timer);
+        };
+    }, [fetchLoading, timerExpired]);
 
     return { isWaiting };
 };
