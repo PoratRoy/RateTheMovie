@@ -46,5 +46,11 @@ export type TitleProps = {
 
 export type RateProps = IdProps & {
     rate: number | string;
-    position?: RatePosition
+    position?: RatePosition;
+};
+
+export type OutOfProps = {
+    current: number;
+    total: number;
+    isDisabled?: boolean;
 };

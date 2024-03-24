@@ -10,7 +10,7 @@ import useMod from "./useMod";
 import { useGameStatusContext } from "../../context/GameStatusContext";
 
 const useFinish = () => {
-    const { setCurrentPlayer, currentPlayer, setGame, setPreviewMovies, gameCards } =
+    const { setCurrentPlayer, currentPlayer, setRoundNumber, setPreviewMovies, gameCards } =
         useGamePlayContext();
     const { handlePlayerFinish } = useSocketContext();
     const { setIsPlayerFinishRound, setIsRoundFinished, setIsRoundStart, setActivateTimer } =
@@ -19,7 +19,7 @@ const useFinish = () => {
     const checkRef = useRef<any>(false);
 
     const setNewRoundStatus = () => {
-        setGame((prev) => ({ ...prev!, round: (prev?.currentRound ?? 1) + 1 }));
+        setRoundNumber("increase");
         setIsPlayerFinishRound(true);
         setIsRoundFinished(false);
         setIsRoundStart(false);

@@ -6,7 +6,6 @@ import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
-import { setRoundNum } from "../../utils/game";
 import useMoviesGame from "./useBackup";
 import { useGameStatusContext } from "../../context/GameStatusContext";
 import { CardFace } from "../../models/enums/animation";
@@ -20,7 +19,7 @@ const useGameActions = (close: () => void) => {
         clearGameContext,
         resetGameContext,
         setRoundNumber,
-        setGame,
+        setShuffle,
         backupMovies,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
@@ -61,8 +60,7 @@ const useGameActions = (close: () => void) => {
     const handleContinue = (action: RoundAction = "increase") => {
         if (game && currentPlayer) {
             const { currentRound } = game;
-            const round = setRoundNum(action, currentRound);
-            setRoundNumber(round);
+            const round = setRoundNumber(action, currentRound);
             setIsRoundFinished(false);
             setIsPlayerFinishRound(false);
             refreshGameContext();
@@ -89,13 +87,7 @@ const useGameActions = (close: () => void) => {
             const { rounds, shuffleAttempt } = game;
             const index = rounds + shuffleAttempt - 1;
             handelNewMovies(index);
-            setGame((prev) => {
-                if (prev) {
-                    const game = { ...prev, shuffleAttempt: prev.shuffleAttempt - 1 };
-                    return game;
-                }
-                return prev;
-            });
+            setShuffle("decrease");
         }
     };
 

@@ -5,15 +5,7 @@
     gap: 2px;
 }
 
-.roundTitleRound,
-.roundTitleCurrent {
+.roundTitleRound {
     font-size: 1.1rem;
     color: var(--text-color);
-}
-
-.roundTitleLeft {
-    position: relative;
-    bottom: 0.5px;
-    font-size: 0.9rem;
-    color: var(--text-color-opacity);
 }

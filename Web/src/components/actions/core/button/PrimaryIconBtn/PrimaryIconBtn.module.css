@@ -47,6 +47,7 @@
     color: var(--text-color-opacity);
     background-color: var(--primary-color-disabled);
     cursor: default;
+    transform: scale(1);
 }
 
 .btnPrimarySmall {

@@ -15,7 +15,7 @@ const useLandingAnimation = (activate: SetupOption) => {
     const [scope, animation] = useAnimate();
     const { isNoneMode } = useMod();
 
-    const handleLandingAnimation = async () => {
+    const handleToLandingAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
             await Promise.all([
                 animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
@@ -32,7 +32,7 @@ const useLandingAnimation = (activate: SetupOption) => {
             ]);
     };
 
-    const handleSetupAnimation = async () => {
+    const handleToSetupAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 });
         await Promise.all([
             animation(`#${DESCRIPTION_ID}`, { opacity: 0 }, { duration: 0.2 }),
@@ -57,9 +57,9 @@ const useLandingAnimation = (activate: SetupOption) => {
 
     useEffect(() => {
         if (isNoneMode(activate.mod)) {
-            handleLandingAnimation();
+            handleToLandingAnimation();
         } else {
-            handleSetupAnimation();
+            handleToSetupAnimation();
         }
     }, [activate]);
 
