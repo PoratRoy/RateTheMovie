@@ -4,6 +4,7 @@ import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
 import useFinish from "../../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../../context/GameStatusContext";
+import { motion } from "framer-motion";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
@@ -20,7 +21,13 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     }, [isFinishPlacing]);
 
     return (
-        <React.Fragment>
+        <motion.div
+            initial={{ height: 0 }}
+            animate={{
+                height: isFinishPlacing ? 35 : 0,
+                transition: { duration: 0.2 },
+            }}
+        >
             {isFinishPlacing ? (
                 <PrimaryBtn
                     id={DONE_BTN_ID}
@@ -33,7 +40,7 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
             ) : (
                 <React.Fragment />
             )}
-        </React.Fragment>
+        </motion.div>
     );
 };
 

@@ -16,8 +16,8 @@
 
 .modalPopup{
     position: fixed;
-    top: 20%;
-    left: calc((100vw - 85vw) / 2);
+    top: 17%;
+    /* left: calc((100vw - 85vw) / 2); */
     background-color: var(--secondary-color);
     color: var(--text-color);
     z-index: 101;

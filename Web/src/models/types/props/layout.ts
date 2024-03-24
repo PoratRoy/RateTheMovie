@@ -4,7 +4,7 @@ import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 import { Player } from "../player";
 import { ModOption } from "../../enums/landing";
-import { CrewModel } from "../movie";
+import { CrewModel, Movie } from "../movie";
 import { InputProps } from "./input";
 
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
@@ -46,7 +46,7 @@ export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     };
 
 export type CardEventLayoutProps = ChildernsProps & {
-    setOpenCardView: React.Dispatch<React.SetStateAction<boolean>>;
+    movie: Movie;
     setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -69,5 +69,5 @@ export type PreviewLayoutProps = ChildernsProps & {
 };
 
 export type ElectedPackLayoutProps = {
-    currentPlayer: Player
+    currentPlayer: Player;
 };
