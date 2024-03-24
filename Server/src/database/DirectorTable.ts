@@ -2,10 +2,10 @@ import DirectorModel from "../model/schemas/Director";
 import { DBCreateError, DBError } from "../libs/error";
 import { Tables } from "../model/enum/database";
 import { CrewModel } from "../model/types/movie";
-import { DirectorOutput } from "../model/types/schemas";
+import { IDirector } from "../model/interfaces/scheme";
 
 export default class DirectorDatabaseService {
-    public static createDirector = async (directorProps: CrewModel): Promise<DirectorOutput> => {
+    public static createDirector = async (directorProps: CrewModel): Promise<IDirector> => {
         try {
             const newDirector = new DirectorModel({
                 ...directorProps,
@@ -19,7 +19,7 @@ export default class DirectorDatabaseService {
         }
     };
 
-    public static getDirectorByName = async (name: string): Promise<DirectorOutput | null> => {
+    public static getDirectorByName = async (name: string): Promise<IDirector | null> => {
         try {
             console.info(`Get director with name: ${name}`);
             const director = await DirectorModel.findOne({ name }).lean().exec();
@@ -30,7 +30,7 @@ export default class DirectorDatabaseService {
         }
     };
 
-    public static getAllDirectors = async (): Promise<DirectorOutput[]> => {
+    public static getAllDirectors = async (): Promise<IDirector[]> => {
         try {
             console.info(`Get all directors`);
             const directors = await DirectorModel.find().lean().exec();
@@ -39,5 +39,5 @@ export default class DirectorDatabaseService {
         } catch (error) {
             throw new DBError(error as string);
         }
-    }
+    };
 }

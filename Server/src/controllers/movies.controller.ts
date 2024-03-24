@@ -6,7 +6,6 @@ import { setNewMovie } from "../utils/init";
 import URL from "../model/constant/path.json";
 import MovieDatabaseService from "../database/MovieTable";
 import { ResponseBody } from "../model/types/http/responses";
-import { ActorOutput, DirectorOutput, MovieOutput } from "../model/types/schemas";
 import msg from "../model/constant/http/messages.json";
 import { fetchOMDB, fetchTMDB } from "../utils/fetch";
 import { response } from "../libs/response";
@@ -21,13 +20,14 @@ import ActorDatabaseService from "../database/ActorTable";
 import DirectorDatabaseService from "../database/DirectorTable";
 import { Difficulty } from "../model/types/union";
 import { logMovieCount } from "../utils/logs";
+import { IActor, IDirector, IMovie } from "../model/interfaces/scheme";
 
 export default class MoviesController {
     async create(
         req: Request<any, any, CreateMovieRequestBody>,
-        res: Response<ResponseBody<{ movies: MovieOutput[]; from: number; created: number }>>,
+        res: Response<ResponseBody<{ movies: IMovie[]; from: number; created: number }>>,
     ) {
-        let moviesOutput: MovieOutput[] = [];
+        let moviesOutput: IMovie[] = [];
         let from = 0;
         let created = 0;
         try {
@@ -111,18 +111,21 @@ export default class MoviesController {
 
     async getMovies(
         req: Request<any, any, GetMovieRequestBody>,
-        res: Response<ResponseBody<{ movies: MovieOutput[]; amount: number }>>,
+        res: Response<ResponseBody<{ movies: IMovie[]; amount: number }>>,
     ) {
         try {
             const { filters, amount } = req.body;
             const { type, difficulty } = filters;
-            const props: [number, Difficulty] = [amount, difficulty]
-            let DBmovies: MovieOutput[] | null = null;
+            const props: [number, Difficulty] = [amount, difficulty];
+            let DBmovies: IMovie[] | null = null;
 
             if ("byDetails" in type) {
                 DBmovies = await MovieDatabaseService.getMoviesByDetails(...props, type.byDetails);
             } else if ("byDirector" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDirector(...props, type.byDirector);
+                DBmovies = await MovieDatabaseService.getMoviesByDirector(
+                    ...props,
+                    type.byDirector,
+                );
             } else if ("byActor" in type) {
                 DBmovies = await MovieDatabaseService.getMoviesByActor(...props, type.byActor);
             } else if ("byBoxOffice" in type) {
@@ -132,14 +135,13 @@ export default class MoviesController {
             } else if ("byNewRelease" in type) {
                 DBmovies = await MovieDatabaseService.getMoviesByNewRelease(...props);
             }
-            const movies: MovieOutput[] = DBmovies ? [...DBmovies] : [];
+            const movies: IMovie[] = DBmovies ? [...DBmovies] : [];
 
             response(res, {
                 statusCode: StatusCode.OK,
                 message: msg.movies.success.get,
                 data: { movies, amount: movies.length },
             });
-
         } catch (error) {
             handleError(res, error);
         }
@@ -147,7 +149,7 @@ export default class MoviesController {
 
     async getCrew(
         req: Request,
-        res: Response<ResponseBody<{ directors: DirectorOutput[]; actors: ActorOutput[] }>>,
+        res: Response<ResponseBody<{ directors: IDirector[]; actors: IActor[] }>>,
     ) {
         try {
             const actors = await ActorDatabaseService.getAllActors();

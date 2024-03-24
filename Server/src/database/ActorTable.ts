@@ -2,10 +2,10 @@ import ActorModel from "../model/schemas/Actor";
 import { DBCreateError, DBError } from "../libs/error";
 import { Tables } from "../model/enum/database";
 import { CrewModel } from "../model/types/movie";
-import { ActorOutput } from "../model/types/schemas";
+import { IActor } from "../model/interfaces/scheme";
 
 export default class ActorDatabaseService {
-    public static createActor = async (actorProps: CrewModel): Promise<ActorOutput> => {
+    public static createActor = async (actorProps: CrewModel): Promise<IActor> => {
         try {
             const newActor = new ActorModel({
                 ...actorProps,
@@ -19,7 +19,7 @@ export default class ActorDatabaseService {
         }
     };
 
-    public static getActorByName = async (name: string): Promise<ActorOutput | null> => {
+    public static getActorByName = async (name: string): Promise<IActor | null> => {
         try {
             console.info(`Get actor with name: ${name}`);
             const actor = await ActorModel.findOne({ name }).lean().exec();
@@ -30,7 +30,7 @@ export default class ActorDatabaseService {
         }
     };
 
-    public static getAllActors = async (): Promise<ActorOutput[]> => {
+    public static getAllActors = async (): Promise<IActor[]> => {
         try {
             console.info(`Get all actors`);
             const actors = await ActorModel.find().lean().exec();

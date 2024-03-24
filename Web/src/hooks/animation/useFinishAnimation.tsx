@@ -39,7 +39,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                         opacity: [0, 1, 1, 0],
                         display: ["none", "block", "block", "none"],
                     },
-                    { duration: 0.9 },
+                    { duration: 0.8 },
                 );
                 setIncreaseScore((prev) => prev + 100);
             }
