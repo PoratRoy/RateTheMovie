@@ -22,7 +22,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
     };
 
     return (
-        <Modal close={close} title={title}>
+        <Modal close={close} title={title} closeBtnType="quit" hasCloseBtn>
             {finish && gameOver ? (
                 <section className={style.MultiRoundGameOver}>
                     <RankingGameOverBoard players={leaderBoardPlayers} />
@@ -32,7 +32,6 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
             ) : (
                 <section className={style.MultiRoundEndModal}>
                     <RankingRoundBoard players={leaderBoardPlayers} />
-                    <AdditionalBtns close={close} btns={["quit"]} />
                     <TimerModal handleTimeOut={handleTimeOut} />
                 </section>
             )}

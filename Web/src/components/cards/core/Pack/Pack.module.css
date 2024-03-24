@@ -11,8 +11,9 @@
 }
 
 .packContainerXSmall{
-    max-width: 100%;
-    gap: 5px;
+    max-width: 98%;
+    height: 98%;
+
 }
 
 .packContainerSmall{

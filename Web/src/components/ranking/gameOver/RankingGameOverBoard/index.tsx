@@ -14,7 +14,7 @@ const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) 
     const levelThree = playersOrder()[2];
 
     return (
-        <section>
+        <section style={{width: "100%"}}>
             {!levelOne[0] || !levelTwo[0] ? (
                 <React.Fragment />
             ) : (

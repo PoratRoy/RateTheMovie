@@ -13,8 +13,8 @@ export const FormSetValue = {
 export const START_GAME_TIME = 14000;
 export const START_GAME_TIMER = START_TIMER * 1000 + 500;
 
-export const GAME_TIME = 40;
-export const MODAL_TIME = 10;
+export const GAME_TIME = 270;
+export const MODAL_TIME = 240;
 
 export const SinglePlayerRoom = "single-player-room";
 

@@ -1,5 +1,5 @@
 import { CloseProps, IdProps } from ".";
-import { BtnSize } from "../union";
+import { AdditionalBtns, BtnSize } from "../union";
 
 type OnClickQProps = {
     onClicked?: () => void;
@@ -9,35 +9,40 @@ type OnClickProps = {
     onClicked: () => void;
 };
 
-export type PrimaryBtnProps = IdProps & OnClickQProps & {
-    type?: "button" | "submit" | undefined;
-    title: string;
-    disabled?: boolean;
-    size: BtnSize;
-    loading?: boolean;
-};
+export type PrimaryBtnProps = IdProps &
+    OnClickQProps & {
+        type?: "button" | "submit" | undefined;
+        title: string;
+        disabled?: boolean;
+        size: BtnSize;
+        loading?: boolean;
+    };
 
-export type PrimaryIconBtnProps = IdProps & OnClickQProps & {
-    title: string | React.ReactNode;
-    disabled?: boolean;
-    size: BtnSize;
-    loading?: boolean;
-};
+export type PrimaryIconBtnProps = IdProps &
+    OnClickQProps & {
+        title: string | React.ReactNode;
+        disabled?: boolean;
+        size: BtnSize;
+        loading?: boolean;
+    };
 
-export type SecondaryBtnProps = IdProps & OnClickQProps &{
-    title: string | React.ReactNode;
-    size?: BtnSize;
-};
+export type SecondaryBtnProps = IdProps &
+    OnClickQProps & {
+        title: string | React.ReactNode;
+        size?: BtnSize;
+    };
 
-export type MultiBtnProps = IdProps & OnClickProps & {
-    title: string;
-};
+export type MultiBtnProps = IdProps &
+    OnClickProps & {
+        title: string;
+    };
 
-export type PlayBtnProps = IdProps & OnClickQProps & {
-    title: string;
-    loading?: boolean;
-    type?: "button" | "submit";
-};
+export type PlayBtnProps = IdProps &
+    OnClickQProps & {
+        title: string;
+        loading?: boolean;
+        type?: "button" | "submit";
+    };
 
 export type FinishBtnProps = {
     isFinishPlacing: boolean;
@@ -78,3 +83,8 @@ export type LeaderBoardCircleBtnProps = CloseProps;
 export type ShuffleBtnProps = CloseProps;
 
 export type CloseBtnProps = CloseProps;
+
+export type ReturnBtnProps = CloseProps & {
+    handleClose: () => void;
+    type: AdditionalBtns;
+};

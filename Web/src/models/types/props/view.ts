@@ -20,6 +20,7 @@ export type ModalProps = ChildernsProps &
     CloseProps & {
         title: string;
         hasCloseBtn?: boolean;
+        closeBtnType?: AdditionalBtns;
     };
 
 export type BackdropProps = CloseProps & {
