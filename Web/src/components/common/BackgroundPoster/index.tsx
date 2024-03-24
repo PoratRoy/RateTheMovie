@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./BackgroundPoster.module.css";
 import { MOVIES_POSTER_ID } from "../../../models/constant";
-import MoviePosterGif from "../../../assets/moviePosterGif.gif";
+import MoviePosterGif from "../../../assets/moviePosterGif3.gif";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import LazyMoviePoster from "../../../assets/LazyMoviesPoster.jpeg";
