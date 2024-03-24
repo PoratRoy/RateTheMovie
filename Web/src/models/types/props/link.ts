@@ -6,6 +6,7 @@ export type BackLinkProps = {
 
 export type RoomLinkProps = {
     roomLink: string;
+    isDefaultOpen?: boolean;
 };
 
 export type MovieListLinkProps = {};

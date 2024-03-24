@@ -31,6 +31,7 @@ export type FooterProps = {
     link?: string;
     callback?: () => void;
     toClear?: boolean;
+    isFixed?: boolean;
 };
 
 export type RoundTitleProps = {

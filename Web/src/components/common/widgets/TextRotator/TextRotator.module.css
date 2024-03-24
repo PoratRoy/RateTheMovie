@@ -3,8 +3,8 @@
     color: var(--text-color-opacity);
     width: 70vw;
     min-width: 200px;
-    height: 180px;
-    font-size: 1.6rem;
+    height: 25vh;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 

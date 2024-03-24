@@ -39,13 +39,12 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
         >
             <PreviewProfile player={player} avatarId={player?.avatar} setValue={setValue} watch={watch} />
 
-            {isMulti(mod) ? <RoomLink roomLink={roomLink} /> : null}
+            {isMulti(mod) ? <RoomLink roomLink={roomLink} isDefaultOpen /> : null}
             <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
 
             {playerRole === "host" ? (
                 <React.Fragment>
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
-                    {/* <Border /> */}
                     <FilterCollapse>
                         <FilterInputs setValue={setValue} />
                     </FilterCollapse>

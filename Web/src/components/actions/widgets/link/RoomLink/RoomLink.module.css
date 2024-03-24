@@ -7,6 +7,9 @@
 
 .roomLinkTitle {
     color: var(--text-color-opacity);
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .roomLinkContainer{
@@ -15,8 +18,7 @@
     min-width: 80vw;
     width: 85vw;
     max-width: 400px;
-    min-height: var(--input-min-height);
-    height: 100%;
+    height: var(--input-min-height);
     max-height: var(--input-max-height);
 }
 

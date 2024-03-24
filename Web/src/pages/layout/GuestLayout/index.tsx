@@ -6,11 +6,11 @@ import { GuestLayoutProps } from "../../../models/types/props/layout";
 const GuestLayout: React.FC<GuestLayoutProps> = ({ children }) => {
     return (
         <section className={style.guestBackground}>
-            <section className={style.guestLogoContainer}>
+            <section className={style.guestBtnContainer}>
                 <Logo />
+                {children}
             </section>
-            <section className={style.guestBtnContainer}>{children}</section>
-            <Footer />
+            <Footer isFixed />
         </section>
     );
 };

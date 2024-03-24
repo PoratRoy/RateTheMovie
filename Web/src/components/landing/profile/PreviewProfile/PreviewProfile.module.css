@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 160px;
+    height: fit-content;
     gap: 10px;
     width: 100%;
-    /* TODO: v collapse the profile */
     overflow-x: hidden;
 }
 

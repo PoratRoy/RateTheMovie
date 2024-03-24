@@ -3,8 +3,12 @@ import style from "./RoomLink.module.css";
 import { FaRegCopy } from "react-icons/fa6";
 import { useErrorContext } from "../../../../../context/ErrorContext";
 import { RoomLinkProps } from "../../../../../models/types/props/link";
+import Collapse from "../../Collapse";
+import useToggle from "../../../../../hooks/global/useToggle";
+import ToggelArrow from "../../ToggelArrow";
 
-const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
+const RoomLink: React.FC<RoomLinkProps> = ({ roomLink, isDefaultOpen = false }) => {
+    const [isOpen, toggle] = useToggle(isDefaultOpen);
     const { handleSuccess } = useErrorContext();
     const handleCopy = () => {
         navigator.clipboard.writeText(roomLink);
@@ -13,15 +17,26 @@ const RoomLink: React.FC<RoomLinkProps> = ({ roomLink }) => {
 
     return (
         <section className={style.roomLink}>
-            <label className={style.roomLinkTitle}>Send the room link to your friends</label>
-            <section className={style.roomLinkContainer}>
-                <span className={style.roomLinkInput}>
-                    <span className={style.roomLinkText}>{roomLink}</span>
-                </span>
-                <span onClick={handleCopy} className={style.roomCopyBtn}>
-                    <FaRegCopy />
-                </span>
-            </section>
+            <div className={style.roomLinkTitle}>
+                <label>Share link with your friends</label>
+                <ToggelArrow
+                    isOpen={isOpen}
+                    handleOnClick={toggle}
+                    startDirection="right"
+                    endDirection="down"
+                    size="small"
+                />
+            </div>
+            <Collapse isOpen={isOpen}>
+                <section className={style.roomLinkContainer}>
+                    <span className={style.roomLinkInput}>
+                        <span className={style.roomLinkText}>{roomLink}</span>
+                    </span>
+                    <span onClick={handleCopy} className={style.roomCopyBtn}>
+                        <FaRegCopy />
+                    </span>
+                </section>
+            </Collapse>
         </section>
     );
 
