@@ -7,7 +7,8 @@
     color: var(--text-color-opacity);
     display: block;
     box-sizing: border-box;
-    margin: 0.5em;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
 }
 
 /* Tablet 768px - 1279px -- 800px*/

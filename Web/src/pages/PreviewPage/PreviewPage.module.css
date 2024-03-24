@@ -1,8 +1,9 @@
 .previewDescription{
     position: relative;
-    width: 70vw;
+    width: 75vw;
     margin-top: -2em;
     margin-bottom: -1em;
+    text-align: center;
 }
 
 .previewMovies{
@@ -10,7 +11,7 @@
     width: 100%;
     min-height: var(--card-height);
     height: calc((var(--card-height) * 2) + 30px );
-    max-height: 70vh;
+    max-height: 65vh;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
