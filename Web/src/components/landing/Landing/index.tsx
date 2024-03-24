@@ -7,14 +7,9 @@ import { useSocketContext } from "../../../context/SocketContext";
 import Description from "../../common/Description";
 import ImdbIcon from "../../common/widgets/ImdbIcon";
 import style from "./Landing.module.css";
-import {
-    DESCRIPTION_ID,
-    DefualtPlayerName,
-    MULTIPLAYER_BTN_ID,
-    PLAY_BTN_ID,
-    SinglePlayerRoom,
-} from "../../../models/constant";
 import { LandingProps } from "../../../models/types/props/landing";
+import { DefualtPlayerName, SinglePlayerRoom } from "../../../models/constant";
+import { DESCRIPTION_ID, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constant/ids";
 
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();

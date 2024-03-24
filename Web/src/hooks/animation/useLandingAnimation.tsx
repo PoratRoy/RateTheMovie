@@ -1,6 +1,7 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { SetupOption } from "../../models/types/setup";
+import useMod from "../gameplay/useMod";
 import {
     DESCRIPTION_ID,
     MOVIES_POSTER_ID,
@@ -8,8 +9,7 @@ import {
     PLAY_BTN_ID,
     SETUP_ID,
     WAVE_ID,
-} from "../../models/constant";
-import useMod from "../gameplay/useMod";
+} from "../../models/constant/ids";
 
 const useLandingAnimation = (activate: SetupOption) => {
     const [scope, animation] = useAnimate();

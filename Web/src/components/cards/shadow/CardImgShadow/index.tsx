@@ -3,9 +3,9 @@ import Dragging from "../../../actions/animation/Dragging";
 import style from "./CardImgShadow.module.css";
 import DoubleClick from "../../../actions/animation/DoubleClick";
 import useCardShadowAnimation from "../../../../hooks/animation/useCardShadowAnimation";
-import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../../../models/constant";
 import { CardImgShadowProps } from "../../../../models/types/props/card";
 import { DisplayNone } from "../../../../style/style";
+import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../../../models/constant/ids";
 
 const CardImgShadow: React.FC<CardImgShadowProps> = ({ title, actions }) => {
     const { scope } = useCardShadowAnimation(actions);

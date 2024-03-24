@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import style from "./Card.module.css";
-import { CARD_ID } from "../../../../models/constant";
 import { CardInnerContainerProps } from "../../../../models/types/props/card";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 import { PRIMARY_COLOR } from "../../../../style/root";
+import { CARD_ID } from "../../../../models/constant/ids";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     type,

@@ -1,8 +1,8 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/time";
-import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../models/constant";
 import { CardAnimation } from "../../models/enums/animation";
+import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../models/constant/ids";
 
 const useCardShadowAnimation = (actions: CardAnimation[]) => {
     const [scope, animation] = useAnimate();

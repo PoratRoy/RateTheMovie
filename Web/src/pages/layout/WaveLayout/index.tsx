@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./WaveLayout.module.css";
 import WaveSVG from "../../../style/WaveSVG";
-import { WAVE_ID } from "../../../models/constant";
 import { WaveLayoutProps } from "../../../models/types/props/layout";
+import { WAVE_ID } from "../../../models/constant/ids";
 
 const WaveLayout: React.FC<WaveLayoutProps> = ({ children }) => {
     return (

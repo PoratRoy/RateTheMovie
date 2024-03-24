@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PrimaryBtn from "../../../core/button/PrimaryBtn";
-import { DONE_BTN_ID } from "../../../../../models/constant";
 import { FinishBtnProps } from "../../../../../models/types/props/btn";
 import useFinish from "../../../../../hooks/gameplay/useFinish";
 import { useGameStatusContext } from "../../../../../context/GameStatusContext";
 import { motion } from "framer-motion";
+import { DONE_BTN_ID } from "../../../../../models/constant/ids";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);

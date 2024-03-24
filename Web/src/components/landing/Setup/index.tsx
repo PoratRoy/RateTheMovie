@@ -11,10 +11,10 @@ import { setupFormSchema } from "../../../models/validation/form";
 import RoomLink from "../../actions/widgets/link/RoomLink";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
 import useRoomLink from "../../../hooks/multiplayer/useRoomLink";
-import { START_BTN_ID } from "../../../models/constant";
 import { SetupProps } from "../../../models/types/props/landing";
 import useMod from "../../../hooks/gameplay/useMod";
 import FilterInputs from "../filter/FilterInputs";
+import { START_BTN_ID } from "../../../models/constant/ids";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);

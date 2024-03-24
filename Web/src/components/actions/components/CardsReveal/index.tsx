@@ -5,7 +5,7 @@ import { getCorrectOrder } from "../../../../utils/correctOrder";
 import PackOfResult from "../../../cards/pack/PackOfResult";
 import style from "./CardsReveal.module.css";
 import { Card } from "../../../../models/types/card";
-import { REVEAL_ACTION_ID } from "../../../../models/constant";
+import { REVEAL_ACTION_ID } from "../../../../models/constant/ids";
 
 const CardsReveal: React.FC = () => {
     const [revealCards, setRevealCards] = useState<Card[]>([]);

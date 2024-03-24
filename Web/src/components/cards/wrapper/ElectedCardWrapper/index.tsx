@@ -3,9 +3,9 @@ import style from "./ElectedCardWrapper.module.css";
 import Rate from "../../../common/Rate";
 import Droppable from "../../../dnd/Droppable";
 import ElectedShadow from "../../shadow/ElectedShadow";
-import { BELOW_ID, SHADOW_ID } from "../../../../models/constant";
 import { ElectedCardWrapperProps } from "../../../../models/types/props/card";
 import CardPoints from "../../../actions/score/CardPoints";
+import { BELOW_ID, SHADOW_ID } from "../../../../models/constant/ids";
 
 const ElectedCardWrapper: React.FC<ElectedCardWrapperProps> = ({
     children,

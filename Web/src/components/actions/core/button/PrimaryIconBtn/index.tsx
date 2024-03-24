@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./PrimaryIconBtn.module.css";
 import useLoadingBtnAnimation from "../../../../../hooks/animation/useLoadingBtnAnimation";
-import { DONE_BTN_ID } from "../../../../../models/constant";
 import { PrimaryIconBtnProps } from "../../../../../models/types/props/btn";
+import { DONE_BTN_ID } from "../../../../../models/constant/ids";
 
 
 const PrimaryIconBtn: React.FC<PrimaryIconBtnProps> = ({
