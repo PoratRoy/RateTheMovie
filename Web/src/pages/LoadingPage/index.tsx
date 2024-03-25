@@ -4,7 +4,7 @@ import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import { LoadingPageProps } from "../../models/types/props/landing";
 import TextRotator from "../../components/common/widgets/TextRotator";
 import useMod from "../../hooks/gameplay/useMod";
-import PreviewLayout from "../layout/PreviewLayout";
+import CommonLayout from "../layout/CommonLayout";
 import RoomLink from "../../components/actions/widgets/link/RoomLink";
 import { ModOption } from "../../models/enums/landing";
 import useRoomLink from "../../hooks/multiplayer/useRoomLink";
@@ -21,7 +21,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
     const { roomLink } = useRoomLink(ModOption.MULTI, "host", game?.roomId);
 
     return (
-        <PreviewLayout>
+        <CommonLayout>
             {/* TODO: animate to the center */}
 
             <section className={style.loadingPageBtnStatus}>
@@ -40,7 +40,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
             {isMulti() ? <RoomLink roomLink={roomLink} /> : null}
 
             {rivalPlayers.length > 0 ? <WatingRoom rivalPlayers={rivalPlayers} /> : null}
-        </PreviewLayout>
+        </CommonLayout>
     );
 };
 

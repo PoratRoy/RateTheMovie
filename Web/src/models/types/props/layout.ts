@@ -71,3 +71,8 @@ export type PreviewLayoutProps = ChildernsProps & {
 export type ElectedPackLayoutProps = {
     currentPlayer: Player;
 };
+
+export type CommonLayoutProps = ChildernsProps & {
+    hasFooter?: boolean;
+    onGoBack?: () => void;
+};

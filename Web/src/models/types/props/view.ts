@@ -49,3 +49,8 @@ export type PlayerScoreProps = {
     id?: string;
     score: number;
 };
+
+export type MovieModalProps = {
+    movie: Movie;
+    close: () => void;
+};

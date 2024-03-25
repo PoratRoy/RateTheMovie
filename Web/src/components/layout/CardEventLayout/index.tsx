@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useCardEvent from "../../../hooks/gameplay/useCardEvents";
 import { CardEventLayoutProps } from "../../../models/types/props/layout";
-import CardView from "../../view/CardView";
+import MovieModal from "../../view/modals/MovieModal";
 
 const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, movie, setOpenShadow }) => {
     const [openCardView, setOpenCardView] = useState<boolean>(false);
@@ -21,7 +21,9 @@ const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, movie, setO
     return (
         <div onMouseDown={handleMouseDown}>
             {children}
-            {openCardView ? <CardView movie={movie} close={() => setOpenCardView(false)} /> : null}
+            {openCardView ? (
+                <MovieModal movie={movie} close={() => setOpenCardView(false)} />
+            ) : null}
         </div>
     );
 };
