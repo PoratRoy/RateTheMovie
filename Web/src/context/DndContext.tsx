@@ -26,26 +26,28 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
             setCurrentPlayer((prev) => {
                 const currentPlayer = {...prev} as Player | undefined;
                 if (!currentPlayer || currentPlayer.id !== player.id) return currentPlayer;
-                const selectedCardsOrder = currentPlayer.electedCards?.order;
+                const electedCardsOrder = currentPlayer.electedCards?.order;
                 if (cardPosition !== -1) {
-                    const existingCard = selectedCardsOrder[cardPosition];
-                    const existingIndex = selectedCardsOrder.findIndex(
+                    // Add card to the elected pack
+                    const existingCard = electedCardsOrder[cardPosition];
+                    const cardPlaceIndex = electedCardsOrder.findIndex(
                         (c) => c?.movie === card?.movie,
                     );
                     if (existingCard) {
-                        //swap
-                        selectedCardsOrder[existingIndex] = existingCard;
-                    } else if (existingIndex !== -1) {
-                        //alredy exists
-                        selectedCardsOrder[existingIndex] = initGameCard;
+                        // If the card is already in the elected pack, swap it with the new card
+                        electedCardsOrder[cardPlaceIndex] = existingCard;
+                    } else if (cardPlaceIndex !== -1) {
+                        // If the card is already in the elected pack, swap it with the new card
+                        electedCardsOrder[cardPlaceIndex] = initGameCard;
                     }
-                    selectedCardsOrder[cardPosition] = card;
+                    // Add the new card to the elected pack
+                    electedCardsOrder[cardPosition] = card;
                 } else {
-                    //remove
-                    const selectedCard = selectedCardsOrder.find((c) => c?.movie === movie);
+                    // Remove card from the elected pack
+                    const selectedCard = electedCardsOrder.find((c) => c?.movie === movie);
                     if (selectedCard) {
-                        const index = selectedCardsOrder.indexOf(selectedCard);
-                        selectedCardsOrder[index] = undefined;
+                        const index = electedCardsOrder.indexOf(selectedCard);
+                        electedCardsOrder[index] = undefined;
                     }
                 }
                 return currentPlayer;

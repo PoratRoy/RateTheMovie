@@ -1,8 +1,8 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/time";
-import { CardAnimation } from "../../models/enums/animation";
 import { DOUBLE_CLICK_ID, DRAGGING_ID, SHADOW_CARD_TITLE_ID } from "../../models/constant/ids";
+import { CardAnimation } from "../../models/types/union";
 
 const useCardShadowAnimation = (actions: CardAnimation[]) => {
     const [scope, animation] = useAnimate();
@@ -12,7 +12,7 @@ const useCardShadowAnimation = (actions: CardAnimation[]) => {
             await animation(`#${DOUBLE_CLICK_ID}`, { opacity: 0 });
             await animation(`#${SHADOW_CARD_TITLE_ID}`, { opacity: 0 });
             await animation(`#${SHADOW_CARD_TITLE_ID}`, { opacity: 0 });
-            if (actions.includes(CardAnimation.DRAGGING)) {
+            if (actions.includes("dragging")) {
                 await animation(
                     `#${DRAGGING_ID}`,
                     { opacity: 1, display: "block" },
@@ -21,7 +21,7 @@ const useCardShadowAnimation = (actions: CardAnimation[]) => {
                 await delayPromise(3000);
                 await animation(`#${DRAGGING_ID}`, { opacity: 0 });
             }
-            if (actions.includes(CardAnimation.DOUBLE_CLICK)) {
+            if (actions.includes("doubleClick")) {
                 await animation(
                     `#${DOUBLE_CLICK_ID}`,
                     { opacity: 1, display: "block" },
@@ -30,7 +30,7 @@ const useCardShadowAnimation = (actions: CardAnimation[]) => {
                 await delayPromise(3000);
                 await animation(`#${DOUBLE_CLICK_ID}`, { opacity: 0 });
             }
-            if (actions.includes(CardAnimation.TITLE)) {
+            if (actions.includes("title")) {
                 await animation(
                     `#${SHADOW_CARD_TITLE_ID}`,
                     { opacity: 1, display: "block" },

@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useCardEvent from "../../../hooks/gameplay/useCardEvents";
 import { CardEventLayoutProps } from "../../../models/types/props/layout";
-import MovieModal from "../../view/modals/MovieModal";
+import usePlaceCard from "../../../hooks/gameplay/usePlaceCard";
 
-const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, movie, setOpenShadow }) => {
-    const [openCardView, setOpenCardView] = useState<boolean>(false);
+const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card, setOpenShadow }) => {
     const { isClicked, isDoubleClick, handleMouseDown } = useCardEvent();
+    const { handlePlaceCard } = usePlaceCard();
+
+    //TODO:
+    // useEffect(() => {
+    //     if (isDoubleClick) {
+    //         //TODO: set in the elected card
+    //         setOpenShadow(false);
+    //     }
+    // }, [isDoubleClick]);
 
     useEffect(() => {
-        if (isDoubleClick) {
-            setOpenCardView(true);
-            setOpenShadow(false);
-        }
-    }, [isDoubleClick, setOpenCardView]);
-
-    useEffect(() => {
-        setOpenShadow(isClicked);
+        // setOpenShadow(isClicked);
+        if (isClicked && card) handlePlaceCard(card);
     }, [isClicked]);
 
-    return (
-        <div onMouseDown={handleMouseDown}>
-            {children}
-            {openCardView ? (
-                <MovieModal movie={movie} close={() => setOpenCardView(false)} />
-            ) : null}
-        </div>
-    );
+    return <div onMouseDown={handleMouseDown}>{children}</div>;
 };
 
 export default CardEventLayout;

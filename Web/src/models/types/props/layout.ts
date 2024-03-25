@@ -4,8 +4,9 @@ import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 import { Player } from "../player";
 import { ModOption } from "../../enums/landing";
-import { CrewModel, Movie } from "../movie";
+import { CrewModel } from "../movie";
 import { InputProps } from "./input";
+import { Card } from "../card";
 
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     methods: UseFormReturn<TInput, any, undefined>;
@@ -46,8 +47,8 @@ export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     };
 
 export type CardEventLayoutProps = ChildernsProps & {
-    movie: Movie;
-    setOpenShadow: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenShadow?: React.Dispatch<React.SetStateAction<boolean>>;
+    card?: Card;
 };
 
 export type CrewImgProps = {

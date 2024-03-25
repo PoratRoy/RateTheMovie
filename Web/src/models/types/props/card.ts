@@ -1,9 +1,8 @@
 import { ChildernsProps, IdProps } from ".";
-import { CardAnimation } from "../../enums/animation";
 import { Card, placeholderCardType } from "../card";
 import { Movie } from "../movie";
 import { Player } from "../player";
-import { CardSize, StarSize } from "../union";
+import { CardSize, StarSize, CardAnimation } from "../union";
 
 export type CardProps = IdProps & {
     size?: CardSize;

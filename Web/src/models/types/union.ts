@@ -47,6 +47,8 @@ export type RatePosition = "relative" | "absolute";
 
 export type AdditionalBtns = "quit" | "restart" | "leaderboard" | "movieList" | "return";
 
+export type CardAnimation = "title" | "doubleClick" | "dragging";
+
 export type LanguageType =
     | "en" // English
     | "es" // Spanish

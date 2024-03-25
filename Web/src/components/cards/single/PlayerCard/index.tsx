@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "../../core/Card";
 import DraggableMovie from "../DraggableMovie";
 import LoadingCard from "../../core/LoadingCard";
@@ -10,19 +10,14 @@ import { PlayerCardProps } from "../../../../models/types/props/card";
 const PlayerCard: React.FC<PlayerCardProps> = ({ player, card }) => {
     const movie = card.movie;
     const position = useCardOrderPosition(player, card);
-    const [openShadow, setOpenShadow] = useState<boolean>(false);
-
-    const isShadow = position === 0 ? openShadow : false;
     const cardId = `${movie.id}-${player.id}`;
 
-    const Back = <DraggableMovie isShadow={isShadow} id={cardId} movie={movie} player={player} />;
-
     return (
-        <CardEventLayout movie={movie} setOpenShadow={setOpenShadow}>
+        <CardEventLayout card={card}>
             <Card
                 type={{ t: "Player", card } as placeholderCardType}
                 front={<LoadingCard />}
-                back={Back}
+                back={<DraggableMovie id={cardId} movie={movie} player={player} />}
                 position={position}
             />
         </CardEventLayout>
