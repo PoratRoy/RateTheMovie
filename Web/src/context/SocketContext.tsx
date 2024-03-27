@@ -110,6 +110,23 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
     }, []);
 
+    //TODO: extract to a hook
+    //TODO: put as useCallBack
+    const setStateFromSession = () => {
+        if (!rivalPlayers) {
+            const sessionRivalPlayers: Player[] | undefined = Session.get(SessionKey.RIVAL_PLAYERS);
+            if (sessionRivalPlayers) setRivalPlayers(sessionRivalPlayers);
+        }
+        if (!leaderBoardPlayers) {
+            const sessionRivalPlayers: Player[] | undefined = Session.get(SessionKey.RIVAL_PLAYERS);
+            const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            if (sessionRivalPlayers && sessionCurrentPlayer)
+                setLeaderBoardPlayers([...sessionRivalPlayers, sessionCurrentPlayer]);
+        }
+    };
+    setStateFromSession();
+
+    //TODO: usecallback?
     useEffect(() => {
         const role = currentPlayer?.role;
         if (game && isMulti(game.mod) && role === "host") {
@@ -150,7 +167,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
                 if (warRoom && currecntPlayer) {
                     setRivalPlayers((prev) => {
-                        return [...prev, ...rivalPlayers];
+                        const players = [...prev, ...rivalPlayers];
+                        Session.set(SessionKey.RIVAL_PLAYERS, players);
+                        return players;
                     });
                     callback(currecntPlayer, warRoom.game);
                 }
@@ -184,7 +203,9 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
-                return [...prev, player];
+                const players = [...prev, player];
+                Session.set(SessionKey.RIVAL_PLAYERS, players);
+                return players;
             });
         };
 
@@ -236,18 +257,21 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
         const handlePlayerDisconnected = (player: Player) => {
             setRivalPlayers((prev) => {
-                return filterRivalPlayers(prev, player.id);
+                const players = filterRivalPlayers(prev, player.id);
+                Session.set(SessionKey.RIVAL_PLAYERS, players);
+                return players;
             });
             const message = `${player.name} has left the game.`;
             handleAlert(message);
         };
 
         const handleGameEnded = (player: Player) => {
-            const gm: Game | undefined = Session.get(SessionKey.GAME);
-            if (gm?.isGameOver) {
+            const game: Game | undefined = Session.get(SessionKey.GAME);
+            if (game?.isGameOver) {
                 handlePlayerDisconnected(player);
             } else {
                 setRivalPlayers([]);
+                Session.set(SessionKey.RIVAL_PLAYERS, []);
                 const message = "Last survivor standing. Game concluding as no opponents remain.";
                 handleAlert(message, 5000);
                 handleQuit();
@@ -278,6 +302,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const clearSocketContext = () => {
+        Session.remove(SessionKey.RIVAL_PLAYERS);
         setRivalPlayers([]);
         setLeaderBoardPlayers([]);
     };
