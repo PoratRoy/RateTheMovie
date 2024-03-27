@@ -7,6 +7,8 @@ import { Movie } from "../../models/types/movie";
 import { Player } from "../../models/types/player";
 import { isCardsOrdrValid } from "../../utils/correctOrder";
 import useMod from "./useMod";
+import Session from "../../utils/storage/sessionStorage";
+import { SessionKey } from "../../models/enums/session";
 
 const useFinish = () => {
     const {
@@ -68,11 +70,13 @@ const useFinish = () => {
                     checkRef.current = true;
                 }
 
-                return {
+                const currentPlayer: Player = {
                     ...player,
                     score: player.score + playerScore,
                     electedCards,
                 };
+                Session.set(SessionKey.CURRENT_PLAYER, currentPlayer);
+                return currentPlayer;
             });
         } else {
             setNewRoundStatus();

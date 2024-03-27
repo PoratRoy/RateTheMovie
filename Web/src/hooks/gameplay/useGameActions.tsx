@@ -59,7 +59,7 @@ const useGameActions = (close: () => void) => {
             refreshGameContext();
             if (isMulti()) {
                 if (currentPlayer.role === "host") {
-                    const movies = backupMovies[currentRound];
+                    const movies = backupMovies ? backupMovies[currentRound] : [];
                     const cards = handleMovieCards(movies);
                     handleNextRound(round, cards);
                     setIsRoundStart(true);
@@ -85,7 +85,7 @@ const useGameActions = (close: () => void) => {
     };
 
     const handelNewMovies = (index: number) => {
-        const movies = backupMovies[index];
+        const movies = backupMovies ? backupMovies[index] : [];
         handleMovieCards(movies);
         close();
         setTimeout(() => {

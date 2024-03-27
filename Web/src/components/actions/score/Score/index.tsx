@@ -7,7 +7,7 @@ import { useAnimationContext } from "../../../../context/AnimationContext";
 
 const Score: React.FC<ScoreProps> = ({ score, isMotion = false }) => {
     const { increaseScore } = useAnimationContext();
-    const { scoreRes } = useCountingScoreAnimation(increaseScore);
+    const { scoreRes } = useCountingScoreAnimation(increaseScore || 0);
 
     return (
         <React.Fragment>

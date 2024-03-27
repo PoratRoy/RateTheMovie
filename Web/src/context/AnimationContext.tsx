@@ -1,14 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { CardFace } from "../models/enums/animation";
+import { SessionKey } from "../models/enums/session";
+import Session from "../utils/storage/sessionStorage";
+import { Player } from "../models/types/player";
 
 export const AnimationContext = createContext<{
-    isFlipCard: CardFace;
-    setIsFlipCard: React.Dispatch<React.SetStateAction<CardFace>>;
-    increaseScore: number;
-    setIncreaseScore: React.Dispatch<React.SetStateAction<number>>;
+    isFlipCard: CardFace | undefined;
+    setIsFlipCard: React.Dispatch<React.SetStateAction<CardFace | undefined>>;
+    increaseScore: number | undefined;
+    setIncreaseScore: React.Dispatch<React.SetStateAction<number | undefined>>;
     clearAnimationContext: () => void;
 }>({
-    isFlipCard: CardFace.BACK,
+    isFlipCard: undefined,
     setIsFlipCard: () => {},
     increaseScore: 0,
     setIncreaseScore: () => {},
@@ -18,8 +21,23 @@ export const AnimationContext = createContext<{
 export const useAnimationContext = () => useContext(AnimationContext);
 
 export const AnimationContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isFlipCard, setIsFlipCard] = useState<CardFace>(CardFace.BACK);
-    const [increaseScore, setIncreaseScore] = useState<number>(0);
+    const [isFlipCard, setIsFlipCard] = useState<CardFace | undefined>();
+    const [increaseScore, setIncreaseScore] = useState<number | undefined>();
+
+    //TODO: extract to a hook
+    //TODO: put as useCallBack
+    const setStateFromSession = () => {
+        if (!isFlipCard) {
+            setIsFlipCard(CardFace.FRONT);
+        }
+        if (increaseScore === undefined) {
+            const sessionPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            if (sessionPlayer) {
+                setIncreaseScore(sessionPlayer.score);
+            }
+        }
+    };
+    setStateFromSession();
 
     const clearAnimationContext = () => {
         setIncreaseScore(0);

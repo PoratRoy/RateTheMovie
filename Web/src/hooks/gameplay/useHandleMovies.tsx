@@ -5,6 +5,7 @@ import { ModOption } from "../../models/enums/landing";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";
+import { Player } from "../../models/types/player";
 import { initGameCards } from "../../utils/card";
 import { logMovies } from "../../utils/log";
 import Session from "../../utils/storage/sessionStorage";
@@ -34,27 +35,19 @@ const useHandleMovies = () => {
         setGameCardsOnStateAndSession(cards, correctOrder);
     };
 
-    const handleGameCardsMoreData = (movies: Movie[]) => {
-        setGameCards((prev) => {
-            const cards = prev.map((gameCard: Card, index: number) => {
-                return { ...gameCard, movie: movies[index] } as Card;
-            });
-            Session.set(SessionKey.GAME_CARDS, cards);
-            return cards;
-        });
-    };
-
     const setGameCardsOnStateAndSession = (cards: Card[], correctOrder?: string[]) => {
         if (correctOrder && correctOrder.length === PACK_CARDS_NUM) {
             setCurrentPlayer((player) => {
                 if (!player) return player;
-                return {
+                const currentPlayer: Player = {
                     ...player,
                     electedCards: {
                         ...player.electedCards,
                         correctOrder,
                     },
                 };
+                Session.set(SessionKey.CURRENT_PLAYER, currentPlayer);
+                return currentPlayer;
             });
         }
         setGameCards(cards);
@@ -64,7 +57,6 @@ const useHandleMovies = () => {
     return {
         handleMovieCards,
         handleGameCards,
-        handleGameCardsMoreData,
     };
 };
 

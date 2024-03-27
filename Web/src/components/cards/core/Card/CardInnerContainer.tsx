@@ -4,6 +4,7 @@ import { CardInnerContainerProps } from "../../../../models/types/props/card";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 import { PRIMARY_COLOR } from "../../../../style/root";
 import { CARD_ID } from "../../../../models/constant/ids";
+import { CardFace } from "../../../../models/enums/animation";
 
 const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     type,
@@ -33,7 +34,7 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
             <motion.div
                 className={style.playerCardInnerContainer}
                 initial={false}
-                animate={{ rotateY: isFlipCard }}
+                animate={{ rotateY: isFlipCard || CardFace.BACK }}
                 transition={{ duration: 0.3, animationDiraction: "normal" }}
             >
                 {children}

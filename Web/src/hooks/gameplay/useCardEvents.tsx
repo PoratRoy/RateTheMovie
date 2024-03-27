@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useDoubleClick from "../global/useDoubleClick";
 import { useDragContext } from "../../context/DndContext";
-
+//TODO: not in use
 const useCardEvent = () => {
     const [isClicked, setIsClicked] = useState<boolean>(false);
     const { isDoubleClick, handleDoubleClick } = useDoubleClick();
@@ -15,7 +15,7 @@ const useCardEvent = () => {
 
     const handleMouseDown = () => {
         handleDoubleClick();
-        setIsClicked((prev) => !prev);
+        setIsClicked(true);
     };
 
     return {

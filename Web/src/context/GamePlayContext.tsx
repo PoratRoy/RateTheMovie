@@ -22,8 +22,8 @@ export const GamePlayContext = createContext<{
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
     previewMovies: Movie[];
     setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
-    backupMovies: Movie[][];
-    setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][]>>;
+    backupMovies: Movie[][] | undefined;
+    setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][] | undefined>>;
     activateTimer: boolean;
     setActivateTimer: React.Dispatch<React.SetStateAction<boolean>>;
     isPreview: boolean;
@@ -80,7 +80,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
-    const [backupMovies, setBackupMovies] = useState<Movie[][]>([]);
+    const [backupMovies, setBackupMovies] = useState<Movie[][] | undefined>(undefined);
 
     const [activateTimer, setActivateTimer] = useState<boolean>(true);
     const [isPreview, setIsPreview] = useState<boolean>(false);
@@ -211,7 +211,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
 
     const resetRoundContextState = () => {
-        Session.remove(SessionKey.GAME_CARDS);
         setCorrectOrder([]);
         setFetchLoading(false);
     };
@@ -222,7 +221,14 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setShuffle("reset");
         setBackupMovies([]);
         setCurrentPlayer((player) => {
-            return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
+            if (!player) return player;
+            const currentPlayer: Player = {
+                ...player,
+                electedCards: { order: [] },
+                score: 0,
+            };
+            Session.set(SessionKey.CURRENT_PLAYER, currentPlayer);
+            return currentPlayer;
         });
         setGame((prev) => {
             if (prev) {
@@ -250,10 +256,11 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
         Session.remove(SessionKey.BACKUP);
+        Session.remove(SessionKey.GAME_CARDS);
         setGameCards(initGameCardsList());
         setCurrentPlayer(undefined);
         setGame(undefined);
-        setBackupMovies([]);
+        setBackupMovies(undefined);
     };
 
     return (

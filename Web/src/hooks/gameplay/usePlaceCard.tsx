@@ -5,7 +5,7 @@ import { Player } from "../../models/types/player";
 
 const usePlaceCard = () => {
     const { setCurrentPlayer } = useGamePlayContext();
-
+    //TODO: disable option if round finished (like dnd)
     const handlePlaceCard = (card: Card) => {
         setCurrentPlayer((prev) => {
             const currentPlayer = { ...prev } as Player | undefined;

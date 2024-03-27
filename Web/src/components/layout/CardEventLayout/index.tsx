@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import useCardEvent from "../../../hooks/gameplay/useCardEvents";
+import React from "react";
 import { CardEventLayoutProps } from "../../../models/types/props/layout";
 import usePlaceCard from "../../../hooks/gameplay/usePlaceCard";
+import { useDragContext } from "../../../context/DndContext";
 
 const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card, setOpenShadow }) => {
-    const { isClicked, isDoubleClick, handleMouseDown } = useCardEvent();
+    // const { isClicked, isDoubleClick } = useCardEvent();
+    const { isDragging } = useDragContext();
     const { handlePlaceCard } = usePlaceCard();
 
     //TODO:
@@ -15,12 +16,16 @@ const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card, setOp
     //     }
     // }, [isDoubleClick]);
 
-    useEffect(() => {
-        // setOpenShadow(isClicked);
-        if (isClicked && card) handlePlaceCard(card);
-    }, [isClicked]);
+    // useEffect(() => {
+    //     // setOpenShadow(isClicked);
+    //     console.log("1")
+    // }, [isClicked]);
 
-    return <div onMouseDown={handleMouseDown}>{children}</div>;
+    const handleOnClick = () => {
+        if (!isDragging && card) handlePlaceCard(card);
+    };
+
+    return <div onClick={handleOnClick}>{children}</div>;
 };
 
 export default CardEventLayout;

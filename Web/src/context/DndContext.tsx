@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useGamePlayContext } from "./GamePlayContext";
 import { createContext, useContext, useState } from "react";
 import { Movie } from "../models/types/movie";
@@ -14,6 +14,14 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
     const { setCurrentPlayer } = useGamePlayContext();
     const [isDragging, setIsDragging] = useState<boolean>(false);
 
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8,
+            },
+        }),
+    );
+
     function handleDragEnd(event: DragEndEvent) {
         setIsDragging(false);
         const { over, active } = event;
@@ -24,7 +32,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
         if (movie && player) {
             const card: Card = { id: movie.id, movie };
             setCurrentPlayer((prev) => {
-                const currentPlayer = {...prev} as Player | undefined;
+                const currentPlayer = { ...prev } as Player | undefined;
                 if (!currentPlayer || currentPlayer.id !== player.id) return currentPlayer;
                 const electedCardsOrder = currentPlayer.electedCards?.order;
                 if (cardPosition !== -1) {
@@ -62,7 +70,7 @@ export const DndContextProvider = ({ children }: { children: React.ReactNode }) 
     };
 
     return (
-        <DndContext onDragEnd={handleDragEnd} onDragMove={handleDragStart}>
+        <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart} sensors={sensors}>
             <DragContext.Provider value={{ isDragging }}>{children}</DragContext.Provider>
         </DndContext>
     );

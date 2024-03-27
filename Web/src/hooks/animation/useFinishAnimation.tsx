@@ -16,33 +16,40 @@ const useFinishAnimation = (activate: boolean | undefined) => {
 
     const handleFinishAnimation = async () => {
         const order = currentPlayer?.electedCards.order;
-        await Promise.all([
-            animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
-            animation(`#${CARD_ID}`, { border: `2px solid ${PRIMARY_COLOR}` }, { duration: 0.2 }),
-        ]);
-        await delayPromise(1000);
-        for (let i = 0; i < PACK_CARDS_NUM; i++) {
-            await animation(
-                `#${SHADOW_ID}-${i}`,
-                { opacity: 1, display: "block" },
-                { duration: 0.3 },
-            );
-            await delayPromise(300);
-
-            if (order && order[i]?.isCorrect === true) {
+        try {
+            await Promise.all([
+                animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
+                animation(
+                    `#${CARD_ID}`,
+                    { border: `2px solid ${PRIMARY_COLOR}` },
+                    { duration: 0.2 },
+                ),
+            ]);
+            await delayPromise(1000);
+            for (let i = 0; i < PACK_CARDS_NUM; i++) {
                 await animation(
-                    `#${POINTS_ID}-${i}`,
-                    {
-                        y: "-40px",
-                        opacity: [0, 1, 1, 0],
-                        display: ["none", "block", "block", "none"],
-                    },
-                    { duration: 0.8 },
+                    `#${SHADOW_ID}-${i}`,
+                    { opacity: 1, display: "block" },
+                    { duration: 0.3 },
                 );
-                setIncreaseScore((prev) => prev + 100);
+                await delayPromise(300);
+
+                if (order && order[i]?.isCorrect === true) {
+                    await animation(
+                        `#${POINTS_ID}-${i}`,
+                        {
+                            y: "-40px",
+                            opacity: [0, 1, 1, 0],
+                            display: ["none", "block", "block", "none"],
+                        },
+                        { duration: 0.8 },
+                    );
+                    setIncreaseScore((prev) => (prev || 0) + 100);
+                }
+                await delayPromise(600);
             }
-            await delayPromise(600);
-        }
+        } catch (error) {}
+
         await delayPromise(1000);
         if (isSingle()) setIsRoundFinished(true);
     };
