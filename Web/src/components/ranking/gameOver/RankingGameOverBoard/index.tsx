@@ -14,29 +14,32 @@ const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) 
     const levelThree = playersOrder()[2];
 
     return (
-        <section style={{width: "100%"}}>
-            {!levelOne[0] || !levelTwo[0] ? (
+        <section style={{ width: "100%" }}>
+            {!levelOne[0] || (levelOne[0].length < 2 && !levelTwo[0]) ? (
                 <React.Fragment />
             ) : (
                 <section className={style.rankingBoard}>
                     <div className={style.rankingBoardLevelOne}>
-                        <ResultPlayerPlace player={levelOne[0]} place={1} />
+                        <ResultPlayerPlace players={levelOne[0]} place={1} />
                     </div>
                     <div className={style.rankingBoardLevelTwo}>
-                        {levelTwo.map((player: Player, index: number) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <ResultPlayerPlace player={player} place={index + 2} />
-                                </React.Fragment>
-                            );
-                        })}
+                        {levelTwo &&
+                            levelTwo[0] &&
+                            levelTwo.map((players: Player[], index: number) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <ResultPlayerPlace players={players} place={index + 2} />
+                                    </React.Fragment>
+                                );
+                            })}
                     </div>
                     <div className={style.rankingBoardLevelThree}>
                         {levelThree &&
-                            levelThree.map((player: Player, index: number) => {
+                            levelThree[0] &&
+                            levelThree.map((players: Player[], index: number) => {
                                 return (
                                     <React.Fragment key={index}>
-                                        <ResultPlayerPlace player={player} place={index + 4} />
+                                        <ResultPlayerPlace players={players} place={index + 4} />
                                     </React.Fragment>
                                 );
                             })}

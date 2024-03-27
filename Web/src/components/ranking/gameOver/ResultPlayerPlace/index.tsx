@@ -4,17 +4,18 @@ import { AvatarImgs } from "../../../../models/resources/avatars";
 import { ResultPlayerProfileProps } from "../../../../models/types/props/profile";
 import Place from "./Place";
 import Avatar from "../../../profile/Avatar";
+import { Player } from "../../../../models/types/player";
 
-const ResultPlayerPlace: React.FC<ResultPlayerProfileProps> = ({ player, place }) => {
-    const { avatar, name, score } = player;
-
+const ResultPlayerPlace: React.FC<ResultPlayerProfileProps> = ({ players, place }) => {
     return (
-        <Place place={place} playerId={player.id}>
-            <section className={style.resultPlayerProfile}>
-                <Avatar img={AvatarImgs[avatar]} />
-                <div className={style.resultPlayerName}>{name}</div>
-                <div className={style.resultPlayerScore}>{score}</div>
-            </section>
+        <Place place={place} players={players}>
+            {players.map((player: Player, index: number) => (
+                <section key={index} className={style.resultPlayerProfile}>
+                    <Avatar img={AvatarImgs[player.avatar]} />
+                    <div className={style.resultPlayerName}>{player.name}</div>
+                    <div className={style.resultPlayerScore}>{player.score}</div>
+                </section>
+            ))}
         </Place>
     );
 };

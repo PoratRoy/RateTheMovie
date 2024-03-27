@@ -11,9 +11,9 @@ const RankingRoundBoard: React.FC<RankingRoundBoardProps> = ({ players }) => {
 
     return (
         <section className={style.rankingBoard}>
-            {sortedPlayers.map((player: Player, index: number) => (
+            {sortedPlayers.map((players: Player[], index: number) => (
                 <React.Fragment key={index}>
-                    <RoundPlayerPlace player={player} place={index + 1} />
+                    <RoundPlayerPlace players={players} place={index + 1} />
                 </React.Fragment>
             ))}
         </section>

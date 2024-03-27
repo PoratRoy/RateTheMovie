@@ -3,6 +3,11 @@ import { Player } from "../player";
 
 export type RankingPlayerProps = {
     place: number;
+    players: Player[];
+};
+
+export type PlayerPlaceProps = {
+    place: number;
     player: Player;
 };
 
@@ -16,6 +21,5 @@ export type RankingGameOverBoardProps = {
 
 export type PlaceProps = ChildernsProps & {
     place: number;
-    playerId?: string;
-    isOpen?: boolean;
+    players?: Player[];
 };

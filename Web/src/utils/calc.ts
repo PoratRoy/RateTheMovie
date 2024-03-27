@@ -33,8 +33,24 @@ export const sortMovies = (a: Movie, b: Movie) => {
     return rateA - rateB;
 };
 
-export const sortPlayersByScore = (players: Player[]): Player[] => {
+export const sortPlayersByScore2 = (players: Player[]): Player[] => {
     return players.slice().sort((playerA, playerB) => playerB.score - playerA.score);
+};
+
+export const sortPlayersByScore = (players: Player[]): Player[][] => {
+    const groupedPlayers: Player[][] = [];
+
+    players.sort((a, b) => b.score - a.score);
+    players.forEach(player => {
+        if (groupedPlayers.length === 0 || groupedPlayers[groupedPlayers.length - 1][0].score !== player.score) {
+            // If the last group's score doesn't match the current player's score, start a new group
+            groupedPlayers.push([player]);
+        } else {
+            // Otherwise, add the player to the last group
+            groupedPlayers[groupedPlayers.length - 1].push(player);
+        }
+    });
+    return groupedPlayers;
 };
 
 export const culcNumOfMovies = (rounds: number) => {

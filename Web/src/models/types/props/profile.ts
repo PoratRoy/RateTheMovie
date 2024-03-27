@@ -25,7 +25,7 @@ export type RivalPlayerProfileProps = {
 };
 
 export type ResultPlayerProfileProps = {
-    player: Player;
+    players: Player[];
     place: number;
 };
 

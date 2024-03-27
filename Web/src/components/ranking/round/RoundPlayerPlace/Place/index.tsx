@@ -13,11 +13,12 @@ import {
 } from "../../../../../style/root";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 
-const Place: React.FC<PlaceProps> = ({ children, place, playerId, isOpen }) => {
+const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
     const { currentPlayer } = useGamePlayContext();
 
     const isCurrentPlayer = useMemo(() => {
-        return currentPlayer?.id === playerId;
+        const found = players?.find((player) => player.id === currentPlayer?.id);
+        return found ? true : false;
     }, []);
 
     const border = useMemo(() => {
@@ -29,7 +30,7 @@ const Place: React.FC<PlaceProps> = ({ children, place, playerId, isOpen }) => {
                 ? BRONZE_COLOR
                 : TEXT_COLOR_OPACITY_REAL;
     }, []);
-    
+
     const backgroundColor = useMemo(() => {
         return place === 1
             ? GOLD_COLOR_OPACITY
@@ -46,7 +47,6 @@ const Place: React.FC<PlaceProps> = ({ children, place, playerId, isOpen }) => {
             style={{
                 boxShadow: isCurrentPlayer ? `0px 0px 10px 3px ${PRIMARY_COLOR}` : "none",
                 border: `3px solid ${border}`,
-                gap: isOpen ? "1rem" : "0",
                 transition: "gap 0.3s linear",
                 backgroundColor,
             }}

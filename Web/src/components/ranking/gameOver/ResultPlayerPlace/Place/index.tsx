@@ -12,11 +12,12 @@ import {
     SILVER_COLOR_OPACITY,
 } from "../../../../../style/root";
 
-const Place: React.FC<PlaceProps> = ({ children, place, playerId }) => {
+const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
     const { currentPlayer } = useGamePlayContext();
 
     const isCurrentPlayer = useMemo(() => {
-        return currentPlayer?.id === playerId;
+        const found = players?.find((player) => player.id === currentPlayer?.id);
+        return found ? true : false;
     }, []);
 
     const isTopThree = useMemo(() => {
@@ -34,6 +35,7 @@ const Place: React.FC<PlaceProps> = ({ children, place, playerId }) => {
     }, []);
 
     const title = useMemo(() => {
+        if(players && players.length > 1) return "Draw"; 
         return place === 1
             ? "Round Winner"
             : place === 2
