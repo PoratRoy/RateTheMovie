@@ -29,7 +29,11 @@ export const initGame = (
         currentRound: 1,
         shuffleAttempt: SHUFFLE_ATTEMPT,
         mod,
-        isStarted: false,
+        isGameStart: false,
+        isRoundStart: false,
+        isPlayerFinishRound: false,
+        isRoundFinished: false,
+        isGameOver: false,
     };
     return game;
 };

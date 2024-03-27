@@ -7,7 +7,6 @@ import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
 import useMoviesGame from "./useBackup";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 import { CardFace } from "../../models/enums/animation";
 import Session from "../../utils/storage/sessionStorage";
 
@@ -21,17 +20,13 @@ const useGameActions = (close: () => void) => {
         setRoundNumber,
         setShuffle,
         backupMovies,
+        setIsRoundFinished,
+        setIsPlayerFinishRound,
+        setIsRoundStart,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
     const { resetSocketContext, clearSocketContext, handleNextRound, handlePlayerLeave } =
         useSocketContext();
-    const {
-        setIsRoundFinished,
-        setIsPlayerFinishRound,
-        setIsRoundStart,
-        resetGameStatusContext,
-        clearGameStatusContext,
-    } = useGameStatusContext();
     const { handleMovieCards } = useHandleMovies();
     const { setMoviesGame } = useMoviesGame();
     const navigate = useNavigate();
@@ -43,13 +38,11 @@ const useGameActions = (close: () => void) => {
         clearGameContext();
         clearSocketContext();
         clearAnimationContext();
-        clearGameStatusContext();
         Session.clear();
         navigate(path.land);
     };
 
     const handleRestart = () => {
-        resetGameStatusContext();
         clearAnimationContext();
         resetSocketContext();
         resetGameContext();

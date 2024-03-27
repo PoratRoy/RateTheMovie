@@ -5,11 +5,9 @@ import NotEnoughMovies from "../../../error/NotEnoughMovies";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import { Card } from "../../../../models/types/card";
 import { PackOfCardsProps } from "../../../../models/types/props/pack";
-import { useGameStatusContext } from "../../../../context/GameStatusContext";
 
 const PackOfCards: React.FC<PackOfCardsProps> = ({ player }) => {
-    const { gameCards } = useGamePlayContext();
-    const { activateTimer } = useGameStatusContext();
+    const { gameCards, activateTimer } = useGamePlayContext();
     return (
         <React.Fragment>
             {!gameCards[0]?.movie.imdbID && !activateTimer ? (

@@ -7,13 +7,19 @@ import { Movie } from "../../models/types/movie";
 import { Player } from "../../models/types/player";
 import { isCardsOrdrValid } from "../../utils/correctOrder";
 import useMod from "./useMod";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 
 const useFinish = () => {
-    const { setCurrentPlayer, currentPlayer, setPreviewMovies, gameCards } = useGamePlayContext();
+    const {
+        setCurrentPlayer,
+        currentPlayer,
+        setPreviewMovies,
+        gameCards,
+        setIsPlayerFinishRound,
+        setIsRoundFinished,
+        setIsRoundStart,
+        setActivateTimer,
+    } = useGamePlayContext();
     const { handlePlayerFinish } = useSocketContext();
-    const { setIsPlayerFinishRound, setIsRoundFinished, setIsRoundStart, setActivateTimer } =
-        useGameStatusContext();
     const { isMulti } = useMod();
     const checkRef = useRef<any>(false);
 

@@ -31,9 +31,9 @@ import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
 import { PACK_CARDS_NUM } from "../models/constant";
 import { useAnimationContext } from "./AnimationContext";
-import { useGameStatusContext } from "./GameStatusContext";
 import { CardFace } from "../models/enums/animation";
 import useGameActions from "../hooks/gameplay/useGameActions";
+import useMod from "../hooks/gameplay/useMod";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -81,9 +81,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
     const { setIsFlipCard } = useAnimationContext();
-    const { setGame } = useGamePlayContext();
+    const { game, currentPlayer, setGame, setIsGameStart, setIsRoundFinished } =
+        useGamePlayContext();
     const { handleQuit } = useGameActions(() => {});
-    const { setIsGameStart, setIsRoundStart, setIsRoundFinished } = useGameStatusContext();
+    const { isMulti } = useMod();
 
     const socket = useSocket(`${import.meta.env.VITE_BE_URL}/game`, {
         reconnectionAttempts: 5,
@@ -108,6 +109,13 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             socket.off("connect_error");
         };
     }, []);
+
+    useEffect(() => {
+        const role = currentPlayer?.role;
+        if (game && isMulti(game.mod) && role === "host") {
+            handleGame(game);
+        }
+    }, [game]);
 
     const handleCreateNewRoom = (callback: (details: WarRoomDetails) => void) => {
         socket.emit(CreateNewRoom, async (details: WarRoomDetails) => {
@@ -186,8 +194,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handleGameCards(gameCards);
                 setGame(game);
                 Session.set(SessionKey.GAME, game);
-                setIsRoundStart(true);
-                setIsGameStart(true);
             }
         };
 
@@ -221,9 +227,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         const handleNextRoundStarted = (warRoom: WarRoomProps) => {
             const { game, gameCards } = warRoom;
             if (game) {
-                handleGameCards(gameCards);
-                setIsRoundStart(true);
                 setGame(game);
+                handleGameCards(gameCards);
                 Session.set(SessionKey.GAME, game);
                 setIsFlipCard((prev) => (prev === CardFace.BACK ? CardFace.FRONT : CardFace.BACK));
             }
@@ -238,8 +243,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         const handleGameEnded = (player: Player) => {
-            const isGameOver: boolean | undefined = Session.get(SessionKey.GAME_OVER);
-            if (isGameOver) {
+            const gm: Game | undefined = Session.get(SessionKey.GAME);
+            if (gm?.isGameOver) {
                 handlePlayerDisconnected(player);
             } else {
                 setRivalPlayers([]);

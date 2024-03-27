@@ -7,16 +7,14 @@ import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { useSocketContext } from "../../../context/SocketContext";
 import GameModal from "./GameModal";
-import { useGameStatusContext } from "../../../context/GameStatusContext";
 import useWaitingRoom from "../../../hooks/gameplay/useWaitingRoom";
 import PreviewPage from "../../PreviewPage";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { game, currentPlayer } = useGamePlayContext();
+    const { game, currentPlayer, isPreview, setIsGameStart } = useGamePlayContext();
     const { rivalPlayers, handleStartGame } = useSocketContext();
-    const { gameStatus, isPreview, setIsGameStart } = useGameStatusContext();
     const { isWaiting } = useWaitingRoom();
-    const { scope } = useFinishAnimation(gameStatus.isPlayerFinishRound);
+    const { scope } = useFinishAnimation(game?.isPlayerFinishRound);
 
     const handleClickStartGame = () => {
         if (rivalPlayers.length >= 1) {
@@ -27,7 +25,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
 
     return (
         <React.Fragment>
-            {gameStatus.isGameStart ? (
+            {game?.isGameStart ? (
                 <React.Fragment>
                     {isPreview ? (
                         <PreviewPage />

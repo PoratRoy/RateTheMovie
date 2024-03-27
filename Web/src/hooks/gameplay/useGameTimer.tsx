@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useMod from "./useMod";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { START_GAME_TIMER } from "../../models/constant";
 import { CardFace } from "../../models/enums/animation";
@@ -8,9 +7,8 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 
 const useGameTimer = () => {
     const [showTimer, setShowTimer] = useState<boolean>(true);
-    const { gameStatus, setActivateTimer } = useGameStatusContext();
     const { setIsFlipCard } = useAnimationContext();
-    const { game } = useGamePlayContext();
+    const { game, setActivateTimer } = useGamePlayContext();
     const { isSingle, isMulti } = useMod();
 
     useEffect(() => {
@@ -19,7 +17,7 @@ const useGameTimer = () => {
         if (isSingle()) {
             setShowTimer(false);
         } else {
-            if (gameStatus.isGameStart) {
+            if (game?.isGameStart) {
                 setShowTimer(true);
                 setIsFlipCard(CardFace.BACK);
                 timer = setTimeout(() => {
@@ -35,12 +33,12 @@ const useGameTimer = () => {
         return () => {
             clearTimeout(timer);
         };
-    }, [gameStatus.isGameStart]);
+    }, [game?.isGameStart]);
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
         const isFirstRound = game?.currentRound === 1;
-        if (isMulti() && gameStatus.isRoundStart) {
+        if (isMulti() && game?.isRoundStart) {
             if (isFirstRound) {
                 timer = setTimeout(() => {
                     setActivateTimer(true);
@@ -53,7 +51,7 @@ const useGameTimer = () => {
         return () => {
             clearTimeout(timer);
         };
-    }, [gameStatus.isRoundStart]);
+    }, [game?.isRoundStart]);
 
     return { showTimer, closeTimer: () => setShowTimer(false) };
 };

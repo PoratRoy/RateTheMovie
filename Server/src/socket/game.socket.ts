@@ -108,7 +108,7 @@ class GameSocket implements ISocket {
                 if (roomId) {
                     const warRoom = this.warRooms[roomId];
                     if (warRoom) {
-                        const isStarted = warRoom.game?.isStarted;
+                        const isStarted = warRoom.game?.isGameStart;
                         if (isStarted) {
                             callback();
                             logBack({ message: "Game already started" });
@@ -129,11 +129,10 @@ class GameSocket implements ISocket {
             this.wrapper(StartGame, () => {
                 const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
                 if (warRoom && warRoom.game) {
-                    const {
-                        game: { roomId },
-                    } = warRoom;
-                    warRoom.game.isStarted = true;
-                    socket.to(roomId).emit(GameStarted, warRoom);
+                    const { game } = warRoom;
+                    game.isRoundStart = true;
+                    game.isGameStart = true;
+                    socket.to(game.roomId).emit(GameStarted, warRoom);
                 }
             });
         });
@@ -180,6 +179,9 @@ class GameSocket implements ISocket {
                         });
                         warRoom.players = players;
                         game.currentRound = round;
+                        game.isRoundFinished = false;
+                        game.isPlayerFinishRound = false;
+                        game.isRoundStart = true;
                         warRoom.gameCards = cards;
                         this.warRooms[roomId] = warRoom;
                         socket.to(roomId).emit(NextRoundStarted, this.warRooms[roomId]);

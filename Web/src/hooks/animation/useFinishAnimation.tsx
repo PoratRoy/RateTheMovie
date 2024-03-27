@@ -5,14 +5,12 @@ import { PRIMARY_COLOR } from "../../style/root";
 import useMod from "../gameplay/useMod";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useAnimationContext } from "../../context/AnimationContext";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 import { BELOW_ID, CARD_ID, POINTS_ID, SHADOW_ID } from "../../models/constant/ids";
 import { PACK_CARDS_NUM } from "../../models/constant";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { currentPlayer } = useGamePlayContext();
-    const { setIsRoundFinished } = useGameStatusContext();
+    const { currentPlayer, setIsRoundFinished } = useGamePlayContext();
     const { setIncreaseScore } = useAnimationContext();
     const { isSingle } = useMod();
 

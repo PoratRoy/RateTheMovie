@@ -3,12 +3,12 @@ import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
 import useFinish from "../../../../hooks/gameplay/useFinish";
-import { useGameStatusContext } from "../../../../context/GameStatusContext";
 import { GAME_TIME } from "../../../../models/constant";
 import { useTimer } from "react-timer-hook";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
-    const { gameStatus, activateTimer } = useGameStatusContext();
+    const { game, activateTimer } = useGamePlayContext();
     const { finishGame } = useFinish();
 
     const expiryTimestamp = new Date();
@@ -35,10 +35,10 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     }, [minutes, seconds]);
 
     useEffect(() => {
-        if (gameStatus.isPlayerFinishRound) {
+        if (game?.isPlayerFinishRound) {
             pause();
         }
-    }, [gameStatus.isPlayerFinishRound]);
+    }, [game?.isPlayerFinishRound]);
 
     useEffect(() => {
         if (activateTimer) {

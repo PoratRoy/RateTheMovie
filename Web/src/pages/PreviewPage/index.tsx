@@ -7,11 +7,9 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import style from "./PreviewPage.module.css";
 import Description from "../../components/common/Description";
 import Title from "../../components/common/widgets/Title";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 
 const PreviewPage: React.FC = () => {
-    const { previewMovies } = useGamePlayContext();
-    const { setIsPreview } = useGameStatusContext();
+    const { previewMovies, setIsPreview } = useGamePlayContext();
 
     const handleGoBack = () => {
         setIsPreview((prev) => !prev);

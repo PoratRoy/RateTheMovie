@@ -4,12 +4,10 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { CardFace } from "../../models/enums/animation";
-import { useGameStatusContext } from "../../context/GameStatusContext";
 import { START_GAME_TIME } from "../../models/constant";
 
 const useWaitingRoom = () => {
-    const { fetchLoading, gameCards, currentPlayer } = useGamePlayContext();
-    const { setIsGameStart } = useGameStatusContext();
+    const { fetchLoading, gameCards, currentPlayer, setIsGameStart } = useGamePlayContext();
     const { setIsFlipCard } = useAnimationContext();
     const { rivalPlayers } = useSocketContext();
     const [timerExpired, setTimerExpired] = useState<boolean>(false);

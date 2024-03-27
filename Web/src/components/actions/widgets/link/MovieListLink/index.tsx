@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./MovieListLink.module.css";
 import { MovieListLinkProps } from "../../../../../models/types/props/link";
-import { useGameStatusContext } from "../../../../../context/GameStatusContext";
+import { useGamePlayContext } from "../../../../../context/GamePlayContext";
 
 const MovieListLink: React.FC<MovieListLinkProps> = () => {
-    const { setIsPreview } = useGameStatusContext();
+    const { setIsPreview } = useGamePlayContext();
 
     const handleOnClick = () => {
         setIsPreview(prev => !prev);

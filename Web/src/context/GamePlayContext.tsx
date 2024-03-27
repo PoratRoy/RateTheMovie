@@ -24,11 +24,20 @@ export const GamePlayContext = createContext<{
     setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
     backupMovies: Movie[][];
     setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][]>>;
+    activateTimer: boolean;
+    setActivateTimer: React.Dispatch<React.SetStateAction<boolean>>;
+    isPreview: boolean;
+    setIsPreview: React.Dispatch<React.SetStateAction<boolean>>;
     resetGameContext: () => void;
     clearGameContext: () => void;
     refreshGameContext: () => void;
     setRoundNumber: (action: RoundAction, round?: number) => number;
     setShuffle: (action: RoundAction) => void;
+    setIsGameStart: (isGameStart: boolean) => void;
+    setIsRoundStart: (isRoundStart: boolean) => void;
+    setIsPlayerFinishRound: (isPlayerFinishRound: boolean) => void;
+    setIsRoundFinished: (isRoundFinished: boolean) => void;
+    setIsGameOver: (isGameOver: boolean) => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -44,11 +53,20 @@ export const GamePlayContext = createContext<{
     setPreviewMovies: () => {},
     backupMovies: [],
     setBackupMovies: () => {},
+    activateTimer: true,
+    setActivateTimer: () => {},
+    isPreview: false,
+    setIsPreview: () => {},
     resetGameContext: () => {},
     clearGameContext: () => {},
     refreshGameContext: () => {},
     setRoundNumber: () => 1,
     setShuffle: () => {},
+    setIsGameStart: () => {},
+    setIsRoundStart: () => {},
+    setIsPlayerFinishRound: () => {},
+    setIsRoundFinished: () => {},
+    setIsGameOver: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -63,6 +81,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
     const [backupMovies, setBackupMovies] = useState<Movie[][]>([]);
+
+    const [activateTimer, setActivateTimer] = useState<boolean>(true);
+    const [isPreview, setIsPreview] = useState<boolean>(false);
 
     //TODO: extract to a hook
     //TODO: put as useCallBack
@@ -119,6 +140,76 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         });
     };
 
+    const setIsGameStart = (isGameStart: boolean) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    isGameStart,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
+
+    const setIsRoundStart = (isRoundStart: boolean) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    isRoundStart,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
+
+    const setIsPlayerFinishRound = (isPlayerFinishRound: boolean) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    isPlayerFinishRound,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
+
+    const setIsRoundFinished = (isRoundFinished: boolean) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    isRoundFinished,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
+
+    const setIsGameOver = (isGameOver: boolean) => {
+        setGame((prev) => {
+            if (prev) {
+                const game = {
+                    ...prev,
+                    isGameOver,
+                };
+                Session.set(SessionKey.GAME, game);
+                return game;
+            }
+            return prev;
+        });
+    };
+
     const resetRoundContextState = () => {
         Session.remove(SessionKey.GAME_CARDS);
         setCorrectOrder([]);
@@ -132,6 +223,18 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setBackupMovies([]);
         setCurrentPlayer((player) => {
             return player ? { ...player, electedCards: { order: [] }, score: 0 } : player;
+        });
+        setGame((prev) => {
+            if (prev) {
+                return {
+                    ...prev,
+                    isGameStart: true,
+                    isRoundStart: false,
+                    isPlayerFinishRound: false,
+                    isRoundFinished: false,
+                };
+            }
+            return prev;
         });
     };
 
@@ -170,11 +273,20 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setPreviewMovies,
                 backupMovies,
                 setBackupMovies,
+                activateTimer,
+                setActivateTimer,
+                isPreview,
+                setIsPreview,
                 resetGameContext,
                 clearGameContext,
                 refreshGameContext,
                 setRoundNumber,
                 setShuffle,
+                setIsGameStart,
+                setIsRoundStart,
+                setIsPlayerFinishRound,
+                setIsRoundFinished,
+                setIsGameOver,
             }}
         >
             {children}
