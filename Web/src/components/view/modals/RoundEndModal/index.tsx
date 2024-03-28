@@ -13,7 +13,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver })
     const { currentPlayer } = useGamePlayContext();
 
     return (
-        <Modal close={close} title={title}>
+        <Modal close={close} title={title} gameOver={gameOver}>
             <section className={style.roundEndModal}>
                 <PlayerScore score={currentPlayer?.score || 0} />
                 <CardsReveal />

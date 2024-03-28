@@ -46,7 +46,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                     );
                     setIncreaseScore((prev) => (prev || 0) + 100);
                 }
-                await delayPromise(600);
+                await delayPromise(400);
             }
         } catch (error) {}
 

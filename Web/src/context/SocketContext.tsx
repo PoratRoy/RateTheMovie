@@ -226,8 +226,8 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         const handleRoundFinished = (warRoom: WarRoomProps) => {
-            //the time of the finish animation
-            const time = 3000 + PACK_CARDS_NUM * 1300;
+            //Time of finish animation
+            const time = 3000 + PACK_CARDS_NUM * 1000;
             const { players } = warRoom;
             setLeaderBoardPlayers(players);
             let isAllPlacedCards = true;

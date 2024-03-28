@@ -14,8 +14,12 @@ const Draggable: React.FC<DraggableProps> = ({ children, draggableId, args }) =>
         disabled: game?.isPlayerFinishRound ? true : false,
     });
 
+    const handleOnTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        // e.preventDefault();
+    }
+
     return (
-        <div ref={setNodeRef} style={dndStyle(transform)} {...listeners} {...attributes}>
+        <div onTouchMove={handleOnTouchMove} ref={setNodeRef} style={dndStyle(transform)} {...listeners} {...attributes}>
             {children}
         </div>
     );
