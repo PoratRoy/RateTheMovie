@@ -20,9 +20,9 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?
                 borderRadius: "50%",
                 color: "rgba(255, 255, 255, 0)",
             },
-            { duration: 0.2 },
+            { duration: 0.2, ease: "linear" },
         );
-        await animation(`#${id}`, { rotate: 360 }, { duration: 1, repeat: Infinity });
+        await animation(`#${id}`, { rotate: 360 }, { duration: 1.2, ease: "linear", repeat: Infinity });
     };
 
     const handleLoadingToBtnAnimation = async () => {
