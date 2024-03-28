@@ -2,7 +2,7 @@ import React from "react";
 import style from "./LoadingPage.module.css";
 import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import { LoadingPageProps } from "../../models/types/props/landing";
-import TextRotator from "../../components/common/widgets/TextRotator";
+import TextRotator from "../../components/info/TextRotator";
 import useMod from "../../hooks/gameplay/useMod";
 import CommonLayout from "../layout/CommonLayout";
 import { ModOption } from "../../models/enums/landing";

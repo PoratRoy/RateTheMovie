@@ -117,6 +117,9 @@ class GameSocket implements ISocket {
                             callback(details);
                             logBack(details);
                         }
+                    } else {
+                        callback();
+                        logBack({ message: "Game not found" });
                     }
                 } else {
                     callback(initWarRoomDetails());

@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./GameAlreadyStart.module.css";
 import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
+import ErrorLayout from "../../layout/ErrorLayout";
 
 const GameAlreadyStart: React.FC = () => {
     const navigate = useNavigate();
@@ -9,14 +9,13 @@ const GameAlreadyStart: React.FC = () => {
     const handleBackLink = () => {
         navigate(path.land);
     };
-    //TODO: core component for all the error components
+
     return (
-        <section className={style.gameStartContainer}>
-            <div className={style.gameStartText}>Ops.. The game has already started</div>
-            <div onClick={handleBackLink} className={style.gameStartLink}>
-                Start a new game
-            </div>
-        </section>
+        <ErrorLayout
+            description="Ops.. Looks like the game has already started"
+            buttonText="Start a new game"
+            onClick={handleBackLink}
+        />
     );
 };
 

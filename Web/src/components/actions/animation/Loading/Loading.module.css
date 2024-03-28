@@ -1,0 +1,9 @@
+.loading {
+    background-color: transparent;
+    border: 7px solid #5548F4;
+    border-bottom-color: #ffffff00;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #ffffff00;
+}

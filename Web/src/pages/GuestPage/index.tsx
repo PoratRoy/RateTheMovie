@@ -5,11 +5,12 @@ import { useParams } from "react-router-dom";
 import useGuestPlayer from "../../hooks/multiplayer/useGuestPlayer";
 import { ModOption } from "../../models/enums/landing";
 import GameAlreadyStart from "../../components/error/GameAlreadyStart";
+import JoinRoom from "../../components/info/JoinRoom";
 
 const GuestPage: React.FC = () => {
     const { room } = useParams();
     const { setupOption } = useGuestPlayer(room);
-    // TODO: create loading component
+
     return (
         <GuestLayout>
             {setupOption.mod === ModOption.MULTI ? (
@@ -17,7 +18,7 @@ const GuestPage: React.FC = () => {
             ) : setupOption.mod === ModOption.STARTED ? (
                 <GameAlreadyStart />
             ) : (
-                <div>Loading...</div>
+                <JoinRoom />
             )}
         </GuestLayout>
     );

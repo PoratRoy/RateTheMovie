@@ -1,11 +1,4 @@
 /* Mobile 320px - 767px -- 812px */
-
-.loadingBtnPrimary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .btnPrimarySmall,
 .btnPrimaryMedium,
 .btnPrimaryLarge {

@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./SomethingWentWrong.module.css";
 import useGameActions from "../../../hooks/gameplay/useGameActions";
+import ErrorLayout from "../../layout/ErrorLayout";
 
 const SomethingWentWrong: React.FC = () => {
     const { handleQuit } = useGameActions(() => {});
@@ -10,12 +10,11 @@ const SomethingWentWrong: React.FC = () => {
     };
 
     return (
-        <section className={style.wrongContainer}>
-            <div className={style.wrongText}>There is an issue starting the game</div>
-            <div onClick={handleBackLink} className={style.wrongLink}>
-                Exit the game
-            </div>
-        </section>
+        <ErrorLayout
+            description="There is an issue starting the game"
+            buttonText="Exit the game"
+            onClick={handleBackLink}
+        />
     );
 };
 

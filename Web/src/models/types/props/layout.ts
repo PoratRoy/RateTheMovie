@@ -76,3 +76,9 @@ export type CommonLayoutProps = ChildernsProps & {
     hasFooter?: boolean;
     onGoBack?: () => void;
 };
+
+export type ErrorLayoutProps = {
+    onClick?: () => void;
+    description: string;
+    buttonText: string;
+};
