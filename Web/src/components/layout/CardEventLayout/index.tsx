@@ -3,7 +3,7 @@ import { CardEventLayoutProps } from "../../../models/types/props/layout";
 import usePlaceCard from "../../../hooks/gameplay/usePlaceCard";
 import { useDragContext } from "../../../context/DndContext";
 
-const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card, setOpenShadow }) => {
+const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card }) => {
     // const { isClicked, isDoubleClick } = useCardEvent();
     const { isDragging } = useDragContext();
     const { handlePlaceCard } = usePlaceCard();
