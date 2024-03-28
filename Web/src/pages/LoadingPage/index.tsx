@@ -5,11 +5,12 @@ import { LoadingPageProps } from "../../models/types/props/landing";
 import TextRotator from "../../components/common/widgets/TextRotator";
 import useMod from "../../hooks/gameplay/useMod";
 import CommonLayout from "../layout/CommonLayout";
-import RoomLink from "../../components/actions/widgets/link/RoomLink";
 import { ModOption } from "../../models/enums/landing";
 import useRoomLink from "../../hooks/multiplayer/useRoomLink";
 import WatingRoom from "../../components/profile/WatingRoom";
+import CopyRoomLinkBtn from "../../components/actions/widgets/btn/CopyRoomLinkBtn";
 //https://unused-css.com/blog/animated-down-arrow/
+
 const LoadingPage: React.FC<LoadingPageProps> = ({
     isLoading,
     rivalPlayers,
@@ -22,23 +23,19 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
 
     return (
         <CommonLayout>
-            {/* TODO: animate to the center */}
+            <TextRotator />
 
             <section className={style.loadingPageBtnStatus}>
                 <StartGameBtn loading={isLoading} onClicked={onClicked} />
                 {isMulti(game?.mod) ? (
                     <div className={style.loadingGameStatus}>
                         {playerRole === "host"
-                            ? "Wait for the players to join"
-                            : "Wait for the host to start the game"}
+                            ? "Waiting for other players..."
+                            : "Waiting for the host to start the game..."}
                     </div>
                 ) : null}
             </section>
-
-            <TextRotator />
-
-            {isMulti() ? <RoomLink roomLink={roomLink} /> : null}
-
+            {isMulti(game?.mod) ? <CopyRoomLinkBtn roomLink={roomLink} /> : null}
             {rivalPlayers.length > 0 ? <WatingRoom rivalPlayers={rivalPlayers} /> : null}
         </CommonLayout>
     );

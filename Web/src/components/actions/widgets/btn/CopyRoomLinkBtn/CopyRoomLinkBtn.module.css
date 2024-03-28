@@ -1,0 +1,12 @@
+.copyRoomLinkBtn{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.shareVia{
+    font-size: 0.8rem;
+    color: var(--text-color-opacity);
+}

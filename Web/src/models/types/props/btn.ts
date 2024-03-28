@@ -88,3 +88,7 @@ export type ReturnBtnProps = CloseProps & {
     handleClose: () => void;
     type: AdditionalBtns;
 };
+
+export type CopyRoomLinkBtnProps = {
+    roomLink: string;
+};

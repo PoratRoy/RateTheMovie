@@ -21,7 +21,6 @@ export type GuestLayoutProps = ChildernsProps;
 
 export type SetupLayoutProps<TInput extends FieldValues> = FormLayoutProps<TInput> & {
     setupOption: SetupOption;
-    roomLink: string;
     playerRole: PlayerRole;
     setSetupOption?: React.Dispatch<React.SetStateAction<ModOption | undefined>>;
 };

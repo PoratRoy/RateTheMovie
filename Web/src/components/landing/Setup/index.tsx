@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import RoundsNumber from "../../actions/components/RoundsNumber";
 import FilterCollapse from "../filter/FilterCollapse";
@@ -8,9 +8,7 @@ import SetupLayout from "../../../pages/layout/SetupLayout";
 import { SetupInputSchema } from "../../../models/types/inputSchema";
 import useInitialForm from "../../../hooks/global/useInitialForm";
 import { setupFormSchema } from "../../../models/validation/form";
-import RoomLink from "../../actions/widgets/link/RoomLink";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
-import useRoomLink from "../../../hooks/multiplayer/useRoomLink";
 import { SetupProps } from "../../../models/types/props/landing";
 import useMod from "../../../hooks/gameplay/useMod";
 import FilterInputs from "../filter/FilterInputs";
@@ -19,8 +17,7 @@ import { START_BTN_ID } from "../../../models/constant/ids";
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
     const { setValue, watch } = methods;
-    const { mod, player, roomId } = setupOption;
-    const { roomLink } = useRoomLink(mod, playerRole, roomId);
+    const { mod, player } = setupOption;
     const { isMulti, isNoneMode } = useMod();
 
     useEffect(() => {
@@ -30,17 +27,28 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
         setValue(setupInputs.avatar.id, avatar.toString());
     }, [setupOption]);
 
+    const title = useMemo(() => {
+        if (isMulti(mod)) {
+            if (playerRole === "host") return "Create Room";
+            return "Join Room";
+        }
+        return "Start";
+    }, [mod]);
+
     return (
         <SetupLayout<SetupInputSchema>
             methods={methods}
             playerRole={playerRole}
             setupOption={setupOption}
-            roomLink={roomLink}
         >
-            <PreviewProfile player={player} avatarId={player?.avatar} setValue={setValue} watch={watch} />
+            <PreviewProfile
+                player={player}
+                avatarId={player?.avatar}
+                setValue={setValue}
+                watch={watch}
+            />
 
-            {isMulti(mod) ? <RoomLink roomLink={roomLink} isDefaultOpen /> : null}
-            <PlayBtn id={START_BTN_ID} type="submit" title="Start" />
+            <PlayBtn id={START_BTN_ID} type="submit" title={title} />
 
             {playerRole === "host" ? (
                 <React.Fragment>

@@ -6,7 +6,7 @@ import { RoomLinkProps } from "../../../../../models/types/props/link";
 import Collapse from "../../Collapse";
 import useToggle from "../../../../../hooks/global/useToggle";
 import ToggelArrow from "../../ToggelArrow";
-
+//TODO: not in use
 const RoomLink: React.FC<RoomLinkProps> = ({ roomLink, isDefaultOpen = false }) => {
     const [isOpen, toggle] = useToggle(isDefaultOpen);
     const { handleSuccess } = useErrorContext();
