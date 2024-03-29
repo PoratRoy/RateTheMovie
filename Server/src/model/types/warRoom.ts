@@ -4,7 +4,7 @@ import { Player } from "./player";
 
 export type WarRoomProps = {
     players: Player[];
-    gameCards: Card[];//TODO: maybe I only need the movies
+    gameCards: Card[];
     game?: Game;
 };
 

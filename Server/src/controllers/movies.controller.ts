@@ -26,94 +26,108 @@ import { getDifficulty } from "../utils/filter";
 export default class MoviesController {
     async create(
         req: Request<any, any, CreateMovieRequestBody>,
-        res: Response<ResponseBody<{ from: number; created: number; movies: IMovie[] }>>,
+        res: Response<
+            ResponseBody<{ from: number; created: number; nextPage: number; movies: IMovie[] }>
+        >,
     ) {
+        const body: CreateMovieRequestBody = req.body;
+        const { filters, page: startPage, iterations } = body;
         let moviesOutput: IMovie[] = [];
         let from = 0;
         let created = 0;
+        let nextPage = startPage + 1;
+
         try {
-            const body: CreateMovieRequestBody = req.body;
+            for (let page = startPage; page < startPage + iterations; page++) {
+                const resultsTMDB: MovieTMDB[] = await fetchTMDB(URL.tmdb.discover, page, filters);
+                from = from + resultsTMDB.length;
+                if (resultsTMDB && resultsTMDB.length >= FETCH_MOVIES_NUM) {
+                    for (const movie of resultsTMDB) {
+                        const {
+                            title,
+                            release_date,
+                            id,
+                            genre_ids,
+                            popularity,
+                            original_language,
+                            poster_path,
+                            overview,
+                        } = movie;
 
-            const { filters, page } = body;
-            const resultsTMDB: MovieTMDB[] = await fetchTMDB(URL.tmdb.discover, page, filters);
-            from = resultsTMDB.length;
-            if (resultsTMDB && resultsTMDB.length >= FETCH_MOVIES_NUM) {
-                for (const movie of resultsTMDB) {
-                    const {
-                        title,
-                        release_date,
-                        id,
-                        genre_ids,
-                        popularity,
-                        original_language,
-                        poster_path,
-                        overview,
-                    } = movie;
+                        const isVlid = validation(
+                            filters,
+                            release_date,
+                            genre_ids,
+                            original_language,
+                        );
 
-                    const isVlid = validation(filters, release_date, genre_ids, original_language);
-
-                    if (
-                        id &&
-                        title &&
-                        overview &&
-                        release_date &&
-                        poster_path &&
-                        original_language &&
-                        isVlid &&
-                        genre_ids
-                    ) {
-                        const DBmovie = await MovieDatabaseService.getMovieById(id.toString());
-                        if (!DBmovie) {
-                            const year = extractYearFromDate(release_date);
-                            const resultsOMDB: MovieOMDB = await fetchOMDB(URL.omdb, title, year);
-                            const { imdbRating, imdbID } = resultsOMDB;
-                            if (imdbRating && imdbRating !== "N/A" && imdbID) {
-                                const { actors, director } = await setCrew(id);
-                                const video: VideoModel | undefined = await setVideo(id);
-                                const isBoxOffice: boolean = await setIsBoxOffice(id);
-                                const difficulty = getDifficulty(
-                                    popularity,
-                                    isBoxOffice,
-                                    original_language,
-                                    imdbRating,
-                                    year,
-                                );
-
-                                const newMovie: Movie = setNewMovie(
+                        if (
+                            id &&
+                            title &&
+                            overview &&
+                            release_date &&
+                            poster_path &&
+                            original_language &&
+                            isVlid &&
+                            genre_ids
+                        ) {
+                            const DBmovie = await MovieDatabaseService.getMovieById(id.toString());
+                            if (!DBmovie) {
+                                const year = extractYearFromDate(release_date);
+                                const resultsOMDB: MovieOMDB = await fetchOMDB(
+                                    URL.omdb,
                                     title,
-                                    id,
-                                    poster_path,
-                                    imdbRating,
-                                    imdbID,
-                                    difficulty,
-                                    isBoxOffice,
-                                    original_language,
-                                    genre_ids,
                                     year,
-                                    overview,
-                                    video,
-                                    director,
-                                    actors,
                                 );
-                                const createOutput =
-                                    await MovieDatabaseService.createMovie(newMovie);
-                                moviesOutput.push(createOutput);
-                                logMovieCount(created);
-                                created++;
+                                const { imdbRating, imdbID } = resultsOMDB;
+                                if (imdbRating && imdbRating !== "N/A" && imdbID) {
+                                    const { actors, director } = await setCrew(id);
+                                    const video: VideoModel | undefined = await setVideo(id);
+                                    const isBoxOffice: boolean = await setIsBoxOffice(id);
+                                    const difficulty = getDifficulty(
+                                        popularity,
+                                        isBoxOffice,
+                                        original_language,
+                                        imdbRating,
+                                        year,
+                                    );
+
+                                    const newMovie: Movie = setNewMovie(
+                                        title,
+                                        id,
+                                        poster_path,
+                                        imdbRating,
+                                        imdbID,
+                                        difficulty,
+                                        isBoxOffice,
+                                        original_language,
+                                        genre_ids,
+                                        year,
+                                        overview,
+                                        video,
+                                        director,
+                                        actors,
+                                    );
+                                    const createOutput =
+                                        await MovieDatabaseService.createMovie(newMovie);
+                                    moviesOutput.push(createOutput);
+                                    logMovieCount(created);
+                                    created++;
+                                    nextPage = page + 1;
+                                }
                             }
                         }
+                        await delayPromise(1000);
                     }
-                    await delayPromise(1000);
                 }
             }
-
             response(res, {
                 statusCode: StatusCode.CREATED,
                 message: msg.movies.success.create,
-                data: { from, created, movies: moviesOutput },
+                data: { from, created, nextPage, movies: moviesOutput },
             });
         } catch (error) {
-            handleError(res, error, { from, created, movies: moviesOutput });
+            handleError(res, error, { from, created, nextPage, movies: moviesOutput });
         }
     }
 

@@ -69,12 +69,12 @@ class GameSocket implements ISocket {
                     rivalPlayers = [...warRoom.players];
                     warRoom.players.push(updatedPlayer);
                     this.warRooms[roomId] = warRoom;
+                    socket.to(roomId).emit(PlayerJoined, updatedPlayer);
+                    callback(this.warRooms[roomId], updatedPlayer, rivalPlayers);
+                    logBack({ warRoom: this.warRooms[roomId], updatedPlayer, rivalPlayers });
                 } else {
                     console.error("Error: War room not found");
                 }
-                socket.to(roomId).emit(PlayerJoined, updatedPlayer);
-                callback(this.warRooms[roomId], updatedPlayer, rivalPlayers);
-                logBack({ warRoom: this.warRooms[roomId], updatedPlayer, rivalPlayers });
             },
         );
 
@@ -242,16 +242,6 @@ class GameSocket implements ISocket {
 
 export default GameSocket;
 
-// {
-//     room: undefined,
-//     players: [],
-//     gameCards: [],
-//     filters: {
-//         year: undefined,
-//         genre: undefined,
-//         language: undefined,
-//     },
-// }
 
 // socket.on("handshake2", (callback: (uid: string, warRoom: string[]) => void) => {
 //     console.info("Handshake received from: " + socket.id);
@@ -340,24 +330,3 @@ export default GameSocket;
 //     );
 // });
 
-// // Upon connection - only to user
-// socket.emit("message", "Welcome to Chat App!");
-
-// // Upon connection - to all others
-// socket.broadcast.emit("message", `User ${socket.id.substring(0, 5)}} connected`);
-
-// // Listening for a message event
-// socket.on("message", (data) => {
-//     console.log(data);
-//     socket.emit("message", `${socket.id.substring(0, 5)}: ${data}`);
-// });
-
-// // When user disconnects - to all others
-// socket.on("disconnect", () => {
-//     socket.broadcast.emit("message", `User ${socket.id.substring(0, 5)}} disconnected`);
-// });
-
-// // Listen for activity
-// socket.on("activity", (name) => {
-//     socket.broadcast.emit("activity", name);
-// });

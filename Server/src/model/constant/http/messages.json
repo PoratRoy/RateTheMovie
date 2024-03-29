@@ -2,8 +2,8 @@
     "movies": {
         "success": {
             "get": "Movies has been successfully located.",
-            "create": "Movie has successfully created.",
-            "delete": "Movie has successfully deleted."
+            "create": "Movies has successfully created.",
+            "delete": "Movies has successfully deleted."
         },
         "error": {
             "notExists": "Movie does not exists.",
