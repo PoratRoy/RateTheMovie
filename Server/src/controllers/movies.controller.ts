@@ -26,7 +26,7 @@ import { getDifficulty } from "../utils/filter";
 export default class MoviesController {
     async create(
         req: Request<any, any, CreateMovieRequestBody>,
-        res: Response<ResponseBody<{ movies: IMovie[]; from: number; created: number }>>,
+        res: Response<ResponseBody<{ from: number; created: number; movies: IMovie[] }>>,
     ) {
         let moviesOutput: IMovie[] = [];
         let from = 0;
@@ -110,10 +110,10 @@ export default class MoviesController {
             response(res, {
                 statusCode: StatusCode.CREATED,
                 message: msg.movies.success.create,
-                data: { movies: moviesOutput, from, created },
+                data: { from, created, movies: moviesOutput },
             });
         } catch (error) {
-            handleError(res, error, { movies: moviesOutput, from, created });
+            handleError(res, error, { from, created, movies: moviesOutput });
         }
     }
 
@@ -124,24 +124,24 @@ export default class MoviesController {
         try {
             const { filters, amount } = req.body;
             const { type, difficulty } = filters;
-            const props: [number, Difficulty] = [amount, difficulty];
             let DBmovies: IMovie[] | null = null;
 
             if ("byDetails" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDetails(...props, type.byDetails);
-            } else if ("byDirector" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDirector(
-                    ...props,
-                    type.byDirector,
+                DBmovies = await MovieDatabaseService.getMoviesByDetails(
+                    amount,
+                    difficulty,
+                    type.byDetails,
                 );
+            } else if ("byDirector" in type) {
+                DBmovies = await MovieDatabaseService.getMoviesByDirector(amount, type.byDirector);
             } else if ("byActor" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByActor(...props, type.byActor);
+                DBmovies = await MovieDatabaseService.getMoviesByActor(amount, type.byActor);
             } else if ("byBoxOffice" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(...props);
+                DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(amount, difficulty);
             } else if ("byTopRated" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByTopRated(...props);
+                DBmovies = await MovieDatabaseService.getMoviesByTopRated(amount, difficulty);
             } else if ("byNewRelease" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByNewRelease(...props);
+                DBmovies = await MovieDatabaseService.getMoviesByNewRelease(amount, difficulty);
             }
             const movies: IMovie[] = DBmovies ? [...DBmovies] : [];
 
@@ -172,19 +172,6 @@ export default class MoviesController {
             handleError(res, error);
         }
     }
-
-    //filters:
-    // 1. genre
-    // 2. language (country)
-    // 3. release year
-    // 4. diractor
-    // 5. actor
-    // 6. universal
-    // 7. difficulty (rating)
-    // 8. oscars
-    // 9. new release
-    // 10. popular / top rated
-    // 12.
 
     async delete(req: Request, res: Response) {
         try {

@@ -3,11 +3,10 @@ import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
 import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
-import { initWarRoom, initWarRoomDetails, setWarRoomDetails } from "../utils/warRoom";
+import { getPlayerWarRoomInfo, setWarRoomDetails } from "../utils/warRoom";
 import { Game } from "../model/types/game";
 import { Card, ElectedCards } from "../model/types/card";
 import { PACK_CARDS_NUM } from "../model/constant";
-import { getPlayerWarRoomInfo } from "./utils";
 import {
     CreateNewRoom,
     Disconnect,
@@ -30,6 +29,7 @@ import {
 } from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { initWarRoom, initWarRoomDetails } from "../utils/init";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;

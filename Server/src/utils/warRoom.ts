@@ -1,5 +1,7 @@
+import { Socket } from "socket.io";
 import { Player } from "../model/types/player";
 import { WarRoomDetails, WarRoomProps, WarRooms } from "../model/types/warRoom";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
 export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
     let player: Player | undefined;
@@ -14,21 +16,6 @@ export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
     return { warRoom, player };
 };
 
-export const initWarRoom = () => {
-    return {
-        players: [],
-        gameCards: [],
-        game: undefined,
-    } as WarRoomProps;
-};
-
-export const initWarRoomDetails = (roomId?: string) => {
-    if(roomId){
-        return { numberOfPlayers: 0, numberOfFinishedPlayers: 0, roomId } as WarRoomDetails;
-    }
-    return { numberOfPlayers: 0, numberOfFinishedPlayers: 0 } as WarRoomDetails;
-};
-
 export const setWarRoomDetails = (warRoom: WarRoomProps, roomId: string) => {
     const numberOfPlayers = warRoom.players.length;
     const numberOfFinishedPlayers = checkNumberOfFinishedPlayers(warRoom.players);
@@ -41,4 +28,13 @@ export const checkIfAllPlayersFinished = (warRoom: WarRoomProps) => {
 
 export const checkNumberOfFinishedPlayers = (players: Player[]) => {
     return players.filter((player) => player.electedCards.order.length > 0).length;
+};
+
+export const getPlayerWarRoomInfo = (
+    socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
+    warRooms: WarRooms,
+) => {
+    const playerId = socket.id;
+    const { warRoom, player } = getRoomByPlayer(warRooms, playerId);
+    return { warRoom, player };
 };

@@ -9,7 +9,8 @@ import { TOP_RATED_NUM } from "../model/constant";
 import { currentYear } from "../utils/time";
 import { Difficulty } from "../model/types/union";
 import { IMovie } from "../model/interfaces/scheme";
-import { populateMovie } from "../utils/populate";
+import { populateMovie } from "../model/db/populate";
+import { specifyDifficulty } from "../model/db/difficulty";
 
 export default class MovieDatabaseService {
     public static createMovie = async (movieProps: Movie): Promise<IMovie> => {
@@ -42,9 +43,11 @@ export default class MovieDatabaseService {
         difficulty: Difficulty,
         filters: ByDetailsFilter,
     ): Promise<IMovie[] | null> => {
+        console.info(`Get movies with filters: ${filters}`);
         const { year, genre, language } = filters;
         if (!year) return null;
-
+        if (!genre) return null;
+        const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
                 {
@@ -53,6 +56,10 @@ export default class MovieDatabaseService {
                             $gte: year[0],
                             $lte: year[1],
                         },
+                        genre_ids: { $in: genre.map(g => parseInt(g)) },
+                        language: language,
+
+                        ...difficultyCriteria,
                     },
                 },
                 { $sample: { size: amount } },
@@ -66,13 +73,12 @@ export default class MovieDatabaseService {
 
     public static getMoviesByActor = async (
         amount: number,
-        difficulty: Difficulty,
         filters: ByActorFilter,
     ): Promise<IMovie[] | null> => {
         const { name } = filters;
 
         try {
-            console.info(`Get movie with actor name: ${name}`);
+            console.info(`Get movies with actor name: ${name}`);
             const actor = await ActorDatabaseService.getActorByName(name);
             if (!actor) return null;
 
@@ -90,16 +96,14 @@ export default class MovieDatabaseService {
 
     public static getMoviesByDirector = async (
         amount: number,
-        difficulty: Difficulty,
         filters: ByDirectorFilter,
     ): Promise<IMovie[] | null> => {
         const { name } = filters;
 
         try {
-            console.info(`Get movie with director name: ${name}`);
+            console.info(`Get movies with director name: ${name}`);
             const director = await DirectorDatabaseService.getDirectorByName(name);
             if (!director) return null;
-
             const movies = await MovieModel.aggregate([
                 { $match: { director: director._id } },
                 { $sample: { size: amount } },
@@ -116,9 +120,11 @@ export default class MovieDatabaseService {
         amount: number,
         difficulty: Difficulty,
     ): Promise<IMovie[] | null> => {
+        console.info(`Get box office movies`);
+        const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
-                { $match: { isBoxOffice: true } },
+                { $match: { isBoxOffice: true, ...difficultyCriteria } },
                 { $sample: { size: amount } },
                 ...populateMovie,
             ]).exec();
@@ -133,9 +139,11 @@ export default class MovieDatabaseService {
         amount: number,
         difficulty: Difficulty,
     ): Promise<IMovie[] | null> => {
+        console.info(`Get top rated movies`);
+        const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
-                { $match: { imdbRating: { $gt: TOP_RATED_NUM } } },
+                { $match: { imdbRating: { $gt: TOP_RATED_NUM }, ...difficultyCriteria } },
                 { $sample: { size: amount } },
                 ...populateMovie,
             ]);
@@ -150,9 +158,11 @@ export default class MovieDatabaseService {
         amount: number,
         difficulty: Difficulty,
     ): Promise<IMovie[] | null> => {
+        console.info(`Get new relese movies`);
+        const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
-                { $match: { release_date: currentYear } },
+                { $match: { release_date: currentYear, ...difficultyCriteria } },
                 { $sample: { size: amount } },
                 ...populateMovie,
             ]);

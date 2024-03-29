@@ -32,7 +32,6 @@ export const setCrew = async (id: number) => {
     let director: CrewModel | undefined;
     if (crewResults.length > 0) {
         const result = crewResults.find(
-            //TODO: can be more than one director
             (option: MovieCrew) => option.job === Director,
         );
         if (result && result.profile_path) {

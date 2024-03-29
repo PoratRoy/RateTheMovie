@@ -1,6 +1,7 @@
 import { CrewModel, Movie, VideoModel } from "../model/types/movie";
 import URL from "../model/constant/path.json";
 import { Difficulty, LanguageType } from "../model/types/union";
+import { WarRoomDetails, WarRoomProps } from "../model/types/warRoom";
 
 export const setNewMovie = (
     title: string,
@@ -57,4 +58,19 @@ export const setCrewModel = (name: string, keyImg: string, job: string) => {
 
 export const setVideoModel = (url: string, title: string) => {
     return { url, title } as VideoModel;
+};
+
+export const initWarRoom = () => {
+    return {
+        players: [],
+        gameCards: [],
+        game: undefined,
+    } as WarRoomProps;
+};
+
+export const initWarRoomDetails = (roomId?: string) => {
+    if (roomId) {
+        return { numberOfPlayers: 0, numberOfFinishedPlayers: 0, roomId } as WarRoomDetails;
+    }
+    return { numberOfPlayers: 0, numberOfFinishedPlayers: 0 } as WarRoomDetails;
 };
