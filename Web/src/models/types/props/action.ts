@@ -11,7 +11,7 @@ export type TimerHeaderProps = {
 
 export type TimerModalProps = {
     duration?: number;
-    handleTimeOut: () => void
+    handleTimeOut: () => void;
 };
 
 export type CountDownProps = {
@@ -19,10 +19,12 @@ export type CountDownProps = {
     time: number;
 };
 
-export type ToggelArrowProps = {
+export type ToggleArrowProps = {
     isOpen: boolean;
     handleOnClick: () => void;
     startDirection?: Diraction;
     endDirection?: Diraction;
     size?: IconSize;
 };
+
+export type ToggleDifficultyProps = {};

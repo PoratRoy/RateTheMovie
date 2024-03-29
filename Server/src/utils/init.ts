@@ -1,7 +1,6 @@
 import { CrewModel, Movie, VideoModel } from "../model/types/movie";
 import URL from "../model/constant/path.json";
-import { getDifficulty } from "./filter";
-import { LanguageType } from "../model/types/union";
+import { Difficulty, LanguageType } from "../model/types/union";
 
 export const setNewMovie = (
     title: string,
@@ -9,7 +8,7 @@ export const setNewMovie = (
     poster_path: string,
     imdbRating: string,
     imdbID: string,
-    popularity: number | undefined,
+    difficulty: Difficulty,
     isBoxOffice: boolean,
     language: string,
     genre_ids: number[],
@@ -19,7 +18,6 @@ export const setNewMovie = (
     director: CrewModel | undefined,
     actors: CrewModel[],
 ): Movie => {
-    const difficulty = getDifficulty(popularity);
     const movie: Movie = {
         title,
         id: id.toString(),

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import style from "./RoundPlayerPlace.module.css";
 import PlayerProfile from "../../../profile/PlayerProfile";
-import ToggelArrow from "../../../actions/widgets/ToggelArrow";
+import ToggleArrow from "../../../actions/widgets/toggle/ToggleArrow";
 import Collapse from "../../../actions/widgets/Collapse";
 import { PACK_CARDS_NUM } from "../../../../models/constant";
 import { motion } from "framer-motion";
@@ -43,7 +43,7 @@ const PlayerPlace: React.FC<PlayerPlaceProps> = ({ place, player }) => {
         <React.Fragment>
             <div className={style.rankingPlayerTabTop}>
                 <PlayerProfile currentPlayer={player} />
-                <ToggelArrow
+                <ToggleArrow
                     isOpen={isOpen}
                     handleOnClick={toggle}
                     startDirection="right"

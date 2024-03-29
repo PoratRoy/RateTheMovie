@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import style from "./ToggelArrow.module.css";
+import style from "./ToggleArrow.module.css";
 import { motion } from "framer-motion";
-import { getRotation, getStartIcon } from "../../../../utils/icon";
-import { ToggelArrowProps } from "../../../../models/types/props/action";
+import { getRotation, getStartIcon } from "../../../../../utils/icon";
+import { ToggleArrowProps } from "../../../../../models/types/props/action";
 
-const ToggelArrow: React.FC<ToggelArrowProps> = ({
+const ToggleArrow: React.FC<ToggleArrowProps> = ({
     isOpen,
     handleOnClick,
     startDirection,
@@ -34,4 +34,4 @@ const ToggelArrow: React.FC<ToggelArrowProps> = ({
     );
 };
 
-export default ToggelArrow;
+export default ToggleArrow;

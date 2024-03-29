@@ -1,0 +1,31 @@
+.radioDifficulty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: var(--secondary-border);
+  border-radius: var(--secondary-border-radius);
+  color: var(--text-color);
+  background-color: var(--secondary-color-focus);
+  height: 50px;
+  width: fit-content;
+  max-width: var(--btn-width-large);
+  overflow: hidden;
+}
+
+.radioDifficultyLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  height: 100%;
+}
+
+.radioDifficulty .radioDifficultyInput {
+  display: none;
+}
+
+
+
+
+

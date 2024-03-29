@@ -21,6 +21,7 @@ import DirectorDatabaseService from "../database/DirectorTable";
 import { Difficulty } from "../model/types/union";
 import { logMovieCount } from "../utils/logs";
 import { IActor, IDirector, IMovie } from "../model/interfaces/scheme";
+import { getDifficulty } from "../utils/filter";
 
 export default class MoviesController {
     async create(
@@ -70,6 +71,13 @@ export default class MoviesController {
                                 const { actors, director } = await setCrew(id);
                                 const video: VideoModel | undefined = await setVideo(id);
                                 const isBoxOffice: boolean = await setIsBoxOffice(id);
+                                const difficulty = getDifficulty(
+                                    popularity,
+                                    isBoxOffice,
+                                    original_language,
+                                    imdbRating,
+                                    year,
+                                );
 
                                 const newMovie: Movie = setNewMovie(
                                     title,
@@ -77,7 +85,7 @@ export default class MoviesController {
                                     poster_path,
                                     imdbRating,
                                     imdbID,
-                                    popularity,
+                                    difficulty,
                                     isBoxOffice,
                                     original_language,
                                     genre_ids,

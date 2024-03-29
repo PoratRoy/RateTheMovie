@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./FilterCollapse.module.css";
 import { FilterCollapseProps } from "../../../../models/types/props/filter";
-import ToggelArrow from "../../../actions/widgets/ToggelArrow";
+import ToggleArrow from "../../../actions/widgets/toggle/ToggleArrow";
 import useToggle from "../../../../hooks/global/useToggle";
 import Collapse from "../../../actions/widgets/Collapse";
 
@@ -17,7 +17,7 @@ const FilterCollapse: React.FC<FilterCollapseProps> = ({ children }) => {
     return (
         <section className={style.filterCollapseContainer}>
             <div>Change filters</div>
-            <ToggelArrow
+            <ToggleArrow
                 startDirection="down"
                 endDirection="up"
                 isOpen={isOpen}

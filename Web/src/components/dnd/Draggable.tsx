@@ -16,6 +16,7 @@ const Draggable: React.FC<DraggableProps> = ({ children, draggableId, args }) =>
 
     const handleOnTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
         // e.preventDefault();
+        //TODO: https://github.com/clauderic/dnd-kit/issues/791
     }
 
     return (

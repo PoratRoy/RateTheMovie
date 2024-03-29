@@ -13,6 +13,7 @@ import { SetupProps } from "../../../models/types/props/landing";
 import useMod from "../../../hooks/gameplay/useMod";
 import FilterInputs from "../filter/FilterInputs";
 import { START_BTN_ID } from "../../../models/constant/ids";
+import RadioDifficulty from "../../actions/widgets/toggle/ToggleDifficulty";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
@@ -52,6 +53,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
 
             {playerRole === "host" ? (
                 <React.Fragment>
+                    <RadioDifficulty />
                     <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
                     <FilterCollapse>
                         <FilterInputs setValue={setValue} />

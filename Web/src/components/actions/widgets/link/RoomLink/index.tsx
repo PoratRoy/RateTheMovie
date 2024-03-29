@@ -5,7 +5,7 @@ import { useErrorContext } from "../../../../../context/ErrorContext";
 import { RoomLinkProps } from "../../../../../models/types/props/link";
 import Collapse from "../../Collapse";
 import useToggle from "../../../../../hooks/global/useToggle";
-import ToggelArrow from "../../ToggelArrow";
+import ToggleArrow from "../../toggle/ToggleArrow";
 //TODO: not in use
 const RoomLink: React.FC<RoomLinkProps> = ({ roomLink, isDefaultOpen = false }) => {
     const [isOpen, toggle] = useToggle(isDefaultOpen);
@@ -19,7 +19,7 @@ const RoomLink: React.FC<RoomLinkProps> = ({ roomLink, isDefaultOpen = false }) 
         <section className={style.roomLink}>
             <div className={style.roomLinkTitle}>
                 <label>Share link with your friends</label>
-                <ToggelArrow
+                <ToggleArrow
                     isOpen={isOpen}
                     handleOnClick={toggle}
                     startDirection="right"
