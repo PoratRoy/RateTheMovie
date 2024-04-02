@@ -7,6 +7,14 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { BELOW_ID, CARD_ID, POINTS_ID, SHADOW_ID } from "../../models/constant/ids";
 import { PACK_CARDS_NUM } from "../../models/constant";
+import {
+    DELAY_ANIMATION_3,
+    DELAY_ANIMATION_4,
+    DURATION_ANIMATION_2,
+    DURATION_ANIMATION_3,
+    DURATION_ANIMATION_8,
+    SECOND_TIME,
+} from "../../models/constant/time";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
@@ -18,21 +26,26 @@ const useFinishAnimation = (activate: boolean | undefined) => {
         const order = currentPlayer?.electedCards.order;
         try {
             await Promise.all([
-                animation(`#${BELOW_ID}`, { opacity: 1, display: "block" }, { duration: 0.3 }),
+                animation(
+                    `#${BELOW_ID}`,
+                    { opacity: 1, display: "block" },
+                    { duration: DURATION_ANIMATION_3 },
+                ),
                 animation(
                     `#${CARD_ID}`,
                     { border: `2px solid ${PRIMARY_COLOR}` },
-                    { duration: 0.2 },
+                    { duration: DURATION_ANIMATION_2 },
                 ),
             ]);
-            await delayPromise(1000);
+            await delayPromise(SECOND_TIME);
+
             for (let i = 0; i < PACK_CARDS_NUM; i++) {
                 await animation(
                     `#${SHADOW_ID}-${i}`,
                     { opacity: 1, display: "block" },
-                    { duration: 0.3 },
+                    { duration: DURATION_ANIMATION_3 },
                 );
-                await delayPromise(300);
+                await delayPromise(DELAY_ANIMATION_3);
 
                 if (order && order[i]?.isCorrect === true) {
                     await animation(
@@ -42,15 +55,15 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                             opacity: [0, 1, 1, 0],
                             display: ["none", "block", "block", "none"],
                         },
-                        { duration: 0.8 },
+                        { duration: DURATION_ANIMATION_8 },
                     );
                     setIncreaseScore((prev) => (prev || 0) + 100);
                 }
-                await delayPromise(400);
+                await delayPromise(DELAY_ANIMATION_4);
             }
         } catch (error) {}
 
-        await delayPromise(1000);
+        await delayPromise(SECOND_TIME);
         if (isSingle()) setIsRoundFinished(true);
     };
 

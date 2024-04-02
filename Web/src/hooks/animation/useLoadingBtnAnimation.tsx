@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { PRIMARY_COLOR, SECONDARY_BORDER_RADIUS, TEXT_COLOR } from "../../style/root";
 import { BtnSize } from "../../models/types/union";
 import { setSize } from "../../style/btn";
+import { DURATION_ANIMATION_2 } from "../../models/constant/time";
 
 const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?: BtnSize) => {
     const [scope, animation] = useAnimate();
@@ -22,11 +23,15 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?
             },
             { duration: 0.2, ease: "linear" },
         );
-        await animation(`#${id}`, { rotate: 360 }, { duration: 1.2, ease: "linear", repeat: Infinity });
+        await animation(
+            `#${id}`,
+            { rotate: 360 },
+            { duration: 1.2, ease: "linear", repeat: Infinity },
+        );
     };
 
     const handleLoadingToBtnAnimation = async () => {
-        await animation(`#${id}`, { rotate: 0 }, { duration: 0.2 });
+        await animation(`#${id}`, { rotate: 0 }, { duration: DURATION_ANIMATION_2 });
         await animation(
             `#${id}`,
             {
@@ -37,7 +42,7 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?
                 borderRadius: SECONDARY_BORDER_RADIUS,
                 color: TEXT_COLOR,
             },
-            { duration: 0.2 },
+            { duration: DURATION_ANIMATION_2 },
         );
     };
 

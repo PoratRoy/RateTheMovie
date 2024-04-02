@@ -9,7 +9,7 @@ import useMod from "./useMod";
 import useMoviesGame from "./useBackup";
 import { CardFace } from "../../models/enums/animation";
 import Session from "../../utils/storage/sessionStorage";
-import { FILP_CARD_TIME } from "../../models/constant";
+import { FILP_CARD_TIME } from "../../models/constant/time";
 
 const useGameActions = (close: () => void) => {
     const {

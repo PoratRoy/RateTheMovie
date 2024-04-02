@@ -10,18 +10,23 @@ import {
     SETUP_ID,
     WAVE_ID,
 } from "../../models/constant/ids";
+import { DURATION_ANIMATION_1, DURATION_ANIMATION_2 } from "../../models/constant/time";
 
 const useLandingAnimation = (activate: SetupOption) => {
     const [scope, animation] = useAnimate();
     const { isNoneMode } = useMod();
 
     const handleToLandingAnimation = async () => {
-        await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: 0.1 }),
+        await animation(`#${SETUP_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_1 }),
             await Promise.all([
-                animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
-                animation(`#${DESCRIPTION_ID}`, { opacity: 1 }, { duration: 0.1 }),
-                animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 1 }, { duration: 0.1 }),
-                animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: 0.1 }),
+                animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
+                animation(`#${DESCRIPTION_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
+                animation(
+                    `#${MULTIPLAYER_BTN_ID}`,
+                    { opacity: 1 },
+                    { duration: DURATION_ANIMATION_1 },
+                ),
+                animation(`#${WAVE_ID}`, { height: "65vh" }, { duration: DURATION_ANIMATION_1 }),
             ]);
         await animation(`#${SETUP_ID}`, { display: "none" }),
             await Promise.all([
@@ -35,12 +40,12 @@ const useLandingAnimation = (activate: SetupOption) => {
     const handleToSetupAnimation = async () => {
         await animation(`#${SETUP_ID}`, { opacity: 0 });
         await Promise.all([
-            animation(`#${DESCRIPTION_ID}`, { opacity: 0 }, { duration: 0.2 }),
-            animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 0 }, { duration: 0.2 }),
+            animation(`#${DESCRIPTION_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_2 }),
+            animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_2 }),
         ]);
         await Promise.all([
-            animation(`#${PLAY_BTN_ID}`, { opacity: 0 }, { duration: 0.1 }),
-            animation(`#${WAVE_ID}`, { height: "100%" }, { duration: 0.1 }),
+            animation(`#${PLAY_BTN_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_1 }),
+            animation(`#${WAVE_ID}`, { height: "100%" }, { duration: DURATION_ANIMATION_1 }),
         ]);
         await Promise.all([
             animation(`#${PLAY_BTN_ID}`, { display: "none" }),
@@ -51,7 +56,7 @@ const useLandingAnimation = (activate: SetupOption) => {
         await animation(
             `#${SETUP_ID}`,
             { opacity: 1, display: "flex", flexDirection: "column", alignItems: "center" },
-            { duration: 0.1 },
+            { duration: DURATION_ANIMATION_1 },
         );
     };
 

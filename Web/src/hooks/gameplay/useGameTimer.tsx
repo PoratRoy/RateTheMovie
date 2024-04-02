@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useMod from "./useMod";
 import { useAnimationContext } from "../../context/AnimationContext";
-import { START_GAME_TIMER } from "../../models/constant";
+import { START_GAME_TIMER } from "../../models/constant/time";
 import { CardFace } from "../../models/enums/animation";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 

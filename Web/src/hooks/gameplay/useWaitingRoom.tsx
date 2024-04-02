@@ -4,7 +4,7 @@ import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { CardFace } from "../../models/enums/animation";
-import { START_GAME_TIME } from "../../models/constant";
+import { START_GAME_TIME } from "../../models/constant/time";
 
 const useWaitingRoom = () => {
     const { fetchLoading, gameCards, currentPlayer, setIsGameStart } = useGamePlayContext();

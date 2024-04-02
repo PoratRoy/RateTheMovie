@@ -1,7 +1,6 @@
 export const PACK_CARDS_NUM = 4;
 export const DISCOVERD_MOVIES_NUM = 20;
 export const ROUND_NUM = 5;
-export const START_TIMER = 3;
 export const SHUFFLE_ATTEMPT = 5;
 
 export const FormSetValue = {
@@ -9,14 +8,6 @@ export const FormSetValue = {
     shouldTouch: true,
     shouldValidate: true,
 };
-
-export const START_GAME_TIME = 14000;
-export const START_GAME_TIMER = START_TIMER * 1000 + 500;
-
-export const GAME_TIME = 120;
-export const MODAL_TIME = 10;
-
-export const FILP_CARD_TIME = 300;
 
 export const SinglePlayerRoom = "single-player-room";
 

@@ -8,7 +8,7 @@ import AvatarSwiper from "../../../actions/components/AvatarSwiper";
 import { setupInputs } from "../../../../models/initialization/form";
 import NameInput from "../../../actions/widgets/input/NameInput";
 import Avatar from "../../../profile/Avatar";
-
+//TODO: not in use
 const PreviewProfile: React.FC<PreviewProfileProps> = ({ setValue, player, avatarId, watch }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
 

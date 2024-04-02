@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./CountDown.module.css";
 import { CountDownProps } from "../../../../models/types/props/action";
+import { SECOND_TIME } from "../../../../models/constant/time";
 
 const CountDown: React.FC<CountDownProps> = ({ time, closeTimer }) => {
     const [counter, setCounter] = useState<number>(time);
@@ -12,7 +13,7 @@ const CountDown: React.FC<CountDownProps> = ({ time, closeTimer }) => {
         } else {
             timer = setInterval(() => {
                 setCounter((prev) => prev - 1);
-            }, 1000);
+            }, SECOND_TIME);
         }
         return () => clearInterval(timer);
     }, [counter]);

@@ -1,6 +1,7 @@
 import { useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { roundToOneDecimal } from "../../utils/calc";
+import { DURATION_ANIMATION_5 } from "../../models/constant/time";
 
 const useCountingScoreAnimation = (score: number) => {
     const count = useMotionValue(score);
@@ -8,7 +9,7 @@ const useCountingScoreAnimation = (score: number) => {
 
     useEffect(() => {
         if (score >= 0) {
-            const animation = animate(count, score, { duration: 0.5 });
+            const animation = animate(count, score, { duration: DURATION_ANIMATION_5 });
             return animation.stop;
         }
     }, [score]);

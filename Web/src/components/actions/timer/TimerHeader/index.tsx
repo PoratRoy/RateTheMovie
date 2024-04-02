@@ -3,7 +3,7 @@ import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
 import useFinish from "../../../../hooks/gameplay/useFinish";
-import { GAME_TIME } from "../../../../models/constant";
+import { GAME_TIME, SECOND_TIME } from "../../../../models/constant/time";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import Session from "../../../../utils/storage/sessionStorage";
 import { SessionKey } from "../../../../models/enums/session";
@@ -20,7 +20,7 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
             timeLockRef.current = true;
             pause();
             finishGame();
-        }, 1000);
+        }, SECOND_TIME);
     };
 
     const { expiryTimestamp, progress, pause, restart, refresh } = useTimer(

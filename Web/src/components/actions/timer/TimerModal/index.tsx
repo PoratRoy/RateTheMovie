@@ -2,7 +2,7 @@ import React from "react";
 import style from "./TimerModal.module.css";
 import { motion } from "framer-motion";
 import { TimerModalProps } from "../../../../models/types/props/action";
-import { MODAL_TIME } from "../../../../models/constant";
+import { MODAL_TIME } from "../../../../models/constant/time";
 import useTimer from "../../../../hooks/multiplayer/useTimer";
 
 const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {

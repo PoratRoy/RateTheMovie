@@ -10,6 +10,7 @@ import TimerModal from "../../../actions/timer/TimerModal";
 import ExitGameBtn from "../../../actions/widgets/btn/ExitGameBtn";
 import useGameActions from "../../../../hooks/gameplay/useGameActions";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import { SECOND_TIME } from "../../../../models/constant/time";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, gameOver }) => {
     const { rivalPlayers } = useSocketContext();
@@ -22,7 +23,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
     const handleTimeOut = () => {
         setTimeout(() => {
             gameOver ? setFinish(true) : handleContinue();
-        }, 1000);
+        }, SECOND_TIME);
     };
 
     return (

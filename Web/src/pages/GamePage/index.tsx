@@ -5,7 +5,7 @@ import GameLayout from "../layout/GameLayout";
 import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
 import useCheckMoviesAlreadySet from "../../api/hooks/useCheckMoviesAlreadySet";
 import CountDown from "../../components/actions/animation/CountDown";
-import { START_TIMER } from "../../models/constant";
+import { START_TIMER } from "../../models/constant/time";
 import useGameTimer from "../../hooks/gameplay/useGameTimer";
 import SomethingWentWrong from "../../components/error/SomethingWentWrong";
 
