@@ -114,7 +114,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const setShuffle = (action: RoundAction) => {
         setGame((prev) => {
-            if(!prev) return prev;
+            if (!prev) return prev;
             const game = {
                 ...prev,
                 shuffleAttempt:
@@ -153,6 +153,20 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         createSetGameState("isRefreshed")(isRefreshed);
     };
 
+    const setPlayerToDefault = () => {
+        setCurrentPlayer((player) => {
+            if (!player) return player;
+            const currentPlayer: Player = {
+                ...player,
+                electedCards: { order: [] },
+                connection: undefined,
+                score: 0,
+            };
+            Session.set(SessionKey.CURRENT_PLAYER, currentPlayer);
+            return currentPlayer;
+        });
+    };
+
     const createSetGameState = <K extends keyof Game>(key: K): SetGameStateFunction<K> => {
         return (value) => {
             setGame((prev) => {
@@ -174,16 +188,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         setRoundNumber("reset");
         setShuffle("reset");
         setBackupMovies([]);
-        setCurrentPlayer((player) => {
-            if (!player) return player;
-            const currentPlayer: Player = {
-                ...player,
-                electedCards: { order: [] },
-                score: 0,
-            };
-            Session.set(SessionKey.CURRENT_PLAYER, currentPlayer);
-            return currentPlayer;
-        });
+        setPlayerToDefault();
         setGame((prev) => {
             if (!prev) return prev;
             return {
@@ -210,9 +215,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.BACKUP);
         Session.remove(SessionKey.GAME_CARDS);
         setGameCards(initGameCardsList());
-        setCurrentPlayer(undefined);
         setGame(undefined);
         setBackupMovies(undefined);
+        setPlayerToDefault();
     };
 
     return (

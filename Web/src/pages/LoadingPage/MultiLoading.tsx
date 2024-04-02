@@ -7,6 +7,7 @@ import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import CommonLayout from "../layout/CommonLayout";
 import CopyRoomLinkBtn from "../../components/actions/widgets/btn/CopyRoomLinkBtn";
 import WatingRoom from "../../components/profile/WatingRoom";
+import { LOADING_START_BTN_ID } from "../../models/constant/ids";
 
 const MultiLoading: React.FC<MultiLoadingProps> = ({
     isLoading,
@@ -20,7 +21,12 @@ const MultiLoading: React.FC<MultiLoadingProps> = ({
     return (
         <CommonLayout>
             <section className={style.loadingPageBtnStatus}>
-                <StartGameBtn loading={isLoading} onClicked={onClicked} />
+                <StartGameBtn
+                    title="Start Game"
+                    loading={isLoading}
+                    onClicked={onClicked}
+                    id={LOADING_START_BTN_ID}
+                />
                 <div className={style.loadingGameStatus}>
                     {playerRole === "host"
                         ? "Waiting for other players..."

@@ -1,16 +1,22 @@
 import React from "react";
 import PrimaryBtn from "../../../core/button/PrimaryBtn";
 import { StartGameBtnProps } from "../../../../../models/types/props/btn";
-import { LOADING_START_BTN_ID } from "../../../../../models/constant/ids";
 
-const StartGameBtn: React.FC<StartGameBtnProps> = ({ loading, onClicked }) => {
+const StartGameBtn: React.FC<StartGameBtnProps> = ({
+    loading,
+    title,
+    id,
+    onClicked = undefined,
+    type = "button",
+}) => {
     return (
         <PrimaryBtn
-            id={LOADING_START_BTN_ID}
-            title="Start Game"
+            id={id}
+            title={title}
             onClicked={onClicked}
             loading={loading}
             size="large"
+            type={type}
         />
     );
 };

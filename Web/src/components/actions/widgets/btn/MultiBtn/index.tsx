@@ -1,9 +1,17 @@
 import React from "react";
-import SecondaryBtn from "../../../core/button/SecondaryBtn";
 import { MultiBtnProps } from "../../../../../models/types/props/btn";
+import PrimaryBtn from "../../../core/button/PrimaryBtn";
 
 const MultiBtn: React.FC<MultiBtnProps> = ({ id, title, onClicked }) => {
-    return <SecondaryBtn id={id} onClicked={onClicked} title={title} />;
+    return (
+        <PrimaryBtn
+            id={id}
+            title={title}
+            onClicked={onClicked}
+            type={"button"}
+            size="large"
+        />
+    );
 };
 
 export default MultiBtn;

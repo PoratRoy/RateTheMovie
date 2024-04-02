@@ -6,14 +6,10 @@ import SingleLoading from "./SingleLoading";
 //https://unused-css.com/blog/animated-down-arrow/
 
 const LoadingPage: React.FC<LoadingPageProps> = (props) => {
-    const { game, isLoading, onClicked } = props;
+    const { game } = props;
     const { isMulti } = useMod();
 
-    return isMulti(game?.mod) ? (
-        <MultiLoading {...props} />
-    ) : (
-        <SingleLoading isLoading={isLoading} onClicked={onClicked} />
-    );
+    return isMulti(game?.mod) ? <MultiLoading {...props} /> : <SingleLoading />;
 };
 
 export default LoadingPage;

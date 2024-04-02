@@ -60,8 +60,12 @@ export type PauseBtnProps = OnClickProps;
 
 export type NextRoundBtnProps = CloseProps;
 
-export type StartGameBtnProps = OnClickProps & {
-    loading: boolean;
+export type StartGameBtnProps = {
+    id: string;
+    title: string;
+    loading?: boolean;
+    onClicked?: () => void;
+    type?: "button" | "submit";
 };
 
 export type QuitCircleBtnProps = CloseProps;

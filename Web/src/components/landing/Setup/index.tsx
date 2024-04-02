@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import RoundsNumber from "../../actions/components/RoundsNumber";
 import FilterCollapse from "../filter/FilterCollapse";
 import PreviewProfile from "../profile/PreviewProfile";
@@ -14,6 +13,7 @@ import useMod from "../../../hooks/gameplay/useMod";
 import FilterInputs from "../filter/FilterInputs";
 import { START_BTN_ID } from "../../../models/constant/ids";
 import RadioDifficulty from "../../actions/widgets/toggle/ToggleDifficulty";
+import StartGameBtn from "../../actions/widgets/btn/StartGameBtn";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
@@ -49,7 +49,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
                 watch={watch}
             />
 
-            <PlayBtn id={START_BTN_ID} type="submit" title={title} />
+            <StartGameBtn id={START_BTN_ID} type="submit" title={title} />
 
             {playerRole === "host" ? (
                 <React.Fragment>

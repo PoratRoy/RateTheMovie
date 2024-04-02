@@ -22,4 +22,4 @@ export type LoadingPageProps = {
 
 export type MultiLoadingProps = LoadingPageProps;
 
-export type SingleLoadingProps = Omit<LoadingPageProps, "rivalPlayers" | "playerRole" | "game">;
+export type SingleLoadingProps = {};

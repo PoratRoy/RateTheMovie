@@ -1,24 +1,9 @@
 import React from "react";
-import PrimaryBtn from "../../../core/button/PrimaryBtn";
 import { PlayBtnProps } from "../../../../../models/types/props/btn";
+import SecondaryBtn from "../../../core/button/SecondaryBtn";
 
-const PlayBtn: React.FC<PlayBtnProps> = ({
-    id,
-    title,
-    onClicked,
-    loading = undefined,
-    type = "button",
-}) => {
-    return (
-        <PrimaryBtn
-            id={id}
-            title={title}
-            onClicked={onClicked}
-            loading={loading}
-            type={type}
-            size="large"
-        />
-    );
+const PlayBtn: React.FC<PlayBtnProps> = ({ id, title, onClicked }) => {
+    return <SecondaryBtn id={id} onClicked={onClicked} title={title} />;
 };
 
 export default PlayBtn;
