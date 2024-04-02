@@ -2,21 +2,24 @@ import React from "react";
 import Modal from "../../core/Modal";
 import style from "./RoundEndModal.module.css";
 import { RoundEndModalProps } from "../../../../models/types/props/view";
-import CardsReveal from "../../../actions/components/CardsReveal";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import PlayerScore from "../../core/PlayerScore";
 import PlayAgainBtn from "../../../actions/widgets/btn/PlayAgainBtn";
 import NextRoundBtn from "../../../actions/widgets/btn/NextRoundBtn";
 import AdditionalBtns from "../../core/AdditionalBtns";
+import PackOfResult from "../../../cards/pack/PackOfResult";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver }) => {
-    const { currentPlayer } = useGamePlayContext();
+    const { currentPlayer, correctOrder } = useGamePlayContext();
 
     return (
         <Modal close={close} title={title} gameOver={gameOver}>
             <section className={style.roundEndModal}>
                 <PlayerScore score={currentPlayer?.score || 0} />
-                <CardsReveal />
+                <section className={style.roundEndResultCards}>
+                    <PackOfResult revealCards={correctOrder} currentPlayer={currentPlayer} />
+                </section>
+
                 {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
                 <AdditionalBtns
                     close={close}

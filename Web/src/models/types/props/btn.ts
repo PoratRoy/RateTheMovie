@@ -52,8 +52,6 @@ export type EditProfileBtnProps = OnClickProps & {
     toggle: boolean;
 };
 
-export type RevealOrderBtnProps = OnClickProps;
-
 export type CircleBtnProps = OnClickProps & {
     Icon: React.ReactNode;
 };
