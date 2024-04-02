@@ -19,3 +19,7 @@ export type LoadingPageProps = {
     isLoading: boolean;
     game: Game | undefined;
 };
+
+export type MultiLoadingProps = LoadingPageProps;
+
+export type SingleLoadingProps = Omit<LoadingPageProps, "rivalPlayers" | "playerRole" | "game">;

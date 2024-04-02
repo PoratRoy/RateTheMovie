@@ -23,32 +23,28 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
         }
     };
 
-    return (
+    return game?.isGameStart ? (
         <React.Fragment>
-            {game?.isGameStart ? (
-                <React.Fragment>
-                    {isPreview ? (
-                        <PreviewPage />
-                    ) : (
-                        <section className={style.gameContainer}>
-                            <Header />
-                            <section ref={scope} className={style.gameChildrenContainer}>
-                                {children}
-                            </section>
-                            <GameModal />
-                        </section>
-                    )}
-                </React.Fragment>
+            {isPreview ? (
+                <PreviewPage />
             ) : (
-                <LoadingPage
-                    rivalPlayers={rivalPlayers}
-                    playerRole={currentPlayer?.role}
-                    onClicked={handleClickStartGame}
-                    isLoading={isWaiting}
-                    game={game}
-                />
+                <section className={style.gameContainer}>
+                    <Header />
+                    <section ref={scope} className={style.gameChildrenContainer}>
+                        {children}
+                    </section>
+                    <GameModal />
+                </section>
             )}
         </React.Fragment>
+    ) : (
+        <LoadingPage
+            rivalPlayers={rivalPlayers}
+            playerRole={currentPlayer?.role}
+            onClicked={handleClickStartGame}
+            isLoading={isWaiting}
+            game={game}
+        />
     );
 };
 

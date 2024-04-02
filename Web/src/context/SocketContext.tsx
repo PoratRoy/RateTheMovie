@@ -78,8 +78,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
     const { setIsFlipCard } = useAnimationContext();
-    const { game, setGame, setIsGameStart, setIsRoundFinished, setIsRefeshed } =
-        useGamePlayContext();
+    const { game, setGame, setIsRoundFinished, setIsRefeshed } = useGamePlayContext();
     const { handleQuit } = useGameActions(() => {});
     const { isMulti } = useMod();
 
@@ -179,7 +178,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const handleStartGame = () => {
-        setIsGameStart(true);
         socket.emit(StartGame);
     };
 
@@ -229,7 +227,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             const player: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
             const rivalPlayers = filterOnlyRivalPlayers(players, player);
             Session.set(SessionKey.RIVAL_PLAYERS, rivalPlayers);
-            console.log("1 handleRoundFinished Rival Players", rivalPlayers)
+            console.log("1 handleRoundFinished Rival Players", rivalPlayers);
             setRivalPlayers(rivalPlayers);
 
             let isAllPlacedCards = true;
