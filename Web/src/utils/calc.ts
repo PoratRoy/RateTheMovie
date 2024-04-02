@@ -33,15 +33,12 @@ export const sortMovies = (a: Movie, b: Movie) => {
     return rateA - rateB;
 };
 
-export const sortPlayersByScore2 = (players: Player[]): Player[] => {
-    return players.slice().sort((playerA, playerB) => playerB.score - playerA.score);
-};
-
-export const sortPlayersByScore = (players: Player[]): Player[][] => {
+export const sortPlayersByScore = (players: (Player | undefined)[]): Player[][] => {
     const groupedPlayers: Player[][] = [];
+    const validPlayers = players.filter(player => player !== undefined) as Player[];
 
-    players.sort((a, b) => b.score - a.score);
-    players.forEach(player => {
+    validPlayers.sort((a, b) => b.score - a.score);
+    validPlayers.forEach(player => {
         if (groupedPlayers.length === 0 || groupedPlayers[groupedPlayers.length - 1][0].score !== player.score) {
             // If the last group's score doesn't match the current player's score, start a new group
             groupedPlayers.push([player]);

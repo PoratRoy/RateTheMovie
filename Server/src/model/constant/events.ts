@@ -8,6 +8,7 @@ export const PlayerFinish = "playerFinish";
 export const FinishRound = "finishRound";
 export const NextRound = "nextRound";
 export const LeaveRoom = "leaveRoom";
+export const Reconnect = "reconnect";
 export const Disconnect = "disconnect";
 
 export const GameStarted = "gameStarted";
@@ -16,4 +17,5 @@ export const PlayerFinished = "PlayerFinished";
 export const RoundFinished = "roundFinished";
 export const NextRoundStarted = "nextRoundStarted";
 export const GameEnded = "gameEnded";
+export const PlayerRecconected = "playerRecconected";
 export const PlayerDisconnect = "playerDisconnect";

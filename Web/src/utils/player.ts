@@ -4,3 +4,8 @@ export const filterRivalPlayers = (players: Player[], playerId: string | undefin
     if (!playerId) return players;
     return players.filter((p) => p.id !== playerId);
 };
+
+export const filterOnlyRivalPlayers = (players: Player[], currentPlayer: Player | undefined) => {
+    if (!currentPlayer?.id) return [];
+    return players.filter((p) => p.id !== currentPlayer.id);
+}

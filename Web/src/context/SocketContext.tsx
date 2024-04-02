@@ -7,7 +7,7 @@ import { useErrorContext } from "./ErrorContext";
 import { Card, ElectedCards } from "../models/types/card";
 import useHandleMovies from "../hooks/gameplay/useHandleMovies";
 import { useGamePlayContext } from "./GamePlayContext";
-import { filterRivalPlayers } from "../utils/player";
+import { filterOnlyRivalPlayers, filterRivalPlayers } from "../utils/player";
 import {
     CreateNewRoom,
     GameStarted,
@@ -26,10 +26,12 @@ import {
     NextRound,
     LeaveRoom,
     GameEnded,
+    Reconnect,
+    PlayerRecconected,
 } from "../models/constant/socketEvents";
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
-import { PACK_CARDS_NUM } from "../models/constant";
+import { FILP_CARD_TIME, PACK_CARDS_NUM } from "../models/constant";
 import { useAnimationContext } from "./AnimationContext";
 import { CardFace } from "../models/enums/animation";
 import useGameActions from "../hooks/gameplay/useGameActions";
@@ -37,7 +39,7 @@ import useMod from "../hooks/gameplay/useMod";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
-    rivalPlayers: Player[];
+    rivalPlayers: Player[] | undefined;
     handleCreateNewRoom: (callback: (details: WarRoomDetails) => void) => void;
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
@@ -54,8 +56,6 @@ export const SocketContext = createContext<{
     handlePlayerFinish: (electedCards: ElectedCards, score: number) => void;
     handlePlayerLeave: () => void;
     handleNextRound: (currentRound: number, cards: Card[]) => void;
-    leaderBoardPlayers: Player[];
-    resetSocketContext: () => void;
     clearSocketContext: () => void;
 }>({
     rivalPlayers: [],
@@ -68,20 +68,17 @@ export const SocketContext = createContext<{
     handlePlayerFinish: () => {},
     handleNextRound: () => {},
     handlePlayerLeave: () => {},
-    leaderBoardPlayers: [],
-    resetSocketContext: () => {},
     clearSocketContext: () => {},
 });
 
 export const useSocketContext = () => useContext(SocketContext);
 
 const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [rivalPlayers, setRivalPlayers] = useState<Player[]>([]);
-    const [leaderBoardPlayers, setLeaderBoardPlayers] = useState<Player[]>([]);
+    const [rivalPlayers, setRivalPlayers] = useState<Player[] | undefined>();
     const { handleAlert } = useErrorContext();
     const { handleGameCards } = useHandleMovies();
     const { setIsFlipCard } = useAnimationContext();
-    const { game, currentPlayer, setGame, setIsGameStart, setIsRoundFinished } =
+    const { game, setGame, setIsGameStart, setIsRoundFinished, setIsRefeshed } =
         useGamePlayContext();
     const { handleQuit } = useGameActions(() => {});
     const { isMulti } = useMod();
@@ -95,6 +92,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         if (!socket.connected) {
             socket.connect();
+            const player: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            const game: Game | undefined = Session.get(SessionKey.GAME);
+            if (player && game) {
+                socket.emit(Reconnect, player.id);
+            }
         }
 
         socket.on("connect", () => {
@@ -117,17 +119,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             const sessionRivalPlayers: Player[] | undefined = Session.get(SessionKey.RIVAL_PLAYERS);
             if (sessionRivalPlayers) setRivalPlayers(sessionRivalPlayers);
         }
-        if (!leaderBoardPlayers) {
-            const sessionRivalPlayers: Player[] | undefined = Session.get(SessionKey.RIVAL_PLAYERS);
-            const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
-            if (sessionRivalPlayers && sessionCurrentPlayer)
-                setLeaderBoardPlayers([...sessionRivalPlayers, sessionCurrentPlayer]);
-        }
     };
     setStateFromSession();
 
     //TODO: usecallback?
     useEffect(() => {
+        const currentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
         const role = currentPlayer?.role;
         if (game && isMulti(game.mod) && role === "host") {
             handleGame(game);
@@ -167,7 +164,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
                 if (warRoom && currecntPlayer) {
                     setRivalPlayers((prev) => {
-                        const players = [...prev, ...rivalPlayers];
+                        const players = prev ? [...prev, ...rivalPlayers] : [...rivalPlayers];
                         Session.set(SessionKey.RIVAL_PLAYERS, players);
                         return players;
                     });
@@ -203,7 +200,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const handlePlayerJoined = (player: Player) => {
             setRivalPlayers((prev) => {
-                const players = [...prev, player];
+                const players = prev ? [...prev, player] : [player];
                 Session.set(SessionKey.RIVAL_PLAYERS, players);
                 return players;
             });
@@ -229,7 +226,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             //Time of finish animation
             const time = 3000 + PACK_CARDS_NUM * 1000;
             const { players } = warRoom;
-            setLeaderBoardPlayers(players);
+            const player: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
+            const rivalPlayers = filterOnlyRivalPlayers(players, player);
+            Session.set(SessionKey.RIVAL_PLAYERS, rivalPlayers);
+            console.log("1 handleRoundFinished Rival Players", rivalPlayers)
+            setRivalPlayers(rivalPlayers);
+
             let isAllPlacedCards = true;
             for (const player of players) {
                 if (!player.electedCards.order[0]?.id) {
@@ -251,12 +253,19 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 setGame(game);
                 handleGameCards(gameCards);
                 Session.set(SessionKey.GAME, game);
-                setIsFlipCard((prev) => (prev === CardFace.BACK ? CardFace.FRONT : CardFace.BACK));
+                setTimeout(() => {
+                    setIsFlipCard(CardFace.FRONT);
+                }, FILP_CARD_TIME);
             }
+        };
+
+        const handleReconnection = () => {
+            setIsRefeshed(true);
         };
 
         const handlePlayerDisconnected = (player: Player) => {
             setRivalPlayers((prev) => {
+                if (!prev) return [];
                 const players = filterRivalPlayers(prev, player.id);
                 Session.set(SessionKey.RIVAL_PLAYERS, players);
                 return players;
@@ -283,6 +292,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         socket.on(PlayerFinished, handlePlayerFinished);
         socket.on(RoundFinished, handleRoundFinished);
         socket.on(NextRoundStarted, handleNextRoundStarted);
+        socket.on(PlayerRecconected, handleReconnection);
         socket.on(PlayerDisconnect, handlePlayerDisconnected);
         socket.on(GameEnded, handleGameEnded);
 
@@ -292,19 +302,15 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             socket.off(PlayerFinished, handlePlayerFinished);
             socket.off(RoundFinished, handleRoundFinished);
             socket.off(NextRoundStarted, handleNextRoundStarted);
+            socket.off(PlayerRecconected, handleReconnection);
             socket.off(PlayerDisconnect, handlePlayerDisconnected);
             socket.off(GameEnded, handleGameEnded);
         };
     }, [socket]);
 
-    const resetSocketContext = () => {
-        setLeaderBoardPlayers([]);
-    };
-
     const clearSocketContext = () => {
         Session.remove(SessionKey.RIVAL_PLAYERS);
         setRivalPlayers([]);
-        setLeaderBoardPlayers([]);
     };
 
     return (
@@ -320,8 +326,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 handlePlayerFinish,
                 handleNextRound,
                 handlePlayerLeave,
-                leaderBoardPlayers,
-                resetSocketContext,
                 clearSocketContext,
             }}
         >

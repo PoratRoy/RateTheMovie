@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { SessionKey } from "../models/enums/session";
 import Session from "../utils/storage/sessionStorage";
-import { Game } from "../models/types/game";
+import { Game, SetGameStateFunction } from "../models/types/game";
 import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
@@ -38,6 +38,7 @@ export const GamePlayContext = createContext<{
     setIsPlayerFinishRound: (isPlayerFinishRound: boolean) => void;
     setIsRoundFinished: (isRoundFinished: boolean) => void;
     setIsGameOver: (isGameOver: boolean) => void;
+    setIsRefeshed: (isRefreshed: boolean) => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -67,6 +68,7 @@ export const GamePlayContext = createContext<{
     setIsPlayerFinishRound: () => {},
     setIsRoundFinished: () => {},
     setIsGameOver: () => {},
+    setIsRefeshed: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -106,108 +108,60 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const setRoundNumber = (action: RoundAction, round?: number) => {
         let currentRound = 1;
         if (round) currentRound = action === "increase" ? round + 1 : round - 1;
-
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    currentRound,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
-        });
+        createSetGameState("currentRound")(currentRound);
         return currentRound;
     };
 
     const setShuffle = (action: RoundAction) => {
         setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    shuffleAttempt:
-                        action === "reset"
-                            ? SHUFFLE_ATTEMPT
-                            : action === "decrease"
-                              ? prev.shuffleAttempt - 1
-                              : prev.shuffleAttempt + 1,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
+            if(!prev) return prev;
+            const game = {
+                ...prev,
+                shuffleAttempt:
+                    action === "reset"
+                        ? SHUFFLE_ATTEMPT
+                        : action === "decrease"
+                          ? prev.shuffleAttempt - 1
+                          : prev.shuffleAttempt + 1,
+            };
+            Session.set(SessionKey.GAME, game);
+            return game;
         });
     };
 
     const setIsGameStart = (isGameStart: boolean) => {
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    isGameStart,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
-        });
+        createSetGameState("isGameStart")(isGameStart);
     };
 
     const setIsRoundStart = (isRoundStart: boolean) => {
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    isRoundStart,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
-        });
+        createSetGameState("isRoundStart")(isRoundStart);
     };
 
     const setIsPlayerFinishRound = (isPlayerFinishRound: boolean) => {
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    isPlayerFinishRound,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
-        });
+        createSetGameState("isPlayerFinishRound")(isPlayerFinishRound);
     };
 
     const setIsRoundFinished = (isRoundFinished: boolean) => {
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    isRoundFinished,
-                };
-                Session.set(SessionKey.GAME, game);
-                return game;
-            }
-            return prev;
-        });
+        createSetGameState("isRoundFinished")(isRoundFinished);
     };
 
     const setIsGameOver = (isGameOver: boolean) => {
-        setGame((prev) => {
-            if (prev) {
-                const game = {
-                    ...prev,
-                    isGameOver,
-                };
+        createSetGameState("isGameOver")(isGameOver);
+    };
+
+    const setIsRefeshed = (isRefreshed: boolean) => {
+        createSetGameState("isRefreshed")(isRefreshed);
+    };
+
+    const createSetGameState = <K extends keyof Game>(key: K): SetGameStateFunction<K> => {
+        return (value) => {
+            setGame((prev) => {
+                if (!prev) return prev;
+                const game = { ...prev, [key]: value };
                 Session.set(SessionKey.GAME, game);
                 return game;
-            }
-            return prev;
-        });
+            });
+        };
     };
 
     const resetRoundContextState = () => {
@@ -231,16 +185,14 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             return currentPlayer;
         });
         setGame((prev) => {
-            if (prev) {
-                return {
-                    ...prev,
-                    isGameStart: true,
-                    isRoundStart: false,
-                    isPlayerFinishRound: false,
-                    isRoundFinished: false,
-                };
-            }
-            return prev;
+            if (!prev) return prev;
+            return {
+                ...prev,
+                isGameStart: true,
+                isRoundStart: false,
+                isPlayerFinishRound: false,
+                isRoundFinished: false,
+            };
         });
     };
 
@@ -294,9 +246,94 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setIsPlayerFinishRound,
                 setIsRoundFinished,
                 setIsGameOver,
+                setIsRefeshed,
             }}
         >
             {children}
         </GamePlayContext.Provider>
     );
 };
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             currentRound,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isGameStart,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isRoundStart,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isPlayerFinishRound,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isRoundFinished,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isGameOver,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });
+
+// setGame((prev) => {
+//     if (prev) {
+//         const game = {
+//             ...prev,
+//             isRefreshed,
+//         };
+//         Session.set(SessionKey.GAME, game);
+//         return game;
+//     }
+//     return prev;
+// });

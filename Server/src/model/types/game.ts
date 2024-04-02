@@ -12,4 +12,5 @@ export type Game = {
     isRoundStart: boolean;
     isPlayerFinishRound: boolean;
     isRoundFinished: boolean;
+    isRefreshed: boolean;
 };

@@ -7,6 +7,7 @@ import { useSocketContext } from "../../../context/SocketContext";
 import Description from "../../common/Description";
 import ImdbIcon from "../../common/widgets/ImdbIcon";
 import style from "./Landing.module.css";
+import { v4 as uuidv4 } from 'uuid';
 import { LandingProps } from "../../../models/types/props/landing";
 import { DefualtPlayerName, SinglePlayerRoom } from "../../../models/constant";
 import { DESCRIPTION_ID, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constant/ids";
@@ -15,14 +16,14 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();
 
     const handlePlay = () => {
-        const player = initPlayer("0", DefualtPlayerName, "host");
+        const player = initPlayer(uuidv4(), DefualtPlayerName, "host");
         setSetupOption({ mod: ModOption.SINGLE, player, roomId: SinglePlayerRoom });
     };
 
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
-            const { numberOfPlayers, roomId } = details;
-            const player = initPlayer(numberOfPlayers.toString(), DefualtPlayerName, "host");
+            const { roomId } = details;
+            const player = initPlayer(uuidv4(), DefualtPlayerName, "host");
             setSetupOption({ mod: ModOption.MULTI, player, roomId });
         });
     };

@@ -26,19 +26,26 @@ import {
     NextRound,
     NextRoundStarted,
     GameEnded,
+    Reconnect,
+    PlayerRecconected,
 } from "../model/constant/events";
 import { logBack, logEvent, logFinish } from "../utils/logs";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { initWarRoom, initWarRoomDetails } from "../utils/init";
+import { SocketConnction } from "../model/types/socket";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
+    public connectedUsers: { id: string; connection: SocketConnction }[];
 
     constructor() {
         this.warRooms = {};
+        this.connectedUsers = [];
     }
 
     handleConnection(socket: Socket) {
+        let user: { id: string; connection: SocketConnction } | undefined = undefined;
+
         socket.on(CreateNewRoom, (callback: (props: WarRoomDetails) => void) => {
             logEvent(CreateNewRoom);
             const roomId = v4();
@@ -61,8 +68,13 @@ class GameSocket implements ISocket {
             ) => {
                 logEvent(PlayerJoinRoom);
                 socket.join(roomId);
-                const playerId = socket.id;
-                const updatedPlayer = { ...player, id: playerId };
+
+                user = { id: player.id, connection: socket };
+                if (user && !this.checkExistingUser(user)) {
+                    this.connectedUsers.push(user);
+                }
+
+                const updatedPlayer = { ...player, connection: socket.id };
                 const warRoom = this.warRooms[roomId];
                 let rivalPlayers: Player[] = [];
                 if (warRoom) {
@@ -199,12 +211,76 @@ class GameSocket implements ISocket {
             });
         });
 
+        socket.on(Reconnect, (playerId: string) => {
+            if (user && !this.checkExistingUser(user)) {
+                this.connectedUsers.push(user);
+            }
+            user = { id: playerId, connection: socket };
+        });
+
         socket.on(Disconnect, () => {
             this.wrapper(Disconnect, () => {
-                this.handleLeavingPlayer(socket);
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    this.connectedUsers = this.connectedUsers.filter(
+                        (user) => user.id !== player.id,
+                    );
+
+                    setTimeout(() => {
+                        if (this.checkExistingUser(user)) {
+                            const { game } = warRoom;
+                            if (game?.roomId) {
+                                const { roomId } = game;
+                                const refreshedUser = this.connectedUsers.find(
+                                    (u) => u.id === player.id,
+                                );
+                                this.connectedUsers = this.connectedUsers.filter(
+                                    (u) => u.id !== player.id,
+                                );
+                                if (refreshedUser) {
+                                    const connection = refreshedUser.connection;
+                                    socket.leave(roomId);
+                                    connection.join(roomId);
+                                    warRoom.players.forEach((p) => {
+                                        if (p.id === player.id) {
+                                            p.connection = connection.id;
+                                        }
+                                    });
+                                    this.warRooms[roomId] = warRoom;
+                                    connection.emit(PlayerRecconected);
+                                }
+                            }
+                            console.log("refreshing");
+                        } else {
+                            console.log("disconnecting");
+                            const { game, players } = warRoom;
+                            if (game?.roomId) {
+                                const { roomId } = game;
+                                socket.leave(roomId);
+                                this.connectedUsers = this.connectedUsers.filter(
+                                    (u) => u.id !== player.id,
+                                );
+                                const index = players.indexOf(player);
+                                players.splice(index, 1);
+                                if (players.length === 1) {
+                                    delete this.warRooms[roomId];
+                                    socket.nsp.to(roomId).emit(GameEnded, player);
+                                } else {
+                                    this.warRooms[roomId] = warRoom;
+                                    socket.nsp.to(roomId).emit(PlayerDisconnect, player);
+                                }
+                            }
+                        }
+                    }, 2000);
+                }
             });
         });
     }
+
+    checkExistingUser = (user: { id: string; connection: SocketConnction } | undefined) => {
+        if (!user) return false;
+        return this.connectedUsers.some((u) => u.id === user.id);
+    };
 
     wrapper = (event: string, func: any) => {
         logEvent(event);
@@ -241,92 +317,3 @@ class GameSocket implements ISocket {
 }
 
 export default GameSocket;
-
-
-// socket.on("handshake2", (callback: (uid: string, warRoom: string[]) => void) => {
-//     console.info("Handshake received from: " + socket.id);
-
-//     const reconnected = Object.values(this.warRoom).includes(socket.id);
-
-//     if (reconnected) {
-//         console.info("This user has reconnected.");
-
-//         const uid = getPlayerIdFromSocketID(socket.id, this.warRoom);
-//         const warRoom = Object.values(this.warRoom);
-
-//         if (uid) {
-//             console.info("Sending callback for reconnect ...");
-//             callback(uid, warRoom);
-//             return;
-//         }
-//     }
-
-//     const uid = v4();
-//     this.warRoom[uid] = socket.id;
-
-//     const warRoom = Object.values(this.warRoom);
-//     console.info("Sending callback ...");
-//     callback(uid, warRoom);
-
-//     const u = warRoom.filter((id) => id !== socket.id);
-//     console.info("Emitting event: " + "user_connected" + " to", u);
-//     u.forEach((id) =>
-//         warRoom
-//             ? socket.to(id).emit("user_connected", warRoom)
-//             : socket.to(id).emit("user_connected"),
-//     );
-// });
-
-// socket.on(connection.disconnect, () => {
-//     console.info("Disconnect received from: " + socket.id);
-
-//     const uid = getPlayerIdFromSocketID(socket.id, this.warRoom);
-
-//     if (uid) {
-//         delete this.warRoom[uid];
-
-//         const warRoom = Object.values(this.warRoom);
-
-//         console.info("Emitting event: " + connection.user_disconnected + " to", warRoom);
-//         warRoom.forEach((id) =>
-//             socket.id
-//                 ? socket.to(id).emit(connection.user_disconnected, socket.id)
-//                 : socket.to(id).emit(connection.user_disconnected),
-//         );
-//     }
-// });
-
-// socket.on(connection.handshake, (callback: (uid: string, warRoom: string[]) => void) => {
-//     console.info("Handshake received from: " + socket.id);
-
-//     const reconnected = Object.values(this.warRoom).includes(socket.id);
-
-//     if (reconnected) {
-//         console.info("This user has reconnected.");
-
-//         const uid = getPlayerIdFromSocketID(socket.id, this.warRoom);
-//         const warRoom = Object.values(this.warRoom);
-
-//         if (uid) {
-//             console.info("Sending callback for reconnect ...");
-//             callback(uid, warRoom);
-//             return;
-//         }
-//     }
-
-//     const uid = v4();
-//     this.warRoom[uid] = socket.id;
-
-//     const warRoom = Object.values(this.warRoom);
-//     console.info("Sending callback ...");
-//     callback(uid, warRoom);
-
-//     const u = warRoom.filter((id) => id !== socket.id);
-//     console.info("Emitting event: " + connection.user_connected + " to", u);
-//     u.forEach((id) =>
-//         warRoom
-//             ? socket.to(id).emit(connection.user_connected, warRoom)
-//             : socket.to(id).emit(connection.user_connected),
-//     );
-// });
-

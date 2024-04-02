@@ -9,11 +9,15 @@ import AdditionalBtns from "../../core/AdditionalBtns";
 import TimerModal from "../../../actions/timer/TimerModal";
 import ExitGameBtn from "../../../actions/widgets/btn/ExitGameBtn";
 import useGameActions from "../../../../hooks/gameplay/useGameActions";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, gameOver }) => {
-    const { leaderBoardPlayers } = useSocketContext();
+    const { rivalPlayers } = useSocketContext();
+    const { currentPlayer } = useGamePlayContext();
     const [finish, setFinish] = useState<boolean>(false);
     const { handleContinue } = useGameActions(close);
+
+    const leaderBoardPlayers = rivalPlayers && currentPlayer ? [...rivalPlayers, currentPlayer] : [];
 
     const handleTimeOut = () => {
         setTimeout(() => {
@@ -40,3 +44,5 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
 };
 
 export default MultiRoundEndModal;
+// let leaderBoardPlayers: Player[] = rivalPlayers ?? [];
+// currentPlayer && leaderBoardPlayers.push(currentPlayer);

@@ -14,4 +14,9 @@ export type Game = {
     isPlayerFinishRound: boolean;
     isRoundFinished: boolean;
     isGameOver: boolean;
+    isRefreshed: boolean;
 };
+
+export type SetGameStateFunction<_T extends keyof Game> = (
+    value: boolean | number | string,
+) => void;

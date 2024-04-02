@@ -17,7 +17,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { scope } = useFinishAnimation(game?.isPlayerFinishRound);
 
     const handleClickStartGame = () => {
-        if (rivalPlayers.length >= 1) {
+        if (rivalPlayers && rivalPlayers.length >= 1) {
             handleStartGame();
             setIsGameStart(true);
         }

@@ -17,6 +17,7 @@ const useWaitingRoom = () => {
     useEffect(() => {
         if (isMulti() && currentPlayer?.role === "host") {
             if (
+                rivalPlayers &&
                 rivalPlayers.length >= 1 &&
                 fetchLoading === false &&
                 gameCards[0]?.id !== undefined

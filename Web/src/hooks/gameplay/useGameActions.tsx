@@ -9,6 +9,7 @@ import useMod from "./useMod";
 import useMoviesGame from "./useBackup";
 import { CardFace } from "../../models/enums/animation";
 import Session from "../../utils/storage/sessionStorage";
+import { FILP_CARD_TIME } from "../../models/constant";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -25,8 +26,7 @@ const useGameActions = (close: () => void) => {
         setIsRoundStart,
     } = useGamePlayContext();
     const { setIsFlipCard, clearAnimationContext } = useAnimationContext();
-    const { resetSocketContext, clearSocketContext, handleNextRound, handlePlayerLeave } =
-        useSocketContext();
+    const { clearSocketContext, handleNextRound, handlePlayerLeave } = useSocketContext();
     const { handleMovieCards } = useHandleMovies();
     const { setMoviesGame } = useMoviesGame();
     const navigate = useNavigate();
@@ -44,7 +44,6 @@ const useGameActions = (close: () => void) => {
 
     const handleRestart = () => {
         clearAnimationContext();
-        resetSocketContext();
         resetGameContext();
         setMoviesGame(game);
         close();
@@ -65,7 +64,7 @@ const useGameActions = (close: () => void) => {
                     setIsRoundStart(true);
                     setTimeout(() => {
                         setIsFlipCard(CardFace.FRONT);
-                    }, 300);
+                    }, FILP_CARD_TIME);
                 }
                 close();
             } else {

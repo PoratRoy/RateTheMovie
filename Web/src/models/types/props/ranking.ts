@@ -12,11 +12,11 @@ export type PlayerPlaceProps = {
 };
 
 export type RankingRoundBoardProps = {
-    players: Player[];
+    players: (Player | undefined)[];
 };
 
 export type RankingGameOverBoardProps = {
-    players: Player[];
+    players: (Player | undefined)[];
 };
 
 export type PlaceProps = ChildernsProps & {

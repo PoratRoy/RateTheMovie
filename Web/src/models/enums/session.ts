@@ -3,8 +3,9 @@ export enum SessionKey {
     GAME_CARDS = "gameCards",
     GAME = "game",
     BACKUP = "backup",
-    WAR_ROOM = "warRoom",
     RIVAL_PLAYERS = "rivalPlayers",
+    TIMER = "timer",
 }
 
+// WAR_ROOM = "warRoom",
 // previewMovies

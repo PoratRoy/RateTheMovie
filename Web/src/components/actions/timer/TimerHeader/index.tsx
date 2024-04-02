@@ -1,48 +1,49 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useRef } from "react";
 import style from "./TimerHeader.module.css";
 import { motion } from "framer-motion";
 import { TimerHeaderProps } from "../../../../models/types/props/action";
 import useFinish from "../../../../hooks/gameplay/useFinish";
 import { GAME_TIME } from "../../../../models/constant";
-import { useTimer } from "react-timer-hook";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
+import Session from "../../../../utils/storage/sessionStorage";
+import { SessionKey } from "../../../../models/enums/session";
+import useTimer from "../../../../hooks/multiplayer/useTimer";
+import { Time } from "../../../../models/types/common";
 
 const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     const { game, activateTimer } = useGamePlayContext();
     const { finishGame } = useFinish();
-
-    const expiryTimestamp = new Date();
-    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + duration);
+    const timeLockRef = useRef<boolean>(true);
 
     const handleTimeOut = () => {
         setTimeout(() => {
+            timeLockRef.current = true;
             pause();
             finishGame();
         }, 1000);
     };
 
-    const { seconds, minutes, restart, pause } = useTimer({
-        expiryTimestamp,
-        autoStart: false,
-        onExpire: handleTimeOut,
-    });
-
-    // Calculate progress percentage
-    const progress = useMemo(() => {
-        const totalSeconds = duration;
-        const remainingSeconds = minutes * 60 + seconds;
-        return (remainingSeconds / totalSeconds) * 100;
-    }, [minutes, seconds]);
+    const { expiryTimestamp, progress, pause, restart, refresh } = useTimer(
+        duration,
+        handleTimeOut,
+    );
 
     useEffect(() => {
         if (game?.isPlayerFinishRound) {
+            timeLockRef.current = true;
             pause();
         }
     }, [game?.isPlayerFinishRound]);
 
     useEffect(() => {
-        if (activateTimer) {
-            restart(expiryTimestamp);
+        if (timeLockRef.current) {
+            const sessionTime: Time | undefined = Session.get(SessionKey.TIMER);
+            if (sessionTime) {
+                refresh(sessionTime);
+                timeLockRef.current = false;
+            } else if (activateTimer) {
+                restart(expiryTimestamp);
+            }
         }
     }, [activateTimer]);
 

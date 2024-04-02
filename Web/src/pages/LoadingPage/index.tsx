@@ -36,7 +36,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
                 ) : null}
             </section>
             {isMulti(game?.mod) ? <CopyRoomLinkBtn roomLink={roomLink} /> : null}
-            {rivalPlayers.length > 0 ? <WatingRoom rivalPlayers={rivalPlayers} /> : null}
+            {rivalPlayers && rivalPlayers.length > 0 ? (
+                <WatingRoom rivalPlayers={rivalPlayers} />
+            ) : null}
         </CommonLayout>
     );
 };

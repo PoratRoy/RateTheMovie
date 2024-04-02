@@ -1,26 +1,12 @@
-import React, { useMemo } from "react";
+import React from "react";
 import style from "./TimerModal.module.css";
 import { motion } from "framer-motion";
 import { TimerModalProps } from "../../../../models/types/props/action";
 import { MODAL_TIME } from "../../../../models/constant";
-import { useTimer } from "react-timer-hook";
+import useTimer from "../../../../hooks/multiplayer/useTimer";
 
 const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
-    const expiryTimestamp = new Date();
-    expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + duration);
-
-    const { seconds, minutes } = useTimer({
-        expiryTimestamp,
-        autoStart: true,
-        onExpire: handleTimeOut,
-    });
-
-    // Calculate progress percentage
-    const progress = useMemo(() => {
-        const totalSeconds = duration;
-        const remainingSeconds = minutes * 60 + seconds;
-        return (remainingSeconds / totalSeconds) * 100;
-    }, [minutes, seconds]);
+    const { progress } = useTimer(duration, handleTimeOut, true);
 
     return (
         <div className={style.timerBarModal}>

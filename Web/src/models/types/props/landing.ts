@@ -13,7 +13,7 @@ export type SetupProps = {
 };
 
 export type LoadingPageProps = {
-    rivalPlayers: Player[];
+    rivalPlayers: Player[] | undefined;
     playerRole?: PlayerRole;
     onClicked: () => void;
     isLoading: boolean;

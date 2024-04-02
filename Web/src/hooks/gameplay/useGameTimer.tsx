@@ -6,7 +6,7 @@ import { CardFace } from "../../models/enums/animation";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 
 const useGameTimer = () => {
-    const [showTimer, setShowTimer] = useState<boolean>(true);
+    const [showTimer, setShowTimer] = useState<boolean>(false);
     const { setIsFlipCard } = useAnimationContext();
     const { game, setActivateTimer } = useGamePlayContext();
     const { isSingle, isMulti } = useMod();
@@ -17,23 +17,34 @@ const useGameTimer = () => {
         if (isSingle()) {
             setShowTimer(false);
         } else {
-            if (game?.isGameStart) {
-                setShowTimer(true);
-                setIsFlipCard(CardFace.BACK);
-                timer = setTimeout(() => {
-                    setActivateTimer(true);
-                    setIsFlipCard(CardFace.FRONT);
-                }, START_GAME_TIMER);
-            } else {
-                setActivateTimer(false);
-                setIsFlipCard(CardFace.BACK);
+            if (game) {
+                const { isRefreshed, isGameStart, currentRound } = game;
+                if (isRefreshed) {
+                    setTimerAndCardFace(false, CardFace.FRONT);
+                } else {
+                    if (isGameStart) {
+                        if (currentRound === 1) {
+                            setTimerAndCardFace(true, CardFace.BACK);
+                            timer = setTimeout(() => {
+                                setTimerAndCardFace(true, CardFace.FRONT);
+                            }, START_GAME_TIMER);
+                        }
+                    } else {
+                        setTimerAndCardFace(false, CardFace.BACK);
+                    }
+                }
             }
         }
 
         return () => {
             clearTimeout(timer);
         };
-    }, [game?.isGameStart]);
+    }, [game?.isGameStart, game?.isRefreshed, game?.currentRound]);
+
+    const setTimerAndCardFace = (isTimer: boolean, cardFace: CardFace) => {
+        setShowTimer(isTimer);
+        setIsFlipCard(cardFace);
+    };
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;

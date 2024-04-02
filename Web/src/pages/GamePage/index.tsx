@@ -15,19 +15,17 @@ const GamePage: React.FC = () => {
     const { showTimer, closeTimer } = useGameTimer();
 
     return (
-        <React.Fragment>
+        <GameLayout>
             {currentPlayer ? (
-                <GameLayout>
+                <React.Fragment>
                     <ElectedPackLayout currentPlayer={currentPlayer} />
                     <PlayerLayout player={currentPlayer} />
                     {showTimer ? <CountDown time={START_TIMER} closeTimer={closeTimer} /> : null}
-                </GameLayout>
+                </React.Fragment>
             ) : (
-                <GameLayout>
-                    <SomethingWentWrong />
-                </GameLayout>
+                <SomethingWentWrong />
             )}
-        </React.Fragment>
+        </GameLayout>
     );
 };
 

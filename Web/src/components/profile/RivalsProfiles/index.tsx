@@ -8,7 +8,7 @@ const RivalsProfiles: React.FC = () => {
     const { rivalPlayers } = useSocketContext();
     return (
         <section className={style.rivalsProfiles}>
-            {rivalPlayers.map((player, index) => {
+            {rivalPlayers?.map((player, index) => {
                 return (
                     <span key={index} className={style.rivalProfile}>
                         <Avatar img={AvatarImgs[player.avatar]} />

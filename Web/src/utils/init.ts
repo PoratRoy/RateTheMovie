@@ -34,6 +34,7 @@ export const initGame = (
         isPlayerFinishRound: false,
         isRoundFinished: false,
         isGameOver: false,
+        isRefreshed: false,
     };
     return game;
 };

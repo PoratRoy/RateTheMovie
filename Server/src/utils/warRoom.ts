@@ -3,11 +3,11 @@ import { Player } from "../model/types/player";
 import { WarRoomDetails, WarRoomProps, WarRooms } from "../model/types/warRoom";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
-export const getRoomByPlayer = (warRooms: WarRooms, playerId: string) => {
+export const getRoomByPlayer = (warRooms: WarRooms, connection: string) => {
     let player: Player | undefined;
     const warRoom = Object.values(warRooms).find((room) =>
         room.players.find((p: Player) => {
-            if (p.id === playerId) {
+            if (p.connection === connection) {
                 player = p;
                 return p;
             }
@@ -34,7 +34,7 @@ export const getPlayerWarRoomInfo = (
     socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
     warRooms: WarRooms,
 ) => {
-    const playerId = socket.id;
-    const { warRoom, player } = getRoomByPlayer(warRooms, playerId);
+    const connection = socket.id;
+    const { warRoom, player } = getRoomByPlayer(warRooms, connection);
     return { warRoom, player };
 };
