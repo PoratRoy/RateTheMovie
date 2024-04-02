@@ -28,8 +28,6 @@ export type BackdropProps = CloseProps & {
     showBackdrop: boolean;
 };
 
-export type PauseModalProps = CloseProps;
-
 export type GameOverModalProps = CloseProps;
 
 export type RoundEndModalProps = CloseProps & {

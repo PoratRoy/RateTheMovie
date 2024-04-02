@@ -3,7 +3,7 @@ import PrimaryIconBtn from "../../../core/button/PrimaryIconBtn";
 import { TiHome } from "react-icons/ti";
 import { QuitBtnProps } from "../../../../../models/types/props/btn";
 import useGameActions from "../../../../../hooks/gameplay/useGameActions";
-
+//TODO: not in use
 const QuitBtn: React.FC<QuitBtnProps> = ({ close }) => {
     const { handleQuit } = useGameActions(close);
 

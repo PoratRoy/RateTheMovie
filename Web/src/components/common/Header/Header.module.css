@@ -22,13 +22,7 @@
     border-bottom: 1px solid var(--secondary-color);;
 }
 
-.gameHeaderCenter{
-    /* position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%); */
+.gameHeaderBtns{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    gap: 1em;
 }

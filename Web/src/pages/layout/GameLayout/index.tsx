@@ -9,6 +9,8 @@ import { useSocketContext } from "../../../context/SocketContext";
 import GameModal from "./GameModal";
 import useWaitingRoom from "../../../hooks/gameplay/useWaitingRoom";
 import PreviewPage from "../../PreviewPage";
+import { ROUND_NUM } from "../../../models/constant";
+import RoundTitle from "../../../components/common/RoundTitle";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     const { game, currentPlayer, isPreview, setIsGameStart } = useGamePlayContext();
@@ -30,8 +32,13 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
             ) : (
                 <section className={style.gameContainer}>
                     <Header />
+
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
+                        <RoundTitle
+                            current={game?.currentRound || 1}
+                            total={game?.rounds || ROUND_NUM}
+                        />
                     </section>
                     <GameModal />
                 </section>

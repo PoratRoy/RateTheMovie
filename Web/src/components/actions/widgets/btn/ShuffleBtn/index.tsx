@@ -7,6 +7,7 @@ import { SHUFFLE_ATTEMPT } from "../../../../../models/constant";
 import OutOf from "../../../../common/OutOf";
 // import { GiCardExchange } from "react-icons/gi";
 
+//TODO: not in use
 const ShuffleBtn: React.FC<ShuffleBtnProps> = ({ close }) => {
     const { handleShuffle } = useGameActions(close);
     const { game } = useGamePlayContext();
