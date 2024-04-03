@@ -32,3 +32,10 @@ export type ResultPlayerProfileProps = {
 export type WatingRoomProps = {
     rivalPlayers: Player[];
 };
+
+export type EditAvatarProps = {
+    player: Player | undefined;
+    avatarId: number | undefined;
+    setValue: any;
+    watch: UseFormWatch<SetupInputSchema>;
+};

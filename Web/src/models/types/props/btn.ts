@@ -53,6 +53,7 @@ export type EditProfileBtnProps = OnClickProps & {
 };
 
 export type CircleBtnProps = OnClickProps & {
+    size?: BtnSize;
     Icon: React.ReactNode;
 };
 
@@ -94,3 +95,5 @@ export type ReturnBtnProps = CloseProps & {
 export type CopyRoomLinkBtnProps = {
     roomLink: string;
 };
+
+export type EditAvatarBtnProps = OnClickProps;

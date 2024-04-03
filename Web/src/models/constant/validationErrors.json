@@ -1,6 +1,6 @@
 {
     "name": {
-        "required": "Player name is required.",
-        "max": "Name can be maximum 30 characters."
+        "required": "Please write your name.",
+        "max": "Name can be maximum 16 characters."
     }
 }

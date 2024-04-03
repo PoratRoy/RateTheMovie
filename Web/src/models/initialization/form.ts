@@ -4,7 +4,7 @@ export const setupInputs: SetupInputs = {
     name: {
         type: "text",
         id: "name",
-        placeholder: "Enter Name",
+        placeholder: "Nickname",
     },
     rounds: {
         id: "rounds",

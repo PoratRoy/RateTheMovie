@@ -1,43 +1,94 @@
-.circleBtn {
+.circleBtnLarge,
+.circleBtnMedium,
+.circleBtnSmall {
     position: relative;
-    width: 35px;
-    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: var(--secondary-border);
     border-radius: 50%;
     color: var(--text-color-opacity);
-    background-color: var(--secondary-color-opacity);
     cursor: pointer;
-    font-size: 1.3rem;
 }
 
-.circleBtn:hover {
+.circleBtnLarge:hover,
+.circleBtnMedium:hover,
+.circleBtnSmall:hover {
     background-color: var(--secondary-color-hover);
     transform: scale(1.01);
 }
 
-.circleBtn:focus {
+.circleBtnLarge:focus,
+.circleBtnMedium:focus,
+.circleBtnSmall:focus {
     background-color: var(--secondary-color-focus);
 }
 
-.circleBtn:active {
+.circleBtnLarge:active,
+.circleBtnMedium:active,
+.circleBtnSmall:active {
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
 }
+
+.circleBtnLarge {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+    background-color: var(--secondary-color-opacity);
+}
+
+.circleBtnMedium {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    background-color: var(--secondary-color);
+}
+
+.circleBtnSmall {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+    background-color: var(--secondary-color);
+}
+
 
 .circleIcon {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -40%);
-    font-size: 1.5rem;
-    color: var(--text-color-opacity);
-    opacity: 0.5;
     z-index: 0;
 }
 
-.circleIcon svg {
+.circleBtnLarge .circleIcon {
+    font-size: 1.5rem;
     color: var(--text-color-opacity);
+    opacity: 0.5;
+}
+
+.circleBtnLarge .circleIcon svg {
+    color: var(--text-color-opacity);
+}
+
+
+.circleBtnMedium .circleIcon {
+    font-size: 1rem;
+    opacity: 1;
+    color: var(--text-color);
+}
+
+.circleBtnMedium .circleIcon svg {
+    color: var(--text-color);
+}
+
+
+.circleBtnSmall .circleIcon {
+    font-size: 0.8rem;
+    opacity: 1;
+    color: var(--text-color);
+}
+
+.circleBtnSmall .circleIcon svg {
+    color: var(--text-color);
 }

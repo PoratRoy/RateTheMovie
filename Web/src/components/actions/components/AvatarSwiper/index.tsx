@@ -17,6 +17,7 @@ const AvatarSwiper = <TInput extends FieldValues>({
     id,
     setValue,
     defualt,
+    setIsEdit,
 }: AvatarSwiperProps<TInput>) => {
 
     const handleAvatar = (swiper: SwiperCore) => {
@@ -46,6 +47,7 @@ const AvatarSwiper = <TInput extends FieldValues>({
             onSlideChange={handleAvatar}
             // TODO: defualt index not working
             initialSlide={defualt}
+            onClick={() => setIsEdit(false)}
         >
             {AvatarImgs.map((img: string, i: number) => (
                 <SwiperSlide key={i} data-hash={`avatar${i}`}>
