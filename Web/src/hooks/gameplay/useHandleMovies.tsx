@@ -51,7 +51,6 @@ const useHandleMovies = () => {
             });
         }
         setGameCards(cards);
-        Session.set(SessionKey.GAME_CARDS, cards);
     };
 
     return {

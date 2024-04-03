@@ -10,7 +10,7 @@ export const splitMovies = (movies: Movie[]): Movie[][] => {
     return result;
 };
 
-export const splitMoviesBackup = (movies: Movie[], rounds: any) => {
+export const splitRoundsMovies = (movies: Movie[], rounds: any) => {
     const matrix = [];
     const setNum = parseInt(rounds) + SHUFFLE_ATTEMPT;
 

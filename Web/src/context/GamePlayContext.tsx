@@ -22,8 +22,8 @@ export const GamePlayContext = createContext<{
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
     previewMovies: Movie[];
     setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
-    backupMovies: Movie[][] | undefined;
-    setBackupMovies: React.Dispatch<React.SetStateAction<Movie[][] | undefined>>;
+    roundsMovies: Movie[][] | undefined;
+    setRoundsMovies: React.Dispatch<React.SetStateAction<Movie[][] | undefined>>;
     activateTimer: boolean;
     setActivateTimer: React.Dispatch<React.SetStateAction<boolean>>;
     isPreview: boolean;
@@ -52,8 +52,8 @@ export const GamePlayContext = createContext<{
     setCurrentPlayer: () => {},
     previewMovies: [],
     setPreviewMovies: () => {},
-    backupMovies: [],
-    setBackupMovies: () => {},
+    roundsMovies: [],
+    setRoundsMovies: () => {},
     activateTimer: true,
     setActivateTimer: () => {},
     isPreview: false,
@@ -82,7 +82,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
     const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
 
-    const [backupMovies, setBackupMovies] = useState<Movie[][] | undefined>(undefined);
+    const [roundsMovies, setRoundsMovies] = useState<Movie[][] | undefined>(undefined);
 
     const [activateTimer, setActivateTimer] = useState<boolean>(true);
     const [isPreview, setIsPreview] = useState<boolean>(false);
@@ -98,9 +98,9 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
             if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
         }
-        if (!backupMovies) {
-            const sessionBackupMovies: Movie[][] = Session.get(SessionKey.BACKUP);
-            if (sessionBackupMovies) setBackupMovies(sessionBackupMovies);
+        if (!roundsMovies) {
+            const sessionRoundsMovies: Movie[][] | undefined = Session.get(SessionKey.ROUNDS_MOVIES);
+            if (sessionRoundsMovies) setRoundsMovies(sessionRoundsMovies);
         }
     };
     setStateFromSession();
@@ -187,7 +187,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         resetRoundContextState();
         setRoundNumber("reset");
         setShuffle("reset");
-        setBackupMovies([]);
+        setRoundsMovies([]);
         setPlayerToDefault();
         setGame((prev) => {
             if (!prev) return prev;
@@ -212,11 +212,10 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         resetRoundContextState();
         Session.remove(SessionKey.GAME);
         Session.remove(SessionKey.CURRENT_PLAYER);
-        Session.remove(SessionKey.BACKUP);
-        Session.remove(SessionKey.GAME_CARDS);
+        Session.remove(SessionKey.ROUNDS_MOVIES);
         setGameCards(initGameCardsList());
         setGame(undefined);
-        setBackupMovies(undefined);
+        setRoundsMovies(undefined);
         setPlayerToDefault();
     };
 
@@ -235,8 +234,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setCurrentPlayer,
                 previewMovies,
                 setPreviewMovies,
-                backupMovies,
-                setBackupMovies,
+                roundsMovies,
+                setRoundsMovies,
                 activateTimer,
                 setActivateTimer,
                 isPreview,

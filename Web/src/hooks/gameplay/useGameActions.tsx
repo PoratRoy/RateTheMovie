@@ -6,7 +6,7 @@ import useHandleMovies from "./useHandleMovies";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { useSocketContext } from "../../context/SocketContext";
 import useMod from "./useMod";
-import useMoviesGame from "./useBackup";
+import useMoviesGame from "./useRoundsMoviesGame";
 import { CardFace } from "../../models/enums/animation";
 import Session from "../../utils/storage/sessionStorage";
 import { FILP_CARD_TIME } from "../../models/constant/time";
@@ -20,7 +20,7 @@ const useGameActions = (close: () => void) => {
         resetGameContext,
         setRoundNumber,
         setShuffle,
-        backupMovies,
+        roundsMovies,
         setIsRoundFinished,
         setIsPlayerFinishRound,
         setIsRoundStart,
@@ -58,7 +58,7 @@ const useGameActions = (close: () => void) => {
             refreshGameContext();
             if (isMulti()) {
                 if (currentPlayer.role === "host") {
-                    const movies = backupMovies ? backupMovies[currentRound] : [];
+                    const movies = roundsMovies ? roundsMovies[currentRound] : [];
                     const cards = handleMovieCards(movies);
                     handleNextRound(round, cards);
                     setIsRoundStart(true);
@@ -84,7 +84,7 @@ const useGameActions = (close: () => void) => {
     };
 
     const handelNewMovies = (index: number) => {
-        const movies = backupMovies ? backupMovies[index] : [];
+        const movies = roundsMovies ? roundsMovies[index] : [];
         handleMovieCards(movies);
         close();
         setTimeout(() => {
