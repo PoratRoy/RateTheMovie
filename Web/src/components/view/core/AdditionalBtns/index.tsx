@@ -16,8 +16,8 @@ const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, btns }) => {
     return (
         <section className={style.AdditionalBtnsContianer}>
             <section className={style.additionalBtns}>
-                {quit()}
                 {restart()}
+                {quit()}
                 {leaderBoard()}
             </section>
             {movieList()}

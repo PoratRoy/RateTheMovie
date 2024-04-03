@@ -2,7 +2,7 @@ import React from "react";
 import { CircleBtnProps } from "../../../../../models/types/props/btn";
 import style from "./CircleBtn.module.css";
 
-const CircleBtn: React.FC<CircleBtnProps> = ({ onClicked, Icon, size = "medium" }) => {
+const CircleBtn: React.FC<CircleBtnProps> = ({ onClicked, Icon, size = "large" }) => {
     const className =
         size === "large"
             ? style.circleBtnLarge

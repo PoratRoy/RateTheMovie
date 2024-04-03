@@ -25,7 +25,11 @@ const CardEventLayout: React.FC<CardEventLayoutProps> = ({ children, card }) => 
         if (!isDragging && card) handlePlaceCard(card);
     };
 
-    return <div onClick={handleOnClick}>{children}</div>;
+    return (
+        <div style={{ WebkitTapHighlightColor: "transparent" }} onClick={handleOnClick}>
+            {children}
+        </div>
+    );
 };
 
 export default CardEventLayout;

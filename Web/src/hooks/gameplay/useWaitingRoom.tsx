@@ -56,6 +56,7 @@ const useWaitingRoom = () => {
 
         const startGame = () => {
             setIsGameStart(true);
+            setIsFlipCard(CardFace.BACK);
             timer = setTimeout(() => {
                 if (isMounted) {
                     setIsFlipCard(CardFace.FRONT);

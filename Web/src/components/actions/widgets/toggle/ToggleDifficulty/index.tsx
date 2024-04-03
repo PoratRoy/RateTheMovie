@@ -15,7 +15,7 @@ const ToggleDifficulty: React.FC<ToggleDifficultyProps> = () => {
     const [difficulty, setDifficulty] = useState<Difficulty>("easy");
 
     useEffect(() => {
-        console.log(difficulty);
+        // console.log(difficulty);
     }, [difficulty]);
 
     const options: SelectRadio[] = [

@@ -4,6 +4,7 @@
     color: var(--text-color-opacity);
     cursor: pointer;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .toggelArrowLarge{

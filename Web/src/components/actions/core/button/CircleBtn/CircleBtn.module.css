@@ -7,14 +7,13 @@
     align-items: center;
     border: var(--secondary-border);
     border-radius: 50%;
-    color: var(--text-color-opacity);
     cursor: pointer;
 }
 
 .circleBtnLarge:hover,
 .circleBtnMedium:hover,
 .circleBtnSmall:hover {
-    background-color: var(--secondary-color-hover);
+    background-color: var(--secondary-color);
     transform: scale(1.01);
 }
 
@@ -63,12 +62,12 @@
 
 .circleBtnLarge .circleIcon {
     font-size: 1.5rem;
-    color: var(--text-color-opacity);
+    color: var(--text-color);
     opacity: 0.5;
 }
 
 .circleBtnLarge .circleIcon svg {
-    color: var(--text-color-opacity);
+    color: var(--text-color);
 }
 
 

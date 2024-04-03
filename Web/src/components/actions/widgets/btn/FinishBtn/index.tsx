@@ -5,6 +5,7 @@ import useFinish from "../../../../../hooks/gameplay/useFinish";
 import { motion } from "framer-motion";
 import { DONE_BTN_ID } from "../../../../../models/constant/ids";
 import { useGamePlayContext } from "../../../../../context/GamePlayContext";
+import { DURATION_ANIMATION_2, DURATION_ANIMATION_4 } from "../../../../../models/constant/time";
 
 const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
@@ -25,7 +26,9 @@ const FinishBtn: React.FC<FinishBtnProps> = ({ isFinishPlacing }) => {
             initial={{ height: 0 }}
             animate={{
                 height: isFinishPlacing ? 35 : 0,
-                transition: { duration: 0.2 },
+                transition: {
+                    duration: isFinishPlacing ? DURATION_ANIMATION_2 : DURATION_ANIMATION_4,
+                },
             }}
         >
             {isFinishPlacing ? (
