@@ -16,7 +16,7 @@ const FilterCollapse: React.FC<FilterCollapseProps> = ({ children }) => {
 
     return (
         <section className={style.filterCollapseContainer}>
-            <div>Change filters</div>
+            <div>Advanced settings</div>
             <ToggleArrow
                 startDirection="down"
                 endDirection="up"

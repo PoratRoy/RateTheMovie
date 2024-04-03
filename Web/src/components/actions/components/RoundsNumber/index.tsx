@@ -31,7 +31,7 @@ const RoundsNumber = <TInput extends FieldValues>({ id, setValue }: RoundInputPr
 
     return (
         <section className={style.roundNum}>
-            <div className={style.roundNumTitle}>Game rounds</div>
+            <div className={style.roundNumTitle}>Number of play rounds</div>
             <div className={style.roundNumAction}>
                 <div onClick={handleDecrement} className={style.roundNumDecrement}>
                     <MdRemove />

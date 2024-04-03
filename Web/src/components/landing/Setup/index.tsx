@@ -10,7 +10,6 @@ import { setupFormSchema } from "../../../models/validation/form";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
 import { SetupProps } from "../../../models/types/props/landing";
 import useMod from "../../../hooks/gameplay/useMod";
-import FilterInputs from "../filter/FilterInputs";
 import { START_BTN_ID } from "../../../models/constant/ids";
 import RadioDifficulty from "../../actions/widgets/toggle/ToggleDifficulty";
 import StartGameBtn from "../../actions/widgets/btn/StartGameBtn";
@@ -54,9 +53,9 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
             {playerRole === "host" ? (
                 <React.Fragment>
                     <RadioDifficulty />
-                    <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
                     <FilterCollapse>
-                        <FilterInputs setValue={setValue} />
+                        <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
+                        {/* <FilterInputs setValue={setValue} /> */}
                     </FilterCollapse>
                 </React.Fragment>
             ) : null}
