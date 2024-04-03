@@ -6,11 +6,11 @@ import { GetMovieResponse } from "../model/types/responses";
 
 const useGetMovies = () => {
     const { setFetchLoading } = useGamePlayContext();
-    const getMovies = async (amount: number, filters: Filters) => {
+    const getMovies = async (rounds: number, filters: Filters) => {
         const URL = `${import.meta.env.VITE_BE_URL}/api/movie`
         const body: GetMovieRequestBody = {
             filters,
-            amount,
+            rounds,
         };
         setFetchLoading(true);
         const response = await axios.post(URL, body);

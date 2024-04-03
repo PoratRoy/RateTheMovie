@@ -3,12 +3,15 @@ import { FaPlay } from "react-icons/fa";
 import PrimaryIconBtn from "../../../core/button/PrimaryIconBtn";
 import { NextRoundBtnProps } from "../../../../../models/types/props/btn";
 import useGameActions from "../../../../../hooks/gameplay/useGameActions";
+import { DELAY_ANIMATION_3 } from "../../../../../models/constant/time";
 
 const NextRoundBtn: React.FC<NextRoundBtnProps> = ({ close }) => {
     const { handleContinue } = useGameActions(close);
     
     const handleNextRound = () => {
-        handleContinue();
+        setTimeout(() => {
+            handleContinue();
+        }, DELAY_ANIMATION_3);
     };
 
     const title = (

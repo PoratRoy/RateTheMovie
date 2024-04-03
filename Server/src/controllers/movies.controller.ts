@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreateMovieRequestBody, GetMovieRequestBody } from "../model/types/http/requests";
 import { Movie, MovieOMDB, MovieTMDB, VideoModel } from "../model/types/movie";
-import { FETCH_MOVIES_NUM } from "../model/constant";
+import { FETCH_MOVIES_NUM, PACK_CARDS_NUM } from "../model/constant";
 import { setNewMovie } from "../utils/init";
 import URL from "../model/constant/path.json";
 import MovieDatabaseService from "../database/MovieTable";
@@ -18,10 +18,11 @@ import { delayPromise, extractYearFromDate } from "../utils/time";
 import { setIsBoxOffice } from "../utils/boxOffice";
 import ActorDatabaseService from "../database/ActorTable";
 import DirectorDatabaseService from "../database/DirectorTable";
-import { Difficulty } from "../model/types/union";
 import { logMovieCount } from "../utils/logs";
 import { IActor, IDirector, IMovie } from "../model/interfaces/scheme";
 import { getDifficulty } from "../utils/filter";
+import { getDBmovies, splitRoundsMovies } from "../utils/movies";
+import { getRandomNumber } from "../utils/calc";
 
 export default class MoviesController {
     async create(
@@ -133,36 +134,18 @@ export default class MoviesController {
 
     async getMovies(
         req: Request<any, any, GetMovieRequestBody>,
-        res: Response<ResponseBody<{ movies: IMovie[]; amount: number }>>,
+        res: Response<ResponseBody<{ movies: IMovie[][]; amount: number }>>,
     ) {
         try {
-            const { filters, amount } = req.body;
-            const { type, difficulty } = filters;
-            let DBmovies: IMovie[] | null = null;
-
-            if ("byDetails" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDetails(
-                    amount,
-                    difficulty,
-                    type.byDetails,
-                );
-            } else if ("byDirector" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByDirector(amount, type.byDirector);
-            } else if ("byActor" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByActor(amount, type.byActor);
-            } else if ("byBoxOffice" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(amount, difficulty);
-            } else if ("byTopRated" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByTopRated(amount, difficulty);
-            } else if ("byNewRelease" in type) {
-                DBmovies = await MovieDatabaseService.getMoviesByNewRelease(amount, difficulty);
-            }
-            const movies: IMovie[] = DBmovies ? [...DBmovies] : [];
+            const { filters, rounds } = req.body;
+            const amount = PACK_CARDS_NUM * rounds;
+            const movies: IMovie[] = await getDBmovies(filters, amount);
+            const matrix: IMovie[][] = await splitRoundsMovies(movies, filters, rounds);
 
             response(res, {
                 statusCode: StatusCode.OK,
                 message: msg.movies.success.get,
-                data: { movies, amount: movies.length },
+                data: { movies: matrix, amount: matrix.length },
             });
         } catch (error) {
             handleError(res, error);

@@ -1,4 +1,4 @@
-import { DISCOVERD_MOVIES_NUM, PACK_CARDS_NUM } from "../models/constant";
+import { DISCOVERD_MOVIES_NUM } from "../models/constant";
 import { Movie } from "../models/types/movie";
 import { Player } from "../models/types/player";
 
@@ -48,8 +48,4 @@ export const sortPlayersByScore = (players: (Player | undefined)[]): Player[][] 
         }
     });
     return groupedPlayers;
-};
-
-export const culcNumOfMovies = (rounds: number) => {
-    return (rounds * PACK_CARDS_NUM);
 };

@@ -8,5 +8,5 @@ export type CreateMovieRequestBody = {
 
 export type GetMovieRequestBody = {
     filters: Filters;
-    amount: number;
+    rounds: number;
 };

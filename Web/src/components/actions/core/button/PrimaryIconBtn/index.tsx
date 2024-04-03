@@ -3,6 +3,7 @@ import style from "./PrimaryIconBtn.module.css";
 import useLoadingBtnAnimation from "../../../../../hooks/animation/useLoadingBtnAnimation";
 import { PrimaryIconBtnProps } from "../../../../../models/types/props/btn";
 import { DONE_BTN_ID } from "../../../../../models/constant/ids";
+import { motion } from 'framer-motion';
 
 
 const PrimaryIconBtn: React.FC<PrimaryIconBtnProps> = ({
@@ -25,15 +26,16 @@ const PrimaryIconBtn: React.FC<PrimaryIconBtnProps> = ({
     
     return (
         <div ref={scope}>
-            <button
+            <motion.button
                 id={id}
                 style={{ scale: 1 }}
                 className={className}
                 onClick={onClicked}
                 disabled={disabled}
+                whileTap={{ scale: 0.9 }}
             >
                 {title}
-            </button>
+            </motion.button>
         </div>
     );
 };

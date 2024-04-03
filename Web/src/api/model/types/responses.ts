@@ -2,6 +2,6 @@ import { Movie } from "../../../models/types/movie";
 
 
 export type GetMovieResponse = {
-    movies: Movie[];
+    movies: Movie[][];
     amount: number;
 }
