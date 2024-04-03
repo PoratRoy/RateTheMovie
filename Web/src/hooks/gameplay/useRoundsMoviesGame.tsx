@@ -18,7 +18,7 @@ const useMoviesGame = () => {
             const { filters, rounds, mod } = game;
             const numOfMovies = culcNumOfMovies(rounds);
             const movies: GetMovieResponse = await getMovies(numOfMovies, filters);
-            const splitMovies = splitRoundsMovies(movies.movies, rounds);
+            const splitMovies = splitRoundsMovies(movies.movies, numOfMovies, rounds);
             setRoundsMovies(splitMovies);
             Session.set(SessionKey.ROUNDS_MOVIES, splitMovies);
             handleMovieCards(splitMovies[0], mod);
