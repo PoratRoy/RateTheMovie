@@ -13,7 +13,7 @@ import { ROUND_NUM } from "../../../models/constant";
 import RoundTitle from "../../../components/common/RoundTitle";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { game, currentPlayer, isPreview, setIsGameStart } = useGamePlayContext();
+    const { game, currentPlayer, isPreview, setIsGameStart, setIsRoundStart } = useGamePlayContext();
     const { rivalPlayers, handleStartGame } = useSocketContext();
     const { isWaiting } = useWaitingRoom();
     const { scope } = useFinishAnimation(game?.isPlayerFinishRound);
@@ -22,6 +22,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
         if (rivalPlayers && rivalPlayers.length >= 1) {
             handleStartGame();
             setIsGameStart(true);
+            setIsRoundStart(true);
         }
     };
 

@@ -84,7 +84,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
 
     const [roundsMovies, setRoundsMovies] = useState<Movie[][] | undefined>(undefined);
 
-    const [activateTimer, setActivateTimer] = useState<boolean>(true);
+    const [activateTimer, setActivateTimer] = useState<boolean>(false);
     const [isPreview, setIsPreview] = useState<boolean>(false);
 
     //TODO: extract to a hook
@@ -214,6 +214,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         Session.remove(SessionKey.CURRENT_PLAYER);
         Session.remove(SessionKey.ROUNDS_MOVIES);
         setGameCards(initGameCardsList());
+        setActivateTimer(false);
         setGame(undefined);
         setRoundsMovies(undefined);
         setPlayerToDefault();
