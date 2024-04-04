@@ -13,7 +13,7 @@ export const styleBtnSize = (style: CSSModuleClasses): PropsObj<string> => {
     return {
         large: style.btnLarge,
         medium: style.btnMedium,
-        "medium-wide": style.btnMediumWide,
+        mediomWide: style.btnMediumWide,
         small: style.btnSmall,
     };
 };

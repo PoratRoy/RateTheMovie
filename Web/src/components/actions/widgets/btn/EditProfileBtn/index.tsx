@@ -7,7 +7,7 @@ const EditProfileBtn: React.FC<EditProfileBtnProps> = ({ onClicked, toggle }) =>
         <SecondaryBtn
             onClicked={onClicked}
             title={toggle ? "Save Changes" : "Edit Profile"}
-            size="mediom-wide"
+            size="mediomWide"
         />
     );
 };

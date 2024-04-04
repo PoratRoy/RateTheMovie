@@ -22,7 +22,7 @@ export type InputType =
 
 export type Difficulty = "easy" | "medium" | "hard";
 
-export type BtnSize = "small" | "medium" | "mediom-wide" | "large";
+export type BtnSize = "small" | "medium" | "mediomWide" | "large";
 
 export type CardSize = "Xsmall" | "small" | "medium" | "large";
 

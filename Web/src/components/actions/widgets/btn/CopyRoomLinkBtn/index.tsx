@@ -22,7 +22,7 @@ const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = ({ roomLink }) => {
 
     return (
         <section className={style.copyRoomLinkBtn}>
-            <SecondaryBtn onClicked={handleCopy} title={title} size="mediom-wide" />
+            <SecondaryBtn onClicked={handleCopy} title={title} size="mediomWide" />
             <span className={style.shareVia}>or share link via</span>
             <SocialLinks roomLink={roomLink} />
         </section>
