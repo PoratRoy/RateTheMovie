@@ -11,6 +11,7 @@ import {
     SILVER_COLOR,
     SILVER_COLOR_OPACITY,
 } from "../../../../../style/root";
+import { styleTopThree } from "../../../../../style/style";
 
 const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
     const { currentPlayer } = useGamePlayContext();
@@ -35,7 +36,7 @@ const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
     }, []);
 
     const title = useMemo(() => {
-        if(players && players.length > 1) return "Draw"; 
+        if (players && players.length > 1) return "Draw";
         return place === 1
             ? "Round Winner"
             : place === 2
@@ -55,7 +56,7 @@ const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
                 : "none";
     }, []);
 
-    const className = isTopThree ? style.placeTopThree : style.placeNormal; //TODOCSS: refactor this
+    const className = styleTopThree(style)[isTopThree.toString()];
 
     return (
         <section className={style.placeContainer}>

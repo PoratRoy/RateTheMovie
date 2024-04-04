@@ -4,6 +4,7 @@ import CardInnerContainer from "./CardInnerContainer";
 import Placeholder from "../Placeholder";
 import Position from "../../shadow/Position";
 import { CardProps } from "../../../../models/types/props/card";
+import { styleSize } from "../../../../style/style";
 
 const Card: React.FC<CardProps> = ({
     id,
@@ -18,14 +19,7 @@ const Card: React.FC<CardProps> = ({
     const isPlayerType = type.t === "Player";
     const movieId = isPlayerType ? type.card.id : undefined;
 
-    const sizeClass =
-        size === "large"
-            ? style.cardContainerLarge
-            : size === "medium"
-              ? style.cardContainerMedium
-              : size === "small"
-                ? style.cardContainerSmall
-                : style.cardContainerXSmall; //TODOCSS: refactor
+    const sizeClass = styleSize(style)[size];
 
     return (
         <section id={id} className={sizeClass}>

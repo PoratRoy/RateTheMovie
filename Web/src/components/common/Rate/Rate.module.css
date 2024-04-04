@@ -11,7 +11,7 @@
     width: calc(var(--medium-card-width) - 13px);
 }
 
-.cardRateWrapperAbsolute{
+.positionAbsolute{
     position: absolute;
     bottom: -15px;
     left: 50%;
@@ -19,6 +19,6 @@
     transform: translateX(-50%);
 }
 
-.cardRateWrapperRelative{
+.positionRelative{
     position: relative;
 }

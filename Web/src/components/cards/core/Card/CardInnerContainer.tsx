@@ -18,7 +18,7 @@ const CardInnerContainer: React.FC<CardInnerContainerProps> = ({
     if (isElectedType) {
         const className = type.hasDecoration
             ? `${style.electedCardInnerDecoration} ${isFocus ? style.cardContainerFocus : ""}`
-            : style.electedCardInnerContainer; //TODOCSS: refactor
+            : style.electedCardInnerContainer;
 
         return (
             <div

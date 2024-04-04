@@ -1,21 +1,21 @@
-.toggelArrowLarge,
-.toggelArrowMedium,
-.toggelArrowSmall {
+.sizeLarge,
+.sizeMedium,
+.sizeSmall {
     color: var(--text-color-opacity);
     cursor: pointer;
     position: relative;
     -webkit-tap-highlight-color: transparent;
 }
 
-.toggelArrowLarge{
+.sizeLarge{
     font-size: 1.7rem;
 }
 
-.toggelArrowMedium{
+.sizeMedium{
     font-size: 1.5rem;
 }
 
-.toggelArrowSmall{
+.sizeSmall{
     font-size: 1rem;
 }
 

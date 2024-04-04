@@ -1,7 +1,7 @@
-.packContainer,
-.packContainerXSmall,
-.packContainerSmall,
-.packContainerWrap {
+.sizeLarge,
+.sizeXSmall,
+.sizeSmall,
+.sizeWrap {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
@@ -10,58 +10,58 @@
     align-items: center;
 }
 
-.packContainerXSmall{
+.sizeXSmall {
     max-width: 98%;
     height: 98%;
 
 }
 
-.packContainerSmall{
+.sizeSmall {
     max-width: 100%;
     gap: 10px;
 }
 
-.packContainer{
+.sizeLarge {
     max-width: 80vw;
     gap: 5px;
 }
 
-.packContainerWrap{
+.sizeWrap {
     max-width: 90vw;
     gap: 17px;
 }
 
-/* .packContainer {
+/* .sizeLarge {
     gap: 10px;
     align-items: center;
     justify-content: space-between;
 } */
 
-/* .packContainerWrap {
+/* .sizeWrap {
     position: relative;
     height: 50vh;
     width: 100%;
 } */
 
-/* .packContainerWrap section:nth-child(2) {
+/* .sizeWrap section:nth-child(2) {
     position: absolute;
     right: 0;
 }
 
-.packContainerWrap section:nth-child(3) {
+.sizeWrap section:nth-child(3) {
     position: absolute;
     top: 150px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.packContainerWrap section:nth-child(4) {
+.sizeWrap section:nth-child(4) {
     position: absolute;
     bottom: 0;
     left: 0;
 }
 
-.packContainerWrap section:nth-child(5) {
+.sizeWrap section:nth-child(5) {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -69,7 +69,7 @@
 
 
 /* 
-.packContainer {
+.sizeLarge {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

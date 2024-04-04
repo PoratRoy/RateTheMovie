@@ -1,6 +1,6 @@
-.circleBtnLarge,
-.circleBtnMedium,
-.circleBtnSmall {
+.btnLarge,
+.btnMedium,
+.btnSmall {
     position: relative;
     display: flex;
     justify-content: center;
@@ -10,41 +10,41 @@
     cursor: pointer;
 }
 
-.circleBtnLarge:hover,
-.circleBtnMedium:hover,
-.circleBtnSmall:hover {
+.btnLarge:hover,
+.btnMedium:hover,
+.btnSmall:hover {
     background-color: var(--secondary-color);
     transform: scale(1.01);
 }
 
-.circleBtnLarge:focus,
-.circleBtnMedium:focus,
-.circleBtnSmall:focus {
+.btnLarge:focus,
+.btnMedium:focus,
+.btnSmall:focus {
     background-color: var(--secondary-color-focus);
 }
 
-.circleBtnLarge:active,
-.circleBtnMedium:active,
-.circleBtnSmall:active {
+.btnLarge:active,
+.btnMedium:active,
+.btnSmall:active {
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
 }
 
-.circleBtnLarge {
+.btnLarge {
     width: 35px;
     height: 35px;
     font-size: 1.3rem;
     background-color: var(--secondary-color-opacity);
 }
 
-.circleBtnMedium {
+.btnMedium {
     width: 30px;
     height: 30px;
     font-size: 1rem;
     background-color: var(--secondary-color);
 }
 
-.circleBtnSmall {
+.btnSmall {
     width: 25px;
     height: 25px;
     font-size: 1rem;
@@ -60,34 +60,34 @@
     z-index: 0;
 }
 
-.circleBtnLarge .circleIcon {
+.btnLarge .circleIcon {
     font-size: 1.5rem;
     color: var(--text-color);
     opacity: 0.5;
 }
 
-.circleBtnLarge .circleIcon svg {
+.btnLarge .circleIcon svg {
     color: var(--text-color);
 }
 
 
-.circleBtnMedium .circleIcon {
+.btnMedium .circleIcon {
     font-size: 1rem;
     opacity: 1;
     color: var(--text-color);
 }
 
-.circleBtnMedium .circleIcon svg {
+.btnMedium .circleIcon svg {
     color: var(--text-color);
 }
 
 
-.circleBtnSmall .circleIcon {
+.btnSmall .circleIcon {
     font-size: 0.8rem;
     opacity: 1;
     color: var(--text-color);
 }
 
-.circleBtnSmall .circleIcon svg {
+.btnSmall .circleIcon svg {
     color: var(--text-color);
 }

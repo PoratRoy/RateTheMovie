@@ -4,6 +4,7 @@ import useLoadingBtnAnimation from "../../../../../hooks/animation/useLoadingBtn
 import { PrimaryIconBtnProps } from "../../../../../models/types/props/btn";
 import { DONE_BTN_ID } from "../../../../../models/constant/ids";
 import { motion } from 'framer-motion';
+import { styleBtnSize } from "../../../../../style/style";
 
 
 const PrimaryIconBtn: React.FC<PrimaryIconBtnProps> = ({
@@ -15,14 +16,7 @@ const PrimaryIconBtn: React.FC<PrimaryIconBtnProps> = ({
     size = "large",
 }) => {
     const { scope } = useLoadingBtnAnimation(loading, id || DONE_BTN_ID, size);
-
-    const className =
-        size === "large"
-            ? style.btnPrimaryLarge
-            : size === "medium"
-              ? style.btnPrimaryMedium
-              : style.btnPrimarySmall; //TODOCSS: refactor this
-
+    const className = styleBtnSize(style)[size];
     
     return (
         <div ref={scope}>

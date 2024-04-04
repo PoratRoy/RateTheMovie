@@ -7,7 +7,7 @@ import { CardFace } from "../../models/enums/animation";
 import { START_GAME_TIME } from "../../models/constant/time";
 
 const useWaitingRoom = () => {
-    const { fetchLoading, gameCards, currentPlayer, setIsGameStart } = useGamePlayContext();
+    const { fetchLoading, gameCards, currentPlayer, game, setIsGameStart } = useGamePlayContext();
     const { setIsFlipCard } = useAnimationContext();
     const { rivalPlayers } = useSocketContext();
     const [timerExpired, setTimerExpired] = useState<boolean>(false);
@@ -33,7 +33,7 @@ const useWaitingRoom = () => {
 
         const startTimer = () => {
             setTimerExpired(false);
-            if (isSingle()) {
+            if (isSingle() && !game?.isGameStart) {
                 timer = setTimeout(() => {
                     if (isMounted) {
                         setTimerExpired(true);

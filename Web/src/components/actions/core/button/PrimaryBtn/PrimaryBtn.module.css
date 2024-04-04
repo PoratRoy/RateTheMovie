@@ -1,7 +1,7 @@
 /* Mobile 320px - 767px -- 812px */
-.btnPrimarySmall,
-.btnPrimaryMedium,
-.btnPrimaryLarge {
+.btnSmall,
+.btnMedium,
+.btnLarge {
     color: var(--text-color);
     background-color: var(--primary-color);
     font-weight: 600;
@@ -14,35 +14,35 @@
     justify-content: center;
 }
 
-.btnPrimarySmall:hover,
-.btnPrimaryMedium:hover,
-.btnPrimaryLarge:hover {
+.btnSmall:hover,
+.btnMedium:hover,
+.btnLarge:hover {
     background-color: var(--primary-color-hover);
     transform: scale(1.01);
 }
 
-.btnPrimarySmall:focus,
-.btnPrimaryMedium:focus,
-.btnPrimaryLarge:focus {
+.btnSmall:focus,
+.btnMedium:focus,
+.btnLarge:focus {
     background-color: var(--primary-color-focus);
 }
 
-.btnPrimarySmall:active,
-.btnPrimaryMedium:active,
-.btnPrimaryLarge:active {
+.btnSmall:active,
+.btnMedium:active,
+.btnLarge:active {
     background-color: var(--primary-color-active);
     transform: scale(1.02);
 }
 
-.btnPrimarySmall:disabled,
-.btnPrimaryMedium:disabled,
-.btnPrimaryLarge:disabled {
+.btnSmall:disabled,
+.btnMedium:disabled,
+.btnLarge:disabled {
     color: var(--text-color-opacity);
     background-color: var(--primary-color-disabled);
     cursor: default;
 }
 
-.btnPrimarySmall {
+.btnSmall {
     width: var(--btn-width-small);
     height: var(--btn-height-small);
     font-size: 1rem;
@@ -50,14 +50,14 @@
     border: var(--secondary-border);
 }
 
-.btnPrimaryMedium {
+.btnMedium {
     width: var(--btn-width-medium);
     height: var(--btn-height-medium);
     font-size: 1.1rem;
     letter-spacing: 2px;
 }
 
-.btnPrimaryLarge {
+.btnLarge {
     width: var(--btn-width-large);
     height: var(--btn-height-large);
     font-size: 1.2rem;
@@ -67,21 +67,21 @@
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
 
-    .btnPrimarySmall {
+    .btnSmall {
         width: 120px;
         height: 40px;
         font-size: 1rem;
         letter-spacing: 2px;
     }
 
-    .btnPrimaryMedium {
+    .btnMedium {
         width: 200px;
         height: 60px;
         font-size: 1rem;
         letter-spacing: 5px;
     }
 
-    .btnPrimaryLarge {
+    .btnLarge {
         width: 300px;
         height: 90px;
         font-size: 1.8rem;

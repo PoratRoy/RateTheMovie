@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import MultiBtn from "../../actions/widgets/btn/MultiBtn";
 import { initPlayer } from "../../../models/initialization/player";
@@ -17,18 +17,24 @@ import { Player } from "../../../models/types/player";
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();
     const { currentPlayer } = useGamePlayContext();
-    const player: Player = useMemo(
-        () => (currentPlayer ? currentPlayer : initPlayer(uuidv4(), DefualtPlayerName, "host")),
-        [currentPlayer],
-    );
 
     const handlePlay = () => {
+        const player = currentPlayer
+            ? currentPlayer
+            : initPlayer(uuidv4(), DefualtPlayerName, "host");
         setSetupOption({ mod: ModOption.SINGLE, player, roomId: SinglePlayerRoom });
     };
 
     const handleMulti = () => {
         handleCreateNewRoom((details) => {
             const { roomId } = details;
+            const player = currentPlayer
+                ? ({
+                      ...currentPlayer,
+                      role: "host",
+                  } as Player)
+                : initPlayer(uuidv4(), DefualtPlayerName, "host");
+
             setSetupOption({ mod: ModOption.MULTI, player, roomId });
         });
     };

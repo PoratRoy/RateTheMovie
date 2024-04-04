@@ -1,12 +1,12 @@
-.cardImgLarge,
-.cardImgMedium,
-.cardImgSmall,
-.cardImgXSmall {
+.sizeLarge,
+.sizeMedium,
+.sizeSmall,
+.sizeXSmall {
     object-fit: cover;
     border-radius: var(--secondary-border-radius);
 }
 
-.cardImgLarge {
+.sizeLarge {
     min-width: 120px;
     width: 42vw;
     max-width: var(--card-width);
@@ -15,17 +15,17 @@
     max-height: var(--card-height);
 }
 
-.cardImgMedium {
+.sizeMedium {
     width: var(--medium-card-width);
     height: var(--medium-card-height);
 }
 
-.cardImgSmall {
+.sizeSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
 }
 
-.cardImgXSmall{
+.sizeXSmall{
     width: var(--x-small-card-width);
     height: var(--x-small-card-height);
 }

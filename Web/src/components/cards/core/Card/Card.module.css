@@ -1,28 +1,28 @@
 /* Mobile 320px - 767px -- 812px */
-.cardContainerXSmall,
-.cardContainerSmall,
-.cardContainerMedium,
-.cardContainerLarge {
+.sizeXSmall,
+.sizeSmall,
+.sizeMedium,
+.sizeLarge {
     position: relative;
     perspective: 1000px;
 }
 
-.cardContainerXSmall {
+.sizeXSmall {
     width: var(--x-small-card-width);
     height: var(--x-small-card-height);
 }
 
-.cardContainerSmall {
+.sizeSmall {
     width: var(--small-card-width);
     height: var(--small-card-height);
 }
 
-.cardContainerMedium {
+.sizeMedium {
     width: var(--medium-card-width);
     height: var(--medium-card-height);
 }
 
-.cardContainerLarge {
+.sizeLarge {
     min-width: 120px;
     width: 42vw;
     max-width: var(--card-width);

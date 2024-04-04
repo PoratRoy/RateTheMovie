@@ -1,8 +1,8 @@
 /* Mobile 320px - 767px -- 812px */
-.btnSecondaryLarge,
-.btnSecondaryMedium,
-.btnSecondaryMediumWide,
-.btnSecondarySmall {
+.btnLarge,
+.btnMedium,
+.btnMediumWide,
+.btnSmall {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,21 +14,21 @@
     transform: width 0.2s ease;
 }
 
-.btnSecondaryLarge {
+.btnLarge {
     width: 200px;
     height: 50px;
     font-size: 1.1rem;
     letter-spacing: 2px;
 }
 
-.btnSecondaryMedium {
+.btnMedium {
     width: 125px;
     height: 35px;
     font-size: 1rem;
     letter-spacing: 2px;
 }
 
-.btnSecondaryMediumWide {
+.btnMediumWide {
     width: fit-content;
     max-width: var(--btn-width-large);
     height: 35px;
@@ -37,32 +37,32 @@
     padding: 0 10px;
 }
 
-.btnSecondarySmall {
+.btnSmall {
     width: 90px;
     height: 20px;
     font-size: 1rem;
     letter-spacing: 1px;
 }
 
-.btnSecondaryLarge:hover,
-.btnSecondaryMedium:hover,
-.btnSecondaryMediumWide:hover,
-.btnSecondarySmall:hover {
+.btnLarge:hover,
+.btnMedium:hover,
+.btnMediumWide:hover,
+.btnSmall:hover {
     background-color: var(--secondary-color-hover);
     transform: scale(1.01);
 }
 
-.btnSecondaryLarge:focus,
-.btnSecondaryMedium:focus,
-.btnSecondaryMediumWide:focus,
-.btnSecondarySmall:focus {
+.btnLarge:focus,
+.btnMedium:focus,
+.btnMediumWide:focus,
+.btnSmall:focus {
     background-color: var(--secondary-color-focus);
 }
 
-.btnSecondaryLarge:active,
-.btnSecondaryMedium:active,
-.btnSecondaryMediumWide:active,
-.btnSecondarySmall:active {
+.btnLarge:active,
+.btnMedium:active,
+.btnMediumWide:active,
+.btnSmall:active {
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
 }
@@ -70,10 +70,10 @@
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
 
-    .btnSecondaryLarge,
-    .btnSecondaryMedium,
-    .btnSecondaryMediumWide,
-    .btnSecondarySmall {
+    .btnLarge,
+    .btnMedium,
+    .btnMediumWide,
+    .btnSmall {
         width: 200px;
         height: 60px;
         font-size: 1.2rem;

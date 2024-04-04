@@ -1,12 +1,12 @@
 /* Mobile 320px - 767px -- 812px */
-.logoSmall {
+.sizeSmall {
     width: 70px;
     min-width: 50px;
     max-width: 150px;
     opacity: 0.5;
 }
 
-.logoLarge {
+.sizeLarge {
     width: 260px;
     min-width: 200px;
     max-width: 300px;
@@ -14,12 +14,12 @@
 
 /* Tablet 768px - 1279px -- 800px*/
 @media screen and (min-width: 768px) {
-    .logoSmall {
+    .sizeSmall {
         width: 150px;
         opacity: 1;
     }
 
-    .logoLarge {
+    .sizeLarge {
         width: 320px;
     }
 }

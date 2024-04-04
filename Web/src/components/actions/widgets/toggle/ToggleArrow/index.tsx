@@ -3,6 +3,7 @@ import style from "./ToggleArrow.module.css";
 import { motion } from "framer-motion";
 import { getRotation, getStartIcon } from "../../../../../utils/icon";
 import { ToggleArrowProps } from "../../../../../models/types/props/action";
+import { styleSize } from "../../../../../style/style";
 
 const ToggleArrow: React.FC<ToggleArrowProps> = ({
     isOpen,
@@ -13,13 +14,7 @@ const ToggleArrow: React.FC<ToggleArrowProps> = ({
 }) => {
     let IconStartDirection = useCallback(() => getStartIcon(startDirection), [handleOnClick]);
     let rotate = useCallback(() => getRotation(startDirection, endDirection), [handleOnClick]);
-
-    const className =
-        size === "large"
-            ? style.toggelArrowLarge
-            : size === "medium"
-              ? style.toggelArrowMedium
-              : style.toggelArrowSmall; //TODOCSS: refactor
+    const className = styleSize(style)[size];
 
     return (
         <span className={className} onClick={handleOnClick}>

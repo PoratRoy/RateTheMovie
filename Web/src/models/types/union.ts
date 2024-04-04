@@ -19,13 +19,14 @@ export type InputType =
     | "submit"
     | "checkbox";
 
+
 export type Difficulty = "easy" | "medium" | "hard";
 
 export type BtnSize = "small" | "medium" | "mediom-wide" | "large";
 
-export type IconSize = "small" | "medium" | "large";
-
 export type CardSize = "Xsmall" | "small" | "medium" | "large";
+
+export type IconSize = "small" | "medium" | "large";
 
 export type LogoSize = "small" | "large";
 
