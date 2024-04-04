@@ -14,13 +14,14 @@ const Draggable: React.FC<DraggableProps> = ({ children, draggableId, args }) =>
         disabled: game?.isPlayerFinishRound ? true : false,
     });
 
-    const handleOnTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-        // e.preventDefault();
-        //TODO: https://github.com/clauderic/dnd-kit/issues/791
-    }
+    // const handleOnTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    //     // e.preventDefault();
+    //     //TODO: https://github.com/clauderic/dnd-kit/issues/791
+    // }
+    //onTouchMove={handleOnTouchMove}
 
     return (
-        <div onTouchMove={handleOnTouchMove} ref={setNodeRef} style={dndStyle(transform)} {...listeners} {...attributes}>
+        <div ref={setNodeRef} style={dndStyle(transform)} {...listeners} {...attributes}>
             {children}
         </div>
     );
