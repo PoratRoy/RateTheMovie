@@ -1,4 +1,3 @@
-/* Mobile 320px - 767px -- 812px */
 .sizeXSmall,
 .sizeSmall,
 .sizeMedium,
@@ -31,8 +30,8 @@
     max-height: var(--card-height);
 }
 
-.electedCardInnerContainer,
-.electedCardInnerDecoration,
+.cardInnerContainer,
+.cardDecoration,
 .playerCardInnerContainer {
     border: 1px solid var(--tertiary-color);
     border-radius: var(--secondary-border-radius);
@@ -42,7 +41,7 @@
     height: 100%;
 }
 
-.electedCardInnerDecoration::before {
+.cardDecoration::before {
     background-color: var(--background-card-color);
     content: "";
     position: absolute;
@@ -52,7 +51,7 @@
     height: calc(var(--medium-card-height) - 10px);
 }
 
-.electedCardInnerDecoration::after {
+.cardDecoration::after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -67,37 +66,42 @@
         calc(var(--medium-card-width) - 17px) calc(var(--medium-card-height) - 17px) 0px 0px var(--secondary-color);
 }
 
-.playerCardInnerContainer {
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
+.cardFocus {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px 20px 3px var(--primary-color);
 }
 
-.cardFront,
-.cardBack {
+
+.cardFront {
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-}
-
-.cardBack {
-    transform: rotateY(180deg);
-}
-
-.cardFront {
     width: 100%;
     height: 100%;
     z-index: 2;
 }
 
-.cardContainerFocus {
-    border: 2px solid var(--primary-color);
-    box-shadow: 0px 0px 20px 3px var(--primary-color);
+.cardPlaceholder {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
 }
 
-/* Tablet 768px - 1279px -- 800px*/
-@media screen and (min-width: 768px) {
-    .cardContainerFocus {
-        border: 7px solid var(--primary-color);
-        box-shadow: 0px 0px 20px 3px var(--primary-color);
-    }
+.cardPlaceholderText {
+    position: absolute;
+    top: -20px;
+    color: var(--text-color-opacity);
+    width: 80%;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    overflow-wrap: break-word;
 }

@@ -1,24 +1,24 @@
 import { ChildernsProps, IdProps } from ".";
-import { Card, placeholderCardType } from "../card";
+import { Card } from "../card";
 import { Movie } from "../movie";
 import { Player } from "../player";
 import { CardSize, StarSize, CardAnimation } from "../union";
 
 export type CardProps = IdProps & {
     size?: CardSize;
-    type: placeholderCardType;
+    content: React.ReactNode;
+    hasDecoration?: boolean;
     isFocus?: boolean;
     hasBorder?: boolean;
-    front?: React.ReactNode;
-    back?: React.ReactNode;
-    position?: number;
+    index?: number;
 };
 
-export type CardInnerContainerProps = {
-    hasBorder?: boolean;
-    type: placeholderCardType;
-    children: React.ReactNode[];
-    isFocus: boolean | undefined;
+export type FlippedCardProps = IdProps & {
+    card: Card;
+    size?: CardSize;
+    position: number | undefined;
+    front: React.ReactNode;
+    back: React.ReactNode;
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
@@ -55,10 +55,6 @@ export type ElectedCardProps = {
     index: number;
     player: Player;
     card: Card | undefined;
-};
-
-export type PlaceholderProps = {
-    type: placeholderCardType;
 };
 
 export type PositionProps = IdProps & {

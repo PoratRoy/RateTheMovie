@@ -3,12 +3,9 @@ import CardImgShadow from "../../shadow/CardImgShadow";
 import Img from "../Img";
 import { MovieProps } from "../../../../models/types/props/movie";
 
-const Movie: React.FC<MovieProps> = ({
-    movie,
-    size,
-    isShadow = false,
-    actions = ["title"],
-}) => {
+const Movie: React.FC<MovieProps> = ({ movie, size, isShadow = false, actions = ["title"] }) => {
+    if (!movie) return <React.Fragment />;
+
     const { title, poster_path } = movie;
     return (
         <section>

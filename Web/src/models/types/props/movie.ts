@@ -3,7 +3,7 @@ import { Player } from "../player";
 import { CardAnimation, CardSize } from "../union";
 
 export type MovieProps = {
-    movie: Movie;
+    movie?: Movie;
     size: CardSize;
     actions?: CardAnimation[];
     isShadow?: boolean;

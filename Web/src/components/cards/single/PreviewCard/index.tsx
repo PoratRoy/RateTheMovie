@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Card from "../../core/Card";
-import { placeholderCardType } from "../../../../models/types/card";
 import CardEventLayout from "../../../layout/CardEventLayout";
 import { PreviewCardProps } from "../../../../models/types/props/card";
 import Movie from "../../core/Movie";
@@ -11,8 +10,7 @@ const PreviewCard: React.FC<PreviewCardProps> = ({ movie }) => {
     return (
         <CardEventLayout setOpenShadow={setOpenShadow}>
             <Card
-                type={{ t: "Preview" } as placeholderCardType}
-                front={
+                content={
                     <Movie
                         isShadow={openShadow}
                         size="large"

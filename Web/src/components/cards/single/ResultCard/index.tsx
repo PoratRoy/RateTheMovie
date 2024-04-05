@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "../../core/Card";
 import { ResultCardProps } from "../../../../models/types/props/card";
-import { placeholderCardType } from "../../../../models/types/card";
-import { setElectedFrontCard } from "../../../../utils/card";
 import ResultCardWrapper from "../../wrapper/ResultCardWrapper";
+import Movie from "../../core/Movie";
 
 const ResultCard: React.FC<ResultCardProps> = ({
     player,
@@ -18,11 +17,17 @@ const ResultCard: React.FC<ResultCardProps> = ({
     return (
         <ResultCardWrapper rate={rate} isRightChoice={isRightChoice}>
             <Card
-                type={{ t: "Elected", index } as placeholderCardType}
-                front={setElectedFrontCard(player, movie, size)}
+                content={
+                    <Movie
+                        size={size}
+                        movie={movie}
+                        actions={[]}
+                    />
+                }
                 size={size}
                 isFocus
                 hasBorder
+                index={index}
             />
         </ResultCardWrapper>
     );

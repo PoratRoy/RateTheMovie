@@ -1,34 +1,41 @@
 import React from "react";
 import style from "./Card.module.css";
-import CardInnerContainer from "./CardInnerContainer";
-import Placeholder from "../Placeholder";
-import Position from "../../shadow/Position";
-import { CardProps } from "../../../../models/types/props/card";
 import { styleSize } from "../../../../style/style";
+import { CardProps } from "../../../../models/types/props/card";
+import { CARD_ID } from "../../../../models/constant/ids";
+import { PRIMARY_COLOR } from "../../../../style/root";
+import { setPlaceholderText } from "../../../../utils/card";
+import RateStar from "../RateStar";
 
 const Card: React.FC<CardProps> = ({
     id,
-    type,
-    front,
-    back,
     isFocus,
-    position,
+    content,
+    hasDecoration,
+    index = 0,
     size = "large",
     hasBorder = false,
 }) => {
-    const isPlayerType = type.t === "Player";
-    const movieId = isPlayerType ? type.card.id : undefined;
-
     const sizeClass = styleSize(style)[size];
+    const className = hasDecoration
+        ? `${style.cardDecoration} ${isFocus ? style.cardFocus : ""}`
+        : style.cardInnerContainer;
+
+    const text = setPlaceholderText(index);
 
     return (
         <section id={id} className={sizeClass}>
-            <CardInnerContainer type={type} isFocus={isFocus} hasBorder={hasBorder}>
-                <Placeholder type={type} />
-                <div className={style.cardFront}>{front}</div>
-                {isPlayerType ? <div className={style.cardBack}>{back}</div> : null}
-                {position ? <Position id={movieId} position={position} /> : null}
-            </CardInnerContainer>
+            <div
+                id={CARD_ID}
+                className={className}
+                style={{ border: hasBorder ? `2px solid ${PRIMARY_COLOR}` : "none" }}
+            >
+                <div className={style.cardPlaceholder}>
+                    <div className={style.cardPlaceholderText}>{text}</div>
+                    <RateStar amount={index + 1} />
+                </div>
+                <div className={style.cardFront}>{content}</div>
+            </div>
         </section>
     );
 };

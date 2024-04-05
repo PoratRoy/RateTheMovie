@@ -7,8 +7,8 @@ export const START_TIMER = 3;
 export const START_GAME_TIME = 14000;
 export const START_GAME_TIMER = START_TIMER * 1000 + 500;
 
-export const GAME_TIME = 120;
-export const MODAL_TIME = 118;
+export const GAME_TIME = 20;
+export const MODAL_TIME = 8;
 
 export const FILP_CARD_TIME = 300;
 

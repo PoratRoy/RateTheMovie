@@ -10,8 +10,3 @@ export type ElectedCards = {
     order: (Card | undefined)[];
     correctOrder?: string[];
 };
-
-export type placeholderCardType =
-    | { t: "Elected"; index: number, hasDecoration?: boolean}
-    | { t: "Player"; card: Card }
-    | { t: "Preview" };

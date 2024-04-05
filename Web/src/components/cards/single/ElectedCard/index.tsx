@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { placeholderCardType } from "../../../../models/types/card";
 import Card from "../../core/Card";
 import ElectedCardWrapper from "../../wrapper/ElectedCardWrapper";
 import { setElectedFrontCard } from "../../../../utils/card";
@@ -19,10 +18,11 @@ const ElectedCard: React.FC<ElectedCardProps> = ({ player, index, card }) => {
             setFocus={setFocus}
         >
             <Card
-                type={{ t: "Elected", index, hasDecoration: true } as placeholderCardType}
-                front={setElectedFrontCard(player, movie)}
+                content={setElectedFrontCard(player, movie)}
                 size="medium"
                 isFocus={focus}
+                hasDecoration
+                index={index}
             />
         </ElectedCardWrapper>
     );
