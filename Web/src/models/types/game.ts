@@ -7,7 +7,6 @@ export type Game = {
     filters: Filters;
     currentRound: number;
     rounds: number;
-    shuffleAttempt: number;
 
     isGameStart: boolean;
     isRoundStart: boolean;

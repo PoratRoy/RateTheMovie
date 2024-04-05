@@ -6,7 +6,6 @@ import { Player } from "../models/types/player";
 import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
 import { Movie } from "../models/types/movie";
-import { SHUFFLE_ATTEMPT } from "../models/constant";
 import { RoundAction } from "../models/types/union";
 
 export const GamePlayContext = createContext<{
@@ -32,7 +31,6 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => void;
     refreshGameContext: () => void;
     setRoundNumber: (action: RoundAction, round?: number) => number;
-    setShuffle: (action: RoundAction) => void;
     setIsGameStart: (isGameStart: boolean) => void;
     setIsRoundStart: (isRoundStart: boolean) => void;
     setIsPlayerFinishRound: (isPlayerFinishRound: boolean) => void;
@@ -62,7 +60,6 @@ export const GamePlayContext = createContext<{
     clearGameContext: () => {},
     refreshGameContext: () => {},
     setRoundNumber: () => 1,
-    setShuffle: () => {},
     setIsGameStart: () => {},
     setIsRoundStart: () => {},
     setIsPlayerFinishRound: () => {},
@@ -110,23 +107,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         if (round) currentRound = action === "increase" ? round + 1 : round - 1;
         createSetGameState("currentRound")(currentRound);
         return currentRound;
-    };
-
-    const setShuffle = (action: RoundAction) => {
-        setGame((prev) => {
-            if (!prev) return prev;
-            const game = {
-                ...prev,
-                shuffleAttempt:
-                    action === "reset"
-                        ? SHUFFLE_ATTEMPT
-                        : action === "decrease"
-                          ? prev.shuffleAttempt - 1
-                          : prev.shuffleAttempt + 1,
-            };
-            Session.set(SessionKey.GAME, game);
-            return game;
-        });
     };
 
     const setIsGameStart = (isGameStart: boolean) => {
@@ -186,7 +166,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const resetGameContext = () => {
         resetRoundContextState();
         setRoundNumber("reset");
-        setShuffle("reset");
         setRoundsMovies([]);
         setPlayerToDefault();
         setGame((prev) => {
@@ -245,7 +224,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 clearGameContext,
                 refreshGameContext,
                 setRoundNumber,
-                setShuffle,
                 setIsGameStart,
                 setIsRoundStart,
                 setIsPlayerFinishRound,

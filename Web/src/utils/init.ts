@@ -1,4 +1,4 @@
-import { SHUFFLE_ATTEMPT, SinglePlayerRoom } from "../models/constant";
+import { SinglePlayerRoom } from "../models/constant";
 import { ModOption } from "../models/enums/landing";
 import { Filters } from "../models/types/filter";
 import { Game } from "../models/types/game";
@@ -27,7 +27,6 @@ export const initGame = (
         roomId: roomId || SinglePlayerRoom,
         filters,
         currentRound: 1,
-        shuffleAttempt: SHUFFLE_ATTEMPT,
         mod,
         isGameStart: false,
         isRoundStart: false,

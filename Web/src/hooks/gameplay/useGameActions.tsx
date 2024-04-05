@@ -19,7 +19,6 @@ const useGameActions = (close: () => void) => {
         clearGameContext,
         resetGameContext,
         setRoundNumber,
-        setShuffle,
         roundsMovies,
         setIsRoundFinished,
         setIsPlayerFinishRound,
@@ -73,16 +72,6 @@ const useGameActions = (close: () => void) => {
         }
     };
 
-    const handleShuffle = () => {
-        refreshGameContext();
-        if (game) {
-            const { rounds, shuffleAttempt } = game;
-            const index = rounds + shuffleAttempt - 1;
-            handelNewMovies(index);
-            setShuffle("decrease");
-        }
-    };
-
     const handelNewMovies = (index: number) => {
         const movies = roundsMovies ? roundsMovies[index] : [];
         handleMovieCards(movies);
@@ -92,7 +81,7 @@ const useGameActions = (close: () => void) => {
         }, 300);
     };
 
-    return { handleQuit, handleRestart, handleShuffle, handleContinue };
+    return { handleQuit, handleRestart, handleContinue };
 };
 
 export default useGameActions;
