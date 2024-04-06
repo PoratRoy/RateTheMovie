@@ -1,15 +1,5 @@
-.gameHeaderContainerFix{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--tertiary-color);
-    height: 3em;
-    z-index: -1;
-}
-
 .gameHeaderContainer {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;

@@ -15,7 +15,6 @@ const Header: React.FC<HeaderProps> = () => {
 
     return (
         <section className={style.gameHeaderContainer}>
-            <section className={style.gameHeaderContainerFix} />
             <PlayerProfile currentPlayer={currentPlayer} isMotion />
 
             {isMulti() ? (
