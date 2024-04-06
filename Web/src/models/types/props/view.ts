@@ -17,15 +17,12 @@ export type GenreProps = {
     genre: string;
 };
 
-export type ModalProps = ChildernsProps &
-    CloseProps & {
-        title: string;
-        hasCloseBtn?: boolean;
-        closeBtnType?: AdditionalBtns;
-        gameOver?: boolean;
-    };
+export type ModalProps = ChildernsProps & {
+    title: string;
+    gameOver?: boolean;
+};
 
-export type BackdropProps = CloseProps & {
+export type BackdropProps = {
     showBackdrop: boolean;
 };
 

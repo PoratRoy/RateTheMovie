@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import style from "./CardViewLayout.module.css";
-import CloseBtn from "../../view/core/CloseBtn";
+import CloseBtn from "../../actions/widgets/btn/CloseBtn";
 import useClickOutside from "../../../hooks/global/useClickOutside";
 import { CardViewLayoutProps } from "../../../models/types/props/layout";
 

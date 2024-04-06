@@ -13,7 +13,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver })
     const { currentPlayer, correctOrder } = useGamePlayContext();
 
     return (
-        <Modal close={close} title={title} gameOver={gameOver}>
+        <Modal title={title} gameOver={gameOver}>
             <section className={style.roundEndModal}>
                 <PlayerScore score={currentPlayer?.score || 0} />
                 <section className={style.roundEndResultCards}>
@@ -23,11 +23,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver })
                 {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
                 <AdditionalBtns
                     close={close}
-                    btns={
-                        gameOver
-                            ? ["movieList", "leaderboard", "quit"]
-                            : ["movieList", "quit", "restart"]
-                    }
+                    btns={gameOver ? ["movieList", "leaderboard", "quit"] : ["movieList"]}
                 />
             </section>
         </Modal>

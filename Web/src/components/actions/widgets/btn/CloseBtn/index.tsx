@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./CloseBtn.module.css";
 import { IoMdClose } from "react-icons/io";
-import { CloseBtnProps } from "../../../../models/types/props/btn";
+import { CloseBtnProps } from "../../../../../models/types/props/btn";
 
 const CloseBtn: React.FC<CloseBtnProps> = ({ close }) => {
     return (

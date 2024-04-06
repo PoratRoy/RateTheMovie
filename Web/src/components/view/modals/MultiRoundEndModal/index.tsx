@@ -25,23 +25,28 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
     };
 
     const setModal = () => {
-        if(game){
+        if (game) {
             const { isPlayerFinishRound, isRoundFinished } = game;
 
-            if(isPlayerFinishRound){
-                if(isRoundFinished){
-                    if(finish && gameOver){ 
-                        <GameOverModal leaderBoardPlayers={leaderBoardPlayers} />
+            if (isPlayerFinishRound) {
+                if (isRoundFinished) {
+                    if (finish && gameOver) {
+                        <GameOverModal leaderBoardPlayers={leaderBoardPlayers} />;
                     }
-                    return <RoundModal leaderBoardPlayers={leaderBoardPlayers} handleTimeOut={handleTimeOut} />
+                    return (
+                        <RoundModal
+                            leaderBoardPlayers={leaderBoardPlayers}
+                            handleTimeOut={handleTimeOut}
+                        />
+                    );
                 }
-                return <WaitingModal/>
+                return <WaitingModal />;
             }
         }
     };
 
     return (
-        <Modal close={close} title={title} closeBtnType="quit" gameOver={gameOver} hasCloseBtn>
+        <Modal title={title} gameOver={gameOver}>
             {setModal()}
         </Modal>
     );
