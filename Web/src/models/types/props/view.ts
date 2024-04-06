@@ -1,5 +1,6 @@
 import { ChildernsProps, CloseProps } from ".";
 import { Movie, VideoModel } from "../movie";
+import { Player } from "../player";
 import { AdditionalBtns } from "../union";
 
 export type ViewImgProps = {
@@ -28,8 +29,6 @@ export type BackdropProps = CloseProps & {
     showBackdrop: boolean;
 };
 
-export type GameOverModalProps = CloseProps;
-
 export type RoundEndModalProps = CloseProps & {
     title: string;
     gameOver: boolean;
@@ -52,4 +51,13 @@ export type PlayerScoreProps = {
 export type MovieModalProps = {
     movie: Movie;
     close: () => void;
+};
+
+export type GameOverModalProps = {
+    leaderBoardPlayers: Player[];
+};
+
+export type RoundModalProps = {
+    leaderBoardPlayers: Player[];
+    handleTimeOut: () => void;
 };

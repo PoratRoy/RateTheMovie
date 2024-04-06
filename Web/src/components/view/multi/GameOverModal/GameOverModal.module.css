@@ -1,12 +1,8 @@
-.MultiRoundEndModal,
-.MultiRoundGameOver {
+.gameOverModal {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 0.5em;
-}
-
-.MultiRoundGameOver{
     align-items: center;
     justify-content: center;
 }

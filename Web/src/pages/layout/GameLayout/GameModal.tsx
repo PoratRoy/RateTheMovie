@@ -17,12 +17,12 @@ const GameModal: React.FC = () => {
     const args = { close: handleClose, title, gameOver };
 
     useEffect(() => {
-        if (game?.isRoundFinished) {
+        if (game?.isPlayerFinishRound) {
             handleOpen();
             setIsFlipCard(CardFace.BACK);
             setIsGameOver(gameOver);
         }
-    }, [game?.isRoundFinished]);
+    }, [game?.isPlayerFinishRound]);
 
     return showModal ? (
         isMulti() ? (

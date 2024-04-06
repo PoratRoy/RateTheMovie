@@ -2,7 +2,6 @@ import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { delayPromise } from "../../utils/time";
 import { PRIMARY_COLOR } from "../../style/root";
-import useMod from "../gameplay/useMod";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { BELOW_ID, CARD_ID, POINTS_ID, SHADOW_ID } from "../../models/constant/ids";
@@ -15,12 +14,15 @@ import {
     DURATION_ANIMATION_8,
     SECOND_TIME,
 } from "../../models/constant/time";
+import useMod from "../gameplay/useMod";
+import { useSocketContext } from "../../context/SocketContext";
 
 const useFinishAnimation = (activate: boolean | undefined) => {
     const [scope, animation] = useAnimate();
-    const { currentPlayer, setIsRoundFinished } = useGamePlayContext();
-    const { setIncreaseScore } = useAnimationContext();
-    const { isSingle } = useMod();
+    const { handlePlayerFinish } = useSocketContext();
+    const { currentPlayer, setIsPlayerFinishRound, setIsRoundFinished } = useGamePlayContext();
+    const { setIncreaseScore, setActivateFinishAnimation } = useAnimationContext();
+    const { isMulti } = useMod();
 
     const handleFinishAnimation = async () => {
         const order = currentPlayer?.electedCards.order;
@@ -62,9 +64,17 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                 await delayPromise(DELAY_ANIMATION_4);
             }
         } catch (error) {}
-
         await delayPromise(SECOND_TIME);
-        if (isSingle()) setIsRoundFinished(true);
+
+        setIsPlayerFinishRound(true);
+        setActivateFinishAnimation(false);
+
+        if (isMulti() && currentPlayer) {
+            const { score, electedCards } = currentPlayer;
+            handlePlayerFinish(electedCards, score);
+        } else {
+            setIsRoundFinished(true);
+        }
     };
 
     useEffect(() => {

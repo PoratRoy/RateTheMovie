@@ -11,12 +11,15 @@ import useWaitingRoom from "../../../hooks/gameplay/useWaitingRoom";
 import PreviewPage from "../../PreviewPage";
 import { ROUND_NUM } from "../../../models/constant";
 import RoundTitle from "../../../components/common/RoundTitle";
+import { useAnimationContext } from "../../../context/AnimationContext";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
-    const { game, currentPlayer, isPreview, setIsGameStart, setIsRoundStart } = useGamePlayContext();
+    const { game, currentPlayer, isPreview, setIsGameStart, setIsRoundStart } =
+        useGamePlayContext();
     const { rivalPlayers, handleStartGame } = useSocketContext();
+    const { activateFinishAnimation } = useAnimationContext();
     const { isWaiting } = useWaitingRoom();
-    const { scope } = useFinishAnimation(game?.isPlayerFinishRound);
+    const { scope } = useFinishAnimation(activateFinishAnimation);
 
     const handleClickStartGame = () => {
         if (rivalPlayers && rivalPlayers.length >= 1) {

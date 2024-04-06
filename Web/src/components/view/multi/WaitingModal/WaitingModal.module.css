@@ -1,0 +1,8 @@
+.waitingModal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    color: var(--text-color);
+}

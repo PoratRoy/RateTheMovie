@@ -1,5 +1,3 @@
-import { PACK_CARDS_NUM } from ".";
-
 export const SECOND_TIME = 1000;
 
 export const START_TIMER = 3;
@@ -22,14 +20,3 @@ export const DURATION_ANIMATION_8 = 0.8; //800ms
 export const DELAY_ANIMATION_3 = 300;
 export const DELAY_ANIMATION_4 = 400;
 export const DELAY_ANIMATION_30 = 3000;
-
-// export const FINISH_ANIMATION_TIME = 3000 + PACK_CARDS_NUM * 1000;
-export const FINISH_ANIMATION_TIME =
-    SECOND_TIME * 2 +
-    DURATION_ANIMATION_3 * 1000 +
-    DURATION_ANIMATION_2 * 1000 +
-    PACK_CARDS_NUM *
-        (DURATION_ANIMATION_3 * 1000 +
-            DELAY_ANIMATION_3 +
-            DURATION_ANIMATION_8 * 1000 +
-            DELAY_ANIMATION_4);

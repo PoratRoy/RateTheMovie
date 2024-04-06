@@ -31,7 +31,7 @@ import {
 } from "../models/constant/socketEvents";
 import Session from "../utils/storage/sessionStorage";
 import { SessionKey } from "../models/enums/session";
-import { FILP_CARD_TIME, FINISH_ANIMATION_TIME } from "../models/constant/time";
+import { FILP_CARD_TIME } from "../models/constant/time";
 import { useAnimationContext } from "./AnimationContext";
 import { CardFace } from "../models/enums/animation";
 import useGameActions from "../hooks/gameplay/useGameActions";
@@ -226,20 +226,7 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             const rivalPlayers = filterOnlyRivalPlayers(players, player);
             Session.set(SessionKey.RIVAL_PLAYERS, rivalPlayers);
             setRivalPlayers(rivalPlayers);
-
-            let isAllPlacedCards = true;
-            for (const player of players) {
-                if (!player.electedCards.order[0]?.id) {
-                    isAllPlacedCards = false;
-                    break;
-                }
-            }
-            setTimeout(
-                () => {
-                    setIsRoundFinished(true);
-                },
-                isAllPlacedCards ? FINISH_ANIMATION_TIME : 0,
-            );
+            setIsRoundFinished(true);
         };
 
         const handleNextRoundStarted = (warRoom: WarRoomProps) => {

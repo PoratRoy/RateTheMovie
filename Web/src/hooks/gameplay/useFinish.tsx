@@ -9,6 +9,7 @@ import { isCardsOrdrValid } from "../../utils/correctOrder";
 import useMod from "./useMod";
 import Session from "../../utils/storage/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
+import { useAnimationContext } from "../../context/AnimationContext";
 
 const useFinish = () => {
     const {
@@ -16,17 +17,17 @@ const useFinish = () => {
         currentPlayer,
         setPreviewMovies,
         gameCards,
-        setIsPlayerFinishRound,
         setIsRoundFinished,
         setIsRoundStart,
         setActivateTimer,
+        setIsPlayerFinishRound,
     } = useGamePlayContext();
     const { handlePlayerFinish } = useSocketContext();
+    const { setActivateFinishAnimation } = useAnimationContext();
     const { isMulti } = useMod();
     const checkRef = useRef<any>(false);
 
     const setNewRoundStatus = () => {
-        setIsPlayerFinishRound(true);
         setIsRoundFinished(false);
         setIsRoundStart(false);
         setActivateTimer(false);
@@ -47,6 +48,7 @@ const useFinish = () => {
             isCardsOrdrValid(currentPlayer);
         if (isValid) {
             setNewRoundStatus();
+            setActivateFinishAnimation(true);
 
             checkRef.current = false;
             setCurrentPlayer((player: Player | undefined) => {
@@ -65,11 +67,6 @@ const useFinish = () => {
                     }
                 }
 
-                if (isMulti() && !checkRef.current) {
-                    handlePlayerFinish(electedCards, playerScore);
-                    checkRef.current = true;
-                }
-
                 const currentPlayer: Player = {
                     ...player,
                     score: player.score + playerScore,
@@ -80,6 +77,8 @@ const useFinish = () => {
             });
         } else {
             setNewRoundStatus();
+            setIsPlayerFinishRound(true);
+            setActivateFinishAnimation(false);
 
             let check = false;
             if (isMulti() && !check) {
