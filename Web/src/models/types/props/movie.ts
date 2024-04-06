@@ -14,4 +14,5 @@ export type DraggableMovieProps = {
     movie: Movie;
     player: Player;
     size?: CardSize;
+    disabled?: boolean;
 };

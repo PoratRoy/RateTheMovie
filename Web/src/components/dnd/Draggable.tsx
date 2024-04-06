@@ -5,17 +5,13 @@ import { DraggableProps } from "../../models/types/props/dnd";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 
 //TODO: zIndex not working because of the transform
-const Draggable: React.FC<DraggableProps> = ({ children, draggableId, args }) => {
+const Draggable: React.FC<DraggableProps> = ({ children, draggableId, disabled, args }) => {
     const { game } = useGamePlayContext();
-    const userAgent = navigator.userAgent;
-    const isIPhone = /iPhone/.test(userAgent);
-    console.log("userAgent", userAgent)
-    console.log("isIPhone", isIPhone)
 
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: draggableId,
         data: args,
-        disabled: game?.isPlayerFinishRound ? true : false,
+        disabled: disabled ? true : game?.isPlayerFinishRound ? true : false,
     });
 
     return (

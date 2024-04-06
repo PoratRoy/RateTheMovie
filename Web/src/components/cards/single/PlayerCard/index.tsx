@@ -10,6 +10,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, card }) => {
     const movie = card.movie;
     const position = useCardOrderPosition(player, card);
     const cardId = `${movie.id}-${player.id}`;
+    const userAgent = navigator.userAgent;
+    const isIPhone = /iPhone/.test(userAgent);
 
     return (
         <CardEventLayout card={card}>
@@ -17,13 +19,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, card }) => {
                 card={card}
                 front={<LoadingCard />}
                 back={
-                    <section>
-                        {movie && movie.title ? (
-                            <DraggableMovie id={cardId} movie={movie} player={player} />
-                        ) : (
-                            <React.Fragment />
-                        )}
-                    </section>
+                    <DraggableMovie id={cardId} movie={movie} player={player} disabled={isIPhone} />
                 }
                 position={position}
             />

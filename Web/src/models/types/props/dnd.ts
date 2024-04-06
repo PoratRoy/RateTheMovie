@@ -7,5 +7,6 @@ export type DroppableProps = ChildernsProps & {
 
 export type DraggableProps = ChildernsProps & {
     draggableId: string;
+    disabled?: boolean;
     args: PropsObj;
 };

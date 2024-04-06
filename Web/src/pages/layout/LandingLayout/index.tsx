@@ -13,14 +13,13 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children, setupOption, se
     const { mod } = setupOption;
     const footerCallback =
         mod === ModOption.NONE ? undefined : () => setSetupOption({ mod: ModOption.NONE });
-    const userAgent = navigator.userAgent;
+
     return (
         <section ref={scope} className={style.landingBackground}>
             <BackgroundPoster />
             <WaveLayout>
                 <section className={style.landingBtnContainer}>
                     <Logo id={LOGO_ID} />
-                    <div>{userAgent}</div>
                     {children}
                 </section>
                 <Footer callback={footerCallback} />

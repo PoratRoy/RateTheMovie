@@ -4,10 +4,16 @@ import style from "./DraggableMovie.module.css";
 import Movie from "../../core/Movie";
 import { DraggableMovieProps } from "../../../../models/types/props/movie";
 
-const DraggableMovie: React.FC<DraggableMovieProps> = ({ id, movie, player, size = "large" }) => {
+const DraggableMovie: React.FC<DraggableMovieProps> = ({
+    id,
+    movie,
+    player,
+    disabled = false,
+    size = "large",
+}) => {
     return (
         <div className={style.draggableCard}>
-            <Draggable draggableId={id} args={{ movie, player }}>
+            <Draggable draggableId={id} args={{ movie, player }} disabled={disabled}>
                 <Movie movie={movie} size={size} actions={[]} />
             </Draggable>
         </div>
