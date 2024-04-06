@@ -8,6 +8,7 @@
     border: var(--secondary-border);
     border-radius: 50%;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btnLarge:hover,
@@ -38,15 +39,15 @@
 }
 
 .btnMedium {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     font-size: 1rem;
     background-color: var(--secondary-color);
 }
 
 .btnSmall {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     font-size: 1rem;
     background-color: var(--secondary-color);
 }

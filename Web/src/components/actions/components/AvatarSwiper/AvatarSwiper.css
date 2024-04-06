@@ -24,9 +24,11 @@
 
 .swiper-button-prev{
     left: 0px !important;
+    -webkit-tap-highlight-color: transparent;
 }
 .swiper-button-next{
     right: 0px !important;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .swiper-button-prev::after{

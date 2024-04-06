@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   border: var(--secondary-border);
-  border-radius: var(--secondary-border-radius);
+  border-radius: 50px;
   color: var(--text-color);
   background-color: var(--secondary-color-focus);
   height: 50px;
@@ -19,6 +19,7 @@
   cursor: pointer;
   width: 100px;
   height: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .radioDifficulty .radioDifficultyInput {

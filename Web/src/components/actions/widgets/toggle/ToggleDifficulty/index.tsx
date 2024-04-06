@@ -4,7 +4,6 @@ import { ToggleDifficultyProps } from "../../../../../models/types/props/action"
 import { Difficulty } from "../../../../../models/types/union";
 import { SelectRadio } from "../../../../../models/types/select";
 import {
-    SECONDARY_BORDER_RADIUS,
     SECONDARY_COLOR,
     SECONDARY_COLOR_FOCUS,
     TEXT_COLOR,
@@ -35,8 +34,7 @@ const ToggleDifficulty: React.FC<ToggleDifficultyProps> = () => {
                         color: difficulty === option.value ? TEXT_COLOR : TEXT_COLOR_OPACITY_REAL,
                         backgroundColor:
                             difficulty === option.value ? SECONDARY_COLOR : SECONDARY_COLOR_FOCUS,
-                        borderRadius:
-                            difficulty === option.value ? SECONDARY_BORDER_RADIUS : "none",
+                        borderRadius: difficulty === option.value ? 50 : "none",
                     }}
                 >
                     <input
