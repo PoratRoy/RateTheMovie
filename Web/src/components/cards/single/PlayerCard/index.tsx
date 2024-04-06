@@ -16,7 +16,15 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, card }) => {
             <FlippedCard
                 card={card}
                 front={<LoadingCard />}
-                back={<DraggableMovie id={cardId} movie={movie} player={player} />}
+                back={
+                    <section>
+                        {movie && movie.title ? (
+                            <DraggableMovie id={cardId} movie={movie} player={player} />
+                        ) : (
+                            <React.Fragment />
+                        )}
+                    </section>
+                }
                 position={position}
             />
         </CardEventLayout>

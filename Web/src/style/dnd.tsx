@@ -6,7 +6,5 @@ export const dndStyle = (transform: Transform | null): React.CSSProperties => {
         touchAction: "none",
         zIndex: 1000,
         cursor: "pointer",
-
-        border: "5px solid red",
     };
 };
