@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import RoundsNumber from "../../actions/components/RoundsNumber";
-import FilterCollapse from "../filter/FilterCollapse";
 import PreviewProfile from "../profile/PreviewProfile";
 import { setupInputs } from "../../../models/initialization/form";
 import SetupLayout from "../../../pages/layout/SetupLayout";
@@ -52,11 +51,11 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
 
             {playerRole === "host" ? (
                 <React.Fragment>
-                    <RadioDifficulty setValue={setValue} id={setupInputs.difficulty.id}/>
-                    <FilterCollapse>
-                        <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
-                        {/* <FilterInputs setValue={setValue} /> */}
-                    </FilterCollapse>
+                    <RadioDifficulty setValue={setValue} id={setupInputs.difficulty.id} />
+                    <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
+                    {/* <FilterCollapse>
+                        <FilterInputs setValue={setValue} />
+                    </FilterCollapse> */}
                 </React.Fragment>
             ) : null}
         </SetupLayout>
