@@ -27,6 +27,4 @@ export type ToggleArrowProps = {
     size?: IconSize;
 };
 
-export type ToggleDifficultyProps = {};
-
 export type ToggleTopMoviesProps = {};

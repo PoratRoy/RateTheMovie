@@ -52,7 +52,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
 
             {playerRole === "host" ? (
                 <React.Fragment>
-                    <RadioDifficulty />
+                    <RadioDifficulty setValue={setValue} id={setupInputs.difficulty.id}/>
                     <FilterCollapse>
                         <RoundsNumber setValue={setValue} id={setupInputs.rounds.id} />
                         {/* <FilterInputs setValue={setValue} /> */}

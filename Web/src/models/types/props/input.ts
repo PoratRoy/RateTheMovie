@@ -50,7 +50,11 @@ export type RoundInputProps<TInput extends FieldValues> = InputProps<TInput> & F
 export type AvatarSwiperProps<TInput extends FieldValues> = InputProps<TInput> &
     FormSetValueProps & {
         defualt: number;
-        setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
+        setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     };
 
 export type FilterInputsProps = FormSetValueProps;
+
+export type ToggleDifficultyProps<TInput extends FieldValues> = InputProps<TInput> & {
+    setValue: any;
+};

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./ToggleDifficulty.module.css";
-import { ToggleDifficultyProps } from "../../../../../models/types/props/action";
 import { Difficulty } from "../../../../../models/types/union";
 import { SelectRadio } from "../../../../../models/types/select";
 import {
@@ -9,12 +8,18 @@ import {
     TEXT_COLOR,
     TEXT_COLOR_OPACITY_REAL,
 } from "../../../../../style/root";
+import { ToggleDifficultyProps } from "../../../../../models/types/props/input";
+import { FieldValues } from "react-hook-form";
+import { FormSetValue } from "../../../../../models/constant";
 
-const ToggleDifficulty: React.FC<ToggleDifficultyProps> = () => {
+const ToggleDifficulty = <TInput extends FieldValues>({
+    id,
+    setValue,
+}: ToggleDifficultyProps<TInput>) => {
     const [difficulty, setDifficulty] = useState<Difficulty>("easy");
 
     useEffect(() => {
-        // console.log(difficulty);
+        setValue(id, JSON.stringify(difficulty), FormSetValue);
     }, [difficulty]);
 
     const options: SelectRadio[] = [
@@ -54,57 +59,3 @@ const ToggleDifficulty: React.FC<ToggleDifficultyProps> = () => {
 };
 
 export default ToggleDifficulty;
-
-// <div className="main-container">
-// <div
-//   className={`switch ${this.state.animation} ${this.state.switchPosition}-position`}
-// ></div>
-// <input
-//   defaultChecked
-//   onChange={(e) => this.getSwitchAnimation(e.target.value)}
-//   name="map-switch"
-//   id="left"
-//   type="radio"
-//   value="left"
-// />
-// <label
-//   className={`left-label ${
-//     this.state.switchPosition === "left" && "black-font"
-//   }`}
-//   htmlFor="left"
-// >
-//   <h4>{labels.left.title}</h4>
-// </label>
-
-// <input
-//   onChange={(e) => this.getSwitchAnimation(e.target.value)}
-//   name="map-switch"
-//   id="center"
-//   type="radio"
-//   value="center"
-// />
-// <label
-//   className={`center-label ${
-//     this.state.switchPosition === "center" && "black-font"
-//   }`}
-//   htmlFor="center"
-// >
-//   <h4>{labels.center.title}</h4>
-// </label>
-
-// <input
-//   onChange={(e) => this.getSwitchAnimation(e.target.value)}
-//   name="map-switch"
-//   id="right"
-//   type="radio"
-//   value="right"
-// />
-// <label
-//   className={`right-label ${
-//     this.state.switchPosition === "right" && "black-font"
-//   }`}
-//   htmlFor="right"
-// >
-//   <h4>{labels.right.title}</h4>
-// </label>
-// </div>

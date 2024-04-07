@@ -21,7 +21,5 @@ export type SetupInputs = {
     name: InputTypeText<SetupInputSchema>;
     rounds: RootInputType<SetupInputSchema>;
     avatar: RootInputType<SetupInputSchema>;
-    year: InputTypeSelect<SetupInputSchema>;
-    genre: InputTypeSelect<SetupInputSchema>;
-    language: InputTypeSelect<SetupInputSchema>;
+    difficulty: RootInputType<SetupInputSchema>;
 };

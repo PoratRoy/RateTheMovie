@@ -10,7 +10,7 @@ import { useSocketContext } from "../../context/SocketContext";
 import useMod from "../gameplay/useMod";
 import { useNavigate } from "react-router-dom";
 import { SetupOption } from "../../models/types/setup";
-import { PlayerRole } from "../../models/types/union";
+import { Difficulty, PlayerRole } from "../../models/types/union";
 import path from "../../router/routePath.json";
 import { initFilters, initGame } from "../../utils/init";
 import useMoviesGame from "../gameplay/useRoundsMoviesGame";
@@ -26,7 +26,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
     const navigate = useNavigate();
 
     const onSubmitForm: SubmitHandler<TInput> = async (data: TInput) => {
-        const { name, avatar, rounds } = data;
+        const { name, avatar, rounds, difficulty } = data;
         const { player, mod, roomId } = setupOption;
 
         const setPlayer = (player: Player) => {
@@ -54,7 +54,7 @@ const useOnSubmitSetup = <TInput extends FieldValues>(
         }
 
         if (playerRole === "host") {
-            const filters: Filters = initFilters();
+            const filters: Filters = initFilters(difficulty as Difficulty);
             const game: Game = initGame(rounds, roomId, filters, mod);
             if (isMulti(mod)) {
                 handleGame(game);

@@ -14,19 +14,8 @@ export const setupInputs: SetupInputs = {
         id: "avatar",
         type: "number",
     },
-    genre: {
-        id: "genre",
-        placeholder: "All Genres",
-        label: "Genres",
-    },
-    language: {
-        id: "language",
-        placeholder: "Select Native Language",
-        label: "Native Language",
-    },
-    year: {
-        id: "year",
-        placeholder: "Select Release Years",
-        label: "Release Year",
-    },
+    difficulty:{
+        id: "difficulty",
+        type: "text",
+    }
 };
