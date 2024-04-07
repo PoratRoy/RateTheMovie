@@ -53,8 +53,6 @@ export type AvatarSwiperProps<TInput extends FieldValues> = InputProps<TInput> &
         setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     };
 
-export type FilterInputsProps = FormSetValueProps;
-
 export type ToggleDifficultyProps<TInput extends FieldValues> = InputProps<TInput> & {
     setValue: any;
 };
