@@ -1,33 +1,6 @@
-.sizeXSmall,
-.sizeSmall,
-.sizeMedium,
-.sizeLarge {
+.cardContainer {
     position: relative;
     perspective: 1000px;
-}
-
-.sizeXSmall {
-    width: var(--x-small-card-width);
-    height: var(--x-small-card-height);
-}
-
-.sizeSmall {
-    width: var(--small-card-width);
-    height: var(--small-card-height);
-}
-
-.sizeMedium {
-    width: var(--medium-card-width);
-    height: var(--medium-card-height);
-}
-
-.sizeLarge {
-    min-width: 120px;
-    width: 42vw;
-    max-width: var(--card-width);
-    min-height: 170px;
-    height: 30vh;
-    max-height: var(--card-height);
 }
 
 .cardInnerContainer {

@@ -1,6 +1,7 @@
 import React from "react";
 import { FlippedCardProps } from "../../../../models/types/props/card";
 import style from "./FlippedCard.module.css";
+import cardStyle from "../../../../style/CardStyle.module.css";
 import { styleSize } from "../../../../style/style";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 import { motion } from "framer-motion";
@@ -20,11 +21,11 @@ const FlippedCard: React.FC<FlippedCardProps> = ({
         id: movieId,
         movie: { title, poster_path },
     } = card;
-    const sizeClass = styleSize(style)[size];
+    const sizeClass = styleSize(cardStyle)[size];
     const { isFlipCard } = useAnimationContext();
 
     return (
-        <section id={id} className={sizeClass}>
+        <section id={id} className={`${sizeClass} ${style.cardContainer}`}>
             <motion.div
                 className={style.cardInnerContainer}
                 initial={false}

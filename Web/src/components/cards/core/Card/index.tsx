@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Card.module.css";
+import cardStyle from "../../../../style/CardStyle.module.css";
 import { styleSize } from "../../../../style/style";
 import { CardProps } from "../../../../models/types/props/card";
 import { CARD_ID } from "../../../../models/constant/ids";
@@ -16,7 +17,7 @@ const Card: React.FC<CardProps> = ({
     size = "large",
     hasBorder = false,
 }) => {
-    const sizeClass = styleSize(style)[size];
+    const sizeClass = styleSize(cardStyle)[size];
     const className = hasDecoration
         ? `${style.cardDecoration} ${isFocus ? style.cardFocus : ""}`
         : style.cardInnerContainer;
@@ -24,7 +25,7 @@ const Card: React.FC<CardProps> = ({
     const text = setPlaceholderText(index);
 
     return (
-        <section id={id} className={sizeClass}>
+        <section id={id} className={`${sizeClass} ${style.cardContainer}`}>
             <div
                 id={CARD_ID}
                 className={className}
