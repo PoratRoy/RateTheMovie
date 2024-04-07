@@ -18,9 +18,10 @@ const useGameTimer = () => {
             setShowTimer(false);
         } else {
             if (game) {
-                const { isRefreshed, isGameStart, currentRound } = game;
+                const { isRefreshed, isPlayerFinishRound, isGameStart, currentRound } = game;
                 if (isRefreshed) {
-                    setTimerAndCardFace(false, CardFace.FRONT);
+                    const face = isPlayerFinishRound ? CardFace.BACK : CardFace.FRONT;
+                    setTimerAndCardFace(false, face);
                 } else {
                     if (isGameStart) {
                         if (currentRound === 1) {

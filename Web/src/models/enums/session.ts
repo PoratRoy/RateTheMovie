@@ -6,5 +6,4 @@ export enum SessionKey {
     TIMER = "timer",
 }
 
-// WAR_ROOM = "warRoom",
 // previewMovies

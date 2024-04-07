@@ -247,12 +247,10 @@ class GameSocket implements ISocket {
                                         }
                                     });
                                     this.warRooms[roomId] = warRoom;
-                                    connection.emit(PlayerRecconected);
+                                    connection.emit(PlayerRecconected, this.warRooms[roomId]);
                                 }
                             }
-                            console.log("refreshing");
                         } else {
-                            console.log("disconnecting");
                             const { game, players } = warRoom;
                             if (game?.roomId) {
                                 const { roomId } = game;

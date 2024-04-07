@@ -241,7 +241,11 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             }
         };
 
-        const handleReconnection = () => {
+        const handleReconnection = (warRoom: WarRoomProps) => {
+            const { game, gameCards } = warRoom;
+            if (game) {
+                handleGameCards(gameCards);
+            }
             setIsRefeshed(true);
         };
 
