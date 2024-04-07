@@ -38,27 +38,38 @@ export default class MovieDatabaseService {
         }
     };
 
-    public static getMoviesByDetails = async (
+    public static getMoviesByDifficulty = async (
         amount: number,
         difficulty: Difficulty,
-        filters: ByDetailsFilter,
     ): Promise<IMovie[] | null> => {
-        console.info(`Get movies with filters: ${filters}`);
-        const { year, genre, language } = filters;
-        if (!year) return null;
+        console.info(`Get movies with difficulty: ${difficulty}`);
+        const difficultyCriteria = specifyDifficulty(difficulty);
+        try {
+            const movies = await MovieModel.aggregate([
+                { $match: { ...difficultyCriteria } },
+                { $sample: { size: amount } },
+                ...populateMovie,
+            ]).exec();
+            console.info(`difficulty ${difficulty} movies: `, movies);
+            return movies;
+        } catch (error) {
+            throw new DBError(error as string);
+        }
+    };
+
+    public static getMoviesByGenre = async (
+        amount: number,
+        difficulty: Difficulty,
+        genre: string[] | undefined,
+    ): Promise<IMovie[] | null> => {
+        console.info(`Get movies with genres: ${genre}`);
         if (!genre) return null;
         const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
                 {
                     $match: {
-                        release_date: {
-                            $gte: year[0],
-                            $lte: year[1],
-                        },
-                        genre_ids: { $in: genre.map(g => parseInt(g)) },
-                        language: language,
-
+                        genre_ids: { $in: genre.map((g) => parseInt(g)) },
                         ...difficultyCriteria,
                     },
                 },
@@ -94,52 +105,11 @@ export default class MovieDatabaseService {
         }
     };
 
-    public static getMoviesByDirector = async (
-        amount: number,
-        filters: ByDirectorFilter,
-    ): Promise<IMovie[] | null> => {
-        const { name } = filters;
-
-        try {
-            console.info(`Get movies with director name: ${name}`);
-            const director = await DirectorDatabaseService.getDirectorByName(name);
-            if (!director) return null;
-            const movies = await MovieModel.aggregate([
-                { $match: { director: director._id } },
-                { $sample: { size: amount } },
-                ...populateMovie,
-            ]);
-            console.info(`Movies with director name: ${name}: `, movies);
-            return movies;
-        } catch (error) {
-            throw new DBError(error as string);
-        }
-    };
-
-    public static getMoviesByBoxOffice = async (
+    public static getMoviesByTopMovies = async (
         amount: number,
         difficulty: Difficulty,
     ): Promise<IMovie[] | null> => {
-        console.info(`Get box office movies`);
-        const difficultyCriteria = specifyDifficulty(difficulty);
-        try {
-            const movies = await MovieModel.aggregate([
-                { $match: { isBoxOffice: true, ...difficultyCriteria } },
-                { $sample: { size: amount } },
-                ...populateMovie,
-            ]).exec();
-            console.info(`Box office movies: `, movies);
-            return movies;
-        } catch (error) {
-            throw new DBError(error as string);
-        }
-    };
-
-    public static getMoviesByTopRated = async (
-        amount: number,
-        difficulty: Difficulty,
-    ): Promise<IMovie[] | null> => {
-        console.info(`Get top rated movies`);
+        console.info(`Get top movies`);
         const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
@@ -147,26 +117,7 @@ export default class MovieDatabaseService {
                 { $sample: { size: amount } },
                 ...populateMovie,
             ]);
-            console.info(`Top rated movies: `, movies);
-            return movies;
-        } catch (error) {
-            throw new DBError(error as string);
-        }
-    };
-
-    public static getMoviesByNewRelease = async (
-        amount: number,
-        difficulty: Difficulty,
-    ): Promise<IMovie[] | null> => {
-        console.info(`Get new relese movies`);
-        const difficultyCriteria = specifyDifficulty(difficulty);
-        try {
-            const movies = await MovieModel.aggregate([
-                { $match: { release_date: currentYear, ...difficultyCriteria } },
-                { $sample: { size: amount } },
-                ...populateMovie,
-            ]);
-            console.info(`New release movies: `, movies);
+            console.info(`Top movies: `, movies);
             return movies;
         } catch (error) {
             throw new DBError(error as string);

@@ -7,22 +7,14 @@ export const getDBmovies = async (filters: Filters, amount: number): Promise<IMo
     const { type, difficulty } = filters;
     let DBmovies: IMovie[] | null = null;
 
-    if ("byDetails" in type) {
-        DBmovies = await MovieDatabaseService.getMoviesByDetails(
-            amount,
-            difficulty,
-            type.byDetails,
-        );
-    } else if ("byDirector" in type) {
-        DBmovies = await MovieDatabaseService.getMoviesByDirector(amount, type.byDirector);
+    if ("byDifficulty" in type) {
+        DBmovies = await MovieDatabaseService.getMoviesByDifficulty(amount, difficulty);
+    } else if ("byGenre" in type) {
+        DBmovies = await MovieDatabaseService.getMoviesByGenre(amount, difficulty, type.byGenre);
     } else if ("byActor" in type) {
         DBmovies = await MovieDatabaseService.getMoviesByActor(amount, type.byActor);
-    } else if ("byBoxOffice" in type) {
-        DBmovies = await MovieDatabaseService.getMoviesByBoxOffice(amount, difficulty);
-    } else if ("byTopRated" in type) {
-        DBmovies = await MovieDatabaseService.getMoviesByTopRated(amount, difficulty);
-    } else if ("byNewRelease" in type) {
-        DBmovies = await MovieDatabaseService.getMoviesByNewRelease(amount, difficulty);
+    } else if ("byTopMovies" in type) {
+        DBmovies = await MovieDatabaseService.getMoviesByTopMovies(amount, difficulty);
     }
     const movies: IMovie[] = DBmovies ? [...DBmovies] : [];
     return movies;

@@ -5,12 +5,10 @@ export type DateRangeOptionFilter = { start?: number; end?: number };
 export type Filters = {
     difficulty: Difficulty;
     type:
-        | { byDetails: ByDetailsFilter }
-        | { byDirector: ByDirectorFilter }
+        | { byDifficulty: true }
+        | { byGenre: string[] | undefined }
         | { byActor: ByActorFilter }
-        | { byBoxOffice: true }
-        | { byTopRated: true }
-        | { byNewRelease: true };
+        | { byTopMovies: true };
 };
 
 export type ByDetailsFilter = {
@@ -26,11 +24,6 @@ export type ByDirectorFilter = {
 export type ByActorFilter = {
     name: string;
 };
-
-
-
-
-
 
 export type MovieFilters = {
     year?: [string, string];

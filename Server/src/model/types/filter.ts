@@ -21,10 +21,8 @@ export type ByActorFilter = {
 export type Filters = {
     difficulty: Difficulty; // by popularity
     type:
-        | { byDetails: ByDetailsFilter }
-        | { byDirector: ByDirectorFilter }
+        | { byDifficulty: true }
+        | { byGenre: string[] | undefined }
         | { byActor: ByActorFilter }
-        | { byBoxOffice: true }
-        | { byTopRated: true}
-        | { byNewRelease: true };
+        | { byTopMovies: true };
 };

@@ -4,14 +4,9 @@ import { Filters } from "../models/types/filter";
 import { Game } from "../models/types/game";
 
 export const initFilters = () => {
-    // const filters: MovieFilters = {
-    //     year: year ? JSON.parse(year) : DateDefaultJSON,
-    //     genre: genre ? JSON.parse(genre) : [],
-    //     language: language ? JSON.parse(language) : "",
-    // };
     const filters: Filters = {
         difficulty: "easy",
-        type: { byTopRated: true },
+        type: { byDifficulty: true },
     };
     return filters;
 };
