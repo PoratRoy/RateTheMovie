@@ -1,7 +1,5 @@
 import { Difficulty } from "./union";
 
-export type DateRangeOptionFilter = { start?: number; end?: number };
-
 export type Filters = {
     difficulty: Difficulty;
     type:
@@ -11,24 +9,12 @@ export type Filters = {
         | { byTopMovies: true };
 };
 
-export type ByDetailsFilter = {
-    year?: [string, string];
-    genre?: string[];
-    language?: string;
-};
-
 export type ByDirectorFilter = {
     name: string;
 };
 
 export type ByActorFilter = {
     name: string;
-};
-
-export type MovieFilters = {
-    year?: [string, string];
-    genre?: string[];
-    language?: string;
 };
 
 export type GenreOptionFilter = {
@@ -43,8 +29,3 @@ export type CountryOptionFilter = {
     iso_3166_1: string;
 };
 
-export type LanguageOptionFilter = {
-    id: string;
-    name: string;
-    emoji: string;
-};

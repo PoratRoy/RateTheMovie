@@ -28,3 +28,5 @@ export type ToggleArrowProps = {
 };
 
 export type ToggleDifficultyProps = {};
+
+export type ToggleTopMoviesProps = {};

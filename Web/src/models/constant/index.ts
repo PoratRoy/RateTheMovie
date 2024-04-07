@@ -10,10 +10,6 @@ export const FormSetValue = {
 
 export const SinglePlayerRoom = "single-player-room";
 
-export const DateStartYear = 1800;
-export const DateEndYear = new Date().getFullYear();
-export const DateDefaultJSON = '["1800","2023"]';
-
 export const DefualtPlayerName = "Player 1";
 
 export const DirectionMap: { [key: string]: number } = {

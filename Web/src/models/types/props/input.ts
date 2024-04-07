@@ -36,16 +36,7 @@ export type SelectMultiInputProps = InputPlaceholderProps & {
     defaultValue?: SelectOption;
 };
 
-export type DateRangeInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputLabelProps &
-    FormSetValueProps;
-
 export type GenreInputProps<TInput extends FieldValues> = InputProps<TInput> &
-    InputPlaceholderProps &
-    InputLabelProps &
-    FormSetValueProps;
-
-export type LanguageInputProps<TInput extends FieldValues> = InputProps<TInput> &
     InputPlaceholderProps &
     InputLabelProps &
     FormSetValueProps;
