@@ -47,7 +47,7 @@ export const AnimationContextProvider = ({ children }: { children: React.ReactNo
     const clearAnimationContext = () => {
         setIncreaseScore(0);
         setActivateFinishAnimation(false);
-        setIsFlipCard(CardFace.BACK);
+        setIsFlipCard(CardFace.FRONT);
     };
 
     return (

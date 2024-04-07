@@ -28,9 +28,8 @@ const useCheckMoviesAlreadySet = () => {
                 const selectedCards = isFinishPlacingElectedCards(currentPlayer);
                 setCorrectOrder(selectedCards);
             }
-        } else {
-            setFetchLoading(false);
         }
+        setFetchLoading(false);
     });
 };
 

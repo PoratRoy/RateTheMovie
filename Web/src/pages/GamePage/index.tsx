@@ -8,11 +8,20 @@ import CountDown from "../../components/actions/animation/CountDown";
 import { START_TIMER } from "../../models/constant/time";
 import useGameTimer from "../../hooks/gameplay/useGameTimer";
 import SomethingWentWrong from "../../components/error/SomethingWentWrong";
+import useReload from "../../hooks/global/useReload";
+import { useAnimationContext } from "../../context/AnimationContext";
 
 const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
-    const { currentPlayer } = useGamePlayContext();
+    const { currentPlayer, setIsPlayerFinishRound } = useGamePlayContext();
+    const { activateFinishAnimation } = useAnimationContext();
     const { showTimer, closeTimer } = useGameTimer();
+
+    const handleBeforeUnload = () => {
+        if (activateFinishAnimation) setIsPlayerFinishRound(true);
+    };
+
+    useReload(handleBeforeUnload, [activateFinishAnimation]);
 
     return (
         <GameLayout>

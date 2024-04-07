@@ -1,8 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useTimer as useReactTimer } from "react-timer-hook";
 import Session from "../../utils/storage/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 import { Time } from "../../models/types/common";
+import useReload from "../global/useReload";
 
 const useTimer = (duration: number, handleTimeOut: () => void, autoStart: boolean = false) => {
     const expiryTimestamp = new Date();
@@ -21,16 +22,11 @@ const useTimer = (duration: number, handleTimeOut: () => void, autoStart: boolea
         return (remainingSeconds / totalSeconds) * 100;
     }, [minutes, seconds]);
 
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            Session.set(SessionKey.TIMER, { seconds, minutes });
-        };
+    const handleBeforeUnload = () => {
+        Session.set(SessionKey.TIMER, { seconds, minutes });
+    };
 
-        window.addEventListener("beforeunload", handleBeforeUnload);
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
-    }, [seconds, minutes]);
+    useReload(handleBeforeUnload, [seconds, minutes])
 
     const refresh = (time: Time) => {
         const timestamp = new Date();

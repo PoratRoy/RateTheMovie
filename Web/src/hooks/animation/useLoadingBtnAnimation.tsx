@@ -47,7 +47,6 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?
     };
 
     useEffect(() => {
-        //TODO: activate not activate if rivalPlayers has change
         if (activate === true) {
             handleBtnToLoadingAnimation();
         } else if (activate === false) {

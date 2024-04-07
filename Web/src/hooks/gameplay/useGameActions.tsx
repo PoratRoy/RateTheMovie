@@ -9,7 +9,7 @@ import useMod from "./useMod";
 import useMoviesGame from "./useRoundsMoviesGame";
 import { CardFace } from "../../models/enums/animation";
 import Session from "../../utils/storage/sessionStorage";
-import { FILP_CARD_TIME } from "../../models/constant/time";
+import { FILP_CARD_TIME, SECOND_TIME } from "../../models/constant/time";
 
 const useGameActions = (close: () => void) => {
     const {
@@ -42,10 +42,13 @@ const useGameActions = (close: () => void) => {
     };
 
     const handleRestart = () => {
-        clearAnimationContext();
-        resetGameContext();
-        setMoviesGame(game);
-        close();
+        setIsFlipCard(CardFace.BACK);
+        setTimeout(() => {
+            setMoviesGame(game);
+            resetGameContext();
+            clearAnimationContext();
+            close();
+        }, SECOND_TIME);
     };
 
     const handleContinue = (action: RoundAction = "increase") => {
