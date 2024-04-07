@@ -31,9 +31,10 @@ const useTimer = (duration: number, handleTimeOut: () => void, autoStart: boolea
     const refresh = (time: Time) => {
         const timestamp = new Date();
         //TODO: check if I can get how much time it takes for the page to reload and put insted of the -5
-        timestamp.setSeconds(timestamp.getSeconds() + (time.seconds - 5));
+        timestamp.setSeconds(timestamp.getSeconds() + (time.seconds - 4));
         timestamp.setMinutes(timestamp.getMinutes() + time.minutes);
         restart(timestamp);
+        //TODO: cousing the modal timer problem
         Session.remove(SessionKey.TIMER);
     };
 

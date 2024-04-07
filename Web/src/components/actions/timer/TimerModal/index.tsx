@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import style from "./TimerModal.module.css";
 import { motion } from "framer-motion";
 import { TimerModalProps } from "../../../../models/types/props/action";
 import { MODAL_TIME } from "../../../../models/constant/time";
 import useTimer from "../../../../hooks/multiplayer/useTimer";
+import { Time } from "../../../../models/types/common";
+import Session from "../../../../utils/storage/sessionStorage";
+import { SessionKey } from "../../../../models/enums/session";
 
 const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
-    const { progress } = useTimer(duration, handleTimeOut, true);
+    const { expiryTimestamp, progress, refresh, restart } = useTimer(duration, handleTimeOut);
+    const timeLockRef = useRef<boolean>(true);
+
+    useEffect(() => {
+        if (timeLockRef.current) {
+            const sessionTime: Time | undefined = Session.get(SessionKey.TIMER);
+            sessionTime ? refresh(sessionTime) : restart(expiryTimestamp);
+            timeLockRef.current = false;
+        }
+    }, []);
 
     return (
         <div className={style.timerBarModal}>
