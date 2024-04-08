@@ -161,7 +161,7 @@ class GameSocket implements ISocket {
                         const { roomId } = game;
                         const index = players.indexOf(player);
                         players[index].electedCards = electedCards;
-                        players[index].score = players[index].score + score;
+                        players[index].score = score;
                         this.warRooms[game.roomId] = warRoom;
                         const warDetails = setWarRoomDetails(warRoom, roomId);
                         socket.nsp.to(roomId).emit(PlayerFinished, warDetails);

@@ -31,7 +31,7 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
             if (isPlayerFinishRound) {
                 if (isRoundFinished) {
                     if (finish && gameOver) {
-                        <GameOverModal leaderBoardPlayers={leaderBoardPlayers} />;
+                        return <GameOverModal leaderBoardPlayers={leaderBoardPlayers} />
                     }
                     return (
                         <RoundModal
@@ -53,5 +53,3 @@ const MultiRoundEndModal: React.FC<MultiRoundEndModalProps> = ({ close, title, g
 };
 
 export default MultiRoundEndModal;
-// let leaderBoardPlayers: Player[] = rivalPlayers ?? [];
-// currentPlayer && leaderBoardPlayers.push(currentPlayer);

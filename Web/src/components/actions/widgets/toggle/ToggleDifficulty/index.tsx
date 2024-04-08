@@ -19,7 +19,7 @@ const ToggleDifficulty = <TInput extends FieldValues>({
     const [difficulty, setDifficulty] = useState<Difficulty>("easy");
 
     useEffect(() => {
-        setValue(id, JSON.stringify(difficulty), FormSetValue);
+        setValue(id, difficulty, FormSetValue);
     }, [difficulty]);
 
     const options: SelectRadio[] = [

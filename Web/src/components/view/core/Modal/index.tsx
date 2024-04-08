@@ -5,20 +5,22 @@ import ModalIcon from "./ModalIcon";
 import { ModalProps } from "../../../../models/types/props/view";
 import Title from "../../../common/widgets/Title";
 import ConfettiExplosion from "react-confetti-explosion";
+import { useGamePlayContext } from "../../../../context/GamePlayContext";
 
 const Modal: React.FC<ModalProps> = ({ children, title, gameOver }) => {
     const [showContent, setShowContent] = useState<boolean>(false);
     const [isExploding, setIsExploding] = useState(false);
+    const { game } = useGamePlayContext();
 
     useEffect(() => {
         setShowContent(true);
     }, []);
 
     useEffect(() => {
-        if (gameOver) {
+        if (game?.isRoundFinished && gameOver) {
             setIsExploding(true);
         }
-    }, [gameOver]);
+    }, [gameOver, game?.isRoundFinished]);
 
     return (
         <React.Fragment>

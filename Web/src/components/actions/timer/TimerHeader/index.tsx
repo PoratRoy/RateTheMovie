@@ -9,9 +9,11 @@ import Session from "../../../../utils/storage/sessionStorage";
 import { SessionKey } from "../../../../models/enums/session";
 import useTimer from "../../../../hooks/multiplayer/useTimer";
 import { Time } from "../../../../models/types/common";
+import { useAnimationContext } from "../../../../context/AnimationContext";
 
 const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
-    const { game, activateTimer } = useGamePlayContext();
+    const { activateTimer } = useGamePlayContext();
+    const { activateFinishAnimation } = useAnimationContext();
     const { finishGame } = useFinish();
     const timeLockRef = useRef<boolean>(true);
 
@@ -29,11 +31,11 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     );
 
     useEffect(() => {
-        if (game?.isPlayerFinishRound) {
+        if (activateFinishAnimation) {
             timeLockRef.current = true;
             pause();
         }
-    }, [game?.isPlayerFinishRound]);
+    }, [activateFinishAnimation]);
 
     useEffect(() => {
         if (timeLockRef.current) {
