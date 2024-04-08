@@ -1,9 +1,7 @@
 import { CloseProps, IdProps } from ".";
 import { AdditionalBtns, BtnSize } from "../union";
 
-type OnClickQProps = {
-    onClicked?: () => void;
-};
+type OnClickQProps = OnClickProps;
 
 type OnClickProps = {
     onClicked: () => void;
@@ -61,11 +59,10 @@ export type PauseBtnProps = OnClickProps;
 
 export type NextRoundBtnProps = CloseProps;
 
-export type StartGameBtnProps = {
+export type StartGameBtnProps = OnClickProps & {
     id: string;
     title: string;
     loading?: boolean;
-    onClicked?: () => void;
     type?: "button" | "submit";
 };
 

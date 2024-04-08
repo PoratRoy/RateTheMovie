@@ -1,5 +1,5 @@
 import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form";
-import { ChildernsProps } from ".";
+import { ChildernsProps, CloseProps, OnClickProps } from ".";
 import { SetupOption } from "../setup";
 import { PlayerRole } from "../union";
 import { Player } from "../player";
@@ -35,9 +35,7 @@ export type PlayersPackLayoutProps = ChildernsProps;
 
 export type WaveLayoutProps = ChildernsProps;
 
-export type CardViewLayoutProps = ChildernsProps & {
-    close: () => void;
-};
+export type CardViewLayoutProps = ChildernsProps & CloseProps;
 
 export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
     InputProps<TInput> & {
@@ -77,8 +75,7 @@ export type CommonLayoutProps = ChildernsProps & {
     onGoBack?: () => void;
 };
 
-export type ErrorLayoutProps = {
-    onClick?: () => void;
+export type ErrorLayoutProps = OnClickProps & {
     description: string;
     buttonText: string;
 };

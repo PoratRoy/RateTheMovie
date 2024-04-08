@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import style from "./TimerModal.module.css";
+import style from "./ModalTimer.module.css";
 import { motion } from "framer-motion";
-import { TimerModalProps } from "../../../../models/types/props/action";
+import { ModalTimerProps } from "../../../../models/types/props/action";
 import { MODAL_TIME } from "../../../../models/constant/time";
-import useTimer from "../../../../hooks/multiplayer/useTimer";
+import useTimer from "../../../../hooks/time/useTimer";
 import { Time } from "../../../../models/types/common";
 import Session from "../../../../utils/storage/sessionStorage";
 import { SessionKey } from "../../../../models/enums/session";
 
-const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
+const ModalTimer: React.FC<ModalTimerProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
     const { expiryTimestamp, progress, refresh, restart } = useTimer(duration, handleTimeOut);
     const timeLockRef = useRef<boolean>(true);
 
@@ -32,4 +32,4 @@ const TimerModal: React.FC<TimerModalProps> = ({ handleTimeOut, duration = MODAL
     );
 };
 
-export default TimerModal;
+export default ModalTimer;

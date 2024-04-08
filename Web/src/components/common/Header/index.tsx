@@ -5,7 +5,7 @@ import { useGamePlayContext } from "../../../context/GamePlayContext";
 import RivalsProfiles from "../../profile/RivalsProfiles";
 import useMod from "../../../hooks/gameplay/useMod";
 import { HeaderProps } from "../../../models/types/props/common";
-import TimerHeader from "../../actions/timer/TimerHeader";
+import RoundTimer from "../../actions/timer/RoundTimer";
 import QuitCircleBtn from "../../actions/widgets/btn/QuitCircleBtn";
 import RestartCircleBtn from "../../actions/widgets/btn/RestartCircleBtn";
 
@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = () => {
                     <QuitCircleBtn close={() => {}} />
                 </section>
             )}
-            {isMulti() ? <TimerHeader /> : null}
+            {isMulti() ? <RoundTimer /> : null}
         </section>
     );
 };

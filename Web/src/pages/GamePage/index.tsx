@@ -6,7 +6,7 @@ import ElectedPackLayout from "../../components/layout/ElectedPackLayout";
 import useCheckMoviesAlreadySet from "../../api/hooks/useCheckMoviesAlreadySet";
 import CountDown from "../../components/actions/animation/CountDown";
 import { START_TIMER } from "../../models/constant/time";
-import useGameTimer from "../../hooks/gameplay/useGameTimer";
+import useGameTimer from "../../hooks/time/useGameTimer";
 import SomethingWentWrong from "../../components/error/SomethingWentWrong";
 import useReload from "../../hooks/global/useReload";
 import { useAnimationContext } from "../../context/AnimationContext";

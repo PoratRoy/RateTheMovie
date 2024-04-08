@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useMod from "./useMod";
+import useMod from "../gameplay/useMod";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { useAnimationContext } from "../../context/AnimationContext";

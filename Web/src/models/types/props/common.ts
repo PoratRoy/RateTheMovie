@@ -34,7 +34,7 @@ export type FooterProps = {
     isFixed?: boolean;
 };
 
-export type RoundTitleProps = {
+export type RoundsNumberProps = {
     current: number;
     total: number;
 };

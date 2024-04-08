@@ -45,7 +45,6 @@ const AvatarSwiper = <TInput extends FieldValues>({
             navigation={true}
             modules={[EffectCoverflow, Mousewheel, HashNavigation, Navigation]}
             onSlideChange={handleAvatar}
-            // TODO: defualt index not working
             initialSlide={defualt}
             onClick={() => setIsEdit(false)}
         >

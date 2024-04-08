@@ -5,11 +5,11 @@ export type CollapseProps = ChildernsProps & {
     isOpen: boolean;
 };
 
-export type TimerHeaderProps = {
+export type RoundTimerProps = {
     duration?: number;
 };
 
-export type TimerModalProps = {
+export type ModalTimerProps = {
     duration?: number;
     handleTimeOut: () => void;
 };

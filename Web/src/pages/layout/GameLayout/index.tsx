@@ -7,10 +7,10 @@ import LoadingPage from "../../LoadingPage";
 import { GameLayoutProps } from "../../../models/types/props/layout";
 import { useSocketContext } from "../../../context/SocketContext";
 import GameModal from "./GameModal";
-import useWaitingRoom from "../../../hooks/gameplay/useWaitingRoom";
+import useWaitingRoom from "../../../hooks/multiplayer/useWaitingRoom";
 import PreviewPage from "../../PreviewPage";
 import { ROUND_NUM } from "../../../models/constant";
-import RoundTitle from "../../../components/common/RoundTitle";
+import RoundsNumber from "../../../components/common/RoundsNumber";
 import { useAnimationContext } from "../../../context/AnimationContext";
 
 const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
@@ -39,7 +39,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
 
                     <section ref={scope} className={style.gameChildrenContainer}>
                         {children}
-                        <RoundTitle
+                        <RoundsNumber
                             current={game?.currentRound || 1}
                             total={game?.rounds || ROUND_NUM}
                         />

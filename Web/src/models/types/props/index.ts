@@ -15,3 +15,7 @@ export type PropsObj<T = Record<string, any>> = {
 export type CloseProps = {
     close: () => void;
 };
+
+export type OnClickProps = {
+    onClick?: () => void;
+};

@@ -6,7 +6,7 @@ import { CardProps } from "../../../../models/types/props/card";
 import { CARD_ID } from "../../../../models/constant/ids";
 import { PRIMARY_COLOR } from "../../../../style/root";
 import { setPlaceholderText } from "../../../../utils/card";
-import RateStar from "../RateStar";
+import PositionRateStar from "../PositionRateStar";
 
 const Card: React.FC<CardProps> = ({
     id,
@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({
             >
                 <div className={style.cardPlaceholder}>
                     <div className={style.cardPlaceholderText}>{text}</div>
-                    <RateStar amount={index + 1} />
+                    <PositionRateStar amount={index + 1} />
                 </div>
                 <div className={style.cardFront}>{content}</div>
             </div>

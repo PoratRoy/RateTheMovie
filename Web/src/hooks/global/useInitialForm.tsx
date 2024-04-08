@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as yup from "yup";
 import { DefaultValues, FieldValues, Path, useForm as useHookForm } from "react-hook-form";
-import useYupValidationResolver from "./useYupValidationResolver";
+import useYupValidationResolver from "../form/useYupValidationResolver";
 
 const useInitialForm = <TSchema extends FieldValues>(
     schema?: yup.ObjectSchema<TSchema, yup.AnyObject, TSchema, "">,

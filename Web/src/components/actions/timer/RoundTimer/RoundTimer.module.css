@@ -1,10 +1,7 @@
-.timerBarHeader {
+.roundTimerBar {
     width: 100%;
     height: 5px;
     background-color: black;
-}
-
-.timerBarHeader {
     position: absolute;
     bottom: -5px;
     left: 0;

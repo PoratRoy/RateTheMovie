@@ -1,4 +1,4 @@
-.watingRoom {
+.waitingRoom {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@
     font-size: 1.1rem;
 }
 
-.watingRoomRivals {
+.waitingRoomRivals {
     height: 60px;
     overflow-y: scroll;
     width: 100%;
@@ -21,7 +21,7 @@
     row-gap: 20px;
 }
 
-.watingRoomTitle{
+.waitingRoomTitle{
     display: flex;
     align-items: center;
     gap: 5px;

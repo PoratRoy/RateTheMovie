@@ -21,11 +21,3 @@ export type GenreOptionFilter = {
     id: number;
     name: string;
 };
-
-export type CountryOptionFilter = {
-    name: string;
-    emoji: string;
-    image: string;
-    iso_3166_1: string;
-};
-

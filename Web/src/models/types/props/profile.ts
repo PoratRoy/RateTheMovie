@@ -3,7 +3,7 @@ import { Player } from "../player";
 import { SetupInputSchema } from "../inputSchema";
 import { AvatarSize } from "../union";
 
-export type PreviewProfileProps = {
+export type ProfileProps = {
     player: Player | undefined;
     avatarId: number | undefined;
     setValue: any;
@@ -29,7 +29,7 @@ export type ResultPlayerProfileProps = {
     place: number;
 };
 
-export type WatingRoomProps = {
+export type WaitingRoomProps = {
     rivalPlayers: Player[];
 };
 

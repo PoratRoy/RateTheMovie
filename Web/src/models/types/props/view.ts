@@ -45,9 +45,8 @@ export type PlayerScoreProps = {
     score: number;
 };
 
-export type MovieModalProps = {
+export type MovieModalProps = CloseProps & {
     movie: Movie;
-    close: () => void;
 };
 
 export type GameOverModalProps = {

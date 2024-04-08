@@ -61,7 +61,7 @@ export type PositionProps = IdProps & {
     position: number;
 };
 
-export type RateStarProps = {
+export type PositionRateStarProps = {
     amount: number;
     size?: StarSize;
 };

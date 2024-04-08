@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import style from "./TimerHeader.module.css";
+import style from "./RoundTimer.module.css";
 import { motion } from "framer-motion";
-import { TimerHeaderProps } from "../../../../models/types/props/action";
+import { RoundTimerProps } from "../../../../models/types/props/action";
 import useFinish from "../../../../hooks/gameplay/useFinish";
 import { GAME_TIME, SECOND_TIME } from "../../../../models/constant/time";
 import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import Session from "../../../../utils/storage/sessionStorage";
 import { SessionKey } from "../../../../models/enums/session";
-import useTimer from "../../../../hooks/multiplayer/useTimer";
+import useTimer from "../../../../hooks/time/useTimer";
 import { Time } from "../../../../models/types/common";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 
-const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
+const RoundTimer: React.FC<RoundTimerProps> = ({ duration = GAME_TIME }) => {
     const { activateTimer } = useGamePlayContext();
     const { activateFinishAnimation } = useAnimationContext();
     const { finishGame } = useFinish();
@@ -50,7 +50,7 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     }, [activateTimer]);
 
     return (
-        <div className={style.timerBarHeader}>
+        <div className={style.roundTimerBar}>
             <motion.div
                 initial={{ width: "100%" }}
                 animate={{ width: `${progress}%` }}
@@ -61,4 +61,4 @@ const TimerHeader: React.FC<TimerHeaderProps> = ({ duration = GAME_TIME }) => {
     );
 };
 
-export default TimerHeader;
+export default RoundTimer;

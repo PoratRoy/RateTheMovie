@@ -6,7 +6,7 @@ import { ModOption } from "../../models/enums/landing";
 import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import CommonLayout from "../layout/CommonLayout";
 import CopyRoomLinkBtn from "../../components/actions/widgets/btn/CopyRoomLinkBtn";
-import WatingRoom from "../../components/profile/WatingRoom";
+import WaitingRoom from "../../components/landing/WaitingRoom";
 import { LOADING_START_BTN_ID } from "../../models/constant/ids";
 
 const MultiLoading: React.FC<MultiLoadingProps> = ({
@@ -35,7 +35,7 @@ const MultiLoading: React.FC<MultiLoadingProps> = ({
             </section>
             <CopyRoomLinkBtn roomLink={roomLink} />
             {rivalPlayers && rivalPlayers.length > 0 ? (
-                <WatingRoom rivalPlayers={rivalPlayers} />
+                <WaitingRoom rivalPlayers={rivalPlayers} />
             ) : null}
         </CommonLayout>
     );

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import RoundsNumber from "../../actions/components/RoundsNumber";
-import PreviewProfile from "../profile/PreviewProfile";
 import { setupInputs } from "../../../models/initialization/form";
 import SetupLayout from "../../../pages/layout/SetupLayout";
 import { SetupInputSchema } from "../../../models/types/inputSchema";
@@ -12,6 +11,7 @@ import useMod from "../../../hooks/gameplay/useMod";
 import { START_BTN_ID } from "../../../models/constant/ids";
 import RadioDifficulty from "../../actions/widgets/toggle/ToggleDifficulty";
 import StartGameBtn from "../../actions/widgets/btn/StartGameBtn";
+import Profile from "../../profile/Profile";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);
@@ -40,7 +40,7 @@ const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => 
             playerRole={playerRole}
             setupOption={setupOption}
         >
-            <PreviewProfile
+            <Profile
                 player={player}
                 avatarId={player?.avatar}
                 setValue={setValue}
