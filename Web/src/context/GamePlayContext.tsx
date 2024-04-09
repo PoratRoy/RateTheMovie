@@ -159,6 +159,8 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     };
 
     const resetRoundContextState = () => {
+        Session.remove(SessionKey.ROUND_TIMER);
+        Session.remove(SessionKey.MODAL_TIMER);
         setCorrectOrder([]);
         setFetchLoading(false);
     };

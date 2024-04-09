@@ -12,7 +12,7 @@ import { Time } from "../../../../models/types/common";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 
 const RoundTimer: React.FC<RoundTimerProps> = ({ duration = GAME_TIME }) => {
-    const { activateTimer } = useGamePlayContext();
+    const { activateTimer, game } = useGamePlayContext();
     const { activateFinishAnimation } = useAnimationContext();
     const { finishGame } = useFinish();
     const timeLockRef = useRef<boolean>(true);
@@ -26,6 +26,7 @@ const RoundTimer: React.FC<RoundTimerProps> = ({ duration = GAME_TIME }) => {
     };
 
     const { expiryTimestamp, progress, pause, restart, refresh } = useTimer(
+        SessionKey.ROUND_TIMER,
         duration,
         handleTimeOut,
     );
@@ -39,10 +40,15 @@ const RoundTimer: React.FC<RoundTimerProps> = ({ duration = GAME_TIME }) => {
 
     useEffect(() => {
         if (timeLockRef.current) {
-            const sessionTime: Time | undefined = Session.get(SessionKey.TIMER);
+            const sessionTime: Time | undefined = Session.get(SessionKey.ROUND_TIMER);
             if (sessionTime) {
-                refresh(sessionTime);
-                timeLockRef.current = false;
+                if (game?.isPlayerFinishRound) {
+                    timeLockRef.current = true;
+                    pause();
+                } else {
+                    timeLockRef.current = false;
+                    refresh(sessionTime);
+                }
             } else if (activateTimer) {
                 restart(expiryTimestamp);
             }

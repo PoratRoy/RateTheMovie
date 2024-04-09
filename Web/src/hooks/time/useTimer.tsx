@@ -1,32 +1,29 @@
-import { useMemo } from "react";
 import { useTimer as useReactTimer } from "react-timer-hook";
 import Session from "../../utils/storage/sessionStorage";
 import { SessionKey } from "../../models/enums/session";
 import { Time } from "../../models/types/common";
 import useReload from "../global/useReload";
 
-const useTimer = (duration: number, handleTimeOut: () => void, autoStart: boolean = false) => {
+const useTimer = (session: SessionKey, duration: number, handleTimeOut: () => void) => {
+
     const expiryTimestamp = new Date();
     expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + duration);
 
     const { seconds, minutes, restart, pause } = useReactTimer({
         expiryTimestamp,
-        autoStart,
+        autoStart: false,
         onExpire: handleTimeOut,
     });
 
     // Calculate progress percentage
-    const progress = useMemo(() => {
-        const totalSeconds = duration;
-        const remainingSeconds = minutes * 60 + seconds;
-        return (remainingSeconds / totalSeconds) * 100;
-    }, [minutes, seconds]);
+    const remainingSeconds = minutes * 60 + seconds;
+    const progress = (remainingSeconds / duration) * 100;
 
     const handleBeforeUnload = () => {
-        Session.set(SessionKey.TIMER, { seconds, minutes });
+        Session.set(session, { seconds, minutes });
     };
 
-    useReload(handleBeforeUnload, [seconds, minutes])
+    useReload(handleBeforeUnload, [seconds, minutes]);
 
     const refresh = (time: Time) => {
         const timestamp = new Date();
@@ -35,7 +32,7 @@ const useTimer = (duration: number, handleTimeOut: () => void, autoStart: boolea
         timestamp.setMinutes(timestamp.getMinutes() + time.minutes);
         restart(timestamp);
         //TODO: cousing the modal timer problem
-        Session.remove(SessionKey.TIMER);
+        Session.remove(session);
     };
 
     return { expiryTimestamp, progress, pause, restart, refresh };

@@ -9,12 +9,16 @@ import Session from "../../../../utils/storage/sessionStorage";
 import { SessionKey } from "../../../../models/enums/session";
 
 const ModalTimer: React.FC<ModalTimerProps> = ({ handleTimeOut, duration = MODAL_TIME }) => {
-    const { expiryTimestamp, progress, refresh, restart } = useTimer(duration, handleTimeOut);
+    const { expiryTimestamp, progress, refresh, restart } = useTimer(
+        SessionKey.MODAL_TIMER,
+        duration,
+        handleTimeOut,
+    );
     const timeLockRef = useRef<boolean>(true);
 
     useEffect(() => {
         if (timeLockRef.current) {
-            const sessionTime: Time | undefined = Session.get(SessionKey.TIMER);
+            const sessionTime: Time | undefined = Session.get(SessionKey.MODAL_TIMER);
             sessionTime ? refresh(sessionTime) : restart(expiryTimestamp);
             timeLockRef.current = false;
         }

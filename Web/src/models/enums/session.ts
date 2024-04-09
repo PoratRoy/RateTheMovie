@@ -3,7 +3,8 @@ export enum SessionKey {
     GAME = "game",
     ROUNDS_MOVIES = "roundsMovies",
     RIVAL_PLAYERS = "rivalPlayers",
-    TIMER = "timer",
+    ROUND_TIMER = "roundTimer",
+    MODAL_TIMER = "modalTimer",
 }
 
 // previewMovies
