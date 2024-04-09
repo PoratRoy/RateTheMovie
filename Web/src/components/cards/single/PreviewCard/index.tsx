@@ -1,25 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "../../core/Card";
-import CardEventLayout from "../../../layout/CardEventLayout";
 import { PreviewCardProps } from "../../../../models/types/props/card";
 import Movie from "../../core/Movie";
 
-const PreviewCard: React.FC<PreviewCardProps> = ({ movie }) => {
-    const [openShadow, setOpenShadow] = useState<boolean>(false);
+const PreviewCard: React.FC<PreviewCardProps> = ({ movie, openModal }) => {
+    const handleOnClick = () => {
+        openModal(movie);
+    };
 
     return (
-        <CardEventLayout setOpenShadow={setOpenShadow}>
-            <Card
-                content={
-                    <Movie
-                        isShadow={openShadow}
-                        size="large"
-                        movie={movie}
-                        actions={["doubleClick"]}
-                    />
-                }
-            />
-        </CardEventLayout>
+        <Card
+            content={<Movie size="large" movie={movie} actions={["doubleClick"]} />}
+            onClick={handleOnClick}
+        />
     );
 };
 

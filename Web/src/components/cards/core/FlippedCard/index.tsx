@@ -1,13 +1,12 @@
 import React from "react";
 import { FlippedCardProps } from "../../../../models/types/props/card";
 import style from "./FlippedCard.module.css";
-import cardStyle from "../../../../style/CardStyle.module.css";
-import { styleSize } from "../../../../style/style";
 import { useAnimationContext } from "../../../../context/AnimationContext";
 import { motion } from "framer-motion";
 import { CardFace } from "../../../../models/enums/animation";
 import Img from "../Img";
 import Position from "../../shadow/Position";
+import CardLayout from "../../../layout/CardLayout";
 
 const FlippedCard: React.FC<FlippedCardProps> = ({
     id,
@@ -15,17 +14,17 @@ const FlippedCard: React.FC<FlippedCardProps> = ({
     position,
     front,
     back,
+    onClick,
     size = "large",
 }) => {
     const {
         id: movieId,
         movie: { title, poster_path },
     } = card;
-    const sizeClass = styleSize(cardStyle)[size];
     const { isFlipCard } = useAnimationContext();
 
     return (
-        <section id={id} className={`${sizeClass} ${style.cardContainer}`}>
+        <CardLayout id={id} onClick={onClick} size={size}>
             <motion.div
                 className={style.cardInnerContainer}
                 initial={false}
@@ -39,7 +38,7 @@ const FlippedCard: React.FC<FlippedCardProps> = ({
                 <div className={style.cardBack}>{back}</div>
                 {position ? <Position id={movieId} position={position} /> : null}
             </motion.div>
-        </section>
+        </CardLayout>
     );
 };
 

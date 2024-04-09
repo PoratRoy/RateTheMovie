@@ -11,6 +11,7 @@ export type CardProps = IdProps & {
     isFocus?: boolean;
     hasBorder?: boolean;
     index?: number;
+    onClick?: () => void;
 };
 
 export type FlippedCardProps = IdProps & {
@@ -19,6 +20,7 @@ export type FlippedCardProps = IdProps & {
     position: number | undefined;
     front: React.ReactNode;
     back: React.ReactNode;
+    onClick?: () => void;
 };
 
 export type ElectedCardWrapperProps = ChildernsProps & {
@@ -40,6 +42,7 @@ export type PlayerCardProps = {
 
 export type PreviewCardProps = {
     movie: Movie;
+    openModal: (movie: Movie) => void;
 };
 
 export type ShadowCardProps = {

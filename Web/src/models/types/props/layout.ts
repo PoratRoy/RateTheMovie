@@ -1,12 +1,11 @@
 import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form";
-import { ChildernsProps, CloseProps, OnClickProps } from ".";
+import { ChildernsProps, CloseProps, IdProps, OnClickProps } from ".";
 import { SetupOption } from "../setup";
-import { PlayerRole } from "../union";
+import { CardSize, PlayerRole } from "../union";
 import { Player } from "../player";
 import { ModOption } from "../../enums/landing";
 import { CrewModel } from "../movie";
 import { InputProps } from "./input";
-import { Card } from "../card";
 
 export type FormLayoutProps<TInput extends FieldValues> = ChildernsProps & {
     methods: UseFormReturn<TInput, any, undefined>;
@@ -43,11 +42,6 @@ export type InputLayoutProps<TInput extends FieldValues> = ChildernsProps &
         label?: string;
     };
 
-export type CardEventLayoutProps = ChildernsProps & {
-    setOpenShadow?: React.Dispatch<React.SetStateAction<boolean>>;
-    card?: Card;
-};
-
 export type CrewImgProps = {
     src: string;
     alt: string;
@@ -79,3 +73,9 @@ export type ErrorLayoutProps = OnClickProps & {
     description: string;
     buttonText: string;
 };
+
+export type CardLayoutProps = ChildernsProps &
+    IdProps & {
+        size?: CardSize;
+        onClick?: () => void;
+    };
