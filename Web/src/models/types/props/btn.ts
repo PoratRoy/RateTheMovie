@@ -7,13 +7,13 @@ type OnClickProps = {
     onClicked: () => void;
 };
 
-export type PrimaryBtnProps = IdProps &
-    OnClickQProps & {
+export type PrimaryBtnProps = IdProps & {
         type?: "button" | "submit" | undefined;
         title: string;
         disabled?: boolean;
         size: BtnSize;
         loading?: boolean;
+        onClicked?: () => void;
     };
 
 export type PrimaryIconBtnProps = IdProps &
@@ -59,10 +59,11 @@ export type PauseBtnProps = OnClickProps;
 
 export type NextRoundBtnProps = CloseProps;
 
-export type StartGameBtnProps = OnClickProps & {
+export type StartGameBtnProps = {
     id: string;
     title: string;
     loading?: boolean;
+    onClicked?: () => void;
     type?: "button" | "submit";
 };
 

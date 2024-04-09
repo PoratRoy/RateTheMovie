@@ -5,7 +5,7 @@ import { PRIMARY_COLOR } from "../../style/root";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useAnimationContext } from "../../context/AnimationContext";
 import { BELOW_ID, CARD_ID, POINTS_ID, SHADOW_ID } from "../../models/constant/ids";
-import { PACK_CARDS_NUM } from "../../models/constant";
+import { PACK_CARDS_NUM, POINTS } from "../../models/constant";
 import {
     DELAY_ANIMATION_3,
     DELAY_ANIMATION_4,
@@ -59,7 +59,7 @@ const useFinishAnimation = (activate: boolean | undefined) => {
                         },
                         { duration: DURATION_ANIMATION_8 },
                     );
-                    setIncreaseScore((prev) => (prev || 0) + 100);
+                    setIncreaseScore((prev) => (prev || 0) + POINTS);
                 }
                 await delayPromise(DELAY_ANIMATION_4);
             }
