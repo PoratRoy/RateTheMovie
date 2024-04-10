@@ -1,32 +1,55 @@
-.radioDifficulty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.multiSwitchContainer {
+  position: relative;
+  display: inline-block;
   border: var(--secondary-border);
   border-radius: 50px;
   color: var(--text-color);
   background-color: var(--secondary-color-focus);
   height: 50px;
-  width: fit-content;
   max-width: var(--btn-width-large);
   overflow: hidden;
+  margin-top: 3px;
+  padding: 2px;
 }
 
-.radioDifficultyLabel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.multiSwitchContent {
+  float: left;
+  width: 50%;
+  line-height: 50px;
+  text-align: center;
   cursor: pointer;
-  width: 100px;
-  height: 100%;
+  position: inherit;
+  z-index: 10;
+  transition: color 0.3s cubic-bezier(0, 1, 0, 0);
+  will-change: transform;
+  animation: multiSwitchHandleColor 0.1s;
   -webkit-tap-highlight-color: transparent;
 }
 
-.radioDifficulty .radioDifficultyInput {
-  display: none;
+.multiSwitchHandle {
+  position: absolute;
+  float: left;
+  height: 50px;
+  width: 50%;
+  font-size: 12px;
+  line-height: 50px;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  border-radius: 30px;
+  top: 2px;
+  transition: left 0.3s cubic-bezier(0.17, 0.67, .83, .67);
+  will-change: transform;
+  animation: multiSwitchHandleMove 0.1s;
 }
 
+@keyframes multiSwitchHandleMove {
+  0% {
+    left: 2px;
+  }
+}
 
-
-
-
+@keyframes multiSwitchHandleColor {
+  0% {
+    color: var(--text-color);
+  }
+}
