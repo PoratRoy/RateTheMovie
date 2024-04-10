@@ -3,8 +3,8 @@ import style from "./RankingGameOverBoard.module.css";
 import { sortPlayersByScore } from "../../../../utils/calc";
 import ResultPlayerPlace from "../ResultPlayerPlace";
 import { Player } from "../../../../models/types/player";
-import { groupPlayersByRank } from "../../../../utils/ranking";
 import { RankingGameOverBoardProps } from "../../../../models/types/props/ranking";
+import { groupPlayersByRank } from "../../../../utils/player";
 
 const RankingGameOverBoard: React.FC<RankingGameOverBoardProps> = ({ players }) => {
     const sortedPlayers = useCallback(() => sortPlayersByScore(players), [players]);

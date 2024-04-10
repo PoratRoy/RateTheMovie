@@ -24,6 +24,6 @@
     align-items: center;
     justify-content: center;
     color: var(--text-color);
-    overflow: scroll;
+    margin-top: 30px;
     width: 100%;
 }

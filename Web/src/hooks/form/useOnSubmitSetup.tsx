@@ -12,8 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { SetupOption } from "../../models/types/setup";
 import { Difficulty, PlayerRole } from "../../models/types/union";
 import path from "../../router/routePath.json";
-import { initFilters, initGame } from "../../utils/init";
 import useMoviesGame from "../gameplay/useRoundsMoviesGame";
+import { initFilters } from "../../utils/filter";
+import { initGame } from "../../utils/game";
 
 const useOnSubmitSetup = <TInput extends FieldValues>(
     setupOption: SetupOption,
