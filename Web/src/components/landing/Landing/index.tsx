@@ -10,13 +10,22 @@ import style from "./Landing.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { LandingProps } from "../../../models/types/props/landing";
 import { DefualtPlayerName, SinglePlayerRoom } from "../../../models/constant";
-import { DESCRIPTION_ID, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constant/ids";
+import {
+    DESCRIPTION_ID,
+    LEADERBOARD_BTN_ID,
+    MULTIPLAYER_BTN_ID,
+    PLAY_BTN_ID,
+} from "../../../models/constant/ids";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { Player } from "../../../models/types/player";
+import { useNavigate } from "react-router-dom";
+import path from "../../../router/routePath.json";
+import LeaderBoardCircleBtn from "../../actions/widgets/btn/LeaderBoardCircleBtn";
 
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
     const { handleCreateNewRoom } = useSocketContext();
     const { currentPlayer } = useGamePlayContext();
+    const navigate = useNavigate();
 
     const handlePlay = () => {
         const player = currentPlayer
@@ -39,6 +48,10 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
         });
     };
 
+    const handleLeaderBoard = () => {
+        navigate(path.leaderboard);
+    };
+
     return (
         <section className={style.landingContainer}>
             <Description
@@ -56,6 +69,7 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
                     onClicked={handleMulti}
                 />
                 <PlayBtn id={PLAY_BTN_ID} title="Practice Yourself" onClicked={handlePlay} />
+                <LeaderBoardCircleBtn id={LEADERBOARD_BTN_ID} onClicked={handleLeaderBoard} />
             </section>
         </section>
     );

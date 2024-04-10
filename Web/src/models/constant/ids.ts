@@ -5,6 +5,7 @@ export const POINTS_ID = "points";
 
 export const PLAY_BTN_ID = "play-btn";
 export const MULTIPLAYER_BTN_ID = "multiplayer-btn";
+export const LEADERBOARD_BTN_ID = "leaderboard-btn";
 export const LOGO_ID = "logo";
 export const DESCRIPTION_ID = "description";
 export const MOVIES_POSTER_ID = "movies-poster";

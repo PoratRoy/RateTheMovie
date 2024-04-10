@@ -34,3 +34,10 @@ export interface IMovie extends Document {
     actors: Schema.Types.ObjectId[];
     director: Schema.Types.ObjectId;
 }
+
+export interface IPlayer extends Document {
+    name: string;
+    avaterId: number;
+    score: number;
+    rank: number;
+}

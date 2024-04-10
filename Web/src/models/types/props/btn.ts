@@ -8,13 +8,13 @@ type OnClickProps = {
 };
 
 export type PrimaryBtnProps = IdProps & {
-        type?: "button" | "submit" | undefined;
-        title: string;
-        disabled?: boolean;
-        size: BtnSize;
-        loading?: boolean;
-        onClicked?: () => void;
-    };
+    type?: "button" | "submit" | undefined;
+    title: string;
+    disabled?: boolean;
+    size: BtnSize;
+    loading?: boolean;
+    onClicked?: () => void;
+};
 
 export type PrimaryIconBtnProps = IdProps &
     OnClickQProps & {
@@ -50,7 +50,7 @@ export type EditProfileBtnProps = OnClickProps & {
     toggle: boolean;
 };
 
-export type CircleBtnProps = OnClickProps & {
+export type CircleBtnProps = IdProps & OnClickProps & {
     size?: BtnSize;
     Icon: React.ReactNode;
 };
@@ -79,7 +79,7 @@ export type ExitGameBtnProps = CloseProps;
 
 export type RestartCircleBtnProps = CloseProps;
 
-export type LeaderBoardCircleBtnProps = CloseProps;
+export type LeaderBoardCircleBtnProps = IdProps & OnClickQProps;
 
 export type CloseBtnProps = CloseProps;
 
@@ -93,3 +93,8 @@ export type CopyRoomLinkBtnProps = {
 };
 
 export type EditAvatarBtnProps = OnClickProps;
+
+export type LeaderBoardBtnProps = IdProps &
+    OnClickQProps & {
+        title: string;
+    };

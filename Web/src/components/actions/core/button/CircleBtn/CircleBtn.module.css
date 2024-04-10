@@ -69,6 +69,7 @@
 
 .btnLarge .circleIcon svg {
     color: var(--text-color);
+    font-size: 1.4rem;
 }
 
 

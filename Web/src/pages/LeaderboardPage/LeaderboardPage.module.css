@@ -1,0 +1,23 @@
+.table {
+    color: var(--text-color);
+    width: 90%;
+    border: var(--secondary-border);
+}
+
+.thead {
+    width: 100%;
+    background-color: var(--secondary-color);
+}
+
+.tr {}
+
+.th {
+    padding: 10px 0;
+    border: var(--secondary-border);
+}
+
+
+.td{
+    border: var(--secondary-border);
+    background-color: var(--tertiary-color);
+}

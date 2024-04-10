@@ -4,6 +4,7 @@ import { SetupOption } from "../../models/types/setup";
 import useMod from "../gameplay/useMod";
 import {
     DESCRIPTION_ID,
+    LEADERBOARD_BTN_ID,
     MOVIES_POSTER_ID,
     MULTIPLAYER_BTN_ID,
     PLAY_BTN_ID,
@@ -22,6 +23,11 @@ const useLandingAnimation = (activate: SetupOption) => {
                 animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
                 animation(`#${DESCRIPTION_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
                 animation(
+                    `#${LEADERBOARD_BTN_ID}`,
+                    { opacity: 1 },
+                    { duration: DURATION_ANIMATION_1 },
+                ),
+                animation(
                     `#${MULTIPLAYER_BTN_ID}`,
                     { opacity: 1 },
                     { duration: DURATION_ANIMATION_1 },
@@ -33,6 +39,7 @@ const useLandingAnimation = (activate: SetupOption) => {
                 animation(`#${PLAY_BTN_ID}`, { display: "flex" }),
                 animation(`#${DESCRIPTION_ID}`, { display: "block" }),
                 animation(`#${MULTIPLAYER_BTN_ID}`, { display: "flex" }),
+                animation(`#${LEADERBOARD_BTN_ID}`, { display: "flex" }),
                 animation(`#${MOVIES_POSTER_ID}`, { display: "block" }),
             ]);
     };
@@ -42,6 +49,7 @@ const useLandingAnimation = (activate: SetupOption) => {
         await Promise.all([
             animation(`#${DESCRIPTION_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_2 }),
             animation(`#${MULTIPLAYER_BTN_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_2 }),
+            animation(`#${LEADERBOARD_BTN_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_2 }),
         ]);
         await Promise.all([
             animation(`#${PLAY_BTN_ID}`, { opacity: 0 }, { duration: DURATION_ANIMATION_1 }),
@@ -51,6 +59,7 @@ const useLandingAnimation = (activate: SetupOption) => {
             animation(`#${PLAY_BTN_ID}`, { display: "none" }),
             animation(`#${DESCRIPTION_ID}`, { display: "none" }),
             animation(`#${MULTIPLAYER_BTN_ID}`, { display: "none" }),
+            animation(`#${LEADERBOARD_BTN_ID}`, { display: "none" }),
             animation(`#${MOVIES_POSTER_ID}`, { display: "none" }),
         ]);
         await animation(
