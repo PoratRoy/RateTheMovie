@@ -8,9 +8,7 @@ const RoundPlayerPlace: React.FC<RankingPlayerProps> = ({ place, players }) => {
     return (
         <Place place={place} players={players}>
             {players.map((player: Player, index: number) => (
-                <React.Fragment key={index}>
-                    <PlayerPlace player={player} place={place} />
-                </React.Fragment>
+                <PlayerPlace key={index} player={player} place={place} />
             ))}
         </Place>
     );

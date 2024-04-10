@@ -1,3 +1,10 @@
+.playerPlace{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
 .rankingPlayerTabTop {
     position: relative;
     width: 100%;

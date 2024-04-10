@@ -47,7 +47,6 @@ const Place: React.FC<PlaceProps> = ({ children, place, players }) => {
             style={{
                 boxShadow: isCurrentPlayer ? `0px 0px 10px 3px ${PRIMARY_COLOR}` : "none",
                 border: `3px solid ${border}`,
-                transition: "gap 0.3s linear",
                 backgroundColor,
             }}
         >
