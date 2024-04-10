@@ -2,8 +2,7 @@ import { useRef } from "react";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { initGameCardsList } from "../../models/initialization/card";
-import { Card, ElectedCards } from "../../models/types/card";
-import { Movie } from "../../models/types/movie";
+import { ElectedCards } from "../../models/types/card";
 import { Player } from "../../models/types/player";
 import { isCardsOrdrValid } from "../../utils/correctOrder";
 import useMod from "./useMod";
@@ -13,10 +12,9 @@ import { useAnimationContext } from "../../context/AnimationContext";
 
 const useFinish = () => {
     const {
-        setCurrentPlayer,
         currentPlayer,
-        setPreviewMovies,
-        gameCards,
+        setCurrentPlayer,
+        insertMoviesToPreview,
         setIsRoundFinished,
         setIsRoundStart,
         setActivateTimer,
@@ -31,16 +29,7 @@ const useFinish = () => {
         setIsRoundFinished(false);
         setIsRoundStart(false);
         setActivateTimer(false);
-
-        setPreviewMovies((prev) => {
-            let filteredMovies: Movie[] = [];
-            gameCards.forEach((card: Card) => {
-                if (!prev.some((prevMovie) => prevMovie.id === card.movie.id)) {
-                    filteredMovies.push(card.movie);
-                }
-            });
-            return [...prev, ...filteredMovies];
-        });
+        insertMoviesToPreview();
     };
 
     const finishGame = () => {

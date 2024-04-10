@@ -4,7 +4,7 @@ import { Difficulty } from "../models/types/union";
 export const initFilters = (difficulty: Difficulty) => {
     const filters: Filters = {
         difficulty,
-        type: { byDifficulty: true },
+        type: { byTopMovies: true },
     };
     return filters;
 };

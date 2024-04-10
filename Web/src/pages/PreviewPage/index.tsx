@@ -28,21 +28,23 @@ const PreviewPage: React.FC = () => {
         <CommonLayout hasFooter onGoBack={handleGoBack}>
             <Title title="PRIVIEW MOVIES" />
             <div className={style.previewDescription}>
-                <Description description={"Double click on the movie to see more details"} />
+                <Description description={"Select movie to see more details"} />
             </div>
 
-            <section className={style.previewMovies}>
-                <Pack packDisplay="wrap">
-                    {previewMovies.map((movie: Movie, i: number) => (
-                        <React.Fragment key={i}>
-                            <PreviewCard movie={movie} openModal={handleOpenModal} />
-                            {showModal && movieModal ? (
-                                <MovieModal movie={movieModal} close={handleClose} />
-                            ) : null}
-                        </React.Fragment>
-                    ))}
-                </Pack>
-            </section>
+            {previewMovies ? (
+                <section className={style.previewMovies}>
+                    <Pack packDisplay="wrap">
+                        {previewMovies.map((movie: Movie, i: number) => (
+                            <React.Fragment key={i}>
+                                <PreviewCard movie={movie} openModal={handleOpenModal} />
+                                {showModal && movieModal ? (
+                                    <MovieModal movie={movieModal} close={handleClose} />
+                                ) : null}
+                            </React.Fragment>
+                        ))}
+                    </Pack>
+                </section>
+            ) : null}
         </CommonLayout>
     );
 };

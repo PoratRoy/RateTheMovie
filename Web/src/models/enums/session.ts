@@ -6,5 +6,3 @@ export enum SessionKey {
     ROUND_TIMER = "roundTimer",
     MODAL_TIMER = "modalTimer",
 }
-
-// previewMovies

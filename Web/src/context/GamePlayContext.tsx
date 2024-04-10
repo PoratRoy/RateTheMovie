@@ -7,6 +7,7 @@ import { Card } from "../models/types/card";
 import { initGameCardsList } from "../models/initialization/card";
 import { Movie } from "../models/types/movie";
 import { RoundAction } from "../models/types/union";
+import { PACK_CARDS_NUM } from "../models/constant";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -19,8 +20,7 @@ export const GamePlayContext = createContext<{
     setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
     currentPlayer: Player | undefined;
     setCurrentPlayer: React.Dispatch<React.SetStateAction<Player | undefined>>;
-    previewMovies: Movie[];
-    setPreviewMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+    previewMovies: Movie[] | undefined;
     roundsMovies: Movie[][] | undefined;
     setRoundsMovies: React.Dispatch<React.SetStateAction<Movie[][] | undefined>>;
     activateTimer: boolean;
@@ -37,6 +37,7 @@ export const GamePlayContext = createContext<{
     setIsRoundFinished: (isRoundFinished: boolean) => void;
     setIsGameOver: (isGameOver: boolean) => void;
     setIsRefeshed: (isRefreshed: boolean) => void;
+    insertMoviesToPreview: () => void;
 }>({
     game: undefined,
     setGame: () => {},
@@ -49,7 +50,6 @@ export const GamePlayContext = createContext<{
     currentPlayer: undefined,
     setCurrentPlayer: () => {},
     previewMovies: [],
-    setPreviewMovies: () => {},
     roundsMovies: [],
     setRoundsMovies: () => {},
     activateTimer: true,
@@ -66,6 +66,7 @@ export const GamePlayContext = createContext<{
     setIsRoundFinished: () => {},
     setIsGameOver: () => {},
     setIsRefeshed: () => {},
+    insertMoviesToPreview: () => {},
 });
 
 export const useGamePlayContext = () => useContext(GamePlayContext);
@@ -77,7 +78,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [fetchLoading, setFetchLoading] = useState<boolean>(false);
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
     // const [leaderBoard, setLeaderBoard] = useState<LeaderBoard | undefined>();
-    const [previewMovies, setPreviewMovies] = useState<Movie[]>([]);
+    const [previewMovies, setPreviewMovies] = useState<Movie[] | undefined>(undefined);
 
     const [roundsMovies, setRoundsMovies] = useState<Movie[][] | undefined>(undefined);
 
@@ -96,8 +97,19 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
             if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
         }
         if (!roundsMovies) {
-            const sessionRoundsMovies: Movie[][] | undefined = Session.get(SessionKey.ROUNDS_MOVIES);
+            const sessionRoundsMovies: Movie[][] | undefined = Session.get(
+                SessionKey.ROUNDS_MOVIES,
+            );
             if (sessionRoundsMovies) setRoundsMovies(sessionRoundsMovies);
+        }
+        if (!previewMovies) {
+            if (game && roundsMovies) {
+                const movies: Movie[] = [];
+                for (let i = 0; i < game.currentRound; i++) {
+                    movies.push(...roundsMovies[i]);
+                }
+                setPreviewMovies(movies);
+            }
         }
     };
     setStateFromSession();
@@ -158,6 +170,18 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
         };
     };
 
+    const insertMoviesToPreview = () => {
+        if (roundsMovies && game) {
+            const numberOfMovies = game.currentRound * PACK_CARDS_NUM;
+            const movies = roundsMovies[game.currentRound - 1];
+            setPreviewMovies((prev) => {
+                if (!prev) return prev;
+                const preview = [...prev, ...movies];
+                return preview.length === numberOfMovies ? preview : prev;
+            });
+        }
+    };
+
     const resetRoundContextState = () => {
         Session.remove(SessionKey.ROUND_TIMER);
         Session.remove(SessionKey.MODAL_TIMER);
@@ -215,7 +239,6 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 currentPlayer,
                 setCurrentPlayer,
                 previewMovies,
-                setPreviewMovies,
                 roundsMovies,
                 setRoundsMovies,
                 activateTimer,
@@ -232,6 +255,7 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
                 setIsRoundFinished,
                 setIsGameOver,
                 setIsRefeshed,
+                insertMoviesToPreview,
             }}
         >
             {children}
