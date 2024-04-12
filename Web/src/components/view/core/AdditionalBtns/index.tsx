@@ -11,7 +11,7 @@ const AdditionalBtns: React.FC<AdditionalBtnsProps> = ({ close, btns }) => {
     const quit = () => (btns.includes("quit") ? <QuitCircleBtn close={close} /> : null);
     const restart = () => (btns.includes("restart") ? <RestartCircleBtn close={close} /> : null);
     const leaderBoard = () =>
-        btns.includes("leaderboard") ? <LeaderBoardCircleBtn close={close} /> : null;
+        btns.includes("leaderboard") ? <LeaderBoardCircleBtn onClicked={() => {}} /> : null;
 
     return (
         <section className={style.AdditionalBtnsContianer}>
