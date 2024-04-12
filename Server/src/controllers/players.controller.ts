@@ -6,7 +6,7 @@ import { setNewMovie } from "../utils/init";
 import URL from "../model/constant/path.json";
 import MovieDatabaseService from "../database/MovieTable";
 import { ResponseBody } from "../model/types/http/responses";
-import msg from "../model/constant/http/messages.json";
+import msg from "../model/constant/messages.json";
 import { fetchOMDB, fetchTMDB } from "../utils/fetch";
 import { response } from "../libs/response";
 import { StatusCode } from "../model/enum/http";
@@ -58,7 +58,6 @@ export default class PlayersController {
             handleError(res, error);
         }
     }
-
 
     async delete(req: Request, res: Response) {
         try {

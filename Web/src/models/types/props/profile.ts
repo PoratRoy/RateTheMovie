@@ -22,6 +22,7 @@ export type PlayerProfileProps = {
 
 export type RivalPlayerProfileProps = {
     player: Player;
+    isYou?: boolean;
 };
 
 export type ResultPlayerProfileProps = {
@@ -30,7 +31,8 @@ export type ResultPlayerProfileProps = {
 };
 
 export type WaitingRoomProps = {
-    rivalPlayers: Player[];
+    currentPlayer?: Player;
+    rivalPlayers?: Player[];
 };
 
 export type EditAvatarProps = {

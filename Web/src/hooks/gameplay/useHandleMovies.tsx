@@ -1,7 +1,7 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { useSocketContext } from "../../context/SocketContext";
 import { PACK_CARDS_NUM } from "../../models/constant";
-import { ModOption } from "../../models/enums/landing";
+import { ModOption } from "../../models/enums/game";
 import { SessionKey } from "../../models/enums/session";
 import { Card } from "../../models/types/card";
 import { Movie } from "../../models/types/movie";

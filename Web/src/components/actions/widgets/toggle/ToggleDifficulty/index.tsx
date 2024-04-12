@@ -18,7 +18,6 @@ const ToggleDifficulty = <TInput extends FieldValues>({
         const difficulty: Difficulty = ev && ev.target.id;
         setDifficulty(difficulty);
         setValue(id, difficulty, FormSetValue);
-        //TODO: Fix this
         setOfset(difficulty === "easy" ? 0 : difficulty === "medium" ? 1 : 2);
     };
 

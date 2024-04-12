@@ -22,11 +22,11 @@ const useLandingAnimation = (activate: SetupOption) => {
             await Promise.all([
                 animation(`#${PLAY_BTN_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
                 animation(`#${DESCRIPTION_ID}`, { opacity: 1 }, { duration: DURATION_ANIMATION_1 }),
-                animation(
-                    `#${LEADERBOARD_BTN_ID}`,
-                    { opacity: 1 },
-                    { duration: DURATION_ANIMATION_1 },
-                ),
+                // animation(
+                //     `#${LEADERBOARD_BTN_ID}`,
+                //     { opacity: 1 },
+                //     { duration: DURATION_ANIMATION_1 },
+                // ),
                 animation(
                     `#${MULTIPLAYER_BTN_ID}`,
                     { opacity: 1 },

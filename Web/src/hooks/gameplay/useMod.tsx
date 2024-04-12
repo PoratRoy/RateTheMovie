@@ -1,5 +1,5 @@
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import { ModOption } from "../../models/enums/landing";
+import { ModOption } from "../../models/enums/game";
 
 const useMod = () => {
     const { game } = useGamePlayContext();

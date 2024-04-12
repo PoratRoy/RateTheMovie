@@ -2,7 +2,7 @@ import React from "react";
 import style from "./LoadingPage.module.css";
 import { MultiLoadingProps } from "../../models/types/props/landing";
 import useRoomLink from "../../hooks/multiplayer/useRoomLink";
-import { ModOption } from "../../models/enums/landing";
+import { ModOption } from "../../models/enums/game";
 import StartGameBtn from "../../components/actions/widgets/btn/StartGameBtn";
 import CommonLayout from "../layout/CommonLayout";
 import CopyRoomLinkBtn from "../../components/actions/widgets/btn/CopyRoomLinkBtn";
@@ -12,7 +12,7 @@ import { LOADING_START_BTN_ID } from "../../models/constant/ids";
 const MultiLoading: React.FC<MultiLoadingProps> = ({
     isLoading,
     rivalPlayers,
-    playerRole,
+    currentPlayer,
     game,
     onClicked,
 }) => {
@@ -28,15 +28,13 @@ const MultiLoading: React.FC<MultiLoadingProps> = ({
                     id={LOADING_START_BTN_ID}
                 />
                 <div className={style.loadingGameStatus}>
-                    {playerRole === "host"
+                    {currentPlayer?.role === "host"
                         ? "Waiting for other players..."
                         : "Waiting for the host to start the game..."}
                 </div>
             </section>
             <CopyRoomLinkBtn roomLink={roomLink} />
-            {rivalPlayers && rivalPlayers.length > 0 ? (
-                <WaitingRoom rivalPlayers={rivalPlayers} />
-            ) : null}
+            <WaitingRoom rivalPlayers={rivalPlayers} currentPlayer={currentPlayer} />
         </CommonLayout>
     );
 };

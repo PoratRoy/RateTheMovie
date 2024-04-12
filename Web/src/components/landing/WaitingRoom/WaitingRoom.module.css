@@ -10,7 +10,9 @@
 }
 
 .waitingRoomRivals {
-    height: 60px;
+    min-height: 60px;
+    height: 20vh;
+    max-height: 400px;
     overflow-y: scroll;
     width: 100%;
     max-width: 85vw;
@@ -19,6 +21,7 @@
     flex-wrap: wrap;
     gap: 5px;
     row-gap: 20px;
+    padding: 5px 0;
 }
 
 .waitingRoomTitle{

@@ -3,7 +3,7 @@ import MovieDatabaseService from "../database/MovieTable";
 import { mockMovie } from "../model/mock";
 import { response } from "../libs/response";
 import { StatusCode } from "../model/enum/http";
-import msg from "../model/constant/http/messages.json";
+import msg from "../model/constant/messages.json";
 
 export default class HomeController {
     home(req: Request, res: Response) {

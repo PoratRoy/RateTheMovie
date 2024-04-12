@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import mongoose from "mongoose";
-import * as msg from "../model/constant/http/messages.json";
+import msg from "../model/constant/messages.json"
 import { StatusCode } from "../model/enum/http";
 import { Tables } from "../model/enum/database";
 import { Response } from "express";

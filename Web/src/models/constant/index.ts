@@ -1,6 +1,7 @@
 export const PACK_CARDS_NUM = 4;
 export const DISCOVERD_MOVIES_NUM = 20;
 export const ROUND_NUM = 5;
+export const MAX_PLAYERS = 10;
 
 export const POINTS = 100;
 

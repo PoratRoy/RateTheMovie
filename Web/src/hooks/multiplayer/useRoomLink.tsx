@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ModOption } from "../../models/enums/landing";
+import { ModOption } from "../../models/enums/game";
 import { PlayerRole } from "../../models/types/union";
 import useMod from "../gameplay/useMod";
 

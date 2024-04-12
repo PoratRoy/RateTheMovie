@@ -2,11 +2,11 @@ import { Socket } from "socket.io";
 import { ISocket } from "../model/interfaces/socket";
 import { Player } from "../model/types/player";
 import { v4 } from "uuid";
-import { WarRooms, WarRoomProps, WarRoomDetails } from "../model/types/warRoom";
+import { WarRooms, WarRoomProps, WarRoomDetails, WarRoomStatus } from "../model/types/warRoom";
 import { getPlayerWarRoomInfo, setWarRoomDetails } from "../utils/warRoom";
 import { Game } from "../model/types/game";
 import { Card, ElectedCards } from "../model/types/card";
-import { PACK_CARDS_NUM } from "../model/constant";
+import { MAX_PLAYERS, PACK_CARDS_NUM } from "../model/constant";
 import {
     CreateNewRoom,
     Disconnect,
@@ -33,6 +33,8 @@ import { logBack, logEvent, logFinish } from "../utils/logs";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { initWarRoom, initWarRoomDetails } from "../utils/init";
 import { SocketConnction } from "../model/types/socket";
+import msg from "../model/constant/messages.json";
+import { RoomStatus } from "../model/enum/game";
 
 class GameSocket implements ISocket {
     public warRooms: WarRooms;
@@ -115,27 +117,34 @@ class GameSocket implements ISocket {
 
         socket.on(
             PlayerWantToJoin,
-            (roomId: string | undefined, callback: (props?: WarRoomDetails) => void) => {
+            (roomId: string | undefined, callback: (props: WarRoomStatus) => void) => {
                 logEvent(PlayerWantToJoin);
                 if (roomId) {
                     const warRoom = this.warRooms[roomId];
                     if (warRoom) {
-                        const isStarted = warRoom.game?.isGameStart;
-                        if (isStarted) {
-                            callback();
-                            logBack({ message: "Game already started" });
+                        const numberOfPlayers = warRoom.players.length;
+                        if (numberOfPlayers >= MAX_PLAYERS) {
+                            callback({ status: RoomStatus.FULL });
+                            logBack({ message: msg.socket.error.full });
                         } else {
-                            const details = setWarRoomDetails(warRoom, roomId);
-                            callback(details);
-                            logBack(details);
+                            const isStarted = warRoom.game?.isGameStart;
+                            if (isStarted) {
+                                callback({ status: RoomStatus.STARTED });
+                                logBack({ message: msg.socket.error.started });
+                            } else {
+                                const details = setWarRoomDetails(warRoom, roomId);
+                                callback({ status: RoomStatus.OK, details });
+                                logBack(details);
+                            }
                         }
                     } else {
-                        callback();
-                        logBack({ message: "Game not found" });
+                        callback({ status: RoomStatus.NOT_EXISTS });
+                        logBack({ message: msg.socket.error.notExists });
                     }
                 } else {
-                    callback(initWarRoomDetails());
-                    logBack(initWarRoomDetails());
+                    const details = initWarRoomDetails();
+                    callback({ status: RoomStatus.OK, details });
+                    logBack(details);
                 }
             },
         );

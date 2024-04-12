@@ -1,4 +1,4 @@
-import { ModOption } from "../enums/landing";
+import { ModOption } from "../enums/game";
 import { Player } from "./player";
 
 export type SetupOption = {

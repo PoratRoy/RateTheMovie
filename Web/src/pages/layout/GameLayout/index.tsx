@@ -51,7 +51,7 @@ const GameLayout: React.FC<GameLayoutProps> = ({ children }) => {
     ) : (
         <LoadingPage
             rivalPlayers={rivalPlayers}
-            playerRole={currentPlayer?.role}
+            currentPlayer={currentPlayer}
             onClicked={handleClickStartGame}
             isLoading={isWaiting}
             game={game}

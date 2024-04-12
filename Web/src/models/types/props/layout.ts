@@ -3,7 +3,7 @@ import { ChildernsProps, CloseProps, IdProps, OnClickProps } from ".";
 import { SetupOption } from "../setup";
 import { CardSize, PlayerRole } from "../union";
 import { Player } from "../player";
-import { ModOption } from "../../enums/landing";
+import { ModOption } from "../../enums/game";
 import { CrewModel } from "../movie";
 import { InputProps } from "./input";
 

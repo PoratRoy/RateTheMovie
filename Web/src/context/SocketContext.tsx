@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSocket } from "../hooks/multiplayer/useSocket";
-import { WarRoomDetails, WarRoomProps } from "../models/types/warRoom";
+import { WarRoomDetails, WarRoomProps, WarRoomStatus } from "../models/types/warRoom";
 import { Player } from "../models/types/player";
 import { Game } from "../models/types/game";
 import { useErrorContext } from "./ErrorContext";
@@ -44,7 +44,7 @@ export const SocketContext = createContext<{
     handleGame: (game: Game) => void;
     handlePlayerWantToJoin: (
         roomId: string | undefined,
-        callback: (details?: WarRoomDetails) => void,
+        callback: (props: WarRoomStatus) => void,
     ) => void;
     handlePlayerJoinRoom: (
         roomId: string,
@@ -144,10 +144,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handlePlayerWantToJoin = (
         roomId: string | undefined,
-        callback: (details?: WarRoomDetails) => void,
+        callback: (props: WarRoomStatus) => void,
     ) => {
-        socket.emit(PlayerWantToJoin, roomId, async (details?: WarRoomDetails) => {
-            callback(details);
+        socket.emit(PlayerWantToJoin, roomId, async (props: WarRoomStatus) => {
+            callback(props);
         });
     };
 

@@ -14,7 +14,7 @@ export type SetupProps = {
 
 export type LoadingPageProps = {
     rivalPlayers: Player[] | undefined;
-    playerRole?: PlayerRole;
+    currentPlayer: Player | undefined;
     onClicked: () => void;
     isLoading: boolean;
     game: Game | undefined;

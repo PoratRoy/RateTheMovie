@@ -1,5 +1,5 @@
 import { SinglePlayerRoom } from "../models/constant";
-import { ModOption } from "../models/enums/landing";
+import { ModOption } from "../models/enums/game";
 import { Filters } from "../models/types/filter";
 import { Game } from "../models/types/game";
 

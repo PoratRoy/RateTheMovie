@@ -35,10 +35,17 @@
             "delete": "Failed to delete project."
         }
     },
-    "error":{
+    "error": {
         "server": "Internal Server Error.",
         "invalid": "Invalid Request!",
         "credentials": "Invalid credentials.",
         "create": "Failed to create"
+    },
+    "socket": {
+        "error": {
+            "full": "Room is full",
+            "notExists": "Room does not exists",
+            "started": "Game already started"
+        }
     }
 }

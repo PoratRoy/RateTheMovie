@@ -2,24 +2,19 @@ import React from "react";
 import PlayBtn from "../../actions/widgets/btn/PlayBtn";
 import MultiBtn from "../../actions/widgets/btn/MultiBtn";
 import { initPlayer } from "../../../models/initialization/player";
-import { ModOption } from "../../../models/enums/landing";
 import { useSocketContext } from "../../../context/SocketContext";
 import Description from "../../common/Description";
 import ImdbIcon from "../../common/widgets/ImdbIcon";
 import style from "./Landing.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { LandingProps } from "../../../models/types/props/landing";
-import { DefualtPlayerName, SinglePlayerRoom } from "../../../models/constant";
-import {
-    DESCRIPTION_ID,
-    LEADERBOARD_BTN_ID,
-    MULTIPLAYER_BTN_ID,
-    PLAY_BTN_ID,
-} from "../../../models/constant/ids";
+import { DefualtPlayerName } from "../../../models/constant";
+import { DESCRIPTION_ID, LEADERBOARD_BTN_ID, MULTIPLAYER_BTN_ID, PLAY_BTN_ID } from "../../../models/constant/ids";
 import { useGamePlayContext } from "../../../context/GamePlayContext";
 import { Player } from "../../../models/types/player";
 import { useNavigate } from "react-router-dom";
 import path from "../../../router/routePath.json";
+import { setMultiSetup, setSingleSetup } from "../../../utils/setup";
 import LeaderBoardCircleBtn from "../../actions/widgets/btn/LeaderBoardCircleBtn";
 
 const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
@@ -31,7 +26,7 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
         const player = currentPlayer
             ? currentPlayer
             : initPlayer(uuidv4(), DefualtPlayerName, "host");
-        setSetupOption({ mod: ModOption.SINGLE, player, roomId: SinglePlayerRoom });
+        setSetupOption(setSingleSetup(player));
     };
 
     const handleMulti = () => {
@@ -44,7 +39,7 @@ const Landing: React.FC<LandingProps> = ({ setSetupOption }) => {
                   } as Player)
                 : initPlayer(uuidv4(), DefualtPlayerName, "host");
 
-            setSetupOption({ mod: ModOption.MULTI, player, roomId });
+            setSetupOption(setMultiSetup(player, roomId));
         });
     };
 
