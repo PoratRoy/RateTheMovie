@@ -5,7 +5,6 @@
     color: var(--text-color);
     background-color: var(--primary-color);
     font-weight: 500;
-    border: var(--primary-border);
     border-radius: var(--primary-border-radius);
     text-align: center;
     width: calc(var(--medium-card-width) - 13px);

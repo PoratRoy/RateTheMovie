@@ -12,6 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: none;
+    margin: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .btnSmall:hover,
