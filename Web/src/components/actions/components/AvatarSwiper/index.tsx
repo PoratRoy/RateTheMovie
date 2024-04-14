@@ -1,4 +1,4 @@
-import { AvatarImgs } from "../../../../models/resources/avatars";
+import { Avatars } from "../../../../models/resources/avatars";
 import { Swiper as SwiperCore } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Mousewheel, HashNavigation, Navigation } from "swiper/modules";
@@ -12,6 +12,7 @@ import { FieldValues } from "react-hook-form";
 import { AvatarSwiperProps } from "../../../../models/types/props/input";
 import { FormSetValue } from "../../../../models/constant";
 import Avatar from "../../../profile/Avatar";
+import { Avatar as AvatarType } from "../../../../models/types/player";
 
 const AvatarSwiper = <TInput extends FieldValues>({
     id,
@@ -19,7 +20,6 @@ const AvatarSwiper = <TInput extends FieldValues>({
     defualt,
     setIsEdit,
 }: AvatarSwiperProps<TInput>) => {
-
     const handleAvatar = (swiper: SwiperCore) => {
         setValue(id, JSON.stringify(swiper.realIndex), FormSetValue);
     };
@@ -48,9 +48,9 @@ const AvatarSwiper = <TInput extends FieldValues>({
             initialSlide={defualt}
             onClick={() => setIsEdit(false)}
         >
-            {AvatarImgs.map((img: string, i: number) => (
+            {Avatars.map((avatar: AvatarType, i: number) => (
                 <SwiperSlide key={i} data-hash={`avatar${i}`}>
-                    <Avatar img={img} size="large" />
+                    <Avatar avatar={avatar} size="large" />
                 </SwiperSlide>
             ))}
         </Swiper>

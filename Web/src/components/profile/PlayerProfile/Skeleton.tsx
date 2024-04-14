@@ -6,7 +6,7 @@ const Skeleton: React.FC = () => {
     return (
         <section className={style.PlayerProfile}>
             <div className={style.PlayerProfileAvatar}>
-                <Avatar img={undefined} />
+                <Avatar avatar={undefined} />
             </div>
             <div className={style.PlayerProfileDetailsSkeleton}>
                 <div className={style.PlayerProfileScoreSkeleton} />

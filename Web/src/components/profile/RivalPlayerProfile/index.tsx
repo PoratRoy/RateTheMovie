@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "../Avatar";
-import { AvatarImgs } from "../../../models/resources/avatars";
+import { Avatars } from "../../../models/resources/avatars";
 import { RivalPlayerProfileProps } from "../../../models/types/props/profile";
 import style from "./RivalPlayerProfile.module.css";
 
@@ -10,7 +10,7 @@ const RivalPlayerProfile: React.FC<RivalPlayerProfileProps> = ({ player, isYou =
     return (
         <section className={style.rivalPlayerProfile}>
             {isYou ? <div className={style.you}>You</div> : null}
-            <Avatar img={AvatarImgs[avatar]} />
+            <Avatar avatar={Avatars[avatar]} />
             <div className={style.rivalPlayerName}>{name}</div>
         </section>
     );

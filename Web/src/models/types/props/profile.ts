@@ -1,5 +1,5 @@
 import { UseFormWatch } from "react-hook-form";
-import { Player } from "../player";
+import { Avatar, Player } from "../player";
 import { SetupInputSchema } from "../inputSchema";
 import { AvatarSize } from "../union";
 
@@ -11,7 +11,7 @@ export type ProfileProps = {
 };
 
 export type AvatarProps = {
-    img?: string;
+    avatar?: Avatar;
     size?: AvatarSize;
 };
 

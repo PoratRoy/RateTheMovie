@@ -10,3 +10,8 @@ export type Player = {
     score: number;
     electedCards: ElectedCards;
 };
+
+export type Avatar = {
+    img: string;
+    hash: string;
+};

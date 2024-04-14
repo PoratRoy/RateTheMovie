@@ -1,5 +1,5 @@
 import React from "react";
-import { AvatarImgs } from "../../../models/resources/avatars";
+import { Avatars } from "../../../models/resources/avatars";
 import style from "./PlayerProfile.module.css";
 import { PlayerProfileProps } from "../../../models/types/props/profile";
 import Skeleton from "./Skeleton";
@@ -13,7 +13,7 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({ currentPlayer, isMotion =
             return (
                 <section className={style.PlayerProfile}>
                     <div className={style.PlayerProfileAvatar}>
-                        <Avatar img={AvatarImgs[avatar]} />
+                        <Avatar avatar={Avatars[avatar]} />
                     </div>
                     <div className={style.PlayerProfileDetails}>
                         <Score score={score} isMotion={isMotion} />
