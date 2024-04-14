@@ -1,0 +1,8 @@
+.loadingText {
+    position: relative;
+    color: var(--text-color-opacity);
+    width: 85vw;
+    min-width: 200px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}

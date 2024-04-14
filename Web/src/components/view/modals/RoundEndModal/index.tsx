@@ -21,10 +21,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver })
                 </section>
 
                 {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
-                <AdditionalBtns
-                    close={close}
-                    btns={gameOver ? ["movieList", "leaderboard", "quit"] : ["movieList"]}
-                />
+                <AdditionalBtns close={close} btns={gameOver ? ["quit"] : []} />
             </section>
         </Modal>
     );

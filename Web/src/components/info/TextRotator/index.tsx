@@ -1,7 +1,7 @@
 import React from "react";
 import { PACK_CARDS_NUM } from "../../../models/constant";
 import style from "./TextRotator.module.css";
-//TODO: https://www.youtube.com/watch?v=UVhaufz6FZc&t=712s&ab_channel=FrontendFYI
+//https://www.youtube.com/watch?v=UVhaufz6FZc&t=712s&ab_channel=FrontendFYI
 
 const TextRotator: React.FC = () => {
     const Sentences = [

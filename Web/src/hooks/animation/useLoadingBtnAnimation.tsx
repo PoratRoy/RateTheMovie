@@ -1,6 +1,6 @@
 import { useAnimate } from "framer-motion";
 import { useEffect } from "react";
-import { BTN_HEIGHT_SMALL, PRIMARY_COLOR, SECONDARY_BORDER_RADIUS, TEXT_COLOR } from "../../style/root";
+import { PRIMARY_COLOR, SECONDARY_BORDER_RADIUS, TEXT_COLOR } from "../../style/root";
 import { BtnSize } from "../../models/types/union";
 import { setSize } from "../../style/btn";
 import { DURATION_ANIMATION_2 } from "../../models/constant/time";
@@ -16,8 +16,8 @@ const useLoadingBtnAnimation = (activate: boolean | undefined, id: string, size?
                 backgroundColor: "rgba(85, 72, 244, 0)",
                 border: "7px solid #5548F4",
                 borderBottomColor: "rgba(85, 72, 244, 0)",
-                width: BTN_HEIGHT_SMALL,
-                maxWidth: BTN_HEIGHT_SMALL,
+                width: height,
+                maxWidth: height,
                 height,
                 borderRadius: "50%",
                 color: "rgba(255, 255, 255, 0)",

@@ -10,7 +10,7 @@ const GameOverModal: React.FC<GameOverModalProps> = ({ leaderBoardPlayers }) => 
         <section className={style.gameOverModal}>
             <RankingGameOverBoard players={leaderBoardPlayers} />
             <ExitGameBtn close={close} />
-            <AdditionalBtns close={close} btns={["movieList"]} />
+            <AdditionalBtns close={close} btns={[]} />
         </section>
     );
 };

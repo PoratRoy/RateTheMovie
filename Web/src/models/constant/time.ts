@@ -2,7 +2,7 @@ export const SECOND_TIME = 1000;
 
 export const START_TIMER = 3;
 
-export const START_GAME_TIME = 14000;
+export const START_GAME_TIME = 3500;
 export const START_GAME_TIMER = START_TIMER * 1000 + 500;
 
 export const GAME_TIME = 20;

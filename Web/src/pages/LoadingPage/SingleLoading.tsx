@@ -1,6 +1,6 @@
 import React from "react";
 import { SingleLoadingProps } from "../../models/types/props/landing";
-import TextRotator from "../../components/info/TextRotator";
+import LoadingText from "../../components/info/LoadingText";
 import CommonLayout from "../layout/CommonLayout";
 import style from "./LoadingPage.module.css";
 import Loading from "../../components/actions/animation/Loading";
@@ -9,7 +9,7 @@ import Loading from "../../components/actions/animation/Loading";
 const SingleLoading: React.FC<SingleLoadingProps> = () => {
     return (
         <CommonLayout>
-            <TextRotator />
+            <LoadingText />
 
             <section className={style.loadingPageBtnStatus}>
                 <Loading />
