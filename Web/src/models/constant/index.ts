@@ -27,3 +27,5 @@ export const DirectionMap: { [key: string]: number } = {
     "up-down": 180,
     "down-up": -180,
 };
+
+export const IMG_HASH = "XEC?cc~BxBR#oxS*S~D,#j-;=?r?RRVYWBJDb_J;X5s%jqV^jKDhD%V[xuo#";
