@@ -1,7 +1,6 @@
 import { SessionKey } from "../models/enums/session";
 import { Game } from "../models/types/game";
 import { Movie } from "../models/types/movie";
-import { Player } from "../models/types/player";
 import Session from "./storage/sessionStorage";
 
 export const stateFromSession = <T>(obj: any, key: SessionKey): T | undefined => {
