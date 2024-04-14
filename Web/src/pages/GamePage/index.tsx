@@ -13,19 +13,22 @@ import { useAnimationContext } from "../../context/AnimationContext";
 
 const GamePage: React.FC = () => {
     useCheckMoviesAlreadySet();
-    const { currentPlayer, setIsPlayerFinishRound } = useGamePlayContext();
+    const { currentPlayer, gameCards, setIsPlayerFinishRound } = useGamePlayContext();
     const { activateFinishAnimation } = useAnimationContext();
     const { showTimer, closeTimer } = useGameTimer();
 
-    const handleBeforeUnload = () => {
+    const handleBeforeUnload = (event: any) => {
         if (activateFinishAnimation) setIsPlayerFinishRound(true);
+        const message = "Are you sure you want to leave?";
+        event.returnValue = message; // Standard for most browsers
+        return message; // For some older browsers
     };
 
     useReload(handleBeforeUnload, [activateFinishAnimation]);
 
     return (
         <GameLayout>
-            {currentPlayer ? (
+            {currentPlayer && gameCards ? (
                 <React.Fragment>
                     <ElectedPackLayout currentPlayer={currentPlayer} />
                     <PlayerLayout player={currentPlayer} />

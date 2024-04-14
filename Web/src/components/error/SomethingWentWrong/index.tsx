@@ -12,7 +12,7 @@ const SomethingWentWrong: React.FC = () => {
     return (
         <ErrorLayout
             description="There is an issue starting the game"
-            buttonText="Exit the game"
+            buttonText="Try again later"
             onClick={handleBackLink}
         />
     );

@@ -1,9 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import path from "./routePath.json";
 import GamePage from "../pages/GamePage";
 import LandingPage from "../pages/LandingPage";
-import PageNotFound from "../pages/PageNotFound";
 import GuestPage from "../pages/GuestPage";
 import LeaderboardPage from "../pages/LeaderboardPage";
 
@@ -15,7 +14,7 @@ const Router: React.FC = () => {
             <Route path={path.guest} element={<GuestPage />} />
             <Route path={path.leaderboard} element={<LeaderboardPage />} />
 
-            <Route path={path.all} element={<PageNotFound />} />
+            <Route path={path.all} element={<Navigate replace to="/" />} />
         </Routes>
     );
 };
