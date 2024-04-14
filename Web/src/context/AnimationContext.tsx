@@ -29,12 +29,9 @@ export const AnimationContextProvider = ({ children }: { children: React.ReactNo
     const [increaseScore, setIncreaseScore] = useState<number | undefined>();
     const [activateFinishAnimation, setActivateFinishAnimation] = useState<boolean>(false);
 
-    //TODO: extract to a hook
-    //TODO: put as useCallBack
     const setStateFromSession = () => {
-        if (!isFlipCard) {
-            setIsFlipCard(CardFace.FRONT);
-        }
+        if (!isFlipCard) setIsFlipCard(CardFace.FRONT);
+
         if (increaseScore === undefined) {
             const sessionPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
             if (sessionPlayer) {

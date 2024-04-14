@@ -36,6 +36,7 @@ import { useAnimationContext } from "./AnimationContext";
 import { CardFace } from "../models/enums/animation";
 import useGameActions from "../hooks/gameplay/useGameActions";
 import useMod from "../hooks/gameplay/useMod";
+import { stateFromSession } from "../utils/context";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -82,6 +83,12 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
     const { handleQuit } = useGameActions(() => {});
     const { isMulti } = useMod();
 
+    const setStateFromSession = () => {
+        const sessionRivalPlayers = stateFromSession<Player[]>(game, SessionKey.RIVAL_PLAYERS);
+        if (sessionRivalPlayers) setRivalPlayers(sessionRivalPlayers);
+    };
+    setStateFromSession();
+
     const socket = useSocket(`${import.meta.env.VITE_BE_URL}/game`, {
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
@@ -110,16 +117,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             socket.off("connect_error");
         };
     }, []);
-
-    //TODO: extract to a hook
-    //TODO: put as useCallBack
-    const setStateFromSession = () => {
-        if (!rivalPlayers) {
-            const sessionRivalPlayers: Player[] | undefined = Session.get(SessionKey.RIVAL_PLAYERS);
-            if (sessionRivalPlayers) setRivalPlayers(sessionRivalPlayers);
-        }
-    };
-    setStateFromSession();
 
     //TODO: usecallback?
     useEffect(() => {

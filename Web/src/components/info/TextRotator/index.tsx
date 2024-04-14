@@ -6,7 +6,7 @@ import style from "./TextRotator.module.css";
 const TextRotator: React.FC = () => {
     const Sentences = [
         "Ready to test your movie knowledge?",
-        `Drag ${PACK_CARDS_NUM} films to their correct rating order (lowest to highest)`,
+        `Drag ${PACK_CARDS_NUM} movies to their correct rating order (lowest to highest)`,
         "and rack up points!",
     ];
 

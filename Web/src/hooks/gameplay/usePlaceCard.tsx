@@ -4,9 +4,11 @@ import { Card } from "../../models/types/card";
 import { Player } from "../../models/types/player";
 
 const usePlaceCard = () => {
-    const { setCurrentPlayer } = useGamePlayContext();
-    //TODO: disable option if round finished (like dnd)
+    const { game, setCurrentPlayer } = useGamePlayContext();
+
     const handlePlaceCard = (card: Card) => {
+        if(game?.isPlayerFinishRound) return;
+
         setCurrentPlayer((prev) => {
             const currentPlayer = { ...prev } as Player | undefined;
             if (!currentPlayer) return currentPlayer;

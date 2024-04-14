@@ -8,6 +8,7 @@ import { initGameCardsList } from "../models/initialization/card";
 import { Movie } from "../models/types/movie";
 import { RoundAction } from "../models/types/union";
 import { PACK_CARDS_NUM } from "../models/constant";
+import { moviesStateFromSession, stateFromSession } from "../utils/context";
 
 export const GamePlayContext = createContext<{
     game: Game | undefined;
@@ -85,32 +86,18 @@ export const GamePlayContextProvider = ({ children }: { children: React.ReactNod
     const [activateTimer, setActivateTimer] = useState<boolean>(false);
     const [isPreview, setIsPreview] = useState<boolean>(false);
 
-    //TODO: extract to a hook
-    //TODO: put as useCallBack
     const setStateFromSession = () => {
-        if (!game) {
-            const sessionGame: Game | undefined = Session.get(SessionKey.GAME);
-            if (sessionGame) setGame(sessionGame);
-        }
-        if (!currentPlayer) {
-            const sessionCurrentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
-            if (sessionCurrentPlayer) setCurrentPlayer(sessionCurrentPlayer);
-        }
-        if (!roundsMovies) {
-            const sessionRoundsMovies: Movie[][] | undefined = Session.get(
-                SessionKey.ROUNDS_MOVIES,
-            );
-            if (sessionRoundsMovies) setRoundsMovies(sessionRoundsMovies);
-        }
-        if (!previewMovies) {
-            if (game && roundsMovies) {
-                const movies: Movie[] = [];
-                for (let i = 0; i < game.currentRound; i++) {
-                    movies.push(...roundsMovies[i]);
-                }
-                setPreviewMovies(movies);
-            }
-        }
+        const sessionGame = stateFromSession<Game>(game, SessionKey.GAME);
+        if (sessionGame) setGame(sessionGame);
+
+        const sessionPlayer = stateFromSession<Player>(currentPlayer, SessionKey.CURRENT_PLAYER);
+        if (sessionPlayer) setCurrentPlayer(sessionPlayer);
+
+        const sessionRounds = stateFromSession<Movie[][]>(roundsMovies, SessionKey.ROUNDS_MOVIES);
+        if (sessionRounds) setRoundsMovies(sessionRounds);
+
+        const sessionPreviewMovies = moviesStateFromSession(previewMovies, game, roundsMovies);
+        if (sessionPreviewMovies) setPreviewMovies(sessionPreviewMovies);
     };
     setStateFromSession();
 
