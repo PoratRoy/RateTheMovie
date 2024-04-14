@@ -18,6 +18,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    width: auto;
+    max-width: 100%;
 }
 
 .btnSmall:hover,
