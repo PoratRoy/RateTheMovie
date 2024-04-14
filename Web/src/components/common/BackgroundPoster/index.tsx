@@ -6,12 +6,12 @@ import { Blurhash } from "react-blurhash";
 import { IMG_HASH } from "../../../models/constant";
 
 const BackgroundPoster: React.FC = () => {
-    const [imageLoading, setImageLoading] = useState<boolean>(false);
+    const [imageLoading, setImageLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const img = new Image();
         img.onload = () => {
-            setImageLoading(true);
+            setImageLoading(false);
         };
         img.src = MoviePosterGif;
         return () => {
@@ -22,7 +22,7 @@ const BackgroundPoster: React.FC = () => {
     return (
         <React.Fragment>
             <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>
-                <div style={{ display: imageLoading ? "none" : "inline" }}>
+                <div style={{ display: imageLoading ? "inline" : "none"  }}>
                     <Blurhash
                         hash={IMG_HASH}
                         width={"100%"}
@@ -32,7 +32,7 @@ const BackgroundPoster: React.FC = () => {
                         punch={1}
                     />
                 </div>
-                <div style={{ display: !imageLoading ? "none" : "inline" }}>
+                <div style={{ display: !imageLoading ? "inline" : "none" }}>
                     <img
                         src={MoviePosterGif}
                         className={style.landingBackgroundImgImg}
