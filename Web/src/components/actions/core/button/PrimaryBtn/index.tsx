@@ -19,7 +19,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({
     const className = styleBtnSize(style)[size];
 
     return (
-        <div ref={scope}>
+        <div ref={scope} style={{backgroundColor: "black", margin: "none", padding: "none"}}>
             <input
                 id={id}
                 value={title}
