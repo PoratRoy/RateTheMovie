@@ -6,10 +6,7 @@ import { CardViewLayoutProps } from "../../../models/types/props/layout";
 
 const CardViewLayout: React.FC<CardViewLayoutProps> = ({ children, close }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
-
-    useClickOutside(modalRef, () => {
-        close();
-    });
+    useClickOutside(modalRef, () => close());
 
     return (
         <section ref={modalRef} className={style.cardViewModal}>

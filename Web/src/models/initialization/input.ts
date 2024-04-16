@@ -1,5 +1,5 @@
 import { DefualtPlayerName } from "../constant";
-import { SetupInputSchema } from "../types/inputSchema";
+import { SetupInputSchema } from "../types/setup";
 
 export const initSetupDefaultValues: SetupInputSchema = {
     name: DefualtPlayerName,

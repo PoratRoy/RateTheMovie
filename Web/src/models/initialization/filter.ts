@@ -1,5 +1,5 @@
-import { Filters } from "../models/types/filter";
-import { Difficulty } from "../models/types/union";
+import { Filters } from "../types/filter";
+import { Difficulty } from "../types/union";
 
 export const initFilters = (difficulty: Difficulty) => {
     const filters: Filters = {

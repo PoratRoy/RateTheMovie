@@ -1,6 +1,6 @@
 import { Path } from "react-hook-form";
-import { SetupInputSchema } from "./inputSchema";
 import { InputType } from "./union";
+import { SetupInputSchema } from "./setup";
 
 export type RootInputType<TInput> = {
     id: Path<TInput>;

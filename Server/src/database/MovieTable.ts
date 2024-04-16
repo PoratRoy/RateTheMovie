@@ -9,6 +9,7 @@ import { Difficulty } from "../model/types/union";
 import { IMovie } from "../model/interfaces/scheme";
 import { populateMovie } from "../model/db/populate";
 import { specifyDifficulty } from "../model/db/difficulty";
+import { logDbParams } from "../utils/logs";
 
 export default class MovieDatabaseService {
     public static createMovie = async (movieProps: Movie): Promise<IMovie> => {
@@ -16,7 +17,7 @@ export default class MovieDatabaseService {
             const newMovie = new MovieModel({
                 ...movieProps,
             });
-            console.info(`Create new movie with params: `, newMovie);
+            logDbParams("Create", "new movie", "params", newMovie);
             const savedMovie = await MovieModel.create(newMovie);
             console.info(`New movie created: `, savedMovie);
             return savedMovie.toObject();
@@ -27,7 +28,7 @@ export default class MovieDatabaseService {
 
     public static getMovieById = async (id: string): Promise<IMovie | null> => {
         try {
-            console.info(`Get movie with movie id: ${id}`);
+            logDbParams("Get", "movie", "movie id", id);
             const movie = await MovieModel.findOne({ id }).lean().exec();
             console.info(`Movie with movie id ${id}: `, movie);
             return movie;
@@ -40,7 +41,7 @@ export default class MovieDatabaseService {
         amount: number,
         difficulty: Difficulty,
     ): Promise<IMovie[] | null> => {
-        console.info(`Get movies with difficulty: ${difficulty}`);
+        logDbParams("Get", "movie", "difficulty", difficulty);
         const difficultyCriteria = specifyDifficulty(difficulty);
         try {
             const movies = await MovieModel.aggregate([
@@ -60,7 +61,7 @@ export default class MovieDatabaseService {
         difficulty: Difficulty,
         genre: string[] | undefined,
     ): Promise<IMovie[] | null> => {
-        console.info(`Get movies with genres: ${genre}`);
+        logDbParams("Get", "movie", "genres", genre);
         if (!genre) return null;
         const difficultyCriteria = specifyDifficulty(difficulty);
         try {
@@ -87,7 +88,7 @@ export default class MovieDatabaseService {
         const { name } = filters;
 
         try {
-            console.info(`Get movies with actor name: ${name}`);
+            logDbParams("Get", "movie", "actor name", name);
             const actor = await ActorDatabaseService.getActorByName(name);
             if (!actor) return null;
 

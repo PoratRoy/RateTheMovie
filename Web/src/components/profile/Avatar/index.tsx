@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./Avatar.module.css";
 import { AvatarProps } from "../../../models/types/props/profile";
 import { styleSize } from "../../../style/style";
 import { Blurhash } from "react-blurhash";
+import useImgLoad from "../../../hooks/global/useImgLoad";
 
 const Avatar: React.FC<AvatarProps> = ({ avatar, size = "small" }) => {
     const className = styleSize(style)[size];
-    const [imageLoading, setImageLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        if (avatar) {
-            const image = new Image();
-            image.onload = () => {
-                setImageLoading(false);
-            };
-            image.src = avatar.img || "";
-            return () => {
-                image.onload = null;
-            };
-        }
-    }, [avatar]);
+    const { imageLoading } = useImgLoad(avatar?.img, [avatar]);
 
     return (
         <div className={className}>

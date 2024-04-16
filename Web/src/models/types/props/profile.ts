@@ -1,7 +1,7 @@
 import { UseFormWatch } from "react-hook-form";
 import { Avatar, Player } from "../player";
-import { SetupInputSchema } from "../inputSchema";
 import { AvatarSize } from "../union";
+import { SetupInputSchema } from "../setup";
 
 export type ProfileProps = {
     player: Player | undefined;

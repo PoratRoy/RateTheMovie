@@ -1,8 +1,8 @@
 import axios from "axios";
-import { GetMovieRequestBody } from "../model/types/requests";
+import { GetMovieRequestBody } from "../types/requests";
 import { Filters } from "../../models/types/filter";
 import { useGamePlayContext } from "../../context/GamePlayContext";
-import { GetMovieResponse } from "../model/types/responses";
+import { GetMovieResponse } from "../types/responses";
 
 const useGetMovies = () => {
     const { setFetchLoading } = useGamePlayContext();

@@ -20,8 +20,7 @@ const GamePage: React.FC = () => {
     const handleBeforeUnload = (event: any) => {
         if (activateFinishAnimation) setIsPlayerFinishRound(true);
         const message = "Are you sure you want to leave?";
-        event.returnValue = message; // Standard for most browsers
-        return message; // For some older browsers
+        return (event.returnValue = message);
     };
 
     useReload(handleBeforeUnload, [activateFinishAnimation]);

@@ -1,8 +1,7 @@
-import { SinglePlayerRoom } from "../models/constant";
-import { ModOption } from "../models/enums/game";
-import { Filters } from "../models/types/filter";
-import { Game } from "../models/types/game";
-
+import { SinglePlayerRoom } from "../constant";
+import { ModOption } from "../enums/game";
+import { Filters } from "../types/filter";
+import { Game } from "../types/game";
 
 export const initGame = (
     rounds: any,

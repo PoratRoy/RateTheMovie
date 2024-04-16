@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import style from "./BackgroundPoster.module.css";
 import MoviePosterGif from "../../../assets/moviePosterGif3.gif";
 import { MOVIES_POSTER_ID } from "../../../models/constant/ids";
 import { Blurhash } from "react-blurhash";
 import { IMG_HASH } from "../../../models/constant";
+import useImgLoad from "../../../hooks/global/useImgLoad";
 
 const BackgroundPoster: React.FC = () => {
-    const [imageLoading, setImageLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const img = new Image();
-        img.onload = () => {
-            setImageLoading(false);
-        };
-        img.src = MoviePosterGif;
-        return () => {
-            img.onload = null;
-        };
-    }, []);
+    const { imageLoading } = useImgLoad(MoviePosterGif, []);
 
     return (
         <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>

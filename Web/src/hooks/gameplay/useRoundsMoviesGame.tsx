@@ -1,5 +1,5 @@
 import useGetMovies from "../../api/hooks/useGetMovies";
-import { GetMovieResponse } from "../../api/model/types/responses";
+import { GetMovieResponse } from "../../api/types/responses";
 import { useErrorContext } from "../../context/ErrorContext";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { SessionKey } from "../../models/enums/session";

@@ -37,6 +37,7 @@ import { CardFace } from "../models/enums/animation";
 import useGameActions from "../hooks/gameplay/useGameActions";
 import useMod from "../hooks/gameplay/useMod";
 import { stateFromSession } from "../utils/context";
+import { logError, logSocketConnection } from "../utils/log";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -106,10 +107,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         socket.on("connect", () => {
-            console.log("Connected to server!");
+            logSocketConnection();
         });
         socket.on("connect_error", (error) => {
-            console.error("Connection error:", error);
+            logError(error);
         });
 
         return () => {
@@ -118,7 +119,6 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
         };
     }, []);
 
-    //TODO: usecallback?
     useEffect(() => {
         const currentPlayer: Player | undefined = Session.get(SessionKey.CURRENT_PLAYER);
         const role = currentPlayer?.role;

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import RoundsNumber from "../../actions/components/RoundsNumber";
 import { setupInputs } from "../../../models/initialization/form";
 import SetupLayout from "../../../pages/layout/SetupLayout";
-import { SetupInputSchema } from "../../../models/types/inputSchema";
 import useInitialForm from "../../../hooks/global/useInitialForm";
 import { setupFormSchema } from "../../../models/validation/form";
 import { initSetupDefaultValues } from "../../../models/initialization/input";
@@ -12,6 +11,7 @@ import { START_BTN_ID } from "../../../models/constant/ids";
 import RadioDifficulty from "../../actions/widgets/toggle/ToggleDifficulty";
 import StartGameBtn from "../../actions/widgets/btn/StartGameBtn";
 import Profile from "../../profile/Profile";
+import { SetupInputSchema } from "../../../models/types/setup";
 
 const Setup: React.FC<SetupProps> = ({ setupOption, playerRole = "player" }) => {
     const methods = useInitialForm<SetupInputSchema>(setupFormSchema, initSetupDefaultValues);

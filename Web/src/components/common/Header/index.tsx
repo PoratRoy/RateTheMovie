@@ -7,10 +7,11 @@ import useMod from "../../../hooks/gameplay/useMod";
 import { HeaderProps } from "../../../models/types/props/common";
 import RoundTimer from "../../actions/timer/RoundTimer";
 import QuitCircleBtn from "../../actions/widgets/btn/QuitCircleBtn";
-import RestartCircleBtn from "../../actions/widgets/btn/RestartCircleBtn";
+import RoundsNumber from "../RoundsNumber";
+import { ROUND_NUM } from "../../../models/constant";
 
 const Header: React.FC<HeaderProps> = () => {
-    const { currentPlayer } = useGamePlayContext();
+    const { currentPlayer, game } = useGamePlayContext();
     const { isMulti } = useMod();
 
     return (
@@ -18,10 +19,19 @@ const Header: React.FC<HeaderProps> = () => {
             <PlayerProfile currentPlayer={currentPlayer} isMotion />
 
             {isMulti() ? (
-                <RivalsProfiles />
+                <section className={style.gameHeaderBtns}>
+                    <RoundsNumber
+                        current={game?.currentRound || 1}
+                        total={game?.rounds || ROUND_NUM}
+                    />
+                    <RivalsProfiles />
+                </section>
             ) : (
                 <section className={style.gameHeaderBtns}>
-                    <RestartCircleBtn close={() => {}} />
+                    <RoundsNumber
+                        current={game?.currentRound || 1}
+                        total={game?.rounds || ROUND_NUM}
+                    />
                     <QuitCircleBtn close={() => {}} />
                 </section>
             )}

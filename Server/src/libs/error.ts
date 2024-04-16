@@ -30,9 +30,10 @@ export const handleError = <T>(
     console.error(error);
 
     if (error instanceof yup.ValidationError) {
+        const message = error.errors.join('\n')
         return response(res, {
             statusCode: StatusCode.BAD_REQUEST,
-            message: error.errors[0], //TODO: allow multiple errors
+            message,
             data,
         });
     }

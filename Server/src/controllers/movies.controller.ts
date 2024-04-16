@@ -22,7 +22,6 @@ import { logMovieCount } from "../utils/logs";
 import { IActor, IDirector, IMovie } from "../model/interfaces/scheme";
 import { getDifficulty } from "../utils/filter";
 import { getDBmovies, splitRoundsMovies } from "../utils/movies";
-import { getRandomNumber } from "../utils/calc";
 
 export default class MoviesController {
     async create(
@@ -167,19 +166,6 @@ export default class MoviesController {
             });
         } catch (error) {
             handleError(res, error);
-        }
-    }
-
-    async delete(req: Request, res: Response) {
-        try {
-            res.status(200).json({
-                message: "delete OK",
-                reqParamId: req.params.id,
-            });
-        } catch (err) {
-            res.status(500).json({
-                message: "Internal Server Error!",
-            });
         }
     }
 }
