@@ -5,7 +5,7 @@ import { MOVIES_POSTER_ID } from "../../../models/constant/ids";
 import { Blurhash } from "react-blurhash";
 import { IMG_HASH } from "../../../models/constant";
 import useImgLoad from "../../../hooks/global/useImgLoad";
-import LazyLoad from "react-lazy-load";
+import ForLazy from "../../../assets/forlazy.jpg";
 
 const BackgroundPoster: React.FC = () => {
     const { imageLoading } = useImgLoad(MoviePosterGif, []);
@@ -22,14 +22,17 @@ const BackgroundPoster: React.FC = () => {
                     punch={1}
                 />
             </div>
-            <div style={{ display: !imageLoading ? "inline" : "none" }}>
-                <LazyLoad height={700}>
-                    <img
-                        src={MoviePosterGif}
-                        className={style.landingBackgroundImgImg}
-                        alt="background poster of movies"
-                    />
-                </LazyLoad>
+            <div style={{ position: "relative", display: !imageLoading ? "inline" : "none" }}>
+                <img
+                    style={{ width: "100%", height: 400, position: "absolute", top: 0, left: 0}}
+                    src={ForLazy}
+                    alt="lazy poster iamge"
+                />
+                <img
+                    src={MoviePosterGif}
+                    className={style.landingBackgroundImgImg}
+                    alt="background poster of movies"
+                />
             </div>
         </section>
     );
