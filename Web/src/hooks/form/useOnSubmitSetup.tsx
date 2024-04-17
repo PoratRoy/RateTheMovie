@@ -13,8 +13,8 @@ import { SetupOption } from "../../models/types/setup";
 import { Difficulty, PlayerRole } from "../../models/types/union";
 import path from "../../router/routePath.json";
 import useMoviesGame from "../gameplay/useRoundsMoviesGame";
-import { initFilters } from "../../utils/filter";
-import { initGame } from "../../utils/game";
+import { initFilters } from "../../models/initialization/filter";
+import { initGame } from "../../models/initialization/game";
 
 const useOnSubmitSetup = <TInput extends FieldValues>(
     setupOption: SetupOption,
