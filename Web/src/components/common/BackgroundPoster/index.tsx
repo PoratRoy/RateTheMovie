@@ -8,7 +8,7 @@ import useImgLoad from "../../../hooks/global/useImgLoad";
 import ForLazy from "../../../assets/forlazy.jpg";
 
 const BackgroundPoster: React.FC = () => {
-    const { imageLoading } = useImgLoad(MoviePosterGif, []);
+    const { imageLoading } = useImgLoad(ForLazy, []);
 
     return (
         <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>
