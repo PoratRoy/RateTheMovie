@@ -17,7 +17,7 @@ const usePlaceCard = () => {
             const cardPlaceIndex = electedCardsOrder.findIndex((c) => c?.movie === card?.movie);
 
             if (cardPlaceIndex === -1) {
-                for (let i = PACK_CARDS_NUM - 1; i >= 0; i--) {
+                for (let i = 0; i < PACK_CARDS_NUM; i++) {
                     const existingCard = electedCardsOrder[i];
                     if (!existingCard || existingCard.id === undefined) {
                         electedCardsOrder[i] = card;
