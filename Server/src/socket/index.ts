@@ -3,7 +3,7 @@ import { InitSocket } from "../model/types/socket";
 import { Server as HttpServer } from "http";
 
 const WEBSOCKET_CORS = {
-    origin: process.env.FE_URL,
+    origin: "https://cusort.com",
     methods: ["GET", "POST"],
 };
 
