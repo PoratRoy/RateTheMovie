@@ -13,9 +13,8 @@ export default class Server {
     }
 
     private config(app: Application): void {
-        console.log("env: ", process.env.FE_URL)
         const corsOptions: CorsOptions = {
-            origin: ["https://cusort.com", "http://localhost:3000"],
+            origin: [process.env.FE_URL || "https://cusort.com", "http://localhost:3000"],
             optionsSuccessStatus: 200,
         };
 

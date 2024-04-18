@@ -182,11 +182,9 @@ class GameSocket implements ISocket {
         socket.on(FinishRound, () => {
             this.wrapper(FinishRound, () => {
                 const { warRoom } = getPlayerWarRoomInfo(socket, this.warRooms);
-                if (warRoom) {
-                    const roomId = warRoom.game?.roomId;
-                    if (roomId) {
-                        socket.to(roomId).emit(RoundFinished, this.warRooms[roomId]);
-                    }
+                if (warRoom && warRoom.game) {
+                    const { roomId } = warRoom.game;
+                    socket.to(roomId).emit(RoundFinished, this.warRooms[roomId]);
                 }
             });
         });
@@ -216,7 +214,14 @@ class GameSocket implements ISocket {
 
         socket.on(LeaveRoom, () => {
             this.wrapper(LeaveRoom, () => {
-                this.handleLeavingPlayer(socket);
+                const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
+                if (warRoom && player) {
+                    if (warRoom.game?.roomId) {
+                        const { roomId } = warRoom.game;
+                        socket.leave(roomId);
+                        this.handlePlayerRefresh(socket, warRoom, player, roomId);
+                    }
+                }
             });
         });
 
@@ -260,22 +265,13 @@ class GameSocket implements ISocket {
                                 }
                             }
                         } else {
-                            const { game, players } = warRoom;
-                            if (game?.roomId) {
-                                const { roomId } = game;
+                            if (warRoom.game?.roomId) {
+                                const { roomId } = warRoom.game;
                                 socket.leave(roomId);
                                 this.connectedUsers = this.connectedUsers.filter(
                                     (u) => u.id !== player.id,
                                 );
-                                const index = players.indexOf(player);
-                                players.splice(index, 1);
-                                if (players.length === 1) {
-                                    delete this.warRooms[roomId];
-                                    socket.nsp.to(roomId).emit(GameEnded, player);
-                                } else {
-                                    this.warRooms[roomId] = warRoom;
-                                    socket.nsp.to(roomId).emit(PlayerDisconnect, player);
-                                }
+                                this.handlePlayerRefresh(socket, warRoom, player, roomId);
                             }
                         }
                     }, 2000);
@@ -295,25 +291,21 @@ class GameSocket implements ISocket {
         logFinish(this.warRooms);
     };
 
-    handleLeavingPlayer = (
+    handlePlayerRefresh = (
         socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
+        warRoom: WarRoomProps,
+        player: Player,
+        roomId: string,
     ) => {
-        const { warRoom, player } = getPlayerWarRoomInfo(socket, this.warRooms);
-        if (warRoom && player) {
-            const { game, players } = warRoom;
-            if (game?.roomId) {
-                const { roomId } = game;
-                socket.leave(roomId);
-                const index = players.indexOf(player);
-                players.splice(index, 1);
-                if (players.length === 1) {
-                    delete this.warRooms[roomId];
-                    socket.nsp.to(roomId).emit(GameEnded, player);
-                } else {
-                    this.warRooms[roomId] = warRoom;
-                    socket.nsp.to(roomId).emit(PlayerDisconnect, player);
-                }
-            }
+        const { players } = warRoom;
+        const index = players.indexOf(player);
+        players.splice(index, 1);
+        if (players.length === 1) {
+            delete this.warRooms[roomId];
+            socket.nsp.to(roomId).emit(GameEnded, player);
+        } else {
+            this.warRooms[roomId] = warRoom;
+            socket.nsp.to(roomId).emit(PlayerDisconnect, player);
         }
     };
 
