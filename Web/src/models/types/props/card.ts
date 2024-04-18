@@ -62,6 +62,7 @@ export type ElectedCardProps = {
 
 export type PositionProps = IdProps & {
     position: number;
+    title: string;
 };
 
 export type PositionRateStarProps = {

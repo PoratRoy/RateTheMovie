@@ -3,27 +3,28 @@
 .btnMedium,
 .btnMediumWide,
 .btnSmall {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: var(--secondary-border);
-    border-radius: var(--secondary-border-radius);
     color: var(--text-color);
     background-color: var(--secondary-color);
     cursor: pointer;
+    border: var(--secondary-border);
+    border-radius: var(--secondary-border-radius);
     transform: width 0.2s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btnLarge {
-    width: 200px;
-    height: 50px;
+    width: var(--btn-width-medium);
+    height: var(--btn-height-medium);
     font-size: 1.1rem;
     letter-spacing: 2px;
 }
 
 .btnMedium {
-    width: 125px;
-    height: 35px;
+    width: var(--btn-width-small);
+    height: var(--btn-height-small);
     font-size: 1rem;
     letter-spacing: 2px;
 }

@@ -6,8 +6,8 @@ import { useGamePlayContext } from "../../../../context/GamePlayContext";
 import PlayerScore from "../../core/PlayerScore";
 import PlayAgainBtn from "../../../actions/widgets/btn/PlayAgainBtn";
 import NextRoundBtn from "../../../actions/widgets/btn/NextRoundBtn";
-import AdditionalBtns from "../../core/AdditionalBtns";
 import PackOfResult from "../../../cards/pack/PackOfResult";
+import QuitBtn from "../../../actions/widgets/btn/QuitBtn";
 
 const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver }) => {
     const { currentPlayer, correctOrder } = useGamePlayContext();
@@ -21,7 +21,7 @@ const RoundEndModal: React.FC<RoundEndModalProps> = ({ close, title, gameOver })
                 </section>
 
                 {gameOver ? <PlayAgainBtn close={close} /> : <NextRoundBtn close={close} />}
-                <AdditionalBtns close={close} btns={gameOver ? ["quit"] : []} />
+                {gameOver ? <QuitBtn close={close} /> : null}
             </section>
         </Modal>
     );

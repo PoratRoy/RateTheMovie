@@ -36,7 +36,7 @@ const FlippedCard: React.FC<FlippedCardProps> = ({
                 </div>
                 <div className={style.cardFront}>{front}</div>
                 <div className={style.cardBack}>{back}</div>
-                {position ? <Position id={movieId} position={position} /> : null}
+                {position ? <Position id={movieId} title={title} position={position} /> : null}
             </motion.div>
         </CardLayout>
     );

@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.sizeWrap{
+    justify-content: center;
+}
+
 .sizeXSmall {
     max-width: 98%;
     height: 98%;
@@ -28,7 +32,7 @@
 
 .sizeWrap {
     max-width: 90vw;
-    gap: 17px;
+    gap: 19px;
 }
 
 /* .sizeLarge {

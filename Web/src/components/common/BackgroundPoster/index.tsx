@@ -22,7 +22,7 @@ const BackgroundPoster: React.FC = () => {
                     punch={1}
                 />
             </div>
-            <div style={{ position: "relative", display: !imageLoading ? "inline" : "none" }}>
+            <div style={{ position: "relative", width: "100%", display: !imageLoading ? "inline" : "none" }}>
                 <img
                     style={{ width: "100%", height: 400, position: "absolute", top: 0, left: 0}}
                     src={ForLazy}
