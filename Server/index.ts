@@ -3,6 +3,8 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import express, { Application } from "express";
 import cors, { CorsOptions } from "cors";
 import Routes from "./src/routes";
+import logMiddleware from "./src/middlewares/logMiddleware";
+import headersMiddleware from "./src/middlewares/headersMiddleware";
 
 export default class Server {
     constructor(app: Application) {
@@ -12,39 +14,14 @@ export default class Server {
 
     private config(app: Application): void {
         const corsOptions: CorsOptions = {
-            origin: [process.env.FE_URL || "http://localhost:3000"],
+            origin: process.env.FE_URL || "http://localhost:3000",
             optionsSuccessStatus: 200,
         };
-        //TODO: middlewares
+
         app.use(cors(corsOptions));
-        app.use((req, res, next) => {
-            console.info(
-                `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`,
-            );
-
-            res.on("finish", () => {
-                console.info(
-                    `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`,
-                );
-            });
-
-            next();
-        });
+        app.use(logMiddleware);
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
-        app.use((req, res, next) => {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header(
-                "Access-Control-Allow-Headers",
-                "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-            );
-
-            if (req.method == "OPTIONS") {
-                res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-                return res.status(200).json({});
-            }
-
-            next();
-        });
+        app.use(headersMiddleware);
     }
 }
