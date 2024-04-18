@@ -4,6 +4,7 @@ import { useErrorContext } from "../../context/ErrorContext";
 import { useGamePlayContext } from "../../context/GamePlayContext";
 import { SessionKey } from "../../models/enums/session";
 import { Game } from "../../models/types/game";
+import { alertError } from "../../utils/alertMsg";
 import Session from "../../utils/storage/sessionStorage";
 import useHandleMovies from "./useHandleMovies";
 
@@ -22,7 +23,7 @@ const useMoviesGame = () => {
                 Session.set(SessionKey.ROUNDS_MOVIES, response.movies);
                 handleMovieCards(response.movies[0], mod);
             } catch (error) {
-                handleError("Something went wrong");
+                handleError(alertError);
             }
         }
     };

@@ -38,6 +38,7 @@ import useGameActions from "../hooks/gameplay/useGameActions";
 import useMod from "../hooks/gameplay/useMod";
 import { stateFromSession } from "../utils/context";
 import { logError, logSocketConnection } from "../utils/log";
+import { alertGameEnd, alertPlayerLeft } from "../utils/alertMsg";
 //https://github.com/joeythelantern/Socket-IO-Basics/tree/master
 
 export const SocketContext = createContext<{
@@ -253,21 +254,17 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
                 Session.set(SessionKey.RIVAL_PLAYERS, players);
                 return players;
             });
-            const message = `${player.name} has left the game.`;
-            handleAlert(message);
+            handleAlert(alertPlayerLeft(player.name));
         };
 
         const handleGameEnded = (player: Player) => {
             const game: Game | undefined = Session.get(SessionKey.GAME);
             if (game?.isGameOver) {
-                handlePlayerDisconnected(player);
+                handleAlert(alertPlayerLeft(player.name));
             } else {
-                setRivalPlayers([]);
-                Session.set(SessionKey.RIVAL_PLAYERS, []);
-                const message = "Last survivor standing. Game concluding as no opponents remain.";
-                handleAlert(message, 5000);
-                handleQuit();
+                handleAlert(alertGameEnd, 5000);
             }
+            handleQuit();
         };
 
         socket.on(PlayerJoined, handlePlayerJoined);

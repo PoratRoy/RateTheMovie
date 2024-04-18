@@ -8,8 +8,10 @@ import GameAlreadyStart from "../../components/error/GameAlreadyStart";
 import JoinRoom from "../../components/info/JoinRoom";
 import RoomFull from "../../components/error/RoomFull";
 import GameNotExists from "../../components/error/GameNotExists";
+import useDisconnect from "../../hooks/multiplayer/useDisconnect";
 
 const GuestPage: React.FC = () => {
+    useDisconnect();
     const { room } = useParams();
     const { status, setupOption } = useGuestPlayer(room);
 

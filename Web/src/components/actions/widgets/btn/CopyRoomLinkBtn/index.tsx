@@ -5,6 +5,7 @@ import { CopyRoomLinkBtnProps } from "../../../../../models/types/props/btn";
 import { useErrorContext } from "../../../../../context/ErrorContext";
 import style from "./CopyRoomLinkBtn.module.css";
 import SocialLinks from "../../link/SocialLinks";
+import { alertLinkCopied } from "../../../../../utils/alertMsg";
 
 const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = ({ roomLink }) => {
     const { handleSuccess } = useErrorContext();
@@ -17,7 +18,7 @@ const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = ({ roomLink }) => {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(roomLink);
-        handleSuccess("Link copied");
+        handleSuccess(alertLinkCopied);
     };
 
     return (
