@@ -3,13 +3,13 @@ import { InitSocket } from "../model/types/socket";
 import { Server as HttpServer } from "http";
 
 const WEBSOCKET_CORS = {
-    origin: "https://cusort.com",
+    origin: ["https://cusort.com", "http://localhost:3000"],
     methods: ["GET", "POST"],
 };
 
 class ServerSocket extends Server {
     private static instance: ServerSocket;
-
+    
     constructor(httpServer: HttpServer) {
         super(httpServer, {
             serveClient: false,
@@ -18,6 +18,7 @@ class ServerSocket extends Server {
             cookie: false,
             cors: WEBSOCKET_CORS,
         });
+        console.log("env s: ", process.env.FE_URL)
     }
 
     public static getInstance(httpServer?: any): ServerSocket {
