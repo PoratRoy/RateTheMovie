@@ -6,6 +6,7 @@ import { PRIMARY_COLOR } from "../../../../style/root";
 import { setPlaceholderText } from "../../../../utils/card";
 import PositionRateStar from "../PositionRateStar";
 import CardLayout from "../../../layout/CardLayout";
+import Decoration from "../../../../assets/cardDecoration.svg";
 
 const Card: React.FC<CardProps> = ({
     id,
@@ -17,9 +18,7 @@ const Card: React.FC<CardProps> = ({
     size = "large",
     hasBorder = false,
 }) => {
-    const className = hasDecoration
-        ? `${style.cardDecoration} ${isFocus ? style.cardFocus : ""}`
-        : style.cardInnerContainer;
+    const className = `${style.cardInnerContainer} ${isFocus ? style.cardFocus : ""}`
 
     const text = setPlaceholderText(index);
 
@@ -30,6 +29,14 @@ const Card: React.FC<CardProps> = ({
                 className={className}
                 style={{ border: hasBorder ? `2px solid ${PRIMARY_COLOR}` : "none" }}
             >
+                {hasDecoration ? (
+                    <img
+                        className={style.cardPlaceholderDecoration}
+                        src={Decoration}
+                        alt="Card decoration"
+                    />
+                ) : null}
+
                 <div className={style.cardPlaceholder}>
                     <div className={style.cardPlaceholderText}>{text}</div>
                     <PositionRateStar amount={index + 1} />

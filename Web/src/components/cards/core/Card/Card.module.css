@@ -1,6 +1,6 @@
 .cardInnerContainer,
-.cardDecoration,
 .playerCardInnerContainer {
+    position: relative;
     border: 1px solid var(--tertiary-color);
     border-radius: var(--secondary-border-radius);
     background-color: var(--secondary-color);
@@ -8,31 +8,16 @@
     width: 100%;
     height: 100%;
 }
-/* 
-.cardDecoration::before {
-    background-color: var(--background-card-color);
-    content: "";
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: calc(var(--medium-card-width) - 10px);
-    height: calc(var(--medium-card-height) - 10px);
-}
 
-.cardDecoration::after {
-    content: "";
+.cardPlaceholderDecoration{
     position: absolute;
-    z-index: 1;
-    top: 2px;
-    left: 2px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: var(--secondary-color);
-    box-shadow: calc(var(--medium-card-width) - 17px) 2px 0px 0px var(--secondary-color),
-        2px calc(var(--medium-card-height) - 17px) 0px 0px var(--secondary-color),
-        calc(var(--medium-card-width) - 17px) calc(var(--medium-card-height) - 17px) 0px 0px var(--secondary-color);
-} */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 85%;
+    opacity: 0.2;
+}
 
 .cardFocus {
     border: 2px solid var(--primary-color);
