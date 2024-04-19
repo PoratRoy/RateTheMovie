@@ -18,7 +18,6 @@ class ServerSocket extends Server {
             cookie: false,
             cors: WEBSOCKET_CORS,
         });
-        console.log("env s: ", process.env.FE_URL)
     }
 
     public static getInstance(httpServer?: any): ServerSocket {

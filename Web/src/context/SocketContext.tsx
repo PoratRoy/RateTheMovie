@@ -158,13 +158,10 @@ const SocketContextProvider = ({ children }: { children: React.ReactNode }) => {
             PlayerJoinRoom,
             roomId,
             player,
-            async (warRoom: WarRoomProps, currecntPlayer: Player, rivalPlayers: Player[]) => {
+            async (warRoom: WarRoomProps, currecntPlayer: Player, otherPlayers: Player[]) => {
                 if (warRoom && currecntPlayer) {
-                    setRivalPlayers((prev) => {
-                        const players = prev ? [...prev, ...rivalPlayers] : [...rivalPlayers];
-                        Session.set(SessionKey.RIVAL_PLAYERS, players);
-                        return players;
-                    });
+                    setRivalPlayers(otherPlayers);
+                    Session.set(SessionKey.RIVAL_PLAYERS, otherPlayers);
                     callback(currecntPlayer, warRoom.game);
                 }
             },

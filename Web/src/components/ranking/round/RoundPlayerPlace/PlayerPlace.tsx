@@ -1,18 +1,18 @@
 import React, { useMemo } from "react";
 import style from "./RoundPlayerPlace.module.css";
 import PlayerProfile from "../../../profile/PlayerProfile";
-import { PACK_CARDS_NUM } from "../../../../models/constant";
 import {
     BRONZE_COLOR,
     GOLD_COLOR,
     SILVER_COLOR,
     TEXT_COLOR,
-    X_SMALL_CARD_WIDTH,
 } from "../../../../style/root";
 import Pack from "../../../cards/core/Pack";
 import ResultCard from "../../../cards/single/ResultCard";
 import { Card } from "../../../../models/types/card";
 import { PlayerPlaceProps } from "../../../../models/types/props/ranking";
+import { checkAllCardsExist } from "../../../../utils/correctOrder";
+import NoCardsSelected from "./NoCardsSelected";
 
 const PlayerPlace: React.FC<PlayerPlaceProps> = ({ place, player }) => {
     const color = useMemo(() => {
@@ -25,6 +25,10 @@ const PlayerPlace: React.FC<PlayerPlaceProps> = ({ place, player }) => {
                 : TEXT_COLOR;
     }, []);
 
+    const isAllExist = useMemo(() => {
+        return checkAllCardsExist(player.electedCards.order);
+    }, [player.electedCards.order]);
+
     return (
         <section className={style.playerPlace}>
             <div className={style.rankingPlayerTabTop}>
@@ -34,18 +38,7 @@ const PlayerPlace: React.FC<PlayerPlaceProps> = ({ place, player }) => {
                 </span>
             </div>
 
-            {player.electedCards.order[0]?.id === undefined ? (
-                <div
-                    className={style.rankingNoCards}
-                    style={{
-                        width: `calc(${(PACK_CARDS_NUM - 1) * 5}px + ${
-                            PACK_CARDS_NUM * X_SMALL_CARD_WIDTH
-                        }px)`,
-                    }}
-                >
-                    No cards selected
-                </div>
-            ) : (
+            {isAllExist ? (
                 <Pack packDisplay="Xsmall">
                     {player.electedCards.order.map((card: Card | undefined, index: number) => (
                         <React.Fragment key={index}>
@@ -53,6 +46,8 @@ const PlayerPlace: React.FC<PlayerPlaceProps> = ({ place, player }) => {
                         </React.Fragment>
                     ))}
                 </Pack>
+            ) : (
+                <NoCardsSelected />
             )}
         </section>
     );

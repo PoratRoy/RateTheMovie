@@ -65,7 +65,7 @@ class GameSocket implements ISocket {
                 callback: (
                     props: WarRoomProps,
                     currecntPlayer: Player,
-                    rivalPlayers: Player[],
+                    otherPlayers: Player[],
                 ) => void,
             ) => {
                 logEvent(PlayerJoinRoom);
