@@ -10,12 +10,12 @@ import Decoration from "../../../../assets/cardDecoration.svg";
 
 const Card: React.FC<CardProps> = ({
     id,
-    isFocus,
     content,
     hasDecoration,
     onClick,
     index = 0,
     size = "large",
+    isFocus = false,
     hasBorder = false,
 }) => {
     const className = `${style.cardInnerContainer} ${isFocus ? style.cardFocus : ""}`

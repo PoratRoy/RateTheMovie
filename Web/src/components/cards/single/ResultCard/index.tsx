@@ -25,7 +25,6 @@ const ResultCard: React.FC<ResultCardProps> = ({
                     />
                 }
                 size={size}
-                isFocus
                 hasBorder
                 index={index}
             />

@@ -13,7 +13,7 @@
 .positionAbsolute{
     position: absolute;
     bottom: -15px;
-    left: 50%;
+    left: 55%;
     width: 100%;
     transform: translateX(-50%);
 }
