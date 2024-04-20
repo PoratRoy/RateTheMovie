@@ -17,24 +17,12 @@ const Header: React.FC<HeaderProps> = () => {
     return (
         <section className={style.gameHeaderContainer}>
             <PlayerProfile currentPlayer={currentPlayer} isMotion />
+            <section className={style.gameHeaderBtns}>
+                <RoundsNumber current={game?.currentRound || 1} total={game?.rounds || ROUND_NUM} />
 
-            {isMulti() ? (
-                <section className={style.gameHeaderBtns}>
-                    <RoundsNumber
-                        current={game?.currentRound || 1}
-                        total={game?.rounds || ROUND_NUM}
-                    />
-                    <RivalsProfiles />
-                </section>
-            ) : (
-                <section className={style.gameHeaderBtns}>
-                    <RoundsNumber
-                        current={game?.currentRound || 1}
-                        total={game?.rounds || ROUND_NUM}
-                    />
-                    <QuitCircleBtn close={() => {}} />
-                </section>
-            )}
+                {isMulti() ? <RivalsProfiles /> : <QuitCircleBtn close={() => {}} />}
+            </section>
+
             {isMulti() ? <RoundTimer /> : null}
         </section>
     );
