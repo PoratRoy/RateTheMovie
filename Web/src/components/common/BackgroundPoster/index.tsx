@@ -26,7 +26,6 @@ const BackgroundPoster: React.FC = () => {
                     display: !imageLoading ? "flex" : "none",
                     flexDirection: !imageLoading ? "column" : "row",
                 }}
-                className={style.landingBackgroundImg}
             >
                 <img
                     src={POSTER_IMG}

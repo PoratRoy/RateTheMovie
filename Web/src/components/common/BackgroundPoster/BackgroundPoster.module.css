@@ -10,11 +10,8 @@
     display: block;
 }
 
-.landingBackgroundImg{
-    animation: slider 200s infinite linear;
-}
-
 .landingBackgroundImgImg{
+    animation: slider 110s infinite linear;
     width: 100%;
     height: 100%;
     object-fit: cover;
