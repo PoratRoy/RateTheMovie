@@ -67,17 +67,3 @@
     background-color: var(--secondary-color-active);
     transform: scale(1.02);
 }
-
-/* Tablet 768px - 1279px -- 800px*/
-@media screen and (min-width: 768px) {
-
-    .btnLarge,
-    .btnMedium,
-    .btnMediumWide,
-    .btnSmall {
-        width: 200px;
-        height: 60px;
-        font-size: 1.2rem;
-        letter-spacing: 2px;
-    }
-}

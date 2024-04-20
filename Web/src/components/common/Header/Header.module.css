@@ -1,3 +1,4 @@
+/* Mobile 320px - 767px -- 812px */
 .gameHeaderContainer {
     position: fixed;
     top: 0;
@@ -16,4 +17,15 @@
     display: flex;
     align-items: center;
     gap: 1em;
+}
+
+/* Laptop HD 1280px - 1439px -- 720px*/
+@media screen and (min-width: 1280px) {
+    .gameHeaderContainer {
+        padding: 10px 40px;
+    }
+
+    .gameHeaderBtns{
+        gap: 2em;
+    }
 }

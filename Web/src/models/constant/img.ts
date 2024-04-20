@@ -14,6 +14,7 @@ export const AVATAR_BLUR_IMG_10 = "UAN+a-Rk-_tQ~pWV57n%T2xF}PSg6JkC=Hn$";
 
 //https://imagekit.io/
 export const POSTER_IMG = "https://ik.imagekit.io/df9g0ij1q/poster.png?updatedAt=1713607582596";
+export const DESKTOP_POSTER_IMG = "https://ik.imagekit.io/df9g0ij1q/moviePoster4.png?updatedAt=1713619182606";
 
 export const AVATAR_IMG_1 = "https://ik.imagekit.io/df9g0ij1q/avater1.png?updatedAt=1713610101954";
 export const AVATAR_IMG_2 = "https://ik.imagekit.io/df9g0ij1q/avater2.png?updatedAt=1713610157119";

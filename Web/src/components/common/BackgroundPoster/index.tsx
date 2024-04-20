@@ -4,10 +4,12 @@ import { MOVIES_POSTER_ID } from "../../../models/constant/ids";
 import { Blurhash } from "react-blurhash";
 import { IMG_HASH } from "../../../models/constant";
 import useImgLoad from "../../../hooks/global/useImgLoad";
-import { POSTER_IMG } from "../../../models/constant/img";
+import { DESKTOP_POSTER_IMG, POSTER_IMG } from "../../../models/constant/img";
+import { isMobile } from "../../../style/style";
 
 const BackgroundPoster: React.FC = () => {
-    const { imageLoading } = useImgLoad(POSTER_IMG, []);
+    const poster = isMobile() ? POSTER_IMG : DESKTOP_POSTER_IMG
+    const { imageLoading } = useImgLoad(poster, []);
 
     return (
         <section id={MOVIES_POSTER_ID} className={style.landingBackground}>
@@ -28,12 +30,12 @@ const BackgroundPoster: React.FC = () => {
                 }}
             >
                 <img
-                    src={POSTER_IMG}
+                    src={poster}
                     className={style.landingBackgroundImgImg}
                     alt="background poster of movies"
                 />
                 <img
-                    src={POSTER_IMG}
+                    src={poster}
                     className={style.landingBackgroundImgImg}
                     alt="background poster of movies"
                 />

@@ -71,28 +71,3 @@
     font-size: 1.2rem;
     letter-spacing: 3px;
 }
-
-/* Tablet 768px - 1279px -- 800px*/
-@media screen and (min-width: 768px) {
-
-    .btnSmall {
-        width: 120px;
-        height: 40px;
-        font-size: 1rem;
-        letter-spacing: 2px;
-    }
-
-    .btnMedium {
-        width: 200px;
-        height: 60px;
-        font-size: 1rem;
-        letter-spacing: 5px;
-    }
-
-    .btnLarge {
-        width: 300px;
-        height: 90px;
-        font-size: 1.8rem;
-        letter-spacing: 8px;
-    }
-}

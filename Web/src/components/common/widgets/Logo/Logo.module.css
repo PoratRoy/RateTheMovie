@@ -20,6 +20,7 @@
     }
 
     .sizeLarge {
-        width: 320px;
+        width: 360px;
+        max-width: 360px;
     }
 }
