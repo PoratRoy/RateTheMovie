@@ -1,17 +1,16 @@
 import React from "react";
 import style from "./BackgroundPoster.module.css";
-import MoviePosterGif from "../../../assets/moviePosterGif3.gif";
 import { MOVIES_POSTER_ID } from "../../../models/constant/ids";
 import { Blurhash } from "react-blurhash";
 import { IMG_HASH } from "../../../models/constant";
 import useImgLoad from "../../../hooks/global/useImgLoad";
-import ForLazy from "../../../assets/forlazy.jpg";
+import { POSTER_IMG } from "../../../models/constant/img";
 
 const BackgroundPoster: React.FC = () => {
-    const { imageLoading } = useImgLoad(ForLazy, []);
+    const { imageLoading } = useImgLoad(POSTER_IMG, []);
 
     return (
-        <section id={MOVIES_POSTER_ID} className={style.landingBackgroundImg}>
+        <section id={MOVIES_POSTER_ID} className={style.landingBackground}>
             <div style={{ display: imageLoading ? "inline" : "none" }}>
                 <Blurhash
                     hash={IMG_HASH}
@@ -22,14 +21,20 @@ const BackgroundPoster: React.FC = () => {
                     punch={1}
                 />
             </div>
-            <div style={{ position: "relative", width: "100%", display: !imageLoading ? "inline" : "none" }}>
+            <div
+                style={{
+                    display: !imageLoading ? "flex" : "none",
+                    flexDirection: !imageLoading ? "column" : "row",
+                }}
+                className={style.landingBackgroundImg}
+            >
                 <img
-                    style={{ width: "100%", height: 400, position: "absolute", top: 0, left: 0}}
-                    src={ForLazy}
-                    alt="lazy poster iamge"
+                    src={POSTER_IMG}
+                    className={style.landingBackgroundImgImg}
+                    alt="background poster of movies"
                 />
                 <img
-                    src={MoviePosterGif}
+                    src={POSTER_IMG}
                     className={style.landingBackgroundImgImg}
                     alt="background poster of movies"
                 />

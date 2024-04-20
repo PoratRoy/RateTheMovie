@@ -9,17 +9,28 @@ import Avatar8 from "../../assets/avatars/avatar8.png";
 import Avatar9 from "../../assets/avatars/avatar9.png";
 import Avatar10 from "../../assets/avatars/avatar10.png";
 import { Avatar } from "../types/player";
+import {
+    AVATAR_BLUR_IMG_1,
+    AVATAR_BLUR_IMG_10,
+    AVATAR_BLUR_IMG_2,
+    AVATAR_BLUR_IMG_3,
+    AVATAR_BLUR_IMG_4,
+    AVATAR_BLUR_IMG_5,
+    AVATAR_BLUR_IMG_6,
+    AVATAR_BLUR_IMG_7,
+    AVATAR_BLUR_IMG_8,
+    AVATAR_BLUR_IMG_9,
+} from "../constant/img";
 
 export const Avatars: Avatar[] = [
-    {img: Avatar1, hash: "UWKx3hoeCAa$I:jZ%2jsD,WV%0ofpJbHV?ae"},
-    {img: Avatar2, hash: "UpIF7MWV5ea$NhoIkWa{E2XA-mjZNhjEs*j]"},
-    {img: Avatar3, hash: "UDKJ-#oy00RQ~7niIuX904Wq~9n$8{j[?Hay"},
-    {img: Avatar4, hash: "UOGJ]hxB0bIt4TWA?aoeBtWD=qt76CWY-okD"},
-    {img: Avatar5, hash: "UlH.:Qj[5JWDyGoeM~a#R+ays5ayEAa#tRj@"},
-    {img: Avatar6, hash: "URO0yRX8_TnjVCa{pJj]0Vah^voc{goLFxah"},
-    {img: Avatar7, hash: "UhP6#IkB?AkC~ffQN2ayvkazJToK%Ij@jGaz"},
-    {img: Avatar8, hash: "UFF6aKv*0eIXGlf*-okV0yWB~VtP0$WD^4nj"},
-    {img: Avatar9, hash: "USH_umae?^ozR%WVxuofOFj]rqWBx^oLnha}"},
-    {img: Avatar10, hash: "UAN+a-Rk-_tQ~pWV57n%T2xF}PSg6JkC=Hn$"},
-]
-
+    { img: Avatar1, hash: AVATAR_BLUR_IMG_1 },
+    { img: Avatar2, hash: AVATAR_BLUR_IMG_2 },
+    { img: Avatar3, hash: AVATAR_BLUR_IMG_3 },
+    { img: Avatar4, hash: AVATAR_BLUR_IMG_4 },
+    { img: Avatar5, hash: AVATAR_BLUR_IMG_5 },
+    { img: Avatar6, hash: AVATAR_BLUR_IMG_6 },
+    { img: Avatar7, hash: AVATAR_BLUR_IMG_7 },
+    { img: Avatar8, hash: AVATAR_BLUR_IMG_8 },
+    { img: Avatar9, hash: AVATAR_BLUR_IMG_9 },
+    { img: Avatar10, hash: AVATAR_BLUR_IMG_10 },
+];
