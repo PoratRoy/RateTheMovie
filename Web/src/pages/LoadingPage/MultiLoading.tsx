@@ -33,7 +33,7 @@ const MultiLoading: React.FC<MultiLoadingProps> = ({
                         : "Waiting for the host to start the game..."}
                 </div>
             </section>
-            <CopyRoomLinkBtn roomLink={roomLink} />
+            <CopyRoomLinkBtn roomLink={roomLink} playerName={currentPlayer?.name} />
             <WaitingRoom rivalPlayers={rivalPlayers} currentPlayer={currentPlayer} />
         </CommonLayout>
     );

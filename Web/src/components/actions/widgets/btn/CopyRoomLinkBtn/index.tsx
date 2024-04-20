@@ -7,7 +7,8 @@ import style from "./CopyRoomLinkBtn.module.css";
 import SocialLinks from "../../link/SocialLinks";
 import { alertLinkCopied } from "../../../../../utils/alertMsg";
 
-const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = ({ roomLink }) => {
+const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = (props) => {
+    const { roomLink } = props;
     const { handleSuccess } = useErrorContext();
 
     const title = (
@@ -25,7 +26,7 @@ const CopyRoomLinkBtn: React.FC<CopyRoomLinkBtnProps> = ({ roomLink }) => {
         <section className={style.copyRoomLinkBtn}>
             <SecondaryBtn onClicked={handleCopy} title={title} size="mediomWide" />
             <span className={style.shareVia}>or share link via</span>
-            <SocialLinks roomLink={roomLink} />
+            <SocialLinks {...props} />
         </section>
     );
 };

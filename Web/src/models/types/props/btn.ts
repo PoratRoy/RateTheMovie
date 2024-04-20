@@ -90,6 +90,7 @@ export type ReturnBtnProps = CloseProps & {
 
 export type CopyRoomLinkBtnProps = {
     roomLink: string;
+    playerName?: string;
 };
 
 export type EditAvatarBtnProps = OnClickProps;

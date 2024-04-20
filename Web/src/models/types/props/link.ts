@@ -8,4 +8,5 @@ export type MovieListLinkProps = {};
 
 export type SocialLinksProps = {
     roomLink: string;
+    playerName?: string;
 };

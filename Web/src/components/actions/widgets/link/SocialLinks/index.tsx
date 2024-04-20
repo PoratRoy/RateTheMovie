@@ -10,10 +10,10 @@ import {
 } from "react-share";
 import { SocialLinksProps } from "../../../../../models/types/props/link";
 
-const SocialLinks: React.FC<SocialLinksProps> = ({ roomLink }) => {
+const SocialLinks: React.FC<SocialLinksProps> = ({ roomLink, playerName }) => {
     return (
         <div className={style.socialLinks}>
-            <WhatsappShareButton url={roomLink} title="Your friend invites you to battle: ">
+            <WhatsappShareButton url={roomLink} title={`Your friend ${playerName} invites you to battle: `}>
                 <WhatsappIcon size={30} round />
             </WhatsappShareButton>
 
@@ -24,7 +24,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ roomLink }) => {
             <EmailShareButton
                 url={roomLink}
                 subject="Rate The Movie"
-                body="Your friend invites you to battle: "
+                body={`Your friend ${playerName} invites you to battle: `}
             >
                 <EmailIcon size={30} round />
             </EmailShareButton>
