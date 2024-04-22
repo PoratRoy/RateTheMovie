@@ -5,4 +5,15 @@
     min-width: 200px;
     font-size: 1.3rem;
     font-weight: 500;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.1;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
